@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project-module
+  type="WEB"
+  name="counter"
+  id="myeclipse.1442498669956"
+  context-root="/counter"
+  j2ee-spec="5.0"
+  archive="counter.war">
+  <attributes>
+    <attribute name="webrootdir" value="WebRoot" />
+  </attributes>
+</project-module>
+
