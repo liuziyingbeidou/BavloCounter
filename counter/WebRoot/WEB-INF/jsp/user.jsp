@@ -9,5 +9,10 @@
 <body>
 	<h3>获取到的Userid是:${UserId}</h3>
 	<h3>获取到的Tagname是:${Tagname}</h3>
+	<h3>==================</h3>
+	<form action="sendMassage.do">
+		发送给:	<input type="text" name="touser" value="${UserId}"/><br>
+		内容:	<input type="text" name="text" value=""/><input type="submit"/>
+	</form>
 </body>
 </html>
