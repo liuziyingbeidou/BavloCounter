@@ -1,4 +1,4 @@
-package com.bavlo.counter.model;
+package com.bavlo.counter.test.model;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;

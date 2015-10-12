@@ -1,4 +1,4 @@
-package com.bavlo.counter.service.custom.itf;
+package com.bavlo.counter.test.service.itf;
 
 public interface IUserService {
 	public void test();
