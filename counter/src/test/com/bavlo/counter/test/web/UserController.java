@@ -1,4 +1,4 @@
-package com.bavlo.counter.web;
+package com.bavlo.counter.test.web;
 
 import java.util.Map;
 
@@ -11,8 +11,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.bavlo.counter.model.User;
-import com.bavlo.counter.service.custom.impl.UserService;
+import com.bavlo.counter.test.model.User;
+import com.bavlo.counter.test.service.impl.UserService;
+import com.bavlo.counter.web.BaseController;
 
 @Controller("userController")
 @RequestMapping(value = "/user")

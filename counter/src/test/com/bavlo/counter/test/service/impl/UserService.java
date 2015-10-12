@@ -1,9 +1,9 @@
-package com.bavlo.counter.service.custom.impl;
+package com.bavlo.counter.test.service.impl;
 
 import org.springframework.stereotype.Service;
 
-import com.bavlo.counter.service.custom.itf.IUserService;
 import com.bavlo.counter.service.impl.CommonService;
+import com.bavlo.counter.test.service.itf.IUserService;
 
 @Service("userService")
 public class UserService extends CommonService implements IUserService{
