@@ -15,10 +15,10 @@ import com.bavlo.counter.model.test.User;
 import com.bavlo.counter.service.test.impl.UserService;
 import com.bavlo.counter.web.BaseController;
 
-@Controller("userController")
+@Controller("userTController")
 @RequestMapping(value = "/user")
 // 表示要访问这个action的时候都要加上这个//user路径
-public class UserController extends BaseController {
+public class UserTController extends BaseController {
 
 	@Resource
 	private UserService userService;
