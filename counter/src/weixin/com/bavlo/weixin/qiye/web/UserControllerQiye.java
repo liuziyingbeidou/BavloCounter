@@ -14,7 +14,7 @@ import com.bavlo.weixin.qiye.interceptor.OAuthRequired;
  *
  */
 @Controller
-public class UserController {
+public class UserControllerQiye {
 	/**
 	 * 加载个人信息，此处添加了@OAuthRequired注解
 	 * @param model
