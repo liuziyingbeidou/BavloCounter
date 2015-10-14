@@ -14,5 +14,8 @@
 		发送给:	<input type="text" name="touser" value="${UserId}"/><br>
 		内容:	<input type="text" name="text" value=""/><input type="submit"/>
 	</form>
+	<form action="sendTemplateMessages.do">
+		发送模板消息:	<input type="submit"/>
+	</form>
 </body>
 </html>
