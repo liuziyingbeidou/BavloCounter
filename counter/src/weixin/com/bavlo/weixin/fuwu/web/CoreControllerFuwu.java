@@ -19,7 +19,7 @@ import com.bavlo.weixin.fuwu.util.SignUtil;
  * @author shijf
  */
 @Controller
-public class CoreController {
+public class CoreControllerFuwu {
 
 	/**
 	 * 请求校验（确认请求来自微信服务器）
