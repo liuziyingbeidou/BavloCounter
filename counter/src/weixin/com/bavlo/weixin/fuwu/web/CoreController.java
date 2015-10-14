@@ -3,7 +3,6 @@ package com.bavlo.weixin.fuwu.web;
 import java.io.IOException;
 import java.io.PrintWriter;
 
-import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -20,7 +19,7 @@ import com.bavlo.weixin.fuwu.util.SignUtil;
  * @author shijf
  */
 @Controller
-public class CoreServlet {
+public class CoreController {
 
 	/**
 	 * 请求校验（确认请求来自微信服务器）
