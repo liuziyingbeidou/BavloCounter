@@ -28,6 +28,11 @@ import com.bavlo.counter.utils.WebUtils;
  */
 public class BaseAction {
 	
+	//·ÖÒ³-start
+	protected Integer dgpage=30;
+	protected Integer rows;
+	//·ÖÒ³-end
+	
 	protected void renderJson(Object object, JsonConfig config) {
 		JSONObject jsonObject = JSONObject.fromObject(object, config);
 		renderJson(jsonObject.toString());
@@ -174,5 +179,21 @@ public class BaseAction {
 			jsonMap.put(i1, i2);
 		}
 		this.renderJson(jsonMap);
+	}
+	
+	public Integer getDgpage() {
+		return dgpage;
+	}
+
+	public void setDgpage(Integer dgpage) {
+		this.dgpage = dgpage;
+	}
+
+	public Integer getRows() {
+		return rows;
+	}
+
+	public void setRows(Integer rows) {
+		this.rows = rows;
 	}
 }
