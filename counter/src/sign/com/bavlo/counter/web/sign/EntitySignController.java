@@ -19,7 +19,7 @@ import com.bavlo.counter.web.BaseController;
  * @date 2015-10-19 обнГ03:30:17
  */
 @Controller("entitySignController")
-@RequestMapping(value = "/entitysign")
+@RequestMapping(value = "/entysign")
 public class EntitySignController extends BaseController {
 
 	@Resource
