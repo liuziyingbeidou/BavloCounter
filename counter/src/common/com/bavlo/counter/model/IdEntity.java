@@ -1,10 +1,11 @@
 package com.bavlo.counter.model;
 
 import java.io.Serializable;
-import java.sql.Date;
+import java.sql.Timestamp;
 import java.util.HashMap;
 import java.util.Map;
 
+import javax.persistence.Column;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -19,46 +20,10 @@ public class IdEntity implements Serializable{
 	
 	public static final String tablePrefix = "";
 	
-	
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	public Integer id;
 	
-    // 时间戳
-    private Date dr;
-    // 其他1
-    private String vdef1;
-    // 其他2
-    private String vdef2;
-    // 其他3
-    private String vdef3;
-    // 其他4
-    private String vdef4;
-    // 其他5
-    private String vdef5;
-    // 其他6
-    private Long vdef6;
-    // 其他7
-    private Long vdef7;
-    // 其他8
-    private Long vdef8;
-    // 其他9
-    private Long vdef9;
-    // 其他10
-    private Long vdef10;
-    // 预留1
-    private String vreserve1;
-    // 预留2
-    private String vreserve2;
-    // 预留3
-    private String vreserve3;
-    // 预留4
-    private String vreserve4;
-    // 预留5
-    private String vreserve5;
-    // 备注
-    private String vmemo;
-
 	public Integer getId() {
 	
 		return id;
@@ -78,7 +43,6 @@ public class IdEntity implements Serializable{
 		this.selected = selected;
 	}
 	
-	//刘忠庆
 	@Transient	
 	private Map<Object, Object> condmap;
  	
@@ -148,12 +112,64 @@ public class IdEntity implements Serializable{
 		this.userValue = userValue;
 	}
 	
-	
-	public Date getDr() {
+	/**
+	 * 以下是补充
+	 */
+	/**
+	 * 时间戳		timestamp	
+	 */
+	private Timestamp ts;
+	/**
+	 * dr		smallint	删除(1);未删除(0);默认值:0
+	 */
+	private Short dr;
+	/**
+	 * 	自定义项		varchar(255)	
+	 */
+	private String vdef1;
+	private String vdef2;
+	private String vdef3;
+	private String vdef4;
+	private String vdef5;
+	/**
+	 * 自定义项		decimal(20,8)	
+	 */
+	@Column(precision=20,scale=8)
+	private Double vdef6;
+	@Column(precision=20,scale=8)
+	private Double vdef7;
+	@Column(precision=20,scale=8)
+	private Double vdef8;
+	@Column(precision=20,scale=8)
+	private Double vdef9;
+	@Column(precision=20,scale=8)
+	private Double vdef10;
+	/**
+	 * 预留字段		varchar(255)	
+	 */
+	private String vreserve1;
+	private String vreserve2;
+	private String vreserve3;
+	private String vreserve4;
+	private String vreserve5;
+	/**
+	 * 备注		varchar(255)	
+	 */
+	private String vmemo;
+
+	public Timestamp getTs() {
+		return ts;
+	}
+
+	public void setTs(Timestamp ts) {
+		this.ts = ts;
+	}
+
+	public Short getDr() {
 		return dr;
 	}
 
-	public void setDr(Date dr) {
+	public void setDr(Short dr) {
 		this.dr = dr;
 	}
 
@@ -197,43 +213,43 @@ public class IdEntity implements Serializable{
 		this.vdef5 = vdef5;
 	}
 
-	public Long getVdef6() {
+	public Double getVdef6() {
 		return vdef6;
 	}
 
-	public void setVdef6(Long vdef6) {
+	public void setVdef6(Double vdef6) {
 		this.vdef6 = vdef6;
 	}
 
-	public Long getVdef7() {
+	public Double getVdef7() {
 		return vdef7;
 	}
 
-	public void setVdef7(Long vdef7) {
+	public void setVdef7(Double vdef7) {
 		this.vdef7 = vdef7;
 	}
 
-	public Long getVdef8() {
+	public Double getVdef8() {
 		return vdef8;
 	}
 
-	public void setVdef8(Long vdef8) {
+	public void setVdef8(Double vdef8) {
 		this.vdef8 = vdef8;
 	}
 
-	public Long getVdef9() {
+	public Double getVdef9() {
 		return vdef9;
 	}
 
-	public void setVdef9(Long vdef9) {
+	public void setVdef9(Double vdef9) {
 		this.vdef9 = vdef9;
 	}
 
-	public Long getVdef10() {
+	public Double getVdef10() {
 		return vdef10;
 	}
 
-	public void setVdef10(Long vdef10) {
+	public void setVdef10(Double vdef10) {
 		this.vdef10 = vdef10;
 	}
 
@@ -276,11 +292,11 @@ public class IdEntity implements Serializable{
 	public void setVreserve5(String vreserve5) {
 		this.vreserve5 = vreserve5;
 	}
-	
+
 	public String getVmemo() {
 		return vmemo;
 	}
-	
+
 	public void setVmemo(String vmemo) {
 		this.vmemo = vmemo;
 	}
