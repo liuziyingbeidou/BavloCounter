@@ -7,6 +7,8 @@
         <wb-resource deploy-path="/WEB-INF/classes" source-path="/src/conf"/>
         <wb-resource deploy-path="/WEB-INF/classes" source-path="/src/weixin"/>
         <wb-resource deploy-path="/WEB-INF/classes" source-path="/src/test"/>
+        <wb-resource deploy-path="/WEB-INF/classes" source-path="/src/order"/>
+        <wb-resource deploy-path="/WEB-INF/classes" source-path="/src/sign"/>
         <property name="context-root" value="/counter"/>
         <property name="java-output-path" value="/counter/WebRoot/WEB-INF/classes"/>
     </wb-module>
