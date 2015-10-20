@@ -20,9 +20,12 @@ import com.bavlo.counter.service.impl.CommonService;
 public class CustomerService extends CommonService implements ICustomerService {
 
 	@Override
-	public void saveCustomer() {
-		// TODO Auto-generated method stub
-		
+	public void saveCustomer(CustomerVO custoerVO) {
+		try {
+			save(custoerVO);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 
 	@Override
