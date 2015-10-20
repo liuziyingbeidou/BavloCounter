@@ -20,7 +20,7 @@ public interface ICustomerService {
 	 * @param 
 	 * @return void
 	*/
-	public void saveCustomer();
+	public void saveCustomer(CustomerVO customerVO);
 	
 	
 	/** 

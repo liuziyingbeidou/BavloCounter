@@ -5,7 +5,10 @@ import javax.annotation.Resource;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.bavlo.counter.constant.IConstant;
+import com.bavlo.counter.model.customer.CustomerVO;
 import com.bavlo.counter.service.customer.impl.CustomerService;
+import com.bavlo.counter.web.BaseController;
 
 /**
  * @Title: ±¦ççCounter
@@ -16,14 +19,15 @@ import com.bavlo.counter.service.customer.impl.CustomerService;
  */
 @RequestMapping("customer")
 @Controller
-public class CustomerController {
+public class CustomerController extends BaseController implements IConstant {
 	
 	@Resource
 	private CustomerService customerService;
 	
-	@RequestMapping("saveOrUpdate")
-	public String saveOrUpdate(){
-		return "customer/customer";	
+	@RequestMapping("saveOrUpdate.do")
+	public String saveOrUpdate(CustomerVO customerVO){
+		customerService.saveCustomer(customerVO);
+		return PATH_CUSTOMER+"customer";	
 	}
 
 }
