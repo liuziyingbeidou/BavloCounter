@@ -2,18 +2,21 @@ package com.bavlo.counter.service.customer.impl;
 
 import java.util.List;
 
+import org.springframework.stereotype.Service;
+
 import com.bavlo.counter.model.customer.CustomerVO;
 import com.bavlo.counter.service.customer.itf.ICustomerService;
 import com.bavlo.counter.service.impl.CommonService;
 
-/**  
+
+/** 
  * @Title: 宝珑Counter
- * @Package com.bavlo.counter.service.custom.impl
+ * @ClassName: CustomerService 
  * @Description: 客户service
- * @author shijf 
- * @date 2015-10-20 上午11:02:08
- * @version V1.0  
+ * @author shijf
+ * @date 2015-10-20 下午04:12:30  
  */
+@Service("CustomerService")
 public class CustomerService extends CommonService implements ICustomerService {
 
 	@Override
