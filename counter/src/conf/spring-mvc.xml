@@ -21,7 +21,7 @@ xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.sprin
     <bean class="org.springframework.web.servlet.mvc.annotation.AnnotationMethodHandlerAdapter"/>
     <!--对模型视图名称的解析，即在模型视图名称添加前后缀 -->
     <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver"
-        p:prefix="/WEB-INF/jsp/" p:suffix=".jsp">
+        p:prefix="/WEB-INF/jsp/views/" p:suffix=".jsp">
          <!-- 如果使用jstl的话，配置下面的属性 -->
         <property name="viewClass" value="org.springframework.web.servlet.view.JstlView" />   
     </bean>
