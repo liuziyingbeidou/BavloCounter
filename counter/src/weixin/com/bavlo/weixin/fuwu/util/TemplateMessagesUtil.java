@@ -34,9 +34,11 @@ public class TemplateMessagesUtil {
 			String errorMsg = jsonObject.getString("errmsg");
 			if (0 == errorCode) {
 				result = true;
+				System.out.println("发送模板消息成功");
 			} else {
 				result = false;
-				log.error("创建菜单失败 errcode:{} errmsg:{}", errorCode, errorMsg);
+				System.out.println("发送模板消息失败");
+				log.error("发送模板消息失败 errcode:{} errmsg:{}", errorCode, errorMsg);
 				System.out.println(errorCode);
 				System.out.println(errorMsg);
 			}
