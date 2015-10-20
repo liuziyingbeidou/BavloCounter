@@ -1,0 +1,50 @@
+@charset "utf-8";
+/* CSS Document */
+
+html{ overflow-y:scroll;}
+body, h1, h2, h3, h4, h5, h6, hr, p, blockquote, dl, dt, dd, ul, ol, li, pre, form, fieldset, legend, button, input, textarea, th, td { margin:0; padding:0; }
+h1, h2, h3, h4, h5, h6 { font-size:100%; }
+/*定位*/
+.none { display:none }
+
+/*通用*/
+
+.main1 { margin:15px auto 0 auto;  overflow:hidden; zoom:1 }
+.main1 .left-sider { float:left; width:700px; height:400px; overflow-y:scroll; scrollbar-face-color: #fcfcfc !important; 
+scrollbar-highlight-color: #6c6c90 !important; 
+scrollbar-shadow-color: #fcfcfc !important; 
+scrollbar-3dlight-color: #fcfcfc !important; 
+scrollbar-arrow-color: #240024 !important; 
+scrollbar-track-color: #fcfcfc !important; 
+scrollbar-darkshadow-color: #48486c !important; 
+scrollbar-base-color: #fcfcfc !important;}
+.operate h3 { font-family: "Microsoft YaHei",微软雅黑; font-size:16px; background:#f7f7f7; height:43px; line-height:43px; padding-left:12px; }
+.operate ul li { display:inline; }
+.operate ul li a { no-repeat 200px 18px; padding-left:30px; text-decoration:none; font-size:14px; color:#f8f8f8; height:43px;  line-height:43px; }
+.operate ul li a.noline { border-bottom:none; }
+.operate ul li a:hover{ color:#8caf00; }
+.operate ul li a.selected:hover { color:#fff; }
+.operate ul li .selected { background-color:#8caf00;  background-position:200px -9px; color:#fff; }
+.operate ul li {display:inline-block; margin-bottom:10px; width:100%; position: relative; right:10px; min-height:43px; _height:43px; z-index: 10; zoom:1 }
+.operate ul li h4 { cursor:pointer; background:url(../images/bg3.png) no-repeat right 18px; text-decoration:none; font-size:14px; color:#f8f8f8; line-height:43px; font-weight:normal; }
+.operate ul li h4  span { float:right; margin-right:40px;}
+.operate ul li h4  span a { text-decoration:none !important;}
+.operate ul li h4 a { text-decoration:underline;}
+.operate ul li h4 b { margin:0 10px; font-weight:normal;}
+.operate ul li h4 img { vertical-align:middle;}
+.operate ul li.noline { border-bottom:none; }
+.operate ul li h4:hover { color:#8caf00; text-decoration:underline; }
+.operate ul li.selected h4 { background-position: right -37px;}
+.operate ul li a { }
+.operate ul li .on a { color:#8caf00; font-weight:bold; }
+.operate ul li a:hover { color:#8caf00; text-decoration:underline; }
+.bg-color { background-color:#8caf00; }
+.operate li .list-item { padding:5px 15px; position:relative; zoom:1 ;background:#777; margin:10px 0; }
+.operate li .list-item p { padding-left:8px; background:url(../images/ico_li.png) no-repeat 60px center; }
+.operate li .list-item a { background:none;  border:none; color: #333333; display:block; height:32px; line-height: 32px; margin: 0 -1px 0 1px; padding-left: 60px;  position: relative; text-decoration: none; font-size:12px; }
+.list-item  dl { margin:10px 0;}
+.list-item  dt{ margin:10px 0; color:#f8f8f8; font-size:16px;}
+.list-item  dt b { font-weight:normal;}
+.list-item  dl dd{ float:left; margin-right:10px;}
+.left-sider .operate { zoom:1 }
+.left-sider .ser-online a { background:url(../images/bg_ser_online.jpg) no-repeat 0 0; margin-top:10px; height:75px; border:1px solid #eaeaea; display:block; }
