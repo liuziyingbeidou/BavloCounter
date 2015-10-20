@@ -12,6 +12,6 @@ public interface IConstant {
 	/**
 	 * 实物签收单模块
 	 */
-	public static final String PATH_ENTITY_PRE = "entitysign/";
+	public static final String PATH_ENTITY = "entitysign/";
 
 }
