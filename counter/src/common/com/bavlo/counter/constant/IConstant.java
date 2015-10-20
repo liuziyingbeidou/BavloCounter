@@ -10,7 +10,7 @@ package com.bavlo.counter.constant;
 public interface IConstant {
 	
 	/**
-	 * 实物签收单
+	 * 实物签收单模块
 	 */
 	public static final String PATH_ENTITY_PRE = "entitysign/";
 
