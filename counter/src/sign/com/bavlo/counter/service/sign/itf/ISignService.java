@@ -25,7 +25,7 @@ public interface ISignService {
 	 * @param @return
 	 * @return Integer
 	 */
-	public void signSave();
+	public void signSave(SignVO signVO);
 	
 	/**
 	 * @Description: ¸üÐÂ
