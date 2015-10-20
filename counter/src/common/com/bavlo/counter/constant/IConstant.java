@@ -9,6 +9,7 @@ package com.bavlo.counter.constant;
  */
 public interface IConstant {
 	
+	/*****************************View模块***************************/
 	/**
 	 * 实物签收单模块
 	 */
