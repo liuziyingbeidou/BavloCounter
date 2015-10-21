@@ -28,6 +28,7 @@ public class HttpTools
 	 */
 	public static String getDataByURL(String url)
 	{
+		//url = "http://www.bavlo.com/getGemCalibrated?typeId=3&shapeId=4";
 		String res = null;
 		// ´´½¨HttpClientÊµÀý   
 	    HttpClient httpclient = new DefaultHttpClient();
