@@ -2,7 +2,7 @@
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html>
 	<head>
-		<title>新增实物签收单</title>
+		<title>新增宝石签收单</title>
 
 		<meta http-equiv="pragma" content="no-cache">
 		<meta http-equiv="cache-control" content="no-cache">
@@ -12,41 +12,23 @@
 		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 		<meta name="viewport" content="width=device-width,target-densitydpi=high-dpi,initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no" />
 		
-		<script src="${pageContext.request.contextPath}/resources/js/jquery-1.7.2.min.js"></script>
 		<link type='text/css' rel='stylesheet' href='${pageContext.request.contextPath}/resources/css/style.css' media='all' />
 		<link type='text/css' rel='stylesheet' href='${pageContext.request.contextPath}/resources/css/bootstrap.css' media='all' />
 		<script src="${pageContext.request.contextPath}/resources/js/top.js"></script>
-		
-		<script type="text/javascript">
-		//实物签收单保存
-		function save(){
-			$.ajax({
-			     type : "POST",
-			     url : "",
-			     data:$('#entityId').serialize(),// formid
-			     async:false,
-			     cache:false,
-			     success : function(msg) {
-			     	 
-			     },
-			     error : function(e) {
-			     	
-			     }
-		    });
-		}
-		</script>
-		
 	</head>
+
 	<body>
-	<form id="entityId" action="saveEntySign.do" method="post">
 		<div class="header">
 			<div class="head">
 				<div class="top1">
-					<b><a href="javascript:;" onclick="EditShow_Hidden(ed1)"><img
-								src="${pageContext.request.contextPath}/resources/images/plus.png">
-					</a> 编辑实物签收单81812560 </b>
-					<font><a href="javascript:;" onclick="Show_Hidden(tr1)"><img
-								src="${pageContext.request.contextPath}/resources/images/plus.png">
+					<b>
+					<a href="javascript:;" onclick="EditShow_Hidden(ed1)">
+					<img src="${pageContext.request.contextPath}/resources/images/plus.png">
+					</a> 编辑宝石签收单81812560 
+					</b>
+					<font>
+					<a href="javascript:;" onclick="Show_Hidden(tr1)">
+					<img src="${pageContext.request.contextPath}/resources/images/plus.png">
 					</a>
 					</font>
 				</div>
@@ -59,7 +41,7 @@
 							<a href="">定制单</a>
 						</li>
 						<li>
-							<a href="">实物签收单</a>
+							<a href="">宝石签收单</a>
 						</li>
 						<li>
 							<a href="">订单</a>
@@ -97,18 +79,20 @@
 				<div class="qsd_left">
 					<ul>
 						<li>
-							<a href=""><img src="${pageContext.request.contextPath}/resources/images/customer_01.png">
+							<a href="">
+							<img src="${pageContext.request.contextPath}/resources/images/customer_01.png">
 							</a>
 						</li>
 						<li>
 							<div class="file3">
-								<a href="javascript:;"><input type="file" name="file"
-										id="file">
+								<a href="javascript:;">
+								<input type="file" name="file" id="file">
 								</a>
 							</div>
 						</li>
 						<li class="camera">
-							<a href=""><img src="${pageContext.request.contextPath}/resources/images/camera.png">
+							<a href="">
+							<img src="${pageContext.request.contextPath}/resources/images/camera.png">
 							</a>
 						</li>
 						<div class="clear"></div>
@@ -126,7 +110,7 @@
 							</option>
 						</select>
 						<dt>
-							<input type='text' name='vtype' class="qsdr r2" value='25000元'>
+							<input type='text' name='' class="qsdr r2" value='25000元'>
 						</dt>
 						<div class="clear"></div>
 					</div>
@@ -164,6 +148,5 @@
 				<div class="clear"></div>
 			</div>
 		</div>
-	</form>
 	</body>
 </html>
