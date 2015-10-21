@@ -20,21 +20,13 @@ jQuery(document).ready(function($){
  */
 function loadSelData(nativeUrl,remoteUrl,emName,selId,selName){
 	$('#'+emName).empty();
-	$('#'+emName).append("<option>==请选择==</option>");
+	$('#'+emName).append("<option value='-1'>==请选择==</option>");
 	
-	$.ajax({
-		type:"GET",
-		async: false,
-		url:nativeUrl,
-		data:"url="+remoteUrl,
-		dataType:"json",
-		success:function(row){
-			var data = row;
-			for(var i=0;i<data.length;i++){
-				$('#'+emName).append("<option value='"+eval(selId)+"'>"+eval(selName)+"</option>");
-			}
+	$.get(nativeUrl,{url:remoteUrl},function(row){
+		var data = row;
+		for(var i=0;i<data.length;i++){
+			$('#'+emName).append("<option value='"+eval(selId)+"'>"+eval(selName)+"</option>");
 		}
-		
 	});
 }
 
@@ -49,7 +41,7 @@ function loadGemType(nativeUrl,remoteUrl,emName){
 	$('#'+emName).append("<option>==请选择==</option>");
 	
 	$.ajax({
-		type:"GET",
+		type:"post",
 		async: false,
 		url:nativeUrl,
 		data:"url="+remoteUrl,
