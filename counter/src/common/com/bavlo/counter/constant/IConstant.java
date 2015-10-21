@@ -10,9 +10,15 @@ package com.bavlo.counter.constant;
 public interface IConstant {
 	
 	/*****************************View模块***************************/
-	/**
-	 * 实物签收单模块
-	 */
+	/**实物签收单模块*/
 	public static final String PATH_ENTITY = "entitysign/";
+	/**宝石签收单模块*/
+	public static final String PATH_GEM = "gemsign/";
+	
+	/*****************************界面类型**************************/
+	//新增
+	public static final String PAGE_TYPE_ADD = "add";
+	//编辑
+	public static final String PAGE_TYPE_EDIT = "edit";
 
 }
