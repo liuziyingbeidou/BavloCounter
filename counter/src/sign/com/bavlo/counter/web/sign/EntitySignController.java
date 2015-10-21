@@ -1,15 +1,13 @@
 package com.bavlo.counter.web.sign;
 
-import java.util.List;
-
 import javax.annotation.Resource;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.bavlo.counter.constant.IConstant;
-import com.bavlo.counter.model.sign.SignVO;
-import com.bavlo.counter.service.sign.itf.ISignService;
+import com.bavlo.counter.model.sign.EntitySignVO;
+import com.bavlo.counter.service.sign.itf.IEntitySignService;
 import com.bavlo.counter.web.BaseController;
 
 /**
@@ -20,21 +18,12 @@ import com.bavlo.counter.web.BaseController;
  * @date 2015-10-19 下午03:30:17
  */
 @Controller("entitySignController")
-@RequestMapping(value = "/entysign")
+@RequestMapping(value = "/entity-sign")
 public class EntitySignController extends BaseController {
 	
 	@Resource
-	private ISignService signService;
+	private IEntitySignService entitySignService;
 	
-
-	@RequestMapping(value="getAllSign")
-	public String getAllSign(){
-		System.out.println("正在查询签收单信息...");
-		
-		List<SignVO> listSign = signService.findList();
-		
-		return IConstant.PATH_ENTITY + "entity-sign-edit";
-	}
 	/**
 	 * @Description: 保存实物签收单
 	 * @param @param signVO
@@ -42,10 +31,10 @@ public class EntitySignController extends BaseController {
 	 * @return String
 	 */
 	@RequestMapping(value="saveEntySign")
-	public String SaveEntitySign(SignVO signVO){
+	public String SaveEntitySign(EntitySignVO entitySignVO){
 		
-		System.out.println("实物类型："+signVO.getVtype());
-		signService.signSave(signVO);
+		System.out.println("实物类型："+entitySignVO.getVtype());
+		entitySignService.signSave(entitySignVO);
 		return IConstant.PATH_ENTITY + "entity-sign-view";
 	}
 	

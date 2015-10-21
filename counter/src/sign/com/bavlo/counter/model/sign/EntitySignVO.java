@@ -9,19 +9,15 @@ import com.bavlo.counter.model.IdEntity;
 /**
  * @Title: 宝珑Counter
  * @ClassName: SignVO 
- * @Description: 实物(0)、宝石(1)签收单
+ * @Description: 实物(0)签收单
  * @author liuzy
  * @date 2015-10-19 下午02:54:18
  */
 @Entity
-@Table(name="blct_sign")
-public class SignVO extends IdEntity {
+@Table(name="blct_entitysign")
+public class EntitySignVO extends IdEntity {
 	
 	private static final long serialVersionUID = 1L;
-	/**
-	 * 类别		char(3)	实物(0);宝石(1)
-	 */
-	private String vtbType;
 	/**
 	 * 客户主键		longint	
 	 */
@@ -68,12 +64,6 @@ public class SignVO extends IdEntity {
 	 */
 	private String vcreateTime;	
 
-	public String getVtbType() {
-		return vtbType;
-	}
-	public void setVtbType(String vtbType) {
-		this.vtbType = vtbType;
-	}
 	public Long getCustomerId() {
 		return customerId;
 	}

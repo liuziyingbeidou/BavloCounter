@@ -10,19 +10,19 @@ import com.bavlo.counter.model.IdEntity;
 /**
  * @Title: 宝珑Counter
  * @ClassName: SignBVO 
- * @Description: 实物(0)、宝石(1)签收单子表（图片）
+ * @Description: 实物签收单子表（图片）
  * @author liuzy
  * @date 2015-10-19 下午07:21:21
  */
 @Entity
-@Table(name="blct_sign_b")
-public class SignBVO extends IdEntity implements Serializable{
+@Table(name="blct_entitysign_b")
+public class EntitySignBVO extends IdEntity implements Serializable{
 	
 	private static final long serialVersionUID = 1L;
 	/**
 	 * 主表主键		longint	
 	 */
-	private Long signId;
+	private Long entitysignId;
 	/**
 	 * 实物名称		varchar(100)	
 	 */
@@ -31,11 +31,12 @@ public class SignBVO extends IdEntity implements Serializable{
 	 * 实物路径		varchar(100)	
 	 */
 	private String vpath;
-	public Long getSignId() {
-		return signId;
+	
+	public Long getEntitysignId() {
+		return entitysignId;
 	}
-	public void setSignId(Long signId) {
-		this.signId = signId;
+	public void setEntitysignId(Long entitysignId) {
+		this.entitysignId = entitysignId;
 	}
 	public String getVname() {
 		return vname;
