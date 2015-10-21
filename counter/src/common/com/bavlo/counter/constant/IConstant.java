@@ -17,8 +17,8 @@ public interface IConstant {
 	
 	/*****************************界面类型**************************/
 	//新增
-	public static final String PAGE_TYPE_ADD = "add";
+	public static final String PAGE_TYPE_ADD = "新增";
 	//编辑
-	public static final String PAGE_TYPE_EDIT = "edit";
+	public static final String PAGE_TYPE_EDIT = "编辑";
 
 }

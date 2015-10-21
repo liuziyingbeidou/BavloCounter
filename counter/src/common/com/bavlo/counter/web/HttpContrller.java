@@ -20,7 +20,10 @@ public class HttpContrller extends BaseController {
 	@RequestMapping(value="/http",produces = "application/json; charset=utf-8")
 	@ResponseBody
 	public String request(String url){
-		System.out.println("开始调用远程接口...");
-		return HttpTools.getDataByURL(url);
+		//url.replace("@", "&");
+		System.out.println("开始调用远程接口..."+url);
+		String info = HttpTools.getDataByURL(url);
+		System.out.println("返回数据:"+info);
+		return info;
 	}
 }
