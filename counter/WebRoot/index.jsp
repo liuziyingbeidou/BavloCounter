@@ -6,15 +6,11 @@
 <title>Insert title here</title>
 </head>
 <body>
-    <form action="user.do">
-        <input type="text" name="name" />
-        <br/>
-        <input type="password" name="password" />
-        <input type="hidden" name="method" value="log" />
-        <br/>
-        <input type="submit" value="登录" />
-    </form>
     
-    <a href="/counter/reg.jsp">注册</a>
+    1、<a href="${pageContext.request.contextPath}/gem-sign/add.do">宝石签收单新增</a>
+       <a href="">宝石签收单列表</a>
+    <br>   
+    2、<a href="">实物签收单新增</a>
+       <a href="">实物签收单列表</a>
 </body>
 </html>
