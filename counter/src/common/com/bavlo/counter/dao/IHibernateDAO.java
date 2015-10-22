@@ -262,7 +262,6 @@ public interface IHibernateDAO {
 	
 	public List findBySql(String sql,List<Object> valueList) ;
 	
-	
 	public Object getMax(Class<?> entityClass, String propertyName,
 			String scope, Object value) ;
 	

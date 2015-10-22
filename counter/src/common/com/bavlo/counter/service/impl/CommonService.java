@@ -233,6 +233,11 @@ public class CommonService implements ICommonService{
 	}
 	
 	public <E> List<E> findAll(Class<E> clasz, String conditions,
+			Object[] args, String order,String orderType) {
+		return dao.findAll(clasz,conditions,order,orderType);
+	}
+	
+	public <E> List<E> findAll(Class<E> clasz, String conditions,
 			Object[] args, String order, String[] includes) {
 		return dao.findAll(clasz,conditions,args,order,includes);
 	}
@@ -258,6 +263,10 @@ public class CommonService implements ICommonService{
 	public <E> List<E> findByHQL(Class<E> clasz, String hql, Object[] args,
 			int limit) {
 		return dao.findByHQL(clasz,hql,args,limit);
+	}
+	
+	public List findBySql(String sql,List<Object> valueList){
+		return dao.findBySql(sql,valueList);
 	}
 	
 	public Integer findInt(String hql, Object... args) {
