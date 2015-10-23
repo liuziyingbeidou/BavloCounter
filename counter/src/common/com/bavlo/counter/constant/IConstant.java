@@ -20,10 +20,24 @@ public interface IConstant {
 	public static final String GEM_SIGN_EDIT = "gem-sign-edit";
 	public static final String GEM_SIGN_LIST = "gem-sign-list";
 	
+	
+	/** 客户模块 */
+	public static final String PATH_CUSTOMER = "customer/";
+	/** 配石单模块 */
+	public static final String PATH_USE_GEM = "useGem/";
+	
 	/*****************************界面类型**************************/
 	//新增
 	public static final String PAGE_TYPE_ADD = "新增";
 	//编辑
 	public static final String PAGE_TYPE_EDIT = "编辑";
+	
+	
+
+	
+	/***************************** 转发路径 ***************************/
+	/** 转发 */
+	public static final String REDIRECT = "redirect:/";
+
 
 }
