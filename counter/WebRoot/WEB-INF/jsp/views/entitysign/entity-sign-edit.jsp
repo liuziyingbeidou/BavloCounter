@@ -1,8 +1,10 @@
 <%@ page language="java" import="java.util.*" pageEncoding="utf-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<c:set var="ctx" value="${pageContext.request.contextPath}"/>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html>
 	<head>
-		<title>新增实物签收单</title>
+		<title>${ctx }实物签收单</title>
 
 		<meta http-equiv="pragma" content="no-cache">
 		<meta http-equiv="cache-control" content="no-cache">
@@ -12,25 +14,26 @@
 		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 		<meta name="viewport" content="width=device-width,target-densitydpi=high-dpi,initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no" />
 		
-		<script src="${pageContext.request.contextPath}/resources/js/jquery-1.7.2.min.js"></script>
-		<link type='text/css' rel='stylesheet' href='${pageContext.request.contextPath}/resources/css/style.css' media='all' />
-		<link type='text/css' rel='stylesheet' href='${pageContext.request.contextPath}/resources/css/bootstrap.css' media='all' />
-		<script src="${pageContext.request.contextPath}/resources/js/top.js"></script>
+		<script src="${ctx}/resources/js/jquery-1.7.2.min.js"></script>
+		<link type='text/css' rel='stylesheet' href='${ctx}/resources/css/style.css' media='all' />
+		<link type='text/css' rel='stylesheet' href='${ctx}/resources/css/bootstrap.css' media='all' />
+		<script src="${ctx}/resources/js/top.js"></script>
 		
 		<script type="text/javascript">
 		//实物签收单保存
 		function save(){
 			$.ajax({
 			     type : "POST",
-			     url : "",
-			     data:$('#entityId').serialize(),// formid
+			     url : "save.do",
+			     data:$('#entityfrmId').serialize(),// formid
 			     async:false,
 			     cache:false,
-			     success : function(msg) {
-			     	 
+			     success : function(data) {
+			     	 $("#entityid").val(data.id);
+			     	 alert("保存成功!");
 			     },
 			     error : function(e) {
-			     	
+			     	alert("保存失败!");
 			     }
 		    });
 		}
@@ -38,15 +41,14 @@
 		
 	</head>
 	<body>
-	<form id="entityId" action="saveEntySign.do" method="post">
+	<form id="entityfrmId" method="post">
+	<input id="entityid" type="hidden" name="id" value="${entityvo['id']}">
 		<div class="header">
 			<div class="head">
 				<div class="top1">
-					<b><a href="javascript:;" onclick="EditShow_Hidden(ed1)"><img
-								src="${pageContext.request.contextPath}/resources/images/plus.png">
+					<b><a href="javascript:;" onclick="EditShow_Hidden(ed1)"><img src="${ctx}/resources/images/plus.png">
 					</a> 编辑实物签收单81812560 </b>
-					<font><a href="javascript:;" onclick="Show_Hidden(tr1)"><img
-								src="${pageContext.request.contextPath}/resources/images/plus.png">
+					<font><a href="javascript:;" onclick="Show_Hidden(tr1)"><img src="${ctx}/resources/images/plus.png">
 					</a>
 					</font>
 				</div>
@@ -97,7 +99,7 @@
 				<div class="qsd_left">
 					<ul>
 						<li>
-							<a href=""><img src="${pageContext.request.contextPath}/resources/images/customer_01.png">
+							<a href=""><img src="${ctx}/resources/images/customer_01.png">
 							</a>
 						</li>
 						<li>
@@ -108,57 +110,42 @@
 							</div>
 						</li>
 						<li class="camera">
-							<a href=""><img src="${pageContext.request.contextPath}/resources/images/camera.png">
+							<a href=""><img src="${ctx}/resources/images/camera.png">
 							</a>
 						</li>
 						<div class="clear"></div>
 					</ul>
 					<div class="clear"></div>
 					<dt>
-						<img src="${pageContext.request.contextPath}/resources/images/pic_02.png">
+						<img src="${ctx}/resources/images/pic_02.png">
 					</dt>
 				</div>
 				<div class="qsd_right">
 					<div class="qsd_right_1">
-						<select name="select" class="qsdr r1">
-							<option>
-								坦桑石
-							</option>
-						</select>
-						<dt>
-							<input type='text' name='vtype' class="qsdr r2" value='25000元'>
-						</dt>
-						<div class="clear"></div>
+						<input type='text' name='vtype' value='声明类型' class="qsdn t3">
 					</div>
 					<div class="qsd_right_1">
-						<select name="select" class="qsdr r1">
-							<option>
-								垫形
-							</option>
-						</select>
+						<input type='text' name='nweight' value='3035ct' class="qsdr r2">
 						<dt>
-							<input type='text' name='' class="qsdr r2" value='3035ct'>
+							<input type='text' name='icount' class="qsdr" value='1颗'>
 						</dt>
 						<div class="clear"></div>
 					</div>
 					<div class="qsdtt">
-						<select name="select" class="qsdt">
-							<option>
-								6.51 x 6.48 x 4.22
-							</option>
-						</select>
+						<input type='text' name='nworth' value='声明价值' class="qsdn t3">
 					</div>
 					<div class="clear"></div>
-					<div class="qsdtt">
-						<input type='text' name='' value='1颗' class="qsdn t3">
-					</div>
 					<div class="qssm-l">
-						<textarea name="" cols="" rows="" class="qssm" value="签收说明"
+						<textarea name="vmemo" cols="" rows="" class="qssm"
 							onfocus="if(this.value=='签收说明'){this.value='';}"
 							onblur="if(this.value==''){this.value='签收说明';}"></textarea>
 					</div>
+					<div class="clear"></div>
+					<div class="qsdtt">
+						<input type='text' name='nrecoveryPrice' value='贵金属回收价格' class="qsdn t3">
+					</div>
 					<div class="qs_save">
-						<input type="submit" name="button" value="保存">
+						<input type="button" onclick="save()" name="button" value="保存">
 					</div>
 				</div>
 				<div class="clear"></div>
