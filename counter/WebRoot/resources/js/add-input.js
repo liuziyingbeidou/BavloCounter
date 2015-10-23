@@ -3,7 +3,6 @@
  params.zuanshiGemPrice=0;
  params.kzsGemPrice=0;
  params.kpsGemPrice=0;
- params.kxsGemPrice=0;
  params.lzGemPrice=0;
  params.inlayPrice=0;
  params.chainPrice=0;
@@ -48,14 +47,6 @@
 			 params.kpsGemPrice=0;
 		 }
 	 })
-	 $(".kxsGem_btn").click(function(){
-		 if($(".kxsGem").css("display")=='none'){
-			 $(".kxsGem").show();
-		 }else{
-			 $(".kxsGem").hide();
-			 params.kxsGemPrice=0;
-		 }
-	 })
 	 $(".lzGem_btn").click(function(){
 		 if($(".lzGem").css("display")=='none'){
 			 $(".lzGem").show();
@@ -79,8 +70,6 @@
 		 params.kzsGemPrice=0;
 	 }else if("kpsGem"==str){
 		 params.kpsGemPrice=0;
-	 }else if("kxsGem"==str){
-		 params.kxsGemPrice=0;
 	 }else if("lzGem"==str){
 		 params.lzGemPrice=0;
 	 }

@@ -1,8 +1,8 @@
 /*定制单 隐藏*/
 
 $(document).ready(function(){
-  $(".pro .hide").click(function(){
-    $(this).parents(".pro").hide("slow");
+  $(".demo .hide").click(function(){
+    $(this).parents(".demo").hide("slow");
   });
   $(".sheji .hide").click(function(){
     $(this).parents(".sheji").hide("slow");
