@@ -3,16 +3,19 @@ package com.bavlo.counter.web.sign;
 import java.util.List;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.bavlo.counter.constant.IConstant;
+import com.bavlo.counter.model.sign.EntitySignBVO;
 import com.bavlo.counter.model.sign.EntitySignVO;
-import com.bavlo.counter.model.sign.GemSignVO;
 import com.bavlo.counter.service.sign.itf.IEntitySignService;
+import com.bavlo.counter.utils.JsonUtils;
 import com.bavlo.counter.web.BaseController;
 
 /**
@@ -58,9 +61,13 @@ public class EntitySignController extends BaseController {
 	 * @param @return
 	 * @return ModelAndView
 	 */
-	@RequestMapping(value="/save")
-	public void entitySave(EntitySignVO entitySignVO){
+	@RequestMapping(value="/save",method = RequestMethod.POST)
+	public void entitySave(HttpServletRequest request,EntitySignVO entitySignVO){
 		System.out.println("ÕýÔÚ±£´æ....");
+		
+		String bvo = request.getParameter("bvo");
+		System.out.println(bvo);
+		
 		Integer id = entitySignVO.getId();
 		if(id == null){
 			id = entitySignService.saveEntityRelID(entitySignVO);
