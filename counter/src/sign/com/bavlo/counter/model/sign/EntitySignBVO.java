@@ -31,6 +31,10 @@ public class EntitySignBVO extends IdEntity implements Serializable{
 	 * 实物路径		varchar(100)	
 	 */
 	private String vpath;
+	/**
+	 * 是否封面		char(1)	Y、N
+	 */
+	private String biscover;
 	
 	public Long getEntitysignId() {
 		return entitysignId;
@@ -49,6 +53,12 @@ public class EntitySignBVO extends IdEntity implements Serializable{
 	}
 	public void setVpath(String vpath) {
 		this.vpath = vpath;
+	}
+	public String getBiscover() {
+		return biscover;
+	}
+	public void setBiscover(String biscover) {
+		this.biscover = biscover;
 	}
 	
 }

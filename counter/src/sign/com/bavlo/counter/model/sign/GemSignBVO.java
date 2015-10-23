@@ -32,6 +32,11 @@ public class GemSignBVO extends IdEntity implements Serializable{
 	 */
 	private String vpath;
 	
+	/**
+	 *  «∑Ò∑‚√Ê		char(1)	Y°¢N
+	 */
+	private String biscover;
+	
 	public Long getEntitysignId() {
 		return entitysignId;
 	}
@@ -49,6 +54,12 @@ public class GemSignBVO extends IdEntity implements Serializable{
 	}
 	public void setVpath(String vpath) {
 		this.vpath = vpath;
+	}
+	public String getBiscover() {
+		return biscover;
+	}
+	public void setBiscover(String biscover) {
+		this.biscover = biscover;
 	}
 	
 }
