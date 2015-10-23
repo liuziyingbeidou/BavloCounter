@@ -25,11 +25,11 @@
 		$(function(){
 			//宝石类型下拉框值
 			var typeUrl = "http://www.bavlo.com/getAllGemType";
-			loadSelData(nativeUrl,typeUrl,"gem-type-id","data[i].id","data[i].type_cn",function(){setNowSelData();});
+			loadSelData(nativeUrl,typeUrl,"gem-type-id","data[i].id","data[i].type_cn",function(){$("#gem-type-id").val("${gemvo['vtype']}");});
 			
 			//宝石形状下拉框值
 			var shapeUrl = "http://www.bavlo.com/getAllGemShape";
-			loadSelData(nativeUrl,shapeUrl,"gem-shape-id","data[i].id","data[i].shape_cn",function(){setNowSelData();});
+			loadSelData(nativeUrl,shapeUrl,"gem-shape-id","data[i].id","data[i].shape_cn",function(){$("#gem-shape-id").val("${gemvo['vshape']}");});
 			
 			//规格下拉框
 			initSpecByTypeShape();
@@ -47,12 +47,6 @@
 			
 		});
 		
-		//设置当前下拉框值
-		function setNowSelData(){
-			$("#gem-type-id").val("${gemvo['vtype']}");
-			$("#gem-shape-id").val("${gemvo['vshape']}");
-			$("#gem-spec-id").val("${gemvo['vspec']}");
-		}
 		//初始话规格下拉框值
 		function initSpecByTypeShape(){
 			var gemTypeId = $("#gem-type-id").val();
@@ -64,7 +58,7 @@
 				gemShapeId = "${gemvo['vshape']}";
 			}
 			var specUrl = "http://www.bavlo.com/getGemCalibrated?typeId="+gemTypeId+"&shapeId="+gemShapeId;
-			loadSelData(nativeUrl,specUrl,"gem-spec-id","data[i].id","data[i].size",function(){setNowSelData();});
+			loadSelData(nativeUrl,specUrl,"gem-spec-id","data[i].id","data[i].size",function(){$("#gem-spec-id").val("${gemvo['vspec']}");});
 		}	
 		
 		
