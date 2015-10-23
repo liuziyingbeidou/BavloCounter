@@ -34,8 +34,9 @@ public class CustomerController extends BaseController implements IConstant {
 	 * @return ModelAndView
 	 */
 	@RequestMapping("info")
-	public ModelAndView info() {
-
+	public ModelAndView info(Map<String, Object> map) {
+		List<CustomerVO> customer = customerService.findCustomerList();
+		map.put("customer", customer);
 		return new ModelAndView(PATH_CUSTOMER + "customerEdit");
 	}
 
