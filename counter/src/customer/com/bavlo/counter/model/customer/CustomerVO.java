@@ -1,7 +1,6 @@
 package com.bavlo.counter.model.customer;
 
-import java.sql.Date;
-
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
 
@@ -16,41 +15,98 @@ import com.bavlo.counter.model.IdEntity;
 @Table(name="blct_customer")
 public class CustomerVO extends IdEntity {
 
-	// 加盟店ID
+	private static final long serialVersionUID = 1L;	
+	/** 
+	 * 加盟店ID 
+	 */ 
 	private Long agentId;
-	// 客服编号
-	private Long vserviceCode;
-	// 客户姓名
+	/** 
+	 * 客服编号
+	 */ 
+	@Column(length=50)
+	private String vserviceCode;
+	/** 
+	 * 客户编号 
+	 */ 
+	@Column(length=50)
+	private String vcustomerCode;
+	/** 
+	 * 客户姓名 
+	 */ 
+	@Column(length=50)
 	private String vname;
-	// 客户昵称
+	/** 
+	 * 客户昵称
+	 */ 
+	@Column(length=50)
 	private String vnickname;
-	// 客户性别
+	/** 
+	 * 客户性别 
+	 */ 
+	@Column(length=50)
 	private String vsex;
-	// 客户手机号
+	/** 
+	 * 客户手机号
+	 */ 
 	private Long vphoneCode;
-	// 地址:国家
+	/** 
+	 * 地址：国家 
+	 */ 
+	@Column(length=50)
 	private String vcontry;
-	// 地址:省份
+	/** 
+	 * 地址：省份
+	 */ 
+	@Column(length=50)
 	private String vprovince;
-	// 地址:城市
+	/** 
+	 * 地址：城市 
+	 */ 
+	@Column(length=50)
 	private String vcity;
-	// 地址:县区
+	/** 
+	 * 地址：县区 
+	 */ 
+	@Column(length=50)
 	private String vdistrict;
-	// 地址:街道
+	/** 
+	 * 地址：街道
+	 */ 
+	@Column(length=50)
 	private String vstreet;
-	// 地址:邮编
+	/** 
+	 * 地址：邮编 
+	 */ 
 	private Long vzipcode;
-	// 邮箱
+	/** 
+	 * 客户邮箱 
+	 */ 
+	@Column(length=50)
 	private String vemail;
-	// 客户微信号
+	/** 
+	 * 客户微信号
+	 */ 
+	@Column(length=50)
 	private String vwechat;
-	// 客户的openid
+	/** 
+	 * 客户的openid
+	 */ 
+	@Column(length=50)
 	private String vopenid;
-	// 客户语言
+	/** 
+	 * 客户语言 
+	 */ 
+	@Column(length=50)
 	private String vlanguage;
-	// 客户头像
+	/** 
+	 * 客户头像地址 
+	 */ 
+	@Column(length=50)
 	private String vhendimgurl;
-	// 客户关注时间
+	/** 
+	 * 客户关注时间
+	 */ 
+	@Column(length=50)
 	private String vsubscribeTime;
 
 	public Long getAgentId() {
@@ -61,12 +117,20 @@ public class CustomerVO extends IdEntity {
 		this.agentId = agentId;
 	}
 
-	public Long getVserviceCode() {
+	public String getVserviceCode() {
 		return vserviceCode;
 	}
 
-	public void setVserviceCode(Long vserviceCode) {
+	public void setVserviceCode(String vserviceCode) {
 		this.vserviceCode = vserviceCode;
+	}
+	
+	public String getVcustomerCode() {
+		return vcustomerCode;
+	}
+	
+	public void setVcustomerCode(String vcustomerCode) {
+		this.vcustomerCode = vcustomerCode;
 	}
 
 	public String getVname() {
