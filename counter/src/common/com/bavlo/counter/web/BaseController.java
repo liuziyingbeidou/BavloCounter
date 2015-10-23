@@ -6,13 +6,16 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
 import net.sf.json.JsonConfig;
 
 import org.apache.struts2.ServletActionContext;
+import org.springframework.web.bind.annotation.ModelAttribute;
 
 import com.bavlo.counter.commonbeans.Page;
 import com.bavlo.counter.utils.JsonUtils;
@@ -33,6 +36,17 @@ public class BaseController {
 	protected Integer rows;
 	//分页-end
 	
+	protected HttpServletResponse response;  
+    protected HttpSession session;  
+    protected HttpServletRequest request;
+	
+    @ModelAttribute  
+    public void setReqAndRes(HttpServletRequest request, HttpServletResponse response){  
+        this.request = request;  
+        this.response = response;  
+        this.session = request.getSession();  
+    }  
+    
 	protected void renderJson(Object object, JsonConfig config) {
 		JSONObject jsonObject = JSONObject.fromObject(object, config);
 		renderJson(jsonObject.toString());
@@ -98,7 +112,7 @@ public class BaseController {
 	 * 直接输出字符串.
 	 */
 	protected void renderText(String text) {
-		WebUtils.setNoCacheHeader(ServletActionContext.getResponse());
+		WebUtils.setNoCacheHeader(response);
 		render(text, "text/plain;charset=UTF-8");
 	}
 
@@ -119,8 +133,7 @@ public class BaseController {
 	
 	protected void render(String text, String contentType) {
 		try {
-			WebUtils.setNoCacheHeader(ServletActionContext.getResponse());
-			HttpServletResponse response = ServletActionContext.getResponse();
+			WebUtils.setNoCacheHeader(response);
 			response.setContentType(contentType);
 			response.getWriter().write(text);
 			response.getWriter().close();
@@ -137,8 +150,7 @@ public class BaseController {
 	protected void renderFusionChartsXML(String xml) {
 
 		try {
-			WebUtils.setNoCacheHeader(ServletActionContext.getResponse());
-			HttpServletResponse response = ServletActionContext.getResponse();
+			WebUtils.setNoCacheHeader(response);
 			response.setCharacterEncoding("UTF-8");
 			response.setContentType("text/xml; charset=UTF-8");
 			OutputStream outs = response.getOutputStream();
