@@ -14,5 +14,11 @@
     <br>   
     2、<a href="${ctx}/entity-sign/add.do">实物签收单新增</a>
        <a href="${ctx}/entity-sign/list.do">实物签收单列表</a>
+    <br>   
+    3、<a href="${ctx}/customer/info.do">客户新增</a>
+       <a href="${ctx}/customer/getList.do">客户列表</a>
+    <br>
+    4、<a href="${ctx}/useGem/edit.do">配石单新增</a>
+       <a href="${ctx}/useGem/getList.do">配石单列表</a>
 </body>
 </html>
