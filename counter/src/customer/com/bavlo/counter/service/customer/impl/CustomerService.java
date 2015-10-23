@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.stereotype.Service;
 
 import com.bavlo.counter.model.customer.CustomerVO;
+import com.bavlo.counter.model.sign.EntitySignVO;
 import com.bavlo.counter.service.customer.itf.ICustomerService;
 import com.bavlo.counter.service.impl.CommonService;
 
@@ -20,42 +21,43 @@ import com.bavlo.counter.service.impl.CommonService;
 public class CustomerService extends CommonService implements ICustomerService {
 
 	@Override
-	public void saveCustomer(CustomerVO custoerVO) {
+	public void saveCustomer(CustomerVO customerVO) {
+
+	}
+
+	@Override
+	public void deleteCustomer(CustomerVO customerVO) {
+		
+	}
+
+	@Override
+	public void updateCustomer(CustomerVO customerVO) {
+		
+	}
+	
+	@Override
+	public void saveOrUpdateCustomer(CustomerVO customerVO) {
 		try {
-			save(custoerVO);
+			saveOrUpdate(customerVO);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 	}
 
 	@Override
-	public void deleteCustomer() {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void updateCustomer() {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
 	public CustomerVO findCustomerById() {
-		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
 	public List<CustomerVO> findCustomerByWh() {
-		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
 	public List<CustomerVO> findCustomerList() {
-		// TODO Auto-generated method stub
-		return null;
+	
+		return findAll(CustomerVO.class, "",null,"ts","desc");
 	}
 
 }
