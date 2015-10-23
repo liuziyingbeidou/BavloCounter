@@ -62,7 +62,7 @@
 .customer ul li img { width:100%;}
 .hide {float:right; width:80px; height:30px; line-height:30px; border:none;position:relative;top:10px;right:3px;z-index:1;}
 /*.file { background:url(../images/customer_02.png) no-repeat; cursor:pointer;display:block;font-size:0;line-height:0;text-indent:-9999px;background-size:100% 100%;}*/
-.file {background: url(../images/customer_02.png) no-repeat;width:100%; padding:20px 0 ; background-size:100%;}
+.file {background: url(../images/customer_02.png) no-repeat;width:100%; background-size:100%;}
 .file input {opacity: 0;width:100%;}
 
 .file1  {background: url(../images/add_cad_pic.png) no-repeat;width:100%; padding:106px 0; background-size:100%;}
@@ -159,9 +159,12 @@
 .yf {
 	width:44%;font-size:26px;
 }
-.dzd_right_btm {
-	width:100%
-}
+
+#list {}
+.my-gallery figure { width:100%;}
+.pswp__zoom-wrap { left:0 !important; width:90% !important; top:100px !important; margin:0 auto;transform:none !important;}
+.pswp__caption h3,.pswp__counter { font-size:26px !important;}
+.dzd_right_btm {	width:100%}
 .baocun input {
 	width:100%;
 	height:60px; 
@@ -202,7 +205,6 @@
 .cankao h2 { font-size:26px;}
 .cankao img {
 	width:100%;
-	height:100%;
 }
 .sheji {
 	width:90%;
@@ -213,7 +215,6 @@
 }
 .sheji img {
 	width:100%;
-	height:100%;
 }
 .quming {
 	width:96%;
@@ -458,6 +459,8 @@ font-size:23px;
 .edit_save input {	width:100%;height:60px;line-height:60px; font-size:26px;}
 #kxbs {background:#242424;}
 .kxbs-in {width:90%;	margin:0px auto;}
+.kxbs { top:180% !important;}
+.kxsGem { position:relative;}
 .ok {width:100%;font-size:26px;height:60px; line-height:60px;}
 #choose {width:100%;}
 #choose h3 { font-size:26px;}
@@ -477,12 +480,18 @@ font-size:23px;
 .upload_btn {width:95%;margin-top:37px;margin-left:5%;}
 
 /*订单列表*/
+/*
 #orderlist  { background:#444; padding:0; min-height: 737px; }
-.orderlist  { width:100%; background:none;}
+*/
+.orderlist  { width:100%; background:#3b3b3b;left:0;}
 .order-list { font-size:26px;}
 .order-main { width:90%;}
 .main1 .left-sider  { height:560px !important;}
-.operate ul li h4 img { width:12%;}
+.operate ul li { width:66% !important;}
+.operate ul li h4  {  background:url(../images/bg3.png) no-repeat 95% 38px !important;}
+.operate ul li h4 b ,.operate ul li h4 a{ font-size:20px !important;}
+.operate ul li h4 span { margin-top:20px !important;}
+.operate ul li h4 img { width:20%;}
 .search-1 { width:100%;}
 .search { width:86%; padding-left:14%; font-size:26px; height:60px; line-height:60px;}
 .operate ul li { width:54%;}
