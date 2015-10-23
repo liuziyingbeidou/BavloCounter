@@ -22,7 +22,7 @@ public class UserTController extends BaseController {
 
 	@Resource
 	private UserService userService;
-
+	
 	/*
 	 * 接收参数getParameter()的时候:
 	 * 如果地址栏/springmvc/hello.htm上面没有传递参数,那么当id为int型的时候会报错,当id为Integer的时候值为null
