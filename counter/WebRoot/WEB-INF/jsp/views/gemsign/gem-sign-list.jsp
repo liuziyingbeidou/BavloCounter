@@ -17,6 +17,10 @@
 	<link href="${ctx}/resources/css/bootstrap.css" rel="stylesheet" type="text/css" />
 	<link href="${ctx}/resources/css/orderlist.css" rel="stylesheet" type="text/css" />
 	<script src="${ctx}/resources/js/showList.js" type="text/javascript"></script>
+	
+	<script type="text/javascript">
+	
+	</script>
 	</head>
 
 <body>

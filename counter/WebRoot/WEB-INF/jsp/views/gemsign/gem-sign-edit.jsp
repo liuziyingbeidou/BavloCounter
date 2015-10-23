@@ -111,7 +111,7 @@
 							<a href="">定制单</a>
 						</li>
 						<li>
-							<a href="">宝石签收单</a>
+							<a href="${ctx}/gem-sign/list.do">宝石签收单</a>
 						</li>
 						<li>
 							<a href="">订单</a>

@@ -20,12 +20,32 @@
 		<script src="${ctx}/resources/js/top.js"></script>
 		
 		<script type="text/javascript">
+		(function($){
+		    $.fn.serializeJson=function(){
+		        var serializeObj={};
+		        var array=this.serializeArray();
+		        var str=this.serialize();
+		        $(array).each(function(){
+		            if(serializeObj[this.name]){
+		                if($.isArray(serializeObj[this.name])){
+		                    serializeObj[this.name].push(this.value);
+		                }else{
+		                    serializeObj[this.name]=[serializeObj[this.name],this.value];
+		                }
+		            }else{
+		                serializeObj[this.name]=this.value;
+		            }
+		        });
+		        return serializeObj;
+		    };
+		})(jQuery);
 		//实物签收单保存
 		function save(){
+			var bvo = JSON.stringify($('#entityfrmBId').serializeJson());
 			$.ajax({
 			     type : "POST",
 			     url : "save.do",
-			     data:$('#entityfrmId').serialize(),// formid
+			     data:$('#entityfrmId').serialize()+"&bvo="+bvo,// formid
 			     async:false,
 			     cache:false,
 			     success : function(data) {
@@ -61,7 +81,7 @@
 							<a href="">定制单</a>
 						</li>
 						<li>
-							<a href="">实物签收单</a>
+							<a href="${ctx}/entity-sign/list.do">实物签收单</a>
 						</li>
 						<li>
 							<a href="">订单</a>
@@ -122,27 +142,27 @@
 				</div>
 				<div class="qsd_right">
 					<div class="qsd_right_1">
-						<input type='text' name='vtype' value='声明类型' class="qsdn t3">
+						<input type='text' name='vtype' value="${entityvo['vtype']}" class="qsdn t3">
 					</div>
 					<div class="qsd_right_1">
-						<input type='text' name='nweight' value='3035ct' class="qsdr r2">
+						<input type='text' name='nweight' value="${entityvo['nweight']}" class="qsdr r2">
 						<dt>
-							<input type='text' name='icount' class="qsdr" value='1颗'>
+							<input type='text' name='icount' class="qsdr" value="${entityvo['icount']}">
 						</dt>
 						<div class="clear"></div>
 					</div>
 					<div class="qsdtt">
-						<input type='text' name='nworth' value='声明价值' class="qsdn t3">
+						<input type='text' name='nworth' value="${entityvo['nworth']}" class="qsdn t3">
 					</div>
 					<div class="clear"></div>
 					<div class="qssm-l">
 						<textarea name="vmemo" cols="" rows="" class="qssm"
 							onfocus="if(this.value=='签收说明'){this.value='';}"
-							onblur="if(this.value==''){this.value='签收说明';}"></textarea>
+							onblur="if(this.value==''){this.value='签收说明';}">${entityvo['vmemo']}</textarea>
 					</div>
 					<div class="clear"></div>
 					<div class="qsdtt">
-						<input type='text' name='nrecoveryPrice' value='贵金属回收价格' class="qsdn t3">
+						<input type='text' name='nrecoveryPrice' value="${entityvo['nrecoveryPrice']}" class="qsdn t3">
 					</div>
 					<div class="qs_save">
 						<input type="button" onclick="save()" name="button" value="保存">
@@ -151,6 +171,10 @@
 				<div class="clear"></div>
 			</div>
 		</div>
+	</form>
+	<form id="entityfrmBId">
+	<input type='text' name='vname' value="aaa" class="qsdn t3">
+	<input type='text' name='biscover' value="bbb" class="qsdn t3">
 	</form>
 	</body>
 </html>
