@@ -1,5 +1,7 @@
 package com.bavlo.counter.service.sign.itf;
 
+import java.util.List;
+
 import com.bavlo.counter.model.sign.EntitySignVO;
 
 /**
@@ -12,17 +14,31 @@ import com.bavlo.counter.model.sign.EntitySignVO;
 public interface IEntitySignService {
 	
 	/**
-	 * @Description: 签收单保存,返回主键
+	 * @Description: 保存
+	 * @param @param gemSignVO
 	 * @param @return
 	 * @return Integer
 	 */
-	public Integer signSaveReID();
-	
+	public Integer saveEntityRelID(EntitySignVO entitySignVO);
 	/**
-	 * @Description: 签收单保存
-	 * @param @return
-	 * @return Integer
+	 * @Description: 更新
+	 * @param @param gemSignVO
+	 * @return void
 	 */
-	public void signSave(EntitySignVO entitySignVO);
+	public void updateEntity(EntitySignVO entitySignVO);
+
+	/**
+	 * @Description: 查询所有数据
+	 * @param @return
+	 * @return List<GemSignVO>
+	 */
+	public List<EntitySignVO> findListEntity();
+	/**
+	 * @Description: 根据id查询
+	 * @param @param id
+	 * @param @return
+	 * @return GemSignVO
+	 */
+	public EntitySignVO findSigleEntity(Integer id);
 	
 }

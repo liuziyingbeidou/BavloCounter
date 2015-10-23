@@ -1,5 +1,7 @@
 package com.bavlo.counter.service.sign.impl;
 
+import java.util.List;
+
 import org.springframework.stereotype.Service;
 
 import com.bavlo.counter.model.sign.GemSignVO;
@@ -17,14 +19,32 @@ import com.bavlo.counter.service.sign.itf.IGemSignService;
 public class GemSignService extends CommonService implements IGemSignService {
 
 	@Override
-	public Integer saveRelId(GemSignVO gemSignVO) {
+	public Integer saveGemRelID(GemSignVO gemSignVO) {
 		Integer id = null;
+		
 		try {
 			id = saveReID(gemSignVO);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 		return id;
+	}
+
+	@Override
+	public void updateGem(GemSignVO gemSignVO) {
+		update(gemSignVO);
+	}
+
+	@Override
+	public List<GemSignVO> findListGem() {
+		
+		return findAll(GemSignVO.class, "",null,"ts","desc");
+	}
+
+	@Override
+	public GemSignVO findSigleGem(Integer id) {
+		String wh = " id ="+id;
+		return findFirst(GemSignVO.class, wh);
 	}
 
 }

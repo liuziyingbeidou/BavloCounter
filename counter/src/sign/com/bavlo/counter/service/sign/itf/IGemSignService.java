@@ -1,5 +1,7 @@
 package com.bavlo.counter.service.sign.itf;
 
+import java.util.List;
+
 import com.bavlo.counter.model.sign.GemSignVO;
 
 /**
@@ -17,6 +19,25 @@ public interface IGemSignService {
 	 * @param @return
 	 * @return Integer
 	 */
-	public Integer saveRelId(GemSignVO gemSignVO);
+	public Integer saveGemRelID(GemSignVO gemSignVO);
+	/**
+	 * @Description: 更新
+	 * @param @param gemSignVO
+	 * @return void
+	 */
+	public void updateGem(GemSignVO gemSignVO);
 
+	/**
+	 * @Description: 查询所有数据
+	 * @param @return
+	 * @return List<GemSignVO>
+	 */
+	public List<GemSignVO> findListGem();
+	/**
+	 * @Description: 根据id查询
+	 * @param @param id
+	 * @param @return
+	 * @return GemSignVO
+	 */
+	public GemSignVO findSigleGem(Integer id);
 }
