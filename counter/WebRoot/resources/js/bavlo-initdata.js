@@ -18,16 +18,36 @@ jQuery(document).ready(function($){
  * selId json中作为下拉框id 如：data[i].id<br>
  * selName json中作为下拉框显示名称 如：data[i].type_cn<br>
  */
-function loadSelData(nativeUrl,remoteUrl,emName,selId,selName){
+function loadSelData(nativeUrl,remoteUrl,emName,selId,selName,callback){
 	$('#'+emName).empty();
 	$('#'+emName).append("<option value='-1'>==请选择==</option>");
+	
+	/*$.ajax({
+		type:"get",
+		async: false,
+		url:nativeUrl,
+		data:{url:remoteUrl},
+		dataType:"json",
+		success:function(row){
+			var data = row;
+			for(var i=0;i<data.length;i++){
+				$('#'+emName).append("<option value='"+eval(selId)+"'>"+eval(selName) +"</option>");
+			}
+		}
+		
+	});*/
 	
 	$.get(nativeUrl,{url:remoteUrl},function(row){
 		var data = row;
 		for(var i=0;i<data.length;i++){
 			$('#'+emName).append("<option value='"+eval(selId)+"'>"+eval(selName)+"</option>");
 		}
+		if(typeof(callback)!=='undefined'){
+			callback&&callback();
+		}
 	});
+	
+
 }
 
 /**
