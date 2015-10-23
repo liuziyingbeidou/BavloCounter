@@ -1,8 +1,10 @@
 <%@ page language="java" import="java.util.*" pageEncoding="utf-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<c:set var="ctx" value="${pageContext.request.contextPath}"/>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html>
 	<head>
-		<title>新增宝石签收单</title>
+		<title>查看宝石签收单</title>
 
 		<meta http-equiv="pragma" content="no-cache">
 		<meta http-equiv="cache-control" content="no-cache">
@@ -12,9 +14,9 @@
 		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 		<meta name="viewport" content="width=device-width,target-densitydpi=high-dpi,initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no" />
 		
-		<link type='text/css' rel='stylesheet' href='${pageContext.request.contextPath}/resources/css/style.css' media='all' />
-		<link type='text/css' rel='stylesheet' href='${pageContext.request.contextPath}/resources/css/bootstrap.css' media='all' />
-		<script src="${pageContext.request.contextPath}/resources/js/top.js"></script>
+		<link type='text/css' rel='stylesheet' href='${ctx}/resources/css/style.css' media='all' />
+		<link type='text/css' rel='stylesheet' href='${ctx}/resources/css/bootstrap.css' media='all' />
+		<script src="${ctx}/resources/js/top.js"></script>
 	</head>
 
 	<body>
@@ -23,12 +25,12 @@
 				<div class="top1">
 					<b>
 					<a href="javascript:;" onclick="EditShow_Hidden(ed1)">
-					<img src="${pageContext.request.contextPath}/resources/images/plus.png">
+					<img src="${ctx}/resources/images/plus.png">
 					</a> 编辑宝石签收单81812560 
 					</b>
 					<font>
 					<a href="javascript:;" onclick="Show_Hidden(tr1)">
-					<img src="${pageContext.request.contextPath}/resources/images/plus.png">
+					<img src="${ctx}/resources/images/plus.png">
 					</a>
 					</font>
 				</div>
@@ -80,7 +82,7 @@
 					<ul>
 						<li>
 							<a href="">
-							<img src="${pageContext.request.contextPath}/resources/images/customer_01.png">
+							<img src="${ctx}/resources/images/customer_01.png">
 							</a>
 						</li>
 						<li>
@@ -92,14 +94,14 @@
 						</li>
 						<li class="camera">
 							<a href="">
-							<img src="${pageContext.request.contextPath}/resources/images/camera.png">
+							<img src="${ctx}/resources/images/camera.png">
 							</a>
 						</li>
 						<div class="clear"></div>
 					</ul>
 					<div class="clear"></div>
 					<dt>
-						<img src="${pageContext.request.contextPath}/resources/images/pic_02.png">
+						<img src="${ctx}/resources/images/pic_02.png">
 					</dt>
 				</div>
 				<div class="qsd_right">
