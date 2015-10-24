@@ -5,7 +5,7 @@ import java.util.List;
 import org.springframework.stereotype.Service;
 
 import com.bavlo.counter.model.customer.CustomerVO;
-import com.bavlo.counter.model.sign.EntitySignVO;
+import com.bavlo.counter.model.sign.GemSignVO;
 import com.bavlo.counter.service.customer.itf.ICustomerService;
 import com.bavlo.counter.service.impl.CommonService;
 
@@ -45,8 +45,9 @@ public class CustomerService extends CommonService implements ICustomerService {
 	}
 
 	@Override
-	public CustomerVO findCustomerById() {
-		return null;
+	public CustomerVO findCustomerById(Integer id) {
+		String wh = " id ="+id;
+		return findFirst(CustomerVO.class, wh);
 	}
 
 	@Override
