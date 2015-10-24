@@ -46,7 +46,7 @@ public interface ICustomerService {
 	 * @param @return
 	 * @return CustomerVO
 	 */
-	public CustomerVO findCustomerById();
+	public CustomerVO findCustomerById(Integer id);
 
 	/**
 	 * @Description: 通过条件查找客户

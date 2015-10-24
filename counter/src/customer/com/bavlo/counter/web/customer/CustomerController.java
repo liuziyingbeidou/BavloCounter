@@ -11,7 +11,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.bavlo.counter.constant.IConstant;
 import com.bavlo.counter.model.customer.CustomerVO;
-import com.bavlo.counter.service.customer.impl.CustomerService;
+import com.bavlo.counter.service.customer.itf.ICustomerService;
 import com.bavlo.counter.web.BaseController;
 
 /**
@@ -26,7 +26,7 @@ import com.bavlo.counter.web.BaseController;
 public class CustomerController extends BaseController implements IConstant {
 
 	@Resource
-	private CustomerService customerService;
+	private ICustomerService customerService;
 
 	/**
 	 * @Description: ¿Í»§ÏêÇé
@@ -34,9 +34,13 @@ public class CustomerController extends BaseController implements IConstant {
 	 * @return ModelAndView
 	 */
 	@RequestMapping("info")
-	public ModelAndView info(Map<String, Object> map) {
-		List<CustomerVO> customer = customerService.findCustomerList();
-		map.put("customer", customer);
+	public ModelAndView info(Map<String, Object> map, Integer id) {
+
+		List<CustomerVO> customerList = customerService.findCustomerList();
+		map.put("customerList", customerList);
+
+		CustomerVO customerDetail = customerService.findCustomerById(id);
+		map.put("customerDetail", customerDetail);
 		return new ModelAndView(PATH_CUSTOMER + "customerEdit");
 	}
 
@@ -50,7 +54,7 @@ public class CustomerController extends BaseController implements IConstant {
 	public String saveOrUpdate(CustomerVO customerVO) {
 
 		customerService.saveOrUpdateCustomer(customerVO);
-		return REDIRECT+"customer/info.do";
+		return REDIRECT + "customer/info.do";
 	}
 
 	/**
