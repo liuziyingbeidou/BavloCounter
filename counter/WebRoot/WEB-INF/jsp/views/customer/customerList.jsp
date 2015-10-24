@@ -28,7 +28,7 @@
 											<li>
 												<h4>
 													<img
-														src="${pageContext.request.contextPath}/resources/images/customer_01.png" />
+														src="${ctx}/resources/images/customer_01.png" />
 													<b>${customerList.vname }</b><a href="">${customerList.vphoneCode
 														}</a><span><a href="${ctx}/customer/info.do?id=${customerList.id}">选择</a> </span>
 												</h4>
@@ -36,15 +36,15 @@
 													<dl>
 														<dd>
 															<img
-																src="${pageContext.request.contextPath}/resources/images/good_01.png" />
+																src="${ctx}/resources/images/good_01.png" />
 														</dd>
 														<dd>
 															<img
-																src="${pageContext.request.contextPath}/resources/images/good_02.png" />
+																src="${ctx}/resources/images/good_02.png" />
 														</dd>
 														<dd>
 															<img
-																src="${pageContext.request.contextPath}/resources/images/good_03.png" />
+																src="${ctx}/resources/images/good_03.png" />
 														</dd>
 													</dl>
 													<div class="clear"></div>
