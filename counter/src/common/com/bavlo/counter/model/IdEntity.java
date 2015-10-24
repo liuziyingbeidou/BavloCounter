@@ -122,6 +122,7 @@ public class IdEntity implements Serializable{
 	/**
 	 * dr		smallint	删除(1);未删除(0);默认值:0
 	 */
+	@Column(columnDefinition="smallint default 0")
 	private Short dr;
 	/**
 	 * 	自定义项		varchar(255)	
