@@ -63,8 +63,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 							<input type="hidden" id='id' name='id' value="${customerDetail.id }" />
 							<input type='text' id='vname' name='vname'
 								value="${customerDetail.vname }"
-								onfocus="if(value =='${customerDetail.vname }'||value =='姓名'){value =''}"
-								onblur="if(value ==''){if('${customerDetail.vname }'==''){value='姓名'}else{value='${customerDetail.vname }'}}"
+								onfocus="if(value =='姓名'){value =''}"
+								onblur="if(value ==''){value='姓名'}'}"
 								class="edit_2 edit_1_name" />
 							<select name="vsex" class="edit_2 edit_1_area_son">
 								<option>
@@ -79,21 +79,21 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 						<div class="edit_1">
 							<input type='text' id='vphoneCode' name='vphoneCode'
 								value="${customerDetail.vphoneCode}"
-								onfocus="if(value =='${customerDetail.vphoneCode}'||value =='手机'){value =''}"
-								onblur="if(value ==''){if('${customerDetail.vphoneCode }'==''){value='手机'}else{value='${customerDetail.vphoneCode }'}}"
+								onfocus="if(value =='手机'){value =''}"
+								onblur="if(value ==''){value='手机'}'}"
 								class="edit_2 edit_1_name" />
 							<input type='text' id='vemail' name='vemail'
 								value="${customerDetail.vemail}"
-								onfocus="if(value =='${customerDetail.vemail}'||value =='邮箱'){value =''}"
-								onblur="if(value ==''){if('${customerDetail.vemail }'==''){value='邮箱'}else{value='${customerDetail.vemail }'}}"
+								onfocus="if(value =='邮箱'){value =''}"
+								onblur="if(value ==''){value='邮箱'}'}"
 								class="edit_2 edit_1_sex" />
 							<div class="clear"></div>
 						</div>
 						<div class="edit_1">
 							<input type='text' id='vnickname' name='vnickname'
 								value="${customerDetail.vnickname}"
-								onfocus="if(value =='${customerDetail.vnickname}'||value =='昵称'){value =''}"
-								onblur="if(value ==''){if('${customerDetail.vnickname }'==''){value='昵称'}else{value='${customerDetail.vnickname }'}}"
+								onfocus="if(value =='昵称'){value =''}"
+								onblur="if(value ==''){value='昵称'}'}"
 								class="edit_2 edit_1_name" />
 							<select name="vcountry" class="edit_2 edit_1_area_son">
 								<option>
