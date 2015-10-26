@@ -22,44 +22,63 @@
 		<script type="text/javascript">
 		//本地webservice
 		var nativeUrl = "${pageScope.basePath}/counter/webservice/http.do";
-		$(function(){
+		var nativeUrl = "${pageScope.basePath}/counter/webservice/http.do";
+		$(function() {
 			//宝石类型下拉框值
 			var typeUrl = "http://www.bavlo.com/getAllGemType";
-			loadSelData(nativeUrl,typeUrl,"gem-type-id","data[i].id","data[i].type_cn",function(){$("#gem-type-id").val("${gemvo['vtype']}");});
+			loadSelData(nativeUrl, typeUrl, "gem-type-id", "data[i].id",
+					"data[i].type_cn", function() {
+						$("#gem-type-id").val("${useGemDetail['vtype']}");
+					});
 			
-			//宝石形状下拉框值
-			var shapeUrl = "http://www.bavlo.com/getAllGemShape";
-			loadSelData(nativeUrl,shapeUrl,"gem-shape-id","data[i].id","data[i].shape_cn",function(){$("#gem-shape-id").val("${gemvo['vshape']}");});
-			
+			//形状下拉框
+			initShapeByType();
 			//规格下拉框
 			initSpecByTypeShape();
-			
+	
 			//类型和形状改变
-			$("#gem-type-id").change(function(){
-				initSpecByTypeShape();
+			$("#gem-type-id").change(function() {
+				initShapeByType();
 			});
-			$("#gem-shape-id").change(function(){
+			$("#gem-shape-id").change(function() {
 				initSpecByTypeShape();
 			});
 			/**
-			*$(document).ajaxStop(function () {setNowSelData(); });
-			**/
-			
+			 *$(document).ajaxStop(function () {setNowSelData(); });
+			 **/
+	
 		});
 		
-		//初始话规格下拉框值
-		function initSpecByTypeShape(){
+		//初始化形状下拉框值
+		function initShapeByType() {
+			var gemTypeId = $("#gem-type-id").val();
+			if (gemTypeId == "-1") {
+				gemTypeId = "${useGemDetail['vtype']}";
+			}
+			var shapeUrl = "http://www.bavlo.com/getGemShape?typeId="+ gemTypeId;
+			loadSelData(nativeUrl, shapeUrl, "gem-shape-id", "data[i].id",
+					"data[i].shape_cn", function() {
+						$("#gem-shape-id").val("${useGemDetail['vshape']}");
+					});
+		}
+		
+		//初始化规格下拉框值
+		function initSpecByTypeShape() {
 			var gemTypeId = $("#gem-type-id").val();
 			var gemShapeId = $("#gem-shape-id").val();
-			if(gemTypeId == "-1"){
-				gemTypeId = "${gemvo['vtype']}";
+			if (gemTypeId == "-1") {
+				gemTypeId = "${useGemDetail['vtype']}";
 			}
-			if(gemShapeId == "-1"){
-				gemShapeId = "${gemvo['vshape']}";
+			if (gemShapeId == "-1") {
+				gemShapeId = "${useGemDetail['vshape']}";
 			}
-			var specUrl = "http://www.bavlo.com/getGemCalibrated?typeId="+gemTypeId+"&shapeId="+gemShapeId;
-			loadSelData(nativeUrl,specUrl,"gem-spec-id","data[i].id","data[i].size",function(){$("#gem-spec-id").val("${gemvo['vspec']}");});
-		}	
+			var specUrl = "http://www.bavlo.com/getGemCalibrated?typeId="
+					+ gemTypeId + "&shapeId=" + gemShapeId;
+			loadSelData(nativeUrl, specUrl, "gem-spec-id", "data[i].id",
+					"data[i].size", function() {
+						$("#gem-spec-id").val("${useGemDetail['vspec']}");
+					});
+		}
 		
 		
 		//宝石签收单保存
