@@ -1,12 +1,12 @@
-package com.bavlo.counter.service.gem.impl;
+package com.bavlo.counter.service.useGem.impl;
 
 import java.util.List;
 
 import org.springframework.stereotype.Service;
 
-import com.bavlo.counter.model.gem.UseGemVO;
-import com.bavlo.counter.service.gem.itf.IUseGemService;
+import com.bavlo.counter.model.useGem.UseGemVO;
 import com.bavlo.counter.service.impl.CommonService;
+import com.bavlo.counter.service.useGem.itf.IUseGemService;
 
 
 /** 

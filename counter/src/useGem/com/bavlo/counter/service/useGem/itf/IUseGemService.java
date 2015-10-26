@@ -1,8 +1,8 @@
-package com.bavlo.counter.service.gem.itf;
+package com.bavlo.counter.service.useGem.itf;
 
 import java.util.List;
 
-import com.bavlo.counter.model.gem.UseGemVO;
+import com.bavlo.counter.model.useGem.UseGemVO;
 
 /** 
  * @Title: ±¦ççCounter
