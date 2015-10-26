@@ -29,8 +29,8 @@
 												<h4>
 													<img
 														src="${ctx}/resources/images/customer_01.png" />
-													<b>${useGemList.vname }</b><a href="">${useGemList.vshape
-														}</a><span><a href="${ctx}/customer/info.do?id=${useGemList.id}">选择</a> </span>
+													<b>${useGemList.vtype }</b><a href="">${useGemList.vshape
+														}</a><span><a href="${ctx}/useGem/info.do?id=${useGemList.id}">选择</a> </span>
 												</h4>
 												<div class="list-item none">
 													<dl>

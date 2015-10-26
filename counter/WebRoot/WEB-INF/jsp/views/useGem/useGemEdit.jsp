@@ -26,61 +26,85 @@
 		<script type="text/javascript">
 	//本地webservice
 	var nativeUrl = "${pageScope.basePath}/counter/webservice/http.do";
-	$(function() {
-		//宝石类型下拉框值
-		var typeUrl = "http://www.bavlo.com/getAllGemType";
-		loadSelData(nativeUrl, typeUrl, "gemTypeId", "data[i].id",
-				"data[i].type_cn", function() {
-					$("#gemTypeId").val("${useGemDetail['vtype']}");
-				});
-
-		//宝石形状下拉框值
-		var shapeUrl = "http://www.bavlo.com/getAllGemShape";
-		loadSelData(nativeUrl, shapeUrl, "gemShapeId", "data[i].id",
-				"data[i].shape_cn", function() {
-					$("#gemShapeId").val("${useGemDetail['vshape']}");
-				});
-
-		//规格下拉框
-		initSpecByTypeShape();
-
-		//类型和形状改变
-		$("#gemTypeId").change(function() {
+			$(function() {
+			//宝石类型下拉框值
+			var typeUrl = "http://www.bavlo.com/getAllGemType";
+			loadSelData(nativeUrl, typeUrl, "gemTypeId", "data[i].id",
+					"data[i].type_cn", function() {
+						$("#gemTypeId").val("${useGemDetail['vtype']}");
+					});
+			
+			//形状下拉框
+			initShapeByType();
+			//规格下拉框
 			initSpecByTypeShape();
+	
+			//类型和形状改变
+			$("#gemTypeId").change(function() {
+				initShapeByType();
+			});
+			$("#gemShapeId").change(function() {
+				initSpecByTypeShape();
+			});
+			/**
+			 *$(document).ajaxStop(function () {setNowSelData(); });
+			 **/
+	
 		});
-		$("#gemShapeId").change(function() {
-			initSpecByTypeShape();
+		
+		//初始化input
+		$(function initVal() {
+			var useGemWorth = "${useGemDetail['nworth']}";
+			var useGemWeigth = "${useGemDetail['nweight']}";
+			var useGemCount = "${useGemDetail['icount']}";
+			if (useGemWorth == "") {
+				$("#nworth").val("价值（元）");
+			}
+			if (useGemWeigth == "") {
+				$("#nweight").val("重量（克拉）");
+			}
+			if (useGemCount == "") {
+				$("#icount").val("数量（颗）");
+			}
 		});
-		/**
-		 *$(document).ajaxStop(function () {setNowSelData(); });
-		 **/
-
-	});
-
-	//初始化规格下拉框值
-	function initSpecByTypeShape() {
-		var gemTypeId = $("#gemTypeId").val();
-		var gemShapeId = $("#gemShapeId").val();
-		if (gemTypeId == "-1") {
-			gemTypeId = "${useGemDetail['vtype']}";
+		
+		//初始化形状下拉框值
+		function initShapeByType() {
+			var gemTypeId = $("#gemTypeId").val();
+			if (gemTypeId == "-1") {
+				gemTypeId = "${useGemDetail['vtype']}";
+			}
+			var shapeUrl = "http://www.bavlo.com/getGemShape?typeId="+ gemTypeId;
+			loadSelData(nativeUrl, shapeUrl, "gemShapeId", "data[i].id",
+					"data[i].shape_cn", function() {
+						$("#gemShapeId").val("${useGemDetail['vshape']}");
+					});
 		}
-		if (gemShapeId == "-1") {
-			gemShapeId = "${useGemDetail['vshape']}";
+		
+		//初始化规格下拉框值
+		function initSpecByTypeShape() {
+			var gemTypeId = $("#gemTypeId").val();
+			var gemShapeId = $("#gemShapeId").val();
+			if (gemTypeId == "-1") {
+				gemTypeId = "${useGemDetail['vtype']}";
+			}
+			if (gemShapeId == "-1") {
+				gemShapeId = "${useGemDetail['vshape']}";
+			}
+			var specUrl = "http://www.bavlo.com/getGemCalibrated?typeId="
+					+ gemTypeId + "&shapeId=" + gemShapeId;
+			loadSelData(nativeUrl, specUrl, "gemSpecId", "data[i].id",
+					"data[i].size", function() {
+						$("#gemSpecId").val("${useGemDetail['vspec']}");
+					});
 		}
-		var specUrl = "http://www.bavlo.com/getGemCalibrated?typeId="
-				+ gemTypeId + "&shapeId=" + gemShapeId;
-		loadSelData(nativeUrl, specUrl, "gemSpecId", "data[i].id",
-				"data[i].size", function() {
-					$("#gemSpecId").val("${useGemDetail['vspec']}");
-				});
-	}
 
 	//宝石签收单保存
-	function save() {
+	function saveOrUpdate() {
 		$.ajax({
 			type : "POST",
-			url : "save.do",
-			data : $('#entityfrmId').serialize(),// formid
+			url : "useGem/saveOrUpdate.do",
+			data : $('#useGem').serialize(),// formid
 			async : false,
 			cache : false,
 			success : function(data) {
@@ -93,31 +117,13 @@
 		});
 	}
 </script>
-<script type="text/javascript">
-			function initVal() {
-				var useGemWorth = "${useGemDetail['nworth']}";
-				var useGemWeigth = "${useGemDetail['nweight']}";
-				var useGemCount = "${useGemDetail['icount']}";
-				if (useGemWorth == "") {
-					$("#nworth").val("价值（元）");
-				}
-				if (useGemWeigth == "") {
-					$("#nweight").val("重量（克拉）");
-				}
-				if (useGemCount == "") {
-					$("#icount").val("数量（颗）");
-				}
-			}
-			window.onload = function() {
-				initVal();
-			}
-</script>
 	</head>
 
 	<body>
 		<form id="useGem">
 			<jsp:include page="../header.jsp"></jsp:include>
 			<jsp:include page="useGemList.jsp"></jsp:include>
+			<input id="gemid" type="hidden" name="id" value="${useGemDetail['id']}">
 			<div class="qsd">
 				<div class="qsd_main">
 					<div class="qsd_left">
@@ -164,7 +170,7 @@
 								</option>
 							</select>
 							<dt>
-								<input type='text' name='nworth' class="qsdr r2"
+								<input type='text' id='nworth' name='nworth' class="qsdr r2"
 									value="${useGemDetail['nworth']}"
 									onfocus="if(value=='价值（元）'){value=''}"
 									onblur="if(value==''){value='价值（元）'}">
@@ -178,7 +184,7 @@
 								</option>
 							</select>
 							<dt>
-								<input type='text' name='nweight' class="qsdr r2"
+								<input type='text' id='nweight' name='nweight' class="qsdr r2"
 									value="${useGemDetail['nweight']}"
 									onfocus="if(value=='重量（克拉）'){value=''}"
 									onblur="if(value==''){value='重量（克拉）'}">
@@ -194,9 +200,9 @@
 						</div>
 						<div class="clear"></div>
 						<div class="qsdtt">
-							<input type='text' name='icount'
+							<input type='text' id='icount' name='icount'
 								value="${useGemDetail['icount']}"
-								onfocus="if(value=='数量（颗粒）'){value=''}"
+								onfocus="if(value=='数量（颗）'){value=''}"
 								onblur="if(value==''){value='数量（颗）'}" class="qsdn t3">
 						</div>
 						<div class="qssm-l">
@@ -206,7 +212,7 @@
 								onblur="if(value==''){value='说明：'}">说明：</textarea>
 						</div>
 						<div class="qs_save">
-							<input type="button" name="button" onclick="javascript:save()"
+							<input type="button" name="button" onclick="javascript:saveOrUpdate()"
 								value="保存">
 						</div>
 					</div>
