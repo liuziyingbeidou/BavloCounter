@@ -20,11 +20,15 @@ public interface IConstant {
 	public static final String GEM_SIGN_EDIT = "gem-sign-edit";
 	public static final String GEM_SIGN_LIST = "gem-sign-list";
 	
-	
 	/** 客户模块 */
 	public static final String PATH_CUSTOMER = "customer/";
 	/** 配石单模块 */
 	public static final String PATH_USE_GEM = "useGem/";
+	
+	/**订单模块*/
+	public static final String PATH_ORDER = "order/";
+	public static final String ORDER_EDIT = "order-edit";
+	public static final String ORDER_LIST = "order-list";
 	
 	/*****************************界面类型**************************/
 	//新增
