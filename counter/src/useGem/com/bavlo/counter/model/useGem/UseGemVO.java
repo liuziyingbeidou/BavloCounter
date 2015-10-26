@@ -1,4 +1,4 @@
-package com.bavlo.counter.model.gem;
+package com.bavlo.counter.model.useGem;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -41,6 +41,11 @@ public class UseGemVO extends IdEntity {
 	 */
 	@Column(length=50)
 	private String vtype;
+	/**
+	 * 声明价值		decimal(20,8)
+	 */
+	@Column(precision=20,scale=8)
+	private Double nworth;
 	/**
 	 * 数量
 	 */
@@ -122,6 +127,12 @@ public class UseGemVO extends IdEntity {
 	}
 	public Long getCustomId() {
 		return customId;
+	}
+	public void setNworth(Double nworth) {
+		this.nworth = nworth;
+	}
+	public Double getNworth() {
+		return nworth;
 	}
 
 }

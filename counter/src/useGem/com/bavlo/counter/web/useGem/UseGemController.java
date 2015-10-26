@@ -1,4 +1,4 @@
-package com.bavlo.counter.web.gem;
+package com.bavlo.counter.web.useGem;
 
 import java.util.List;
 import java.util.Map;
@@ -10,8 +10,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.bavlo.counter.constant.IConstant;
-import com.bavlo.counter.model.gem.UseGemVO;
-import com.bavlo.counter.service.gem.itf.IUseGemService;
+import com.bavlo.counter.model.useGem.UseGemVO;
+import com.bavlo.counter.service.useGem.itf.IUseGemService;
 import com.bavlo.counter.web.BaseController;
 
 /**
@@ -29,7 +29,7 @@ public class UseGemController extends BaseController implements IConstant {
 	private IUseGemService useGemService;
 
 	/**
-	 * @Description: 客户详情
+	 * @Description: 配石单详情
 	 * @param @return
 	 * @return ModelAndView
 	 */
@@ -37,15 +37,15 @@ public class UseGemController extends BaseController implements IConstant {
 	public ModelAndView info(Map<String, Object> map, Integer id) {
 
 		List<UseGemVO> useGemList = useGemService.findUseGemList();
-		map.put("useGemList", useGemList);
-
 		UseGemVO useGemDetail = useGemService.findUseGemById(id);
+		
+		map.put("useGemList", useGemList);
 		map.put("useGemDetail", useGemDetail);
 		return new ModelAndView(PATH_USE_GEM + "useGemEdit");
 	}
 
 	/**
-	 * @Description: 保存或更新客户信息
+	 * @Description: 保存或更新配石单信息
 	 * @param @param useGemVO
 	 * @param @return
 	 * @return ModelAndView
@@ -58,7 +58,7 @@ public class UseGemController extends BaseController implements IConstant {
 	}
 
 	/**
-	 * @Description: 获取客户列表
+	 * @Description: 获取配石单列表
 	 * @param @param map
 	 * @param @return
 	 * @return ModelAndView
