@@ -57,7 +57,7 @@
 
 	});
 
-	//初始话规格下拉框值
+	//初始化规格下拉框值
 	function initSpecByTypeShape() {
 		var gemTypeId = $("#gemTypeId").val();
 		var gemShapeId = $("#gemShapeId").val();
@@ -115,7 +115,7 @@
 	</head>
 
 	<body>
-		<form id="useGem" action="info.do">
+		<form id="useGem">
 			<jsp:include page="../header.jsp"></jsp:include>
 			<jsp:include page="useGemList.jsp"></jsp:include>
 			<div class="qsd">
