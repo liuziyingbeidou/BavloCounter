@@ -18,5 +18,7 @@
     3、<a href="${ctx}/customer/info.do">客户新增</a>
     <br>
     4、<a href="${ctx}/useGem/edit.do">配石单新增</a>
+    <br>
+    5、<a href="${ctx}/order/add.do">订单新增</a>
 </body>
 </html>
