@@ -1,34 +1,35 @@
 <%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%
-String path = request.getContextPath();
-String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
+	String path = request.getContextPath();
+	String basePath = request.getScheme() + "://"
+			+ request.getServerName() + ":" + request.getServerPort()
+			+ path + "/";
 %>
 <c:set var="ctx" value="${pageContext.request.contextPath}" />
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 	<head>
-		<meta http-equiv="pragma" content="no-cache"/>
-		<meta http-equiv="cache-control" content="no-cache"/>
-		<meta http-equiv="expires" content="0"/>
-		<meta http-equiv="keywords" content="keyword1,keyword2,keyword3"/>
-		<meta http-equiv="description" content="This is my page"/>
-		<link href="${ctx}/resources/css/orderlist.css" rel="stylesheet"
-			type="text/css" />
-		<script src="${ctx}/resources/js/showList.js" type="text/javascript"></script>
-			<script src="${ctx}/resources/js/jquery-1.8.3.min.js"></script>
-			<script src="${ctx}/resources/js/area.js"></script>
-			<script src="${ctx}/resources/js/location.js"></script>
-			<script src="${ctx}/resources/js/bavlo-initdata.js"></script>
-			<script type="text/javascript">
-			$(document).ready(function() {
-				showLocation();
-			});
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+		<meta name="viewport"
+			content="width=device-width,target-densitydpi=high-dpi,initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+
+		<title>编辑客户</title>
+
+		<script src="${ctx}/resources/js/jquery-1.8.3.min.js"></script>
+		<script src="${ctx}/resources/js/area.js"></script>
+		<script src="${ctx}/resources/js/location.js"></script>
+		<script src="${ctx}/resources/js/bavlo-initdata.js"></script>
+		<script type="text/javascript">
 			$(function initVal() {
 				var customerName = "${customerDetail.vname}";
 				var customerNickname = "${customerDetail.vnickname}";
 				var customerEmail = "${customerDetail.vemail}";
 				var customerPhone = "${customerDetail.vphoneCode}";
+				var customerProvince = "${customerDetail.vprovince}";
+				var customerCity = "${customerDetail.vcity}";
+				var customerDistricte = "${customerDetail.vdistrict}";
+				var customerId = "${customerDetail.id}";
 				if (customerName == "") {
 					$("#vname").val("姓名");
 				}
@@ -40,6 +41,14 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 				}
 				if (customerPhone == "") {
 					$("#vphoneCode").val("手机");
+				}
+				showLocation();
+				if (customerId != "") {
+					$("#vprovince").val("${customerDetail.vprovince}");
+					$("#vprovince").change();
+					$("#vcity").val("${customerDetail.vcity}");
+					$("#vcity").change();
+					$("#vdistrict").val("${customerDetail.vdistrict}");
 				}
 			});
 		</script>
@@ -74,7 +83,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 							<input type='text' id='vname' name='vname'
 								value="${customerDetail.vname }"
 								onfocus="if(value =='姓名'){value =''}"
-								onblur="if(value ==''){value='姓名'}'}" class="edit_2 edit_1_name" />
+								onblur="if(value ==''){value='姓名'}" class="edit_2 edit_1_name" />
 							<select name="vsex" class="edit_2 edit_1_area_son">
 								<option>
 									女
@@ -89,18 +98,18 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 							<input type='text' id='vphoneCode' name='vphoneCode'
 								value="${customerDetail.vphoneCode}"
 								onfocus="if(value=='手机'){value=''}"
-								onblur="if(value==''){value='手机'}'}" class="edit_2 edit_1_name" />
+								onblur="if(value==''){value='手机'}" class="edit_2 edit_1_name" />
 							<input type='text' id='vemail' name='vemail'
 								value="${customerDetail.vemail}"
 								onfocus="if(value=='邮箱'){value=''}"
-								onblur="if(value==''){value='邮箱'}'}" class="edit_2 edit_1_sex" />
+								onblur="if(value==''){value='邮箱'}" class="edit_2 edit_1_sex" />
 							<div class="clear"></div>
 						</div>
 						<div class="edit_1">
 							<input type='text' id='vnickname' name='vnickname'
 								value="${customerDetail.vnickname}"
 								onfocus="if(value =='昵称'){value =''}"
-								onblur="if(value ==''){value='昵称'}'}" class="edit_2 edit_1_name" />
+								onblur="if(value ==''){value='昵称'}" class="edit_2 edit_1_name" />
 							<select id="vprovince" name="vprovince"
 								class="edit_2 edit_1_area_son"></select>
 							<div class="clear"></div>
@@ -109,7 +118,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 							<select id="vcity" name="vcity" class="edit_2 edit_1_area"></select>
 							<select id="vdistrict" name="vdistrict"
 								class="edit_2 edit_1_area_son"></select>
-							<input type="hidden" name="location_id" />
 							<div class="clear"></div>
 						</div>
 						<div class="edit_1">
