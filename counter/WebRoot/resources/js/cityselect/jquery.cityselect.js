@@ -47,11 +47,11 @@ required:必选项
 
 			if(prov_id<0||typeof(city_json.citylist[prov_id].c)=="undefined"){
 				if(settings.nodata=="none"){
-					city_obj.css("display","none");
-					dist_obj.css("display","none");
+					city_obj.css("display","");//none
+					dist_obj.css("display","");//none
 				}else if(settings.nodata=="hidden"){
-					city_obj.css("visibility","hidden");
-					dist_obj.css("visibility","hidden");
+					city_obj.css("visibility","");//hidden
+					dist_obj.css("visibility","");//hidden
 				};
 				return;
 			};
@@ -79,7 +79,7 @@ required:必选项
 				if(settings.nodata=="none"){
 					dist_obj.css("display","none");
 				}else if(settings.nodata=="hidden"){
-					dist_obj.css("visibility","hidden");
+					dist_obj.css("visibility","hidden");//visible
 				};
 				return;
 			};
