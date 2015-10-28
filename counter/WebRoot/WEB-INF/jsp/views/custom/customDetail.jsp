@@ -1,11 +1,12 @@
 <%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%
 	String path = request.getContextPath();
 	String basePath = request.getScheme() + "://"
 			+ request.getServerName() + ":" + request.getServerPort()
 			+ path + "/";
 %>
-
+<c:set var="ctx" value="${pageContext.request.contextPath}" />
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html>
 	<head>
@@ -20,15 +21,15 @@
 		<title>定制单</title>
 		<script language="javascript" type="text/javascript"
 			src="${ctx}/resources/js/jquery-1.8.3.min.js"></script>
-		<link type='text/css' rel='stylesheet' href='css/style.css'
+		<link type='text/css' rel='stylesheet' href='${ctx}/resources/css/style.css'
 			media='all' />
-		<link type='text/css' rel='stylesheet' href='css/bootstrap.css'
+		<link type='text/css' rel='stylesheet' href='${ctx}/resources/css/bootstrap.css'
 			media='all' />
 		<script src="${ctx}/resources/js/top.js"></script>
 		<script src="${ctx}/resources/js/hide.js"></script>
 		<!--必要样式-->
-		<link rel="stylesheet" href="css/photoswipe.css">
-		<link rel="stylesheet" href="css/default-skin.css">
+		<link rel="stylesheet" href="${ctx}/resources/css/photoswipe.css">
+		<link rel="stylesheet" href="${ctx}/resources/css/default-skin.css">
 
 		<script src="${ctx}/resources/js/photoswipe.min.js"></script>
 		<script src="${ctx}/resources/js/photoswipe-ui-default.min.js"></script>
