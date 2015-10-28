@@ -22,6 +22,7 @@
 		<script src="${ctx}/resources/js/bavlo-initdata.js"></script>
 		<script type="text/javascript">
 			$(function initVal() {
+				var customerId = "${customerDetail.id}";
 				var customerName = "${customerDetail.vname}";
 				var customerNickname = "${customerDetail.vnickname}";
 				var customerEmail = "${customerDetail.vemail}";
@@ -29,7 +30,9 @@
 				var customerProvince = "${customerDetail.vprovince}";
 				var customerCity = "${customerDetail.vcity}";
 				var customerDistricte = "${customerDetail.vdistrict}";
-				var customerId = "${customerDetail.id}";
+				var customerSex = "${customerDetail.vsex}";
+				var customerLanguage = "${customerDetail.vlanguage}";
+				var customerGroup = "${customerDetail.vgroup}";
 				if (customerName == "") {
 					$("#vname").val("姓名");
 				}
@@ -44,11 +47,14 @@
 				}
 				showLocation();
 				if (customerId != "") {
-					$("#vprovince").val("${customerDetail.vprovince}");
+					$("#vprovince").val(customerProvince);
 					$("#vprovince").change();
-					$("#vcity").val("${customerDetail.vcity}");
+					$("#vcity").val(customerCity);
 					$("#vcity").change();
-					$("#vdistrict").val("${customerDetail.vdistrict}");
+					$("#vdistrict").val(customerDistricte);
+					$("#vsex").val(customerSex);
+					$("#vlanguage").val(customerLanguage);
+					$("#vgroup").val(customerGroup);
 				}
 			});
 		</script>
@@ -84,7 +90,7 @@
 								value="${customerDetail.vname }"
 								onfocus="if(value =='姓名'){value =''}"
 								onblur="if(value ==''){value='姓名'}" class="edit_2 edit_1_name" />
-							<select name="vsex" class="edit_2 edit_1_area_son">
+							<select id="vsex" name="vsex" class="edit_2 edit_1_area_son">
 								<option>
 									女
 								</option>
@@ -121,7 +127,7 @@
 							<div class="clear"></div>
 						</div>
 						<div class="edit_1">
-							<select name="select" class="edit_2 edit_1_area">
+							<select id="vlanguage" name="vlanguage" class="edit_2 edit_1_area">
 								<option>
 									zh_CN
 								</option>
@@ -129,9 +135,12 @@
 									en_US
 								</option>
 							</select>
-							<select name="vgroup" class="edit_2 edit_1_area_son">
+							<select id="vgroup" name="vgroup" class="edit_2 edit_1_area_son">
 								<option>
-									无分组
+									分组一
+								</option>
+								<option>
+									分组二
 								</option>
 							</select>
 							<div class="clear"></div>
