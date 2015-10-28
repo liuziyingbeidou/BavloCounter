@@ -17,7 +17,7 @@ import com.bavlo.counter.web.BaseController;
 /**
  * @Title: 宝珑Counter
  * @ClassName: CustomController
- * @Description: 客户控制器
+ * @Description: 定制单控制器
  * @author shijf
  * @date 2015-10-20 下午04:00:41
  */
