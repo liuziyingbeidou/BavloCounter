@@ -28,17 +28,17 @@ public class CustomVO extends IdEntity {
 	@Column(length = 50)
 	private String vcustomCode;
 	/**
-	 * 款式类型ID
+	 * 款式类型
 	 */
-	private Long srcstyleTypeId;
+	private Long srcstyleType;
 	/**
-	 * 链子ID
+	 * 链子
 	 */
-	private Long srcchainId;
+	private Long srcchain;
 	/**
-	 * 金属ID
+	 * 金属
 	 */
-	private Long srcmetailId;
+	private Long srcmetail;
 	/**
 	 * 戒指手寸
 	 */
@@ -55,6 +55,11 @@ public class CustomVO extends IdEntity {
 	@Column(length = 50)
 	private String vsex;
 	/**
+	 * 重量	
+	 */
+	@Column(precision=20,scale=8)
+	private Double nweight;
+	/**
 	 * 价格
 	 */
 	@Column(precision = 20, scale = 8)
@@ -63,7 +68,7 @@ public class CustomVO extends IdEntity {
 	 * 其他款项
 	 */
 	@Column(precision = 20, scale = 8)
-	private Double iotherPrice;
+	private Double notherPrice;
 	/**
 	 * 刻字
 	 */
@@ -108,28 +113,28 @@ public class CustomVO extends IdEntity {
 		this.vcustomCode = vcustomCode;
 	}
 
-	public Long getSrcstyleTypeId() {
-		return srcstyleTypeId;
+	public Long getSrcstyleType() {
+		return srcstyleType;
 	}
 
-	public void setSrcstyleTypeId(Long srcstyleTypeId) {
-		this.srcstyleTypeId = srcstyleTypeId;
+	public void setSrcstyleType(Long srcstyleType) {
+		this.srcstyleType = srcstyleType;
 	}
 
-	public Long getSrcchainId() {
-		return srcchainId;
+	public Long getSrcchain() {
+		return srcchain;
 	}
 
-	public void setSrcchainId(Long srcchainId) {
-		this.srcchainId = srcchainId;
+	public void setSrcchain(Long srcchain) {
+		this.srcchain = srcchain;
 	}
 
-	public Long getSrcmetailId() {
-		return srcmetailId;
+	public Long getSrcmetail() {
+		return srcmetail;
 	}
 
-	public void setSrcmetailId(Long srcmetailId) {
-		this.srcmetailId = srcmetailId;
+	public void setSrcmetail(Long srcmetail) {
+		this.srcmetail = srcmetail;
 	}
 
 	public String getVringSize() {
@@ -165,11 +170,11 @@ public class CustomVO extends IdEntity {
 	}
 
 	public Double getIotherPrice() {
-		return iotherPrice;
+		return notherPrice;
 	}
 
-	public void setIotherPrice(Double iotherPrice) {
-		this.iotherPrice = iotherPrice;
+	public void setIotherPrice(Double notherPrice) {
+		this.notherPrice = notherPrice;
 	}
 
 	public String getVengrave() {
@@ -222,6 +227,14 @@ public class CustomVO extends IdEntity {
 
 	public static long getSerialversionuid() {
 		return serialVersionUID;
+	}
+
+	public void setNweight(Double nweight) {
+		this.nweight = nweight;
+	}
+
+	public Double getNweight() {
+		return nweight;
 	}
 
 }
