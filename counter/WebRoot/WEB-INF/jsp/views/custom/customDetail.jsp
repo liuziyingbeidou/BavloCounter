@@ -10,9 +10,6 @@
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html>
 	<head>
-		<base href="<%=basePath%>">
-
-
 		<meta http-equiv="pragma" content="no-cache">
 		<meta http-equiv="cache-control" content="no-cache">
 		<meta http-equiv="expires" content="0">
@@ -33,10 +30,11 @@
 
 		<script src="${ctx}/resources/js/photoswipe.min.js"></script>
 		<script src="${ctx}/resources/js/photoswipe-ui-default.min.js"></script>
+		<script src="${ctx}/resources/js/photoswipefromdom.js"></script>
 	</head>
 
 	<body>
-
+		<form id="custom">
 		<div class="header">
 			<div class="top">
 				<b><a href="javascript:;" onclick="EditShow_Hidden(ed1)"><img
@@ -227,8 +225,6 @@
 									</div>
 								</div>
 							</div>
-							<script language="javascript" type="text/javascript"
-								src="${ctx}/resources/js/photoswipefromdom.js"></script>
 						</div>
 					</div>
 					<div class="clear"></div>
@@ -311,7 +307,7 @@
 				</div>
 				<div class="clear"></div>
 			</div>
-
 		</div>
+		</form>
 	</body>
 </html>
