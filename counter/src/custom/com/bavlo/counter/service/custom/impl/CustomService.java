@@ -13,7 +13,7 @@ import com.bavlo.counter.service.impl.CommonService;
 /** 
  * @Title: 宝珑Counter
  * @ClassName: CustomService 
- * @Description: 客户service
+ * @Description: 定制单service
  * @author shijf
  * @date 2015-10-20 下午04:12:30  
  */
