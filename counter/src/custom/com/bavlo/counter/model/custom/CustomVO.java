@@ -7,151 +7,145 @@ import javax.persistence.Table;
 import com.bavlo.counter.model.IdEntity;
 
 /**
+ * @Title: 宝珑Counter
+ * @ClassName: CustomVO
+ * @Description: 定制单实体类
  * @author shijf
- *  客户信息实体类
- * 
+ * @date 2015-10-28 下午06:43:28
  */
 @Entity
-@Table(name="blct_custom")
+@Table(name = "blct_custom")
 public class CustomVO extends IdEntity {
 
-	private static final long serialVersionUID = 1L;	
-	/** 
-	 * 加盟店ID 
-	 */ 
-	private Long agentId;
-	/** 
-	 * 客服编号
-	 */ 
-	@Column(length=50)
-	private String vserviceCode;
-	/** 
-	 * 客户编号 
-	 */ 
-	@Column(length=50)
+	private static final long serialVersionUID = 1L;
+	/**
+	 * 用户ID
+	 */
+	private Long customerId;
+	/**
+	 * 定制单编号
+	 */
+	@Column(length = 50)
 	private String vcustomCode;
-	/** 
-	 * 客户姓名 
-	 */ 
-	@Column(length=50)
-	private String vname;
-	/** 
-	 * 客户昵称
-	 */ 
-	@Column(length=50)
-	private String vnickname;
-	/** 
-	 * 客户性别 
-	 */ 
-	@Column(length=50)
+	/**
+	 * 款式类型ID
+	 */
+	private Long srcstyleTypeId;
+	/**
+	 * 链子ID
+	 */
+	private Long srcchainId;
+	/**
+	 * 金属ID
+	 */
+	private Long srcmetailId;
+	/**
+	 * 戒指手寸
+	 */
+	@Column(length = 50)
+	private String vringSize;
+	/**
+	 * 款式名称
+	 */
+	@Column(length = 50)
+	private String vstyleName;
+	/**
+	 * 款式性别
+	 */
+	@Column(length = 50)
 	private String vsex;
-	/** 
-	 * 客户手机号
-	 */ 
-	private Long vphoneCode;
-	/** 
-	 * 地址：国家 
-	 */ 
-	@Column(length=50)
-	private String vcontry;
-	/** 
-	 * 地址：省份
-	 */ 
-	@Column(length=50)
-	private String vprovince;
-	/** 
-	 * 地址：城市 
-	 */ 
-	@Column(length=50)
-	private String vcity;
-	/** 
-	 * 地址：县区 
-	 */ 
-	@Column(length=50)
-	private String vdistrict;
-	/** 
-	 * 地址：街道
-	 */ 
-	@Column(length=50)
-	private String vstreet;
-	/** 
-	 * 地址：邮编 
-	 */ 
-	private Long vzipcode;
-	/** 
-	 * 客户邮箱 
-	 */ 
-	@Column(length=50)
-	private String vemail;
-	/** 
-	 * 客户微信号
-	 */ 
-	@Column(length=50)
-	private String vwechat;
-	/** 
-	 * 客户的openid
-	 */ 
-	@Column(length=50)
-	private String vopenid;
-	/** 
-	 * 客户语言 
-	 */ 
-	@Column(length=50)
-	private String vlanguage;
-	/** 
-	 * 客户分组
-	 */ 
-	@Column(length=50)
-	private String vgroup;
-	/** 
-	 * 客户头像地址 
-	 */ 
-	@Column(length=50)
-	private String vhendimgurl;
-	/** 
-	 * 客户关注时间
-	 */ 
-	@Column(length=50)
-	private String vsubscribeTime;
+	/**
+	 * 价格
+	 */
+	@Column(precision = 20, scale = 8)
+	private Double iprice;
+	/**
+	 * 其他款项
+	 */
+	@Column(precision = 20, scale = 8)
+	private Double iotherPrice;
+	/**
+	 * 刻字
+	 */
+	@Column(length = 50)
+	private String vengrave;
+	/**
+	 * 刻字字体
+	 */
+	@Column(length = 50)
+	private String vfont;
+	/**
+	 * 定制单创建时间
+	 */
+	@Column(length = 50)
+	private String vcreatedate;
+	/**
+	 * 状态:0:未处理；1：设计中；2：已完成
+	 */
+	private Integer istatus;
+	/**
+	 * 需求描述
+	 */
+	private String vrequirement;
+	/**
+	 * 细节描述
+	 */
+	private String vrequirementB;
 
-	public Long getAgentId() {
-		return agentId;
+	public Long getCustomerId() {
+		return customerId;
 	}
 
-	public void setAgentId(Long agentId) {
-		this.agentId = agentId;
+	public void setCustomerId(Long customerId) {
+		this.customerId = customerId;
 	}
 
-	public String getVserviceCode() {
-		return vserviceCode;
-	}
-
-	public void setVserviceCode(String vserviceCode) {
-		this.vserviceCode = vserviceCode;
-	}
-	
 	public String getVcustomCode() {
 		return vcustomCode;
 	}
-	
+
 	public void setVcustomCode(String vcustomCode) {
 		this.vcustomCode = vcustomCode;
 	}
 
-	public String getVname() {
-		return vname;
+	public Long getSrcstyleTypeId() {
+		return srcstyleTypeId;
 	}
 
-	public void setVname(String vname) {
-		this.vname = vname;
+	public void setSrcstyleTypeId(Long srcstyleTypeId) {
+		this.srcstyleTypeId = srcstyleTypeId;
 	}
 
-	public String getVnickname() {
-		return vnickname;
+	public Long getSrcchainId() {
+		return srcchainId;
 	}
 
-	public void setVnickname(String vnickname) {
-		this.vnickname = vnickname;
+	public void setSrcchainId(Long srcchainId) {
+		this.srcchainId = srcchainId;
+	}
+
+	public Long getSrcmetailId() {
+		return srcmetailId;
+	}
+
+	public void setSrcmetailId(Long srcmetailId) {
+		this.srcmetailId = srcmetailId;
+	}
+
+	public String getVringSize() {
+		return vringSize;
+	}
+
+	public void setVringSize(String vringSize) {
+		this.vringSize = vringSize;
+	}
+
+	public String getVstyleName() {
+		return vstyleName;
+	}
+
+	public void setVstyleName(String vstyleName) {
+		this.vstyleName = vstyleName;
 	}
 
 	public String getVsex() {
@@ -162,116 +156,72 @@ public class CustomVO extends IdEntity {
 		this.vsex = vsex;
 	}
 
-	public Long getVphoneCode() {
-		return vphoneCode;
+	public Double getIprice() {
+		return iprice;
 	}
 
-	public void setVphoneCode(Long vphoneCode) {
-		this.vphoneCode = vphoneCode;
+	public void setIprice(Double iprice) {
+		this.iprice = iprice;
 	}
 
-	public String getVcontry() {
-		return vcontry;
+	public Double getIotherPrice() {
+		return iotherPrice;
 	}
 
-	public void setVcontry(String vcontry) {
-		this.vcontry = vcontry;
+	public void setIotherPrice(Double iotherPrice) {
+		this.iotherPrice = iotherPrice;
 	}
 
-	public String getVprovince() {
-		return vprovince;
+	public String getVengrave() {
+		return vengrave;
 	}
 
-	public void setVprovince(String vprovince) {
-		this.vprovince = vprovince;
+	public void setVengrave(String vengrave) {
+		this.vengrave = vengrave;
 	}
 
-	public String getVcity() {
-		return vcity;
+	public String getVfont() {
+		return vfont;
 	}
 
-	public void setVcity(String vcity) {
-		this.vcity = vcity;
+	public void setVfont(String vfont) {
+		this.vfont = vfont;
 	}
 
-	public String getVdistrict() {
-		return vdistrict;
+	public String getVcreatedate() {
+		return vcreatedate;
 	}
 
-	public void setVdistrict(String vdistrict) {
-		this.vdistrict = vdistrict;
+	public void setVcreatedate(String vcreatedate) {
+		this.vcreatedate = vcreatedate;
 	}
 
-	public String getVstreet() {
-		return vstreet;
+	public Integer getIstatus() {
+		return istatus;
 	}
 
-	public void setVstreet(String vstreet) {
-		this.vstreet = vstreet;
+	public void setIstatus(Integer istatus) {
+		this.istatus = istatus;
 	}
 
-	public Long getVzipcode() {
-		return vzipcode;
+	public String getVrequirement() {
+		return vrequirement;
 	}
 
-	public void setVzipcode(Long vzipcode) {
-		this.vzipcode = vzipcode;
+	public void setVrequirement(String vrequirement) {
+		this.vrequirement = vrequirement;
 	}
 
-	public String getVemail() {
-		return vemail;
+	public String getVrequirementB() {
+		return vrequirementB;
 	}
 
-	public void setVemail(String vemail) {
-		this.vemail = vemail;
+	public void setVrequirementB(String vrequirementB) {
+		this.vrequirementB = vrequirementB;
 	}
 
-	public String getVwechat() {
-		return vwechat;
-	}
-
-	public void setVwechat(String vwechat) {
-		this.vwechat = vwechat;
-	}
-
-	public String getVopenid() {
-		return vopenid;
-	}
-
-	public void setVopenid(String vopenid) {
-		this.vopenid = vopenid;
-	}
-
-	public String getVlanguage() {
-		return vlanguage;
-	}
-
-	public void setVlanguage(String vlanguage) {
-		this.vlanguage = vlanguage;
-	}
-
-	public String getVhendimgurl() {
-		return vhendimgurl;
-	}
-
-	public void setVhendimgurl(String vhendimgurl) {
-		this.vhendimgurl = vhendimgurl;
-	}
-
-	public String getVsubscribeTime() {
-		return vsubscribeTime;
-	}
-
-	public void setVsubscribeTime(String vsubscribeTime) {
-		this.vsubscribeTime = vsubscribeTime;
-	}
-
-	public void setVgroup(String vgroup) {
-		this.vgroup = vgroup;
-	}
-
-	public String getVgroup() {
-		return vgroup;
+	public static long getSerialversionuid() {
+		return serialVersionUID;
 	}
 
 }
