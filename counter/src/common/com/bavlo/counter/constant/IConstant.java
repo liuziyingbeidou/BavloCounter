@@ -24,6 +24,8 @@ public interface IConstant {
 	public static final String PATH_CUSTOMER = "customer/";
 	/** 配石单模块 */
 	public static final String PATH_USE_GEM = "useGem/";
+	/** 定制单模块*/
+	public static final String PATH_CUSTOM = "custom/";
 	
 	/**订单模块*/
 	public static final String PATH_ORDER = "order/";
