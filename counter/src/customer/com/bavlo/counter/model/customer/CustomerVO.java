@@ -99,6 +99,11 @@ public class CustomerVO extends IdEntity {
 	@Column(length=50)
 	private String vlanguage;
 	/** 
+	 * 客户分组
+	 */ 
+	@Column(length=50)
+	private String vgroup;
+	/** 
 	 * 客户头像地址 
 	 */ 
 	@Column(length=50)
@@ -259,6 +264,14 @@ public class CustomerVO extends IdEntity {
 
 	public void setVsubscribeTime(String vsubscribeTime) {
 		this.vsubscribeTime = vsubscribeTime;
+	}
+
+	public void setVgroup(String vgroup) {
+		this.vgroup = vgroup;
+	}
+
+	public String getVgroup() {
+		return vgroup;
 	}
 
 }
