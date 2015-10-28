@@ -57,11 +57,28 @@
 					$("#vgroup").val(customerGroup);
 				}
 			});
+			// 保存
+			function saveOrUpdate() {
+				$.ajax({
+					type : "POST",
+					url : "saveOrUpdate.do",
+					data : $('#customer').serialize(),// formid
+					async : false,
+					cache : false,
+					success : function(data) {
+						$("#customerid").val(data.id);
+						alert("保存成功!");
+					},
+					error : function(e) {
+						alert("保存失败!");
+					}
+				});
+			}
 		</script>
 	</head>
 
 	<body>
-		<form id="customer" action="saveOrUpdate.do" method="post">
+		<form id="customer">
 			<jsp:include page="../header.jsp"></jsp:include>
 			<jsp:include page="customerList.jsp"></jsp:include>
 			<div class="edit_main">
@@ -84,7 +101,7 @@
 					</ul>
 					<div class="edit_btn">
 						<div class="edit_1">
-							<input type="hidden" id='id' name='id'
+							<input type="hidden" id='customerid' name='id'
 								value="${customerDetail.id }" />
 							<input type='text' id='vname' name='vname'
 								value="${customerDetail.vname }"
@@ -146,7 +163,8 @@
 							<div class="clear"></div>
 						</div>
 						<div class="edit_save">
-							<input type='submit' name='' value='保存' class="" />
+							<input type="button" name="button" onclick="javascript:saveOrUpdate()"
+								value="保存"/>
 						</div>
 					</div>
 				</div>
