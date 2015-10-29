@@ -3,6 +3,7 @@ package com.bavlo.counter.model.order;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 import com.bavlo.counter.model.IdEntity;
 
@@ -22,6 +23,8 @@ public class OrderVO extends IdEntity {
 	 * 客户id		bigint	
 	 */
 	private Integer customerId;
+	@Transient
+	private String customerName;
 	/**
 	 * 订单号		varchar(50)	
 	 */
@@ -57,7 +60,7 @@ public class OrderVO extends IdEntity {
 	@Column(length=1,columnDefinition="char")
 	private String bisinvoice;
 	/**
-	 * 发票类型		bigint	基本档案
+	 * 发票类型		bigint	基本档案(电子、纸质)
 	 */
 	private String vinvoiceType;
 	/**
@@ -73,6 +76,8 @@ public class OrderVO extends IdEntity {
 	 * 交付地址id		bigint	地址档案
 	 */
 	private Integer addressId;
+	@Transient
+	private String vaddress;
 	/**
 	 * 预算区间价		varchar(50)	
 	 */
@@ -229,6 +234,18 @@ public class OrderVO extends IdEntity {
 	}
 	public void setVcourierNumber(String vcourierNumber) {
 		this.vcourierNumber = vcourierNumber;
+	}
+	public String getVaddress() {
+		return vaddress;
+	}
+	public void setVaddress(String vaddress) {
+		this.vaddress = vaddress;
+	}
+	public String getCustomerName() {
+		return customerName;
+	}
+	public void setCustomerName(String customerName) {
+		this.customerName = customerName;
 	}
 	
 }

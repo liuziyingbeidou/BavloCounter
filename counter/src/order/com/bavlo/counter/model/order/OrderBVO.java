@@ -8,7 +8,7 @@ import com.bavlo.counter.model.IdEntity;
 /**
  * @Title: 宝珑Counter
  * @ClassName: OrderBVO 
- * @Description: TODO(这里用一句话描述这个类的作用) 
+ * @Description: 订单清单
  * @author liuzy
  * @date 2015-10-26 下午05:51:38
  */
@@ -33,6 +33,14 @@ public class OrderBVO extends IdEntity{
 	 * 数量		int	
 	 */
 	private Integer nnumber;
+	/*
+	 * 价格		decimal(20,8)
+	 */
+	private Double nprice;
+	/*
+	 * 图片		String(50)	
+	 */
+	private String vpic;
 	
 	public Integer getOrderId() {
 		return orderId;
@@ -57,6 +65,18 @@ public class OrderBVO extends IdEntity{
 	}
 	public void setNnumber(Integer nnumber) {
 		this.nnumber = nnumber;
+	}
+	public Double getNprice() {
+		return nprice;
+	}
+	public void setNprice(Double nprice) {
+		this.nprice = nprice;
+	}
+	public String getVpic() {
+		return vpic;
+	}
+	public void setVpic(String vpic) {
+		this.vpic = vpic;
 	}
 
 }
