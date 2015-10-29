@@ -22,13 +22,12 @@
 		<script type="text/javascript">
 		//本地webservice
 		var nativeUrl = "${pageScope.basePath}/counter/webservice/http.do";
-		var nativeUrl = "${pageScope.basePath}/counter/webservice/http.do";
 		$(function() {
 			//宝石类型下拉框值
 			var typeUrl = "http://www.bavlo.com/getAllGemType";
 			loadSelData(nativeUrl, typeUrl, "gem-type-id", "data[i].id",
 					"data[i].type_cn", function() {
-						$("#gem-type-id").val("${useGemDetail['vtype']}");
+						$("#gem-type-id").val("${gemvo['vtype']}");
 					});
 			
 			//形状下拉框
@@ -53,12 +52,12 @@
 		function initShapeByType() {
 			var gemTypeId = $("#gem-type-id").val();
 			if (gemTypeId == "-1") {
-				gemTypeId = "${useGemDetail['vtype']}";
+				gemTypeId = "${gemvo['vtype']}";
 			}
 			var shapeUrl = "http://www.bavlo.com/getGemShape?typeId="+ gemTypeId;
 			loadSelData(nativeUrl, shapeUrl, "gem-shape-id", "data[i].id",
 					"data[i].shape_cn", function() {
-						$("#gem-shape-id").val("${useGemDetail['vshape']}");
+						$("#gem-shape-id").val("${gemvo['vshape']}");
 					});
 		}
 		
@@ -67,16 +66,16 @@
 			var gemTypeId = $("#gem-type-id").val();
 			var gemShapeId = $("#gem-shape-id").val();
 			if (gemTypeId == "-1") {
-				gemTypeId = "${useGemDetail['vtype']}";
+				gemTypeId = "${gemvo['vtype']}";
 			}
 			if (gemShapeId == "-1") {
-				gemShapeId = "${useGemDetail['vshape']}";
+				gemShapeId = "${gemvo['vshape']}";
 			}
 			var specUrl = "http://www.bavlo.com/getGemCalibrated?typeId="
 					+ gemTypeId + "&shapeId=" + gemShapeId;
 			loadSelData(nativeUrl, specUrl, "gem-spec-id", "data[i].id",
 					"data[i].size", function() {
-						$("#gem-spec-id").val("${useGemDetail['vspec']}");
+						$("#gem-spec-id").val("${gemvo['vspec']}");
 					});
 		}
 		
