@@ -17,7 +17,7 @@
  */
 function loadSelData(nativeUrl,remoteUrl,emName,selId,selName,callback){
 	$('#'+emName).empty();
-	$('#'+emName).append("<option value='-1'>==请选择==</option>");
+	$('#'+emName).append("<option value='-1'>请选择</option>");
 	
 	/*$.ajax({
 		type:"get",
@@ -55,7 +55,7 @@ function loadSelData(nativeUrl,remoteUrl,emName,selId,selName,callback){
  */
 function loadGemType(nativeUrl,remoteUrl,emName){
 	$('#'+emName).empty();
-	$('#'+emName).append("<option>==请选择==</option>");
+	$('#'+emName).append("<option>请选择</option>");
 	
 	$.ajax({
 		type:"post",
@@ -81,7 +81,7 @@ function loadGemType(nativeUrl,remoteUrl,emName){
  */
 function loadGemShape(nativeUrl,remoteUrl,emName){
 	$('#'+emName).empty();
-	$('#'+emName).append("<option>==请选择==</option>");
+	$('#'+emName).append("<option>请选择</option>");
 	
 	$.ajax({
 		type:"GET",
