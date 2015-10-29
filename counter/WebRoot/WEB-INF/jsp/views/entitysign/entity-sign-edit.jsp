@@ -173,7 +173,7 @@
 		</div>
 	</form>
 	<form id="entityfrmBId">
-	<input type='text' name='vname' value="aaa" class="qsdn t3">
+	<input type='text' name='vname' value="测试" class="qsdn t3">
 	<input type='text' name='biscover' value="bbb" class="qsdn t3">
 	</form>
 	</body>
