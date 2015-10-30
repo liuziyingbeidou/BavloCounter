@@ -24,9 +24,9 @@
 	<link rel="stylesheet" href="${ctx }/resources/jquery.multiDialog/css/jquery.multiDialog.css">
 	<script src="${ctx }/resources/jquery.multiDialog/js/jquery.ui.dialog.extended-1.0.2.js"></script>
 	<script src="${ctx }/resources/jquery.multiDialog/js/jquery.multiDialog.js"></script>
+	<script src="${ctx }/resources/js/bavlo-dialog.js"></script>
 	
 	<!-- 自定义 -->
-	<script src="${ctx }/resources/js/bavlo-dialog.js"></script>
 	<script type="text/javascript">
 	$(function() {
 		$("#api-button").click( function(){
@@ -40,6 +40,32 @@
   <body>
 	<br>
     <button id="api-button">弹框</button>
-    <pre></pre>
+    <xmp>
+1、  引入JS：
+    <!--[if lt IE 9]> 
+	<script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+	<![endif]-->
+	<!-- jQuery & jQuery UI files (needed)-->
+	<link rel="stylesheet" href="${ctx }/resources/jquery.multiDialog/css/jquery-ui-1.10.3.custom.css">
+	<script src="${ctx }/resources/jquery.multiDialog/js/jquery/jquery-1.9.1.js"></script>
+	<script src="${ctx }/resources/jquery.multiDialog/js/jquery/jquery-ui-1.10.3.custom.js"></script>
+	<!-- MultiDialog files (needed) -->
+	<link rel="stylesheet" href="${ctx }/resources/jquery.multiDialog/css/jquery.multiDialog.css">
+	<script src="${ctx }/resources/jquery.multiDialog/js/jquery.ui.dialog.extended-1.0.2.js"></script>
+	<script src="${ctx }/resources/jquery.multiDialog/js/jquery.multiDialog.js"></script>
+	<script src="${ctx }/resources/js/bavlo-dialog.js"></script>
+	
+2、调用弹框：
+	$(function() {
+		$("#api-button").click( function(){
+			openURL("index.jsp","弹框");
+		});
+	});
+3、操作父窗口方法：
+	$(".test").click(function(){
+		var cont = $("#api-button",window.parent.document).text();
+		alert("点我的按钮名称："+cont);
+	});
+    </xmp>
   </body>
 </html>
