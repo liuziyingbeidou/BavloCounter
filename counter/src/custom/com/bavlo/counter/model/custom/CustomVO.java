@@ -30,20 +30,23 @@ public class CustomVO extends IdEntity {
 	/**
 	 * 款式类型
 	 */
-	private Long srcstyleType;
+	@Column(length = 50)
+	private String srcstyleType;
 	/**
 	 * 链子
 	 */
-	private Long srcchain;
+	@Column(length = 50)
+	private String srcchain;
 	/**
 	 * 金属
 	 */
-	private Long srcmetail;
+	@Column(length = 50)
+	private String srcmetail;
 	/**
 	 * 戒指手寸
 	 */
 	@Column(length = 50)
-	private String vringSize;
+	private String srcringSize;
 	/**
 	 * 款式名称
 	 */
@@ -101,10 +104,6 @@ public class CustomVO extends IdEntity {
 		return customerId;
 	}
 
-	public void setCustomerId(Long customerId) {
-		this.customerId = customerId;
-	}
-
 	public String getVcustomCode() {
 		return vcustomCode;
 	}
@@ -113,36 +112,36 @@ public class CustomVO extends IdEntity {
 		this.vcustomCode = vcustomCode;
 	}
 
-	public Long getSrcstyleType() {
+	public String getSrcstyleType() {
 		return srcstyleType;
 	}
 
-	public void setSrcstyleType(Long srcstyleType) {
+	public void setSrcstyleType(String srcstyleType) {
 		this.srcstyleType = srcstyleType;
 	}
 
-	public Long getSrcchain() {
+	public String getSrcchain() {
 		return srcchain;
 	}
 
-	public void setSrcchain(Long srcchain) {
+	public void setSrcchain(String srcchain) {
 		this.srcchain = srcchain;
 	}
 
-	public Long getSrcmetail() {
+	public String getSrcmetail() {
 		return srcmetail;
 	}
 
-	public void setSrcmetail(Long srcmetail) {
+	public void setSrcmetail(String srcmetail) {
 		this.srcmetail = srcmetail;
 	}
 
-	public String getVringSize() {
-		return vringSize;
+	public String getSrcringSize() {
+		return srcringSize;
 	}
 
-	public void setVringSize(String vringSize) {
-		this.vringSize = vringSize;
+	public void setSrcringSize(String srcringSize) {
+		this.srcringSize = srcringSize;
 	}
 
 	public String getVstyleName() {
@@ -161,6 +160,14 @@ public class CustomVO extends IdEntity {
 		this.vsex = vsex;
 	}
 
+	public Double getNweight() {
+		return nweight;
+	}
+
+	public void setNweight(Double nweight) {
+		this.nweight = nweight;
+	}
+
 	public Double getIprice() {
 		return iprice;
 	}
@@ -169,11 +176,11 @@ public class CustomVO extends IdEntity {
 		this.iprice = iprice;
 	}
 
-	public Double getIotherPrice() {
+	public Double getNotherPrice() {
 		return notherPrice;
 	}
 
-	public void setIotherPrice(Double notherPrice) {
+	public void setNotherPrice(Double notherPrice) {
 		this.notherPrice = notherPrice;
 	}
 
@@ -229,12 +236,8 @@ public class CustomVO extends IdEntity {
 		return serialVersionUID;
 	}
 
-	public void setNweight(Double nweight) {
-		this.nweight = nweight;
-	}
-
-	public Double getNweight() {
-		return nweight;
+	public void setCustomerId(Long customerId) {
+		this.customerId = customerId;
 	}
 
 }
