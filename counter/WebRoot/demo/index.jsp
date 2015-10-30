@@ -18,6 +18,6 @@ $(function(){
 </head>
 <body>
     <br>
-    8、<button class="test">测试</button>
+   	<button class="test">测试</button>
 </body>
 </html>
