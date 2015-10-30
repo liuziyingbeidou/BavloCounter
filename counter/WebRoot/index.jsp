@@ -6,6 +6,15 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
+<script src="${ctx }/resources/jquery.multiDialog/js/jquery/jquery-1.9.1.js"></script>
+<script type="text/javascript">
+$(function(){
+	$(".multidialog").click(function(){
+		var cont = $("#api-button",window.parent.document).text();
+		alert(cont);
+	});
+});
+</script>
 </head>
 <body>
     
@@ -23,5 +32,11 @@
        <a href="${ctx}/order/list.do">订单列表</a>
     <br>   
     6、<a href="${ctx}/custom/info.do">定制单</a>
+    <br>
+    <br>
+    <fieldset>
+    	<legend>弹框Demo</legend>
+    	<a href="http://127.0.0.1:8080/counter/demo/dialog.jsp">点我</a>
+    </fieldset>
 </body>
 </html>
