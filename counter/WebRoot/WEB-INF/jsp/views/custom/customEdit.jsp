@@ -1,146 +1,114 @@
-<%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
+<%@ page language="java" import="java.util.*" pageEncoding="utf-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%
-	String path = request.getContextPath();
-	String basePath = request.getScheme() + "://"
-			+ request.getServerName() + ":" + request.getServerPort()
-			+ path + "/";
-%>
 <c:set var="ctx" value="${pageContext.request.contextPath}" />
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml">
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
 <head>
+<title>${customPageType}定制单</title>
+
+<meta http-equiv="pragma" content="no-cache" />
+<meta http-equiv="cache-control" content="no-cache" />
+<meta http-equiv="expires" content="0" />
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <meta name="viewport"
 	content="width=device-width,target-densitydpi=high-dpi,initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no" />
-<title>编辑定制单</title>
-<script language="javascript" type="text/javascript"
-	src="js/jquery-1.8.3.min.js"></script>
-<link type='text/css' rel='stylesheet'
-	href='${ctx}/resources/css/style.css' media='all' />
-<link type='text/css' rel='stylesheet'
-	href='${ctx}/resources/css/bootstrap.css' media='all' />
-<script src="${ctx}/resources/js/top.js"></script>
-<script language="javascript" type="text/javascript"
-	src="${ctx}/resources/js/add-input.js"></script>
 <!--必要样式-->
+<link rel='stylesheet' href='${ctx}/resources/css/style.css' media='all' />
+<link rel='stylesheet' href='${ctx}/resources/css/bootstrap.css' media='all' />
 <link rel="stylesheet" href="${ctx}/resources/css/photoswipe.css" />
 <link rel="stylesheet" href="${ctx}/resources/css/default-skin.css" />
 
+<script src="${ctx}/resources/js/jquery-1.8.3.min.js"></script>
+<script src="${ctx}/resources/js/top.js"></script>
+<script	src="${ctx}/resources/js/add-input.js"></script>
 <script src="${ctx}/resources/js/photoswipe.min.js"></script>
 <script src="${ctx}/resources/js/photoswipe-ui-default.min.js"></script>
-<script language="javascript" type="text/javascript"
-	src="${ctx}/resources/js/photoswipefromdom.js"></script>
-	
+<script src="${ctx}/resources/js/photoswipefromdom.js"></script>
+<script src="${ctx}/resources/js/bavlo-initdata.js"></script>
+
 <script>
-// 本地webservice
-var nativeUrl = "${pageScope.basePath}/counter/webservice/http.do";
-		$(function() {
+	// 本地webservice
+	var nativeUrl = "${pageScope.basePath}/counter/webservice/http.do";
+	$(function() {
 		// 款式类型下拉框值
 		var typeUrl = "http://www.bavlo.com/getAllStyleType";
-		loadSelData(nativeUrl, typeUrl, "styleType", "data[i].id",
-				"data[i].type_name_cn", function() {
-					$("#styleType").val("${customerDetail['vtype']}");
+		loadData(
+				nativeUrl,
+				typeUrl,
+				"styleTypeId",
+				"data[i].id",
+				"data[i].type_name_cn", 
+				function() {
+					$("#styleTypeId").val("${customDetail['srcstyleType']}");
 				});
-		
-		//形状下拉框
-		initShapeByType();
-		//规格下拉框
-		initSpecByTypeShape();
-
-		//类型和形状改变
+		// 金属材质下拉框值 
+		var typeUrl = "http://www.bavlo.com/getAllMetalMaterialType";
+		loadData(
+				nativeUrl,
+				typeUrl,
+				"srcmetail",
+				"data[i].id",
+				"data[i].metal_type_cn", 
+				function() {
+					$("#srcmetail").val("${customDetail['srcmetail']}");
+				});
+		// 款式类型下拉框值
+		var typeUrl = "http://www.bavlo.com/getAllRingSize"; 
+		loadRingSizeData(
+				nativeUrl,
+				typeUrl,
+				"ringSizeId",
+				"data[i].id",
+				"data[i].china", 
+				"data[i].diameter", 
+				"data[i].circumference", 
+				function() {
+					$("#ringSizeId").val("${customDetail['srcringSize']}");
+				});
+		// 
+		// 当款式类型不是戒指时，隐藏戒指手寸选项 
 		$("#styleTypeId").change(function() {
-			initShapeByType();
+			if($("#styleTypeId").val()=="1"){
+				$("#ringSizeId").css({display:"block"});
+			}else{
+				$("#ringSizeId").css({display:"none"});
+			}	
 		});
-		$("#styleShapeId").change(function() {
-			initSpecByTypeShape();
+	});
+
+	//定制单保存
+	function saveOrUpdate() {
+		$.ajax({
+			type : "POST",
+			url : "customer/saveOrUpdate.do",
+			data : $('#customer').serialize(),// formid
+			async : false,
+			cache : false,
+			success : function(data) {
+				$("#styleid").val(data.id);
+				alert("保存成功!");
+			},
+			error : function(e) {
+				alert("保存失败!");
+			}
 		});
-		/**
-		 *$(document).ajaxStop(function () {setNowSelData(); });
-		 **/
-
-	});
-	
-	//初始化input
-	$(function initVal() {
-		var customerWorth = "${customerDetail['nworth']}";
-		var customerWeigth = "${customerDetail['nweight']}";
-		var customerCount = "${customerDetail['icount']}";
-		if (customerWorth == "") {
-			$("#nworth").val("价值（元）");
-		}
-		if (customerWeigth == "") {
-			$("#nweight").val("重量（克拉）");
-		}
-		if (customerCount == "") {
-			$("#icount").val("数量（颗）");
-		}
-	});
-	
-	//初始化形状下拉框值
-	function initShapeByType() {
-		var styleTypeId = $("#styleTypeId").val();
-		if (styleTypeId == "-1") {
-			styleTypeId = "${customerDetail['vtype']}";
-		}
-		var shapeUrl = "http://www.bavlo.com/getGemShape?typeId="+ styleTypeId;
-		loadSelData(nativeUrl, shapeUrl, "styleShapeId", "data[i].id",
-				"data[i].shape_cn", function() {
-					$("#styleShapeId").val("${customerDetail['vshape']}");
-				});
 	}
-	
-	//初始化规格下拉框值
-	function initSpecByTypeShape() {
-		var styleTypeId = $("#styleTypeId").val();
-		var styleShapeId = $("#styleShapeId").val();
-		if (styleTypeId == "-1") {
-			styleTypeId = "${customerDetail['vtype']}";
-		}
-		if (styleShapeId == "-1") {
-			styleShapeId = "${customerDetail['vshape']}";
-		}
-		var specUrl = "http://www.bavlo.com/getGemCalibrated?typeId="
-				+ styleTypeId + "&shapeId=" + styleShapeId;
-		loadSelData(nativeUrl, specUrl, "styleSpecId", "data[i].id",
-				"data[i].size", function() {
-					$("#styleSpecId").val("${customerDetail['vspec']}");
-				});
-	}
-
-//定制单保存
-function saveOrUpdate() {
-	$.ajax({
-		type : "POST",
-		url : "customer/saveOrUpdate.do",
-		data : $('#customer').serialize(),// formid
-		async : false,
-		cache : false,
-		success : function(data) {
-			$("#styleid").val(data.id);
-			alert("保存成功!");
-		},
-		error : function(e) {
-			alert("保存失败!");
-		}
-	});
-}
 </script>
 </head>
 
 <body>
 	<jsp:include page="../header.jsp"></jsp:include>
 	<jsp:include page="customList.jsp"></jsp:include>
-	<input type="hidden" id='customerid' name='customerId' value="${customDetail.customerId }" />
-	<input type="hidden" id='customid' name='id' value="${customDetail.id }" />
+	<input type="hidden" id='customerid' name='customerId'
+		value="${customDetail.customerId }" />
+	<input type="hidden" id='customid' name='id'
+		value="${customDetail.id }" />
 	<div class="all">
 		<div class="main">
 			<div class="mainleft">
 				<div class="cankao">
 					<h2>+ 参考图 （6）</h2>
 					<div class="pro">
-						<!--<img src="images/zb_03.png" />-->
-
 						<b><a href="javascript:;" onclick="PicShow_Hidden(pic)">显示</a></b>
 						<div class="demo" id='pic' style='display: block;'>
 							<b><a href="javascript:;" onclick="PicShow_Hidden(pic)">隐藏</a></b>
@@ -237,37 +205,37 @@ function saveOrUpdate() {
 				</div>
 				<div class="clear"></div>
 				<div class="name">
-					<input type="text" id="vstyleName" name="vstyleName" value="给本款取个名字吧！" class="quming" />
+					<input type="text" id="vstyleName" name="vstyleName"
+						value="给本款取个名字吧！" class="quming" />
 				</div>
 				<div class="xuqiu">
-					<textarea id="vrequirement" name="vrequirement" cols="" rows="" class="miaoshu1">需求描述</textarea>
+					<textarea id="vrequirement" name="vrequirement" cols="" rows=""
+						class="miaoshu1">需求描述</textarea>
 				</div>
 			</div>
 			<div class="mainmid">
 				<h2>BOM</h2>
 				<div class="bom">
-					<select id="srcstyleType" name="srcstyleType" class="jiezhi">
-						<option>戒指</option>
-					</select>
-					<select id="vsex" name="vsex" class="nvkuan">
+					<select id="styleTypeId" name="srcstyleType" class="jiezhi">
+						<option>选择款式</option>
+					</select> <select id="vsex" name="vsex" class="nvkuan">
 						<option>女款</option>
 						<option>男款</option>
 					</select>
 				</div>
 				<div class="changdu">
-					<select id="vringSize" name="vringSize" class="neijin">
+					<select id="ringSizeId" name="srcringSize" class="neijin">
 						<option>选择手寸</option>
 					</select>
 				</div>
 				<div class="weight">
 					<select id="srcmetail" name="srcmetail" class="wk">
-						<option>W18K</option>
-					</select>
-					<input type="text" id="nweight" name="nweight" class="ke" value="8克"/>
+						<option>选择金属</option>
+					</select> <input type="text" id="nweight" name="nweight" class="ke"
+						value="" />
 				</div>
 				<div class="price">
-					<input id="iprice" name="iprice" class="jiege" value="200"/>
-					<b>+选择</b>
+					<input id="iprice" name="iprice" class="jiege" value="200" /> <b>+选择</b>
 				</div>
 				<dl>
 					<dd class="lzGem" style="display: none">
@@ -289,8 +257,8 @@ function saveOrUpdate() {
 									value="+ 关联" /></li>
 								<li class="kong">空</li>
 								<li class="cha"><a href="javascript:h('kzsGem')"><font>X</font></a></li>
-								<div class="clear"></div>
 							</ul>
+							<div class="clear"></div>
 						</div>
 					</dd>
 					<dd class="kpsGem" style="display: none">
@@ -302,26 +270,13 @@ function saveOrUpdate() {
 								<li class="kzs_price">2颗</li>
 								<li class="kzs_gl"><input type='button' name="guanlian"
 									value="+ 关联" /></li>
-								<li class="kps"><img src="images/zb_09.png" width="42"
+								<li class="kps"><img src="${ctx}/resources/images/zb_09.png" width="42"
 									height="42" /></li>
 								<li class="cha"><a href="javascript:h('kpsGem')"><font>X</font></a></li>
-								<div class="clear"></div>
 							</ul>
+							<div class="clear"></div>
 						</div>
 					</dd>
-					<!--<dd class="kxsGem" style="display: none">
-				  <div class="kzs">
-					<h3><a href="">库选石</a></h3>
-					<ul>
-					  <li class="kzs_price">22颗</li>
-					  <li class="kzs_gl">橄榄石</li>
-					  <li class="kxs"><img src="images/zhubao1_03.jpg" width="41" height="40" /</li>
-					  <li class="cha"><a href="javascript:h('kxsGem')"><font>X</font></a></li>
-					  <div class="clear"></div>
-					</ul>
-				  </div>
-			  </dd>-->
-
 				</dl>
 				<div style="width: 100%; position: relative;">
 					<!--库选石弹窗-->
@@ -356,8 +311,8 @@ function saveOrUpdate() {
 								<dd>
 									<img src="${ctx}/resources/images/ks_03.png" />
 								</dd>
-								<div class="clear"></div>
 							</dl>
+							<div class="clear"></div>
 							<input type="submit" name="button" value="OK" class="ok" />
 						</div>
 					</div>
@@ -401,7 +356,7 @@ function saveOrUpdate() {
 				</select>
 				<div class="tu">
 					<div class="tu1">
-						<b>+ 刻字矢量图</b><strong>Love & Love.cdr</strong><br />
+						<b>+ 刻字矢量图</b><strong>Love.cdr</strong><br />
 					</div>
 					<u>+ CAD文件</u><strong>无</strong>
 				</div>
@@ -418,11 +373,12 @@ function saveOrUpdate() {
 						<dd class="sum">
 							<a href="">计算</a>
 						</dd>
-						<div class="clear"></div>
 					</dl>
+					<div class="clear"></div>
 				</div>
 				<div class="baocun1">
-					<input type="button" name="button" onclick="javascript:saveOrUpdate()" value="保存"/>
+					<input type="button" name="button"
+						onclick="javascript:saveOrUpdate()" value="保存" />
 				</div>
 			</div>
 			<div class="clear"></div>
