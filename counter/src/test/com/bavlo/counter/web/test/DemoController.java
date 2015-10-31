@@ -1,27 +1,52 @@
 package com.bavlo.counter.web.test;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
+import org.apache.log4j.Logger;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.bavlo.counter.constant.IConstant;
 import com.bavlo.counter.model.test.User;
 import com.bavlo.counter.service.test.impl.UserService;
 import com.bavlo.counter.web.BaseController;
 
-@Controller("userTController")
-@RequestMapping(value = "/user")
+@Controller("demoController")
+@RequestMapping(value = "/demo")
 // 表示要访问这个action的时候都要加上这个//user路径
-public class UserTController extends BaseController {
+public class DemoController extends BaseController {
 
+	public DemoController(){
+		System.out.println("============================");
+	}
+	static{
+		System.out.println("---------------------------");
+	}
 	@Resource
 	private UserService userService;
+	
+    Logger log = Logger.getLogger(DemoController.class);
+    
+    @RequestMapping("/upload")
+    public void uploadHeadPic(@RequestParam("file")MultipartFile file,HttpServletRequest request,HttpServletResponse response){
+        try {
+            super.upload(file,IConstant.RES_TYPE_FILE, "/order/",request);
+            renderText(super.getfName());
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+   }
 	
 	/*
 	 * 接收参数getParameter()的时候:
