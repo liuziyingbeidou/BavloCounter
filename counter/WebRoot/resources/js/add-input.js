@@ -15,14 +15,14 @@
 			 params.mainGemPrice=0;
 		 }
 	 })
-/*	 $(".partsGem_btn").click(function(){
+	 $(".partsGem_btn").click(function(){
 		 if($(".partsGem").css("display")=='none'){
 			 $(".partsGem").show();
 		 }else{
 			 $(".partsGem").hide();
 			 params.inlayPrice=0;
 		 }
-	 })*/
+	 })
 	 $(".zuanshiGem_btn").click(function(){
 		 if($(".zuanshiGem").css("display")=='none'){
 			 $(".zuanshiGem").show();
