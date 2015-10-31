@@ -148,7 +148,7 @@
             swf: 'Uploader.swf',
             chunked: false,
             chunkSize: 512 * 1024,
-            server: '/agentUpload/up',
+            server: 'upload.do',
             // runtimeOrder: 'flash',
 
             // accept: {
@@ -414,7 +414,7 @@
 
             $info.html( text );
         }
-
+        
         function setState( val ) {
             var file, stats;
 
@@ -467,7 +467,8 @@
                 case 'finish':
                     stats = uploader.getStats();
                     if ( stats.successNum ) {
-                        alert( '上传成功' );
+                       // alert( '上传成功'+$("#d9").text());
+                        
                     } else {
                         // 没有成功的图片，重设
                         state = 'done';
@@ -532,6 +533,50 @@
 
             }
         });
+        /**
+         * 上传成功
+         */
+        uploader.on('uploadSuccess',function(file,val){
+        	debugger;
+            var id = file.id;
+            switch(id){
+            case 'WU_FILE_0':
+            	$("#FILE_0").val(val._raw);
+            	break;
+            case 'WU_FILE_1':
+            	$("#FILE_1").val(val._raw);
+            	break;
+            case 'WU_FILE_2':
+            	$("#FILE_2").val(val._raw);
+            	break;
+            case 'WU_FILE_3':
+            	$("#FILE_3").val(val._raw);
+            	break;
+            case 'WU_FILE_4':
+            	$("#FILE_4").val(val._raw);
+            	break;
+            case 'WU_FILE_5':
+            	$("#FILE_5").val(val._raw);
+            	break;
+            case 'WU_FILE_6':
+            	$("#FILE_6").val(val._raw);
+            	break;
+            case 'WU_FILE_7':
+            	$("#FILE_7").val(val._raw);
+            	break;
+            case 'WU_FILE_8':
+            	$("#FILE_8").val(val._raw);
+            	break;
+            case 'WU_FILE_9':
+            	$("#FILE_9").val(val._raw);
+            	break;
+            }
+        });
+        
+        /*uploader.uploadSuccess = function( file, val ) {
+        	debugger;
+            alert(val);
+        };*/
 
         uploader.onError = function( code ) {
             alert( 'Eroor: ' + code );
