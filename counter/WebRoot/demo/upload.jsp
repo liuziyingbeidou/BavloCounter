@@ -10,18 +10,17 @@
 <link type='text/css' rel='stylesheet' href='${ctx }/resources/css/style.css' media='all' />
 <link type='text/css' rel='stylesheet' href='${ctx }/resources/css/bootstrap.css' media='all' />
 <script src="${ctx }/resources/js/top.js"></script>
-<!-- 上传图片 -->
+	<!-- 上传图片 -->
 	<link rel="stylesheet" type="text/css" href="${ctx }/resources/webuploader/css/webuploader.css" />
     <link rel="stylesheet" type="text/css" href="${ctx }/resources/webuploader/css/upload.css" />    
     <script type="text/javascript" src="${ctx }/resources/js/jquery.js"></script>
     <script type="text/javascript" src="${ctx }/resources/webuploader/js/webuploader.js"></script>
     <script type="text/javascript" src="${ctx }/resources/webuploader/js/upload.js"></script> 
-    <script type="text/javascript">
-    
-    </script>
+
 </head>
 
 <body>
+<form>
 <div id="upload">
   <div class="upload">
     <p>上传CAD</p>
@@ -57,15 +56,52 @@
   </div>
 </div>
 <br>
-<span id="FILE_0"></span><br>
-<span id="FILE_1"></span><br>
-<span id="FILE_2"></span><br>
-<span id="FILE_3"></span><br>
-<span id="FILE_4"></span><br>
-<span id="FILE_5"></span><br>
-<span id="FILE_6"></span><br>
-<span id="FILE_7"></span><br>
-<span id="FILE_8"></span><br>
-<span id="FILE_9"></span><br>
+<input type="text" id="FILE_0"></input>&nbsp;
+<input type="text" id="FILE_1"></input>&nbsp;
+<input type="text" id="FILE_2"></input>&nbsp;
+<input type="text" id="FILE_3"></input>&nbsp;
+<input type="text" id="FILE_4"></input>&nbsp;
+<input type="text" id="FILE_5"></input>&nbsp;
+<input type="text" id="FILE_6"></input>&nbsp;
+<input type="text" id="FILE_7"></input>&nbsp;
+<input type="text" id="FILE_8"></input>&nbsp;
+<input type="text" id="FILE_9"></input>&nbsp;
+<br>
+<xmp>
+1、引入JS和CSS文件
+	<!-- 上传图片 -->
+	<link rel="stylesheet" type="text/css" href="${ctx }/resources/webuploader/css/webuploader.css" />
+    <link rel="stylesheet" type="text/css" href="${ctx }/resources/webuploader/css/upload.css" />    
+    <script type="text/javascript" src="${ctx }/resources/js/jquery.js"></script>
+    <script type="text/javascript" src="${ctx }/resources/webuploader/js/webuploader.js"></script>
+    <script type="text/javascript" src="${ctx }/resources/webuploader/js/upload.js"></script> //自己复制的
+    
+2、放入9个隐藏文本框（其中id必须为以下名称，用于接收上传成功的文件）
+<input type="hidden" id="FILE_0"></input>&nbsp;
+<input type="hidden" id="FILE_1"></input>&nbsp;
+<input type="hidden" id="FILE_2"></input>&nbsp;
+<input type="hidden" id="FILE_3"></input>&nbsp;
+<input type="hidden" id="FILE_4"></input>&nbsp;
+<input type="hidden" id="FILE_5"></input>&nbsp;
+<input type="hidden" id="FILE_6"></input>&nbsp;
+<input type="hidden" id="FILE_7"></input>&nbsp;
+<input type="hidden" id="FILE_8"></input>&nbsp;
+<input type="hidden" id="FILE_9"></input>&nbsp;
+
+3、Controller中调用上传方法
+ @RequestMapping("/upload")
+    public void uploadHeadPic(@RequestParam("file")MultipartFile file,HttpServletRequest request,HttpServletResponse response){
+        try {
+            super.upload(file,IConstant.RES_TYPE_PIC, "/order/",request);
+            renderText(super.getfName());
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+   }
+   
+4、赋值一份upload.js自定义名称
+其中：server: 'upload.do',修改成自己的
+</xmp>
+</form>
 </body>
 </html>

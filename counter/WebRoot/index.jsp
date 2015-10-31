@@ -38,5 +38,9 @@ $(function(){
     	<legend>弹框Demo</legend>
     	<a href="http://127.0.0.1:8080/counter/demo/dialog.jsp">点我</a>
     </fieldset>
+    <fieldset>
+    	<legend>上传文件Demo</legend>
+    	<a href="http://127.0.0.1:8080/counter/demo/upload.jsp">上传图片</a>
+    </fieldset>
 </body>
 </html>
