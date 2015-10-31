@@ -1,7 +1,5 @@
 package com.bavlo.counter.web.test;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Map;
 
 import javax.annotation.Resource;
@@ -27,12 +25,6 @@ import com.bavlo.counter.web.BaseController;
 // 表示要访问这个action的时候都要加上这个//user路径
 public class DemoController extends BaseController {
 
-	public DemoController(){
-		System.out.println("============================");
-	}
-	static{
-		System.out.println("---------------------------");
-	}
 	@Resource
 	private UserService userService;
 	
@@ -41,7 +33,7 @@ public class DemoController extends BaseController {
     @RequestMapping("/upload")
     public void uploadHeadPic(@RequestParam("file")MultipartFile file,HttpServletRequest request,HttpServletResponse response){
         try {
-            super.upload(file,IConstant.RES_TYPE_FILE, "/order/",request);
+            super.upload(file,IConstant.RES_TYPE_PIC, "/order/",request);
             renderText(super.getfName());
         } catch (Exception e) {
             e.printStackTrace();
