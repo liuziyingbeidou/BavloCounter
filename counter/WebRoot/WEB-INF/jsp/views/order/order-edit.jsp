@@ -351,6 +351,7 @@ function saveOrder(){
               </select>
             </div>
             </p>
+            <p>
             <div class="save1"><input type='text' name='vstreet' class="add dizhi street" value='' placeholder="如街道名称，门牌号码，楼层和房间号等信息"></div>
             <p><input type='text' name='vphoneCode' class="add tel phoneCode" value="" placeholder="手机电话"><input type='text' class="add email" name='vemail' value="" placeholder="邮箱"></p>
             <div class="save1"><input type="button" id="addrSave" name="Submit" class="save" value="Save" /></div>
