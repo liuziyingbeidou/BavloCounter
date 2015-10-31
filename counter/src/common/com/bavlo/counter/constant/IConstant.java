@@ -45,5 +45,11 @@ public interface IConstant {
 	/** 转发 */
 	public static final String REDIRECT = "redirect:/";
 
+	
+	/*************************文件上传常量***************************/
+	public static final String FILE_DIE = "staticRes";//默认
+	public static final String FILE_MODEL = "/temp";//临时模块
+	public static final String RES_TYPE_PIC = "pic";//图片
+	public static final String RES_TYPE_FILE = "file";//普通文件
 
 }
