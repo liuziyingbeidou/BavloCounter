@@ -273,7 +273,7 @@ public class BaseController {
 
 		//上传文件目录
 		public String getStaticDir() {
-			return IConstant.FILE_DIE;
+			return IConstant.FILE_DIR;
 		}
 
 	    public String getfName() {
