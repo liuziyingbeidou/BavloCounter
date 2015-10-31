@@ -12,6 +12,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <meta name="viewport"
 	content="width=device-width,target-densitydpi=high-dpi,initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+
 <!--必要样式-->
 <link rel='stylesheet' href='${ctx}/resources/css/style.css' media='all' />
 <link rel='stylesheet' href='${ctx}/resources/css/bootstrap.css' media='all' />
@@ -30,6 +31,8 @@
 	// 本地webservice
 	var nativeUrl = "${pageScope.basePath}/counter/webservice/http.do";
 	$(function() {
+		// 款式名字初始化
+		
 		// 款式类型下拉框值
 		var typeUrl = "http://www.bavlo.com/getAllStyleType";
 		loadData(
@@ -65,7 +68,6 @@
 				function() {
 					$("#ringSizeId").val("${customDetail['srcringSize']}");
 				});
-		// 
 		// 当款式类型不是戒指时，隐藏戒指手寸选项 
 		$("#styleTypeId").change(function() {
 			if($("#styleTypeId").val()=="1"){
@@ -94,6 +96,7 @@
 		});
 	}
 </script>
+
 </head>
 
 <body>
@@ -107,10 +110,10 @@
 		<div class="main">
 			<div class="mainleft">
 				<div class="cankao">
-					<h2>+ 参考图 （6）</h2>
+					<h2><a href="javascript:;" style="color:#fff" onclick="PicShow_Hidden(pic)">+ 参考图 （6）</a></h2>
 					<div class="pro">
 						<b><a href="javascript:;" onclick="PicShow_Hidden(pic)">显示</a></b>
-						<div class="demo" id='pic' style='display: block;'>
+						<div class="demo" id='pic' style='display: none;'>
 							<b><a href="javascript:;" onclick="PicShow_Hidden(pic)">隐藏</a></b>
 							<!--<b class="hide">隐藏</b>-->
 							<div class="my-gallery">
@@ -137,11 +140,11 @@
 					</div>
 				</div>
 				<div class="sheji">
-					<h2>+ 起版设计图 （2）</h2>
+					<h2><a href="javascript:;" style="color:#fff" onclick="Pic1Show_Hidden(pic1)">+ 起版设计图 （2）</a></h2>
 					<div class="pro">
 						<!--<img src="images/zb_06.png" />-->
 						<b><a href="javascript:;" onclick="Pic1Show_Hidden(pic1)">显示</a></b>
-						<div class="demo" id='pic1' style='display: block;'>
+						<div class="demo" id='pic1' style='display: none;'>
 							<b><a href="javascript:;" onclick="Pic1Show_Hidden(pic1)">隐藏</a></b>
 							<!--<b class="hide">隐藏</b>-->
 							<div class="my-gallery">
@@ -206,10 +209,15 @@
 				<div class="clear"></div>
 				<div class="name">
 					<input type="text" id="vstyleName" name="vstyleName"
-						value="给本款取个名字吧！" class="quming" />
+						value="给本款取个名字吧！"
+						onfocus="if(value=='给本款取个名字吧！'){value=''}" 
+						onblur="if(value==''){value='给本款取个名字吧！'}"
+						class="quming" />
 				</div>
 				<div class="xuqiu">
 					<textarea id="vrequirement" name="vrequirement" cols="" rows=""
+						onfocus="if(value=='需求描述'){value=''}" 
+						onblur="if(value==''){value='需求描述'}"
 						class="miaoshu1">需求描述</textarea>
 				</div>
 			</div>
@@ -231,11 +239,19 @@
 				<div class="weight">
 					<select id="srcmetail" name="srcmetail" class="wk">
 						<option>选择金属</option>
-					</select> <input type="text" id="nweight" name="nweight" class="ke"
-						value="" />
+					</select>
+					<input type="text" id="nweight" name="nweight"
+						value="克"
+						onfocus="if(value=='克'){value=''}" 
+						onblur="if(value==''){value='克'}"
+						class="ke" />
 				</div>
 				<div class="price">
-					<input id="iprice" name="iprice" class="jiege" value="200" /> <b>+选择</b>
+					<input id="iprice" name="iprice" 
+					value="元"
+					onfocus="if(value=='元'){value=''}" 
+					onblur="if(value==''){value='元'}"
+					class="jiege" /> <b>+选择</b>
 				</div>
 				<dl>
 					<dd class="lzGem" style="display: none">
@@ -331,44 +347,56 @@
 			</div>
 			<div class="mainrig">
 				<h2>其他信息</h2>
-				<select name="" class="kezi">
-					<option>刻字</option>
-					<option>2</option>
-					<option>3</option>
-				</select> <select name="" class="ziti">
-					<option>字体</option>
-					<option>2</option>
-					<option>3</option>
-				</select><br /> <select name="" class="jianding1">
-					<option>喷砂</option>
-					<option>2</option>
-					<option>3</option>
-				</select> <select name="" class="jianding1">
-					<option>成色打标</option>
-					<option>2</option>
-					<option>3</option>
+				
+				<!-- 标签 -->
+				<input type="text" name="staticPath" value="刻字标签：" id="staticPath" />
+				<div class="zhanwei">
+				<select name="" class="ziti">
+					<option value="华文细黑" >华文细黑</option>
+					<option value="华文仿宋" >华文仿宋</option>
+					<option value="华文楷体" >华文楷体</option>
+					<option value="华文宋体" >华文宋体</option>
+					<option value="华文中宋" >华文中宋</option>
+					<option value="仿宋" >仿宋</option>
+					<option value="黑体" >黑体</option>
+					<option value="楷体" >楷体</option>
+					<option value="Bradley Hand ITC" >Bradley Hand ITC</option>
+					<option value="Segoe Script" >Segoe Script</option>
+					<option value="Verdana" >Verdana</option>
 				</select>
-				<textarea name="" cols="" rows="" class="miaoshu1">表面工艺描述</textarea>
-				<br /> <select name="" class="jianding1">
+				</div>
+				<br />
+	
+				<textarea name="" cols="" rows="" 
+				onfocus="if(value=='表面工艺描述'){value=''}" 
+				onblur="if(value==''){value='表面工艺描述'}"				
+				class="miaoshu1">表面工艺描述</textarea>
+				<br />
+				
+				<select name="" class="jianding1">
 					<option>鉴定证书</option>
-					<option>2</option>
-					<option>3</option>
+					<option value="1">有</option>
+					<option value="0">无</option>
 				</select>
+				<!-- 
 				<div class="tu">
 					<div class="tu1">
-						<b>+ 刻字矢量图</b><strong>Love.cdr</strong><br />
+						<input type="file" id="kezitu" style="display: none;">
+						<a href="javascript:;" class="kzsGem_btn">+ 刻字矢量图</a><strong>Love.cdr</strong><br />
 					</div>
 					<u>+ CAD文件</u><strong>无</strong>
-				</div>
+				</div> -->
 				<div class="qita">
 					<div class="clear"></div>
-					<b>其他 元</b><strong>13325+13150=<u>26800 </u>元
-					</strong>
+					<input type="text" value="其他      元"
+					onfocus="if(value=='其他      元'){value=''}" 
+					onblur="if(value==''){value='其他      元'}">
+					<strong>13325+13150=<u>26800 </u>元</strong>
 				</div>
 				<div class="jisuan">
 					<dl>
 						<dd class="plus">
-							<b>+</b>
+							<a href="">+</a>
 						</dd>
 						<dd class="sum">
 							<a href="">计算</a>
@@ -383,7 +411,7 @@
 			</div>
 			<div class="clear"></div>
 		</div>
-
 	</div>
+	<script src="${ctx}/resources/js/custom.js"></script>
 </body>
 </html>
