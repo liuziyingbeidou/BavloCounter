@@ -148,7 +148,8 @@
             swf: 'Uploader.swf',
             chunked: false,
             chunkSize: 512 * 1024,
-            server: 'upload.do',
+            //server: 'upload.do',
+            server: '../upload/uploadFile.do?filemodel='+$("#filemodel").val()+"&filetype="+$("#filetype").val(),
             // runtimeOrder: 'flash',
 
             // accept: {
@@ -541,34 +542,34 @@
             var id = file.id;
             switch(id){
             case 'WU_FILE_0':
-            	$("#FILE_0").val(val._raw);
+            	$("#FILE_0").text(val._raw);
             	break;
             case 'WU_FILE_1':
-            	$("#FILE_1").val(val._raw);
+            	$("#FILE_1").text(val._raw);
             	break;
             case 'WU_FILE_2':
-            	$("#FILE_2").val(val._raw);
+            	$("#FILE_2").text(val._raw);
             	break;
             case 'WU_FILE_3':
-            	$("#FILE_3").val(val._raw);
+            	$("#FILE_3").text(val._raw);
             	break;
             case 'WU_FILE_4':
-            	$("#FILE_4").val(val._raw);
+            	$("#FILE_4").text(val._raw);
             	break;
             case 'WU_FILE_5':
-            	$("#FILE_5").val(val._raw);
+            	$("#FILE_5").text(val._raw);
             	break;
             case 'WU_FILE_6':
-            	$("#FILE_6").val(val._raw);
+            	$("#FILE_6").text(val._raw);
             	break;
             case 'WU_FILE_7':
-            	$("#FILE_7").val(val._raw);
+            	$("#FILE_7").text(val._raw);
             	break;
             case 'WU_FILE_8':
-            	$("#FILE_8").val(val._raw);
+            	$("#FILE_8").text(val._raw);
             	break;
             case 'WU_FILE_9':
-            	$("#FILE_9").val(val._raw);
+            	$("#FILE_9").text(val._raw);
             	break;
             }
         });

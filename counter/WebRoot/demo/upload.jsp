@@ -25,7 +25,8 @@
   <div class="upload">
     <p>上传CAD</p>
     <p>限9张图片+1个CAD文件</p>
-	
+	<input type="hidden" id="filemodel" value="order">
+	<input type="hidden" id="filetype" value="pic">
 	<div id="wrapper">
 			        <div id="container">
 			            <!--头部，相册选择和格式选择-->
@@ -56,16 +57,16 @@
   </div>
 </div>
 <br>
-<input type="text" id="FILE_0"></input>&nbsp;
-<input type="text" id="FILE_1"></input>&nbsp;
-<input type="text" id="FILE_2"></input>&nbsp;
-<input type="text" id="FILE_3"></input>&nbsp;
-<input type="text" id="FILE_4"></input>&nbsp;
-<input type="text" id="FILE_5"></input>&nbsp;
-<input type="text" id="FILE_6"></input>&nbsp;
-<input type="text" id="FILE_7"></input>&nbsp;
-<input type="text" id="FILE_8"></input>&nbsp;
-<input type="text" id="FILE_9"></input>&nbsp;
+<span id="FILE_0"></span>&nbsp;
+<span id="FILE_1"></span>&nbsp;
+<span id="FILE_2"></span>&nbsp;
+<span id="FILE_3"></span>&nbsp;
+<span id="FILE_4"></span>&nbsp;
+<span id="FILE_5"></span>&nbsp;
+<span id="FILE_6"></span>&nbsp;
+<span id="FILE_7"></span>&nbsp;
+<span id="FILE_8"></span>&nbsp;
+<span id="FILE_9"></span>&nbsp;
 <br>
 <xmp>
 1、引入JS和CSS文件
@@ -76,31 +77,13 @@
     <script type="text/javascript" src="${ctx }/resources/webuploader/js/webuploader.js"></script>
     <script type="text/javascript" src="${ctx }/resources/webuploader/js/upload.js"></script> //自己复制的
     
-2、放入9个隐藏文本框（其中id必须为以下名称，用于接收上传成功的文件）
-<input type="hidden" id="FILE_0"></input>&nbsp;
-<input type="hidden" id="FILE_1"></input>&nbsp;
-<input type="hidden" id="FILE_2"></input>&nbsp;
-<input type="hidden" id="FILE_3"></input>&nbsp;
-<input type="hidden" id="FILE_4"></input>&nbsp;
-<input type="hidden" id="FILE_5"></input>&nbsp;
-<input type="hidden" id="FILE_6"></input>&nbsp;
-<input type="hidden" id="FILE_7"></input>&nbsp;
-<input type="hidden" id="FILE_8"></input>&nbsp;
-<input type="hidden" id="FILE_9"></input>&nbsp;
+2、9个隐藏文本框（其中id必须为以下名称，用于接收上传成功返回的文件名称）
+id分别为FILE_0~FILE_9
 
-3、Controller中调用上传方法
- @RequestMapping("/upload")
-    public void uploadHeadPic(@RequestParam("file")MultipartFile file,HttpServletRequest request,HttpServletResponse response){
-        try {
-            super.upload(file,IConstant.RES_TYPE_PIC, "/order/",request);
-            renderText(super.getfName());
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-   }
-   
-4、赋值一份upload.js自定义名称
-其中：server: 'upload.do',修改成自己的
+3、2个隐藏文本框
+id="filetype";//上传文件类型，value值为pic代表上传图片，file代表上传普通文件
+<br>
+id="filemodel";//自定义上传目录模块
 </xmp>
 </form>
 </body>
