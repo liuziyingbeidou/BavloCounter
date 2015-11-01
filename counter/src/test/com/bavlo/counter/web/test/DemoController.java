@@ -34,6 +34,7 @@ public class DemoController extends BaseController {
     public void uploadHeadPic(@RequestParam("file")MultipartFile file,HttpServletRequest request,HttpServletResponse response){
         try {
             super.upload(file,IConstant.RES_TYPE_PIC, "/order/",request);
+            //System.out.println(request.getParameter("test"));
             renderText(super.getfName());
         } catch (Exception e) {
             e.printStackTrace();
