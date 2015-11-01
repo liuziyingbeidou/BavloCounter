@@ -229,8 +229,10 @@ public class BaseController {
 	    private String model;//文件上传模块
 	    private String fName;//文件名(包含扩展名)
 	    private String[] fNames;
+	    private String srcFilePath;
 	    
 	    private String minFilePath;//缩略图存放路径
+	    private String minFileName;//缩略图名称
 	    
 	    public String getAllowSuffix() {
 	        return allowSuffix;
@@ -298,6 +300,22 @@ public class BaseController {
 
 		public void setMinFilePath(String minFilePath) {
 			this.minFilePath = minFilePath;
+		}
+
+		public String getSrcFilePath() {
+			return srcFilePath;
+		}
+
+		public void setSrcFilePath(String srcFilePath) {
+			this.srcFilePath = srcFilePath;
+		}
+
+		public String getMinFileName() {
+			return minFileName;
+		}
+
+		public void setMinFileName(String minFileName) {
+			this.minFileName = minFileName;
 		}
 
 		/**
@@ -398,10 +416,8 @@ public class BaseController {
 	                f.createNewFile();
 	                fileName = basePath+destDir+fileNameNew;
 	                fName = fileNameNew;
-	                if(IConstant.RES_TYPE_PIC.equals(fileType)){
-	                	setMinFilePath(realPath+destDir+"min/");
-	                	toZoom(f);
-	                }
+	                setSrcFilePath(destFile.getAbsoluteFile()+"/"+fileNameNew);
+	                setMinFilePath(realPath+destDir+"min");
 	        } catch (Exception e) {
 	            throw e;
 	    }
@@ -423,12 +439,17 @@ public class BaseController {
 				int yh = srcBufferImage.getHeight();
 				int w = 80, h = 80;
 				
+				File mdestFile = new File(getMinFilePath());
+                if(!mdestFile.exists()){
+                	mdestFile.mkdirs();
+                }
+				
 				String uploadFileName = getfName();
 		        int index = uploadFileName.lastIndexOf(".");
 		        if (index != -1) {
 		        	minFileName = uploadFileName.substring(0, index) + "_min" + uploadFileName.substring(index);
 		        } else {
-		        	minFileName = uploadFileName+"_min";
+		        	minFileName = uploadFileName+"_min.jpg";
 		        }
 		    	
 		     // 如果上传图片 宽高 比 压缩的要小 则不压缩

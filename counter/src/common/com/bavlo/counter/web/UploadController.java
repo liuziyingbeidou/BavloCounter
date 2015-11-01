@@ -1,5 +1,9 @@
 package com.bavlo.counter.web;
 
+import java.io.File;
+import java.io.FileOutputStream;
+
+import javax.imageio.ImageIO;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -8,6 +12,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
+
+import com.bavlo.counter.constant.IConstant;
+import com.bavlo.counter.utils.ImageUtils;
 
 /**
  * @Title: ±¦ççCounter
@@ -29,7 +36,26 @@ public class UploadController extends BaseController {
         	String model = request.getParameter("filemodel");
         	String type = request.getParameter("filetype");
             super.upload(file,type, "/"+model+"/",request);
-            renderText(super.getfName());
+            File originalImage = new File(getSrcFilePath());
+            if(IConstant.RES_TYPE_PIC.equals(type)){
+            	File destFile = new File(getMinFilePath());
+                if(!destFile.exists()){
+                    destFile.mkdirs();
+                }
+                String uploadFileName = getfName();
+                String minFileName = null;
+		        int index = uploadFileName.lastIndexOf(".");
+		        if (index != -1) {
+		        	minFileName = uploadFileName.substring(0, index) + "_min" + uploadFileName.substring(index);
+		        } else {
+		        	minFileName = uploadFileName+"_min.jpg";
+		        }
+            	byte[] bytes = ImageUtils.resize(ImageIO.read(originalImage), 100, 1f, true);
+                FileOutputStream out = new FileOutputStream(new File(getMinFilePath()+ "/" +minFileName));
+                out.write(bytes);
+                out.close();
+            }
+            response.getWriter().print(super.getfName());
         } catch (Exception e) {
             e.printStackTrace();
         }
