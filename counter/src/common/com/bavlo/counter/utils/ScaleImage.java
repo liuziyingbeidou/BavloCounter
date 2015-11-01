@@ -48,13 +48,13 @@ public class ScaleImage {
 	}
 
 	/**
-	 * ����ͼ��ߴ�
+	 * 决定图像尺寸
 	 */
 	private int DetermineResultSize(int w, int h) {
 		double scaleH, scaleV;
 		scaleH = (double) w / (double) width;
 		scaleV = (double) h / (double) height;
-		// ????�ж�????scaleH��scaleV�������Ŵ��??
+		// ????判断????scaleH，scaleV，不做放大操??
 		if (scaleH >= 1.0 && scaleV >= 1.0) {
 			return 1;
 		}
@@ -111,7 +111,7 @@ public class ScaleImage {
 		}
 	} // end of CalContrib()
 
-	// �����Ե
+	// 处理边缘
 	private void CalTempContrib(int start, int stop) {
 		double weight = 0;
 
@@ -145,7 +145,7 @@ public class ScaleImage {
 		return (redValue << 16) + (greenValue << 8) + blueValue;
 	}
 
-	// ��ˮƽ��??
+	// 行水平滤??
 	private int HorizontalFilter(BufferedImage bufImg, int startX, int stopX,
 			int start, int stop, int y, double[] pContrib) {
 		double valueRed = 0.0;
@@ -168,7 +168,7 @@ public class ScaleImage {
 
 	} // end of HorizontalFilter()
 
-	// ͼƬˮƽ�˲�
+	// 图片水平滤波
 	private BufferedImage HorizontalFiltering(BufferedImage bufImage, int iOutW) {
 		int dwInW = bufImage.getWidth();
 		int dwInH = bufImage.getHeight();
