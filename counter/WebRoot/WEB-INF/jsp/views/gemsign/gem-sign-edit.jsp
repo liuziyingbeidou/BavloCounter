@@ -117,7 +117,7 @@
 	</head>
 	<body>
 	<form id="entityfrmId">
-	<input type="hidden" id="filemodel" value="test">
+	<input type="hidden" id="filemodel" value="gemsign">
 	<input type="hidden" id="filetype" value="pic">
 	<input type="text" id="FILE_0"></input>
 	<input type="hidden" id="FILE_1"></input>
