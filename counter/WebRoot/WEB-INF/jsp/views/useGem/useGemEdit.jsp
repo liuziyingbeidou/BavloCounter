@@ -32,7 +32,7 @@
 			loadSelData(nativeUrl, typeUrl, "gemTypeId", "data[i].id",
 					"data[i].type_cn", function() {
 						$("#gemTypeId").val("${useGemDetail['vtype']}");
-					});
+					},"宝石类型");
 			
 			//形状下拉框
 			initShapeByType();
@@ -78,7 +78,7 @@
 			loadSelData(nativeUrl, shapeUrl, "gemShapeId", "data[i].id",
 					"data[i].shape_cn", function() {
 						$("#gemShapeId").val("${useGemDetail['vshape']}");
-					});
+					},"宝石形状");
 		}
 		
 		//初始化规格下拉框值
@@ -96,7 +96,7 @@
 			loadSelData(nativeUrl, specUrl, "gemSpecId", "data[i].id",
 					"data[i].size", function() {
 						$("#gemSpecId").val("${useGemDetail['vspec']}");
-					});
+					},"宝石规格");
 		}
 
 	//宝石签收单保存
@@ -122,7 +122,6 @@
 	<body>
 		<form id="useGem">
 			<jsp:include page="../header.jsp"></jsp:include>
-			<jsp:include page="useGemList.jsp"></jsp:include>
 			<input id="gemid" type="hidden" name="id" value="${useGemDetail['id']}">
 			<div class="qsd">
 				<div class="qsd_main">
