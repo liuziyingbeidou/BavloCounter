@@ -15,9 +15,12 @@
  * selId json中作为下拉框id 如：data[i].id<br>
  * selName json中作为下拉框显示名称 如：data[i].type_cn<br>
  */
-function loadSelData(nativeUrl,remoteUrl,emName,selId,selName,callback){
+function loadSelData(nativeUrl,remoteUrl,emName,selId,selName,callback,explain){
+	if(explain == undefined){
+		explain = "请选择";
+	}
 	$('#'+emName).empty();
-	$('#'+emName).append("<option value='-1'>请选择</option>");
+	$('#'+emName).append("<option value='-1'>"+explain+"</option>");
 	
 	/*$.ajax({
 		type:"get",
