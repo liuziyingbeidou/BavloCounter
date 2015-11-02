@@ -63,11 +63,11 @@ public class UseGemController extends BaseController implements IConstant {
 	 * @param @return
 	 * @return ModelAndView
 	 */
-	@RequestMapping("getList")
-	public ModelAndView getList(Map<String, Object> map) {
+	@RequestMapping("list")
+	public ModelAndView list(Map<String, Object> map) {
 
-		List<UseGemVO> useGem = useGemService.findUseGemList();
-		map.put("useGem", useGem);
+		List<UseGemVO> useGemList = useGemService.findUseGemList();
+		map.put("useGem", useGemList);
 		return new ModelAndView(PATH_USE_GEM + "useGemList");
 	}
 
