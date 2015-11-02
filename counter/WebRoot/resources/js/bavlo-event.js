@@ -58,13 +58,29 @@
     	});
     }
     
-    /*
-     * 判断是否包含该字符
-     * str 目标字符串
-     * em 包含的字符串
-     */
-    function isContain(str,em){
-        var s = str.indexOf(em); 
-        return (s);
-    } 
 })( jQuery );
+//去前缀
+function clearSuffix(myClass,suffix){
+	var worth = $("."+myClass).val();
+	var index = isContain(worth,suffix);
+	if(index >= 0){
+		$("."+myClass).val(worth.substring(0,index));
+	}
+}
+//加前缀
+function initSuffix(myClass,suffix){
+	var worth = $("."+myClass).val();
+	var index = isContain(worth,suffix);
+	if(index == -1){
+		$("."+myClass).val(worth + suffix);
+	}
+}
+/*
+ * 判断是否包含该字符
+ * str 目标字符串
+ * em 包含的字符串
+ */
+function isContain(str,em){
+    var s = str.indexOf(em); 
+    return (s);
+} 
