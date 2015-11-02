@@ -4204,7 +4204,7 @@
     
                 if ( count >= max && flag ) {
                     flag = false;
-                    this.trigger( 'error', 'Q_EXCEED_NUM_LIMIT', max, file );
+                    this.trigger( 'error', '图片超出上传数量', max, file );
                     setTimeout(function() {
                         flag = true;
                     }, 1 );

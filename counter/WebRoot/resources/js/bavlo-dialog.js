@@ -29,7 +29,7 @@ function openURL(url, title,width, height ) {
 			height:jheight
 		}
 	});
-	api.openLink({ 
+	api.openLink({
 		href: url,
 		type: "iframe"
 	});
