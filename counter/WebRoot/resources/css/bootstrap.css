@@ -345,7 +345,8 @@ font-size:23px;
 	padding:9px 21px;font-size:26px;
 }
 .qita input {
-	padding:9px 20px; font-size:26px;
+	padding:9px 20px;font-size:26px; width: 45%; height: 60px;
+
 }
 .qita u { font-size:26px;}
 .qita strong {
@@ -355,7 +356,7 @@ font-size:23px;
 .plus {
 	width:45%;font-size:26px;height:60px; line-height:60px;
 }
-.sum {height:60px; line-height:60px;}
+.sum {width: 45%; height:60px; line-height:60px;}
 .sum a {
 	padding:0px 73px;font-size:26px;height:60px; line-height:60px;
 }
