@@ -12,6 +12,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.bavlo.counter.constant.IConstant;
 import com.bavlo.counter.utils.ImageUtils;
@@ -28,6 +29,14 @@ import com.bavlo.counter.utils.ImageUtils;
 public class UploadController extends BaseController {
 
 	Logger log = Logger.getLogger(UploadController.class);
+	
+	@RequestMapping("/uppage")
+	public ModelAndView upPage(){
+		
+		ModelAndView model = new ModelAndView(IConstant.PATH_COMMON + IConstant.COMMON_UPLOAD);
+		
+		return model;
+	}
 	
 	@RequestMapping("/uploadFile")
     public void uploadHeadPic(@RequestParam("file")MultipartFile file,HttpServletRequest request,HttpServletResponse response){
