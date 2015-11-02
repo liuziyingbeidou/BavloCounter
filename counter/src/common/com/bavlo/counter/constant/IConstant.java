@@ -10,6 +10,8 @@ package com.bavlo.counter.constant;
 public interface IConstant {
 	
 	/*****************************View模块和ViewName***************************/
+	public static final String PATH_COMMON = "common/";
+	public static final String COMMON_UPLOAD = "upload";
 	/**实物签收单模块*/
 	public static final String PATH_ENTITY = "entitysign/";
 	public static final String ENTITY_SIGN_EDIT = "entity-sign-edit";
