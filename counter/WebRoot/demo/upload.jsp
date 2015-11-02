@@ -60,12 +60,12 @@
 	<script src="/counter/resources/js/bavlo-dialog.js"></script>		
     
 2、9个隐藏文本框（其中id必须为以下名称，用于接收上传成功返回的文件名称）
-	id分别为FILE_0~FILE_9
+	name/id分别为FILE_0~FILE_9
 
 3、2个隐藏文本框
-	id="filetype";//上传文件类型，value值为pic代表上传图片，file代表上传普通文件
+	name/id="filetype";//上传文件类型，value值为pic代表上传图片，file代表上传普通文件
 <br>
-	id="filemodel";//自定义上传目录模块
+	name/id="filemodel";//自定义上传目录模块
 
 4、调用上传图片方法（弹框）
 	//上传图片
