@@ -42,5 +42,13 @@ $(function(){
     	<legend>上传文件Demo</legend>
     	<a href="http://127.0.0.1:8080/counter/demo/upload.jsp">上传图片</a>
     </fieldset>
+    <fieldset>
+    	<legend>后缀单位设置方法</legend>
+    	1、引入<script src="${ctx}/resources/js/bavlo-event.js"></script>
+    	2、设置placeholder="后缀"
+    	3、设置属性class
+    	4、在bavlo-event.js中添加如下：
+    	setSuffix(class属性值,后缀);实例：setSuffix("worth","元");
+    </fieldset>
 </body>
 </html>
