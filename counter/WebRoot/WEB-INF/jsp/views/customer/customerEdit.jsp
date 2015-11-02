@@ -80,16 +80,15 @@
 	<body>
 		<form id="customer">
 			<jsp:include page="../header.jsp"></jsp:include>
-			<jsp:include page="customerList.jsp"></jsp:include>
 			<div class="edit_main">
 				<div class="edit_left">
 					<ul>
 						<li>
-							<a href="javascript:;" onclick="Pic2Show_Hidden(pic2)"><img
+							<a href="getList.do"><img
 									src="${ctx}/resources/images/customer_01.png" /> </a>
 						</li>
 						<li>
-							<a href="javascript:;" onclick="Pic2Show_Hidden(pic2)"><img
+							<a href="getList.do"><img
 									src="${ctx}/resources/images/customer_02.png" /> </a>
 						</li>
 						<li class="focus">
