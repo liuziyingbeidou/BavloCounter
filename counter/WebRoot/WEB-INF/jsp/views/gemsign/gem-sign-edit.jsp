@@ -18,7 +18,18 @@
 		
 		<!-- 定义JS -->
 		<script src="${ctx}/resources/js/bavlo-initdata.js"></script>
+		<script src="${ctx}/resources/js/bavlo-event.js"></script>
 		
+		<!-- 弹框 -->
+		<!-- jQuery & jQuery UI files (needed)--> 
+		<link rel="stylesheet" href="/counter/resources/jquery.multiDialog/css/jquery-ui-1.10.3.custom.css">
+		<script src="/counter/resources/jquery.multiDialog/js/jquery/jquery-1.9.1.js"></script> 
+		<script src="/counter/resources/jquery.multiDialog/js/jquery/jquery-ui-1.10.3.custom.js"></script> 
+		<!-- MultiDialog files (needed) --> 
+		<link rel="stylesheet" href="/counter/resources/jquery.multiDialog/css/jquery.multiDialog.css"> 
+		<script src="/counter/resources/jquery.multiDialog/js/jquery.ui.dialog.extended-1.0.2.js"></script> 
+		<script src="/counter/resources/jquery.multiDialog/js/jquery.multiDialog.js"></script> 
+		<script src="/counter/resources/js/bavlo-dialog.js"></script>
 		<script type="text/javascript">
 		//本地webservice
 		var nativeUrl = "${pageScope.basePath}/counter/webservice/http.do";
@@ -28,7 +39,7 @@
 			loadSelData(nativeUrl, typeUrl, "gem-type-id", "data[i].id",
 					"data[i].type_cn", function() {
 						$("#gem-type-id").val("${gemvo['vtype']}");
-					});
+					},"选宝石");
 			
 			//形状下拉框
 			initShapeByType();
@@ -45,6 +56,10 @@
 			/**
 			 *$(document).ajaxStop(function () {setNowSelData(); });
 			 **/
+			 //上传图片
+			 $(".gem-upload").bind("click",function(){
+			 		openURL("${ctx}/upload/uppage.do","上传图片");
+			 });
 	
 		});
 		
@@ -58,7 +73,7 @@
 			loadSelData(nativeUrl, shapeUrl, "gem-shape-id", "data[i].id",
 					"data[i].shape_cn", function() {
 						$("#gem-shape-id").val("${gemvo['vshape']}");
-					});
+					},"选形状");
 		}
 		
 		//初始化规格下拉框值
@@ -76,7 +91,7 @@
 			loadSelData(nativeUrl, specUrl, "gem-spec-id", "data[i].id",
 					"data[i].size", function() {
 						$("#gem-spec-id").val("${gemvo['vspec']}");
-					});
+					},"选规格");
 		}
 		
 		
@@ -102,6 +117,18 @@
 	</head>
 	<body>
 	<form id="entityfrmId">
+	<input type="hidden" id="filemodel" value="test">
+	<input type="hidden" id="filetype" value="pic">
+	<input type="text" id="FILE_0"></input>
+	<input type="hidden" id="FILE_1"></input>
+	<input type="hidden" id="FILE_2"></input>
+	<input type="hidden" id="FILE_3"></input>
+	<input type="hidden" id="FILE_4"></input>
+	<input type="hidden" id="FILE_5"></input>
+	<input type="hidden" id="FILE_6"></input>
+	<input type="hidden" id="FILE_7"></input>
+	<input type="hidden" id="FILE_8"></input>
+	<input type="hidden" id="FILE_9"></input>
 	<input id="gemid" type="hidden" name="id" value="${gemvo['id']}">
 		<div class="header">
 			<div class="head">
@@ -171,7 +198,7 @@
 							</div>
 						</li>
 						<li class="camera">
-							<a href=""><img src="${ctx}/resources/images/camera.png"></a>
+							<a class="gem-upload" href="javascript:;"><img src="${ctx}/resources/images/camera.png"></a>
 						</li>
 						<div class="clear"></div>
 					</ul>
@@ -184,40 +211,38 @@
 					<div class="qsd_right_1">
 						<select name="vtype" class="qsdr r1" id="gem-type-id">
 							<option value="-1">
-								 请选择
+								 宝石
 							</option>
 						</select>
 						<dt>
-							<input type='text' name='nworth' class="qsdr r2" value="${gemvo['nworth']}">
+							<input type='text' name='nworth' placeholder="元" class="qsdr r2 gem-worth" value="${gemvo['nworth']}">
 						</dt>
 						<div class="clear"></div>
 					</div>
 					<div class="qsd_right_1">
 						<select name="vshape" class="qsdr r1" id="gem-shape-id">
 							<option value="-1">
-								 请选择
+								 形状
 							</option>
 						</select>
 						<dt>
-							<input type='text' name='nweight' class="qsdr r2" value="${gemvo['nweight']}">
+							<input type='text' name='nweight' placeholder="克" class="qsdr r2 gem-weight" value="${gemvo['nweight']}">
 						</dt>
 						<div class="clear"></div>
 					</div>
 					<div class="qsdtt">
 						<select name="vspec" class="qsdt" id="gem-spec-id">
 							<option value="-1">
-								 请选择
+								 规格
 							</option>
 						</select>
 					</div>
 					<div class="clear"></div>
 					<div class="qsdtt">
-						<input type='text' name='icount' value="${gemvo['icount']}" class="qsdn t3">
+						<input type='text' name='icount' placeholder="颗" value="${gemvo['icount']}" class="qsdn t3 gem-count">
 					</div>
 					<div class="qssm-l">
-						<textarea name="vmemo" cols="" rows="" class="qssm"
-							onfocus="if(this.value=='签收说明'){this.value='';}"
-							onblur="if(this.value==''){this.value='签收说明';}">${gemvo['vmemo']}</textarea>
+						<textarea name="vmemo" cols="" rows="" class="qssm" placeholder="签收说明">${gemvo['vmemo']}</textarea>
 					</div>
 					<div class="qs_save">
 						<input type="button" name="button" onclick="javascript:save()" value="保存">
@@ -228,7 +253,4 @@
 		</div>
 	</form>
 	</body>
-	<script type="text/javascript">
-		
-	</script>
 </html>
