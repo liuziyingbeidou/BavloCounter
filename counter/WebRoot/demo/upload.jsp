@@ -10,18 +10,41 @@
 <link type='text/css' rel='stylesheet' href='${ctx }/resources/css/style.css' media='all' />
 <link type='text/css' rel='stylesheet' href='${ctx }/resources/css/bootstrap.css' media='all' />
 <script src="${ctx }/resources/js/top.js"></script>
-	<!-- 上传图片 -->
-	<link rel="stylesheet" type="text/css" href="${ctx }/resources/webuploader/css/webuploader.css" />
-    <link rel="stylesheet" type="text/css" href="${ctx }/resources/webuploader/css/upload.css" />    
-    <script type="text/javascript" src="${ctx }/resources/js/jquery.js"></script>
-    <script type="text/javascript" src="${ctx }/resources/webuploader/js/webuploader.js"></script>
-    <script type="text/javascript" src="${ctx }/resources/webuploader/js/upload.js"></script> 
-
+		<!-- 弹框 -->
+		<!-- jQuery & jQuery UI files (needed)--> 
+		<link rel="stylesheet" href="/counter/resources/jquery.multiDialog/css/jquery-ui-1.10.3.custom.css">
+		<script src="/counter/resources/jquery.multiDialog/js/jquery/jquery-1.9.1.js"></script> 
+		<script src="/counter/resources/jquery.multiDialog/js/jquery/jquery-ui-1.10.3.custom.js"></script> 
+		<!-- MultiDialog files (needed) --> 
+		<link rel="stylesheet" href="/counter/resources/jquery.multiDialog/css/jquery.multiDialog.css"> 
+		<script src="/counter/resources/jquery.multiDialog/js/jquery.ui.dialog.extended-1.0.2.js"></script> 
+		<script src="/counter/resources/jquery.multiDialog/js/jquery.multiDialog.js"></script> 
+		<script src="/counter/resources/js/bavlo-dialog.js"></script>
+		
+		<script type="text/javascript">
+		$(function(){
+			$(".gem-upload").bind("click",function(){
+				openURL("${ctx}/upload/uppage.do","上传图片");
+			});
+		});
+		</script>
 </head>
 
 <body>
 <form>
-
+	<input type="hidden" id="filemodel" value="test">
+	<input type="hidden" id="filetype" value="pic">
+	<input type="hidden" id="FILE_0"></input>
+	<input type="hidden" id="FILE_1"></input>
+	<input type="hidden" id="FILE_2"></input>
+	<input type="hidden" id="FILE_3"></input>
+	<input type="hidden" id="FILE_4"></input>
+	<input type="hidden" id="FILE_5"></input>
+	<input type="hidden" id="FILE_6"></input>
+	<input type="hidden" id="FILE_7"></input>
+	<input type="hidden" id="FILE_8"></input>
+	<input type="hidden" id="FILE_9"></input>
+<a class="gem-upload" href="javascript:;"><img src="${ctx}/resources/images/camera.png"></a>
 <br>
 <xmp>
 1、引入JS和CSS文件
