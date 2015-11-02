@@ -59,7 +59,7 @@ public class UploadController extends BaseController {
 		        } else {
 		        	minFileName = uploadFileName+"_min.jpg";
 		        }
-            	byte[] bytes = ImageUtils.resize(ImageIO.read(originalImage), 100, 1f, true);
+            	byte[] bytes = ImageUtils.resize(ImageIO.read(originalImage), 330, 1f, true);
                 FileOutputStream out = new FileOutputStream(new File(getMinFilePath()+ "/" +minFileName));
                 out.write(bytes);
                 out.close();
