@@ -25,13 +25,16 @@ $(function(){
        <a href="${ctx}/entity-sign/list.do">实物签收单列表</a>
     <br>   
     3、<a href="${ctx}/customer/info.do">客户</a>
+      <a href="${ctx}/customer/list.do">客户列表</a>
     <br>
     4、<a href="${ctx}/useGem/info.do">配石单</a>
+      <a href="${ctx}/useGem/list.do">配石单列表</a>
     <br>
     5、<a href="${ctx}/order/add.do">订单新增</a>
        <a href="${ctx}/order/list.do">订单列表</a>
     <br>   
     6、<a href="${ctx}/custom/info.do">定制单</a>
+       <a href="${ctx}/custom/list.do">定制单列表</a>
     <br>
     <br>
     <fieldset>
