@@ -2,6 +2,7 @@ package com.bavlo.counter.service.sign.itf;
 
 import java.util.List;
 
+import com.bavlo.counter.model.sign.GemSignBVO;
 import com.bavlo.counter.model.sign.GemSignVO;
 
 /**
@@ -40,4 +41,23 @@ public interface IGemSignService {
 	 * @return GemSignVO
 	 */
 	public GemSignVO findSigleGem(Integer id);
+	/**
+	 * @Description: 保存子表
+	 * @param @param listBVO
+	 * @return void
+	 */
+	public void saveGemB(List<GemSignBVO> listBVO);
+	/**
+	 * @Description: 根据主表主键删除子表数据
+	 * @param @param mid
+	 * @return void
+	 */
+	public void deleteGemB(Integer mid);
+	/**
+	 * @Description: 根据主表主键查询子表数据
+	 * @param @param id
+	 * @param @return
+	 * @return List<GemSignBVO>
+	 */
+	public List<GemSignBVO> findListGemB(Integer id);
 }

@@ -22,7 +22,7 @@ public class GemSignBVO extends IdEntity implements Serializable{
 	/**
 	 * 主表主键		longint	
 	 */
-	private Long entitysignId;
+	private Integer gemsignId;
 	/**
 	 * 实物名称		varchar(100)	
 	 */
@@ -37,11 +37,11 @@ public class GemSignBVO extends IdEntity implements Serializable{
 	 */
 	private String biscover;
 	
-	public Long getEntitysignId() {
-		return entitysignId;
+	public Integer getGemsignId() {
+		return gemsignId;
 	}
-	public void setEntitysignId(Long entitysignId) {
-		this.entitysignId = entitysignId;
+	public void setGemsignId(Integer gemsignId) {
+		this.gemsignId = gemsignId;
 	}
 	public String getVname() {
 		return vname;

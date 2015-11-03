@@ -2,7 +2,9 @@ package com.bavlo.counter.web;
 
 import java.io.File;
 import java.io.FileOutputStream;
+import java.util.List;
 
+import javax.annotation.Resource;
 import javax.imageio.ImageIO;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -15,7 +17,11 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.bavlo.counter.constant.IConstant;
+import com.bavlo.counter.model.sign.GemSignBVO;
+import com.bavlo.counter.service.sign.impl.GemSignService;
+import com.bavlo.counter.service.sign.itf.IGemSignService;
 import com.bavlo.counter.utils.ImageUtils;
+import com.bavlo.counter.utils.StringUtil;
 
 /**
  * @Title: ±¦ççCounter
@@ -27,6 +33,9 @@ import com.bavlo.counter.utils.ImageUtils;
 @Controller("uploadController")
 @RequestMapping(value = "/upload")
 public class UploadController extends BaseController {
+	
+	@Resource
+	private IGemSignService gemSignService;
 
 	Logger log = Logger.getLogger(UploadController.class);
 	
@@ -39,10 +48,13 @@ public class UploadController extends BaseController {
 	}
 	
 	@RequestMapping("/showpic")
-	public ModelAndView showPic(){
-		
+	public ModelAndView showPic(HttpServletRequest request){
+		String id = request.getParameter("id");
 		ModelAndView model = new ModelAndView(IConstant.PATH_COMMON + IConstant.COMMON_SHOWPIC);
-		
+		if(StringUtil.isNotEmpty(id)){
+			List<GemSignBVO> listbvo = gemSignService.findListGemB(Integer.valueOf(id));
+			model.addObject("listbvo", listbvo);
+		}
 		return model;
 	}
 	
