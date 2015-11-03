@@ -568,9 +568,6 @@
             case 'WU_FILE_8':
             	$("#FILE_8",window.parent.document).val(val._raw);
             	break;
-            case 'WU_FILE_9':
-            	$("#FILE_9",window.parent.document).val(val._raw);
-            	break;
             }
         });
         
