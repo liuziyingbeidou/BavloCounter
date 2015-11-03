@@ -12,6 +12,12 @@ public interface IConstant {
 	public static final String YES = "Y";
 	public static final String NO = "N";
 	
+	/**
+	 * 编码前缀
+	 */
+	//宝石签收单
+	public static final String CODE_GEMSIGN = "GS";
+	
 	/*****************************View模块和ViewName***************************/
 	public static final String PATH_COMMON = "common/";
 	public static final String COMMON_UPLOAD = "upload";
