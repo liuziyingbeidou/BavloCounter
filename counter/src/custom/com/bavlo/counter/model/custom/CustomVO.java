@@ -63,10 +63,19 @@ public class CustomVO extends IdEntity {
 	@Column(precision=20,scale=8)
 	private Double nweight;
 	/**
+	 * 主石（元）
+	 */
+	@Column(precision = 20, scale = 8)
+	private Double nprimaryGem;
+	/**
+	 * 配石（颗）
+	 */
+	private Integer iforeignGem;
+	/**
 	 * 价格
 	 */
 	@Column(precision = 20, scale = 8)
-	private Double iprice;
+	private Double nprice;
 	/**
 	 * 其他款项
 	 */
@@ -91,6 +100,10 @@ public class CustomVO extends IdEntity {
 	 * 状态:0:未处理；1：设计中；2：已完成
 	 */
 	private Integer istatus;
+	/**
+	 * 鉴定证书:0:无；1：有
+	 */
+	private Integer icertificate;
 	/**
 	 * 需求描述
 	 */
@@ -167,13 +180,28 @@ public class CustomVO extends IdEntity {
 	public void setNweight(Double nweight) {
 		this.nweight = nweight;
 	}
-
-	public Double getIprice() {
-		return iprice;
+	public Double getNprimaryGem() {
+		return nprimaryGem;
 	}
 
-	public void setIprice(Double iprice) {
-		this.iprice = iprice;
+	public void setNprimaryGem(Double nprimaryGem) {
+		this.nprimaryGem = nprimaryGem;
+	}
+
+	public Integer getIforeignGem() {
+		return iforeignGem;
+	}
+
+	public void setIforeignGem(Integer iforeignGem) {
+		this.iforeignGem = iforeignGem;
+	}
+
+	public Double getNprice() {
+		return nprice;
+	}
+
+	public void setINprice(Double nprice) {
+		this.nprice = nprice;
 	}
 
 	public Double getNotherPrice() {
@@ -238,6 +266,14 @@ public class CustomVO extends IdEntity {
 
 	public void setCustomerId(Long customerId) {
 		this.customerId = customerId;
+	}
+
+	public Integer getIcertificate() {
+		return icertificate;
+	}
+
+	public void setIcertificate(Integer icertificate) {
+		this.icertificate = icertificate;
 	}
 
 }

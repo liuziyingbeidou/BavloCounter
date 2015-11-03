@@ -36,9 +36,6 @@ public class CustomController extends BaseController implements IConstant {
 	@RequestMapping("info")
 	public ModelAndView info(Map<String, Object> map, Integer id) {
 
-		List<CustomVO> customList = customService.findCustomList();
-		map.put("customList", customList);
-
 		CustomVO customDetail = customService.findCustomById(id);
 		map.put("customDetail", customDetail);
 		return new ModelAndView(PATH_CUSTOM + "customEdit");
@@ -47,7 +44,6 @@ public class CustomController extends BaseController implements IConstant {
 	/**
 	 * @Description: 保存或更新客户信息
 	 * @param @param customVO
-	 * @param @return
 	 * @return ModelAndView
 	 */
 	@RequestMapping("saveOrUpdate")
@@ -60,14 +56,14 @@ public class CustomController extends BaseController implements IConstant {
 	/**
 	 * @Description: 获取客户列表
 	 * @param @param map
-	 * @param @return
 	 * @return ModelAndView
 	 */
-	@RequestMapping("getList")
+	@RequestMapping("list")
 	public ModelAndView getList(Map<String, Object> map) {
 
-		List<CustomVO> custom = customService.findCustomList();
-		map.put("custom", custom);
+		List<CustomVO> customList = customService.findCustomList();
+		map.put("customList", customList);
+
 		return new ModelAndView(PATH_CUSTOM + "customList");
 	}
 
