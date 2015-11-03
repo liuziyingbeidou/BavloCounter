@@ -12,6 +12,7 @@ import com.bavlo.counter.model.IdEntity;
  * @Description: 实物(0)签收单
  * @author liuzy
  * @date 2015-10-19 下午02:54:18
+ * vdef1,vdef2,vdef3查询使用
  */
 @Entity
 @Table(name="blct_gemsign")
