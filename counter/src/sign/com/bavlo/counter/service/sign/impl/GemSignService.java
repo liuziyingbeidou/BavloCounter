@@ -4,9 +4,11 @@ import java.util.List;
 
 import org.springframework.stereotype.Service;
 
+import com.bavlo.counter.model.sign.GemSignBVO;
 import com.bavlo.counter.model.sign.GemSignVO;
 import com.bavlo.counter.service.impl.CommonService;
 import com.bavlo.counter.service.sign.itf.IGemSignService;
+import com.bavlo.counter.utils.CommonUtils;
 
 /**
  * @Title: ±¶ÁÁCounter
@@ -44,7 +46,37 @@ public class GemSignService extends CommonService implements IGemSignService {
 	@Override
 	public GemSignVO findSigleGem(Integer id) {
 		String wh = " id ="+id;
-		return findFirst(GemSignVO.class, wh);
+		GemSignVO vo = findFirst(GemSignVO.class, wh);
+		String bwh = " gemsignId="+id +" and biscover='Y'";
+		GemSignBVO bvo = findFirst(GemSignBVO.class, bwh);
+		vo.setFILE_0(bvo.getVpath()+"/min/"+CommonUtils.getMinPicName(bvo.getVname()));//∑‚√Ê
+		return vo;
+	}
+
+	@Override
+	public void saveGemB(List<GemSignBVO> listBVO) {
+		try {
+			save(listBVO);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+
+	@Override
+	public void deleteGemB(Integer mid) {
+		List<GemSignBVO>  list = findListGemB(mid);
+		if(list != null){
+			for (GemSignBVO gemSignBVO : list) {
+				delete(gemSignBVO);
+			}
+		}
+		
+	}
+
+	@Override
+	public List<GemSignBVO> findListGemB(Integer mid) {
+		List<GemSignBVO>  list = findAll(GemSignBVO.class, " gemsignId="+mid);
+		return list;
 	}
 
 }

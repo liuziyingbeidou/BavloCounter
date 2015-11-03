@@ -64,7 +64,6 @@ public class EntitySignController extends BaseController {
 		System.out.println("ÕýÔÚ±£´æ....");
 		
 		String bvo = request.getParameter("bvo");
-		System.out.println(bvo);
 		
 		Integer id = entitySignVO.getId();
 		if(id == null){
