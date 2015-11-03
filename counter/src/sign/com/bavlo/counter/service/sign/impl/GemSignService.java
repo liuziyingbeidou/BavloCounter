@@ -1,14 +1,21 @@
 package com.bavlo.counter.service.sign.impl;
 
+import java.util.ArrayList;
 import java.util.List;
+
+import net.sf.json.JSONArray;
 
 import org.springframework.stereotype.Service;
 
+import com.bavlo.counter.constant.IConstant;
 import com.bavlo.counter.model.sign.GemSignBVO;
 import com.bavlo.counter.model.sign.GemSignVO;
 import com.bavlo.counter.service.impl.CommonService;
 import com.bavlo.counter.service.sign.itf.IGemSignService;
 import com.bavlo.counter.utils.CommonUtils;
+import com.bavlo.counter.utils.JsonUtils;
+import com.bavlo.counter.utils.ObjectToJSON;
+import com.bavlo.counter.utils.StringUtil;
 
 /**
  * @Title: ±¦ççCounter
@@ -41,6 +48,38 @@ public class GemSignService extends CommonService implements IGemSignService {
 	public List<GemSignVO> findListGem() {
 		
 		return findAll(GemSignVO.class, "",null,"ts","desc");
+	}
+	
+	public List<GemSignVO> findListGemBySql(String wh){
+		
+		StringBuilder sql = new StringBuilder();
+		sql.append("select ");
+		sql.append(" a.id,a.vnumber,b.vname as vdef1,b.vpath vdef2");
+		sql.append(" from blct_gemsign a");
+		sql.append(" left join blct_gemsign_b b");
+		sql.append(" on a.id=b.gemsign_id");
+		sql.append(" where ifnull(a.dr,0)=0 and b.biscover='"+IConstant.YES+"'");
+		
+		Integer count = getCountBySQL(sql.toString());
+		List<GemSignVO> list = (List<GemSignVO>)findListBySQL(sql.toString(), null, 0, count);
+		List<GemSignVO> list_ = new ArrayList<GemSignVO>();
+		if(list != null){
+			String jsonstr = ObjectToJSON.writeListJSON(list);
+			JSONArray jsonArr = JSONArray.fromObject(jsonstr);
+			int size = jsonArr.size();
+			for (int i = 0; i < size; i++) {
+				GemSignVO dto = new GemSignVO();
+				Object[] arry = jsonArr.getJSONArray(i).toArray();
+				dto.setId(CommonUtils.isNull(arry[0]) ? null :Integer.valueOf(arry[0]+""));
+				dto.setVnumber(CommonUtils.isNull(arry[1]) ? null :arry[1]+"");
+				dto.setVdef1(CommonUtils.isNull(arry[2]) ? null :arry[2]+"");
+				dto.setVdef2(CommonUtils.isNull(arry[3]) ? null :arry[3]+"");
+				dto.setVdef3(CommonUtils.getMinPicName(arry[2]+""));
+				list_.add(dto);
+			}
+		}
+		
+		return list_;
 	}
 
 	@Override

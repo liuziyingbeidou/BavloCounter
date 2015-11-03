@@ -39,8 +39,8 @@ public class GemSignController extends BaseController {
 	@RequestMapping(value="/list")
 	public ModelAndView gemList(){
 		
-		List<GemSignVO> gemList = gemSignService.findListGem();
-		
+		//List<GemSignVO> gemList = gemSignService.findListGem();
+		List<GemSignVO> gemList = gemSignService.findListGemBySql("");
 		ModelAndView model = new ModelAndView(IConstant.PATH_GEM + IConstant.GEM_SIGN_LIST);
 		model.addObject("gemList", gemList);
 		return model;

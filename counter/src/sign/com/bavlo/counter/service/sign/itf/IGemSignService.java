@@ -60,4 +60,10 @@ public interface IGemSignService {
 	 * @return List<GemSignBVO>
 	 */
 	public List<GemSignBVO> findListGemB(Integer id);
+	/**
+	 * @Description: ∂®“ÂSQL
+	 * @param @return
+	 * @return List<GemSignVO>
+	 */
+	public List<GemSignVO> findListGemBySql(String wh);
 }
