@@ -139,7 +139,6 @@
 	<body>
 	<form id="gemfrmId">
 	<input id="gemid" class="mid" type="hidden" name="id" value="${gemvo['id']}">
-	<input type="hidden" name="vnumber" value="${gemvo['vnumber']}">
 		<div class="header">
 			<div class="head">
 				<div class="top1">
@@ -149,9 +148,11 @@
 					<c:choose>
 						 <c:when test="${empty gemvo['vnumber']}">   
 						 ${number }
+						 <input type="hidden" name="vnumber" value="${number }">
 						 </c:when>
 						 <c:otherwise>
 						 gemvo['vnumber']}
+						 <input type="hidden" name="vnumber" value="${gemvo['vnumber']}">
 						 </c:otherwise>	
 						</c:choose> 
 					</b>

@@ -19,7 +19,34 @@
 	<script src="${ctx}/resources/js/showList.js" type="text/javascript"></script>
 	
 	<script type="text/javascript">
+	$(function(){
+		$(".search").keyup(function(){
+			 delay(function(){
+				 initData();
+			 }, 500 );
+		});
+		
+		var delay = (function(){
+			 var timer = 0;
+			 return function(callback, ms){
+				 clearTimeout (timer);
+				 timer = setTimeout(callback, ms);
+			 };
+		})();
+		initData();
+		
+	});
 	
+	function initData(){
+		$("#juheweb").empty();
+		var url = "${ctx}/gem-sign/listJson.do";
+		$.post(url,{content:$(".search").val()},function(row){
+			var data = row;
+			for(var i = 0; i < data.length; i++){
+				$("#juheweb").append("<li><h4><img style='width:60px;height:60px;' src='${ctx}/staticRes/"+data[i].vdef2+"/min/"+data[i].vdef3+"'><b>"+data[i].vnumber+"</b><span><a href='${ctx}/gem-sign/view.do?id="+data[i].id+"'>选择</a></span></h4><div class='clear'></div></li>");
+			}
+		});
+	}
 	</script>
 	</head>
 
@@ -30,7 +57,7 @@
 		<div class="order-list">宝石签收单列表 X</div>
 		<div class="search-1">
 			<form action='' method='post'>
-				<input type='text' name='search' class="search" value='搜索'>
+				<input type='text' name='search' class="search" placeholder="输入编号">
 			</form>
 		</div>
 		<div class="">
@@ -38,12 +65,13 @@
 				<div class="left-sider">
 				  <div class="operate">
 					<ul id="juheweb">
-					<c:forEach items="${gemList}" var="bean">
+					<!--<c:forEach items="${gemList}" var="bean">
 					  <li >
 						<h4 ><img style="width:60px;height:60px;" src="${ctx}/staticRes/${bean.vdef2}/min/${bean.vdef3}"><b>${bean.vnumber}</b><span><a href="${ctx}/gem-sign/view.do?id=${bean.id}">选择</a></span></h4>
 						<div class="clear"></div>
 					  </li>
 					  </c:forEach>
+					-->
 					</ul>
 					<script type="text/javascript" language="javascript">
 						navList(12);
