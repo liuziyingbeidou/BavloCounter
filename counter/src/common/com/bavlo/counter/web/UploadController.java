@@ -38,6 +38,14 @@ public class UploadController extends BaseController {
 		return model;
 	}
 	
+	@RequestMapping("/showpic")
+	public ModelAndView showPic(){
+		
+		ModelAndView model = new ModelAndView(IConstant.PATH_COMMON + IConstant.COMMON_SHOWPIC);
+		
+		return model;
+	}
+	
 	@RequestMapping("/uploadFile")
     public void uploadHeadPic(@RequestParam("file")MultipartFile file,HttpServletRequest request,HttpServletResponse response){
         try {
