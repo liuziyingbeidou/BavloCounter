@@ -23,7 +23,6 @@
 		<!-- 弹框 -->
 		<!-- jQuery & jQuery UI files (needed)--> 
 		<link rel="stylesheet" href="/counter/resources/jquery.multiDialog/css/jquery-ui-1.10.3.custom.css">
-		<script src="/counter/resources/jquery.multiDialog/js/jquery/jquery-1.9.1.js"></script> 
 		<script src="/counter/resources/jquery.multiDialog/js/jquery/jquery-ui-1.10.3.custom.js"></script> 
 		<!-- MultiDialog files (needed) --> 
 		<link rel="stylesheet" href="/counter/resources/jquery.multiDialog/css/jquery.multiDialog.css"> 
@@ -60,7 +59,10 @@
 			 $(".gem-upload").bind("click",function(){
 			 		openURL("${ctx}/upload/uppage.do","上传图片");
 			 });
-	
+			 //图片显示
+			 $(".gem-pic-show").bind("click",function(){
+			 	openURL("${ctx}/upload/showpic.do","图片展示");
+			 });
 		});
 		
 		//初始化形状下拉框值
@@ -97,14 +99,28 @@
 		
 		//宝石签收单保存
 		function save(){
+			//价值
+	    	clearSuffix("gem-worth","元");
+	    	//重量
+	    	clearSuffix("gem-weight","克");
+	    	//数量
+	    	clearSuffix("gem-count","颗");
+	    	
+			var bvo = JSON.stringify($('#gemfrmBId').serializeJson());
 			$.ajax({
 			     type : "POST",
 			     url : "save.do",
-			     data:$('#entityfrmId').serialize(),// formid
+			     data:$('#gemfrmId').serialize()+"&bvo="+bvo,// formid
 			     async:false,
 			     cache:false,
 			     success : function(data) {
 			     	 $("#gemid").val(data.id);
+			     	 //价值
+			    	 initSuffix("gem-worth","元");
+			    	 //重量
+			    	 initSuffix("gem-weight","克");
+			    	 //数量
+			    	 initSuffix("gem-count","颗");
 			     	 alert("保存成功!");
 			     },
 			     error : function(e) {
@@ -116,20 +132,8 @@
 		
 	</head>
 	<body>
-	<form id="entityfrmId">
-	<input type="hidden" id="filemodel" value="gemsign">
-	<input type="hidden" id="filetype" value="pic">
-	<input type="text" id="FILE_0"></input>
-	<input type="hidden" id="FILE_1"></input>
-	<input type="hidden" id="FILE_2"></input>
-	<input type="hidden" id="FILE_3"></input>
-	<input type="hidden" id="FILE_4"></input>
-	<input type="hidden" id="FILE_5"></input>
-	<input type="hidden" id="FILE_6"></input>
-	<input type="hidden" id="FILE_7"></input>
-	<input type="hidden" id="FILE_8"></input>
-	<input type="hidden" id="FILE_9"></input>
-	<input id="gemid" type="hidden" name="id" value="${gemvo['id']}">
+	<form id="gemfrmId">
+	<input id="gemid" class="mid" type="hidden" name="id" value="${gemvo['id']}">
 		<div class="header">
 			<div class="head">
 				<div class="top1">
@@ -204,7 +208,16 @@
 					</ul>
 					<div class="clear"></div>
 					<dt>
-						<img src="${ctx}/resources/images/pic_02.png">
+						<a class="gem-pic-show" href="javascript:;">
+						<c:choose>
+						 <c:when test="${empty gemvo['FILE_0']}">   
+						 <img src="${ctx}/resources/images/pic_02.png">
+						 </c:when>
+						 <c:otherwise>
+						 <img src="${ctx}/staticRes/${gemvo['FILE_0']}">
+						 </c:otherwise>	
+						</c:choose> 
+						</a>
 					</dt>
 				</div>
 				<div class="qsd_right">
@@ -251,6 +264,19 @@
 				<div class="clear"></div>
 			</div>
 		</div>
+	</form>
+	<form id="gemfrmBId">
+	<input type="hidden" name="filemodel" id="filemodel" value="gemsign">
+	<input type="hidden" name="filetype" id="filetype" value="pic">
+	<input type="hidden" name="FILE_0" id="FILE_0"></input>
+	<input type="hidden" name="FILE_1" id="FILE_1"></input>
+	<input type="hidden" name="FILE_2" id="FILE_2"></input>
+	<input type="hidden" name="FILE_3" id="FILE_3"></input>
+	<input type="hidden" name="FILE_4" id="FILE_4"></input>
+	<input type="hidden" name="FILE_5" id="FILE_5"></input>
+	<input type="hidden" name="FILE_6" id="FILE_6"></input>
+	<input type="hidden" name="FILE_7" id="FILE_7"></input>
+	<input type="hidden" name="FILE_8" id="FILE_8"></input>
 	</form>
 	</body>
 </html>

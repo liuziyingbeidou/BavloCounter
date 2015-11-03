@@ -15,7 +15,7 @@
     <link rel="stylesheet" type="text/css" href="${ctx }/resources/webuploader/css/upload.css" />    
     <script type="text/javascript" src="${ctx }/resources/js/jquery.js"></script>
     <script type="text/javascript" src="${ctx }/resources/webuploader/js/webuploader.js"></script>
-    <script type="text/javascript" src="${ctx }/resources/webuploader/js/upload.js"></script> 
+    <script type="text/javascript" src="${ctx }/resources/webuploader/js/upload.js"></script>
 </head>
 
 <body>
