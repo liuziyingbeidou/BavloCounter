@@ -18,6 +18,7 @@ import com.bavlo.counter.constant.IConstant;
 import com.bavlo.counter.model.sign.GemSignBVO;
 import com.bavlo.counter.model.sign.GemSignVO;
 import com.bavlo.counter.service.sign.itf.IGemSignService;
+import com.bavlo.counter.utils.CommonUtils;
 import com.bavlo.counter.utils.StringUtil;
 import com.bavlo.counter.web.BaseController;
 
@@ -55,6 +56,8 @@ public class GemSignController extends BaseController {
 		
 		ModelAndView model = new ModelAndView(IConstant.PATH_GEM + IConstant.GEM_SIGN_EDIT);
 		model.addObject("pageGemType", IConstant.PAGE_TYPE_ADD);
+		//±àºÅ
+		model.addObject("number", CommonUtils.getBillCode(IConstant.CODE_GEMSIGN));
 		return model;
 	}
 	
