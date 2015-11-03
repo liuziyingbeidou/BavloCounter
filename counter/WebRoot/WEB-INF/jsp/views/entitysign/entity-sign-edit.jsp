@@ -18,27 +18,9 @@
 		<link type='text/css' rel='stylesheet' href='${ctx}/resources/css/style.css' media='all' />
 		<link type='text/css' rel='stylesheet' href='${ctx}/resources/css/bootstrap.css' media='all' />
 		<script src="${ctx}/resources/js/top.js"></script>
-		
+		<!-- 自定义event	 -->
+		<script src="${ctx}/resources/js/bavlo-event.js"></script>
 		<script type="text/javascript">
-		(function($){
-		    $.fn.serializeJson=function(){
-		        var serializeObj={};
-		        var array=this.serializeArray();
-		        var str=this.serialize();
-		        $(array).each(function(){
-		            if(serializeObj[this.name]){
-		                if($.isArray(serializeObj[this.name])){
-		                    serializeObj[this.name].push(this.value);
-		                }else{
-		                    serializeObj[this.name]=[serializeObj[this.name],this.value];
-		                }
-		            }else{
-		                serializeObj[this.name]=this.value;
-		            }
-		        });
-		        return serializeObj;
-		    };
-		})(jQuery);
 		//实物签收单保存
 		function save(){
 			var bvo = JSON.stringify($('#entityfrmBId').serializeJson());
