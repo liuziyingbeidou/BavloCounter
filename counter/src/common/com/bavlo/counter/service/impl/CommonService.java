@@ -47,6 +47,10 @@ public class CommonService implements ICommonService{
 		dao.save(entity);
 	}
 	
+	public void save(List<?> entities) throws Exception{
+		dao.saveAll(entities);
+	}
+	
 	public void update(Object entity) {
 		dao.update(entity);
 	}
@@ -71,6 +75,11 @@ public class CommonService implements ICommonService{
 	
 	public void delete(Class<?> clasz, Object[] ids) {
 		dao.delete(clasz,ids);
+	}
+	
+	//自定义sql条数
+	public Integer getCountBySQL(String sql){
+		return dao.getCountBySQL("select count(*) from ("+sql+") tb", null);
 	}
 	
 	

@@ -157,6 +157,26 @@ public class IdEntity implements Serializable{
 	 * ±¸×¢		varchar(255)	
 	 */
 	private String vmemo;
+	
+	//ÉÏ´«Í¼Æ¬
+	@Transient
+	private String FILE_0;
+	@Transient
+	private String FILE_1;
+	@Transient
+	private String FILE_2;
+	@Transient
+	private String FILE_3;
+	@Transient
+	private String FILE_4;
+	@Transient
+	private String FILE_5;
+	@Transient
+	private String FILE_6;
+	@Transient
+	private String FILE_7;
+	@Transient
+	private String FILE_8;
 
 	public Timestamp getTs() {
 		return ts;
@@ -300,6 +320,78 @@ public class IdEntity implements Serializable{
 
 	public void setVmemo(String vmemo) {
 		this.vmemo = vmemo;
+	}
+
+	public String getFILE_0() {
+		return FILE_0;
+	}
+
+	public void setFILE_0(String fILE_0) {
+		FILE_0 = fILE_0;
+	}
+
+	public String getFILE_1() {
+		return FILE_1;
+	}
+
+	public void setFILE_1(String fILE_1) {
+		FILE_1 = fILE_1;
+	}
+
+	public String getFILE_2() {
+		return FILE_2;
+	}
+
+	public void setFILE_2(String fILE_2) {
+		FILE_2 = fILE_2;
+	}
+
+	public String getFILE_3() {
+		return FILE_3;
+	}
+
+	public void setFILE_3(String fILE_3) {
+		FILE_3 = fILE_3;
+	}
+
+	public String getFILE_4() {
+		return FILE_4;
+	}
+
+	public void setFILE_4(String fILE_4) {
+		FILE_4 = fILE_4;
+	}
+
+	public String getFILE_5() {
+		return FILE_5;
+	}
+
+	public void setFILE_5(String fILE_5) {
+		FILE_5 = fILE_5;
+	}
+
+	public String getFILE_6() {
+		return FILE_6;
+	}
+
+	public void setFILE_6(String fILE_6) {
+		FILE_6 = fILE_6;
+	}
+
+	public String getFILE_7() {
+		return FILE_7;
+	}
+
+	public void setFILE_7(String fILE_7) {
+		FILE_7 = fILE_7;
+	}
+
+	public String getFILE_8() {
+		return FILE_8;
+	}
+
+	public void setFILE_8(String fILE_8) {
+		FILE_8 = fILE_8;
 	}
 	
 }

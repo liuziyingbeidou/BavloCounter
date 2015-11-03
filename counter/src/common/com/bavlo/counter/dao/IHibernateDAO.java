@@ -136,7 +136,6 @@ public interface IHibernateDAO {
 	//根据条件删除 --  2015-5-29
 	public void deleteByCondition(Class<?> clasz, Object condition) throws Exception;
 	
-	
 	public void delete(Class<?> clasz, String property, Object[] values);
 
 	// 基本查找

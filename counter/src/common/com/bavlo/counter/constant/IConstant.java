@@ -9,9 +9,13 @@ package com.bavlo.counter.constant;
  */
 public interface IConstant {
 	
+	public static final String YES = "Y";
+	public static final String NO = "N";
+	
 	/*****************************View模块和ViewName***************************/
 	public static final String PATH_COMMON = "common/";
 	public static final String COMMON_UPLOAD = "upload";
+	public static final String COMMON_SHOWPIC = "showpic";
 	/**实物签收单模块*/
 	public static final String PATH_ENTITY = "entitysign/";
 	public static final String ENTITY_SIGN_EDIT = "entity-sign-edit";
