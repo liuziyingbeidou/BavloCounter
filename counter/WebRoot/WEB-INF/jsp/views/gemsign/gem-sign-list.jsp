@@ -43,9 +43,26 @@
 		$.post(url,{content:$(".search").val()},function(row){
 			var data = row;
 			for(var i = 0; i < data.length; i++){
-				$("#juheweb").append("<li><h4><img style='width:60px;height:60px;' src='${ctx}/staticRes/"+data[i].vdef2+"/min/"+data[i].vdef3+"'><b>"+data[i].vnumber+"</b><span><a href='${ctx}/gem-sign/view.do?id="+data[i].id+"'>选择</a></span></h4><div class='clear'></div></li>");
+				$("#juheweb").append("<li><h4><img style='width:60px;height:60px;' src='${ctx}/staticRes/"+data[i].vdef2+"/min/"+data[i].vdef3+"'><b>"+data[i].vnumber+"</b><span><a href='javascript:void();' onclick='selHander("+data[i].id+")'>选择</a></span></h4><div class='clear'></div></li>");
 			}
 		});
+	}
+	//调用父窗体方法
+	function selHander(id){
+		if(isExitsFunction(window.parent.setValueByFrame)){
+			window.parent.setValueByFrame(id);
+		}else{
+			alert("请在父窗口添加setValueByFrame(id){处理逻辑}");
+		}
+	}
+	//是否存在指定函数 
+	function isExitsFunction(funcName) {
+	    try {
+	        if (typeof(eval(funcName)) == "function") {
+	            return true;
+	        }
+	    } catch(e) {}
+	    return false;
 	}
 	</script>
 	</head>
