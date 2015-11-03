@@ -12,8 +12,9 @@
 	<link type='text/css' rel='stylesheet' href='${ctx}/resources/css/bootstrap.css' media='all' />
 	
 	<script type="text/javascript">
+	//暂时保存后效果
 	$(function(){
-		var id = $(".mid",window.parent.document).val();
+		/*var id = $(".mid",window.parent.document).val();
 		if(id == "" || id ==null || id == undefined){
 			var jsonvo = JSON.stringify($("#gemfrmBId",window.parent.document).serializeJson());
 			var jsonStr = jQuery.parseJSON(jsonvo);
@@ -64,16 +65,29 @@
 			});
 		}
 		
-		initCSS();
+		initCSS();*/
 	});
 	
 	function initCSS(){
 	 $('.f_out').each(function(){
-		  
+		  $(this).css({
+		  	width:"90%",
+			height:"auto",
+			margin:"0 auto"
+		  });
+		  $(".f_out img").css({
+		  	width:"100%",
+			height:"auto"
+		  });
 	 });
 	}
 	function insertPicEm(model,pic){
-		$(".flashlist").append('<div class="f_out"><a href="javascript:void(0);" target="_blank"><img src="${ctx}/staticRes/'+model+'/'+pic+'" width="960" height="639" /></a></div>');
+		/*var newPic = "";
+		var index = pic.lastIndexOf(".");
+		if(index != -1){
+			newPic = pic.substring(0,index) + "_min" + pic.substring(index);
+		}*/
+		$(".flashlist").append('<div class="f_out"><a href="javascript:void(0);"><img src="${ctx}/staticRes/'+model+'/'+pic+'" width="960" height="639" /></a></div>');
 		$(".hander").append('<li class="f_tab opdiv"><a href="javascript:void(0);"></a></li>');
 	}
 	</script>
@@ -84,14 +98,20 @@
   <div class="hdwrap">
     <div class="hdflash f_list">
       <div class="flashlist">
+      <c:forEach items="${listbvo}" var="bean">
+      <div class="f_out"><a href="javascript:void(0);" target="_blank">
+      <img src="${ctx}/staticRes/${bean.vpath}/${bean.vname}" width="960" height="639" />
+      </a></div>
+      </c:forEach>
         <!--<div class="f_out"><a href="javascript:void(0);" target="_blank"><img src="${ctx}/staticRes/gemsign/20151102171220543e5gtyv.jpg" width="960" height="639" /></a></div>
         <div class="f_out"><a href="javascript:void(0);" target="_blank"><img src="${ctx}/staticRes/gemsign/20151102171220543e5gtyv.jpg" width="960" height="639" /></a></div>
       --></div>
       <div class="flash_tab">
         <div class="tabs f_tabs" style="width:258px;">
           <ul class="hander">
-            <li class="f_tab opdiv"><a href="javascript:void(0);"></a></li>
-            <li class="f_tab opdiv"><a href="javascript:void(0);"></a></li>
+          <c:forEach items="${listbvo}" var="bean">
+          <li class="f_tab opdiv"><a href="javascript:void(0);"></a></li>
+          </c:forEach>
           </ul>
         </div>
       </div>

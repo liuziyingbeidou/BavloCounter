@@ -61,7 +61,12 @@
 			 });
 			 //图片显示
 			 $(".gem-pic-show").bind("click",function(){
-			 	openURL("${ctx}/upload/showpic.do","图片展示");
+			 	var mid = $(".mid").val();
+			 	if(mid == ""){
+			 		alert("请保存后查看!");
+			 	}else{
+			 		openURL("${ctx}/upload/showpic.do?id="+mid,"图片展示");
+			 	}
 			 });
 		});
 		
