@@ -55,6 +55,10 @@
 			/**
 			 *$(document).ajaxStop(function () {setNowSelData(); });
 			 **/
+			 //选择客户
+			 $("#file").bind("click",function(){
+			 		openURL("${ctx}/customer/list.do","客户列表");
+			 });
 			 //上传图片
 			 $(".gem-upload").bind("click",function(){
 			 		openURL("${ctx}/upload/uppage.do","上传图片");
@@ -132,6 +136,14 @@
 			     	alert("保存失败!");
 			     }
 		    });
+		}
+		
+		//子窗体调用
+		function setValueByFrame(id){
+			var url = "";//根据id查询客户信息
+			$.post(url,{id:id},function(){
+				
+			});
 		}
 		</script>
 		
