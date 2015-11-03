@@ -1,5 +1,9 @@
 package com.bavlo.counter.utils;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.Random;
+
 /**
  * @Title: 宝珑Counter
  * @ClassName: CommonUtils 
@@ -17,5 +21,35 @@ public class CommonUtils {
         	minFileName = uploadFileName.substring(0, index) + "_min" + uploadFileName.substring(index);
         }
         return minFileName;
+	}
+	
+	/**
+	 * @Description: 自动编号
+	 * @param @return
+	 * @return String
+	 */
+	public static String getBillCode(String prefix){
+        SimpleDateFormat fmt = new SimpleDateFormat("yyyyMMddHHmmssSSS");
+        if(StringUtil.isEmpty(prefix)){
+        	prefix = "BL";
+        }
+        return prefix + fmt.format(new Date());
+    }
+	
+	/**
+	 * 判断参数为null/""/"null"/"  " [],
+	 * 
+	 * @param obj
+	 * @return
+	 */
+	public static boolean isNull(Object obj) {
+		boolean flag = true;
+		if (obj != null) {
+			String objs = obj.toString();
+			if (!"null".equals(objs) && !"".equals(objs.trim())&&!"[]".equals(objs)) {
+				flag = false;
+			}
+		}
+		return flag;
 	}
 }
