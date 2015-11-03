@@ -27,7 +27,7 @@
 <div id="orderlist">
   <div class="orderlist">
     <div class="order-main">
-		<div class="order-list">订单列表 X</div>
+		<div class="order-list">宝石签收单列表 X</div>
 		<div class="search-1">
 			<form action='' method='post'>
 				<input type='text' name='search' class="search" value='搜索'>
@@ -40,7 +40,7 @@
 					<ul id="juheweb">
 					<c:forEach items="${gemList}" var="bean">
 					  <li >
-						<h4 ><img src="${ctx}/resources/images/customer_01.png"><b>${bean.vtype}&nbsp;${bean.vspec}</b><span><a href="${ctx}/gem-sign/view.do?id=${bean.id}">选择</a></span></h4>
+						<h4 ><img style="width:60px;height:60px;" src="${ctx}/staticRes/${bean.vdef2}/min/${bean.vdef3}"><b>${bean.vnumber}</b><span><a href="${ctx}/gem-sign/view.do?id=${bean.id}">选择</a></span></h4>
 						<div class="clear"></div>
 					  </li>
 					  </c:forEach>
