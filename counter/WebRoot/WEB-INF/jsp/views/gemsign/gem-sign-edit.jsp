@@ -139,12 +139,22 @@
 	<body>
 	<form id="gemfrmId">
 	<input id="gemid" class="mid" type="hidden" name="id" value="${gemvo['id']}">
+	<input type="hidden" name="vnumber" value="${gemvo['vnumber']}">
 		<div class="header">
 			<div class="head">
 				<div class="top1">
-					<b><a href="javascript:;" onclick="EditShow_Hidden(ed1)"><img
-								src="${ctx}/resources/images/plus.png">
-					</a> ${pageGemType }宝石签收单81812560 </b>
+					<b><a href="javascript:;" onclick="EditShow_Hidden(ed1)">
+					<img src="${ctx}/resources/images/plus.png">
+					</a> ${pageGemType }宝石签收单
+					<c:choose>
+						 <c:when test="${empty gemvo['vnumber']}">   
+						 ${number }
+						 </c:when>
+						 <c:otherwise>
+						 gemvo['vnumber']}
+						 </c:otherwise>	
+						</c:choose> 
+					</b>
 					<font><a href="javascript:;" onclick="Show_Hidden(tr1)"><img
 								src="${ctx}/resources/images/plus.png">
 					</a>
@@ -202,7 +212,7 @@
 						</li>
 						<li>
 							<div class="file3">
-								<a href="javascript:;"><input type="file" name="file" id="file">
+								<a href="javascript:;"><input type="text" name="file" id="file">
 								</a>
 							</div>
 						</li>
