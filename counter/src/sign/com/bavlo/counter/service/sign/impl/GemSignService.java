@@ -59,6 +59,9 @@ public class GemSignService extends CommonService implements IGemSignService {
 		sql.append(" left join blct_gemsign_b b");
 		sql.append(" on a.id=b.gemsign_id");
 		sql.append(" where ifnull(a.dr,0)=0 and b.biscover='"+IConstant.YES+"'");
+		if(StringUtil.isNotEmpty(wh)){
+			sql.append(" and" +wh);
+		}
 		
 		Integer count = getCountBySQL(sql.toString());
 		List<GemSignVO> list = (List<GemSignVO>)findListBySQL(sql.toString(), null, 0, count);

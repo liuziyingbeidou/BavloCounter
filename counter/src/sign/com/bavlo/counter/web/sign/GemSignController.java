@@ -12,6 +12,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.bavlo.counter.constant.IConstant;
@@ -40,10 +41,24 @@ public class GemSignController extends BaseController {
 	public ModelAndView gemList(){
 		
 		//List<GemSignVO> gemList = gemSignService.findListGem();
-		List<GemSignVO> gemList = gemSignService.findListGemBySql("");
+		
 		ModelAndView model = new ModelAndView(IConstant.PATH_GEM + IConstant.GEM_SIGN_LIST);
-		model.addObject("gemList", gemList);
+		
+		//model.addObject("gemList", gemList);
 		return model;
+	}
+	
+	@RequestMapping(value="/listJson",method = RequestMethod.POST)
+	@ResponseBody
+	public void gemListJson(HttpServletRequest request){
+		String content = request.getParameter("content");
+		String wh = "";
+		if(StringUtil.isNotEmpty(content)){
+			wh = " a.vnumber like '%"+content+"%'";
+		}
+		
+		List<GemSignVO> gemList = gemSignService.findListGemBySql(wh);
+		renderJson(gemList);
 	}
 	
 	/**
