@@ -635,7 +635,7 @@ font-family:"Microsoft yahei";
 #orderlist { background: url(../images/kxbs_bg.png) repeat-y; background-size: 100% 100%; min-height: 467px; padding:100px 0;}
 .orderlist { width: 800px; margin:0 auto; background: #3b3b3b;}
 */
-.orderlist { width: 800px; position:absolute; top:100px; left:20%; margin:0 auto; background: #3b3b3b; min-height: 467px;}
+.orderlist { width: 800px; position:absolute; left:20%; margin:0 auto; background: #3b3b3b; min-height: 467px;}/*top:100px;*/
 .order-main { width: 700px; margin: 0 auto; padding: 20px 0 40px;}
 .order-list { width:330px; margin:0 auto; font-size:16px; line-height:30px; text-align:center; color:#a0a0a0;}
 .order-list a { text-decoration:none; color:#a0a0a0;}
