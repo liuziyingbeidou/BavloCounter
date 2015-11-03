@@ -388,7 +388,7 @@ public class BaseController {
 	     * @param @throws Exception
 	     * @return void
 	     */
-	    public void upload(MultipartFile file,String fileType, String destDir,HttpServletRequest request) throws Exception {
+	    public String upload(MultipartFile file,String fileType, String destDir,HttpServletRequest request) throws Exception {
 	        String path = request.getContextPath();
 	        String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path;
 	        try {
@@ -420,7 +420,8 @@ public class BaseController {
 	                setMinFilePath(realPath+destDir+"min");
 	        } catch (Exception e) {
 	            throw e;
-	    }
+	        }
+	        return fName;
 	}
 		
 		   /**
