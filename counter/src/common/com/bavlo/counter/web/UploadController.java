@@ -18,7 +18,6 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.bavlo.counter.constant.IConstant;
 import com.bavlo.counter.model.sign.GemSignBVO;
-import com.bavlo.counter.service.sign.impl.GemSignService;
 import com.bavlo.counter.service.sign.itf.IGemSignService;
 import com.bavlo.counter.utils.ImageUtils;
 import com.bavlo.counter.utils.StringUtil;
@@ -64,7 +63,7 @@ public class UploadController extends BaseController {
         	//ÉÏ´«Ä£¿é
         	String model = request.getParameter("filemodel");
         	String type = request.getParameter("filetype");
-            super.upload(file,type, "/"+model+"/",request);
+            String picName = super.upload(file,type, "/"+model+"/",request);
             File originalImage = new File(getSrcFilePath());
             if(IConstant.RES_TYPE_PIC.equals(type)){
             	File destFile = new File(getMinFilePath());
@@ -84,7 +83,8 @@ public class UploadController extends BaseController {
                 out.write(bytes);
                 out.close();
             }
-            response.getWriter().print(super.getfName());
+            response.getWriter().print(picName);
+            System.out.println(picName);
         } catch (Exception e) {
             e.printStackTrace();
         }
