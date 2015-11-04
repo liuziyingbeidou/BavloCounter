@@ -34,6 +34,7 @@
 			 $("#file").bind("click",function(){
 			 		openURL("${ctx}/customer/list.do","客户列表");
 			 });
+			 setValueByFrame("customer","${entityvo['id']}");
 			 //上传图片
 			 $(".entity-upload").bind("click",function(){
 			 		openURL("${ctx}/upload/uppage.do","上传图片");
@@ -51,6 +52,10 @@
 			 $(".entity-page-list").bind("click",function(){
 			 	openURL("${ctx}/entity-sign/list.do","实物签收单列表");
 			 });
+			 //有值后加后缀
+			 initFieldSuffix();
+			 //加载子表数据
+		  	loadSubData("${entityvo['id']}");
 		});
 		//实物签收单保存
 		function save(){
@@ -78,20 +83,64 @@
 			     	alert("保存失败!");
 			     }
 		    });
-		    //数量
-	    	initSuffix("entity-count","件");
-	    	//重量
-	    	initSuffix("entity-weight","ct");
-	    	//价值
-	    	initSuffix("entity-worth","元");
-	    	//回收价格
-	    	initSuffix("entity-recoveryPrice","元/克");
+		    //有值加后缀
+		  	initFieldSuffix();
 		}
+		//加载子表数据
+		function loadSubData(mid){
+			var url = "${ctx}/upload/showpicJson.do";
+			$.get(url,{cpath:"com.bavlo.counter.model.sign.EntitySignBVO",fkey:"entitysignId",id:mid},function(row){
+				var data = row;
+				if(data != "" && data != null){
+					for(var i = 0; i < data.length; i++){
+						if(data[i].biscover == "Y"){
+							$("#FILE_0").val(data[i].vname);
+						}else{
+							$("#FILE_"+i).val(data[i].vname);
+						}
+					}
+				}
+			});
+		}
+		
+		function initFieldSuffix(){
+			if($(".entity-count").val() != ""){
+	    		//数量
+		    	initSuffix("entity-count","件");
+    		}
+		  	if($(".entity-weight").val() != ""){
+	    		//重量
+	    		initSuffix("entity-weight","ct");
+    		}
+	    	if($(".entity-worth").val() != ""){
+	    		//价值
+	    		initSuffix("entity-worth","元");
+    		}
+	    	if($(".entity-recoveryPrice").val() != ""){
+	    		//回收价格
+	    		initSuffix("entity-recoveryPrice","元/克");
+    		}
+		}
+		
 		//子窗体调用
-		function setValueByFrame(type,id){
+		function setValueByFrame(type,id,callback){
+			var url;
 			if(type == "entity"){
-				var url = "${ctx}/entity-sign/view.do?id="+id;//根据id查询客户信息
+				url = "${ctx}/entity-sign/view.do?id="+id;//根据id查询客户信息
 				window.location = url;
+			}else if(type == "customer"){
+				url = "${ctx}/customer/infoJson.do";
+				$.get(url,{id:id},function(data){
+					if(data != null){
+						if(data.vhendimgurl != ""){
+							$(".cusheader").prop("src",data.vhendimgurl);
+						}
+						$("#customerId").val(data.id);
+					}
+					if(typeof(callback)!=='undefined'){
+						callback&&callback();
+					}
+				});
 			}
 		}
 		</script>
@@ -100,17 +149,18 @@
 <body>
 <form id="entityfrmId" method="post">
 <input id="entityid" class="mid" type="hidden" name="id" value="${entityvo['id']}">
+<input id="customerId" type="hidden" name="customerId" value="${entityvo['customerId']}">
 <div class="header">
 	<div class="head">
 		<div class="top1">
 			<b><a href="javascript:;" onclick="EditShow_Hidden(ed1)"><img src="${ctx}/resources/images/plus.png"></a>${pageEntityType }实物签收单
 					<c:choose>
-						 <c:when test="${empty gemvo['vnumber']}">
+						 <c:when test="${empty entityvo['vnumber']}">
 						 ${number }
 						 <input type="hidden" name="vnumber" value="${number }">
 						 </c:when>
 						 <c:otherwise>
-						 entityvo['vnumber']}
+						 ${entityvo['vnumber']}
 						 <input type="hidden" name="vnumber" value="${entityvo['vnumber']}">
 						 </c:otherwise>	
 					</c:choose> 
@@ -141,14 +191,14 @@
   <div class="qsd_main">
     <div class="qsd_left">
       <ul>
-        <li><a href="javascript:void();"><img src="${ctx}/resources/images/customer_01.png"></a></li>
+        <li><a href="javascript:void();"><img class="cusheader" src="${ctx}/resources/images/customer_01.png"></a></li>
 		<li><div class="file3"><a href="javascript:;"><input type="text" name="file" id="file"></a></div></li>
         <li class="camera"><a class="entity-upload" href="javascript:void();"><img src="${ctx}/resources/images/camera.png"></a></li>
         <div class="clear"></div>
       </ul>
       <p><a class="entity-pic-show" href="javascript:void();">
       <c:choose>
-		<c:when test="${empty gemvo['FILE_0']}">   
+		<c:when test="${empty entityvo['FILE_0']}">   
 		<img src="${ctx}/resources/images/pic_03.png">
 		</c:when>
 		<c:otherwise>

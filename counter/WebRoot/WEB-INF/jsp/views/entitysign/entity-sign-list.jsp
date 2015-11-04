@@ -17,7 +17,8 @@
 	<link href="${ctx}/resources/css/bootstrap.css" rel="stylesheet" type="text/css" />
 	<link href="${ctx}/resources/css/orderlist.css" rel="stylesheet" type="text/css" />
 	<script src="${ctx}/resources/js/showList.js" type="text/javascript"></script>
-	
+	<!-- 自定义 -->
+	<script src="${ctx}/resources/js/bavlo-event.js"></script>
 	<script type="text/javascript">
 	$(function(){
 		$(".search").keyup(function(){
@@ -50,19 +51,10 @@
 	//调用父窗体方法
 	function selHander(id){
 		if(isExitsFunction(window.parent.setValueByFrame)){
-			window.parent.setValueByFrame("entity",id);
+			window.parent.setValueByFrame("entity",id,function(){window.close();});
 		}else{
 			alert("请在父窗口添加setValueByFrame(type,id){处理逻辑}type='entity'");
 		}
-	}
-	//是否存在指定函数 
-	function isExitsFunction(funcName) {
-	    try {
-	        if (typeof(eval(funcName)) == "function") {
-	            return true;
-	        }
-	    } catch(e) {}
-	    return false;
 	}
 	</script>
 	</head>
