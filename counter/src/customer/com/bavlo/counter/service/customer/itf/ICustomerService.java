@@ -60,6 +60,6 @@ public interface ICustomerService {
 	 * @param @return
 	 * @return List<CustomerVO>
 	 */
-	public List<CustomerVO> findCustomerList();
+	public List<CustomerVO> findCustomerList(String wh);
 
 }

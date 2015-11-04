@@ -56,9 +56,9 @@ public class CustomerService extends CommonService implements ICustomerService {
 	}
 
 	@Override
-	public List<CustomerVO> findCustomerList() {
+	public List<CustomerVO> findCustomerList(String wh) {
 	
-		return findAll(CustomerVO.class, "",null,"id","desc");
+		return findAll(CustomerVO.class, wh,null,"id","desc");
 	}
 
 }
