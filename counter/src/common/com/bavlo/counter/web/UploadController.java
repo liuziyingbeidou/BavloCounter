@@ -87,6 +87,24 @@ public class UploadController extends BaseController {
 		return model;
 	}
 	
+	@RequestMapping("/showpicJson")
+	public void showPicJson(HttpServletRequest request){
+		String id = request.getParameter("id");//外键值
+		String table = request.getParameter("cpath");//表
+		String fkey = request.getParameter("fkey");//外键
+		ModelAndView model = new ModelAndView(IConstant.PATH_COMMON + IConstant.COMMON_SHOWPIC);
+		
+		try {
+			Class cls = Class.forName(table);
+			if(StringUtil.isNotEmpty(id)){
+				List list = commonService.findAll(cls, fkey+"="+id,null,"biscover","desc");
+				renderJson(list);
+			}
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
+		}
+	}
+	
 	@RequestMapping("/uploadFile")
     public void uploadHeadPic(@RequestParam("file")MultipartFile file,HttpServletRequest request,HttpServletResponse response){
         try {

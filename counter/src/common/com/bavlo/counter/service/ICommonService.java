@@ -127,6 +127,9 @@ public interface ICommonService {
 	public <E> List<E> findAll(Class<E> clasz, String conditions,
 			Object[] args, String order, int limit, String[] includes);
 
+	public <E> List<E> findAll(Class<E> clasz, String conditions,
+			Object[] args, String order,String orderType);
+	
 	// HQL≤È—Ø
 	public <E> E findFirstByHQL(Class<E> clasz, String hql, Object... args);
 
