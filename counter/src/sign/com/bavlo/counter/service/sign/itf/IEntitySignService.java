@@ -2,6 +2,7 @@ package com.bavlo.counter.service.sign.itf;
 
 import java.util.List;
 
+import com.bavlo.counter.model.sign.EntitySignBVO;
 import com.bavlo.counter.model.sign.EntitySignVO;
 
 /**
@@ -40,5 +41,29 @@ public interface IEntitySignService {
 	 * @return GemSignVO
 	 */
 	public EntitySignVO findSigleEntity(Integer id);
-	
+	/**
+	 * @Description: 保存子表
+	 * @param @param listBVO
+	 * @return void
+	 */
+	public void saveEntityB(List<EntitySignBVO> listBVO);
+	/**
+	 * @Description: 根据主表主键删除子表数据
+	 * @param @param mid
+	 * @return void
+	 */
+	public void deleteEntityB(Integer mid);
+	/**
+	 * @Description: 根据主表主键查询子表数据
+	 * @param @param id
+	 * @param @return
+	 * @return List<GemSignBVO>
+	 */
+	public List<EntitySignBVO> findListEntityB(Integer id);
+	/**
+	 * @Description: 定义SQL
+	 * @param @return
+	 * @return List<GemSignVO>
+	 */
+	public List<EntitySignVO> findListEntityBySql(String wh);
 }

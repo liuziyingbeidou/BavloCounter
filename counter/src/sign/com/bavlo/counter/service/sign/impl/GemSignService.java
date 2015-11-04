@@ -91,7 +91,10 @@ public class GemSignService extends CommonService implements IGemSignService {
 		GemSignVO vo = findFirst(GemSignVO.class, wh);
 		String bwh = " gemsignId="+id +" and biscover='Y'";
 		GemSignBVO bvo = findFirst(GemSignBVO.class, bwh);
-		vo.setFILE_0(bvo.getVpath()+"/min/"+CommonUtils.getMinPicName(bvo.getVname()));//∑‚√Ê
+		if(StringUtil.isNotEmpty(id+"")){
+			vo.setFILE_0(bvo.getVpath()+"/min/"+CommonUtils.getMinPicName(bvo.getVname()));//∑‚√Ê
+		}
+		
 		return vo;
 	}
 
@@ -112,7 +115,6 @@ public class GemSignService extends CommonService implements IGemSignService {
 				delete(gemSignBVO);
 			}
 		}
-		
 	}
 
 	@Override
