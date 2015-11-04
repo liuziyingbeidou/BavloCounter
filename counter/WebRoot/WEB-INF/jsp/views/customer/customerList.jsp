@@ -18,6 +18,48 @@
 <link href="${ctx}/resources/css/orderlist.css" rel="stylesheet"
 	type="text/css" />
 <script src="${ctx}/resources/js/showList.js" type="text/javascript"></script>
+
+	<!-- 自定义 -->
+	<script src="${ctx}/resources/js/bavlo-event.js"></script>
+	
+	<script type="text/javascript">
+	$(function(){
+		$(".search").keyup(function(){
+			 delay(function(){
+				 initData();
+			 }, 500 );
+		});
+		
+		var delay = (function(){
+			 var timer = 0;
+			 return function(callback, ms){
+				 clearTimeout (timer);
+				 timer = setTimeout(callback, ms);
+			 };
+		})();
+		initData();
+		
+	});
+	
+	function initData(){
+		$("#juheweb").empty();
+		var url = "${ctx}/customer/listJson.do";
+		$.post(url,{content:$(".search").val()},function(row){
+			var data = row;
+			for(var i = 0; i < data.length; i++){
+				$("#juheweb").append("<li><h4><img style='width:60px;height:60px;' src='"+data[i].vhendimgurl+"'><b>"+data[i].vname+"</b><a href='javascript:void();'>"+data[i].vphoneCode+"</a><span><a href='javascript:void();' onclick='selHander("+data[i].id+")'>选择</a></span></h4><div class='clear'></div></li>");
+			}
+		});
+	}
+	//调用父窗体方法
+	function selHander(id){
+		if(isExitsFunction(window.parent.setValueByFrame)){
+			window.parent.setValueByFrame("customer",id);
+		}else{
+			alert("请在父窗口添加setValueByFrame(type,id){处理逻辑}type='customer'");
+		}
+	}
+	</script>
 </head>
 
 <body>
@@ -28,16 +70,14 @@
 				客户列表 
 			</div>
 			<div class="search-1">
-				<input type='text' name='search' class="search" value="搜索"
-					onfocus="if(value =='搜索'){value =''}"
-					onblur="if(value ==''){value='搜索'}" />
+				<input type='text' name='search' class="search" placeholder="输入姓名/手机号" />
 			</div>
 			<div class="">
 				<div class="main1 content">
 					<div class="left-sider">
 						<div class="operate">
 							<ul id="juheweb">
-								<c:forEach var="customerList" items="${customerList }">
+								<!--<c:forEach var="customerList" items="${customerList }">
 									<li>
 										<h4>
 											<img src="${ctx}/resources/images/customer_01.png" /> <b>${customerList.vname }</b><a
@@ -66,7 +106,7 @@
 										<div class="clear"></div>
 									</li>
 								</c:forEach>
-							</ul>
+							--></ul>
 						</div>
 					</div>
 				</div>
