@@ -47,7 +47,13 @@
 		$.post(url,{content:$(".search").val()},function(row){
 			var data = row;
 			for(var i = 0; i < data.length; i++){
-				$("#juheweb").append("<li><h4><img style='width:60px;height:60px;' src='"+data[i].vhendimgurl+"'><b>"+data[i].vname+"</b><a href='javascript:void();'>"+data[i].vphoneCode+"</a><span><a href='javascript:void();' onclick='selHander("+data[i].id+")'>选择</a></span></h4><div class='clear'></div></li>");
+				var ht = "<li><h4><img style='width:60px;height:60px;' ";
+				var img = "src='${ctx}/resources/images/customer_01.png'";
+				if(data[i].vhendimgurl != ""){
+					img = "src='"+data[i].vhendimgurl+"'";
+				}
+				var ml = "><b>"+data[i].vname+"</b><a href='javascript:void();'>"+data[i].vphoneCode+"</a><span><a href='javascript:void();' onclick='selHander("+data[i].id+")'>选择</a></span></h4><div class='clear'></div></li>";
+				$("#juheweb").append(ht+img+ml);
 			}
 		});
 	}
