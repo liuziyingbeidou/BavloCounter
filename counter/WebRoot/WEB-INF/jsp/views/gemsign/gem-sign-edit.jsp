@@ -59,6 +59,7 @@
 			 $("#file").bind("click",function(){
 			 		openURL("${ctx}/customer/list.do","客户列表");
 			 });
+			 setValueByFrame("customer","${gemvo['id']}");
 			 //上传图片
 			 $(".gem-upload").bind("click",function(){
 			 		openURL("${ctx}/upload/uppage.do","上传图片");
@@ -76,7 +77,28 @@
 			 $(".gem-page-list").bind("click",function(){
 			 	openURL("${ctx}/gem-sign/list.do","宝石签收单列表");
 			 });
+			 //有值加后缀
+		  	initFieldSuffix();
+			 //加载子表数据
+		  	loadSubData("${gemvo['id']}");
 		});
+		
+		//加载子表数据
+		function loadSubData(mid){
+			var url = "${ctx}/upload/showpicJson.do";
+			$.get(url,{cpath:"com.bavlo.counter.model.sign.GemSignBVO",fkey:"gemsignId",id:mid},function(row){
+				var data = row;
+				if(data != "" && data != null){
+					for(var i = 0; i < data.length; i++){
+						if(data[i].biscover == "Y"){
+							$("#FILE_0").val(data[i].vname);
+						}else{
+							$("#FILE_"+i).val(data[i].vname);
+						}
+					}
+				}
+			});
+		}
 		
 		//初始化形状下拉框值
 		function initShapeByType() {
@@ -134,12 +156,22 @@
 			     	alert("保存失败!");
 			     }
 		    });
-		    //价值
-			initSuffix("gem-worth","元");
-			//重量
-			initSuffix("gem-weight","ct");
-			//数量
-			initSuffix("gem-count","颗");
+		   initFieldSuffix();
+		}
+		
+		function initFieldSuffix(){
+			if($(".gem-worth").val() != ""){
+	    		 //价值
+				initSuffix("gem-worth","元");
+    		}
+		  	if($(".gem-weight").val() != ""){
+	    		//重量
+				initSuffix("gem-weight","ct");
+    		}
+	    	if($(".gem-count").val() != ""){
+	    		//数量
+				initSuffix("gem-count","颗");
+    		}
 		}
 		
 		//子窗体调用
@@ -147,6 +179,19 @@
 			if(type == "gem"){
 				var url = "${ctx}/gem-sign/view.do?id="+id;//根据id查询客户信息
 				window.location = url;
+			}else if(type == "customer"){
+				url = "${ctx}/customer/infoJson.do";
+				$.get(url,{id:id},function(data){
+					if(data != null){
+						if(data.vhendimgurl != ""){
+							$(".cusheader").prop("src",data.vhendimgurl);
+						}
+						$("#customerId").val(data.id);
+					}
+					if(typeof(callback)!=='undefined'){
+						callback&&callback();
+					}
+				});
 			}
 		}
 		</script>
@@ -155,6 +200,7 @@
 	<body>
 	<form id="gemfrmId">
 	<input id="gemid" class="mid" type="hidden" name="id" value="${gemvo['id']}">
+	<input id="customerId" type="hidden" name="customerId" value="${gemvo['customerId']}">
 		<div class="header">
 			<div class="head">
 				<div class="top1">
@@ -167,7 +213,7 @@
 						 <input type="hidden" name="vnumber" value="${number }">
 						 </c:when>
 						 <c:otherwise>
-						 gemvo['vnumber']}
+						 ${gemvo['vnumber']}
 						 <input type="hidden" name="vnumber" value="${gemvo['vnumber']}">
 						 </c:otherwise>	
 					</c:choose> 
@@ -224,7 +270,7 @@
 				<div class="qsd_left">
 					<ul>
 						<li>
-							<a href=""><img src="${ctx}/resources/images/customer_01.png">
+							<a href="javascript:;"><img class="cusheader" src="${ctx}/resources/images/customer_01.png">
 							</a>
 						</li>
 						<li>
