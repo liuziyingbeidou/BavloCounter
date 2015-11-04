@@ -49,6 +49,7 @@
      * 设置后缀
      */
     function setSuffix(myClass,suffix){
+    	
     	//获得焦点
     	$("."+myClass).bind("focusin",function(){
     		var worth = $("."+myClass).val();
@@ -59,12 +60,14 @@
     	});
     	//失去焦点
     	$("."+myClass).bind("focusout",function(){
-    		var worth = $("."+myClass).val();
-    		var index = isContain(worth,suffix);
-    		if(index == -1){
-    			$("."+myClass).val(worth + suffix);
+    		if($(this).val() != ""){
+    			var worth = $("."+myClass).val();
+        		var index = isContain(worth,suffix);
+        		if(index == -1){
+        			$("."+myClass).val(worth + suffix);
+        		}
     		}
-    	});
+    	});    	
     }
     
 })( jQuery );
