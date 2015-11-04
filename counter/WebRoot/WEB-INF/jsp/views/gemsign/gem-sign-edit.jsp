@@ -69,8 +69,12 @@
 			 	if(mid == ""){
 			 		alert("请保存后查看!");
 			 	}else{
-			 		openURL("${ctx}/upload/showpic.do?id="+mid,"图片展示");
+			 		openURL("${ctx}/upload/showpic.do?cpath=com.bavlo.counter.model.sign.GemSignBVO&fkey=gemsignId&id="+mid,"图片展示");
 			 	}
+			 });
+			 //宝石签收单列表
+			 $(".gem-page-list").bind("click",function(){
+			 	openURL("${ctx}/gem-sign/list.do","宝石签收单列表");
 			 });
 		});
 		
@@ -111,7 +115,7 @@
 			//价值
 	    	clearSuffix("gem-worth","元");
 	    	//重量
-	    	clearSuffix("gem-weight","克");
+	    	clearSuffix("gem-weight","ct");
 	    	//数量
 	    	clearSuffix("gem-count","颗");
 	    	
@@ -124,26 +128,26 @@
 			     cache:false,
 			     success : function(data) {
 			     	 $("#gemid").val(data.id);
-			     	 //价值
-			    	 initSuffix("gem-worth","元");
-			    	 //重量
-			    	 initSuffix("gem-weight","克");
-			    	 //数量
-			    	 initSuffix("gem-count","颗");
 			     	 alert("保存成功!");
 			     },
 			     error : function(e) {
 			     	alert("保存失败!");
 			     }
 		    });
+		    //价值
+			initSuffix("gem-worth","元");
+			//重量
+			initSuffix("gem-weight","ct");
+			//数量
+			initSuffix("gem-count","颗");
 		}
 		
 		//子窗体调用
-		function setValueByFrame(id){
-			var url = "";//根据id查询客户信息
-			$.post(url,{id:id},function(){
-				
-			});
+		function setValueByFrame(type,id){
+			if(type == "gem"){
+				var url = "${ctx}/gem-sign/view.do?id="+id;//根据id查询客户信息
+				window.location = url;
+			}
 		}
 		</script>
 		
@@ -166,7 +170,7 @@
 						 gemvo['vnumber']}
 						 <input type="hidden" name="vnumber" value="${gemvo['vnumber']}">
 						 </c:otherwise>	
-						</c:choose> 
+					</c:choose> 
 					</b>
 					<font><a href="javascript:;" onclick="Show_Hidden(tr1)"><img
 								src="${ctx}/resources/images/plus.png">
@@ -182,7 +186,7 @@
 							<a href="">定制单</a>
 						</li>
 						<li>
-							<a href="${ctx}/gem-sign/list.do">宝石签收单</a>
+							<a class="gem-page-list" href="javascript:void();">宝石签收单</a>
 						</li>
 						<li>
 							<a href="">订单</a>
@@ -256,7 +260,7 @@
 							</option>
 						</select>
 						<dt>
-							<input type='text' name='nworth' placeholder="元" class="qsdr r2 gem-worth" value="${gemvo['nworth']}">
+							<input type='text' name='nworth' placeholder="声明价值" class="qsdr r2 gem-worth" value="${gemvo['nworth']}">
 						</dt>
 						<div class="clear"></div>
 					</div>
@@ -267,7 +271,7 @@
 							</option>
 						</select>
 						<dt>
-							<input type='text' name='nweight' placeholder="克" class="qsdr r2 gem-weight" value="${gemvo['nweight']}">
+							<input type='text' name='nweight' placeholder="重量" class="qsdr r2 gem-weight" value="${gemvo['nweight']}">
 						</dt>
 						<div class="clear"></div>
 					</div>
@@ -280,7 +284,7 @@
 					</div>
 					<div class="clear"></div>
 					<div class="qsdtt">
-						<input type='text' name='icount' placeholder="颗" value="${gemvo['icount']}" class="qsdn t3 gem-count">
+						<input type='text' name='icount' placeholder="数量" value="${gemvo['icount']}" class="qsdn t3 gem-count">
 					</div>
 					<div class="qssm-l">
 						<textarea name="vmemo" cols="" rows="" class="qssm" placeholder="签收说明">${gemvo['vmemo']}</textarea>

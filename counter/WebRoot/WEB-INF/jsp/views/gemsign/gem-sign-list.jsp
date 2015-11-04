@@ -50,9 +50,9 @@
 	//调用父窗体方法
 	function selHander(id){
 		if(isExitsFunction(window.parent.setValueByFrame)){
-			window.parent.setValueByFrame(id);
+			window.parent.setValueByFrame("gem",id);
 		}else{
-			alert("请在父窗口添加setValueByFrame(id){处理逻辑}");
+			alert("请在父窗口添加setValueByFrame(type,id){处理逻辑}type='gem']");
 		}
 	}
 	//是否存在指定函数 
@@ -71,7 +71,7 @@
 <div id="orderlist">
   <div class="orderlist">
     <div class="order-main">
-		<div class="order-list">宝石签收单列表 X</div>
+		<div class="order-list">宝石签收单列表 </div>
 		<div class="search-1">
 			<form action='' method='post'>
 				<input type='text' name='search' class="search" placeholder="输入编号">

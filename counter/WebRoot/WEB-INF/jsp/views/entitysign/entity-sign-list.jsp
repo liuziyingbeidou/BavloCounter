@@ -17,16 +17,64 @@
 	<link href="${ctx}/resources/css/bootstrap.css" rel="stylesheet" type="text/css" />
 	<link href="${ctx}/resources/css/orderlist.css" rel="stylesheet" type="text/css" />
 	<script src="${ctx}/resources/js/showList.js" type="text/javascript"></script>
+	
+	<script type="text/javascript">
+	$(function(){
+		$(".search").keyup(function(){
+			 delay(function(){
+				 initData();
+			 }, 500 );
+		});
+		
+		var delay = (function(){
+			 var timer = 0;
+			 return function(callback, ms){
+				 clearTimeout (timer);
+				 timer = setTimeout(callback, ms);
+			 };
+		})();
+		initData();
+		
+	});
+	
+	function initData(){
+		$("#juheweb").empty();
+		var url = "${ctx}/entity-sign/listJson.do";
+		$.post(url,{content:$(".search").val()},function(row){
+			var data = row;
+			for(var i = 0; i < data.length; i++){
+				$("#juheweb").append("<li><h4><img style='width:60px;height:60px;' src='${ctx}/staticRes/"+data[i].vdef2+"/min/"+data[i].vdef3+"'><b>"+data[i].vnumber+"</b><span><a href='javascript:void();' onclick='selHander("+data[i].id+")'>选择</a></span></h4><div class='clear'></div></li>");
+			}
+		});
+	}
+	//调用父窗体方法
+	function selHander(id){
+		if(isExitsFunction(window.parent.setValueByFrame)){
+			window.parent.setValueByFrame("entity",id);
+		}else{
+			alert("请在父窗口添加setValueByFrame(type,id){处理逻辑}type='entity'");
+		}
+	}
+	//是否存在指定函数 
+	function isExitsFunction(funcName) {
+	    try {
+	        if (typeof(eval(funcName)) == "function") {
+	            return true;
+	        }
+	    } catch(e) {}
+	    return false;
+	}
+	</script>
 	</head>
 
 <body>
 <div id="orderlist">
   <div class="orderlist">
     <div class="order-main">
-		<div class="order-list">订单列表 X</div>
+		<div class="order-list">实物签收单列表 </div>
 		<div class="search-1">
 			<form action='' method='post'>
-				<input type='text' name='search' class="search" value='搜索'>
+				<input type='text' name='search' class="search" placeholder="输入编号">
 			</form>
 		</div>
 		<div class="">
@@ -34,12 +82,13 @@
 				<div class="left-sider">
 				  <div class="operate">
 					<ul id="juheweb">
-					<c:forEach items="${entityList}" var="bean">
+					<!--<c:forEach items="${gemList}" var="bean">
 					  <li >
-						<h4 ><img src="${ctx}/resources/images/customer_01.png"><b>${bean.vtype}&nbsp;${bean.vspec}</b><span><a href="${ctx}/entity-sign/view.do?id=${bean.id}">选择</a></span></h4>
+						<h4 ><img style="width:60px;height:60px;" src="${ctx}/staticRes/${bean.vdef2}/min/${bean.vdef3}"><b>${bean.vnumber}</b><span><a href="${ctx}/gem-sign/view.do?id=${bean.id}">选择</a></span></h4>
 						<div class="clear"></div>
 					  </li>
 					  </c:forEach>
+					-->
 					</ul>
 					<script type="text/javascript" language="javascript">
 						navList(12);

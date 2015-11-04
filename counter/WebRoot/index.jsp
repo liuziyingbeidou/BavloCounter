@@ -46,6 +46,13 @@ $(function(){
     	<a href="http://127.0.0.1:8080/counter/demo/upload.jsp">上传图片</a>
     </fieldset>
     <fieldset>
+    	<legend>展示图片设置方法</legend>
+    	openURL("${ctx}/upload/showpic.do?cpath=com.bavlo.counter.model.sign.GemSignBVO&fkey=gemsignId&id="+mid,"图片展示");
+    	cpath:图片VO类全路径
+    	fkey:主表在子表的外键
+    	id:主表主键
+    </fieldset>
+    <fieldset>
     	<legend>后缀单位设置方法</legend>
     	1、引入<script src="${ctx}/resources/js/bavlo-event.js"></script>
     	2、设置placeholder="后缀"
