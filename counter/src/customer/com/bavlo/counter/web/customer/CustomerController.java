@@ -43,6 +43,18 @@ public class CustomerController extends BaseController implements IConstant {
 		map.put("customerDetail", customerDetail);
 		return new ModelAndView(PATH_CUSTOMER + "customerEdit");
 	}
+	
+	/**
+	 * @Description: 客户详情
+	 * @param @return
+	 * @return ModelAndView
+	 */
+	@RequestMapping("infoJson")
+	public void infoJson(Map<String, Object> map, Integer id) {
+
+		CustomerVO customerDetail = customerService.findCustomerById(id);
+		renderJson(customerDetail);
+	}
 
 	/**
 	 * @Description: 保存或更新客户信息
