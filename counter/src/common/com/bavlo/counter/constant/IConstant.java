@@ -17,7 +17,8 @@ public interface IConstant {
 	 */
 	//宝石签收单
 	public static final String CODE_GEMSIGN = "GS";
-	
+	//实物签收单
+	public static final String CODE_ENTITYSIGN = "ES";
 	/*****************************View模块和ViewName***************************/
 	public static final String PATH_COMMON = "common/";
 	public static final String COMMON_UPLOAD = "upload";
