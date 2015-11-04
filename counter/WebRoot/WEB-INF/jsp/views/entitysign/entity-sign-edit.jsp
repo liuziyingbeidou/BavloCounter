@@ -4,8 +4,7 @@
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html>
 	<head>
-		<title>${ctx }实物签收单</title>
-
+		<title>${pageEntityType }实物签收单</title>
 		<meta http-equiv="pragma" content="no-cache">
 		<meta http-equiv="cache-control" content="no-cache">
 		<meta http-equiv="expires" content="0">
@@ -14,15 +13,56 @@
 		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 		<meta name="viewport" content="width=device-width,target-densitydpi=high-dpi,initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no" />
 		
-		<script src="${ctx}/resources/js/jquery-1.7.2.min.js"></script>
+		<script src="${ctx}/resources/js/jquery-1.8.3.min.js"></script>
 		<link type='text/css' rel='stylesheet' href='${ctx}/resources/css/style.css' media='all' />
 		<link type='text/css' rel='stylesheet' href='${ctx}/resources/css/bootstrap.css' media='all' />
 		<script src="${ctx}/resources/js/top.js"></script>
 		<!-- 自定义event	 -->
 		<script src="${ctx}/resources/js/bavlo-event.js"></script>
+		<!-- 弹框 -->
+		<!-- jQuery & jQuery UI files (needed)--> 
+		<link rel="stylesheet" href="/counter/resources/jquery.multiDialog/css/jquery-ui-1.10.3.custom.css">
+		<script src="/counter/resources/jquery.multiDialog/js/jquery/jquery-ui-1.10.3.custom.js"></script> 
+		<!-- MultiDialog files (needed) --> 
+		<link rel="stylesheet" href="/counter/resources/jquery.multiDialog/css/jquery.multiDialog.css"> 
+		<script src="/counter/resources/jquery.multiDialog/js/jquery.ui.dialog.extended-1.0.2.js"></script> 
+		<script src="/counter/resources/jquery.multiDialog/js/jquery.multiDialog.js"></script> 
+		<script src="/counter/resources/js/bavlo-dialog.js"></script>
 		<script type="text/javascript">
+		$(function() {
+			 //选择客户
+			 $("#file").bind("click",function(){
+			 		openURL("${ctx}/customer/list.do","客户列表");
+			 });
+			 //上传图片
+			 $(".entity-upload").bind("click",function(){
+			 		openURL("${ctx}/upload/uppage.do","上传图片");
+			 });
+			 //图片显示
+			 $(".entity-pic-show").bind("click",function(){
+			 	var mid = $(".mid").val();
+			 	if(mid == ""){
+			 		alert("请保存后查看!");
+			 	}else{
+			 		openURL("${ctx}/upload/showpic.do?cpath=com.bavlo.counter.model.sign.EntitySignBVO&fkey=entitysignId&id="+mid,"图片展示");
+			 	}
+			 });
+			 //实物签收单列表
+			 $(".entity-page-list").bind("click",function(){
+			 	openURL("${ctx}/entity-sign/list.do","实物签收单列表");
+			 });
+		});
 		//实物签收单保存
 		function save(){
+			//数量
+	    	clearSuffix("entity-count","件");
+	    	//重量
+	    	clearSuffix("entity-weight","ct");
+	    	//价值
+	    	clearSuffix("entity-worth","元");
+	    	//回收价格
+	    	clearSuffix("entity-recoveryPrice","元/克");
+	    	
 			var bvo = JSON.stringify($('#entityfrmBId').serializeJson());
 			$.ajax({
 			     type : "POST",
@@ -38,125 +78,117 @@
 			     	alert("保存失败!");
 			     }
 		    });
+		    //数量
+	    	initSuffix("entity-count","件");
+	    	//重量
+	    	initSuffix("entity-weight","ct");
+	    	//价值
+	    	initSuffix("entity-worth","元");
+	    	//回收价格
+	    	initSuffix("entity-recoveryPrice","元/克");
+		}
+		//子窗体调用
+		function setValueByFrame(type,id){
+			if(type == "entity"){
+				var url = "${ctx}/entity-sign/view.do?id="+id;//根据id查询客户信息
+				window.location = url;
+			}
 		}
 		</script>
 		
 	</head>
-	<body>
-	<form id="entityfrmId" method="post">
-	<input id="entityid" type="hidden" name="id" value="${entityvo['id']}">
-		<div class="header">
-			<div class="head">
-				<div class="top1">
-					<b><a href="javascript:;" onclick="EditShow_Hidden(ed1)"><img src="${ctx}/resources/images/plus.png">
-					</a> 编辑实物签收单81812560 </b>
-					<font><a href="javascript:;" onclick="Show_Hidden(tr1)"><img src="${ctx}/resources/images/plus.png">
-					</a>
-					</font>
-				</div>
-				<div class="hidden_enent" id="tr1" style="display: none;">
-					<ul>
-						<li class="jian">
-							<a href="javascript:;" onclick="Show_Hidden(tr1)">—</a>
-						</li>
-						<li>
-							<a href="">定制单</a>
-						</li>
-						<li>
-							<a href="${ctx}/entity-sign/list.do">实物签收单</a>
-						</li>
-						<li>
-							<a href="">订单</a>
-						</li>
-						<li>
-							<a href="">客户</a>
-						</li>
-					</ul>
-				</div>
-				<div class="edit_hidden" id="ed1" style="display: none;">
-					<ul>
-						<li class="jian2">
-							<a href="javascript:;" onclick="EditShow_Hidden(ed1)">—</a>
-						</li>
-						<li>
-							<a href="">Open</a>
-						</li>
-						<li>
-							<a href="">Save</a>
-						</li>
-						<li>
-							<a href="">Save as</a>
-						</li>
-						<li>
-							<a href="">Print</a>
-						</li>
-					</ul>
-				</div>
-				<div class="clear"></div>
-			</div>
+<body>
+<form id="entityfrmId" method="post">
+<input id="entityid" class="mid" type="hidden" name="id" value="${entityvo['id']}">
+<div class="header">
+	<div class="head">
+		<div class="top1">
+			<b><a href="javascript:;" onclick="EditShow_Hidden(ed1)"><img src="${ctx}/resources/images/plus.png"></a>${pageEntityType }实物签收单
+					<c:choose>
+						 <c:when test="${empty gemvo['vnumber']}">
+						 ${number }
+						 <input type="hidden" name="vnumber" value="${number }">
+						 </c:when>
+						 <c:otherwise>
+						 entityvo['vnumber']}
+						 <input type="hidden" name="vnumber" value="${entityvo['vnumber']}">
+						 </c:otherwise>	
+					</c:choose> 
+			</b>
+			<font><a href="javascript:;" onclick="Show_Hidden(tr1)"><img src="${ctx}/resources/images/plus.png"></a></font>
 		</div>
-
-		<div class="qsd">
-			<div class="qsd_main">
-				<div class="qsd_left">
-					<ul>
-						<li>
-							<a href=""><img src="${ctx}/resources/images/customer_01.png">
-							</a>
-						</li>
-						<li>
-							<div class="file3">
-								<a href="javascript:;"><input type="file" name="file"
-										id="file">
-								</a>
-							</div>
-						</li>
-						<li class="camera">
-							<a href=""><img src="${ctx}/resources/images/camera.png">
-							</a>
-						</li>
-						<div class="clear"></div>
-					</ul>
-					<div class="clear"></div>
-					<dt>
-						<img src="${ctx}/resources/images/pic_02.png">
-					</dt>
-				</div>
-				<div class="qsd_right">
-					<div class="qsd_right_1">
-						<input type='text' name='vtype' value="${entityvo['vtype']}" class="qsdn t3">
-					</div>
-					<div class="qsd_right_1">
-						<input type='text' name='nweight' value="${entityvo['nweight']}" class="qsdr r2">
-						<dt>
-							<input type='text' name='icount' class="qsdr" value="${entityvo['icount']}">
-						</dt>
-						<div class="clear"></div>
-					</div>
-					<div class="qsdtt">
-						<input type='text' name='nworth' value="${entityvo['nworth']}" class="qsdn t3">
-					</div>
-					<div class="clear"></div>
-					<div class="qssm-l">
-						<textarea name="vmemo" cols="" rows="" class="qssm"
-							onfocus="if(this.value=='签收说明'){this.value='';}"
-							onblur="if(this.value==''){this.value='签收说明';}">${entityvo['vmemo']}</textarea>
-					</div>
-					<div class="clear"></div>
-					<div class="qsdtt">
-						<input type='text' name='nrecoveryPrice' value="${entityvo['nrecoveryPrice']}" class="qsdn t3">
-					</div>
-					<div class="qs_save">
-						<input type="button" onclick="save()" name="button" value="保存">
-					</div>
-				</div>
-				<div class="clear"></div>
-			</div>
+		<div class="hidden_enent" id="tr1" style="display:none;">
+			<ul>
+				<li class="jian"><a href="javascript:;" onclick="Show_Hidden(tr1)">—</a></li>
+				<li><a href="">定制单</a></li>
+				<li><a class="entity-page-list" href="javascript:void();">实物签收单</a></li>
+				<li><a href="">订单</a></li>
+				<li><a href="">客户</a></li>
+			</ul>
 		</div>
-	</form>
-	<form id="entityfrmBId">
-	<input type='text' name='vname' value="测试" class="qsdn t3">
-	<input type='text' name='biscover' value="bbb" class="qsdn t3">
-	</form>
-	</body>
+		<div class="edit_hidden" id="ed1" style="display:none;">
+			<ul>
+				<li class="jian2"><a href="javascript:;" onclick="EditShow_Hidden(ed1)">—</a></li>
+				<li><a href="">Open</a></li>
+				<li><a href="">Save</a></li>
+				<li><a href="">Save as</a></li>
+				<li><a href="">Print</a></li>			
+			</ul>
+		</div>
+	</div>
+</div>
+<div class="qsd">
+  <div class="qsd_main">
+    <div class="qsd_left">
+      <ul>
+        <li><a href="javascript:void();"><img src="${ctx}/resources/images/customer_01.png"></a></li>
+		<li><div class="file3"><a href="javascript:;"><input type="text" name="file" id="file"></a></div></li>
+        <li class="camera"><a class="entity-upload" href="javascript:void();"><img src="${ctx}/resources/images/camera.png"></a></li>
+        <div class="clear"></div>
+      </ul>
+      <p><a class="entity-pic-show" href="javascript:void();">
+      <c:choose>
+		<c:when test="${empty gemvo['FILE_0']}">   
+		<img src="${ctx}/resources/images/pic_03.png">
+		</c:when>
+		<c:otherwise>
+		<img src="${ctx}/staticRes/${entityvo['FILE_0']}">
+		</c:otherwise>
+	  </c:choose> 
+      </a></p>
+    </div>
+    <div class="qsd_right">
+      <div class="qsd_right_1">
+        <input type='text' name='vtype' value="${entityvo['vtype']}" placeholder='声明类型 ' class="swqsd entity-type">
+      </div>
+      <div class="qsd_right_1">
+        <dt><input type='text' name='icount' value="${entityvo['icount']}" placeholder="数量" class="swqs t3 entity-count"></dt>
+        <dt><input type='text' name='nweight' value="${entityvo['nweight']}" placeholder="重量" class="qsdr r2 entity-weight"></dt>
+        <div class="clear"></div>
+      </div>
+      <div class="save1"><input type='text' name='nworth' value="${entityvo['nworth']}"  placeholder='声明价值' class="swqsd1 entity-worth"></div>
+      <div class="save1"><textarea name="" cols="" rows="" class="qssm" placeholder="说明">${entityvo['vmemo']}</textarea></div>
+      <div class="save1"><input type='text' name='nrecoveryPrice' value="${entityvo['nrecoveryPrice']}" placeholder='回收价格' class="qsdn1 t3 entity-recoveryPrice"></div>
+      <div class="qs_save1">
+        <input type="button" onclick="save()" value="保存">
+      </div>
+    </div>
+    <div class="clear"></div>
+  </div>
+</div>
+</form>
+<form id="entityfrmBId">
+	<input type="hidden" name="filemodel" id="filemodel" value="entitysign">
+	<input type="hidden" name="filetype" id="filetype" value="pic">
+	<input type="hidden" name="FILE_0" id="FILE_0"></input>
+	<input type="hidden" name="FILE_1" id="FILE_1"></input>
+	<input type="hidden" name="FILE_2" id="FILE_2"></input>
+	<input type="hidden" name="FILE_3" id="FILE_3"></input>
+	<input type="hidden" name="FILE_4" id="FILE_4"></input>
+	<input type="hidden" name="FILE_5" id="FILE_5"></input>
+	<input type="hidden" name="FILE_6" id="FILE_6"></input>
+	<input type="hidden" name="FILE_7" id="FILE_7"></input>
+	<input type="hidden" name="FILE_8" id="FILE_8"></input>
+</form>
+</body>
 </html>

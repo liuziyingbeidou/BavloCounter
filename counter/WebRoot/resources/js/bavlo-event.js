@@ -93,3 +93,5 @@ function isContain(str,em){
     var s = str.indexOf(em); 
     return (s);
 } 
+
+
