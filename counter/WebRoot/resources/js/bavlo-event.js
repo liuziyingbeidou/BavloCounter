@@ -94,4 +94,14 @@ function isContain(str,em){
     return (s);
 } 
 
+//是否存在指定函数 
+function isExitsFunction(funcName) {
+    try {
+        if (typeof(eval(funcName)) == "function") {
+            return true;
+        }
+    } catch(e) {}
+    return false;
+}
+
 
