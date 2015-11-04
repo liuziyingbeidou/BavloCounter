@@ -22,7 +22,7 @@ public class EntitySignBVO extends IdEntity implements Serializable{
 	/**
 	 * 主表主键		longint	
 	 */
-	private Long entitysignId;
+	private Integer entitysignId;
 	/**
 	 * 实物名称		varchar(100)	
 	 */
@@ -36,10 +36,10 @@ public class EntitySignBVO extends IdEntity implements Serializable{
 	 */
 	private String biscover;
 	
-	public Long getEntitysignId() {
+	public Integer getEntitysignId() {
 		return entitysignId;
 	}
-	public void setEntitysignId(Long entitysignId) {
+	public void setEntitysignId(Integer entitysignId) {
 		this.entitysignId = entitysignId;
 	}
 	public String getVname() {
