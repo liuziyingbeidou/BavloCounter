@@ -26,84 +26,173 @@
 <script src="${ctx}/resources/js/photoswipe-ui-default.min.js"></script>
 <script src="${ctx}/resources/js/photoswipefromdom.js"></script>
 <script src="${ctx}/resources/js/bavlo-initdata.js"></script>
-
 <script>
-	// 本地webservice
-	var nativeUrl = "${pageScope.basePath}/counter/webservice/http.do";
-	$(function() {
-		// 款式名字初始化
-		
-		// 款式类型下拉框值
-		var typeUrl = "http://www.bavlo.com/getAllStyleType";
-		loadData(
-				nativeUrl,
-				typeUrl,
-				"styleTypeId",
-				"data[i].id",
-				"data[i].type_name_cn", 
-				function() {
-					$("#styleTypeId").val("${customDetail['srcstyleType']}");
-				});
-		// 金属材质下拉框值 
-		var typeUrl = "http://www.bavlo.com/getAllMetalMaterialType";
-		loadData(
-				nativeUrl,
-				typeUrl,
-				"srcmetail",
-				"data[i].id",
-				"data[i].metal_type_cn", 
-				function() {
-					$("#srcmetail").val("${customDetail['srcmetail']}");
-				});
-		// 款式类型下拉框值
-		var typeUrl = "http://www.bavlo.com/getAllRingSize"; 
-		loadRingSizeData(
-				nativeUrl,
-				typeUrl,
-				"ringSizeId",
-				"data[i].id",
-				"data[i].china", 
-				"data[i].diameter", 
-				"data[i].circumference", 
-				function() {
-					$("#ringSizeId").val("${customDetail['srcringSize']}");
-				});
-		// 当款式类型不是戒指时，隐藏戒指手寸选项 
-		$("#styleTypeId").change(function() {
-			if($("#styleTypeId").val()=="1"){
-				$("#ringSizeId").css({display:"block"});
-			}else{
-				$("#ringSizeId").css({display:"none"});
-			}	
-		});
+//本地webservice
+var nativeUrl = "${pageScope.basePath}/counter/webservice/http.do";
+$(function() {
+	// 款式名字初始化
+
+	// 款式类型下拉框值
+	var typeUrl = "http://www.bavlo.com/getAllStyleType";
+	loadSelData(nativeUrl, typeUrl, "styleTypeId", "data[i].id",
+			"data[i].type_name_cn", function() {
+				$("#styleTypeId").val("${customDetail['srcstyleType']}");
+			},"款式");
+	// 金属材质下拉框值
+	var typeUrl = "http://www.bavlo.com/getAllMetalMaterialType";
+	loadSelData(nativeUrl, typeUrl, "srcmetail", "data[i].id",
+			"data[i].metal_type_cn", function() {
+				$("#srcmetail").val("${customDetail['srcmetail']}");
+			},"金属");
+	// 款式类型下拉框值
+	var typeUrl = "http://www.bavlo.com/getAllRingSize";
+	loadRingSizeData(nativeUrl, typeUrl, "ringSizeId", "data[i].id",
+			"data[i].china", "data[i].diameter", "data[i].circumference",
+			function() {
+				$("#ringSizeId").val("${customDetail['srcringSize']}");
+			},"规格");
+	// 当款式类型不是戒指时，隐藏戒指手寸选项
+	$("#styleTypeId").change(function() {
+		if ($("#styleTypeId").val() == "1") {
+			$("#ringSizeId").css({
+				display : "block"
+			});
+		} else {
+			$("#ringSizeId").css({
+				display : "none"
+			});
+		}
 	});
 
-	//定制单保存
-	function saveOrUpdate() {
-		$.ajax({
-			type : "POST",
-			url : "customer/saveOrUpdate.do",
-			data : $('#customer').serialize(),// formid
-			async : false,
-			cache : false,
-			success : function(data) {
-				$("#styleid").val(data.id);
-				alert("保存成功!");
-			},
-			error : function(e) {
-				alert("保存失败!");
+	// 填充所有链子类型于下拉框
+	function initChainStyle() {
+		var styleUrl = "http://www.bavlo.com/getAllChainStyle";
+		loadSelData(nativeUrl, styleUrl, "chain-style-id", "data[i].id",
+				"data[i].name_cn", function() {
+				});
+	}
+
+	// 根据选择链子材质+类型选择链子(chain-spec-id)
+	function initChainSpec(emName) {
+		$('#' + emName).empty();
+		$('#' + emName).append("<option value='-1'>==请选择==</option>");
+		var chainMaterialId = $("#chain-material-id").val();
+		var chainStyleId = $("#chain-style-id").val();
+		var styleUrl = "http://www.bavlo.com/getChainList?metalId="
+				+ chainMaterialId + "&chainStyleId=" + chainStyleId;
+		$.get(nativeUrl, {
+			url : styleUrl
+		}, function(row) {
+			var data = row;
+			for (var i = 0; i < data.length; i++) {
+				$('#' + emName).append(
+						"<option cost=" + data[i].chainCost + " value='"
+								+ data[i].id + "'>" + data[i].x + " x "
+								+ data[i].y + " x " + data[i].z + "</option>");
 			}
 		});
 	}
+	//初始化刻字
+	var WS = function(opt) {
+
+		var regexp = opt.regexp || /\S/, el = $(opt.el), list = el.val().split(','), holder = $('<span class="words-split"></span>'), add = $('<div class="kezi"><a href="javascript:void(0)" class="words-split-add">+刻字</a></div>');
+
+		for (var i = 0; i < list.length; i++) {
+			holder.append($('<a href="javascript:void(0)" class="fm-button">'
+					+ list[i] + '<em> </em></a>'));
+		}
+
+		el.hide().after(holder);
+		holder.after(add);
+
+		holder.on('click', 'a>em', function() { // 刪除
+			$(this).parent().remove();
+			el.val(holder.text().match(/\S+/g).join(','))
+		});
+
+		add.on('click', function() { // 添加预处理
+			$(this).hide();
+			$(".zhanwei").append(
+					$('<span class="lbl-input" contenteditable="true"/>'))
+		});
+
+		$(".zhanwei")
+				.on(
+						'blur',
+						'.lbl-input',
+						function() { // 验证添加字段
+							var t = $(this), v = t.text();
+							if (v) {
+								t.remove();
+								add.show();
+								holder
+										.append($('<a href="javascript:void(0)" class="fm-button">'
+												+ v + '<em> </em></a>'));
+								el.val(holder.text().match(/\S+/g).join(','));
+							} else {
+								t.remove();
+								add.show();
+							}
+						});
+
+		holder.on('keydown', '.lbl-input', function(e) {
+			switch (e.keyCode) {
+			case 13:
+			case 27:
+				$(this).trigger('blur');
+			}
+		});
+	}
+
+	WS({
+		el : '#vengrave',
+		regexp : /\w+\.\w+/
+	});
+});
+
+// 定制单保存
+function saveOrUpdate() {
+	$.ajax({
+		type : "POST",
+		url : "saveOrUpdate.do",
+		data : $('#custom').serialize(),// formid
+		async : false,
+		cache : false,
+		success : function(data) {
+			$("#styleid").val(data.id);
+			alert("保存成功!");
+		},
+		error : function(e) {
+			alert("保存失败!");
+		}
+	});
+}
+
+// 添加链子
+function toOrder() {
+	$(".partsGem .list_name").text(
+			$("#chain-material-id").find("option:selected").text() + " "
+					+ $("#chain-style-id").find("option:selected").text() + " "
+					+ $("#chain-spec-id").find("option:selected").text());
+	$(".partsGem .list_price").text(
+			$("#chain-spec-id").find("option:selected").attr("cost"));
+	if ($(".partsGem").css("display") == 'none') {
+		$(".partsGem").show();
+	} else {
+		$(".partsGem").hide();
+		params.inlayPrice = 0;
+	}
+}
+
 </script>
 
 </head>
 
 <body>
+	<form id="custom">
 	<jsp:include page="../header.jsp"></jsp:include>
-	<jsp:include page="customList.jsp"></jsp:include>
-	<input type="hidden" id='customerid' name='customerId'
-		value="${customDetail.customerId }" />
+	<input type="hidden" id='customerId' name='customerId'
+		value="2" />
 	<input type="hidden" id='customid' name='id'
 		value="${customDetail.id }" />
 	<div class="all">
@@ -246,13 +335,13 @@
 						onblur="if(value==''){value='克'}"
 						class="ke" />
 				</div>
-				<div class="price">
+				<!-- <div class="price">
 					<input id="iprice" name="iprice" 
 					value="元"
 					onfocus="if(value=='元'){value=''}" 
 					onblur="if(value==''){value='元'}"
 					class="jiege" /> <b>+选择</b>
-				</div>
+				</div> -->
 				<dl>
 					<dd class="lzGem" style="display: none">
 						<div class="lianzi">
@@ -268,7 +357,12 @@
 								<a href="">客主石</a>
 							</h3>
 							<ul>
-								<li class="kzs_price">25000元</li>
+								<li><input type="text" 
+								id="nprimaryGem" name="nprimaryGem" class="kzs_price"
+								value="元" 
+								onfocus="if(value=='元'){value=''}" 
+								onblur="if(value==''){value='元'}"/>
+								</li>
 								<li class="kzs_gl"><input type='button' name="guanlian"
 									value="+ 关联" /></li>
 								<li class="kong">空</li>
@@ -283,7 +377,11 @@
 								<a href="">客配石</a>
 							</h3>
 							<ul>
-								<li class="kzs_price">2颗</li>
+								<li><input type="text" value="颗"
+										id="iforeignGem" name="iforeignGem" class="kzs_price"
+										onfocus="if(value=='颗'){value=''}" 
+										onblur="if(value==''){value='颗'}"/>
+								</li>
 								<li class="kzs_gl"><input type='button' name="guanlian"
 									value="+ 关联" /></li>
 								<li class="kps"><img src="${ctx}/resources/images/zb_09.png" width="42"
@@ -349,9 +447,9 @@
 				<h2>其他信息</h2>
 				
 				<!-- 标签 -->
-				<input type="text" name="staticPath" value="刻字标签：" id="staticPath" />
+				<input type="text" name="vengrave" value="刻字标签：" id="vengrave" />
 				<div class="zhanwei">
-				<select name="" class="ziti">
+				<select id="vfont" name="vfont" class="ziti">
 					<option value="华文细黑" >华文细黑</option>
 					<option value="华文仿宋" >华文仿宋</option>
 					<option value="华文楷体" >华文楷体</option>
@@ -367,16 +465,15 @@
 				</div>
 				<br />
 	
-				<textarea name="" cols="" rows="" 
+				<textarea id="vrequirementB" name="vrequirementB" cols="" rows="" 
 				onfocus="if(value=='表面工艺描述'){value=''}" 
 				onblur="if(value==''){value='表面工艺描述'}"				
 				class="miaoshu1">表面工艺描述</textarea>
 				<br />
 				
-				<select name="" class="jianding1">
-					<option>鉴定证书</option>
-					<option value="1">有</option>
-					<option value="0">无</option>
+				<select name="icertificate" name="icertificate" class="jianding1">
+					<option value="0">鉴定证书 -无</option>
+					<option value="1">鉴定证书 -有</option>
 				</select>
 				<!-- 
 				<div class="tu">
@@ -388,9 +485,11 @@
 				</div> -->
 				<div class="qita">
 					<div class="clear"></div>
-					<input type="text" value="其他      元"
-					onfocus="if(value=='其他      元'){value=''}" 
-					onblur="if(value==''){value='其他      元'}">
+					<input type="text" 
+					id="notherPrice" name="notherPrice"
+					value="其他  元"
+					onfocus="if(value=='其他  元'){value=''}" 
+					onblur="if(value==''){value='其他  元'}" />
 					<strong>13325+13150=<u>26800 </u>元</strong>
 				</div>
 				<div class="jisuan">
@@ -412,6 +511,6 @@
 			<div class="clear"></div>
 		</div>
 	</div>
-	<script src="${ctx}/resources/js/custom.js"></script>
+	</form>
 </body>
 </html>
