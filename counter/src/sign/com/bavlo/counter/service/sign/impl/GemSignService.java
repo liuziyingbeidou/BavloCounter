@@ -91,7 +91,7 @@ public class GemSignService extends CommonService implements IGemSignService {
 		GemSignVO vo = findFirst(GemSignVO.class, wh);
 		String bwh = " gemsignId="+id +" and biscover='Y'";
 		GemSignBVO bvo = findFirst(GemSignBVO.class, bwh);
-		if(StringUtil.isNotEmpty(id+"")){
+		if(bvo != null){
 			vo.setFILE_0(bvo.getVpath()+"/min/"+CommonUtils.getMinPicName(bvo.getVname()));//∑‚√Ê
 		}
 		
