@@ -57,7 +57,7 @@ public class EntitySignService extends CommonService implements IEntitySignServi
 		EntitySignVO vo = findFirst(EntitySignVO.class, wh);
 		String bwh = " entitysignId="+id +" and biscover='Y'";
 		EntitySignBVO bvo = findFirst(EntitySignBVO.class, bwh);
-		if(StringUtil.isNotEmpty(id+"")){
+		if(bvo != null){
 			vo.setFILE_0(bvo.getVpath()+"/min/"+CommonUtils.getMinPicName(bvo.getVname()));//∑‚√Ê
 		}
 		return vo;

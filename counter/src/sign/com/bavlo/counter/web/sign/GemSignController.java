@@ -49,7 +49,6 @@ public class GemSignController extends BaseController {
 	}
 	
 	@RequestMapping(value="/listJson",method = RequestMethod.POST)
-	@ResponseBody
 	public void gemListJson(HttpServletRequest request){
 		String content = request.getParameter("content");
 		String wh = "";

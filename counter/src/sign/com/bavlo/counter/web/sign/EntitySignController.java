@@ -12,7 +12,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.bavlo.counter.constant.IConstant;
@@ -48,7 +47,6 @@ public class EntitySignController extends BaseController {
 	}
 	
 	@RequestMapping(value="/listJson",method = RequestMethod.POST)
-	@ResponseBody
 	public void entityListJson(HttpServletRequest request){
 		String content = request.getParameter("content");
 		String wh = "";
@@ -188,5 +186,6 @@ public class EntitySignController extends BaseController {
 		model.addObject("entityvo",entitySignVO);
 		return model;
 	}
+	
 	
 }
