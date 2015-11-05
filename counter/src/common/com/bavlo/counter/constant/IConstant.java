@@ -19,10 +19,13 @@ public interface IConstant {
 	public static final String CODE_GEMSIGN = "GS";
 	//实物签收单
 	public static final String CODE_ENTITYSIGN = "ES";
+	//订单
+	public static final String CODE_ORDER = "OD";
 	/*****************************View模块和ViewName***************************/
 	public static final String PATH_COMMON = "common/";
 	public static final String COMMON_UPLOAD = "upload";
 	public static final String COMMON_SHOWPIC = "showpic";
+	public static final String COMMON_CHAIN = "chain";
 	/**实物签收单模块*/
 	public static final String PATH_ENTITY = "entitysign/";
 	public static final String ENTITY_SIGN_EDIT = "entity-sign-edit";
