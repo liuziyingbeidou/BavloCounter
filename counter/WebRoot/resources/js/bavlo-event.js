@@ -42,7 +42,7 @@
     	//回收价格
     	setSuffix("entity-recoveryPrice","元/克");
     	/***************实物签收单-结束*******************/
-    	
+
     	/***************订单-开始*******************/
     	//报价
     	setSuffix("order-quotedPrice","元");
@@ -53,6 +53,19 @@
     	//尾款实收
     	setSuffix("order-tailPaid","元");
     	/***************订单-结束*******************/
+    	
+    	/***************定制单-开始*******************/
+    	//金属重量
+    	setSuffix("custom_weight","克");
+    	//主石金额
+    	setSuffix("kzs_price","元");
+    	//配石数量
+    	setSuffix("kzs_count","颗");
+    	//链子条数
+    	setSuffix("custom_item","条");
+    	//其他金额
+    	setSuffix("costom_otherPrice","元");
+    	/***************定制单-结束*******************/
     });
     
     /**
