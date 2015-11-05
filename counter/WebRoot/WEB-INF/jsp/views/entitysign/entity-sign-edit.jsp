@@ -123,7 +123,7 @@
 		}
 		
 		//子窗体调用
-		function setValueByFrame(type,id,callback){
+		function setValueByFrame(type,id,json){
 			var url;
 			if(type == "entity"){
 				url = "${ctx}/entity-sign/view.do?id="+id;//根据id查询客户信息
@@ -136,9 +136,6 @@
 							$(".cusheader").prop("src",data.vhendimgurl);
 						}
 						$("#customerId").val(data.id);
-					}
-					if(typeof(callback)!=='undefined'){
-						callback&&callback();
 					}
 				});
 			}
