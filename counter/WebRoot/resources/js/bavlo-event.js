@@ -43,6 +43,16 @@
     	setSuffix("entity-recoveryPrice","元/克");
     	/***************实物签收单-结束*******************/
     	
+    	/***************订单-开始*******************/
+    	//报价
+    	setSuffix("order-quotedPrice","元");
+    	//已付
+    	setSuffix("order-payment","元");
+    	//未付
+    	setSuffix("order-nonPayment","元");
+    	//尾款实收
+    	setSuffix("order-tailPaid","元");
+    	/***************订单-结束*******************/
     });
     
     /**
