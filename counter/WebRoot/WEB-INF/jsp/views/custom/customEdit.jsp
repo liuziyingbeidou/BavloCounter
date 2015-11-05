@@ -12,13 +12,13 @@
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <meta name="viewport"
 	content="width=device-width,target-densitydpi=high-dpi,initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no" />
-<script src="${ctx}/resources/js/jquery-1.8.3.min.js"></script>
 <!--必要样式-->
 <link rel='stylesheet' href='${ctx}/resources/css/style.css' media='all' />
 <link rel='stylesheet' href='${ctx}/resources/css/bootstrap.css' media='all' />
 <link rel="stylesheet" href="${ctx}/resources/css/photoswipe.css" />
 <link rel="stylesheet" href="${ctx}/resources/css/default-skin.css" />
 
+<script src="${ctx}/resources/js/jquery-1.8.3.min.js"></script>
 <script src="${ctx}/resources/js/top.js"></script>
 <script	src="${ctx}/resources/js/add-input.js"></script>
 <script src="${ctx}/resources/js/photoswipe.min.js"></script>
@@ -30,14 +30,14 @@
 <script src="${ctx}/resources/js/bavlo-event.js"></script>
 
 <!-- 弹框 -->
-		<!-- jQuery & jQuery UI files (needed)--> 
-		<link rel="stylesheet" href="/counter/resources/jquery.multiDialog/css/jquery-ui-1.10.3.custom.css">
-		<script src="/counter/resources/jquery.multiDialog/js/jquery/jquery-ui-1.10.3.custom.js"></script> 
-		<!-- MultiDialog files (needed) --> 
-		<link rel="stylesheet" href="/counter/resources/jquery.multiDialog/css/jquery.multiDialog.css"> 
-		<script src="/counter/resources/jquery.multiDialog/js/jquery.ui.dialog.extended-1.0.2.js"></script> 
-		<script src="/counter/resources/jquery.multiDialog/js/jquery.multiDialog.js"></script> 
-		<script src="/counter/resources/js/bavlo-dialog.js"></script>
+<!-- jQuery & jQuery UI files (needed)--> 
+<link rel="stylesheet" href="/counter/resources/jquery.multiDialog/css/jquery-ui-1.10.3.custom.css">
+<script src="/counter/resources/jquery.multiDialog/js/jquery/jquery-ui-1.10.3.custom.js"></script> 
+<!-- MultiDialog files (needed) --> 
+<link rel="stylesheet" href="/counter/resources/jquery.multiDialog/css/jquery.multiDialog.css"> 
+<script src="/counter/resources/jquery.multiDialog/js/jquery.ui.dialog.extended-1.0.2.js"></script> 
+<script src="/counter/resources/jquery.multiDialog/js/jquery.multiDialog.js"></script> 
+<script src="/counter/resources/js/bavlo-dialog.js"></script>
 
 <script type="text/javascript">
 //本地webservice
@@ -164,7 +164,10 @@ $(function() {
 	
 	 //上传图片
 	 $(".cankaotu").bind("click",function(){
-	 		openURL("${ctx}/upload/uppage.do","上传图片");
+	 		openURL("${ctx}/upload/uppage.do","上传参考图"); 
+	 });
+	 $(".qibantu").bind("click",function(){
+	 		openURL("${ctx}/upload/uppage.do","上传起版图"); 
 	 });
 	 //图片显示
 	 $(".gem-pic-show").bind("click",function(){
@@ -205,11 +208,15 @@ function saveOrUpdate() {
 function initFieldSuffix(){
 	if($(".custom_weight").val() != ""){
 		 //重量 
-		initSuffix("customWeight","克");
+		initSuffix("custom_weight","克");
 	}
   	if($(".kzs_price").val() != ""){
 		//金额 
 		initSuffix("kzs_price","元"); 
+	}
+  	if($(".kps_count").val() != ""){
+		//数量
+		initSuffix("kzs_count","颗"); 
 	}
 	if($(".custom_item").val() != ""){
 		//数量
@@ -265,7 +272,7 @@ function initFieldSuffix(){
 					</div>
 				</div>
 				<div class="sheji">
-					<h2><a href="javascript:;" style="color:#fff" onclick="Pic1Show_Hidden(pic1)">+ 起版设计图 （2）</a></h2>
+					<h2><a href="javascript:;" style="color:#fff" class="qibantu">+ 起版设计图 （2）</a></h2>
 					<div class="pro">
 						<!--<img src="images/zb_06.png" />-->
 						<b><a href="javascript:;" onclick="Pic1Show_Hidden(pic1)">显示</a></b>
@@ -364,7 +371,7 @@ function initFieldSuffix(){
 					</select>
 					<input type="text" id="nweight" name="nweight"
 						placeholder="克"
-						class="custom_weight" />
+						class="custom_weight" value="" />
 				</div>
 				<!-- <div class="price">
 					<input id="iprice" name="iprice" 
@@ -408,7 +415,7 @@ function initFieldSuffix(){
 								<a href="">客配石</a>
 							</h3>
 							<ul>
-								<li><input type="text" id="iforeignGem" name="iforeignGem" class="kps_price"
+								<li><input type="text" id="iforeignGem" name="iforeignGem" class="kps_count"
 										placeholder="颗"/>
 								</li>
 								<li class="kzs_gl"><input type='button' name="guanlian"
@@ -516,7 +523,7 @@ function initFieldSuffix(){
 					<input type="text" 
 					id="notherPrice" name="notherPrice" class="costom_otherPrice"
 					placeholder="其他 元" />
-					<strong>13325+13150=<u>26800 </u>元</strong>
+					<!-- <strong>13325+13150=<u>26800 </u>元</strong> -->
 				</div>
 				<div class="jisuan">
 					<dl>
