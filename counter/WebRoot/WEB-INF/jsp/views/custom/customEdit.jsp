@@ -12,21 +12,34 @@
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <meta name="viewport"
 	content="width=device-width,target-densitydpi=high-dpi,initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no" />
-
+<script src="${ctx}/resources/js/jquery-1.8.3.min.js"></script>
 <!--必要样式-->
 <link rel='stylesheet' href='${ctx}/resources/css/style.css' media='all' />
 <link rel='stylesheet' href='${ctx}/resources/css/bootstrap.css' media='all' />
 <link rel="stylesheet" href="${ctx}/resources/css/photoswipe.css" />
 <link rel="stylesheet" href="${ctx}/resources/css/default-skin.css" />
 
-<script src="${ctx}/resources/js/jquery-1.8.3.min.js"></script>
 <script src="${ctx}/resources/js/top.js"></script>
 <script	src="${ctx}/resources/js/add-input.js"></script>
 <script src="${ctx}/resources/js/photoswipe.min.js"></script>
 <script src="${ctx}/resources/js/photoswipe-ui-default.min.js"></script>
 <script src="${ctx}/resources/js/photoswipefromdom.js"></script>
+
+<!-- 定义JS -->
 <script src="${ctx}/resources/js/bavlo-initdata.js"></script>
-<script>
+<script src="${ctx}/resources/js/bavlo-event.js"></script>
+
+<!-- 弹框 -->
+		<!-- jQuery & jQuery UI files (needed)--> 
+		<link rel="stylesheet" href="/counter/resources/jquery.multiDialog/css/jquery-ui-1.10.3.custom.css">
+		<script src="/counter/resources/jquery.multiDialog/js/jquery/jquery-ui-1.10.3.custom.js"></script> 
+		<!-- MultiDialog files (needed) --> 
+		<link rel="stylesheet" href="/counter/resources/jquery.multiDialog/css/jquery.multiDialog.css"> 
+		<script src="/counter/resources/jquery.multiDialog/js/jquery.ui.dialog.extended-1.0.2.js"></script> 
+		<script src="/counter/resources/jquery.multiDialog/js/jquery.multiDialog.js"></script> 
+		<script src="/counter/resources/js/bavlo-dialog.js"></script>
+
+<script type="text/javascript">
 //本地webservice
 var nativeUrl = "${pageScope.basePath}/counter/webservice/http.do";
 $(function() {
@@ -50,7 +63,7 @@ $(function() {
 			"data[i].china", "data[i].diameter", "data[i].circumference",
 			function() {
 				$("#ringSizeId").val("${customDetail['srcringSize']}");
-			},"规格");
+			},"手寸");
 	// 当款式类型不是戒指时，隐藏戒指手寸选项
 	$("#styleTypeId").change(function() {
 		if ($("#styleTypeId").val() == "1") {
@@ -148,6 +161,26 @@ $(function() {
 		el : '#vengrave',
 		regexp : /\w+\.\w+/
 	});
+	
+	 //上传图片
+	 $(".cankaotu").bind("click",function(){
+	 		openURL("${ctx}/upload/uppage.do","上传图片");
+	 });
+	 //图片显示
+	 $(".gem-pic-show").bind("click",function(){
+	 	var mid = $(".mid").val();
+	 	if(mid == ""){
+	 		alert("请保存后查看!");
+	 	}else{
+	 		openURL("${ctx}/upload/showpic.do?cpath=com.bavlo.counter.model.sign.GemSignBVO&fkey=gemsignId&id="+mid,"图片展示");
+	 	}
+	 });
+	 //宝石签收单列表
+	 $(".gem-page-list").bind("click",function(){
+	 	openURL("${ctx}/gem-sign/list.do","宝石签收单列表");
+	 });
+	 //有值加后缀
+ 	initFieldSuffix();
 });
 
 // 定制单保存
@@ -168,22 +201,25 @@ function saveOrUpdate() {
 	});
 }
 
-// 添加链子
-function toOrder() {
-	$(".partsGem .list_name").text(
-			$("#chain-material-id").find("option:selected").text() + " "
-					+ $("#chain-style-id").find("option:selected").text() + " "
-					+ $("#chain-spec-id").find("option:selected").text());
-	$(".partsGem .list_price").text(
-			$("#chain-spec-id").find("option:selected").attr("cost"));
-	if ($(".partsGem").css("display") == 'none') {
-		$(".partsGem").show();
-	} else {
-		$(".partsGem").hide();
-		params.inlayPrice = 0;
+//增加后缀 
+function initFieldSuffix(){
+	if($(".custom_weight").val() != ""){
+		 //重量 
+		initSuffix("customWeight","克");
+	}
+  	if($(".kzs_price").val() != ""){
+		//金额 
+		initSuffix("kzs_price","元"); 
+	}
+	if($(".custom_item").val() != ""){
+		//数量
+		initSuffix("custom_item","条");
+	}
+  	if($(".costom_otherPrice").val() != ""){
+		//金额 
+		initSuffix("costom_otherPrice","元"); 
 	}
 }
-
 </script>
 
 </head>
@@ -199,7 +235,7 @@ function toOrder() {
 		<div class="main">
 			<div class="mainleft">
 				<div class="cankao">
-					<h2><a href="javascript:;" style="color:#fff" onclick="PicShow_Hidden(pic)">+ 参考图 （6）</a></h2>
+					<h2><a href="javascript:;" style="color:#fff" class="cankaotu">+ 参考图 （6）</a></h2>
 					<div class="pro">
 						<b><a href="javascript:;" onclick="PicShow_Hidden(pic)">显示</a></b>
 						<div class="demo" id='pic' style='display: none;'>
@@ -298,16 +334,13 @@ function toOrder() {
 				<div class="clear"></div>
 				<div class="name">
 					<input type="text" id="vstyleName" name="vstyleName"
-						value="给本款取个名字吧！"
-						onfocus="if(value=='给本款取个名字吧！'){value=''}" 
-						onblur="if(value==''){value='给本款取个名字吧！'}"
+						placeholder="给本款取个名字把"
 						class="quming" />
 				</div>
 				<div class="xuqiu">
 					<textarea id="vrequirement" name="vrequirement" cols="" rows=""
-						onfocus="if(value=='需求描述'){value=''}" 
-						onblur="if(value==''){value='需求描述'}"
-						class="miaoshu1">需求描述</textarea>
+						placeholder="需求描述"
+						class="miaoshu1"></textarea>
 				</div>
 			</div>
 			<div class="mainmid">
@@ -330,10 +363,8 @@ function toOrder() {
 						<option>选择金属</option>
 					</select>
 					<input type="text" id="nweight" name="nweight"
-						value="克"
-						onfocus="if(value=='克'){value=''}" 
-						onblur="if(value==''){value='克'}"
-						class="ke" />
+						placeholder="克"
+						class="custom_weight" />
 				</div>
 				<!-- <div class="price">
 					<input id="iprice" name="iprice" 
@@ -348,7 +379,9 @@ function toOrder() {
 							<h3>链子</h3>
 							<a href="javascript:h('lzGem')"><font>X</font></a>
 							<div class="clear"></div>
-							<b>2 条</b> <strong>肖邦链 W18k 16"×1.6mm</strong>
+							<input type="text" id="iitem" name="iitem"
+							placeholder="条"
+							class="custom_item" /> <strong>肖邦链 W18k 16"×1.6mm</strong>
 						</div>
 					</dd>
 					<dd class="kzsGem" style="display: none">
@@ -359,9 +392,7 @@ function toOrder() {
 							<ul>
 								<li><input type="text" 
 								id="nprimaryGem" name="nprimaryGem" class="kzs_price"
-								value="元" 
-								onfocus="if(value=='元'){value=''}" 
-								onblur="if(value==''){value='元'}"/>
+								placeholder="元"/>
 								</li>
 								<li class="kzs_gl"><input type='button' name="guanlian"
 									value="+ 关联" /></li>
@@ -377,10 +408,8 @@ function toOrder() {
 								<a href="">客配石</a>
 							</h3>
 							<ul>
-								<li><input type="text" value="颗"
-										id="iforeignGem" name="iforeignGem" class="kzs_price"
-										onfocus="if(value=='颗'){value=''}" 
-										onblur="if(value==''){value='颗'}"/>
+								<li><input type="text" id="iforeignGem" name="iforeignGem" class="kps_price"
+										placeholder="颗"/>
 								</li>
 								<li class="kzs_gl"><input type='button' name="guanlian"
 									value="+ 关联" /></li>
@@ -466,9 +495,8 @@ function toOrder() {
 				<br />
 	
 				<textarea id="vrequirementB" name="vrequirementB" cols="" rows="" 
-				onfocus="if(value=='表面工艺描述'){value=''}" 
-				onblur="if(value==''){value='表面工艺描述'}"				
-				class="miaoshu1">表面工艺描述</textarea>
+				placeholder="表面工艺描述"			
+				class="miaoshu1"></textarea>
 				<br />
 				
 				<select name="icertificate" name="icertificate" class="jianding1">
@@ -486,10 +514,8 @@ function toOrder() {
 				<div class="qita">
 					<div class="clear"></div>
 					<input type="text" 
-					id="notherPrice" name="notherPrice"
-					value="其他  元"
-					onfocus="if(value=='其他  元'){value=''}" 
-					onblur="if(value==''){value='其他  元'}" />
+					id="notherPrice" name="notherPrice" class="costom_otherPrice"
+					placeholder="其他 元" />
 					<strong>13325+13150=<u>26800 </u>元</strong>
 				</div>
 				<div class="jisuan">
