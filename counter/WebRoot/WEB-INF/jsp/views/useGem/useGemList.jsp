@@ -18,29 +18,86 @@
 <link href="${ctx}/resources/css/orderlist.css" rel="stylesheet"
 	type="text/css" />
 <script src="${ctx}/resources/js/showList.js" type="text/javascript"></script>
+
+
+<!-- 自定义 -->
+<script src="${ctx}/resources/js/bavlo-event.js"></script>
+
+<script type="text/javascript">
+	$(function() {
+		$(".search").keyup(function() {
+			delay(function() {
+				initData();
+			}, 500);
+		});
+
+		var delay = (function() {
+			var timer = 0;
+			return function(callback, ms) {
+				clearTimeout(timer);
+				timer = setTimeout(callback, ms);
+			};
+		})();
+		initData();
+
+	});
+
+	function initData() {
+		$("#juheweb").empty();
+		var url = "${ctx}/useGem/listJson.do";
+		$
+				.post(
+						url,
+						{
+							content : $(".search").val()
+						},
+						function(row) {
+							var data = row;
+							for (var i = 0; i < data.length; i++) {
+								var ht = "<li><h4><img style='width:60px;height:60px;' ";
+								var img = "src='${ctx}/resources/images/useGem_01.png'";
+								if (data[i].vhendimgurl != "") {
+									img = "src='" + data[i].vhendimgurl + "'";
+								}
+								var ml = "><b>"
+										+ data[i].vtype
+										+ "</b><a href='javascript:void();'>"
+										+ data[i].vshape
+										+ "</a><span><a href='javascript:void();' onclick='selHander("
+										+ data[i].id
+										+ ")'>选择</a></span></h4><div class='clear'></div></li>";
+								$("#juheweb").append(ht + img + ml);
+							}
+						});
+	}
+	//调用父窗体方法
+	function selHander(id) {
+		if (isExitsFunction(window.parent.setValueByFrame)) {
+			window.parent.setValueByFrame("useGem", id);
+		} else {
+			alert("请在父窗口添加setValueByFrame(type,id){处理逻辑}type='useGem'");
+		}
+	}
+</script>
 </head>
 
 <body>
 	<!--配石单列表弹窗-->
 	<div class="orderlist" id='pic2'>
 		<div class="order-main">
-			<div class="order-list">
-				配石单列表 
-			</div>
+			<div class="order-list">配石单列表</div>
 			<div class="search-1">
-				<input type='text' name='search' class="search" value="搜索"
-					onfocus="if(value =='搜索'){value =''}"
-					onblur="if(value ==''){value='搜索'}" />
+				<input type='text' name='search' class="search" placeholder="输入姓名/手机号"/>
 			</div>
 			<div class="">
 				<div class="main1 content">
 					<div class="left-sider">
 						<div class="operate">
 							<ul id="juheweb">
-								<c:forEach var="useGemList" items="${useGemList }">
+								<%-- <c:forEach var="useGemList" items="${useGemList }">
 									<li>
 										<h4>
-											<img src="${ctx}/resources/images/customer_01.png" /> <b>${useGemList.vtype }</b><a
+											<img src="${ctx}/resources/images/useGem_01.png" /> <b>${useGemList.vtype }</b><a
 												href="">${useGemList.vshape
 														}</a><span><a
 												href="${ctx}/useGem/info.do?id=${useGemList.id}">选择</a> </span>
@@ -64,7 +121,7 @@
 										</div>
 										<div class="clear"></div>
 									</li>
-								</c:forEach>
+								</c:forEach> --%>
 							</ul>
 						</div>
 					</div>
