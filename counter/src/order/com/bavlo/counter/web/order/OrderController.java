@@ -16,6 +16,7 @@ import com.bavlo.counter.model.order.AddressVO;
 import com.bavlo.counter.model.order.OrderVO;
 import com.bavlo.counter.model.sign.GemSignVO;
 import com.bavlo.counter.service.order.itf.IOrderService;
+import com.bavlo.counter.utils.CommonUtils;
 import com.bavlo.counter.web.BaseController;
 
 /**
@@ -52,6 +53,8 @@ public class OrderController extends BaseController {
 		
 		ModelAndView model = new ModelAndView(IConstant.PATH_ORDER + IConstant.ORDER_EDIT);
 		model.addObject("pageOrderType", IConstant.PAGE_TYPE_ADD);
+		//±àºÅ
+		model.addObject("number", CommonUtils.getBillCode(IConstant.CODE_ORDER));
 		return model;
 	}
 	
