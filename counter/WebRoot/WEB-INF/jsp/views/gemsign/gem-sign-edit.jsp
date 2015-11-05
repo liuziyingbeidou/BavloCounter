@@ -175,7 +175,7 @@
 		}
 		
 		//子窗体调用
-		function setValueByFrame(type,id){
+		function setValueByFrame(type,id,json){
 			if(type == "gem"){
 				var url = "${ctx}/gem-sign/view.do?id="+id;//根据id查询客户信息
 				window.location = url;
