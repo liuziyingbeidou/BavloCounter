@@ -50,23 +50,13 @@ function loadSelData(nativeUrl,remoteUrl,emName,selId,selName,callback,explain){
 
 }
 
-
-function loadData(nativeUrl,remoteUrl,emName,selId,selName,callback){
+function loadRingSizeData(nativeUrl,remoteUrl,emName,selId,selName1,selName2,selName3,callback,explain){
+	if(explain == undefined){
+		explain = "请选择";
+	}
 	$('#'+emName).empty();
-	$.get(nativeUrl,{url:remoteUrl},function(row){
-		var data = row;
-		for(var i=0;i<data.length;i++){
-			$('#'+emName).append("<option value='"+eval(selId)+"'>"+eval(selName)+"</option>");
-		}
-		if(typeof(callback)!=='undefined'){
-			callback&&callback();
-		}
-	});
+	$('#'+emName).append("<option value='-1'>"+explain+"</option>");
 	
-}	
-
-function loadRingSizeData(nativeUrl,remoteUrl,emName,selId,selName1,selName2,selName3,callback){
-	$('#'+emName).empty();
 	$.get(nativeUrl,{url:remoteUrl},function(row){
 		var data = row;
 		for(var i=0;i<data.length;i++){
