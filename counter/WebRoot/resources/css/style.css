@@ -95,6 +95,8 @@ font-family:"Microsoft yahei";
 	background-color: #ddd;padding-left: 10px;margin-top: 20px;}
 .ke {width: 95px;height: 40px;font-family: "Microsoft yahei";font-size: 16px;color: #555;margin-left: 10px;
 	background-color: #ddd;	padding-left: 10px;}
+.custom_weight {width: 95px;height: 40px;font-family: "Microsoft yahei";font-size: 16px;color: #555;margin-left: 10px;
+	background-color: #ddd;	padding-left: 10px;}
 .jiege {
 	width: 200px;
 	height: 40px;
@@ -147,6 +149,8 @@ font-family:"Microsoft yahei";
 .kzs h3 { font-size: 16px; font-weight: normal;}
 .kzs h3 a { text-decoration: underline; color: #ddd; line-height: 50px;}
 .kzs_price { float: left; width: 90px; background: #dbdbdb; color: #555555; height: 37px; line-height: 37px; text-align: center;}
+.kps_count { float: left; width: 90px; background: #dbdbdb; color: #555555; height: 37px; line-height: 37px; text-align: center;}
+.custom_item { float: left; width: 90px; background: #dbdbdb; color: #555555; height: 37px; line-height: 37px; text-align: center;}
 .kzs_gl { width: 70px; float: left; margin: 0 20px; line-height: 37px; height: 37px;}
 .kzs_gl input { width:70px; height: 37px; line-height: 37px; color: #ccc; font-size: 14px; border: none; text-align: center; background: #767676; }
 .kong  { float: left; width: 50px; height: 37px; line-height: 37px; text-align: center; border: 1px solid #777;}
@@ -687,7 +691,34 @@ font-family:"Microsoft yahei";
 }
 
 
+/*list  分享弹出层*/
+.zhezhaodiv1{position:fixed;top:0px;width: 500px;height: 100%;display: block;background:#333;filter:alpha(opacity=80); opacity: 0.8;z-index:999999;}
+.login_reg_div1{background:#000;border:1px solid #b0b0b0;width:480px;height:auto;margin:20px auto;top:10%;left:2%;position: fixed;z-index:9999999;}
+.fenxiang{width:450px;margin:0px auto;overflow:hidden;}
+.gb{width:98%;margin:3% auto 0;line-height:40px;overflow:hidden;}
+.gb a{float:right;display: inline-block;text-align:right;width:9%;}
+.gb a img{width:100%}
+.fenxiang h5{font-size:1.2em;text-align:left;padding-left:25%;line-height:40px;color:#ddd;margin:0 auto 2%;width:72%;}
+.xbstc{overflow: hidden;margin:0px auto;width:90%;}
+.xbstc li{width:100%;margin:0 auto 5%;overflow: hidden;color:#bbb}
+.xbstc  li label{display:inline-block;font-size:1.1em;float:left;width:20%;line-height:35px;text-align:right;color:#bbb;margin-right:3%}
+.xbstc  li p{width:75%;line-height:35px;margin:0% auto 0;overflow: hidden;}
+.xbstc  li p select{height:35px;line-height:35px;width:95%}
 
+.baoshi a{display:inline-block;text-align:center;width:20%;}
+.mlr_3{margin:0px 5%}
+.baoshi a img{width:98%;border:1px solid #000;border-radius: 50%}
+.baoshi a :hover img{width:98%;border:1px solid #ff0000;border-radius:50%}
+
+.gem_sel_t{overflow:hidden;margin:0 auto;width:80%;padding-bottom:5%;}
+.gem_sel_t input{width:45%;margin:0px auto;text-align:center;background: -webkit-gradient(linear, left top, left bottom, from(#b8b8b8),
+ to(#999999) );background-image: -moz-linear-gradient(center top , #b8b8b8, #999999);border: 1px solid #212121;
+border-radius: 5px ;padding:3% 0px;font-size:1.1em;color:#333}
+
+.baoshi_bnt{overflow:hidden;margin:0 auto;width:80%;padding-bottom:5%;}
+.baoshi_bnt input{width:45%;margin:0px auto;text-align:center;background: -webkit-gradient(linear, left top, left bottom, from(#b8b8b8),
+ to(#999999) );background-image: -moz-linear-gradient(center top , #b8b8b8, #999999);border: 1px solid #212121;
+border-radius: 5px ;padding:3% 0px;font-size:1.1em;color:#333}
 
 
 
