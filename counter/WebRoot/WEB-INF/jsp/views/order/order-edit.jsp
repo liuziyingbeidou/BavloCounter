@@ -41,7 +41,6 @@
 <!-- 远程数据初始下拉框值 -->
 <script src="${ctx}/resources/js/bavlo-initdata.js"></script>
 <script type="text/javascript">
-
 $(function(){
 	//选择客户
 	$(".file").bind("click",function(){
@@ -74,7 +73,91 @@ $(function(){
 	
 	//选择下拉框值
 	setSelValue();
+	//加载交付地址
+	initAddr();
 });
+
+//根据addressId显示地址信息
+function showAddrInfo(){
+	var url = "${ctx}/order/getAddrInfoJsonById.do";
+	var aid = $("#addressId").val();
+	$.get(url,{id:aid},function(row){
+		var data = row;
+		if(data != "" && data != null){
+			showLocation();
+			$("#vprovince").val(data.vprovince);
+			$("#vprovince").change();
+			$("#vcity").val(data.vcity);
+			$("#vcity").change();
+			//姓名
+			$(".receiverName").val(data.vreceiverName);
+			//省
+			$(".province").val(data.vprovince);
+			//市
+			$(".city").val(data.vcity);
+			//县
+			$(".district").val(data.vdistrict);
+			//街道
+			$(".street").val(data.vstreet);
+			//电话
+			$(".phoneCode").val(data.vphoneCode);
+			//邮箱
+			$(".email").val(data.vemail);
+		}
+	});
+}
+
+//点击选择
+function clickSelAddr(id){
+	$(".addrlist").each(function(){
+		$(this).css({"background":"#444444"});
+	});
+	$("#"+id).css({"background":"#777"});
+	$("#addressId").val(id);
+	showAddrInfo();
+}
+
+//编辑页遍历选中当前
+function traversedSelAddr(iid){
+	var addressId = $("#addressId").val();
+	$(".addrlist").each(function(){
+		var id = $(this).prop("id");
+		if(id == addressId){
+			$(this).css({"background":"#777"});
+			$("#addressId").val(id);
+		}else{
+			if($("id").val() == ""){
+				$("#"+iid).css({"background":"#777"});
+				$("#addressId").val(iid);
+			}
+		}
+	});
+}
+
+function initAddr(){
+	var url = "${ctx}/order/getAddrListJson.do";
+	$.get(url,{customerId:$("#customerId").val()},function(row){
+		var data = row;
+		//默认地址id
+		var iid;
+		if(data != "" && data != null){
+			for(var i = 0; i < data.length; i++){
+				var name = data[i].vreceiverName +" "+ data[i].vphoneCode+" "+data[i].vprovince+" "+data[i].vcity+" "+data[i].vstreet;
+				insert_row(data[i].id,name);
+				if(data[i].bisDefault == "Y"){
+					iid = data[i].id;
+				}
+			}
+			$(".add_dizhi").show();
+		}else{
+			$("#tbl").empty();
+			$(".add_dizhi").hide();
+		}
+		traversedSelAddr(iid);
+		//显示地址详细信息
+		showAddrInfo();
+	});
+}
 
 //选择下拉框值
 function setSelValue(){
@@ -90,33 +173,53 @@ function setSelValue(){
 
 //保存地址
 function saveAddr(){
+	
+	//客户ID
+	var customerId = $("#customerId").val();
+	
+	if(customerId == ""){
+		alert("请选择客户...");
+		return;
+	}
+	
 	//姓名
 	var receiverName = $(".receiverName").val();
 	//省
 	var province = $(".province").val();
 	//市
 	var city = $(".city").val();
+	//县
+	var district = $(".district").val();
 	//街道
 	var street = $(".street").val();
 	//电话
 	var phoneCode = $(".phoneCode").val();
 	//邮箱
 	var email = $(".email").val();
-	
+	var addressId = $("#addressId").val();
 	$.post(
 		"saveAddr.do", 
-		{ vreceiverName: receiverName,vprovince:province,vcity:city,vstreet:street,vphoneCode:phoneCode,vemail:email }, 
+		{ id:addressId,customerId:customerId,vreceiverName: receiverName,vprovince:province,vcity:city,vdistrict:district,vstreet:street,vphoneCode:phoneCode,vemail:email }, 
 		function (text, status) { 
 			alert("保存成功!");
-			$("#addrId").val(text.id);
-			insert_row(text.id,text.val);
-			$(".add_dizhi").hide();
+			if($("#addressId").val() == ""){
+				insert_row(text.id,text.val);
+			}
+			$("#addressId").val(text.id);
 		}
 	);
 }
+
 //保存订单
 function saveOrder(){
-
+	//报价
+    clearSuffix("order-quotedPrice","元");
+    //已付
+    clearSuffix("order-payment","元");
+    //未付
+    clearSuffix("order-nonPayment","元");
+    //尾款实收
+    clearSuffix("order-tailPaid","元");
 	$.ajax({
 			type : "POST",
 			     url : "save.do",
@@ -131,8 +234,27 @@ function saveOrder(){
 			     	alert("保存失败!");
 			     }
 		    });
+		    //有值加后缀
+			initFieldSuffix();
 }
-
+		function initFieldSuffix(){
+			if($(".order-quotedPrice").val() != ""){
+	    		//报价
+		    	initSuffix("order-quotedPrice","元");
+    		}
+		  	if($(".order-payment").val() != ""){
+	    		//已付
+	    		initSuffix("order-payment","元");
+    		}
+	    	if($(".order-nonPayment").val() != ""){
+	    		//未付
+	    		initSuffix("order-nonPayment","元");
+    		}
+	    	if($(".order-tailPaid").val() != ""){
+	    		//尾款实收
+	    		initSuffix("order-tailPaid","元");
+    		}
+		}
 //子窗体调用
 		function setValueByFrame(type,id,json){
 			var url;
@@ -144,22 +266,33 @@ function saveOrder(){
 							$(".cusheader").prop("src",data.vhendimgurl);
 						}
 						$("#customerId").val(data.id);
+						//选客户后初始化交付地址
+						initAddr();
 					}
 				});
 			}else if(type == "chain"){
 				var data = JSON.parse(json);
-				$(".partsGem .list_name").text(data.sname);
-				$(".partsGem .list_price").text(data.sprice);
+				//$(".partsGem .list_name").text(data.sname);
+				//$(".partsGem .list_price").text(data.sprice);
+				$("#order-list").append("<dd class='"+data.sid+"'><span class='list_name'>"+data.sname+"</span><input class='list_num' style='width:40px;margin-left:10px;' type='text' value='' placeholder='条'><b class='list_price'>"+data.sprice+"</b><a href='javascript:rlist("+data.sid+")' class='close_c'><img src='${ctx}/resources/images/close.png'></a></dd>");
 			}
 		}
+		
+		//删除清单
+		function rlist(className){
+			$("."+className).remove();
+		}
 </script>
+<style>
+.address .addrlist {background:#444444;}
+</style>
 </head>
 
 <body>
 <form id="orderFrmId">
 <input type="hidden" name="id" id="orderId" value="${ordervo['id']}">
 <input type="hidden" name="iorderState" value="${ordervo['iorderState']}">
-<input type="hidden" name="customerId" value="${ordervo['customerId']}">
+<input type="hidden" name="customerId" id="customerId" value="${ordervo['customerId']}">
 <div class="header">
 	<div class="head1">
 		<div class="top">
@@ -227,9 +360,9 @@ function saveOrder(){
       </div>
       <div class="list">
         <h3>清单</h3>
-        <dl >
+        <dl id="order-list">
           <!--<dd class="mainGem" style="display: none"><img src="${ctx}/resources/images/good_01.png"><input type='text' value="1对"><b>6590元</b><a href="javascript:h('mainGem')" class="close_c"><img src="${ctx}/resources/images/close.png"></a></dd>-->
-          <dd class="partsGem" uid=""><span class="list_name"></span><input class="list_num" style="width:40px;margin-left:10px;" type='text' value="" placeholder="条"><b class="list_price"></b><a href="javascript:h('partsGem')" class="close_c"><img src="${ctx}/resources/images/close.png"></a></dd>
+          <!--<dd class="partsGem" uid=""><span class="list_name"></span><input class="list_num" style="width:40px;margin-left:10px;" type='text' value="" placeholder="条"><b class="list_price"></b><a href="javascript:h('partsGem')" class="close_c"><img src="${ctx}/resources/images/close.png"></a></dd>-->
           <!--<dd class="zuanshiGem" style="display: none;"><img src="${ctx}/resources/images/good_03.png"><input type='text' value="1颗"><b>12590元</b><a href="javascript:h('zuanshiGem')" class="close_c"><img src="${ctx}/resources/images/close.png"></a></dd>-->
           <div class="clear"></div>
         </dl>
@@ -255,21 +388,31 @@ function saveOrder(){
 			  i ++;
 			  R = tbl.insertRow();
 			  C = R.insertCell();
-			  C.innerHTML = "<input type='radio' class='addr-radio'><input value='"+val+"' id='"+id+"' readonly>";
+			  C.innerHTML = "<input class='addrlist' value='"+val+"' id='"+id+"' onclick='clickSelAddr("+id+")' readonly>";
 			  C = R.insertCell();
-			  C.innerHTML = "<a onclick='deleteRow(this)' class='address-close'>X</a>";
+			  C.innerHTML = "<a onclick='deleteRow(this,"+id+")' class='address-close'>X</a>";
 			 }
-			 function deleteRow(obj){
+			 function deleteRow(obj,aid){
 			  alert('确定要删除吗');
-			  tbl.deleteRow(obj.parentElement.parentElement.rowIndex);
+			  var delUrl = "${ctx}/order/delAddrById.do";
+			  $.get(delUrl,{id:aid},function(){
+			  	tbl.deleteRow(obj.parentElement.parentElement.rowIndex);
+			  });
 			 }
 			 function add_addr(){
+			 	$(".add_dizhi :input").each(function(){
+			 		$(this).val("");
+			 	});
+			 	$("#addressId").val("");
+			 	$("#addrSave").val("Save");
 			 	$(".add_dizhi").show();
 			 }
 		  </script>
           <div class="address">
           	<input type="hidden" name="addressId" value="${ordervo['addressId'] }" id="addressId">
-            <table name='tbl' id="tbl"  class="add-address"> </table> 
+            <table name='tbl' id="tbl"  class="add-address"> 
+            
+            </table> 
             <!--<p class="new_adr">丁力 清华路17号院29号楼B座1103室...<a href="">X</a></p>-->
             <input type="button" value="+新建地址" onclick="add_addr()" />
           </div>
@@ -312,7 +455,7 @@ function saveOrder(){
           </select>
           <p><input type='text' name="nquotedPrice" class="zf bj order-quotedPrice" value="${ordervo['nquotedPrice'] }" placeholder="报价"><input type='text' name="npayment" class="zf yf order-payment" value="${ordervo['npayment'] }" placeholder="已付"></p>
           <p><input type='text' name="nnonPayment" class="zf bj order-nonPayment" value="${ordervo['nnonPayment'] }" placeholder="未付"><input type='text' name="ntailPaid" class="zf yf order-tailPaid" value="${ordervo['ntailPaid'] }" placeholder="尾收"></p>
-          <input type="text" id="datetimepicker" class="jianding" placeholder="交付时间" />
+          <input type="text" name="ddeliverdate" value="${ordervo['ddeliverdate'] }" id="datetimepicker" class="jianding" placeholder="交付时间" />
           
           <select name="vdeliveryWay" class="jianding deliveryWay">
             <option value="0">来店自取</option>
