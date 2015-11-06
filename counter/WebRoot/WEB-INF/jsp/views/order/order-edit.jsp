@@ -75,6 +75,10 @@ $(function(){
 	setSelValue();
 	//加载交付地址
 	initAddr();
+	//订单列表
+	$(".menu-order").bind("click",function(){
+		openURL("${ctx}/order/list.do","订单列表",500,600);
+	});
 });
 
 //根据addressId显示地址信息
@@ -275,6 +279,9 @@ function saveOrder(){
 				//$(".partsGem .list_name").text(data.sname);
 				//$(".partsGem .list_price").text(data.sprice);
 				$("#order-list").append("<dd class='"+data.sid+"'><span class='list_name'>"+data.sname+"</span><input class='list_num' style='width:40px;margin-left:10px;' type='text' value='' placeholder='条'><b class='list_price'>"+data.sprice+"</b><a href='javascript:rlist("+data.sid+")' class='close_c'><img src='${ctx}/resources/images/close.png'></a></dd>");
+			}else if(type == "order"){
+				url = "${ctx}/order/view.do?id="+id;//根据id查询客户信息
+				window.location = url;
 			}
 		}
 		
@@ -315,7 +322,7 @@ function saveOrder(){
 				<li class="jian"><a href="javascript:;" onclick="Show_Hidden(tr1)">—</a></li>
 				<li><a href="">定制单</a></li>
 				<li><a href="">宝石签收单</a></li>
-				<li><a href="">订单</a></li>
+				<li class="menu-order"><a href="javascript:;">订单</a></li>
 				<li><a href="">客户</a></li>
 			</ul>
 		</div>
