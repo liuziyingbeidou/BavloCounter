@@ -23,7 +23,7 @@ public interface IOrderService {
 	
 	public void updateOrder(OrderVO orderVO);
 	
-	public List<OrderVO> findListOrder();
+	public List<OrderVO> findListOrder(String wh);
 	
 	public OrderVO findSigleOrder(Integer id);
 	

@@ -37,9 +37,9 @@ public class OrderService extends CommonService implements IOrderService {
 	}
 
 	@Override
-	public List<OrderVO> findListOrder() {
+	public List<OrderVO> findListOrder(String wh) {
 		
-		return findAll(OrderVO.class, "",null,"ts","desc");
+		return findAll(OrderVO.class, wh,null,"ts","desc");
 	}
 
 	@Override

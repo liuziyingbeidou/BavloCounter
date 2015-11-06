@@ -37,11 +37,23 @@ public class OrderController extends BaseController {
 	@RequestMapping(value="/list")
 	public ModelAndView orderList(){
 		
-		List<OrderVO> orderList = orderService.findListOrder();
+		//List<OrderVO> orderList = orderService.findListOrder();
 		
 		ModelAndView model = new ModelAndView(IConstant.PATH_ORDER + IConstant.ORDER_LIST);
-		model.addObject("orderList", orderList);
+		//model.addObject("orderList", orderList);
 		return model;
+	}
+	
+	@RequestMapping(value="/listJson",method = RequestMethod.POST)
+	public void orderListJson(HttpServletRequest request){
+		String content = request.getParameter("content");
+		String wh = " 1=1";
+		if(StringUtil.isNotEmpty(content)){
+			wh = " vorderCode like '%"+content+"%'";
+		}
+		List<OrderVO> orderList = orderService.findListOrder(wh);
+		
+		renderJson(orderList);
 	}
 	
 	/**
