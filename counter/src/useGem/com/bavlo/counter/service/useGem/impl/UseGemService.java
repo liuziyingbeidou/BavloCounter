@@ -55,9 +55,9 @@ public class UseGemService extends CommonService implements IUseGemService {
 	}
 
 	@Override
-	public List<UseGemVO> findUseGemList() {
+	public List<UseGemVO> findUseGemList(String wh) {
 	
-		return findAll(UseGemVO.class, "",null,"id","desc");
+		return findAll(UseGemVO.class, wh,null,"id","desc");
 	}
 
 }

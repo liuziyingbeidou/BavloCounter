@@ -4,14 +4,18 @@ import java.util.List;
 import java.util.Map;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.bavlo.counter.constant.IConstant;
+import com.bavlo.counter.model.customer.CustomerVO;
 import com.bavlo.counter.model.useGem.UseGemVO;
 import com.bavlo.counter.service.useGem.itf.IUseGemService;
+import com.bavlo.counter.utils.StringUtil;
 import com.bavlo.counter.web.BaseController;
 
 /**
@@ -36,10 +40,8 @@ public class UseGemController extends BaseController implements IConstant {
 	@RequestMapping("info")
 	public ModelAndView info(Map<String, Object> map, Integer id) {
 
-		List<UseGemVO> useGemList = useGemService.findUseGemList();
 		UseGemVO useGemDetail = useGemService.findUseGemById(id);
 		
-		map.put("useGemList", useGemList);
 		map.put("useGemDetail", useGemDetail);
 		return new ModelAndView(PATH_USE_GEM + "useGemEdit");
 	}
@@ -66,9 +68,24 @@ public class UseGemController extends BaseController implements IConstant {
 	@RequestMapping("list")
 	public ModelAndView list(Map<String, Object> map) {
 
-		List<UseGemVO> useGemList = useGemService.findUseGemList();
-		map.put("useGem", useGemList);
 		return new ModelAndView(PATH_USE_GEM + "useGemList");
+	}
+	
+	/**
+	 * @Description: 获取客户列表JSON
+	 * @param @param map
+	 * @param @return
+	 * @return ModelAndView
+	 */
+	@RequestMapping(value="listJson",method = RequestMethod.POST)
+	public void listJson(HttpServletRequest request,Map<String, Object> map) {
+		String content = request.getParameter("content");
+		String wh = "";
+		if(StringUtil.isNotEmpty(content)){
+			wh = " vtype like '%"+content+"%' or vshape like '%"+content+"%'";
+		}
+		List<UseGemVO> useGemList = useGemService.findUseGemList(wh);
+		renderJson(useGemList);
 	}
 
 }

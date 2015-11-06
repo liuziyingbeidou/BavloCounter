@@ -60,6 +60,6 @@ public interface IUseGemService {
 	 * @param @return
 	 * @return List<UseGemVO>
 	 */
-	public List<UseGemVO> findUseGemList();
+	public List<UseGemVO> findUseGemList(String wh);
 	
 }
