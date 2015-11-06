@@ -13,6 +13,55 @@
 <link href="${ctx}/resources/css/bootstrap.css" rel="stylesheet" type="text/css" />
 <link href="${ctx}/resources/css/orderlist.css" rel="stylesheet" type="text/css" />
 <script src="${ctx}/resources/js/showList.js" type="text/javascript"></script>
+
+	<!-- 自定义 -->
+	<script src="${ctx}/resources/js/bavlo-event.js"></script>
+	<script type="text/javascript">
+	$(function(){
+		$(".search").keyup(function(){
+			 delay(function(){
+				 initData();
+			 }, 500 );
+		});
+		
+		var delay = (function(){
+			 var timer = 0;
+			 return function(callback, ms){
+				 clearTimeout (timer);
+				 timer = setTimeout(callback, ms);
+			 };
+		})();
+		initData();
+		
+	});
+	
+	function initData(){
+		$("#juheweb").empty();
+		var url = "${ctx}/order/listJson.do";
+		$.post(url,{content:$(".search").val()},function(row){
+			var data = row;
+			for(var i = 0; i < data.length; i++){
+				$("#juheweb").append("<li><h4><img style='width:60px;height:60px;' src='${ctx}/staticRes/"+data[i].vdef2+"/min/"+data[i].vdef3+"'><b>"+data[i].vorderCode+"</b><span><a href='javascript:void();' onclick='selHander("+data[i].id+")'>选择</a></span>"+
+				"<div class='list-item none'><dl>"+
+				"<dd><img src='${ctx}/resources/images/good_01.png'></dd>"+
+				"<dd><img src='${ctx}/resources/images/good_02.png'></dd>"+
+				"<dd><img src='${ctx}/resources/images/good_03.png'></dd>"+
+				"</dl><div class='clear'></div>"+
+				"<dt>报价：<b>"+data[i].nquotedPrice+"元</b> 已付：<b>"+data[i].npayment+"元</b> 未付：<b>"+data[i].nnonPayment+"元</b> 实收："+data[i].ntailPaid+"</dt>"+
+				"</div>"+
+				"</h4><div class='clear'></div></li>");
+			}
+		});
+	}
+	//调用父窗体方法
+	function selHander(id){
+		if(isExitsFunction(window.parent.setValueByFrame)){
+			window.parent.setValueByFrame("order",id);
+		}else{
+			alert("请在父窗口添加setValueByFrame(type,id){处理逻辑}type='order'");
+		}
+	}
+	</script>
 </head>
 
 <body>
@@ -22,7 +71,7 @@
 		<div class="order-list">订单列表 X</div>
 		<div class="search-1">
 			<form action='' method='post'>
-				<input type='text' name='search' class="search" value='搜索'>
+				<input type='text' name='search' class="search" placehoder='搜索'>
 			</form>
 		</div>
 		<div class="">
@@ -30,7 +79,7 @@
 				<div class="left-sider">
 				  <div class="operate">
 					<ul id="juheweb">
-					<c:forEach items="${orderList}" var="bean">
+					<!--<c:forEach items="${orderList}" var="bean">
 					  <li >
 						<h4 ><img src="${ctx}/resources/images/customer_01.png"><b>${bean.customerId}</b><a href="">${bean.vorderCode}</a><span><a href="${ctx}/order/view.do?id=${bean.id}">选择</a></span></h4>
 						<div class="list-item none">
@@ -45,7 +94,7 @@
 						<div class="clear"></div>
 					  </li>
 					  </c:forEach>
-					</ul>
+					--></ul>
 					<script type="text/javascript" language="javascript">
 						navList(12);
 					</script>
