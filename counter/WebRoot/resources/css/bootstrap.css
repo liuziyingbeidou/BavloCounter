@@ -250,11 +250,14 @@
 	width:90%;
 	margin:0 auto;
 }
-.wk,.ke,.jiege {font-size:26px;height:60px; line-height:60px;}
+.wk,.ke,.jiege,.custom_weight {font-size:26px;height:60px; line-height:60px;}
 .wk {
 	width:55%;
 }
 .ke {
+	width:40%;
+}
+.custom_weight {
 	width:40%;
 }
 .price {
@@ -289,6 +292,9 @@
 }
 .kzs h3 a { font-size:26px;}
 .kzs_price { font-size:26px; width:33%; height:60px; line-height:60px;}
+.kps_count { font-size:26px; width:33%; height:60px; line-height:60px;}
+.custom_item { font-size:26px; width:33%; height:60px; line-height:60px;}
+
 .kzs_gl {margin:0 14px; width:22%; font-size:26px;}
 .kzs_gl input {font-size:26px; width:100%;}
 .xuanze {
@@ -495,7 +501,7 @@ font-size:23px;
 .upload_btn input {width:94%;font-size:26px;height:60px; line-height:60px;}
 .upload_btn {width:95%;margin-top:37px;margin-left:5%;}
 
-/*订单列表*/
+/*璁㈠崟鍒楄〃*/
 /*
 #orderlist  { background:#444; padding:0; min-height: 737px; }
 */
@@ -519,3 +525,7 @@ font-size:23px;
 #container { margin-top:29px !important; width:100%;}
 #uploader .filelist li { width:30% !important;}
 }
+
+.zhezhaodiv1{width: 100%;}
+.login_reg_div1{width:96%;}
+.fenxiang{width:90%;margin:0px auto;overflow:hidden;}
