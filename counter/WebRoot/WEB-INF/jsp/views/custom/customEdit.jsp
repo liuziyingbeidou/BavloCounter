@@ -1,5 +1,6 @@
 <%@ page language="java" import="java.util.*" pageEncoding="utf-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix='fmt' uri="http://java.sun.com/jsp/jstl/fmt"%>
 <c:set var="ctx" value="${pageContext.request.contextPath}" />
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html>
@@ -127,6 +128,28 @@ $(function() {
 			$(this).hide();
 			$(".zhanwei").append(
 					$('<span class="lbl-input" contenteditable="true"/>'))
+		});
+		
+		//弹出框
+		$(function() {
+			$(".kxsGem_btn").click(function() {
+				$(".alertdiv1").show();
+			});
+			
+			$(".fenxiang_col").click(function() {
+				$(".alertdiv1").hide();
+			});
+			
+			
+			
+			$(document).click(
+					function(e) {
+						var target = $(e.target);
+						if (target.closest(".kxsGem_btn").length == 0
+								&& target.closest(".login_reg_div1").length == 0) {
+							$(".login_reg_div1").hide();
+						}
+					});
 		});
 
 		$(".zhanwei")
@@ -420,8 +443,9 @@ function initFieldSuffix(){
 								</li>
 								<li class="kzs_gl"><input type='button' name="guanlian"
 									value="+ 关联" /></li>
-								<li class="kps"><img src="${ctx}/resources/images/zb_09.png" width="42"
-									height="42" /></li>
+								<li class="kong">空</li>
+								<%-- <li class="kps"><img src="${ctx}/resources/images/zb_09.png" width="42"
+									height="42" /></li> --%>
 								<li class="cha"><a href="javascript:h('kpsGem')"><font>X</font></a></li>
 							</ul>
 							<div class="clear"></div>
@@ -430,7 +454,52 @@ function initFieldSuffix(){
 				</dl>
 				<div style="width: 100%; position: relative;">
 					<!--库选石弹窗-->
-					<div class="kxbs" id='kxs' style='display: none;'>
+					<div class="alertdiv1 login_reg_div1" style="display: none;">
+						<div class="fenxiang" >
+							<h5>库选宝石</h5>
+							<ul class="xbstc">
+								<li><label>类 型</label>
+									<p>
+										<select class="gem_type">
+											<option value="1">钻石</option>
+											<c:forEach var="gemType" items="${gemType }">
+												<option value="${gemType.id }">${gemType.type_cn }</option>
+											</c:forEach>
+										</select>
+									</p></li>
+								<li><label>形 状</label>
+									<p>
+										<select class="gem_shape">
+											<option value="4">圆形</option>
+										</select>
+									</p></li>
+								<li><label>规 格</label>
+									<p>
+										<select class="gem_calibrated">
+											<c:forEach var="calibrated" items="${calibtateds }">
+												<option value="${calibrated.id }">
+													<fmt:formatNumber type="number" pattern="0.00"
+														value="${calibrated.x }" /> ×
+													<fmt:formatNumber type="number" pattern="0.00"
+														value="${calibrated.y }" /> ×
+													<fmt:formatNumber type="number" pattern="0.00"
+														value="${calibrated.z }" />
+												</option>
+											</c:forEach>
+										</select>
+									</p></li>
+							</ul>
+							<div class="gem_sel_r" >
+								<div  class="gem_sel_h"></div>
+								<div  class="gem_sel_t">
+									<input type="button" class="gem_btn" id="gem_exit" value="取消"/>
+									<input type="button" class="gem_btn" id="gem_add" value="确定"/>
+								</div>
+							</div>
+						</div>	
+					</div>
+					<!--分享弹出框-->
+					<%-- <div class="kxbs" id='kxs' style='display: none;'>
 						<div class="kxbs-in">
 							<div class="kxbs-in-close">
 								<a href="javascript:;" onclick="KxsShow_Hidden(kxs)">X</a>
@@ -465,7 +534,7 @@ function initFieldSuffix(){
 							<div class="clear"></div>
 							<input type="submit" name="button" value="OK" class="ok" />
 						</div>
-					</div>
+					</div> --%>
 					<!--库选石弹窗END-->
 				</div>
 				<div class="xuanze">
