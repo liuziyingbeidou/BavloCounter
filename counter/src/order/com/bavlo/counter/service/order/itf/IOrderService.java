@@ -33,7 +33,9 @@ public interface IOrderService {
 	
 	public void updateAddr(AddressVO addressVO);
 	
-	public List<AddressVO> findListAddr();
+	public List<AddressVO> findListAddr(String wh);
 	
 	public AddressVO findSigleAddr(Integer id);
+	
+	public void delAddrById(Integer id);
 }
