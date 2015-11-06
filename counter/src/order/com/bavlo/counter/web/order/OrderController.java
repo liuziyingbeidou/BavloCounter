@@ -17,6 +17,7 @@ import com.bavlo.counter.model.order.OrderVO;
 import com.bavlo.counter.model.sign.GemSignVO;
 import com.bavlo.counter.service.order.itf.IOrderService;
 import com.bavlo.counter.utils.CommonUtils;
+import com.bavlo.counter.utils.StringUtil;
 import com.bavlo.counter.web.BaseController;
 
 /**
@@ -94,8 +95,39 @@ public class OrderController extends BaseController {
 		value.append(addressVO.getVreceiverName()+" ");
 		value.append(addressVO.getVprovince()+" ");
 		value.append(addressVO.getVcity()+" ");
+		value.append(addressVO.getVdistrict()+" ");
 		value.append(addressVO.getVstreet());
 		
 		renderJson("{\"id\":\""+id+"\",\"val\":\""+value+"\"}");
+	}
+	
+	@RequestMapping(value="/getAddrListJson")
+	public void getAddrListJson(HttpServletRequest request){
+		String customerId = request.getParameter("customerId");
+		String wh = " 1=2";
+		if(StringUtil.isNotEmpty(customerId+"")){
+			wh = " customerId="+customerId;
+		}
+		List<AddressVO> list = orderService.findListAddr(wh);
+		renderJson(list);
+	}
+	
+	@RequestMapping(value="/getAddrInfoJsonById")
+	public void getAddrInfoJsonById(HttpServletRequest request){
+		String id = request.getParameter("id");
+		if(StringUtil.isEmpty(id)){
+			id = "-1";
+		}
+		AddressVO vo = orderService.findSigleAddr(Integer.valueOf(id));
+		renderJson(vo);
+	}
+	
+	@RequestMapping(value="/delAddrById")
+	public void delAddrById(HttpServletRequest request){
+		String id = request.getParameter("id");
+		if(StringUtil.isEmpty(id)){
+			id = "-1";
+		}
+		orderService.delAddrById(Integer.valueOf(id));
 	}
 }

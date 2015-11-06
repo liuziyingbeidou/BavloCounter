@@ -8,6 +8,7 @@ import com.bavlo.counter.model.order.AddressVO;
 import com.bavlo.counter.model.order.OrderVO;
 import com.bavlo.counter.service.impl.CommonService;
 import com.bavlo.counter.service.order.itf.IOrderService;
+import com.bavlo.counter.utils.StringUtil;
 
 /**
  * @Title: ±¦ççCounter
@@ -53,6 +54,11 @@ public class OrderService extends CommonService implements IOrderService {
 	public Integer saveAddrRelID(AddressVO addressVO) {
 		Integer id = null;
 		try {
+			Integer custId = addressVO.getCustomerId();
+			Integer count = getCountByHQL(AddressVO.class, " customerId="+custId);
+			if(count == 0){
+				addressVO.setBisDefault("Y");
+			}
 			id = saveReID(addressVO);
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -62,18 +68,26 @@ public class OrderService extends CommonService implements IOrderService {
 
 	@Override
 	public void updateAddr(AddressVO addressVO) {
+		Integer id = addressVO.getId();
+		AddressVO srcvo = findFirst(AddressVO.class, " id="+id);
+		addressVO.setBisDefault(srcvo.getBisDefault());
 		update(addressVO);
 	}
 
 	@Override
-	public List<AddressVO> findListAddr() {
-		return findAll(AddressVO.class, "",null,"ts","desc");
+	public List<AddressVO> findListAddr(String wh) {
+		return findAll(AddressVO.class, wh,null,"ts","desc");
 	}
 
 	@Override
 	public AddressVO findSigleAddr(Integer id) {
 		String wh = " id ="+id;
 		return findFirst(AddressVO.class, wh);
+	}
+
+	@Override
+	public void delAddrById(Integer id) {
+		delete(AddressVO.class, id);
 	}
 	
 }
