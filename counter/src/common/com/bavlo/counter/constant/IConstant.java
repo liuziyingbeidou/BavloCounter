@@ -26,6 +26,7 @@ public interface IConstant {
 	public static final String COMMON_UPLOAD = "upload";
 	public static final String COMMON_SHOWPIC = "showpic";
 	public static final String COMMON_CHAIN = "chain";
+	public static final String COMMON_GEM = "gem";
 	/**实物签收单模块*/
 	public static final String PATH_ENTITY = "entitysign/";
 	public static final String ENTITY_SIGN_EDIT = "entity-sign-edit";
