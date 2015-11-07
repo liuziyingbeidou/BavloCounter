@@ -24,4 +24,13 @@ public class CommonController extends BaseController {
 		
 		return model;
 	}
+	
+	@RequestMapping(value="getGemInfo")
+	public ModelAndView getGemInfo(){
+		
+		ModelAndView model = new ModelAndView(IConstant.PATH_COMMON + IConstant.COMMON_GEM);
+		
+		return model;
+	}
+	
 }
