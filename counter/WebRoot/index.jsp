@@ -37,6 +37,11 @@ $(function(){
        <a href="${ctx}/custom/list.do">定制单列表</a>
     <br>
     <br>
+     <fieldset>
+    	<legend>订单→定制单→订单</legend>
+    	订单中添加定制单时调用url=info.do?orderId="+data.id+"&customerId="+customerId{orderId:订单ID,customerId:客户ID}
+    	定制单中点击保存调用该方法（调用方式）:window.opener.loadCumById(定制单ID);
+    </fieldset>
     <fieldset>
     	<legend>弹框Demo</legend>
     	<a href="http://127.0.0.1:8080/counter/demo/dialog.jsp">点我</a>
