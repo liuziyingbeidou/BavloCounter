@@ -71,6 +71,65 @@ function loadRingSizeData(nativeUrl,remoteUrl,emName,selId,selName1,selName2,sel
 }
 
 /**
+ * 获取宝石图片
+ * @param nativeUrl
+ * @param remoteUrl
+ */
+function loadGemImg(nativeUrl,remoteUrl){
+	var type_cn = $("#gemTypeId").find("option:selected").text();
+	var shape_cn = $("#gemShapeId").find("option:selected").text();
+	var calibrated_cn = $("#gemSpecId").find("option:selected").text();
+	$.get(nativeUrl,
+		{url:remoteUrl},
+		function(data){
+			var html = "";
+			for (var i = 0; i < data.length; i++) {
+				html += "<span class='gem_img' type='"+type_cn+"' shape='"+shape_cn+"' calibrated='"+calibrated_cn+"' weight='"+data[i].weight+"' costPrice='"+data[i].costPrice+"'>"
+						+ "<img src='http://img.bavlo.com/GemPics/"+data[i].shape.id+"_"+data[i].color.id+".png'/><div class='weight'>"
+						+ data[i].weight
+						+ '&nbsp;&nbsp;'
+						+ "CT &nbsp;&nbsp;&nbsp;&nbsp;</div></span>"
+			}
+			$(".gem_sel_h").html(html);
+			$(".gem_img").click(function() {
+				if ($(this).attr("class") == 'gem_img') {
+					$(".gem_img_sel").attr("class", "gem_img");
+					$(this).attr("class", "gem_img_sel");
+				} else {
+					$(this).attr("class", "gem_img");
+				}
+			})
+		
+	});
+	/*$.ajax({
+		type:"get",
+		url:nativeUrl,
+		data:"url="+remoteUrl,
+		dataType:"json",
+		success:function(row){
+			var html = "";
+			for (var i = 0; i < data.length; i++) {
+				html += "<span class='gem_img' type='"+type_cn+"' shape='"+shape_cn+"' calibrated='"+calibrated_cn+"' weight='"+data[i].weight+"' costPrice='"+data[i].costPrice+"'>"
+						+ "<img src='http://img.bavlo.com/GemPics/"+data[i].shape.id+"_"+data[i].color.id+".png'/><div class='weight'>"
+						+ data[i].weight
+						+ '&nbsp;&nbsp;'
+						+ "CT &nbsp;&nbsp;&nbsp;&nbsp;</div></span>"
+			}
+			$(".gem_sel_h").html(html);
+			$(".gem_img").click(function() {
+				if ($(this).attr("class") == 'gem_img') {
+					$(".gem_img_sel").attr("class", "gem_img");
+					$(this).attr("class", "gem_img_sel");
+				} else {
+					$(this).attr("class", "gem_img");
+				}
+			})
+		}
+		
+	});*/
+}
+
+/**
  * 宝石类型(未使用)
  * @param nativeUrl
  * @param remoteUrl
