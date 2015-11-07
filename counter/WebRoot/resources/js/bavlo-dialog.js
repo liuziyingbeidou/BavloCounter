@@ -9,7 +9,7 @@
 }( jQuery ));
 
 function openURL(url, title,width, height ) {
-	var jwidth = 500,jheight = 400;
+	var jwidth = 500,jheight = 560;
 	var jtitle = "Bavlo-Window";
 	if(title != undefined && title != "" && title != null){
 		jtitle = title;

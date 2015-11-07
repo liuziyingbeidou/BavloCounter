@@ -47,14 +47,14 @@
 			 params.kpsGemPrice=0;
 		 }
 	 })
-	 $(".lzGem_btn").click(function(){
-		 if($(".lzGem").css("display")=='none'){
-			 $(".lzGem").show();
-		 }else{
-			 $(".lzGem").hide();
-			 params.lzGemPrice=0;
-		 }
-	 })
+//	 $(".lzGem_btn").click(function(){
+//		 if($(".lzGem").css("display")=='none'){
+//			 $(".lzGem").show();
+//		 }else{
+//			 $(".lzGem").hide();
+//			 params.lzGemPrice=0;
+//		 }
+//	 })
 	 
  })
  function h(str){

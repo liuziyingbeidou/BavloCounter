@@ -44,7 +44,6 @@
 //本地webservice
 var nativeUrl = "${pageScope.basePath}/counter/webservice/http.do";
 $(function() {
-	// 款式名字初始化
 
 	// 款式类型下拉框值
 	var typeUrl = "http://www.bavlo.com/getAllStyleType";
@@ -78,34 +77,16 @@ $(function() {
 		}
 	});
 
-	// 填充所有链子类型于下拉框
-	function initChainStyle() {
-		var styleUrl = "http://www.bavlo.com/getAllChainStyle";
-		loadSelData(nativeUrl, styleUrl, "chain-style-id", "data[i].id",
-				"data[i].name_cn", function() {
-				});
-	}
-
-	// 根据选择链子材质+类型选择链子(chain-spec-id)
-	function initChainSpec(emName) {
-		$('#' + emName).empty();
-		$('#' + emName).append("<option value='-1'>==请选择==</option>");
-		var chainMaterialId = $("#chain-material-id").val();
-		var chainStyleId = $("#chain-style-id").val();
-		var styleUrl = "http://www.bavlo.com/getChainList?metalId="
-				+ chainMaterialId + "&chainStyleId=" + chainStyleId;
-		$.get(nativeUrl, {
-			url : styleUrl
-		}, function(row) {
-			var data = row;
-			for (var i = 0; i < data.length; i++) {
-				$('#' + emName).append(
-						"<option cost=" + data[i].chainCost + " value='"
-								+ data[i].id + "'>" + data[i].x + " x "
-								+ data[i].y + " x " + data[i].z + "</option>");
-			}
-		});
-	}
+	
+	//宝石弹框
+	$(".kxsGem_btn").click(function(){
+		openURL("${ctx}/common/getGemInfo.do","库选石");
+	});
+	//链子弹框
+	$(".lzGem_btn").click(function(){
+		openURL("${ctx}/common/getChainInfo.do","链子");
+	});
+	
 	//初始化刻字
 	var WS = function(opt) {
 
@@ -128,28 +109,6 @@ $(function() {
 			$(this).hide();
 			$(".zhanwei").append(
 					$('<span class="lbl-input" contenteditable="true"/>'))
-		});
-		
-		//弹出框
-		$(function() {
-			$(".kxsGem_btn").click(function() {
-				$(".alertdiv1").show();
-			});
-			
-			$(".fenxiang_col").click(function() {
-				$(".alertdiv1").hide();
-			});
-			
-			
-			
-			$(document).click(
-					function(e) {
-						var target = $(e.target);
-						if (target.closest(".kxsGem_btn").length == 0
-								&& target.closest(".login_reg_div1").length == 0) {
-							$(".login_reg_div1").hide();
-						}
-					});
 		});
 
 		$(".zhanwei")
@@ -211,6 +170,7 @@ $(function() {
 
 // 定制单保存
 function saveOrUpdate() {
+	cleanFieldSuffix();
 	$.ajax({
 		type : "POST",
 		url : "saveOrUpdate.do",
@@ -220,9 +180,11 @@ function saveOrUpdate() {
 		success : function(data) {
 			$("#styleid").val(data.id);
 			alert("保存成功!");
+			initFieldSuffix();
 		},
 		error : function(e) {
 			alert("保存失败!");
+			initFieldSuffix();
 		}
 	});
 }
@@ -239,7 +201,7 @@ function initFieldSuffix(){
 	}
   	if($(".kps_count").val() != ""){
 		//数量
-		initSuffix("kzs_count","颗"); 
+		initSuffix("kps_count","颗"); 
 	}
 	if($(".custom_item").val() != ""){
 		//数量
@@ -250,6 +212,37 @@ function initFieldSuffix(){
 		initSuffix("costom_otherPrice","元"); 
 	}
 }
+
+//清除后缀
+function cleanFieldSuffix(){
+	//重量 
+	clearSuffix("custom_weight","克");
+	//金额 
+	clearSuffix("kzs_price","元");
+	//数量
+	clearSuffix("kps_count","颗");
+	//金额 
+	clearSuffix("costom_otherPrice","元");
+	//数量
+	clearSuffix("custom_item","条");
+}
+
+//子窗体调用
+function setValueByFrame(type,id,json){
+	var url;
+	if(type == "chain"){
+		var data = JSON.parse(json);
+		//$(".partsGem .list_name").text(data.sname);
+		//$(".partsGem .list_price").text(data.sprice);
+		$(".chain").append("<dd class='"+data.sid+"'><div class='lianzi'><h3>链子</h3><a href='javascript:rlist("+data.sid+")' class='close_c'><font>X</font></a><div class='clear'></div><input class='custom_item' id='iitem' name='iitem' type='text' value='' placeholder='条'><strong>"+data.sname+"</strong></div></dd>");
+	}
+	
+}
+//删除清单
+function rlist(className){
+	$("."+className).remove();
+}
+
 </script>
 
 </head>
@@ -403,17 +396,8 @@ function initFieldSuffix(){
 					onblur="if(value==''){value='元'}"
 					class="jiege" /> <b>+选择</b>
 				</div> -->
-				<dl>
-					<dd class="lzGem" style="display: none">
-						<div class="lianzi">
-							<h3>链子</h3>
-							<a href="javascript:h('lzGem')"><font>X</font></a>
-							<div class="clear"></div>
-							<input type="text" id="iitem" name="iitem"
-							placeholder="条"
-							class="custom_item" /> <strong>肖邦链 W18k 16"×1.6mm</strong>
-						</div>
-					</dd>
+				<dl class="chain">
+
 					<dd class="kzsGem" style="display: none">
 						<div class="kzs">
 							<h3>
@@ -452,97 +436,14 @@ function initFieldSuffix(){
 						</div>
 					</dd>
 				</dl>
-				<div style="width: 100%; position: relative;">
-					<!--库选石弹窗-->
-					<div class="alertdiv1 login_reg_div1" style="display: none;">
-						<div class="fenxiang" >
-							<h5>库选宝石</h5>
-							<ul class="xbstc">
-								<li><label>类 型</label>
-									<p>
-										<select class="gem_type">
-											<option value="1">钻石</option>
-											<c:forEach var="gemType" items="${gemType }">
-												<option value="${gemType.id }">${gemType.type_cn }</option>
-											</c:forEach>
-										</select>
-									</p></li>
-								<li><label>形 状</label>
-									<p>
-										<select class="gem_shape">
-											<option value="4">圆形</option>
-										</select>
-									</p></li>
-								<li><label>规 格</label>
-									<p>
-										<select class="gem_calibrated">
-											<c:forEach var="calibrated" items="${calibtateds }">
-												<option value="${calibrated.id }">
-													<fmt:formatNumber type="number" pattern="0.00"
-														value="${calibrated.x }" /> ×
-													<fmt:formatNumber type="number" pattern="0.00"
-														value="${calibrated.y }" /> ×
-													<fmt:formatNumber type="number" pattern="0.00"
-														value="${calibrated.z }" />
-												</option>
-											</c:forEach>
-										</select>
-									</p></li>
-							</ul>
-							<div class="gem_sel_r" >
-								<div  class="gem_sel_h"></div>
-								<div  class="gem_sel_t">
-									<input type="button" class="gem_btn" id="gem_exit" value="取消"/>
-									<input type="button" class="gem_btn" id="gem_add" value="确定"/>
-								</div>
-							</div>
-						</div>	
-					</div>
-					<!--分享弹出框-->
-					<%-- <div class="kxbs" id='kxs' style='display: none;'>
-						<div class="kxbs-in">
-							<div class="kxbs-in-close">
-								<a href="javascript:;" onclick="KxsShow_Hidden(kxs)">X</a>
-							</div>
-							<div id="choose">
-								<h3>库选宝石</h3>
-								<select>
-									<option>锰铝榴石</option>
-								</select>
-							</div>
-							<div id="choose">
-								<select>
-									<option>椭圆形</option>
-								</select>
-							</div>
-							<div id="choose">
-								<select>
-									<option>11.60x11.58x7.22</option>
-								</select>
-							</div>
-							<dl>
-								<dd>
-									<img src="${ctx}/resources/images/ks_01.png" />
-								</dd>
-								<dd>
-									<img src="${ctx}/resources/images/ks_02.png" />
-								</dd>
-								<dd>
-									<img src="${ctx}/resources/images/ks_03.png" />
-								</dd>
-							</dl>
-							<div class="clear"></div>
-							<input type="submit" name="button" value="OK" class="ok" />
-						</div>
-					</div> --%>
-					<!--库选石弹窗END-->
-				</div>
+<!-- 				<div style="width: 100%; position: relative;">
+				
+				</div> -->
 				<div class="xuanze">
 					<ul>
 						<li><a href="javascript:;" class="kzsGem_btn">+客主石</a></li>
 						<li><a href="javascript:;" class="kpsGem_btn">+客配石</a></li>
-						<li><a href="javascript:;" onclick="KxsShow_Hidden(kxs)"
-							class="kxsGem_btn">+库选石</a></li>
+						<li><a href="javascript:;" class="kxsGem_btn">+库选石</a></li>
 						<li><a href="javascript:void(0);" class="lzGem_btn">+链子</a></li>
 					</ul>
 					<div class="clear"></div>

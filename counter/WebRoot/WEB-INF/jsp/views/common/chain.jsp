@@ -78,9 +78,6 @@ function initChainSpec(emName){
 <div id="kxbs">
 			<div id='kxs'>
 				<div class="kxbs-in">
-					<div class="kxbs-in-close">
-						<a href="javascript:;" onclick="KxsShow_Hidden(kxs)">X</a>
-					</div>
 					<div id="choose">
 						<h3>
 							链子

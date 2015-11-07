@@ -60,7 +60,7 @@
     	//主石金额
     	setSuffix("kzs_price","元");
     	//配石数量
-    	setSuffix("kzs_count","颗");
+    	setSuffix("kps_count","颗");
     	//链子条数
     	setSuffix("custom_item","条");
     	//其他金额
