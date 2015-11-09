@@ -30,6 +30,10 @@ public class OrderBVO extends IdEntity{
 	 */
 	private String vsourceId;
 	/*
+	 * (物品名称)
+	 */
+	private String vname;
+	/*
 	 * 数量		int	
 	 */
 	private Integer nnumber;
@@ -77,6 +81,12 @@ public class OrderBVO extends IdEntity{
 	}
 	public void setVpic(String vpic) {
 		this.vpic = vpic;
+	}
+	public String getVname() {
+		return vname;
+	}
+	public void setVname(String vname) {
+		this.vname = vname;
 	}
 
 }

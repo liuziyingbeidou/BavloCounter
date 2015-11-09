@@ -32,6 +32,17 @@ public class OrderService extends CommonService implements IOrderService {
 	}
 
 	@Override
+	public OrderVO saveOrderRelVO(OrderVO orderVO){
+		OrderVO vo = new OrderVO();
+		try {
+			vo = (OrderVO)saveReDTO(orderVO);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return vo;
+	}
+	
+	@Override
 	public void updateOrder(OrderVO orderVO) {
 		update(orderVO);
 	}
