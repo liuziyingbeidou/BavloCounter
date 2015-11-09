@@ -39,8 +39,9 @@ $(function(){
     <br>
      <fieldset>
     	<legend>订单→定制单→订单</legend>
-    	订单中添加定制单时调用url=info.do?orderId="+data.id+"&customerId="+customerId{orderId:订单ID,customerId:客户ID}
-    	定制单中点击保存调用该方法（调用方式）:window.opener.loadCumById(定制单ID);
+    	1、订单中添加定制单时调用url=info.do?orderId="+data.id+"&customerId="+customerId{orderId:订单ID,customerId:客户ID}<br>
+    	2、定制单中点击保存调用该方法（调用方式）:window.opener.loadCumById(定制单ID);
+    	3、定制单保存后需要回写订单中的子表信息；回写条件：订单ID+定制单ID
     </fieldset>
     <fieldset>
     	<legend>弹框Demo</legend>
@@ -52,17 +53,17 @@ $(function(){
     </fieldset>
     <fieldset>
     	<legend>展示图片设置方法</legend>
-    	openURL("${ctx}/upload/showpic.do?cpath=com.bavlo.counter.model.sign.GemSignBVO&fkey=gemsignId&id="+mid,"图片展示");
-    	cpath:图片VO类全路径
-    	fkey:主表在子表的外键
+    	openURL("${ctx}/upload/showpic.do?cpath=com.bavlo.counter.model.sign.GemSignBVO&fkey=gemsignId&id="+mid,"图片展示");<br>
+    	cpath:图片VO类全路径<br>
+    	fkey:主表在子表的外键<br>
     	id:主表主键
     </fieldset>
     <fieldset>
     	<legend>后缀单位设置方法</legend>
-    	1、引入<script src="${ctx}/resources/js/bavlo-event.js"></script>
-    	2、设置placeholder="后缀"
-    	3、设置属性class
-    	4、在bavlo-event.js中添加如下：
+    	1、引入<script src="${ctx}/resources/js/bavlo-event.js"></script><br>
+    	2、设置placeholder="后缀"<br>
+    	3、设置属性class<br>
+    	4、在bavlo-event.js中添加如下：<br>
     	setSuffix(class属性值,后缀);实例：setSuffix("worth","元");
     </fieldset>
 </body>
