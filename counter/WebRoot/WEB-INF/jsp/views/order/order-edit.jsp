@@ -70,7 +70,11 @@ $(function(){
 	$(".partsGem_btn").click(function(){
 		openURL("${ctx}/common/getChainInfo.do","链子");
 	});
-	
+	//点击"定制单"
+	$(".custom_btn").click(function(){
+		//{到定制单前预保存订单}
+		preSaveToCum();
+	});
 	//选择下拉框值
 	setSelValue();
 	//加载交付地址
@@ -80,6 +84,7 @@ $(function(){
 		openURL("${ctx}/order/list.do","订单列表",500,600);
 	});
 });
+
 
 //根据addressId显示地址信息
 function showAddrInfo(){
@@ -175,15 +180,25 @@ function setSelValue(){
 	$(".deliveryWay").val("${ordervo['vdeliveryWay']}");
 }
 
-//保存地址
-function saveAddr(){
+//校验
+function check(){
 	
 	//客户ID
 	var customerId = $("#customerId").val();
 	
 	if(customerId == ""){
 		alert("请选择客户...");
-		return;
+		return true;
+	}
+	
+	return false;
+}
+
+//保存地址
+function saveAddr(){
+	
+	if(check()){
+		return ;
 	}
 	
 	//姓名
@@ -214,8 +229,43 @@ function saveAddr(){
 	);
 }
 
+//定制单保存回调此方法，添加到清单中
+function loadCumById(cumId){
+	//根据定制单ID获取定制单信息{edit:需要提供返回默认图的信息}
+	var url = "${ctx}/order/getCumById.do";
+	$.get(url,{id:cumId},function(data){
+		data = JSON.parse("{\"id\":\"1\",\"nprice\":\"23\"}");
+		$("#order-list").append("<dd type='dz' sid='"+data.id+"' class='"+data.id+" bill'><img class='bill-pic' src='${ctx}/resources/images/good_01.png'><input class='bill-num' type='text' placehoder='对' value='1'><b class='bill-price'>"+data.nprice+"元</b><a href='javascript:rlist("+data.id+")' class='close_c'><img src='${ctx}/resources/images/close.png'></a></dd>");
+	});
+}
+
+//到定制单前预保存订单
+function preSaveToCum(){
+	if(check()){
+		return ;
+	}
+	var id = $("#orderId").val();
+	var customerId = $("#customerId").val();
+	if(id == ""){
+		var url = "save.do";
+		var state = $("#orderState").val();
+		$.post(url,{customerId:customerId,iorderState:state},function(data){
+			$("#orderId").val(data.id);
+			window.open("${ctx}/custom/info.do?orderId="+data.id+"&customerId="+customerId); 
+		});
+	}else{
+		//打开定制单
+		window.open("${ctx}/custom/info.do?orderId="+id+"&customerId="+customerId); 
+	}
+}
+
 //保存订单
 function saveOrder(){
+
+	if(check()){
+		return ;
+	}
+	
 	//报价
     clearSuffix("order-quotedPrice","元");
     //已付
@@ -224,10 +274,14 @@ function saveOrder(){
     clearSuffix("order-nonPayment","元");
     //尾款实收
     clearSuffix("order-tailPaid","元");
+    
+    //清单数据
+    var orderListJson = getOrderListInfo();
+    
 	$.ajax({
 			type : "POST",
 			     url : "save.do",
-			     data:$('#orderFrmId').serialize(),// formid
+			     data:$('#orderFrmId').serialize()+"&list="+orderListJson,// formid
 			     async:false,
 			     cache:false,
 			     success : function(data) {
@@ -240,6 +294,32 @@ function saveOrder(){
 		    });
 		    //有值加后缀
 			initFieldSuffix();
+}
+
+//收集-清单数据
+function getOrderListInfo(){
+	var listJson = "[";
+	$(".bill").each(function(index,domEle){
+		var type = $(this).attr("type");
+		if(type == "ch"){//链子
+			var sid = $(this).attr("sid");
+			var sname = $(this).find(".bill-name").text();
+			var num = $(this).find(".bill-num").val();
+			var price = $(this).find(".bill-price").text();
+			listJson+="{\"vsourceType\":\""+type+"\",\"vname\":\""+sname+"\",\"vsourceId\":\""+sid+"\",\"nnumber\":\""+num+"\",\"nprice\":\""+price+"\"},";
+		}else if(type == "dz"){
+			var sid = $(this).attr("sid");
+			var pic = $(this).find(".bill-pic").text();
+			var num = $(this).find(".bill-num").val();
+			var price = $(this).find(".bill-price").text();
+			listJson+="{\"vsourceType\":\""+type+"\",\"vsourceId\":\""+sid+"\",\"nnumber\":\""+num+"\",\"nprice\":\""+price+"\",\"vpic\":\""+pic+"\"},";
+		}
+	});
+	if(listJson.length > 1){
+		listJson = listJson.substring(0,listJson.length-1);
+	}
+	listJson+="]";
+	return listJson;
 }
 		function initFieldSuffix(){
 			if($(".order-quotedPrice").val() != ""){
@@ -278,7 +358,7 @@ function saveOrder(){
 				var data = JSON.parse(json);
 				//$(".partsGem .list_name").text(data.sname);
 				//$(".partsGem .list_price").text(data.sprice);
-				$("#order-list").append("<dd class='"+data.sid+"'><span class='list_name'>"+data.sname+"</span><input class='list_num' style='width:40px;margin-left:10px;' type='text' value='' placeholder='条'><b class='list_price'>"+data.sprice+"</b><a href='javascript:rlist("+data.sid+")' class='close_c'><img src='${ctx}/resources/images/close.png'></a></dd>");
+				$("#order-list").append("<dd type='ch' sid='"+data.sid+"' class='"+data.sid+" bill'><span class='list_name bill-name'>"+data.sname+"</span><input class='list_num bill-num' style='width:40px;margin-left:10px;' type='text' value='1' placeholder='条'><b class='list_price bill-price'>"+data.sprice+"</b><a href='javascript:rlist("+data.sid+")' class='close_c'><img src='${ctx}/resources/images/close.png'></a></dd>");
 			}else if(type == "order"){
 				url = "${ctx}/order/view.do?id="+id;//根据id查询客户信息
 				window.location = url;
@@ -298,7 +378,14 @@ function saveOrder(){
 <body>
 <form id="orderFrmId">
 <input type="hidden" name="id" id="orderId" value="${ordervo['id']}">
-<input type="hidden" name="iorderState" value="${ordervo['iorderState']}">
+<input type="hidden" name="iorderState" id="orderState" value="<c:choose>
+						 <c:when test="${empty ordervo['iorderState']}">   
+						 0
+						 </c:when>
+						 <c:otherwise>
+						 ${ordervo['iorderState']}
+						 </c:otherwise>	
+					</c:choose> ">
 <input type="hidden" name="customerId" id="customerId" value="${ordervo['customerId']}">
 <div class="header">
 	<div class="head1">
@@ -476,5 +563,5 @@ function saveOrder(){
     </div>
 </div>
 </form>
-</body>
+	</body>
 </html>
