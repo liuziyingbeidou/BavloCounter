@@ -13,6 +13,17 @@ public interface IConstant {
 	public static final String NO = "N";
 	
 	/**
+	 * 订单状态 
+	 * 提交(0)、制版(1)、生产(2)、质检(3)、快递(4)、支付(5)
+	 * commit (0), Plate (1), Production (2), quality (3), express (4), payment (5)
+	 */
+	public static final Integer ORDER_COMMIT = 0;
+	public static final Integer ORDER_PLATE = 1;
+	public static final Integer ORDER_PRODUCTION = 2;
+	public static final Integer ORDER_QUALITY = 3;
+	public static final Integer ORDER_EXPRESS = 4;
+	public static final Integer ORDER_PAYMENT = 5;
+	/**
 	 * 编码前缀
 	 */
 	//宝石签收单
