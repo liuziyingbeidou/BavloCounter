@@ -14,10 +14,12 @@ import org.springframework.web.servlet.ModelAndView;
 import com.bavlo.counter.constant.IConstant;
 import com.bavlo.counter.model.custom.CustomVO;
 import com.bavlo.counter.model.order.AddressVO;
+import com.bavlo.counter.model.order.OrderBVO;
 import com.bavlo.counter.model.order.OrderVO;
 import com.bavlo.counter.service.custom.itf.ICustomService;
 import com.bavlo.counter.service.order.itf.IOrderService;
 import com.bavlo.counter.utils.CommonUtils;
+import com.bavlo.counter.utils.JsonUtils;
 import com.bavlo.counter.utils.StringUtil;
 import com.bavlo.counter.web.BaseController;
 
@@ -76,13 +78,23 @@ public class OrderController extends BaseController {
 	}
 	
 	@RequestMapping(value="/save")
-	public void saveOrder(OrderVO orderVO){
+	public void saveOrder(HttpServletRequest request,OrderVO orderVO){
 		Integer id = orderVO.getId();
+		String listbvo = request.getParameter("list");
+		
 		if(id == null){
 			id = orderService.saveOrderRelID(orderVO);
 		}else{
 			orderService.updateOrder(orderVO);
 		}
+		
+		//组织子表数据-删除更新
+		List list = JsonUtils.getList4Json(listbvo, OrderBVO.class);
+		if(list != null){
+			orderService.delOrderByMid(id);
+			orderService.saveOrderBVO(id,list);
+		}
+		
 		renderJson("{\"id\":"+id+"}");
 	}
 	
@@ -101,6 +113,12 @@ public class OrderController extends BaseController {
 	public void getCumById(Integer id){
 		CustomVO cvo = customService.findCustomById(id);
 		renderJson(cvo);
+	}
+	
+	@RequestMapping(value="/getOrderListByMid")
+	public void getOrderListByMid(Integer mid){
+		List<OrderBVO> listvo = orderService.findListOrderBVO(mid);
+		renderJson(listvo);
 	}
 	
 	/*************************以下是交付地址********************************/
