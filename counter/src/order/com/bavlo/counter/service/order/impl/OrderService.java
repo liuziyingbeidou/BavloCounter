@@ -5,10 +5,10 @@ import java.util.List;
 import org.springframework.stereotype.Service;
 
 import com.bavlo.counter.model.order.AddressVO;
+import com.bavlo.counter.model.order.OrderBVO;
 import com.bavlo.counter.model.order.OrderVO;
 import com.bavlo.counter.service.impl.CommonService;
 import com.bavlo.counter.service.order.itf.IOrderService;
-import com.bavlo.counter.utils.StringUtil;
 
 /**
  * @Title: 宝珑Counter
@@ -43,6 +43,18 @@ public class OrderService extends CommonService implements IOrderService {
 	}
 	
 	@Override
+	public void saveOrderBVO(Integer id,List<OrderBVO> orderListBVO){
+		try {
+			for (OrderBVO orderBVO : orderListBVO) {
+				orderBVO.setOrderId(id);
+			}
+			save(orderListBVO);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+	
+	@Override
 	public void updateOrder(OrderVO orderVO) {
 		update(orderVO);
 	}
@@ -57,6 +69,26 @@ public class OrderService extends CommonService implements IOrderService {
 	public OrderVO findSigleOrder(Integer id) {
 		String wh = " id ="+id;
 		return findFirst(OrderVO.class, wh);
+	}
+	
+	@Override
+	public void delOrderById(Integer id){
+		delete(OrderVO.class, id);
+		delOrderByMid(id);
+	}
+	
+	@Override
+	public void delOrderByMid(Integer mid){
+		List<OrderBVO> list = findListOrderBVO(mid);
+		if(list != null){
+			for (OrderBVO orderBVO : list) {
+				delete(orderBVO);
+			}
+		}
+	}
+	
+	public List<OrderBVO> findListOrderBVO(Integer mid){
+		return findAll(OrderBVO.class, " orderId="+mid);
 	}
 
 	/*******************************以下是交付地址***********************************/

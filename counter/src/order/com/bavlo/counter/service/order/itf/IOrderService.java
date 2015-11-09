@@ -3,6 +3,7 @@ package com.bavlo.counter.service.order.itf;
 import java.util.List;
 
 import com.bavlo.counter.model.order.AddressVO;
+import com.bavlo.counter.model.order.OrderBVO;
 import com.bavlo.counter.model.order.OrderVO;
 
 /**
@@ -23,11 +24,19 @@ public interface IOrderService {
 	
 	public OrderVO saveOrderRelVO(OrderVO orderVO);
 	
+	public void saveOrderBVO(Integer id,List<OrderBVO> orderListBVO);
+	
 	public void updateOrder(OrderVO orderVO);
 	
 	public List<OrderVO> findListOrder(String wh);
 	
 	public OrderVO findSigleOrder(Integer id);
+	
+	public void delOrderById(Integer id);
+	
+	public void delOrderByMid(Integer mid);
+	
+	public List<OrderBVO> findListOrderBVO(Integer mid);
 	
 	/*******************************以下是交付地址***********************************/
 	
