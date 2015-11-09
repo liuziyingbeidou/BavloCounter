@@ -77,14 +77,34 @@ $(function(){
 	});
 	//选择下拉框值
 	setSelValue();
-	//加载交付地址
-	initAddr();
 	//订单列表
 	$(".menu-order").bind("click",function(){
 		openURL("${ctx}/order/list.do","订单列表",500,600);
 	});
+	//订单清单
+	loadOrderList();
 });
 
+//加载清单列表
+function loadOrderList(){
+	var mid = $("#orderId").val();
+	var url = "${ctx}/order/getOrderListByMid.do";
+	$.get(url,{mid:mid},function(row){
+		var data = row;
+		if(data != null && data != ""){
+			for(var i = 0; i < data.length; i++){
+				var type = data[i].vsourceType;
+				if(type == "dz"){
+					$("#order-list").append("<dd type='dz' sid='"+data[i].vsourceId+"' class='"+data[i].vsourceId+" bill'><img class='bill-pic' src='${ctx}/resources/images/good_01.png'><input class='bill-num' type='text' placehoder='对' value='"+data[i].nnumber+"'><b class='bill-price'>"+data[i].nprice+"元</b><a href='javascript:rlist("+data[i].vsourceId+")' class='close_c'><img src='${ctx}/resources/images/close.png'></a></dd>");
+				}else if(type == "ch"){
+					$("#order-list").append("<dd type='ch' sid='"+data[i].vsourceId+"' class='"+data[i].vsourceId+" bill'><span class='list_name bill-name'>"+data[i].vname+"</span><input class='list_num bill-num' style='width:40px;margin-left:10px;' type='text' value='"+data[i].nnumber+"' placeholder='条'><b class='list_price bill-price'>"+data[i].nprice+"</b><a href='javascript:rlist("+data[i].vsourceId+")' class='close_c'><img src='${ctx}/resources/images/close.png'></a></dd>");
+				}
+			}
+		}
+		//加载交付地址
+		initAddr();
+	});
+}
 
 //根据addressId显示地址信息
 function showAddrInfo(){
@@ -351,6 +371,7 @@ function getOrderListInfo(){
 						}
 						$("#customerId").val(data.id);
 						//选客户后初始化交付地址
+						$("#tbl").empty();
 						initAddr();
 					}
 				});
