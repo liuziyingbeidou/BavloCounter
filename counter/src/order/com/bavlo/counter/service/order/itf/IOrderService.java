@@ -21,6 +21,8 @@ public interface IOrderService {
 	 */
 	public Integer saveOrderRelID(OrderVO orderVO);
 	
+	public OrderVO saveOrderRelVO(OrderVO orderVO);
+	
 	public void updateOrder(OrderVO orderVO);
 	
 	public List<OrderVO> findListOrder(String wh);

@@ -12,9 +12,10 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.bavlo.counter.constant.IConstant;
+import com.bavlo.counter.model.custom.CustomVO;
 import com.bavlo.counter.model.order.AddressVO;
 import com.bavlo.counter.model.order.OrderVO;
-import com.bavlo.counter.model.sign.GemSignVO;
+import com.bavlo.counter.service.custom.itf.ICustomService;
 import com.bavlo.counter.service.order.itf.IOrderService;
 import com.bavlo.counter.utils.CommonUtils;
 import com.bavlo.counter.utils.StringUtil;
@@ -33,6 +34,8 @@ public class OrderController extends BaseController {
 	
 	@Resource
 	IOrderService orderService;
+	@Resource
+	ICustomService customService;
 
 	@RequestMapping(value="/list")
 	public ModelAndView orderList(){
@@ -68,6 +71,7 @@ public class OrderController extends BaseController {
 		model.addObject("pageOrderType", IConstant.PAGE_TYPE_ADD);
 		//编号
 		model.addObject("number", CommonUtils.getBillCode(IConstant.CODE_ORDER));
+	
 		return model;
 	}
 	
@@ -91,6 +95,12 @@ public class OrderController extends BaseController {
 		model.addObject("pageOrderType", IConstant.PAGE_TYPE_EDIT);
 		model.addObject("ordervo",orderVO);
 		return model;
+	}
+	
+	@RequestMapping(value="/getCumById")
+	public void getCumById(Integer id){
+		CustomVO cvo = customService.findCustomById(id);
+		renderJson(cvo);
 	}
 	
 	/*************************以下是交付地址********************************/
