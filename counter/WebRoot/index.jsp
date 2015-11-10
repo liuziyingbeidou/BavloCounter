@@ -32,6 +32,7 @@ $(function(){
     <br>
     5、<a href="${ctx}/order/add.do">订单新增</a>
        <a href="${ctx}/order/list.do">订单列表</a>
+       <a href="${ctx}/order/view.do?id=1">订单查看</a>
     <br>   
     6、<a href="${ctx}/custom/info.do">定制单</a>
        <a href="${ctx}/custom/list.do">定制单列表</a>
