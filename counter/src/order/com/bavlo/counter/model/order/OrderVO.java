@@ -31,9 +31,11 @@ public class OrderVO extends IdEntity {
 	@Column(length=50)
 	private String vorderCode;	
 	/**
-	 * 订单状态		smallint	提交(0)、模具(1)、工艺(2)、质检(3)、快递(4)、支付(5)
+	 * 订单状态		smallint	提交(0)、制版(1)、生产(2)、质检(3)、快递(4)、支付(5)
 	 */
 	private Integer iorderState;
+	@Transient
+	private String orderState;
 	/**
 	 * 订单类型		varchar(10)	
 	 */
@@ -79,6 +81,17 @@ public class OrderVO extends IdEntity {
 	@Transient
 	private String vaddress;
 	/**
+	 * 收货人
+	 */
+	@Transient
+	private String vrname;
+	//联系电话
+	@Transient
+	private String vtel;
+	//email
+	@Transient
+	private String vmail;
+	/**
 	 * 预算区间价		varchar(50)	
 	 */
 	@Column(length=50)
@@ -115,6 +128,7 @@ public class OrderVO extends IdEntity {
 	 * 快递单号		varchar(50)	
 	 */
 	private String vcourierNumber;
+	
 	public Integer getCustomerId() {
 		return customerId;
 	}
@@ -246,6 +260,30 @@ public class OrderVO extends IdEntity {
 	}
 	public void setCustomerName(String customerName) {
 		this.customerName = customerName;
+	}
+	public String getVrname() {
+		return vrname;
+	}
+	public void setVrname(String vrname) {
+		this.vrname = vrname;
+	}
+	public String getVtel() {
+		return vtel;
+	}
+	public void setVtel(String vtel) {
+		this.vtel = vtel;
+	}
+	public String getVmail() {
+		return vmail;
+	}
+	public void setVmail(String vmail) {
+		this.vmail = vmail;
+	}
+	public String getOrderState() {
+		return orderState;
+	}
+	public void setOrderState(String orderState) {
+		this.orderState = orderState;
 	}
 	
 }

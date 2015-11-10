@@ -52,11 +52,11 @@ public class OrderController extends BaseController {
 	@RequestMapping(value="/listJson",method = RequestMethod.POST)
 	public void orderListJson(HttpServletRequest request){
 		String content = request.getParameter("content");
-		String wh = " 1=1";
+		/*String wh = " 1=1";
 		if(StringUtil.isNotEmpty(content)){
 			wh = " vorderCode like '%"+content+"%'";
-		}
-		List<OrderVO> orderList = orderService.findListOrder(wh);
+		}*/
+		List<OrderVO> orderList = orderService.findListOrderBySql(content);
 		
 		renderJson(orderList);
 	}
@@ -98,12 +98,23 @@ public class OrderController extends BaseController {
 		renderJson("{\"id\":"+id+"}");
 	}
 	
-	@RequestMapping(value="/view")
-	public ModelAndView orderView(@RequestParam(value="id",required=true) Integer id){
+	@RequestMapping(value="/edit")
+	public ModelAndView orderEdit(@RequestParam(value="id",required=true) Integer id){
 		
 		OrderVO orderVO = orderService.findSigleOrder(id);
 		
 		ModelAndView model = new ModelAndView(IConstant.PATH_ORDER + IConstant.ORDER_EDIT);
+		model.addObject("pageOrderType", IConstant.PAGE_TYPE_EDIT);
+		model.addObject("ordervo",orderVO);
+		return model;
+	}
+	
+	@RequestMapping(value="/view")
+	public ModelAndView orderView(@RequestParam(value="id",required=true) Integer id){
+		
+		OrderVO orderVO = orderService.findOrderInfoBySql(id);
+		
+		ModelAndView model = new ModelAndView(IConstant.PATH_ORDER + IConstant.ORDER_VIEW);
 		model.addObject("pageOrderType", IConstant.PAGE_TYPE_EDIT);
 		model.addObject("ordervo",orderVO);
 		return model;
@@ -169,5 +180,24 @@ public class OrderController extends BaseController {
 			id = "-1";
 		}
 		orderService.delAddrById(Integer.valueOf(id));
+	}
+	
+	@RequestMapping(value="/updateState")
+	public void updateState(Integer orderId,Integer ista){
+		try {
+			orderService.updateOrderState(orderId,ista);
+			renderText("保存成功!");
+		} catch (Exception e) {
+			renderText("保存失败!");
+		}
+	}
+	@RequestMapping(value="/updateOrderCNumber")
+	public void updateOrderCNumber(Integer orderId,String cnum){
+		try {
+			orderService.updateOrderCNumber(orderId, cnum);
+			renderText("保存成功!");
+		} catch (Exception e) {
+			renderText("保存失败!");
+		}
 	}
 }
