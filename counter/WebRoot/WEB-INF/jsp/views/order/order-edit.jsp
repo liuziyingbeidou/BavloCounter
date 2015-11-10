@@ -17,8 +17,7 @@
 <script src="${ctx}/resources/js/showList.js" type="text/javascript"></script>
 
 <!-- 城市联动 -->
-<script src="${ctx}/resources/js/area.js"></script>
-<script src="${ctx}/resources/js/location.js"></script>
+<script src="${ctx}/resources/cityselect/area.js"></script>
 <!-- 日期选择器 -->
 <link href="${ctx}/resources/timepicker/bootstrap/css/bootstrap.min.css" rel="stylesheet" media="screen">
 <link href="${ctx}/resources/timepicker/bootstrap-datetimepicker.min.css" rel="stylesheet" media="screen">
@@ -41,12 +40,14 @@
 <!-- 远程数据初始下拉框值 -->
 <script src="${ctx}/resources/js/bavlo-initdata.js"></script>
 <script type="text/javascript">
+var s=["vprovince","vcity","vdistrict"];//三个select的name
+var opt0 = ["省份","城市","区县"];//初始值
 $(function(){
 	//选择客户
 	$(".file").bind("click",function(){
 		openURL("${ctx}/customer/list.do","客户列表");
 	});
-	setValueByFrame("customer","${entityvo['id']}");
+	setValueByFrame("customer","${ordervo['id']}");
 	
 	//日期选择器
 	$("#datetimepicker").datetimepicker({
@@ -59,7 +60,13 @@ $(function(){
 		language:"zh-CN"
 	});
 	//城市联动
-	showLocation();
+	change(0);
+	$("#vprovince").bind("change",function(){
+		change(1);
+	});
+	$("#vcity").bind("change",function(){
+		change(2);
+	});
 	$("#addrSave").click(function(){
 		saveAddr();
 	});
@@ -101,8 +108,6 @@ function loadOrderList(){
 				}
 			}
 		}
-		//加载交付地址
-		initAddr();
 	});
 }
 
@@ -113,7 +118,7 @@ function showAddrInfo(){
 	$.get(url,{id:aid},function(row){
 		var data = row;
 		if(data != "" && data != null){
-			showLocation();
+			
 			$("#vprovince").val(data.vprovince);
 			$("#vprovince").change();
 			$("#vcity").val(data.vcity);
@@ -205,9 +210,12 @@ function check(){
 	
 	//客户ID
 	var customerId = $("#customerId").val();
-	
+	var addressId = $("#addressId").val();
 	if(customerId == ""){
 		alert("请选择客户...");
+		return true;
+	}else if(addressId == ""){
+		alert("请选择交付地址...");
 		return true;
 	}
 	
@@ -220,7 +228,7 @@ function saveAddr(){
 	if(check()){
 		return ;
 	}
-	
+	var customerId = $("#customerId").val();
 	//姓名
 	var receiverName = $(".receiverName").val();
 	//省
@@ -381,7 +389,7 @@ function getOrderListInfo(){
 				//$(".partsGem .list_price").text(data.sprice);
 				$("#order-list").append("<dd type='ch' sid='"+data.sid+"' class='"+data.sid+" bill'><span class='list_name bill-name'>"+data.sname+"</span><input class='list_num bill-num' style='width:40px;margin-left:10px;' type='text' value='1' placeholder='条'><b class='list_price bill-price'>"+data.sprice+"</b><a href='javascript:rlist("+data.sid+")' class='close_c'><img src='${ctx}/resources/images/close.png'></a></dd>");
 			}else if(type == "order"){
-				url = "${ctx}/order/view.do?id="+id;//根据id查询客户信息
+				url = "${ctx}/order/edit.do?id="+id;//根据id查询客户信息
 				window.location = url;
 			}
 		}
@@ -401,7 +409,7 @@ function getOrderListInfo(){
 <input type="hidden" name="id" id="orderId" value="${ordervo['id']}">
 <input type="hidden" name="iorderState" id="orderState" value="<c:choose>
 						 <c:when test="${empty ordervo['iorderState']}">   
-						 0
+						 -1
 						 </c:when>
 						 <c:otherwise>
 						 ${ordervo['iorderState']}
@@ -508,11 +516,12 @@ function getOrderListInfo(){
 			  C.innerHTML = "<a onclick='deleteRow(this,"+id+")' class='address-close'>X</a>";
 			 }
 			 function deleteRow(obj,aid){
-			  alert('确定要删除吗');
-			  var delUrl = "${ctx}/order/delAddrById.do";
-			  $.get(delUrl,{id:aid},function(){
-			  	tbl.deleteRow(obj.parentElement.parentElement.rowIndex);
-			  });
+			  if(confirm('确定要删除吗')){
+			  	 var delUrl = "${ctx}/order/delAddrById.do";
+				  $.get(delUrl,{id:aid},function(){
+				  	tbl.deleteRow(obj.parentElement.parentElement.rowIndex);
+				  });
+			  }
 			 }
 			 function add_addr(){
 			 	$(".add_dizhi :input").each(function(){
@@ -553,8 +562,8 @@ function getOrderListInfo(){
                 <option value="N">不开发票</option>
                 <option value="Y">开发票</option>
               </select>
-              <select name="vinvoiceType" class="fp fp2 invoiceType">
-                <option>珠宝首饰</option>
+              <select name="vinvoiceContent" class="fp fp2 invoiceType">
+                <option value="珠宝首饰">珠宝首饰</option>
               </select>
             </p>
             <input type='text' name='vinvoiceTitle' value="${ordervo['vinvoiceTitle'] }" placeholder="发票抬头">
@@ -573,8 +582,8 @@ function getOrderListInfo(){
           <input type="text" name="ddeliverdate" value="${ordervo['ddeliverdate'] }" id="datetimepicker" class="jianding" placeholder="交付时间" />
           
           <select name="vdeliveryWay" class="jianding deliveryWay">
-            <option value="0">来店自取</option>
-            <option value="1">邮递</option>
+            <option value="来店自取">来店自取</option>
+            <option value="邮递">邮递</option>
           </select>
           <div class="baocun">
             <input type="button" id="orderSave" name="button" value="保存">
