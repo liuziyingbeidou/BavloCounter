@@ -42,10 +42,6 @@ public interface IOrderService {
 	
 	public OrderVO findOrderInfoBySql(Integer id);
 	
-	public void updateOrderState(Integer orderId,Integer ista);
-	
-	public void updateOrderCNumber(Integer orderId,String cnum);
-	
 	/*******************************以下是交付地址***********************************/
 	
 	public Integer saveAddrRelID(AddressVO addressVO);
@@ -59,5 +55,22 @@ public interface IOrderService {
 	public void delAddrById(Integer id);
 	
 	/***********************回写*********************************/
+	/**
+	 * 定制单保存回写订单数量、价格、图片
+	 * @param orderId 订单ID
+	 * @param customId 定制单ID
+	 */
 	public void backWriteByCum(Integer orderId,Integer customId);
+	/**
+	 * 回写订单状态
+	 * @param orderId
+	 * @param ista 提交(0)、制版(1)、生产(2)、质检(3)、快递(4)、支付(5)
+	 */
+	public void updateOrderState(Integer orderId,Integer ista);
+	/**
+	 * 回写快递单号 且 回写订单状态
+	 * @param orderId
+	 * @param cnum
+	 */
+	public void updateOrderCNumber(Integer orderId,String cnum);
 }
