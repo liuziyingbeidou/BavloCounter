@@ -38,6 +38,14 @@ public interface IOrderService {
 	
 	public List<OrderBVO> findListOrderBVO(Integer mid);
 	
+	public List<OrderVO> findListOrderBySql(String wh);
+	
+	public OrderVO findOrderInfoBySql(Integer id);
+	
+	public void updateOrderState(Integer orderId,Integer ista);
+	
+	public void updateOrderCNumber(Integer orderId,String cnum);
+	
 	/*******************************以下是交付地址***********************************/
 	
 	public Integer saveAddrRelID(AddressVO addressVO);
@@ -49,4 +57,7 @@ public interface IOrderService {
 	public AddressVO findSigleAddr(Integer id);
 	
 	public void delAddrById(Integer id);
+	
+	/***********************回写*********************************/
+	public void backWriteByCum(Integer orderId,Integer customId);
 }
