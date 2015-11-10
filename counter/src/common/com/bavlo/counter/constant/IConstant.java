@@ -59,6 +59,7 @@ public interface IConstant {
 	public static final String PATH_ORDER = "order/";
 	public static final String ORDER_EDIT = "order-edit";
 	public static final String ORDER_LIST = "order-list";
+	public static final String ORDER_VIEW = "order-view";
 	
 	/*****************************界面类型**************************/
 	//新增
