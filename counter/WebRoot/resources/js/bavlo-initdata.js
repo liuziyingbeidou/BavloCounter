@@ -50,6 +50,50 @@ function loadSelData(nativeUrl,remoteUrl,emName,selId,selName,callback,explain){
 
 }
 
+/**
+ * 远程数据
+ * 下拉框赋值<br>
+ * nativeUrl 本地<br>
+ * remoteUrl 远程数据接口<br>
+ * emName 下拉框id名称<br>
+ * selId json中作为下拉框id 如：data[i].id<br>
+ * selName json中作为下拉框显示名称 如：data[i].type_cn<br>
+ */
+function loadSelDataStr(nativeUrl,remoteUrl,emName,selId,selName,callback,explain){
+	if(explain == undefined){
+		explain = "请选择";
+	}
+	$('#'+emName).empty();
+	$('#'+emName).append("<option value='-1'>"+explain+"</option>");
+	
+	/*$.ajax({
+		type:"get",
+		async: false,
+		url:nativeUrl,
+		data:{url:remoteUrl},
+		dataType:"json",
+		success:function(row){
+			var data = row;
+			for(var i=0;i<data.length;i++){
+				$('#'+emName).append("<option value='"+eval(selId)+"'>"+eval(selName) +"</option>");
+			}
+		}
+		
+	});*/
+	
+	$.get(nativeUrl,{url:remoteUrl},function(row){
+		var data = row;
+		for(var i=0;i<data.length;i++){
+			$('#'+emName).append("<option sid='"+eval(selId)+"' value='"+eval(selName)+"'>"+eval(selName)+"</option>");
+		}
+		if(typeof(callback)!=='undefined'){
+			callback&&callback();
+		}
+	});
+	
+
+}
+
 function loadRingSizeData(nativeUrl,remoteUrl,emName,selId,selName1,selName2,selName3,callback,explain){
 	if(explain == undefined){
 		explain = "请选择";
