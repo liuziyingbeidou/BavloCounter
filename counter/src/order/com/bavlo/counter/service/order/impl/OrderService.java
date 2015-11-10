@@ -3,13 +3,18 @@ package com.bavlo.counter.service.order.impl;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.annotation.Resource;
+
 import net.sf.json.JSONArray;
 
 import org.springframework.stereotype.Service;
 
+import com.bavlo.counter.constant.IConstant;
+import com.bavlo.counter.model.custom.CustomVO;
 import com.bavlo.counter.model.order.AddressVO;
 import com.bavlo.counter.model.order.OrderBVO;
 import com.bavlo.counter.model.order.OrderVO;
+import com.bavlo.counter.service.custom.itf.ICustomService;
 import com.bavlo.counter.service.impl.CommonService;
 import com.bavlo.counter.service.order.itf.IOrderService;
 import com.bavlo.counter.utils.CommonUtils;
@@ -26,6 +31,9 @@ import com.bavlo.counter.utils.StringUtil;
 @Service("orderService")
 public class OrderService extends CommonService implements IOrderService {
 
+	@Resource
+	ICustomService customService;
+	
 	@Override
 	public Integer saveOrderRelID(OrderVO orderVO) {
 		Integer id = null;
@@ -239,12 +247,16 @@ public class OrderService extends CommonService implements IOrderService {
 	
 	/*************************回写****************************/
 	/**
-	 * 定制单保存回写订单数量、价格、图片
+	 * 定制单保存回写订单价格
 	 * @param orderId 订单ID
 	 * @param customId 定制单ID
 	 */
 	public void backWriteByCum(Integer orderId,Integer customId){
-		
+		CustomVO vo = customService.findCustomById(customId);
+		String[] attrname = new String[]{"nprice"};
+		Object[] attrval = new Object[]{vo.getNprice()};
+		String wh = " orderId="+orderId+" and vsourceId="+customId;
+		updateAttrs(OrderBVO.class, attrname, attrval, wh);
 	}
 	
 	/**
@@ -253,7 +265,10 @@ public class OrderService extends CommonService implements IOrderService {
 	 * @param ista 提交(0)、制版(1)、生产(2)、质检(3)、快递(4)、支付(5)
 	 */
 	public void updateOrderState(Integer orderId,Integer ista){
-		
+		String[] attrname = new String[]{"iorderState"};
+		Object[] attrval = new Object[]{ista};
+		Integer[] IDs = new Integer[]{orderId};
+		updateAttrsByIDs(OrderVO.class, attrname, attrval, IDs);
 	}
 	
 	/**
@@ -262,6 +277,9 @@ public class OrderService extends CommonService implements IOrderService {
 	 * @param cnum
 	 */
 	public void updateOrderCNumber(Integer orderId,String cnum){
-		
+		String[] attrname = new String[]{"vcourierNumber","iorderState"};
+		Object[] attrval = new Object[]{cnum,IConstant.ORDER_EXPRESS};
+		Integer[] IDs = new Integer[]{orderId};
+		updateAttrsByIDs(OrderVO.class, attrname, attrval, IDs);
 	}
 }
