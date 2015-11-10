@@ -35,7 +35,7 @@
 		$(function() {
 			//宝石类型下拉框值
 			var typeUrl = "http://www.bavlo.com/getAllGemType";
-			loadSelData(nativeUrl, typeUrl, "gem-type-id", "data[i].id",
+			loadSelDataStr(nativeUrl, typeUrl, "gem-type-id", "data[i].id",
 					"data[i].type_cn", function() {
 						$("#gem-type-id").val("${gemvo['vtype']}");
 					},"选宝石");
@@ -102,12 +102,12 @@
 		
 		//初始化形状下拉框值
 		function initShapeByType() {
-			var gemTypeId = $("#gem-type-id").val();
+			var gemTypeId = $("#gem-type-id").find("option:selected").attr("sid");
 			if (gemTypeId == "-1") {
 				gemTypeId = "${gemvo['vtype']}";
 			}
 			var shapeUrl = "http://www.bavlo.com/getGemShape?typeId="+ gemTypeId;
-			loadSelData(nativeUrl, shapeUrl, "gem-shape-id", "data[i].id",
+			loadSelDataStr(nativeUrl, shapeUrl, "gem-shape-id", "data[i].id",
 					"data[i].shape_cn", function() {
 						$("#gem-shape-id").val("${gemvo['vshape']}");
 					},"选形状");
@@ -115,17 +115,17 @@
 		
 		//初始化规格下拉框值
 		function initSpecByTypeShape() {
-			var gemTypeId = $("#gem-type-id").val();
-			var gemShapeId = $("#gem-shape-id").val();
-			if (gemTypeId == "-1") {
+			var gemTypeId = $("#gem-type-id").find("option:selected").attr("sid");
+			var gemShapeId = $("#gem-shape-id").find("option:selected").attr("sid");
+			/*if (gemTypeId == "-1") {
 				gemTypeId = "${gemvo['vtype']}";
 			}
 			if (gemShapeId == "-1") {
 				gemShapeId = "${gemvo['vshape']}";
-			}
+			}*/
 			var specUrl = "http://www.bavlo.com/getGemCalibrated?typeId="
 					+ gemTypeId + "&shapeId=" + gemShapeId;
-			loadSelData(nativeUrl, specUrl, "gem-spec-id", "data[i].id",
+			loadSelDataStr(nativeUrl, specUrl, "gem-spec-id", "data[i].id",
 					"data[i].size", function() {
 						$("#gem-spec-id").val("${gemvo['vspec']}");
 					},"选规格");
