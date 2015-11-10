@@ -49,46 +49,16 @@
 		 
 		//确定 
 		$(".ok").click(function(){
-		 var html="";
-		 var gem=$(".gem_img_sel");
-		 if(gem.length!=0){ 
-			 var i=1;
-			 for(var g=1;g<100;g++){
-				 if($(".stockGem"+g).length==0){
-					 i=g;
-					 break;
-				 }
-			 }
-			 var type=gem.attr("type");
-			 var shape=gem.attr("shape");
-			 var calibrated=gem.attr("calibrated");
-			 var weight=gem.attr("weight");
-			 var costPrice=gem.attr("costPrice");
-			 var pic=gem.find("img").attr("src");
-				
-		     html+= "<li class='stockGem"+i+"'>"+	
-				    "<label>库选宝石</label>"+
-				    "<p>"+
-				    "<font>"+
-					"<b class='b_img'><img src='"+pic+"'/></b><b>"+type+"</b><b>"+weight+"ct</b>"+
-					"</font>"+
-					"<input class='inpt_3' type='text' price='"+costPrice+"' name='stockGemQ' class='txt_45' value=''/>颗"+
-					"<span><a href='javascript:removeStockGem("+i+")'><img src='/web/mobile/images/s/sc.png' /></a></span>"+
-					"</p>"+
-					"<input type='hidden' class='sgPrice'/>"+
-					"</li>";
-					 
-					
-					
-			 $(".biaodan ul").append(html);
-			 $(".alertdiv1").hide();
-			$("input[name='stockGemQ']").blur(function(){
-				 checkNum(this);
-				 var qutity=$(this).val();
-				 var price=$(this).attr("price");
-				 $(this).parent().nextAll(".sgPrice").val((price*qutity+qutity*2).toFixed(2));
-			 })
-		 }
+			if(isExitsFunction(window.parent.setValueByFrame)){
+				var sname = $("gemTypeId").find("option:selected").text()+" "+ $("#gemShapeId").find("option:selected").text()+" "+$("#gemSpecId").find("option:selected").text();
+				var sid = $("#gemTypeId").find("option:selected").val()+ $("#gemShapeId").find("option:selected").val()+$("#gemSpecId").find("option:selected").val();
+				var json = "{\"sname\":\""+sname+"\",\"sid\":\""+sid+"\"}";
+				var gem=$(".gem_img_sel");
+
+				window.parent.setValueByFrame("gem","",json,gem);
+			}else{
+				alert("请在父窗口添加setValueByFrame(type,id,json){处理逻辑}type='chain']");
+			}
 		
 		});
 		
