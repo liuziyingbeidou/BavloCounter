@@ -315,7 +315,7 @@ font-size:23px;
 }
 
 .words-split a{display: inline-block; padding:0 30px 0 10px; position: relative; }
-.words-split a em{display:none; width: 30px; height: 100%; position: absolute;}
+.words-split a em{display:inline-block; width: 30px; height: 100%; position: absolute;}
 .words-split a em:after{ content: "-"; color: #fff; font: bold 35px 'Microsoft Yahei';}
 .kezi a{
 	width:46%; font-size:26px;height:60px; line-height:60px;float:left;

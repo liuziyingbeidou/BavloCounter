@@ -49,20 +49,20 @@ $(function() {
 	var typeUrl = "http://www.bavlo.com/getAllStyleType";
 	loadSelData(nativeUrl, typeUrl, "styleTypeId", "data[i].id",
 			"data[i].type_name_cn", function() {
-				$("#styleTypeId").val("${customDetail['srcstyleType']}");
+				$("#styleTypeId").val("${customEdit['srcstyleType']}");
 			},"款式");
 	// 金属材质下拉框值
 	var typeUrl = "http://www.bavlo.com/getAllMetalMaterialType";
 	loadSelData(nativeUrl, typeUrl, "srcmetail", "data[i].id",
 			"data[i].metal_type_cn", function() {
-				$("#srcmetail").val("${customDetail['srcmetail']}");
+				$("#srcmetail").val("${customEdit['srcmetail']}");
 			},"金属");
 	// 款式类型下拉框值
 	var typeUrl = "http://www.bavlo.com/getAllRingSize";
 	loadRingSizeData(nativeUrl, typeUrl, "ringSizeId", "data[i].id",
 			"data[i].china", "data[i].diameter", "data[i].circumference",
 			function() {
-				$("#ringSizeId").val("${customDetail['srcringSize']}");
+				$("#ringSizeId").val("${customEdit['srcringSize']}");
 			},"手寸");
 	// 当款式类型不是戒指时，隐藏戒指手寸选项
 	$("#styleTypeId").change(function() {
@@ -152,39 +152,61 @@ $(function() {
 	 		openURL("${ctx}/upload/uppage.do","上传起版图"); 
 	 });
 	 //图片显示
-	 $(".gem-pic-show").bind("click",function(){
-	 	var mid = $(".mid").val();
+	 $(".costomPicShow").bind("click",function(){
+	 	var mid = $("#customid").val();
 	 	if(mid == ""){
 	 		alert("请保存后查看!");
 	 	}else{
-	 		openURL("${ctx}/upload/showpic.do?cpath=com.bavlo.counter.model.sign.GemSignBVO&fkey=gemsignId&id="+mid,"图片展示");
+	 		openURL("${ctx}/upload/showpic.do?cpath=com.bavlo.counter.model.custom.CustomBVO&fkey=customId&id="+mid,"图片展示");
 	 	}
 	 });
 	 //宝石签收单列表
-	 $(".gem-page-list").bind("click",function(){
+	 $(".kzs_guanlian").bind("click",function(){
+	 	openURL("${ctx}/gem-sign/list.do","宝石签收单列表");
+	 });
+	 //宝石签收单列表
+	 $(".kps_guanlian").bind("click",function(){
 	 	openURL("${ctx}/gem-sign/list.do","宝石签收单列表");
 	 });
 	 //有值加后缀
- 	initFieldSuffix();
+ 	//initFieldSuffix();
+	 
+	//加载子表数据
+	function loadSubData(mid){
+		var url = "${ctx}/upload/showpicJson.do";
+		$.get(url,{cpath:"com.bavlo.counter.model.custom.CustomBVO",fkey:"customId",id:mid},function(row){
+			var data = row;
+			if(data != "" && data != null){
+				for(var i = 0; i < data.length; i++){
+					if(data[i].biscover == "Y"){
+						$("#FILE_0").val(data[i].vname);
+					}else{
+						$("#FILE_"+i).val(data[i].vname);
+					}
+				}
+			}
+		});
+	}
 });
 
 // 定制单保存
 function saveOrUpdate() {
 	cleanFieldSuffix();
+	var bvo = JSON.stringify($('#customBId').serializeJson());
 	$.ajax({
 		type : "POST",
-		url : "saveOrUpdate.do",
-		data : $('#custom').serialize(),// formid
+		url : "save.do",
+		data : $('#custom').serialize()+"&bvo="+bvo,// formid
 		async : false,
 		cache : false,
 		success : function(data) {
-			$("#styleid").val(data.id);
+			$("#customid").val(data.id);
 			alert("保存成功!");
-			initFieldSuffix();
+			//initFieldSuffix();
 		},
 		error : function(e) {
 			alert("保存失败!");
-			initFieldSuffix();
+			//initFieldSuffix();
 		}
 	});
 }
@@ -224,17 +246,48 @@ function cleanFieldSuffix(){
 	//金额 
 	clearSuffix("costom_otherPrice","元");
 	//数量
-	clearSuffix("custom_item","条");
+	//clearSuffix("custom_item","条");
+	//刻字 
+	//clearSuffix("custom_engrave","刻字标签:,");
 }
 
 //子窗体调用
-function setValueByFrame(type,id,json){
+function setValueByFrame(type,id,callback,json,gem){
 	var url;
 	if(type == "chain"){
 		var data = JSON.parse(json);
-		//$(".partsGem .list_name").text(data.sname);
-		//$(".partsGem .list_price").text(data.sprice);
 		$(".chain").append("<dd class='"+data.sid+"'><div class='lianzi'><h3>链子</h3><a href='javascript:rlist("+data.sid+")' class='close_c'><font>X</font></a><div class='clear'></div><input class='custom_item' id='iitem' name='iitem' type='text' value='' placeholder='条'><strong>"+data.sname+"</strong></div></dd>");
+		closeMultiDlg();
+	}else if(type == "gem"){
+		 var html="";
+		 var data = JSON.parse(json);
+		 
+		 var type=gem.attr("type");
+		 var shape=gem.attr("shape");
+		 var calibrated=gem.attr("calibrated");
+		 var weight=gem.attr("weight");
+		 var costPrice=gem.attr("costPrice");
+		 var pic=gem.find("img").attr("src");
+			
+	     html+= "<dd class='"+data.sid+"'>"+
+	    	 	"<div div class='lianzi'>"+	
+			    "<h3>库选宝石</h3>"+
+			    "<a href='javascript:rlist("+data.sid+")' class='close_c'><font>X</font></a><div class='clear'></div>"+
+			    "<input class='custom_item' id='iitem' name='iitem' type='text' value='' placeholder='颗'>"+
+				"<img src='"+pic+"'/><strong>"+type+" "+weight+"ct</strong>"+
+				"<input type='hidden' class='sgPrice' value='"+costPrice+"'/>"+
+				"</div></dd>";
+				 
+				
+				
+		 $(".chain").append(html);
+		$("input[name='stockGemQ']").blur(function(){
+			 checkNum(this);
+			 var qutity=$(this).val();
+			 var price=$(this).attr("price");
+			 $(this).parent().nextAll(".sgPrice").val((price*qutity+qutity*2).toFixed(2));
+		 })
+		 closeMultiDlg();
 	}
 	
 }
@@ -250,37 +303,34 @@ function rlist(className){
 <body>
 	<form id="custom">
 	<jsp:include page="../header.jsp"></jsp:include>
-	<input type="hidden" id='customerId' name='customerId'
-		value="2" />
 	<input type="hidden" id='customid' name='id'
-		value="${customDetail.id }" />
+		value="${customEdit.id }" />
+	<input type="hidden" id='orderId' name='orderId'
+		value="${customEdit.orderId }" />
+	<input type="hidden" id='customerId' name='customerId'
+		value="${customEdit.customerId }" />
 	<div class="all">
 		<div class="main">
 			<div class="mainleft">
 				<div class="cankao">
-					<h2><a href="javascript:;" style="color:#fff" class="cankaotu">+ 参考图 （6）</a></h2>
+					<h2><a href="javascript:;" style="color:#fff" class="cankaotu">+ 参考图</a></h2>
 					<div class="pro">
 						<b><a href="javascript:;" onclick="PicShow_Hidden(pic)">显示</a></b>
 						<div class="demo" id='pic' style='display: none;'>
 							<b><a href="javascript:;" onclick="PicShow_Hidden(pic)">隐藏</a></b>
 							<!--<b class="hide">隐藏</b>-->
 							<div class="my-gallery">
-								<volist name="list" id="list"> <figure> <a
-									href="${ctx}/resources/images/zb_03.png" data-size="800x1142"><img
-									src="${ctx}/resources/images/zb_03.png" alt="Image description" /></a>
-								<figcaption itemprop="caption description">
-								<h3>图片名称8</h3>
-								<!--<div class="bottom"><ul><li><a href="#"><img src="images/share.png"></a></li><li><a href="#"><img src="images/download.png"></a></li><li><a href="#"><img src="images/link.png"></a></li></ul></div>-->
-								</figcaption> </figure> <figure style="display:none;"> <a
-									href="${ctx}/resources/images/zb_03.png" data-size="800x1142"><img
-									src="${ctx}/resources/images/zb_03.png" alt="Image description" /></a>
-								<figcaption itemprop="caption description">
-								<h3>图片名称8</h3>
-								</figcaption> </figure> <figure style="display:none;"> <a
-									href="${ctx}/resources/images/zb_03.png" data-size="800x1142"><img
-									src="${ctx}/resources/images/zb_03.png" alt="Image description" /></a>
-								<figcaption itemprop="caption description">
-								<h3>图片名称8</h3>
+								<volist name="list" id="list"> <figure> 
+								<a class="costomPicShow" href="javascript:void();">
+									<c:choose>
+										<c:when test="${empty customEdit['FILE_0']}">   
+											<img src="${ctx}/resources/images/zb_03.png">
+										</c:when>
+										<c:otherwise>
+											<img src="${ctx}/staticRes/${customEdit['FILE_0']}">
+										</c:otherwise>
+									</c:choose> 
+								</a>
 								</figcaption> </figure> </volist>
 
 							</div>
@@ -288,7 +338,7 @@ function rlist(className){
 					</div>
 				</div>
 				<div class="sheji">
-					<h2><a href="javascript:;" style="color:#fff" class="qibantu">+ 起版设计图 （2）</a></h2>
+					<h2><a href="javascript:;" style="color:#fff" class="qibantu">+ 起版设计图</a></h2>
 					<div class="pro">
 						<!--<img src="images/zb_06.png" />-->
 						<b><a href="javascript:;" onclick="Pic1Show_Hidden(pic1)">显示</a></b>
@@ -371,9 +421,9 @@ function rlist(className){
 				<div class="bom">
 					<select id="styleTypeId" name="srcstyleType" class="jiezhi">
 						<option>选择款式</option>
-					</select> <select id="vsex" name="vsex" class="nvkuan">
-						<option>女款</option>
-						<option>男款</option>
+					</select> <select class="nvkuan">
+						<option  id="vsex" name="vsex">女款</option>
+						<option  id="vsex" name="vsex">男款</option>
 					</select>
 				</div>
 				<div class="changdu">
@@ -408,7 +458,7 @@ function rlist(className){
 								id="nprimaryGem" name="nprimaryGem" class="kzs_price"
 								placeholder="元"/>
 								</li>
-								<li class="kzs_gl"><input type='button' name="guanlian"
+								<li class="kzs_gl"><input type='button' name="guanlian" class="kzs_guanlian"
 									value="+ 关联" /></li>
 								<li class="kong">空</li>
 								<li class="cha"><a href="javascript:h('kzsGem')"><font>X</font></a></li>
@@ -425,7 +475,7 @@ function rlist(className){
 								<li><input type="text" id="iforeignGem" name="iforeignGem" class="kps_count"
 										placeholder="颗"/>
 								</li>
-								<li class="kzs_gl"><input type='button' name="guanlian"
+								<li class="kzs_gl"><input type='button' name="guanlian" class="kps_guanlian"
 									value="+ 关联" /></li>
 								<li class="kong">空</li>
 								<%-- <li class="kps"><img src="${ctx}/resources/images/zb_09.png" width="42"
@@ -453,7 +503,7 @@ function rlist(className){
 				<h2>其他信息</h2>
 				
 				<!-- 标签 -->
-				<input type="text" name="vengrave" value="刻字标签：" id="vengrave" />
+				<input type="text" class="custom_engrave" name="vengrave" value="刻字标签：" id="vengrave" />
 				<div class="zhanwei">
 				<select id="vfont" name="vfont" class="ziti">
 					<option value="华文细黑" >华文细黑</option>
@@ -514,6 +564,19 @@ function rlist(className){
 			<div class="clear"></div>
 		</div>
 	</div>
+	</form>
+	<form id="customBId">
+	<input type="hidden" name="filemodel" id="filemodel" value="costom">
+	<input type="hidden" name="filetype" id="filetype" value="pic">
+	<input type="hidden" name="FILE_0" id="FILE_0"></input>
+	<input type="hidden" name="FILE_1" id="FILE_1"></input>
+	<input type="hidden" name="FILE_2" id="FILE_2"></input>
+	<input type="hidden" name="FILE_3" id="FILE_3"></input>
+	<input type="hidden" name="FILE_4" id="FILE_4"></input>
+	<input type="hidden" name="FILE_5" id="FILE_5"></input>
+	<input type="hidden" name="FILE_6" id="FILE_6"></input>
+	<input type="hidden" name="FILE_7" id="FILE_7"></input>
+	<input type="hidden" name="FILE_8" id="FILE_8"></input>
 	</form>
 </body>
 </html>
