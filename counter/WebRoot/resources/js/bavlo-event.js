@@ -132,5 +132,5 @@ function isExitsFunction(funcName) {
 
 //弹框回调
 function callbackMuilt(){
-	alert("回调测试");
+	//$(".ui-dialog-titlebar-close",window.parent.document).trigger('click');
 }
