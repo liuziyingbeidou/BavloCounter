@@ -128,12 +128,12 @@ function loadGemImg(nativeUrl,remoteUrl){
 		function(data){
 			var html = "";
 			for (var i = 0; i < data.length; i++) {
-				html += "<span class='gem_img' type='"+type_cn+"' shape='"+shape_cn+"' calibrated='"+calibrated_cn+"' weight='"+data[i].weight+"' costPrice='"+data[i].costPrice+"'>"
-						+ "<img src='http://img.bavlo.com/GemPics/"+data[i].shape.id+"_"+data[i].color.id+".png'/><div class='weight'>"
+				html += "<dl class='gem_img' type='"+type_cn+"' shape='"+shape_cn+"' calibrated='"+calibrated_cn+"' weight='"+data[i].weight+"' costPrice='"+data[i].costPrice+"'>"
+						+ "<dd><img src='http://img.bavlo.com/GemPics/"+data[i].shape.id+"_"+data[i].color.id+".png'/><div class='kxs_weight'>"
 						+ data[i].weight
-						+ '&nbsp;&nbsp;'
-						+ "CT &nbsp;&nbsp;&nbsp;&nbsp;</div></span>"
+						+ "CT</div></dd></dl>"
 			}
+
 			$(".gem_sel_h").html(html);
 			$(".gem_img").click(function() {
 				if ($(this).attr("class") == 'gem_img') {
@@ -145,32 +145,6 @@ function loadGemImg(nativeUrl,remoteUrl){
 			})
 		
 	});
-	/*$.ajax({
-		type:"get",
-		url:nativeUrl,
-		data:"url="+remoteUrl,
-		dataType:"json",
-		success:function(row){
-			var html = "";
-			for (var i = 0; i < data.length; i++) {
-				html += "<span class='gem_img' type='"+type_cn+"' shape='"+shape_cn+"' calibrated='"+calibrated_cn+"' weight='"+data[i].weight+"' costPrice='"+data[i].costPrice+"'>"
-						+ "<img src='http://img.bavlo.com/GemPics/"+data[i].shape.id+"_"+data[i].color.id+".png'/><div class='weight'>"
-						+ data[i].weight
-						+ '&nbsp;&nbsp;'
-						+ "CT &nbsp;&nbsp;&nbsp;&nbsp;</div></span>"
-			}
-			$(".gem_sel_h").html(html);
-			$(".gem_img").click(function() {
-				if ($(this).attr("class") == 'gem_img') {
-					$(".gem_img_sel").attr("class", "gem_img");
-					$(this).attr("class", "gem_img_sel");
-				} else {
-					$(this).attr("class", "gem_img");
-				}
-			})
-		}
-		
-	});*/
 }
 
 /**

@@ -1,11 +1,5 @@
 <%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%
-	String path = request.getContextPath();
-	String basePath = request.getScheme() + "://"
-			+ request.getServerName() + ":" + request.getServerPort()
-			+ path + "/";
-%>
 <c:set var="ctx" value="${pageContext.request.contextPath}" />
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html>
@@ -35,62 +29,13 @@
 
 	<body>
 		<form id="custom">
-		<div class="header">
-			<div class="top">
-				<b><a href="javascript:;" onclick="EditShow_Hidden(ed1)"><img
-							src="${ctx}/resources/images/plus.png">
-				</a> 定制单81812560 </b>
-				<font><a href="javascript:;" onclick="Show_Hidden(tr1)"><img
-							src="${ctx}/resources/images/plus.png">
-				</a>
-				</font>
-				<div class="clear"></div>
-			</div>
-			<div class="hidden_enent1" id="tr1" style="display: none;">
-				<ul>
-					<li class="jian">
-						<a href="javascript:;" onclick="Show_Hidden(tr1)">—</a>
-					</li>
-					<li>
-						<a href="">定制单</a>
-					</li>
-					<li>
-						<a href="">宝石签收单</a>
-					</li>
-					<li>
-						<a href="">订单</a>
-					</li>
-					<li>
-						<a href="">客户</a>
-					</li>
-				</ul>
-			</div>
-			<div class="edit_hidden1" id="ed1" style="display: none;">
-				<ul>
-					<li class="jian2">
-						<a href="javascript:;" onclick="EditShow_Hidden(ed1)">—</a>
-					</li>
-					<li>
-						<a href="">Open</a>
-					</li>
-					<li>
-						<a href="">Save</a>
-					</li>
-					<li>
-						<a href="">Save as</a>
-					</li>
-					<li>
-						<a href="">Print</a>
-					</li>
-				</ul>
-			</div>
-		</div>
+		<jsp:include page="../header.jsp"></jsp:include>
 		<div class="all">
 			<div class="main">
 				<div class="mainleft">
 					<div class="cankao">
 						<h2>
-							+ 参考图 （6）
+							+ 参考图
 						</h2>
 						<div class="pro">
 							<!--<img src="${ctx}/resources/images/zb_03.png" />-->
@@ -142,7 +87,7 @@
 					</div>
 					<div class="sheji">
 						<h2>
-							+ 起版设计图 （2）
+							+ 起版设计图
 						</h2>
 						<div class="pro">
 							<!--<img src="${ctx}/resources/images/zb_06.png" />-->
@@ -151,7 +96,6 @@
 							<div class="demo" id='pic1' style='display: block;'>
 								<b><a href="javascript:;" onclick="Pic1Show_Hidden(pic1)">隐藏</a>
 								</b>
-								<!--<b class="hide">隐藏</b>-->
 								<div class="my-gallery">
 									<volist name="list" id="list">
 									<figure>
@@ -228,56 +172,47 @@
 						</div>
 					</div>
 					<div class="clear"></div>
-					<b>订单号 1133695</b>
+					<b>订单号 ${customDetail.vorderCode }</b>
 				</div>
 				<div class="mainmid">
 					<div class="dzd">
 						<dl>
 							<dd>
 								报价：
-								<b>26800元</b>
+								<b>${customDetail.nprice }元</b>
 							</dd>
 							<dd>
-								类型：戒指
+								类型：${customDetail.srcstyleType }
 							</dd>
 							<dd>
-								款型：女款
+								手寸：${customDetail.srcringSize }
 							</dd>
 							<dd>
-								手寸：13号
+								金属：${customDetail.nprice }
 							</dd>
 							<dd>
-								报价：
+								链子：${customDetail.srcchain }
 							</dd>
 							<dd>
-								类型：戒指
+								客主石：${customDetail.iprimaryGemID } ${customDetail.iprimaryGemID }元
 							</dd>
 							<dd>
-								手寸：
+								客配石：${customDetail.iforeignGemID } ${customDetail.iforeignGemNum }颗
 							</dd>
 							<dd>
-								报价：
+								库选石：${customDetail.stockGemID } ${customDetail.stockGemNum }颗
 							</dd>
 							<dd>
-								类型：戒指
+								刻字：${customDetail.vengrave }
 							</dd>
 							<dd>
-								手寸：
+								表面工艺：${customDetail.vrequirementB }
 							</dd>
 							<dd>
-								报价：
+								鉴定证书：${customDetail.icertificate }
 							</dd>
 							<dd>
-								类型：戒指
-							</dd>
-							<dd>
-								手寸：
-							</dd>
-							<dd>
-								类型：戒指
-							</dd>
-							<dd>
-								定制说明：
+								定制说明：${customDetail.vrequirement }
 							</dd>
 						</dl>
 					</div>

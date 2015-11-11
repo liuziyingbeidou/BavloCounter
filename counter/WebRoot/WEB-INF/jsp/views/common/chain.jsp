@@ -31,6 +31,11 @@ $(function(){
 	});
 	//链子弹框
 	$(".ok").click(function(){
+		var spec =  $("#chain-spec-id").val();
+		if(spec == "-1"){
+			alert("请选择规格!");
+			return ;
+		}
 		if(isExitsFunction(window.parent.setValueByFrame)){
 			var sname = $("#chain-material-id").find("option:selected").text()+" "+ $("#chain-style-id").find("option:selected").text()+" "+$("#chain-spec-id").find("option:selected").text();
 			var sprice = $("#chain-spec-id").find("option:selected").attr("cost");
@@ -59,7 +64,7 @@ function initChainStyle(){
 //根据选择链子材质+类型选择链子(chain-spec-id)
 function initChainSpec(emName){
 	$('#'+emName).empty();
-	$('#'+emName).append("<option value='-1'>==请选择==</option>");
+	$('#'+emName).append("<option value='-1'>请选择</option>");
 	var chainMaterialId = $("#chain-material-id").val();
 	var chainStyleId = $("#chain-style-id").val();
 	var styleUrl = "http://www.bavlo.com/getChainList?metalId="+chainMaterialId+"&chainStyleId="+chainStyleId;

@@ -18,6 +18,54 @@
 <link href="${ctx}/resources/css/orderlist.css" rel="stylesheet"
 	type="text/css" />
 <script src="${ctx}/resources/js/showList.js" type="text/javascript"></script>
+
+	<!-- 自定义 -->
+	<script src="${ctx}/resources/js/bavlo-event.js"></script>
+	
+	<script type="text/javascript">
+	$(function(){
+		$(".search").keyup(function(){
+			 delay(function(){
+				 initData();
+			 }, 500 );
+		});
+		
+		var delay = (function(){
+			 var timer = 0;
+			 return function(callback, ms){
+				 clearTimeout (timer);
+				 timer = setTimeout(callback, ms);
+			 };
+		})();
+		initData();
+		
+	});
+	
+	function initData(){
+		$("#juheweb").empty();
+		var url = "${ctx}/customer/listJson.do";
+		$.post(url,{content:$(".search").val()},function(row){
+			var data = row;
+			for(var i = 0; i < data.length; i++){
+				var ht = "<li><h4><img style='width:60px;height:60px;' ";
+				var img = "src='${ctx}/resources/images/customer_01.png'";
+				if(data[i].vhendimgurl != ""){
+					img = "src='"+data[i].vhendimgurl+"'";
+				}
+				var ml = "><b>"+data[i].vname+"</b><a href='javascript:void();'>"+data[i].vphoneCode+"</a><span><a href='javascript:void();' onclick='selHander("+data[i].id+")'>选择</a></span></h4><div class='clear'></div></li>";
+				$("#juheweb").append(ht+img+ml);
+			}
+		});
+	}
+	//调用父窗体方法
+	function selHander(id){
+		if(isExitsFunction(window.parent.setValueByFrame)){
+			window.parent.setValueByFrame("custom",id);
+		}else{
+			alert("请在父窗口添加setValueByFrame(type,id){处理逻辑}type='custom'");
+		}
+	}
+	</script>
 </head>
 
 <body>
@@ -37,13 +85,13 @@
 					<div class="left-sider">
 						<div class="operate">
 							<ul id="juheweb">
-								<c:forEach var="customerList" items="${customerList }">
+								<%-- <c:forEach var="customList" items="${customList }">
 									<li>
 										<h4>
-											<img src="${ctx}/resources/images/customer_01.png" /> <b>${customerList.vname }</b><a
-												href="">${customerList.vphoneCode
+											<img src="${ctx}/resources/images/customer_01.png" /> <b>${customList.vname }</b><a
+												href="">${customList.vphoneCode
 														}</a><span><a
-												href="${ctx}/customer/info.do?id=${customerList.id}">选择</a>
+												href="${ctx}/customer/info.do?id=${customList.id}">选择</a>
 											</span>
 										</h4>
 										<div class="list-item none">
@@ -65,7 +113,7 @@
 										</div>
 										<div class="clear"></div>
 									</li>
-								</c:forEach>
+								</c:forEach> --%>
 							</ul>
 						</div>
 					</div>
