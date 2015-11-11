@@ -261,7 +261,7 @@
         <select name="vtype" class="qsdr r1" id="gem-type-id">
           <option value="-1">宝石</option>
         </select>
-        <dt><input type='text' name='nworth' placeholder="声明价值" class="qsdr r2 gem-worth" value='${gemvo['nworth']}'></dt>
+        <dt><input type='text' name='nworth' placeholder="声明价值" class="qsdr r2 gem-worth" value="${gemvo['nworth']}"></dt>
         <div class="clear"></div>
       </div>
       <div class="qsd_right_1">
