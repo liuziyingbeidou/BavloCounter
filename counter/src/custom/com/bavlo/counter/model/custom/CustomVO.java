@@ -21,7 +21,7 @@ public class CustomVO extends IdEntity {
 	/**
 	 * 用户ID
 	 */
-	private Long customerId;
+	private Integer customerId;
 	/**
 	 * 定制单编号
 	 */
@@ -130,15 +130,19 @@ public class CustomVO extends IdEntity {
 	 */
 	private String vrequirementB;
 	/**
+	 * 订单ID
+	 */
+	private Integer orderId;
+	/**
 	 * 订单编号
 	 */
 	private String vorderCode;
 
-	public Long getCustomerId() {
+	public Integer getCustomerId() {
 		return customerId;
 	}
 
-	public void setCustomerId(Long customerId) {
+	public void setCustomerId(Integer customerId) {
 		this.customerId = customerId;
 	}
 
@@ -336,6 +340,14 @@ public class CustomVO extends IdEntity {
 
 	public static long getSerialversionuid() {
 		return serialVersionUID;
+	}
+
+	public Integer getOrderId() {
+		return orderId;
+	}
+
+	public void setOrderId(Integer orderId) {
+		this.orderId = orderId;
 	}
 
 }

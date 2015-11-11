@@ -43,11 +43,19 @@ public class CustomController extends BaseController implements IConstant {
 	 * @Description: ¶¨ÖÆµ¥±à¼­
 	 * @param @return
 	 * @return ModelAndView
+	 * orderId=1&customerId=1
 	 */
 	@RequestMapping("edit")
-	public ModelAndView edit(Map<String, Object> map, Integer id) {
+	public ModelAndView edit(Map<String, Object> map, Integer id, Integer orderId, Integer customerId) {
 
 		CustomVO customEdit = customService.findCustomById(id);
+		
+		if(orderId != null){
+			customEdit.setOrderId(orderId);
+		}
+		if(customerId != null){
+			customEdit.setCustomerId(customerId);
+		}
 		map.put("customEdit", customEdit);
 		return new ModelAndView(PATH_CUSTOM + "customEdit");
 	}
