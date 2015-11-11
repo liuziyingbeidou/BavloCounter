@@ -2,6 +2,7 @@ package com.bavlo.counter.service.custom.itf;
 
 import java.util.List;
 
+import com.bavlo.counter.model.custom.CustomBVO;
 import com.bavlo.counter.model.custom.CustomVO;
 
 /**
@@ -56,10 +57,32 @@ public interface ICustomService {
 	public List<CustomVO> findCustomByWh();
 
 	/**
-	 * @Description: 查找定制单列表
+	 * @Description: 通过条件查找定制单列表
 	 * @param @return
 	 * @return List<CustomVO>
 	 */
-	public List<CustomVO> findCustomList();
+	public List<CustomVO> findCustomList(String wh);
+	
+	/**
+	 * @Description: 保存子表
+	 * @param @param listBVO
+	 * @return void
+	 */
+	public void saveCustomB(List<CustomBVO> listBVO);
+	
+	/** 
+	 * @Description: 根据主表主键删除子表数据
+	 * @param @param mid
+	 * @return void
+	*/
+	public void deleteCustomB(Integer mid);
+	
+	/**
+	 * @Description: 根据主表主键查询子表数据
+	 * @param @param id
+	 * @param @return
+	 * @return List<CustomBVO>
+	 */
+	public List<CustomBVO> findListCustomB(Integer id);
 
 }
