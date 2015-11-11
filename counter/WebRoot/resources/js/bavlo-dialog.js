@@ -34,8 +34,4 @@ function openURL(url, title,width, height ) {
 		type: "iframe"
 	});
 }
-//弹框回调
-function callbackMuilt(){
-	alert("回调测试");
-}
 

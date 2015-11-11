@@ -130,3 +130,7 @@ function isExitsFunction(funcName) {
     return false;
 }
 
+//弹框回调
+function callbackMuilt(){
+	alert("回调测试");
+}
