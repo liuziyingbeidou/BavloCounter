@@ -69,7 +69,11 @@
 	//调用父窗体方法
 	function selHander(id){
 		if(isExitsFunction(window.parent.setValueByFrame)){
-			window.parent.setValueByFrame("customer",id,callbackMuilt());
+			if("${listType}" == "menu"){
+				window.parent.setValueByFrame("customer-menu",id,callbackMuilt());
+			}else{
+				window.parent.setValueByFrame("customer",id,callbackMuilt());
+			}
 		}else{
 			alert("请在父窗口添加setValueByFrame(type,id,callback){处理逻辑}type='customer'");
 		}

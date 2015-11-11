@@ -74,9 +74,9 @@
 			 	}
 			 });
 			 //宝石签收单列表
-			 $(".gem-page-list").bind("click",function(){
+			 /*$(".gem-page-list").bind("click",function(){
 			 	openURL("${ctx}/gem-sign/list.do","宝石签收单列表");
-			 });
+			 });*/
 			 //有值加后缀
 		  	initFieldSuffix();
 			 //加载子表数据
@@ -175,11 +175,9 @@
 		}
 		
 		//子窗体调用
-		function setValueByFrame(type,id,json){
-			if(type == "gem"){
-				var url = "${ctx}/gem-sign/view.do?id="+id;//根据id查询客户信息
-				window.location = url;
-			}else if(type == "customer"){
+		function setValueByFrame(type,id,callback,json){
+			var url;
+			if(type == "customer"){
 				url = "${ctx}/customer/infoJson.do";
 				$.get(url,{id:id},function(data){
 					if(data != null){
@@ -189,10 +187,20 @@
 						$("#customerId").val(data.id);
 					}
 					closeMultiDlg();
-					/*if(typeof(callback)!=='undefined'){
-						callback&&callback();
-					}*/
 				});
+			}else if(type == "chain"){
+				var data = JSON.parse(json);
+				$("#order-list").append("<dd type='ch' sid='"+data.sid+"' class='"+data.sid+" bill'><span class='list_name bill-name'>"+data.sname+"</span><input class='list_num bill-num' style='width:40px;margin-left:10px;' type='text' value='1' placeholder='条'><b class='list_price bill-price'>"+data.sprice+"</b><a href='javascript:rlist("+data.sid+")' class='close_c'><img src='${ctx}/resources/images/close.png'></a></dd>");
+				closeMultiDlg();
+			}else if(type == "order"){
+				url = "${ctx}/order/edit.do?id="+id;//根据id查询客户信息
+				window.location = url;
+			}else if(type == "gem"){
+				url = "${ctx}/gem-sign/view.do?id="+id;//根据id查询客户信息
+				window.location = url;
+			}else if(type == "entity"){
+				url = "${ctx}/entity-sign/view.do?id="+id;//根据id查询客户信息
+				window.location = url;
 			}
 		}
 		</script>
@@ -239,7 +247,7 @@
     <div class="qsd_left">
       <ul>
         <li><a href=""><img src="${ctx}/resources/images/customer_01.png"></a></li>
-        <li><div class="file3"><a href="javascript:;"><input type="file" name="file" id="file"></a></div></li>
+        <li><div class="file3"><a href="javascript:;"><input type="text" name="file" id="file"></a></div></li>
         <li class="camera"><a class="gem-upload" href="javascript:;"><img src="${ctx}/resources/images/camera.png"></a></li>
         <div class="clear"></div>
       </ul>

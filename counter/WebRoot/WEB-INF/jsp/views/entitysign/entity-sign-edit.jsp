@@ -49,9 +49,9 @@
 			 	}
 			 });
 			 //实物签收单列表
-			 $(".entity-page-list").bind("click",function(){
+			 /*$(".entity-page-list").bind("click",function(){
 			 	openURL("${ctx}/entity-sign/list.do","实物签收单列表");
-			 });
+			 });*/
 			 //有值后加后缀
 			 initFieldSuffix();
 			 //加载子表数据
@@ -123,12 +123,9 @@
 		}
 		
 		//子窗体调用
-		function setValueByFrame(type,id,json){
+		function setValueByFrame(type,id,callback,json){
 			var url;
-			if(type == "entity"){
-				url = "${ctx}/entity-sign/view.do?id="+id;//根据id查询客户信息
-				window.location = url;
-			}else if(type == "customer"){
+			if(type == "customer"){
 				url = "${ctx}/customer/infoJson.do";
 				$.get(url,{id:id},function(data){
 					if(data != null){
@@ -139,6 +136,19 @@
 					}
 					closeMultiDlg();
 				});
+			}else if(type == "chain"){
+				var data = JSON.parse(json);
+				$("#order-list").append("<dd type='ch' sid='"+data.sid+"' class='"+data.sid+" bill'><span class='list_name bill-name'>"+data.sname+"</span><input class='list_num bill-num' style='width:40px;margin-left:10px;' type='text' value='1' placeholder='条'><b class='list_price bill-price'>"+data.sprice+"</b><a href='javascript:rlist("+data.sid+")' class='close_c'><img src='${ctx}/resources/images/close.png'></a></dd>");
+				closeMultiDlg();
+			}else if(type == "order"){
+				url = "${ctx}/order/edit.do?id="+id;//根据id查询客户信息
+				window.location = url;
+			}else if(type == "gem"){
+				url = "${ctx}/gem-sign/view.do?id="+id;//根据id查询客户信息
+				window.location = url;
+			}else if(type == "entity"){
+				url = "${ctx}/entity-sign/view.do?id="+id;//根据id查询客户信息
+				window.location = url;
 			}
 		}
 		</script>
