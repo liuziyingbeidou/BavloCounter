@@ -13,7 +13,9 @@ import com.bavlo.counter.constant.IConstant;
 import com.bavlo.counter.model.custom.CustomVO;
 import com.bavlo.counter.model.order.AddressVO;
 import com.bavlo.counter.model.order.OrderBVO;
+import com.bavlo.counter.model.order.OrderCVO;
 import com.bavlo.counter.model.order.OrderVO;
+import com.bavlo.counter.model.sign.GemSignBVO;
 import com.bavlo.counter.service.custom.itf.ICustomService;
 import com.bavlo.counter.service.impl.CommonService;
 import com.bavlo.counter.service.order.itf.IOrderService;
@@ -199,8 +201,39 @@ public class OrderService extends CommonService implements IOrderService {
 				nList.add(dto);
 			}
 		}
+		OrderVO vo = nList.get(0);
+		String bwh = " orderId="+id +" and biscover='Y'";
+		OrderCVO bvo = findFirst(OrderCVO.class, bwh);
+		if(bvo != null){
+			vo.setFILE_0(bvo.getVpath()+"/min/"+CommonUtils.getMinPicName(bvo.getVname()));//封面
+		}
 		
-		return nList.get(0);
+		return vo;
+	}
+	
+	@Override
+	public void delOrderCVOByMid(Integer mid){
+		List<OrderCVO>  list = findListOrderC(mid);
+		if(list != null){
+			for (OrderCVO orderCVO : list) {
+				delete(orderCVO);
+			}
+		}
+	}
+	
+	@Override
+	public List<OrderCVO> findListOrderC(Integer mid) {
+		List<OrderCVO>  list = findAll(OrderCVO.class, " orderId="+mid);
+		return list;
+	}
+	
+	@Override
+	public void saveOrderCVO(List<OrderCVO> listcvo){
+		try {
+			save(listcvo);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 	
 	/*******************************以下是交付地址***********************************/

@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.bavlo.counter.model.order.AddressVO;
 import com.bavlo.counter.model.order.OrderBVO;
+import com.bavlo.counter.model.order.OrderCVO;
 import com.bavlo.counter.model.order.OrderVO;
 
 /**
@@ -41,6 +42,12 @@ public interface IOrderService {
 	public List<OrderVO> findListOrderBySql(String wh);
 	
 	public OrderVO findOrderInfoBySql(Integer id);
+	
+	public void delOrderCVOByMid(Integer mid);
+	
+	public List<OrderCVO> findListOrderC(Integer mid);
+	
+	public void saveOrderCVO(List<OrderCVO> listcvo);
 	
 	/*******************************以下是交付地址***********************************/
 	
