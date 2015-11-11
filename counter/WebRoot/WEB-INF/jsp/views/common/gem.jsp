@@ -55,14 +55,15 @@
 				var json = "{\"sname\":\""+sname+"\",\"sid\":\""+sid+"\"}";
 				var gem=$(".gem_img_sel");
 
-				window.parent.setValueByFrame("gem","",json,gem);
+				window.parent.setValueByFrame("gem","",callbackMuilt(),json,gem);
 			}else{
-				alert("请在父窗口添加setValueByFrame(type,id,json){处理逻辑}type='chain']");
+				alert("请在父窗口添加setValueByFrame(type,id,callback,json){处理逻辑}type='chain']");
 			}
 		
 		});
 		
 	});
+	
 
 	//初始化形状下拉框值
 	function initShapeByType() {

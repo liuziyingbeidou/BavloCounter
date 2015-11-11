@@ -35,6 +35,20 @@ $(function(){
 		openURL("${ctx}/order/list.do","订单列表",500,600);
 	});
 	
+	//上传图片
+	$(".cptu").bind("click",function(){
+		openURL("${ctx}/upload/uppage.do","上传图片");
+	});
+	//图片显示
+	$(".gem-pic-show").bind("click",function(){
+		var mid = $("#orderId").val();
+		if(mid == ""){
+			alert("请保存后查看!");
+		}else{
+			openURL("${ctx}/upload/showpic.do?cpath=com.bavlo.counter.model.order.OrderCVO&fkey=orderId&id="+mid,"图片展示");
+		}
+	});
+	
 	//更新状态
 	$("#ssave").bind("click",function(){
 		var orderId = $("#orderId").val();
@@ -50,6 +64,15 @@ $(function(){
 		var cnum = $(".cnum").val();
 		var url = "${ctx}/order/updateOrderCNumber.do";
 		$.post(url,{orderId:orderId,cnum:cnum},function(data){
+			alert(data);
+		});
+	});
+	//保存上传图片
+	$(".psave").bind("click",function(){
+		var url = "${ctx}/order/saveOrderCVO.do";
+		var orderId = $("#orderId").val();
+		var bvo = JSON.stringify($('#orderCId').serializeJson());
+		$.post(url,{orderId:orderId,bvo:bvo},function(data){
 			alert(data);
 		});
 	});
@@ -166,7 +189,7 @@ function loadOrderList(){
       </div>
     </div>
         <div class="mainmid">
-          <div class="check">            
+          <div class="ocheck">            
             <ul>
               <li>交付时间：${ordervo['ddeliverdate']}</li>
               <li>交付方式：${ordervo['vdeliveryWay']}</li>
@@ -199,40 +222,45 @@ function loadOrderList(){
 			  <div class="clear"></div>
 		  </p>
 		  		<div class="cankao">
-					<h2><a href="javascript:;" style="color:#fff" class="cankaotu">+ 成品图 （6）</a></h2>
+					<h2><a href="javascript:;" style="color:#fff" class="cankaotu cptu">+ 成品图 </a></h2>
 					<div class="pro">
 						<div class="demo" id='pic' style='display: ;'>
 							<div class="my-gallery">
-								<volist name="list" id="list"> <figure> <a
-									href="${ctx}/resources/images/zb_03.png" data-size="800x1142"><img
-									src="${ctx}/resources/images/zb_03.png" alt="Image description" /></a>
-								<figcaption itemprop="caption description">
-								<h3>图片名称8</h3>
-								<!--<div class="bottom"><ul><li><a href="#"><img src="images/share.png"></a></li><li><a href="#"><img src="images/download.png"></a></li><li><a href="#"><img src="images/link.png"></a></li></ul></div>-->
-								</figcaption> </figure> <figure style="display:none;"> <a
-									href="${ctx}/resources/images/zb_03.png" data-size="800x1142"><img
-									src="${ctx}/resources/images/zb_03.png" alt="Image description" /></a>
-								<figcaption itemprop="caption description">
-								<h3>图片名称8</h3>
-								</figcaption> </figure> <figure style="display:none;"> <a
-									href="${ctx}/resources/images/zb_03.png" data-size="800x1142"><img
-									src="${ctx}/resources/images/zb_03.png" alt="Image description" /></a>
-								<figcaption itemprop="caption description">
-								<h3>图片名称8</h3>
-								</figcaption> </figure> </volist>
-
+								<a class="gem-pic-show" href="javascript:;">
+								<c:choose>
+								 <c:when test="${empty ordervo['FILE_0']}">   
+								 <img src="${ctx}/resources/images/pic_02.png">
+								 </c:when>
+								 <c:otherwise>
+								 <img src="${ctx}/staticRes/${ordervo['FILE_0']}">
+								 </c:otherwise>	
+								</c:choose> 
+								</a>
 							</div>
 						</div>
 					</div>
 				</div>
 				<p/>
           <div class="close">
-            <input type="submit" name="button" value="关闭">
+            <input type="button" class="psave" name="button" value="保存">
           </div>
       </div>
         <div class="clear"></div>
     </div>  
 </div>
+	<form id="orderCId">
+	<input type="hidden" name="filemodel" id="filemodel" value="order">
+	<input type="hidden" name="filetype" id="filetype" value="pic">
+	<input type="hidden" name="FILE_0" id="FILE_0"></input>
+	<input type="hidden" name="FILE_1" id="FILE_1"></input>
+	<input type="hidden" name="FILE_2" id="FILE_2"></input>
+	<input type="hidden" name="FILE_3" id="FILE_3"></input>
+	<input type="hidden" name="FILE_4" id="FILE_4"></input>
+	<input type="hidden" name="FILE_5" id="FILE_5"></input>
+	<input type="hidden" name="FILE_6" id="FILE_6"></input>
+	<input type="hidden" name="FILE_7" id="FILE_7"></input>
+	<input type="hidden" name="FILE_8" id="FILE_8"></input>
+	</form>
 </body>
 </html>
 

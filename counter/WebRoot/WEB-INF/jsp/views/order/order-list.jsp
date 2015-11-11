@@ -57,9 +57,9 @@
 	//调用父窗体方法
 	function selHander(id){
 		if(isExitsFunction(window.parent.setValueByFrame)){
-			window.parent.setValueByFrame("order",id);
+			window.parent.setValueByFrame("order",id,callbackMuilt());
 		}else{
-			alert("请在父窗口添加setValueByFrame(type,id){处理逻辑}type='order'");
+			alert("请在父窗口添加setValueByFrame(type,id,callback){处理逻辑}type='order'");
 		}
 	}
 	</script>
