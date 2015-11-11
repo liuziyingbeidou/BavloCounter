@@ -368,7 +368,7 @@ function getOrderListInfo(){
     		}
 		}
 //子窗体调用
-		function setValueByFrame(type,id,json){
+		function setValueByFrame(type,id,callback,json){
 			var url;
 			if(type == "customer"){
 				url = "${ctx}/customer/infoJson.do";
@@ -391,6 +391,9 @@ function getOrderListInfo(){
 			}else if(type == "order"){
 				url = "${ctx}/order/edit.do?id="+id;//根据id查询客户信息
 				window.location = url;
+			}
+			if(typeof(callback)!=='undefined'){
+				callback&&callback();
 			}
 		}
 		

@@ -36,9 +36,9 @@ $(function(){
 			var sprice = $("#chain-spec-id").find("option:selected").attr("cost");
 			var sid = $("#chain-material-id").find("option:selected").val()+ $("#chain-style-id").find("option:selected").val()+$("#chain-spec-id").find("option:selected").val();
 			var json = "{\"sname\":\""+sname+"\",\"sprice\":\""+sprice+"\",\"sid\":\""+sid+"\"}";
-			window.parent.setValueByFrame("chain","",json);
+			window.parent.setValueByFrame("chain","",callbackMuilt(),json);
 		}else{
-			alert("请在父窗口添加setValueByFrame(type,id,json){处理逻辑}type='chain']");
+			alert("请在父窗口添加setValueByFrame(type,id,callback,json){处理逻辑}type='chain']");
 		}
 	});
 
