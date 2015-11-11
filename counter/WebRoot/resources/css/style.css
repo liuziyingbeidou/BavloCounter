@@ -446,9 +446,9 @@ font-family:"Microsoft yahei";
 }
 
 /*查看订单*/
-.check { width: 310px;}
-.check ul { margin-top: 20px; margin-bottom: 20px;}
-.check ul li { line-height: 35px;}
+.ocheck { width: 310px;}
+.ocheck ul { margin-top: 20px; margin-bottom: 20px;}
+.ocheck ul li { line-height: 35px;}
 .repair { margin:30px 0;}
 .check_re {}
 .repair1 { width: 170px; padding-left: 10px; float: left; font-size: 16px; height: 40px; line-height: 40px; background: #ddd; color: #616161;}

@@ -171,11 +171,11 @@
 	line-height:60px;
 	font-size:26px;
 }
-.check {
+.ocheck {
 	width:90%;
 	margin:0 auto;
 }
-.check ul li { font-size:26px; line-height:60px; }
+.ocheck ul li { font-size:26px; line-height:60px; }
 .repair1 {
 	width:48%;
 	height:60px; 
@@ -501,7 +501,7 @@ font-size:23px;
 .upload_btn input {width:94%;font-size:26px;height:60px; line-height:60px;}
 .upload_btn {width:95%;margin-top:37px;margin-left:5%;}
 
-/*璁㈠崟鍒楄〃*/
+/*鐠併垹宕熼崚妤勩�*/
 /*
 #orderlist  { background:#444; padding:0; min-height: 737px; }
 */
