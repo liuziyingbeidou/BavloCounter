@@ -202,12 +202,10 @@
 	<form id="gemfrmId">
 	<input id="gemid" class="mid" type="hidden" name="id" value="${gemvo['id']}">
 	<input id="customerId" type="hidden" name="customerId" value="${gemvo['customerId']}">
-		<div class="header">
-			<div class="head">
-				<div class="top1">
-					<b><a href="javascript:;" onclick="EditShow_Hidden(ed1)">
-					<img src="${ctx}/resources/images/plus.png">
-					</a> ${pageGemType }宝石签收单
+<div class="header">
+	<div class="head">
+		<div class="top1">
+			<b><a href="javascript:;" onclick="EditShow_Hidden(ed1)"><img src="${ctx}/resources/images/plus.png"></a> ${pageGemType }宝石签收单
 					<c:choose>
 						 <c:when test="${empty gemvo['vnumber']}">   
 						 ${number }
@@ -217,132 +215,77 @@
 						 ${gemvo['vnumber']}
 						 <input type="hidden" name="vnumber" value="${gemvo['vnumber']}">
 						 </c:otherwise>	
-					</c:choose> 
-					</b>
-					<font><a href="javascript:;" onclick="Show_Hidden(tr1)"><img
-								src="${ctx}/resources/images/plus.png">
-					</a>
-					</font>
-				</div>
-				<div class="hidden_enent" id="tr1" style="display: none;">
-					<ul>
-						<li class="jian">
-							<a href="javascript:;" onclick="Show_Hidden(tr1)">—</a>
-						</li>
-						<li>
-							<a href="">定制单</a>
-						</li>
-						<li>
-							<a class="gem-page-list" href="javascript:void();">宝石签收单</a>
-						</li>
-						<li>
-							<a href="">订单</a>
-						</li>
-						<li>
-							<a href="">客户</a>
-						</li>
-					</ul>
-				</div>
-				<div class="edit_hidden" id="ed1" style="display: none;">
-					<ul>
-						<li class="jian2">
-							<a href="javascript:;" onclick="EditShow_Hidden(ed1)">—</a>
-						</li>
-						<li>
-							<a href="">Open</a>
-						</li>
-						<li>
-							<a href="">Save</a>
-						</li>
-						<li>
-							<a href="">Save as</a>
-						</li>
-						<li>
-							<a href="">Print</a>
-						</li>
-					</ul>
-				</div>
-				<div class="clear"></div>
-			</div>
+					</c:choose> </b>
+			<font><a href="javascript:;" onclick="Show_Hidden(tr1)"><img src="${ctx}/resources/images/plus.png"></a></font>
 		</div>
+		<div class="hidden_enent" id="tr1" style="display:none;">
+			<ul>
+				<li class="jian"><a href="javascript:;" onclick="Show_Hidden(tr1)">—</a></li>
+				<jsp:include page="../menu_pg.jsp"></jsp:include>
+			</ul>
+		</div>
+		<div class="edit_hidden" id="ed1" style="display:none;">
+			<ul>
+				<li class="jian2"><a href="javascript:;" onclick="EditShow_Hidden(ed1)">—</a></li>
+				<jsp:include page="../menu_cau.jsp"></jsp:include>	
+			</ul>
+		</div>
+		<div class="clear"></div>
+	</div>
+</div>
 
-		<div class="qsd">
-			<div class="qsd_main">
-				<div class="qsd_left">
-					<ul>
-						<li>
-							<a href="javascript:;"><img class="cusheader" src="${ctx}/resources/images/customer_01.png">
-							</a>
-						</li>
-						<li>
-							<div class="file3">
-								<a href="javascript:;"><input type="text" name="file" id="file">
-								</a>
-							</div>
-						</li>
-						<li class="camera">
-							<a class="gem-upload" href="javascript:;"><img src="${ctx}/resources/images/camera.png"></a>
-						</li>
-						<div class="clear"></div>
-					</ul>
-					<div class="clear"></div>
-					<dt>
-						<a class="gem-pic-show" href="javascript:;">
-						<c:choose>
-						 <c:when test="${empty gemvo['FILE_0']}">   
-						 <img src="${ctx}/resources/images/pic_02.png">
-						 </c:when>
-						 <c:otherwise>
-						 <img src="${ctx}/staticRes/${gemvo['FILE_0']}">
-						 </c:otherwise>	
-						</c:choose> 
-						</a>
-					</dt>
-				</div>
-				<div class="qsd_right">
-					<div class="qsd_right_1">
-						<select name="vtype" class="qsdr r1" id="gem-type-id">
-							<option value="-1">
-								 宝石
-							</option>
-						</select>
-						<dt>
-							<input type='text' name='nworth' placeholder="声明价值" class="qsdr r2 gem-worth" value="${gemvo['nworth']}">
-						</dt>
-						<div class="clear"></div>
-					</div>
-					<div class="qsd_right_1">
-						<select name="vshape" class="qsdr r1" id="gem-shape-id">
-							<option value="-1">
-								 形状
-							</option>
-						</select>
-						<dt>
-							<input type='text' name='nweight' placeholder="重量" class="qsdr r2 gem-weight" value="${gemvo['nweight']}">
-						</dt>
-						<div class="clear"></div>
-					</div>
-					<div class="qsdtt">
-						<select name="vspec" class="qsdt" id="gem-spec-id">
-							<option value="-1">
-								 规格
-							</option>
-						</select>
-					</div>
-					<div class="clear"></div>
-					<div class="qsdtt">
-						<input type='text' name='icount' placeholder="数量" value="${gemvo['icount']}" class="qsdn t3 gem-count">
-					</div>
-					<div class="qssm-l">
-						<textarea name="vmemo" cols="" rows="" class="qssm" placeholder="签收说明">${gemvo['vmemo']}</textarea>
-					</div>
-					<div class="qs_save">
-						<input type="button" name="button" onclick="javascript:save()" value="保存">
-					</div>
-				</div>
-				<div class="clear"></div>
-			</div>
-		</div>
+<div class="qsd">
+  <div class="qsd_main">
+    <div class="qsd_left">
+      <ul>
+        <li><a href=""><img src="${ctx}/resources/images/customer_01.png"></a></li>
+        <li><div class="file3"><a href="javascript:;"><input type="file" name="file" id="file"></a></div></li>
+        <li class="camera"><a class="gem-upload" href="javascript:;"><img src="${ctx}/resources/images/camera.png"></a></li>
+        <div class="clear"></div>
+      </ul>
+	  <div class="clear"></div>
+      <dt><a class="gem-pic-show" href="javascript:;">
+			<c:choose>
+				<c:when test="${empty gemvo['FILE_0']}">
+					<img src="${ctx}/resources/images/pic_02.png">
+				</c:when>
+				<c:otherwise>
+					<img src="${ctx}/staticRes/${gemvo['FILE_0']}">
+				</c:otherwise>
+			</c:choose> 
+		</a>
+	</dt>
+    </div>
+    <div class="qsd_right">
+      <div class="qsd_right_1">
+        <select name="vtype" class="qsdr r1" id="gem-type-id">
+          <option value="-1">宝石</option>
+        </select>
+        <dt><input type='text' name='nworth' placeholder="声明价值" class="qsdr r2 gem-worth" value='${gemvo['nworth']}'></dt>
+        <div class="clear"></div>
+      </div>
+      <div class="qsd_right_1">
+        <select name="vshape" class="qsdr r1"  id="gem-shape-id">
+          <option value="-1">形状</option>
+        </select>
+        <dt><input type='text' name='nweight' placeholder="重量" class="qsdr r2 gem-weight" value="${gemvo['nweight']}"></dt>
+        <div class="clear"></div>
+      </div>
+      <div class="qsdtt">
+		<select name="vspec"  class="qsdt" id="gem-spec-id">
+          <option value="-1">规格</option>
+        </select>
+      </div>
+      <div class="clear"></div>
+      <div class="qsdtt"><input type='text' name='icount' placeholder="数量" value="${gemvo['icount']}" class="qsdn t3 gem-count"></div>
+      <div class="qssm-l"><textarea name="vmemo" cols="" rows="" class="qssm" placeholder="签收说明">${gemvo['vmemo']}</textarea></div>
+      <div class="qs_save">
+        <input type="button" name="button" onclick="javascript:save()" value="保存">
+      </div>
+    </div>
+    <div class="clear"></div>
+  </div>
+</div>
 	</form>
 	<form id="gemfrmBId">
 	<input type="hidden" name="filemodel" id="filemodel" value="gemsign">
