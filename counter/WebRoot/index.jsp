@@ -34,8 +34,9 @@ $(function(){
        <a href="${ctx}/order/list.do">订单列表</a>
        <a href="${ctx}/order/view.do?id=1">订单查看</a>
     <br>   
-    6、<a href="${ctx}/custom/info.do">定制单</a>
-       <a href="${ctx}/custom/list.do">定制单列表</a>
+    6、<a href="${ctx}/custom/edit.do">定制单</a>
+       <a href="${ctx}/custom/getList.do">定制单列表</a>
+       <a href="${ctx}/custom/detail.do">定制单详细</a>
     <br>
     <br>
      <fieldset>
