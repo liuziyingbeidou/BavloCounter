@@ -225,7 +225,10 @@ function check(){
 //保存地址
 function saveAddr(){
 	
-	if(check()){
+	//客户ID
+	var customerId = $("#customerId").val();
+	if(customerId == ""){
+		alert("请选择客户...");
 		return ;
 	}
 	var customerId = $("#customerId").val();
@@ -407,6 +410,7 @@ function getOrderListInfo(){
 <style>
 .address .addrlist {background:#444444;}
 .add_dizhi .name{width:310px;}
+.fapiao input{width:310px;}
 .district{ 
   width: 310px;
   height: 40px;
