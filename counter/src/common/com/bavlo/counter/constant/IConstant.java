@@ -66,7 +66,8 @@ public interface IConstant {
 	public static final String PAGE_TYPE_ADD = "新增";
 	//编辑
 	public static final String PAGE_TYPE_EDIT = "编辑";
-	
+	//编辑
+	public static final String PAGE_TYPE_VIEW = "查看";
 	
 
 	
