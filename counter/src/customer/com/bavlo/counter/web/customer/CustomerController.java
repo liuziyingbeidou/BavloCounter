@@ -76,7 +76,8 @@ public class CustomerController extends BaseController implements IConstant {
 	 * @return ModelAndView
 	 */
 	@RequestMapping(value="list")
-	public ModelAndView list(Map<String, Object> map) {
+	public ModelAndView list(HttpServletRequest request,Map<String, Object> map) {
+		String listType = request.getParameter("listType");
 		/*String content = request.getParameter("content");
 		String wh = "";
 		if(StringUtil.isNotEmpty(content)){
@@ -84,7 +85,9 @@ public class CustomerController extends BaseController implements IConstant {
 		}
 		List<CustomerVO> customerList = customerService.findCustomerList(wh);
 		map.put("customerList", customerList);*/
-		return new ModelAndView(PATH_CUSTOMER + "customerList");
+		ModelAndView model = new ModelAndView(PATH_CUSTOMER + "customerList");
+		model.addObject("listType", listType);
+		return model;
 	}
 	
 	/**
