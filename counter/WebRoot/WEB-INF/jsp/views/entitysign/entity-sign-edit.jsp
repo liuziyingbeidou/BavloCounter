@@ -137,6 +137,7 @@
 						}
 						$("#customerId").val(data.id);
 					}
+					closeMultiDlg();
 				});
 			}
 		}
