@@ -35,3 +35,7 @@ function openURL(url, title,width, height ) {
 	});
 }
 
+function closeMultiDlg(){
+	
+	$(".ui-dialog-titlebar-close").trigger('click');
+}
