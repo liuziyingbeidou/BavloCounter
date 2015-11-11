@@ -510,8 +510,8 @@ function getOrderListInfo(){
 		<!--<dt><i class="status" style=" width:182px; position:absolute; top:180px; left:105px;"></i></dt>-->
         <ul>
           <li>提交</li>
-          <li>模具</li>
-          <li>工艺</li>
+          <li>制版</li>
+          <li>生产</li>
           <li>质检</li>
           <li>快递</li>
           <li>交付</li>
@@ -538,7 +538,7 @@ function getOrderListInfo(){
       </div>
 	<script language="javascript" type="text/javascript" src="${ctx}/resources/js/add-input.js"></script>
 	
-    <div class="miaoshu2"><textarea name="vordermemo" cols="" rows="" class="miaoshu" placeholder="订单说明" onfocus="if(this.value=='订单说明'){this.value='';}"  onblur="if(this.value==''){this.value='订单说明';}">${ordervo['vordermemo'] }</textarea></div>
+    <div class="miaoshu2"><textarea name="vordermemo" cols="" rows="" class="miaoshu" placeholder="订单说明">${ordervo['vordermemo'] }</textarea></div>
     </div>
         <div class="mainmid">
           <h2>交付地址</h2>
