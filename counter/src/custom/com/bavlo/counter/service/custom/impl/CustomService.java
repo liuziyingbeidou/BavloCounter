@@ -2,6 +2,8 @@ package com.bavlo.counter.service.custom.impl;
 
 import java.util.List;
 
+import javax.annotation.Resource;
+
 import org.springframework.stereotype.Service;
 
 import com.bavlo.counter.model.custom.CustomBVO;
@@ -10,6 +12,7 @@ import com.bavlo.counter.model.sign.GemSignBVO;
 import com.bavlo.counter.model.sign.GemSignVO;
 import com.bavlo.counter.service.custom.itf.ICustomService;
 import com.bavlo.counter.service.impl.CommonService;
+import com.bavlo.counter.service.order.itf.IOrderService;
 
 
 /** 
@@ -21,6 +24,10 @@ import com.bavlo.counter.service.impl.CommonService;
  */
 @Service("CustomService")
 public class CustomService extends CommonService implements ICustomService {
+	
+	
+	@Resource
+	private IOrderService orderService;
 
 	@Override
 	public void saveCustom(CustomVO customVO) {
@@ -41,9 +48,11 @@ public class CustomService extends CommonService implements ICustomService {
 	public void saveOrUpdateCustom(CustomVO customVO) {
 		try {
 			saveOrUpdate(customVO);
+			orderService.backWriteByCum(customVO.getOrderId(), customVO.getCustomerId());
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+		
 	}
 
 	@Override
@@ -84,7 +93,7 @@ public class CustomService extends CommonService implements ICustomService {
 	
 	@Override
 	public List<CustomBVO> findListCustomB(Integer mid) {
-		List<CustomBVO>  list = findAll(CustomBVO.class, " gemsignId="+mid);
+		List<CustomBVO>  list = findAll(CustomBVO.class, " customId="+mid);
 		return list;
 	}
 
