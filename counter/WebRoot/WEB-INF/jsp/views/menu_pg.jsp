@@ -18,7 +18,7 @@ $(function(){
 	});
 	//选择客户
 	$(".menu-customer-list").bind("click",function(){
-		openURL("${ctx}/customer/list.do","客户列表");
+		openURL("${ctx}/customer/list.do?listType=menu","客户列表");
 	});
 });
 </script>

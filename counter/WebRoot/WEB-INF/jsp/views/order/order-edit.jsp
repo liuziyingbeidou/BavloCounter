@@ -85,9 +85,9 @@ $(function(){
 	//选择下拉框值
 	setSelValue();
 	//订单列表
-	$(".menu-order").bind("click",function(){
+	/*$(".menu-order").bind("click",function(){
 		openURL("${ctx}/order/list.do","订单列表",500,600);
-	});
+	});*/
 	//订单清单
 	loadOrderList();
 });
@@ -160,7 +160,7 @@ function traversedSelAddr(iid){
 			$(this).css({"background":"#777"});
 			$("#addressId").val(id);
 		}else{
-			if($("id").val() == ""){
+			if($("#addressId").val() == "" ){
 				$("#"+iid).css({"background":"#777"});
 				$("#addressId").val(iid);
 			}
@@ -272,7 +272,10 @@ function loadCumById(cumId){
 
 //到定制单前预保存订单
 function preSaveToCum(){
-	if(check()){
+	//客户ID
+	var customerId = $("#customerId").val();
+	if(customerId == ""){
+		alert("请选择客户...");
 		return ;
 	}
 	var id = $("#orderId").val();
@@ -282,11 +285,11 @@ function preSaveToCum(){
 		var state = $("#orderState").val();
 		$.post(url,{customerId:customerId,iorderState:state},function(data){
 			$("#orderId").val(data.id);
-			window.open("${ctx}/custom/info.do?orderId="+data.id+"&customerId="+customerId); 
+			window.open("${ctx}/custom/edit.do?orderId="+data.id+"&customerId="+customerId); 
 		});
 	}else{
 		//打开定制单
-		window.open("${ctx}/custom/info.do?orderId="+id+"&customerId="+customerId); 
+		window.open("${ctx}/custom/edit.do?orderId="+id+"&customerId="+customerId); 
 	}
 }
 
@@ -382,6 +385,7 @@ function getOrderListInfo(){
 						}
 						$("#customerId").val(data.id);
 						//选客户后初始化交付地址
+						$("#addressId").val("");
 						$("#tbl").empty();
 						initAddr();
 					}
@@ -389,15 +393,22 @@ function getOrderListInfo(){
 				});
 			}else if(type == "chain"){
 				var data = JSON.parse(json);
-				//$(".partsGem .list_name").text(data.sname);
-				//$(".partsGem .list_price").text(data.sprice);
 				$("#order-list").append("<dd type='ch' sid='"+data.sid+"' class='"+data.sid+" bill'><span class='list_name bill-name'>"+data.sname+"</span><input class='list_num bill-num' style='width:40px;margin-left:10px;' type='text' value='1' placeholder='条'><b class='list_price bill-price'>"+data.sprice+"</b><a href='javascript:rlist("+data.sid+")' class='close_c'><img src='${ctx}/resources/images/close.png'></a></dd>");
 				closeMultiDlg();
 			}else if(type == "order"){
 				url = "${ctx}/order/edit.do?id="+id;//根据id查询客户信息
 				window.location = url;
+			}else if(type == "gem"){
+				url = "${ctx}/gem-sign/view.do?id="+id;//根据id查询客户信息
+				window.location = url;
+			}else if(type == "entity"){
+				url = "${ctx}/entity-sign/view.do?id="+id;//根据id查询客户信息
+				window.location = url;
+			}else if(type == "customer-menu"){
+				url = "${ctx}/customer/info.do?id="+id;//根据id查询客户信息
+				window.location = url;
 			}
-/*			if(typeof(callback)!=='undefined'){
+			/*if(typeof(callback)!=='undefined'){
 				callback&&callback;
 			}*/
 		}
@@ -468,7 +479,7 @@ function getOrderListInfo(){
 		<div class="edit_hidden1" id="ed1" style="display:none;">
 			<ul>
 				<li class="jian2"><a href="javascript:;" onclick="EditShow_Hidden(ed1)">—</a></li>
-				<jsp:include page="../menu_pg.jsp"></jsp:include>
+				<jsp:include page="../menu_cau.jsp"></jsp:include>
 				<!--
 				<li><a href="">Open</a></li>
 				<li><a href="">Save</a></li>
