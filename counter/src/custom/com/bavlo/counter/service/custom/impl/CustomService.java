@@ -4,7 +4,9 @@ import java.util.List;
 
 import org.springframework.stereotype.Service;
 
+import com.bavlo.counter.model.custom.CustomBVO;
 import com.bavlo.counter.model.custom.CustomVO;
+import com.bavlo.counter.model.sign.GemSignBVO;
 import com.bavlo.counter.model.sign.GemSignVO;
 import com.bavlo.counter.service.custom.itf.ICustomService;
 import com.bavlo.counter.service.impl.CommonService;
@@ -56,9 +58,34 @@ public class CustomService extends CommonService implements ICustomService {
 	}
 
 	@Override
-	public List<CustomVO> findCustomList() {
+	public List<CustomVO> findCustomList(String wh) {
 	
-		return findAll(CustomVO.class, "",null,"id","desc");
+		return findAll(CustomVO.class, wh,null,"id","desc");
+	}
+	
+	@Override
+	public void saveCustomB(List<CustomBVO> listBVO) {
+		try {
+			save(listBVO);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+	
+	@Override
+	public void deleteCustomB(Integer mid) {
+		List<CustomBVO>  list = findListCustomB(mid);
+		if(list != null){
+			for (CustomBVO customBVO : list) {
+				delete(customBVO);
+			}
+		}
+	}
+	
+	@Override
+	public List<CustomBVO> findListCustomB(Integer mid) {
+		List<CustomBVO>  list = findAll(CustomBVO.class, " gemsignId="+mid);
+		return list;
 	}
 
 }

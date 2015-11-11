@@ -58,21 +58,38 @@ public class CustomVO extends IdEntity {
 	@Column(length = 50)
 	private String vsex;
 	/**
-	 * 重量	
+	 * 重量
 	 */
-	@Column(precision=20,scale=8)
+	@Column(precision = 20, scale = 8)
 	private Double nweight;
 	/**
 	 * 主石（元）
 	 */
 	@Column(precision = 20, scale = 8)
-	private Double nprimaryGem;
+	private Double nprimaryGemCost;
+	/**
+	 * 主石（ID）
+	 */
+	@Column(precision = 20, scale = 8)
+	private Integer iprimaryGemID;
 	/**
 	 * 配石（颗）
 	 */
-	private Integer iforeignGem;
+	private Integer iforeignGemNum;
 	/**
-	 * 价格
+	 * 配石（ID）
+	 */
+	private Integer iforeignGemID;
+	/**
+	 * 库选石（元）
+	 */
+	private Integer stockGemNum;
+	/**
+	 * 库选石（颗）
+	 */
+	private Integer stockGemID;
+	/**
+	 * 总价格
 	 */
 	@Column(precision = 20, scale = 8)
 	private Double nprice;
@@ -112,9 +129,17 @@ public class CustomVO extends IdEntity {
 	 * 细节描述
 	 */
 	private String vrequirementB;
+	/**
+	 * 订单编号
+	 */
+	private String vorderCode;
 
 	public Long getCustomerId() {
 		return customerId;
+	}
+
+	public void setCustomerId(Long customerId) {
+		this.customerId = customerId;
 	}
 
 	public String getVcustomCode() {
@@ -180,27 +205,60 @@ public class CustomVO extends IdEntity {
 	public void setNweight(Double nweight) {
 		this.nweight = nweight;
 	}
-	public Double getNprimaryGem() {
-		return nprimaryGem;
+
+	public Double getNprimaryGemCost() {
+		return nprimaryGemCost;
 	}
 
-	public void setNprimaryGem(Double nprimaryGem) {
-		this.nprimaryGem = nprimaryGem;
+	public void setNprimaryGemCost(Double nprimaryGemCost) {
+		this.nprimaryGemCost = nprimaryGemCost;
 	}
 
-	public Integer getIforeignGem() {
-		return iforeignGem;
+	public Integer getIprimaryGemID() {
+		return iprimaryGemID;
 	}
 
-	public void setIforeignGem(Integer iforeignGem) {
-		this.iforeignGem = iforeignGem;
+	public void setIprimaryGemID(Integer iprimaryGemID) {
+		this.iprimaryGemID = iprimaryGemID;
+	}
+
+	public Integer getIforeignGemNum() {
+		return iforeignGemNum;
+	}
+
+	public void setIforeignGemNum(Integer iforeignGemNum) {
+		this.iforeignGemNum = iforeignGemNum;
+	}
+
+	public Integer getIforeignGemID() {
+		return iforeignGemID;
+	}
+
+	public void setIforeignGemID(Integer iforeignGemID) {
+		this.iforeignGemID = iforeignGemID;
+	}
+
+	public Integer getStockGemNum() {
+		return stockGemNum;
+	}
+
+	public void setStockGemNum(Integer stockGemNum) {
+		this.stockGemNum = stockGemNum;
+	}
+
+	public Integer getStockGemID() {
+		return stockGemID;
+	}
+
+	public void setStockGemID(Integer stockGemID) {
+		this.stockGemID = stockGemID;
 	}
 
 	public Double getNprice() {
 		return nprice;
 	}
 
-	public void setINprice(Double nprice) {
+	public void setNprice(Double nprice) {
 		this.nprice = nprice;
 	}
 
@@ -244,6 +302,14 @@ public class CustomVO extends IdEntity {
 		this.istatus = istatus;
 	}
 
+	public Integer getIcertificate() {
+		return icertificate;
+	}
+
+	public void setIcertificate(Integer icertificate) {
+		this.icertificate = icertificate;
+	}
+
 	public String getVrequirement() {
 		return vrequirement;
 	}
@@ -260,20 +326,16 @@ public class CustomVO extends IdEntity {
 		this.vrequirementB = vrequirementB;
 	}
 
+	public String getVorderCode() {
+		return vorderCode;
+	}
+
+	public void setVorderCode(String vorderCode) {
+		this.vorderCode = vorderCode;
+	}
+
 	public static long getSerialversionuid() {
 		return serialVersionUID;
-	}
-
-	public void setCustomerId(Long customerId) {
-		this.customerId = customerId;
-	}
-
-	public Integer getIcertificate() {
-		return icertificate;
-	}
-
-	public void setIcertificate(Integer icertificate) {
-		this.icertificate = icertificate;
 	}
 
 }
