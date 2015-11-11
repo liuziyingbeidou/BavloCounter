@@ -68,5 +68,26 @@ $(function(){
     	4、在bavlo-event.js中添加如下：<br>
     	setSuffix(class属性值,后缀);实例：setSuffix("worth","元");
     </fieldset>
+    <fieldset>
+    	<legend>回写接口（IOrderService）</legend>
+    	/**
+		 * 定制单保存回写订单数量、价格
+		 * @param orderId 订单ID
+		 * @param customId 定制单ID
+		 */<br>
+		public void backWriteByCum(Integer orderId,Integer customId);<br>
+		/**
+		 * 回写订单状态
+		 * @param orderId
+		 * @param ista 提交(0)、制版(1)、生产(2)、质检(3)、快递(4)、支付(5)
+		 */<br>
+		public void updateOrderState(Integer orderId,Integer ista);<br>
+		/**
+		 * 回写快递单号 且 回写订单状态
+		 * @param orderId
+		 * @param cnum
+		 */<br>
+		public void updateOrderCNumber(Integer orderId,String cnum);
+    </fieldset>
 </body>
 </html>
