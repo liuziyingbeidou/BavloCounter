@@ -13,7 +13,7 @@
 		<div class="top2">
 			<b><a href="javascript:;" onclick="EditShow_Hidden(ed1)"><img
 						src="${ctx}/resources/images/plus.png" />
-			</a> xxxx单 81812560 </b>
+			</a> 定制单 81812560 </b>
 			<font><a href="javascript:;" onclick="Show_Hidden(tr1)"><img
 						src="${ctx}/resources/images/plus.png" />
 			</a> </font>
