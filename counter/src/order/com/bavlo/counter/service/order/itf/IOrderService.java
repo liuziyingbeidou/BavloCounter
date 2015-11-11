@@ -63,7 +63,7 @@ public interface IOrderService {
 	
 	/***********************回写*********************************/
 	/**
-	 * 定制单保存回写订单数量、价格、图片
+	 * 定制单保存回写订单数量、价格
 	 * @param orderId 订单ID
 	 * @param customId 定制单ID
 	 */
