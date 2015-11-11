@@ -1,11 +1,5 @@
 <%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%
-	String path = request.getContextPath();
-	String basePath = request.getScheme() + "://"
-			+ request.getServerName() + ":" + request.getServerPort()
-			+ path + "/";
-%>
 <c:set var="ctx" value="${pageContext.request.contextPath}" />
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
@@ -15,6 +9,12 @@
 			content="width=device-width,target-densitydpi=high-dpi,initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no" />
 
 		<title>编辑客户</title>
+
+<!--必要样式-->
+<link rel='stylesheet' href='${ctx}/resources/css/style.css' media='all' />
+<link rel='stylesheet' href='${ctx}/resources/css/bootstrap.css' media='all' />
+<link rel="stylesheet" href="${ctx}/resources/css/photoswipe.css" />
+<link rel="stylesheet" href="${ctx}/resources/css/default-skin.css" />
 
 		<script src="${ctx}/resources/js/jquery-1.8.3.min.js"></script>
 		<script src="${ctx}/resources/js/area.js"></script>
