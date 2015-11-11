@@ -188,9 +188,10 @@
 						}
 						$("#customerId").val(data.id);
 					}
-					if(typeof(callback)!=='undefined'){
+					closeMultiDlg();
+					/*if(typeof(callback)!=='undefined'){
 						callback&&callback();
-					}
+					}*/
 				});
 			}
 		}

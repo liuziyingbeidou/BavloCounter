@@ -382,19 +382,21 @@ function getOrderListInfo(){
 						$("#tbl").empty();
 						initAddr();
 					}
+					closeMultiDlg();
 				});
 			}else if(type == "chain"){
 				var data = JSON.parse(json);
 				//$(".partsGem .list_name").text(data.sname);
 				//$(".partsGem .list_price").text(data.sprice);
 				$("#order-list").append("<dd type='ch' sid='"+data.sid+"' class='"+data.sid+" bill'><span class='list_name bill-name'>"+data.sname+"</span><input class='list_num bill-num' style='width:40px;margin-left:10px;' type='text' value='1' placeholder='条'><b class='list_price bill-price'>"+data.sprice+"</b><a href='javascript:rlist("+data.sid+")' class='close_c'><img src='${ctx}/resources/images/close.png'></a></dd>");
+				closeMultiDlg();
 			}else if(type == "order"){
 				url = "${ctx}/order/edit.do?id="+id;//根据id查询客户信息
 				window.location = url;
 			}
-			if(typeof(callback)!=='undefined'){
-				callback&&callback();
-			}
+/*			if(typeof(callback)!=='undefined'){
+				callback&&callback;
+			}*/
 		}
 		
 		//删除清单
