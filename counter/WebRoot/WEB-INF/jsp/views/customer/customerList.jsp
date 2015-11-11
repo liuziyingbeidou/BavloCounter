@@ -22,6 +22,15 @@
 	<!-- 自定义 -->
 	<script src="${ctx}/resources/js/bavlo-event.js"></script>
 	
+	<!-- 自定义 -->
+	<script src="${ctx}/resources/js/bavlo-event.js"></script>
+		<!-- 弹框 -->
+		<!-- jQuery & jQuery UI files (needed)--> 
+		<script src="/counter/resources/jquery.multiDialog/js/jquery/jquery-ui-1.10.3.custom.js"></script> 
+		<!-- MultiDialog files (needed) --> 
+		<script src="/counter/resources/jquery.multiDialog/js/jquery.ui.dialog.extended-1.0.2.js"></script> 
+		<script src="/counter/resources/jquery.multiDialog/js/jquery.multiDialog.js"></script> 
+	
 	<script type="text/javascript">
 	$(function(){
 		$(".search").keyup(function(){
