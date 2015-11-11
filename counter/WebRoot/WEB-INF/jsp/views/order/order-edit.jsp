@@ -406,6 +406,17 @@ function getOrderListInfo(){
 </script>
 <style>
 .address .addrlist {background:#444444;}
+.add_dizhi .name{width:310px;}
+.district{ 
+  width: 310px;
+  height: 40px;
+  font-family: "Microsoft yahei";
+  font-size: 16px;
+  color: #555;
+  background-color: #ddd;
+  padding-left: 10px;
+  margin-top: 20px}
+.add_dizhi .dizhi{width:310px;}
 </style>
 </head>
 
@@ -441,19 +452,25 @@ function getOrderListInfo(){
 		<div class="hidden_enent1" id="tr1" style="display:none;">
 			<ul>
 				<li class="jian"><a href="javascript:;" onclick="Show_Hidden(tr1)">—</a></li>
+				<jsp:include page="../menu_pg.jsp"></jsp:include>
+				<!--
 				<li><a href="">定制单</a></li>
 				<li><a href="">宝石签收单</a></li>
 				<li class="menu-order"><a href="javascript:;">订单</a></li>
 				<li><a href="">客户</a></li>
+				-->
 			</ul>
 		</div>
 		<div class="edit_hidden1" id="ed1" style="display:none;">
 			<ul>
 				<li class="jian2"><a href="javascript:;" onclick="EditShow_Hidden(ed1)">—</a></li>
+				<jsp:include page="../menu_pg.jsp"></jsp:include>
+				<!--
 				<li><a href="">Open</a></li>
 				<li><a href="">Save</a></li>
 				<li><a href="">Save as</a></li>
-				<li><a href="">Print</a></li>			
+				<li><a href="">Print</a></li>
+				-->
 			</ul>
 		</div>
 	</div>
@@ -553,7 +570,7 @@ function getOrderListInfo(){
             <select name="vcity" id="vcity" class="add area2 city">
             </select>
             </p>
-            <select name="vdistrict" id="vdistrict" class="jianding district">
+            <select name="vdistrict" id="vdistrict" class="district">
             </select>
             <p>
             <div class="save1"><input type='text' name='vstreet' class="add dizhi street" value='' placeholder="如街道名称，门牌号码，楼层和房间号等信息"></div>
