@@ -42,8 +42,7 @@ $(function(){
      <fieldset>
     	<legend>订单→定制单→订单</legend>
     	1、订单中添加定制单时调用url=info.do?orderId="+data.id+"&customerId="+customerId{orderId:订单ID,customerId:客户ID}<br>
-    	2、定制单中点击保存调用该方法（调用方式）:window.opener.loadCumById(定制单ID);
-    	3、定制单保存后需要回写订单中的子表信息；回写条件：订单ID+定制单ID
+    	2、定制单保存后需要回写订单中的子表信息；回写条件：订单ID+定制单ID
     </fieldset>
     <fieldset>
     	<legend>弹框Demo</legend>
