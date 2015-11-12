@@ -58,7 +58,7 @@
 2、调用弹框：
 	$(function() {
 		$("#api-button").click( function(){
-			openURL("index.jsp","弹框");//openURL(url, title,width, height )
+			openURL("index.jsp","弹框");//openURL(url, title,width, height ,ifFull)
 		});
 	});
 3、操作父窗口方法：
