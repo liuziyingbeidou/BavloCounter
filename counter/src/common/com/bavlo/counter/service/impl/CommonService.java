@@ -77,6 +77,14 @@ public class CommonService implements ICommonService{
 		dao.delete(clasz,ids);
 	}
 	
+	public void delete(Class<?> clasz,String conditions){
+		try {
+			dao.deleteByCont(clasz, conditions);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+	
 	//自定义sql条数
 	public Integer getCountBySQL(String sql){
 		return dao.getCountBySQL("select count(*) from ("+sql+") tb", null);

@@ -40,6 +40,7 @@ public interface ICommonService {
 
 	public void delete(Class<?> clasz, Object[] ids);
    
+	public void delete(Class<?> clasz,String conditions);
 	
 	// add by liuzy begin Âß¼­É¾³ý
 	public void deleteByDr(Object entity);

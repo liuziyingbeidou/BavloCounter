@@ -935,6 +935,10 @@ public class HibernateDAO implements IHibernateDAO {
 		execute("delete " + clasz.getName() + " where " + property + " in ("
 				+ DaoHelper.getDeleteIds(values) + ")");
 	}
+	
+	public void deleteByCont(Class<?> clasz, Object conditions) {
+		execute("delete " + clasz.getName() + " where  ifnull(dr,0)=0 "+ conditions);
+	}
 
 	// »ù±¾²éÕÒ
 
