@@ -5,21 +5,35 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 	<head>
 		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-		<meta name="viewport"
-			content="width=device-width,target-densitydpi=high-dpi,initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+		<meta name="viewport" content="width=device-width,target-densitydpi=high-dpi,initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no" />
 
 		<title>编辑客户</title>
-
 <!--必要样式-->
 <link rel='stylesheet' href='${ctx}/resources/css/style.css' media='all' />
 <link rel='stylesheet' href='${ctx}/resources/css/bootstrap.css' media='all' />
 <link rel="stylesheet" href="${ctx}/resources/css/photoswipe.css" />
 <link rel="stylesheet" href="${ctx}/resources/css/default-skin.css" />
 
-		<script src="${ctx}/resources/js/jquery-1.8.3.min.js"></script>
+<script src="${ctx}/resources/js/jquery-1.8.3.min.js"></script>
+<script src="${ctx}/resources/js/top.js"></script>
+<script src="${ctx}/resources/js/hide.js"></script>
+
+<link href="${ctx}/resources/css/orderlist.css" rel="stylesheet" type="text/css" />
+<script src="${ctx}/resources/js/showList.js" type="text/javascript"></script>
 		<script src="${ctx}/resources/js/area.js"></script>
 		<script src="${ctx}/resources/js/location.js"></script>
 		<script src="${ctx}/resources/js/bavlo-initdata.js"></script>
+		<!-- 自定义event	 -->
+		<script src="${ctx}/resources/js/bavlo-event.js"></script>
+		<!-- 弹框 -->
+		<!-- jQuery & jQuery UI files (needed)--> 
+		<link rel="stylesheet" href="${ctx}/resources/jquery.multiDialog/css/jquery-ui-1.10.3.custom.css" />
+		<script src="${ctx}/resources/jquery.multiDialog/js/jquery/jquery-ui-1.10.3.custom.js"></script> 
+		<!-- MultiDialog files (needed) --> 
+		<link rel="stylesheet" href="${ctx}/resources/jquery.multiDialog/css/jquery.multiDialog.css" /> 
+		<script src="${ctx}/resources/jquery.multiDialog/js/jquery.ui.dialog.extended-1.0.2.js"></script> 
+		<script src="${ctx}/resources/jquery.multiDialog/js/jquery.multiDialog.js"></script> 
+		<script src="${ctx}/resources/js/bavlo-dialog.js"></script>
 		<script type="text/javascript">
 			$(function initVal() {
 				var customerId = "${customerDetail.id}";
@@ -74,12 +88,74 @@
 					}
 				});
 			}
+			
+		//子窗体调用
+		function setValueByFrame(type,id,callback,json){
+			var url;
+			if(type == "customer"){
+				url = "${ctx}/customer/infoJson.do";
+				$.get(url,{id:id},function(data){
+					if(data != null){
+						if(data.vhendimgurl != ""){
+							$(".cusheader").prop("src",data.vhendimgurl);
+						}
+						$("#customerId").val(data.id);
+					}
+					closeMultiDlg();
+				});
+			}else if(type == "chain"){
+				var data = JSON.parse(json);
+				$("#order-list").append("<dd type='ch' sid='"+data.sid+"' class='"+data.sid+" bill'><span class='list_name bill-name'>"+data.sname+"</span><input class='list_num bill-num' style='width:40px;margin-left:10px;' type='text' value='1' placeholder='条'><b class='list_price bill-price'>"+data.sprice+"</b><a href='javascript:rlist("+data.sid+")' class='close_c'><img src='${ctx}/resources/images/close.png'></a></dd>");
+				closeMultiDlg();
+			}else if(type == "order"){
+				url = "${ctx}/order/edit.do?id="+id;//根据id查询客户信息
+				window.location = url;
+			}else if(type == "order-view"){
+				url = "${ctx}/order/view.do?id="+id;//根据id查询客户信息
+				window.location = url;
+			}else if(type == "gem"){
+				url = "${ctx}/gem-sign/view.do?id="+id;//根据id查询客户信息
+				window.location = url;
+			}else if(type == "entity"){
+				url = "${ctx}/entity-sign/view.do?id="+id;//根据id查询客户信息
+				window.location = url;
+			}
+		}
+		</script>
 		</script>
 	</head>
 
 	<body>
 		<form id="customer">
-			<jsp:include page="../header.jsp"></jsp:include>
+			<div class="header">
+	<div class="head2">
+		<div class="top2">
+			<b><a href="javascript:;" onclick="EditShow_Hidden(ed1)"><img
+						src="${ctx}/resources/images/plus.png" />
+			</a> 定制单 81812560 </b>
+			<font><a href="javascript:;" onclick="Show_Hidden(tr1)"><img
+						src="${ctx}/resources/images/plus.png" />
+			</a> </font>
+		</div>
+		<div class="hidden_enent2" id="tr1" style="display: none;">
+			<ul>
+				<li class="jian">
+					<a href="javascript:;" onclick="Show_Hidden(tr1)">一</a>
+				</li>
+				<jsp:include page="../menu_pg.jsp"></jsp:include>
+			</ul>
+		</div>
+		<div class="edit_hidden2" id="ed1" style="display: none;">
+			<ul>
+				<li class="jian2">
+					<a href="javascript:;" onclick="EditShow_Hidden(ed1)">一</a>
+				</li>
+				<jsp:include page="../menu_cau.jsp"></jsp:include>
+			</ul>
+		</div>
+		<div class="clear"></div>
+	</div>
+</div>
 			<div class="edit_main">
 				<div class="edit_left">
 					<ul>
@@ -104,8 +180,7 @@
 								value="${customerDetail.id }" />
 							<input type='text' id='vname' name='vname'
 								value="${customerDetail.vname }"
-								onfocus="if(value =='姓名'){value =''}"
-								onblur="if(value ==''){value='姓名'}" class="edit_2 edit_1_name" />
+								placeholder="姓名" class="edit_2 edit_1_name" />
 							<select id="vsex" name="vsex" class="edit_2 edit_1_area_son">
 								<option>
 									女
@@ -119,19 +194,16 @@
 						<div class="edit_1">
 							<input type='text' id='vphoneCode' name='vphoneCode'
 								value="${customerDetail.vphoneCode}"
-								onfocus="if(value=='手机'){value=''}"
-								onblur="if(value==''){value='手机'}" class="edit_2 edit_1_name" />
+								placeholder="手机" class="edit_2 edit_1_name" />
 							<input type='text' id='vemail' name='vemail'
 								value="${customerDetail.vemail}"
-								onfocus="if(value=='邮箱'){value=''}"
-								onblur="if(value==''){value='邮箱'}" class="edit_2 edit_1_sex" />
+								placeholder="邮箱" class="edit_2 edit_1_sex" />
 							<div class="clear"></div>
 						</div>
 						<div class="edit_1">
 							<input type='text' id='vnickname' name='vnickname'
 								value="${customerDetail.vnickname}"
-								onfocus="if(value =='昵称'){value =''}"
-								onblur="if(value ==''){value='昵称'}" class="edit_2 edit_1_name" />
+								placeholder="昵称" class="edit_2 edit_1_name" />
 							<select id="vprovince" name="vprovince"
 								class="edit_2 edit_1_area_son"></select>
 							<div class="clear"></div>

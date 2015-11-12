@@ -21,13 +21,13 @@
 		<script src="${ctx}/resources/js/bavlo-event.js"></script>
 		<!-- 弹框 -->
 		<!-- jQuery & jQuery UI files (needed)--> 
-		<link rel="stylesheet" href="/counter/resources/jquery.multiDialog/css/jquery-ui-1.10.3.custom.css">
-		<script src="/counter/resources/jquery.multiDialog/js/jquery/jquery-ui-1.10.3.custom.js"></script> 
+		<link rel="stylesheet" href="${ctx}/resources/jquery.multiDialog/css/jquery-ui-1.10.3.custom.css">
+		<script src="${ctx}/resources/jquery.multiDialog/js/jquery/jquery-ui-1.10.3.custom.js"></script> 
 		<!-- MultiDialog files (needed) --> 
-		<link rel="stylesheet" href="/counter/resources/jquery.multiDialog/css/jquery.multiDialog.css"> 
-		<script src="/counter/resources/jquery.multiDialog/js/jquery.ui.dialog.extended-1.0.2.js"></script> 
-		<script src="/counter/resources/jquery.multiDialog/js/jquery.multiDialog.js"></script> 
-		<script src="/counter/resources/js/bavlo-dialog.js"></script>
+		<link rel="stylesheet" href="${ctx}/resources/jquery.multiDialog/css/jquery.multiDialog.css"> 
+		<script src="${ctx}/resources/jquery.multiDialog/js/jquery.ui.dialog.extended-1.0.2.js"></script> 
+		<script src="${ctx}/resources/jquery.multiDialog/js/jquery.multiDialog.js"></script> 
+		<script src="${ctx}/resources/js/bavlo-dialog.js"></script>
 		<script type="text/javascript">
 		$(function() {
 			 //选择客户
@@ -143,6 +143,9 @@
 			}else if(type == "order"){
 				url = "${ctx}/order/edit.do?id="+id;//根据id查询客户信息
 				window.location = url;
+			}else if(type == "order-view"){
+				url = "${ctx}/order/view.do?id="+id;//根据id查询客户信息
+				window.location = url;
 			}else if(type == "gem"){
 				url = "${ctx}/gem-sign/view.do?id="+id;//根据id查询客户信息
 				window.location = url;
@@ -179,24 +182,12 @@
 			<ul>
 				<li class="jian"><a href="javascript:;" onclick="Show_Hidden(tr1)">—</a></li>
 				<jsp:include page="../menu_pg.jsp"></jsp:include>
-				<!--
-				<li><a href="">定制单</a></li>
-				<li><a class="entity-page-list" href="javascript:void();">实物签收单</a></li>
-				<li><a href="">订单</a></li>
-				<li><a href="">客户</a></li>
-				-->
 			</ul>
 		</div>
 		<div class="edit_hidden" id="ed1" style="display:none;">
 			<ul>
 				<li class="jian2"><a href="javascript:;" onclick="EditShow_Hidden(ed1)">—</a></li>
 				<jsp:include page="../menu_cau.jsp"></jsp:include>
-				<!--
-				<li><a href="">Open</a></li>
-				<li><a href="">Save</a></li>
-				<li><a href="">Save as</a></li>
-				<li><a href="">Print</a></li>			
-				-->
 			</ul>
 		</div>
 	</div>

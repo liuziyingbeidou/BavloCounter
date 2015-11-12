@@ -195,6 +195,9 @@
 			}else if(type == "order"){
 				url = "${ctx}/order/edit.do?id="+id;//根据id查询客户信息
 				window.location = url;
+			}else if(type == "order-view"){
+				url = "${ctx}/order/view.do?id="+id;//根据id查询客户信息
+				window.location = url;
 			}else if(type == "gem"){
 				url = "${ctx}/gem-sign/view.do?id="+id;//根据id查询客户信息
 				window.location = url;

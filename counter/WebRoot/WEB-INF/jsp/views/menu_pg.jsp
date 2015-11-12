@@ -16,6 +16,10 @@ $(function(){
 	$(".menu-order-list").bind("click",function(){
 		openURL("${ctx}/order/list.do","订单列表",500,600);
 	});
+	//订单列表(查看)
+	$(".menu-order-list-view").bind("click",function(){
+		openURL("${ctx}/order/list.do?listType=view","订单列表",500,600);
+	});
 	//选择客户
 	$(".menu-customer-list").bind("click",function(){
 		openURL("${ctx}/customer/list.do?listType=menu","客户列表");
@@ -27,6 +31,7 @@ $(function(){
 <li class="menu-entity-list"><a href="javascript:void();">实物签收单</a></li>
 <li class="menu-gem-list"><a href="javascript:void();">宝石签收单</a></li>
 <li class="menu-order-list"><a href="javascript:void();">订单</a></li>
+<li class="menu-order-list-view"><a href="javascript:void();">查看订单</a></li>
 <li class="menu-customer-list"><a href="javascript:void();">客户</a></li>
 
 
