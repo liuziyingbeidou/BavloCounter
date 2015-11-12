@@ -138,6 +138,7 @@ public interface IHibernateDAO {
 	
 	public void delete(Class<?> clasz, String property, Object[] values);
 
+	public void deleteByCont(Class<?> clasz, Object conditions);
 	// »ù±¾²éÕÒ
 	
 	public <E> E getByProperty(Class<E> clasz, String name, Object value,
