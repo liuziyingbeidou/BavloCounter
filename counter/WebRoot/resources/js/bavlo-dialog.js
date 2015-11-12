@@ -8,7 +8,7 @@
 	
 }( jQuery ));
 
-function openURL(url, title,width, height ) {
+function openURL(url, title,width, height,isFull) {
 	var jwidth = 500,jheight = 560;
 	var jtitle = "Bavlo-Window";
 	if(title != undefined && title != "" && title != null){
@@ -20,15 +20,26 @@ function openURL(url, title,width, height ) {
 	if(height != undefined  && height != "" && height != null){
 		jheight = height;
 	}
-	api = $.fn.MultiDialog({
-		dialog: {
-			title: jtitle,
-			resizeOnWindowResize: true,
-			resizeAccordingToViewport: true,
-			width:jwidth,
-			height:jheight
-		}
-	});
+	if(isFull == true){
+		api = $.fn.MultiDialog({
+			dialog: {
+				title: jtitle,
+				resizeOnWindowResize: true,
+				resizeAccordingToViewport: true,
+				forceFullscreen:isFull
+			}
+		});
+	}else{
+		api = $.fn.MultiDialog({
+			dialog: {
+				title: jtitle,
+				resizeOnWindowResize: true,
+				resizeAccordingToViewport: true,
+				width:jwidth,
+				height:jheight
+			}
+		});
+	}
 	api.openLink({
 		href: url,
 		type: "iframe"
