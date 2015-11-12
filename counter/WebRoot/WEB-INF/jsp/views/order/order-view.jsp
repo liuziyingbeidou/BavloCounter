@@ -45,7 +45,7 @@ $(function(){
 		if(mid == ""){
 			alert("请保存后查看!");
 		}else{
-			openURL("${ctx}/upload/showpic.do?cpath=com.bavlo.counter.model.order.OrderCVO&fkey=orderId&id="+mid,"图片展示");
+			openURL("${ctx}/upload/showpic.do?cpath=com.bavlo.counter.model.order.OrderCVO&fkey=orderId&id="+mid,"图片展示",'','',true);
 		}
 	});
 	
@@ -89,9 +89,9 @@ function loadOrderList(){
 				var type = data[i].vsourceType;
 				if(type == "dz"){
 					$("#olist").append("<dd type='dz' sid='"+data[i].vsourceId+"' class='"+data[i].vsourceId+" bill'><img class='bill-pic' src='${ctx}/resources/images/good_01.png'><b class='bill-num'>"+data[i].nnumber+"对</b><a href='javascript:rlist("+data[i].vsourceId+")' class='close_c'><img src='${ctx}/resources/images/close.png'></a></dd>");
-				}else if(type == "ch"){
+				}/*else if(type == "ch"){
 					$("#olist").append("<dd type='ch' sid='"+data[i].vsourceId+"' class='"+data[i].vsourceId+" bill'><span class='list_name bill-name'>"+data[i].vname+"</span><b class='list_price bill-num'>"+data[i].nnumber+"条</b><a href='javascript:rlist("+data[i].vsourceId+")' class='close_c'><img src='${ctx}/resources/images/close.png'></a></dd>");
-				}
+				}*/
 			}
 			$("#olist").append("<div class='clear'></div>");
 		}
@@ -102,7 +102,7 @@ function loadOrderList(){
 			$("."+className).remove();
 		}
 //子窗体调用
-		function setValueByFrame(type,id,json){
+		function setValueByFrame(type,id,callback,json){
 			var url;
 			if(type == "customer"){
 				url = "${ctx}/customer/infoJson.do";
@@ -112,12 +112,32 @@ function loadOrderList(){
 							$(".cusheader").prop("src",data.vhendimgurl);
 						}
 						$("#customerId").val(data.id);
+						//选客户后初始化交付地址
+						$("#addressId").val("");
+						$("#tbl").empty();
+						initAddr();
 					}
+					closeMultiDlg();
 				});
 			}else if(type == "order"){
+				url = "${ctx}/order/edit.do?id="+id;//根据id查询客户信息
+				window.location = url;
+			}else if(type == "order-view"){
 				url = "${ctx}/order/view.do?id="+id;//根据id查询客户信息
 				window.location = url;
+			}else if(type == "gem"){
+				url = "${ctx}/gem-sign/view.do?id="+id;//根据id查询客户信息
+				window.location = url;
+			}else if(type == "entity"){
+				url = "${ctx}/entity-sign/view.do?id="+id;//根据id查询客户信息
+				window.location = url;
+			}else if(type == "customer-menu"){
+				url = "${ctx}/customer/info.do?id="+id;//根据id查询客户信息
+				window.location = url;
 			}
+			/*if(typeof(callback)!=='undefined'){
+				callback&&callback;
+			}*/
 		}
 		
 </script>
@@ -139,19 +159,13 @@ function loadOrderList(){
 		<div class="hidden_enent1" id="tr1" style="display:none;">
 			<ul>
 				<li class="jian"><a href="javascript:;" onclick="Show_Hidden(tr1)">—</a></li>
-				<li><a href="">定制单</a></li>
-				<li><a href="">宝石签收单</a></li>
-				<li class="menu-order"><a href="javascript:;">订单</a></li>
-				<li><a href="">客户</a></li>
+				<jsp:include page="../menu_pg.jsp"></jsp:include>
 			</ul>
 		</div>
 		<div class="edit_hidden1" id="ed1" style="display:none;">
 			<ul>
 				<li class="jian2"><a href="javascript:;" onclick="EditShow_Hidden(ed1)">—</a></li>
-				<li><a href="">Open</a></li>
-				<li><a href="">Save</a></li>
-				<li><a href="">Save as</a></li>
-				<li><a href="">Print</a></li>			
+				<jsp:include page="../menu_cau.jsp"></jsp:include>		
 			</ul>
 		</div>
 	</div>

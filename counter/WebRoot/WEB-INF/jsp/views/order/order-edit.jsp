@@ -29,13 +29,13 @@
 	<script src="${ctx}/resources/js/bavlo-event.js"></script>
 		<!-- 弹框 -->
 		<!-- jQuery & jQuery UI files (needed)--> 
-		<link rel="stylesheet" href="/counter/resources/jquery.multiDialog/css/jquery-ui-1.10.3.custom.css">
-		<script src="/counter/resources/jquery.multiDialog/js/jquery/jquery-ui-1.10.3.custom.js"></script> 
+		<link rel="stylesheet" href="${ctx}/resources/jquery.multiDialog/css/jquery-ui-1.10.3.custom.css">
+		<script src="${ctx}/resources/jquery.multiDialog/js/jquery/jquery-ui-1.10.3.custom.js"></script> 
 		<!-- MultiDialog files (needed) --> 
-		<link rel="stylesheet" href="/counter/resources/jquery.multiDialog/css/jquery.multiDialog.css"> 
-		<script src="/counter/resources/jquery.multiDialog/js/jquery.ui.dialog.extended-1.0.2.js"></script> 
-		<script src="/counter/resources/jquery.multiDialog/js/jquery.multiDialog.js"></script> 
-		<script src="/counter/resources/js/bavlo-dialog.js"></script>
+		<link rel="stylesheet" href="${ctx}/resources/jquery.multiDialog/css/jquery.multiDialog.css"> 
+		<script src="${ctx}/resources/jquery.multiDialog/js/jquery.ui.dialog.extended-1.0.2.js"></script> 
+		<script src="${ctx}/resources/jquery.multiDialog/js/jquery.multiDialog.js"></script> 
+		<script src="${ctx}/resources/js/bavlo-dialog.js"></script>
 
 <!-- 远程数据初始下拉框值 -->
 <script src="${ctx}/resources/js/bavlo-initdata.js"></script>
@@ -74,9 +74,9 @@ $(function(){
 		saveOrder();
 	});
 	//链子弹框
-	$(".partsGem_btn").click(function(){
+	/*$(".partsGem_btn").click(function(){
 		openURL("${ctx}/common/getChainInfo.do","链子");
-	});
+	});*/
 	//点击"定制单"
 	$(".custom_btn").click(function(){
 		//{到定制单前预保存订单}
@@ -102,10 +102,10 @@ function loadOrderList(){
 			for(var i = 0; i < data.length; i++){
 				var type = data[i].vsourceType;
 				if(type == "dz"){
-					$("#order-list").append("<dd type='dz' sid='"+data[i].vsourceId+"' class='"+data[i].vsourceId+" bill'><img class='bill-pic' src='${ctx}/resources/images/good_01.png'><input class='bill-num' type='text' placehoder='对' value='"+data[i].nnumber+"'><b class='bill-price'>"+data[i].nprice+"元</b><a href='javascript:rlist("+data[i].vsourceId+")' class='close_c'><img src='${ctx}/resources/images/close.png'></a></dd>");
-				}else if(type == "ch"){
-					$("#order-list").append("<dd type='ch' sid='"+data[i].vsourceId+"' class='"+data[i].vsourceId+" bill'><span class='list_name bill-name'>"+data[i].vname+"</span><input class='list_num bill-num' style='width:40px;margin-left:10px;' type='text' value='"+data[i].nnumber+"' placeholder='条'><b class='list_price bill-price'>"+data[i].nprice+"</b><a href='javascript:rlist("+data[i].vsourceId+")' class='close_c'><img src='${ctx}/resources/images/close.png'></a></dd>");
-				}
+					$("#order-list").append("<dd type='dz' sid='"+data[i].vsourceId+"' class='dz-"+data[i].vsourceId+" bill'><img class='bill-pic' src='${ctx}/resources/images/good_01.png'><input class='bill-num' type='text' placehoder='对' value='"+data[i].nnumber+"'><b class='bill-price'>"+data[i].nprice+"元</b><a href='javascript:rlist("+data[i].vsourceId+")' class='close_c'><img src='${ctx}/resources/images/close.png'></a></dd>");
+				}/*else if(type == "ch"){
+					$("#order-list").append("<dd type='ch' sid='"+data[i].vsourceId+"' class='ch-"+data[i].vsourceId+" bill'><span class='list_name bill-name'>"+data[i].vname+"</span><input class='list_num bill-num' style='width:40px;margin-left:10px;' type='text' value='"+data[i].nnumber+"' placeholder='条'><b class='list_price bill-price'>"+data[i].nprice+"</b><a href='javascript:rlist("+data[i].vsourceId+")' class='close_c'><img src='${ctx}/resources/images/close.png'></a></dd>");
+				}*/
 			}
 		}
 	});
@@ -254,6 +254,8 @@ function saveAddr(){
 			alert("保存成功!");
 			if($("#addressId").val() == ""){
 				insert_row(text.id,text.val);
+			}else{
+				$("#"+text.id).val(text.val);
 			}
 			$("#addressId").val(text.id);
 		}
@@ -265,8 +267,8 @@ function loadCumById(cumId){
 	//根据定制单ID获取定制单信息{edit:需要提供返回默认图的信息}
 	var url = "${ctx}/order/getCumById.do";
 	$.get(url,{id:cumId},function(data){
-		data = JSON.parse("{\"id\":\"1\",\"nprice\":\"23\"}");
-		$("#order-list").append("<dd type='dz' sid='"+data.id+"' class='"+data.id+" bill'><img class='bill-pic' src='${ctx}/resources/images/good_01.png'><input class='bill-num' type='text' placehoder='对' value='1'><b class='bill-price'>"+data.nprice+"元</b><a href='javascript:rlist("+data.id+")' class='close_c'><img src='${ctx}/resources/images/close.png'></a></dd>");
+		//data = JSON.parse("{\"id\":\"1\",\"nprice\":\"23\"}");
+		$("#order-list").append("<dd type='dz' sid='"+data.id+"' class='dz-"+data.id+" bill'><img class='bill-pic' src='${ctx}/resources/images/good_01.png'><input class='bill-num' type='text' placehoder='对' value='1'><b class='bill-price'>"+data.nprice+"元</b><a href='javascript:rlist("+data.id+")' class='close_c'><img src='${ctx}/resources/images/close.png'></a></dd>");
 	});
 }
 
@@ -335,13 +337,14 @@ function getOrderListInfo(){
 	var listJson = "[";
 	$(".bill").each(function(index,domEle){
 		var type = $(this).attr("type");
-		if(type == "ch"){//链子
+		/*if(type == "ch"){//链子
 			var sid = $(this).attr("sid");
 			var sname = $(this).find(".bill-name").text();
 			var num = $(this).find(".bill-num").val();
 			var price = $(this).find(".bill-price").text();
 			listJson+="{\"vsourceType\":\""+type+"\",\"vname\":\""+sname+"\",\"vsourceId\":\""+sid+"\",\"nnumber\":\""+num+"\",\"nprice\":\""+price+"\"},";
-		}else if(type == "dz"){
+		}else */
+		if(type == "dz"){
 			var sid = $(this).attr("sid");
 			var pic = $(this).find(".bill-pic").text();
 			var num = $(this).find(".bill-num").val();
@@ -391,12 +394,15 @@ function getOrderListInfo(){
 					}
 					closeMultiDlg();
 				});
-			}else if(type == "chain"){
+			}/*else if(type == "chain"){
 				var data = JSON.parse(json);
 				$("#order-list").append("<dd type='ch' sid='"+data.sid+"' class='"+data.sid+" bill'><span class='list_name bill-name'>"+data.sname+"</span><input class='list_num bill-num' style='width:40px;margin-left:10px;' type='text' value='1' placeholder='条'><b class='list_price bill-price'>"+data.sprice+"</b><a href='javascript:rlist("+data.sid+")' class='close_c'><img src='${ctx}/resources/images/close.png'></a></dd>");
 				closeMultiDlg();
-			}else if(type == "order"){
+			}*/else if(type == "order"){
 				url = "${ctx}/order/edit.do?id="+id;//根据id查询客户信息
+				window.location = url;
+			}else if(type == "order-view"){
+				url = "${ctx}/order/view.do?id="+id;//根据id查询客户信息
 				window.location = url;
 			}else if(type == "gem"){
 				url = "${ctx}/gem-sign/view.do?id="+id;//根据id查询客户信息
@@ -415,7 +421,12 @@ function getOrderListInfo(){
 		
 		//删除清单
 		function rlist(className){
-			$("."+className).remove();
+			if(confirm('确定要删除吗')){
+			  	 var delUrl = "${ctx}/order/delOrderBVOById.do";
+				  $.get(delUrl,{id:className},function(){
+				  		$(".dz-"+className).remove();
+				  });
+			}
 		}
 </script>
 <style>
@@ -432,6 +443,9 @@ function getOrderListInfo(){
   padding-left: 10px;
   margin-top: 20px}
 .add_dizhi .dizhi{width:310px;}
+.addrlist{
+text-overflow:ellipsis;
+}
 </style>
 </head>
 
@@ -468,24 +482,12 @@ function getOrderListInfo(){
 			<ul>
 				<li class="jian"><a href="javascript:;" onclick="Show_Hidden(tr1)">—</a></li>
 				<jsp:include page="../menu_pg.jsp"></jsp:include>
-				<!--
-				<li><a href="">定制单</a></li>
-				<li><a href="">宝石签收单</a></li>
-				<li class="menu-order"><a href="javascript:;">订单</a></li>
-				<li><a href="">客户</a></li>
-				-->
 			</ul>
 		</div>
 		<div class="edit_hidden1" id="ed1" style="display:none;">
 			<ul>
 				<li class="jian2"><a href="javascript:;" onclick="EditShow_Hidden(ed1)">—</a></li>
 				<jsp:include page="../menu_cau.jsp"></jsp:include>
-				<!--
-				<li><a href="">Open</a></li>
-				<li><a href="">Save</a></li>
-				<li><a href="">Save as</a></li>
-				<li><a href="">Print</a></li>
-				-->
 			</ul>
 		</div>
 	</div>
@@ -530,7 +532,7 @@ function getOrderListInfo(){
       <div class="list1">
         <dl>
           <!--<dd><a href="javascript:void(0);" class="mainGem_btn">+款式</a></dd>-->
-          <dd><a href="javascript:void(0);" class="partsGem_btn">+链子</a></dd>
+          <!--<dd><a href="javascript:void(0);" class="partsGem_btn">+链子</a></dd>-->
           <dd><a href="javascript:void(0);" class="custom_btn">+定制单</a></dd>
           <!--<dd><a href="javascript:void(0);" class="zuanshiGem_btn">+钻石</a></dd>-->
 		  <div class="clear"></div>
@@ -615,7 +617,7 @@ function getOrderListInfo(){
             <option value="4">40001-50000元</option>
           </select>
           <p><input type='text' name="nquotedPrice" class="zf bj order-quotedPrice" value="${ordervo['nquotedPrice'] }" placeholder="报价"><input type='text' name="npayment" class="zf yf order-payment" value="${ordervo['npayment'] }" placeholder="已付"></p>
-          <p><input type='text' name="nnonPayment" class="zf bj order-nonPayment" value="${ordervo['nnonPayment'] }" placeholder="未付"><input type='text' name="ntailPaid" class="zf yf order-tailPaid" value="${ordervo['ntailPaid'] }" placeholder="尾收"></p>
+          <p><input type='text' name="nnonPayment" class="zf bj order-nonPayment" value="${ordervo['nnonPayment'] }" placeholder="未付"><input type='text' name="ntailPaid" class="zf yf order-tailPaid" value="${ordervo['ntailPaid'] }" placeholder="尾款实收"></p>
           <input type="text" name="ddeliverdate" value="${ordervo['ddeliverdate'] }" id="datetimepicker" class="jianding" placeholder="交付时间" />
           
           <select name="vdeliveryWay" class="jianding deliveryWay">
