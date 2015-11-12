@@ -176,10 +176,14 @@ public class OrderService extends CommonService implements IOrderService {
 				dto.setVinvoiceContent(CommonUtils.isNull(arry[4]) ? null :arry[4]+"");
 				dto.setVordermemo(CommonUtils.isNull(arry[5]) ? null :arry[5]+"");
 				Integer ista = CommonUtils.isNull(arry[6]) ? null :Integer.valueOf(arry[6]+"");
+				if(ista == null){
+					ista = -1;
+				}
 				dto.setIorderState(ista);
 				String vsta = "提交";
 				switch(ista){
-				//提交(0)、制版(1)、生产(2)、质检(3)、快递(4)、支付(5)
+				//未提交(-1)、提交(0)、制版(1)、生产(2)、质检(3)、快递(4)、支付(5)
+				case -1: vsta = "未提交";break;
 				case 0: vsta = "提交";break;
 				case 1: vsta = "制版";break;
 				case 2: vsta = "生产";break;
@@ -234,6 +238,11 @@ public class OrderService extends CommonService implements IOrderService {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+	}
+	
+	@Override
+	public void delOrderBVOById(Integer srcid) {
+		delete(OrderBVO.class, " and vsourceId="+srcid);
 	}
 	
 	/*******************************以下是交付地址***********************************/
