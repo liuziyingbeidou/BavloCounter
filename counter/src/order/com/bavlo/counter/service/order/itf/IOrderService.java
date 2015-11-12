@@ -61,6 +61,8 @@ public interface IOrderService {
 	
 	public void delAddrById(Integer id);
 	
+	public void delOrderBVOById(Integer id);
+	
 	/***********************回写*********************************/
 	/**
 	 * 定制单保存回写订单数量、价格

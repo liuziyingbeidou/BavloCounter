@@ -45,11 +45,12 @@ public class OrderController extends BaseController {
 	ICustomService customService;
 
 	@RequestMapping(value="/list")
-	public ModelAndView orderList(){
+	public ModelAndView orderList(String listType){
 		
 		//List<OrderVO> orderList = orderService.findListOrder();
 		
 		ModelAndView model = new ModelAndView(IConstant.PATH_ORDER + IConstant.ORDER_LIST);
+		model.addObject("listType", listType);
 		//model.addObject("orderList", orderList);
 		return model;
 	}
@@ -228,6 +229,15 @@ public class OrderController extends BaseController {
 	public void getOrderListByMid(Integer mid){
 		List<OrderBVO> listvo = orderService.findListOrderBVO(mid);
 		renderJson(listvo);
+	}
+	
+	@RequestMapping(value="/delOrderBVOById")
+	public void delOrderCumById(HttpServletRequest request){
+		String id = request.getParameter("id");
+		if(StringUtil.isEmpty(id)){
+			id = "-1";
+		}
+		orderService.delOrderBVOById(Integer.valueOf(id));
 	}
 	
 	/*************************以下是交付地址********************************/
