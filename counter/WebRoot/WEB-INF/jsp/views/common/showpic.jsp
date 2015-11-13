@@ -87,8 +87,8 @@
 		if(index != -1){
 			newPic = pic.substring(0,index) + "_min" + pic.substring(index);
 		}*/
-		$(".flashlist").append('<div class="f_out"><a href="javascript:void(0);"><img src="${ctx}/staticRes/'+model+'/'+pic+'" width="960" height="639" /></a></div>');
-		$(".hander").append('<li class="f_tab opdiv"><a href="javascript:void(0);"></a></li>');
+		$(".flashlist").append('<div class="f_out"><a href="#"><img src="${ctx}/staticRes/'+model+'/'+pic+'" width="960" height="639" /></a></div>');
+		$(".hander").append('<li class="f_tab opdiv"><a href="#"></a></li>');
 	}
 	</script>
 </head>
@@ -99,7 +99,7 @@
     <div class="hdflash f_list">
       <div class="flashlist">
       <c:forEach items="${listbvo}" var="bean">
-      <div class="f_out"><a href="javascript:void(0);" target="_blank">
+      <div class="f_out"><a href="#" target="_blank">
       <img src="${ctx}/staticRes/${bean.vpath}/${bean.vname}" width="960" height="639" />
       </a></div>
       </c:forEach>
@@ -110,7 +110,7 @@
         <div class="tabs f_tabs" style="width:258px;">
           <ul class="hander">
           <c:forEach items="${listbvo}" var="bean">
-          <li class="f_tab opdiv"><a href="javascript:void(0);"></a></li>
+          <li class="f_tab opdiv"><a href="#"></a></li>
           </c:forEach>
           </ul>
         </div>

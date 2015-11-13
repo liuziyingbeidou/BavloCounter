@@ -60,7 +60,7 @@
 				var json = "{\"sname\":\""+sname+"\",\"sid\":\""+sid+"\"}";
 				window.parent.setValueByFrame("gem","",callbackMuilt(),json,gem);
 			}else{
-				alert("请在父窗口添加setValueByFrame(type,id,json){处理逻辑}type='chain']");
+				alert("请在父窗口添加setValueByFrame(type,id,json){处理逻辑}type='gem']");
 			}
 		
 		});

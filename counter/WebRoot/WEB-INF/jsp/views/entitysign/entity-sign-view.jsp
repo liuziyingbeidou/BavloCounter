@@ -21,10 +21,10 @@
 		<div class="header">
 			<div class="head">
 				<div class="top1">
-					<b><a href="javascript:;" onclick="EditShow_Hidden(ed1)"><img
+					<b><a href="#" onclick="EditShow_Hidden(ed1)"><img
 								src="${pageContext.request.contextPath}/resources/images/plus.png">
 					</a> 编辑宝石签收单81812560 </b>
-					<font><a href="javascript:;" onclick="Show_Hidden(tr1)"><img
+					<font><a href="#" onclick="Show_Hidden(tr1)"><img
 								src="${pageContext.request.contextPath}/resources/images/plus.png">
 					</a>
 					</font>
@@ -32,7 +32,7 @@
 				<div class="hidden_enent" id="tr1" style="display: none;">
 					<ul>
 						<li class="jian">
-							<a href="javascript:;" onclick="Show_Hidden(tr1)">—</a>
+							<a href="#" onclick="Show_Hidden(tr1)">—</a>
 						</li>
 						<li>
 							<a href="">定制单</a>

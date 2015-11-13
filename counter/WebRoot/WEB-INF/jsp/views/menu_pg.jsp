@@ -27,12 +27,12 @@ $(function(){
 });
 </script>
 
-<li><a href="">定制单</a></li>
-<li class="menu-entity-list"><a href="javascript:void();">实物签收单</a></li>
-<li class="menu-gem-list"><a href="javascript:void();">宝石签收单</a></li>
-<li class="menu-order-list"><a href="javascript:void();">订单</a></li>
-<li class="menu-order-list-view"><a href="javascript:void();">查看订单</a></li>
-<li class="menu-customer-list"><a href="javascript:void();">客户</a></li>
+<li><a href="#">定制单</a></li>
+<li class="menu-entity-list"><a href="#">实物签收单</a></li>
+<li class="menu-gem-list"><a href="#">宝石签收单</a></li>
+<li class="menu-order-list"><a href="#">订单</a></li>
+<li class="menu-order-list-view"><a href="#">查看订单</a></li>
+<li class="menu-customer-list"><a href="#">客户</a></li>
 
 
 

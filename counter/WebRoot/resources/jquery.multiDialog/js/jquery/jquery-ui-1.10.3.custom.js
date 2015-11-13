@@ -1158,7 +1158,7 @@ $.fn.position = function( options ) {
 	if ( options.at[ 1 ] === "bottom" ) {
 		basePosition.top += targetHeight;
 	} else if ( options.at[ 1 ] === "center" ) {
-		basePosition.top += targetHeight / 2;
+		basePosition.top += 20;//targetHeight / 2;
 	}
 
 	atOffset = getOffsets( offsets.at, targetWidth, targetHeight );
@@ -1305,7 +1305,7 @@ $.ui.position = {
 				position.left = max( position.left - collisionPosLeft, position.left );
 			}
 		},
-		top: function( position, data ) {
+		top: function( position, data ) {debugger;
 			var within = data.within,
 				withinOffset = within.isWindow ? within.scrollTop : within.offset.top,
 				outerHeight = data.within.height,
