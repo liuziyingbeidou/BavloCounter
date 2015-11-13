@@ -102,13 +102,38 @@ function loadOrderList(){
 			for(var i = 0; i < data.length; i++){
 				var type = data[i].vsourceType;
 				if(type == "dz"){
-					$("#order-list").append("<dd type='dz' sid='"+data[i].vsourceId+"' class='dz-"+data[i].vsourceId+" bill'><img class='bill-pic' src='${ctx}/resources/images/good_01.png'><input class='bill-num' type='text' placehoder='对' value='"+data[i].nnumber+"'><b class='bill-price'>"+data[i].nprice+"元</b><a href='javascript:rlist("+data[i].vsourceId+")' class='close_c'><img src='${ctx}/resources/images/close.png'></a></dd>");
+					var pic = "";
+					if(data[i].FILE_0 != "" && data[i].FILE_0 != null){
+						pic = "<img class='bill-pic' src='${ctx}/"+data[i].FILE_0+"'>";
+					}else{
+						pic = "<img class='bill-pic' src='${ctx}/resources/images/good_01.png'>";
+					}
+					$("#order-list").append("<dd type='dz' sid='"+data[i].vsourceId+"' class='dz-"+data[i].vsourceId+" bill'>"+pic+"<input class='bill-num' onchange='calPrice("+data[i].vsourceId+")' type='text' placehoder='对' onum='"+data[i].nnumber+"'  value='"+data[i].nnumber+"'><b class='bill-price'>"+data[i].nprice+"元</b><a href='javascript:rlist("+data[i].vsourceId+")' class='close_c'><img src='${ctx}/resources/images/close.png'></a></dd>");
 				}/*else if(type == "ch"){
 					$("#order-list").append("<dd type='ch' sid='"+data[i].vsourceId+"' class='ch-"+data[i].vsourceId+" bill'><span class='list_name bill-name'>"+data[i].vname+"</span><input class='list_num bill-num' style='width:40px;margin-left:10px;' type='text' value='"+data[i].nnumber+"' placeholder='条'><b class='list_price bill-price'>"+data[i].nprice+"</b><a href='javascript:rlist("+data[i].vsourceId+")' class='close_c'><img src='${ctx}/resources/images/close.png'></a></dd>");
 				}*/
 			}
 		}
 	});
+}
+
+//计算价格
+function calPrice(obj){
+	
+	var onum = $(".dz-"+obj).find(".bill-num").attr("onum");
+	var num = $(".dz-"+obj).find(".bill-num").val();
+	var oprice = $(".dz-"+obj).find(".bill-price").text();
+	
+	if(num <=0 || num == ""){
+		var onum = $(".dz-"+obj).find(".bill-num").attr("onum");
+		$(".dz-"+obj).find(".bill-num").val(onum);
+		return ;
+	}
+	
+	oprice = parseInt(oprice.replace(/[^0-9]/ig,""));
+	var nprice = eval((oprice/onum)*num);
+	$(".dz-"+obj).find(".bill-price").text(nprice+"元");
+	$(".dz-"+obj).find(".bill-num").attr("onum",num);
 }
 
 //根据addressId显示地址信息
@@ -262,7 +287,10 @@ function saveAddr(){
 	);
 }
 
-//定制单保存回调此方法，添加到清单中
+/**
+*定制单保存回调此方法，添加到清单中
+*@Deprecated
+**/
 function loadCumById(cumId){
 	//根据定制单ID获取定制单信息{edit:需要提供返回默认图的信息}
 	var url = "${ctx}/order/getCumById.do";
@@ -285,13 +313,18 @@ function preSaveToCum(){
 	if(id == ""){
 		var url = "save.do";
 		var state = $("#orderState").val();
-		$.post(url,{customerId:customerId,iorderState:state},function(data){
+		var orderCode = $("#orderCode").val();
+		$.post(url,{vorderCode:orderCode,customerId:customerId,iorderState:state},function(data){
 			$("#orderId").val(data.id);
-			window.open("${ctx}/custom/edit.do?orderId="+data.id+"&customerId="+customerId); 
+			//window.open("${ctx}/custom/edit.do?orderId="+data.id+"&customerId="+customerId); 
+			var url = "${ctx}/custom/edit.do?orderId="+data.id+"&customerId="+customerId;
+			window.location = url;
 		});
 	}else{
 		//打开定制单
-		window.open("${ctx}/custom/edit.do?orderId="+id+"&customerId="+customerId); 
+		//window.open("${ctx}/custom/edit.do?orderId="+id+"&customerId="+customerId); 
+		var url = "${ctx}/custom/edit.do?orderId="+id+"&customerId="+customerId;
+		window.location = url;
 	}
 }
 
@@ -468,11 +501,11 @@ text-overflow:ellipsis;
 			<c:choose>
 						 <c:when test="${empty ordervo['vorderCode']}">   
 						 ${number }
-						 <input type="hidden" name="vorderCode" value="${number }">
+						 <input type="hidden" id="orderCode" name="vorderCode" value="${number }">
 						 </c:when>
 						 <c:otherwise>
 						 ${ordervo['vorderCode']}
-						 <input type="hidden" name="vorderCode" value="${ordervo['vorderCode']}">
+						 <input type="hidden" id="orderCode" name="vorderCode" value="${ordervo['vorderCode']}">
 						 </c:otherwise>	
 					</c:choose> 
 			</b>
