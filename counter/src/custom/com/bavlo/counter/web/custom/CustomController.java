@@ -49,7 +49,9 @@ public class CustomController extends BaseController implements IConstant {
 	public ModelAndView edit(Map<String, Object> map, Integer id, Integer orderId, Integer customerId) {
 
 		CustomVO customEdit = customService.findCustomById(id);
-		
+		if(customEdit == null){
+			customEdit = new CustomVO();
+		}
 		if(orderId != null){
 			customEdit.setOrderId(orderId);
 		}
