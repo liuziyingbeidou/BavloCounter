@@ -198,7 +198,7 @@
 			}else if(type == "order-view"){
 				url = "${ctx}/order/view.do?id="+id;//根据id查询客户信息
 				window.location = url;
-			}else if(type == "gem"){
+			}else if(type == "signGem"){
 				url = "${ctx}/gem-sign/view.do?id="+id;//根据id查询客户信息
 				window.location = url;
 			}else if(type == "entity"){
@@ -216,7 +216,7 @@
 <div class="header">
 	<div class="head">
 		<div class="top1">
-			<b><a href="javascript:;" onclick="EditShow_Hidden(ed1)"><img src="${ctx}/resources/images/plus.png"></a> ${pageGemType }宝石签收单
+			<b><a href="#" onclick="EditShow_Hidden(ed1)"><img src="${ctx}/resources/images/plus.png"></a> ${pageGemType }宝石签收单
 					<c:choose>
 						 <c:when test="${empty gemvo['vnumber']}">   
 						 ${number }
@@ -227,17 +227,17 @@
 						 <input type="hidden" name="vnumber" value="${gemvo['vnumber']}">
 						 </c:otherwise>	
 					</c:choose> </b>
-			<font><a href="javascript:;" onclick="Show_Hidden(tr1)"><img src="${ctx}/resources/images/plus.png"></a></font>
+			<font><a href="#" onclick="Show_Hidden(tr1)"><img src="${ctx}/resources/images/plus.png"></a></font>
 		</div>
 		<div class="hidden_enent" id="tr1" style="display:none;">
 			<ul>
-				<li class="jian"><a href="javascript:;" onclick="Show_Hidden(tr1)">—</a></li>
+				<li class="jian"><a href="#" onclick="Show_Hidden(tr1)">—</a></li>
 				<jsp:include page="../menu_pg.jsp"></jsp:include>
 			</ul>
 		</div>
 		<div class="edit_hidden" id="ed1" style="display:none;">
 			<ul>
-				<li class="jian2"><a href="javascript:;" onclick="EditShow_Hidden(ed1)">—</a></li>
+				<li class="jian2"><a href="#" onclick="EditShow_Hidden(ed1)">—</a></li>
 				<jsp:include page="../menu_cau.jsp"></jsp:include>	
 			</ul>
 		</div>
@@ -249,13 +249,13 @@
   <div class="qsd_main">
     <div class="qsd_left">
       <ul>
-        <li><a href=""><img src="${ctx}/resources/images/customer_01.png"></a></li>
-        <li><div class="file3"><a href="javascript:;"><input type="text" name="file" id="file"></a></div></li>
-        <li class="camera"><a class="gem-upload" href="javascript:;"><img src="${ctx}/resources/images/camera.png"></a></li>
+        <li><a href="#"><img src="${ctx}/resources/images/customer_01.png"></a></li>
+        <li><div class="file3"><a href="#"><input type="text" name="file" id="file"></a></div></li>
+        <li class="camera"><a class="gem-upload" href="#"><img src="${ctx}/resources/images/camera.png"></a></li>
         <div class="clear"></div>
       </ul>
 	  <div class="clear"></div>
-      <dt><a class="gem-pic-show" href="javascript:;">
+      <dt><a class="gem-pic-show" href="#">
 			<c:choose>
 				<c:when test="${empty gemvo['FILE_0']}">
 					<img src="${ctx}/resources/images/pic_02.png">

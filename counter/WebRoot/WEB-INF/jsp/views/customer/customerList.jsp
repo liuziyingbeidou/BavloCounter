@@ -63,7 +63,7 @@
 				if(data[i].vhendimgurl != ""){
 					img = "src='"+data[i].vhendimgurl+"'";
 				}
-				var ml = "><b>"+data[i].vname+"</b><a href='javascript:void();'>"+data[i].vphoneCode+"</a><span><a href='javascript:void();' onclick='selHander("+data[i].id+")'>选择</a></span></h4><div class='clear'></div></li>";
+				var ml = "><b>"+data[i].vname+"</b><a href='#'>"+data[i].vphoneCode+"</a><span><a href='#' onclick='selHander("+data[i].id+")'>选择</a></span></h4><div class='clear'></div></li>";
 				$("#juheweb").append(ht+img+ml);
 			}
 		});
@@ -88,7 +88,7 @@
 	<div class="orderlist" id='pic2'>
 		<div class="order-main">
 			<div class="order-list">
-				<a id="add-customer" href="javascript:;"><img style="height:50px;width:50px;" src="${ctx}/resources/images/customer_02.png"></a>
+				<a id="add-customer" href="#"><img style="height:50px;width:50px;" src="${ctx}/resources/images/customer_02.png"></a>
 			</div>
 			<div class="search-1">
 				<input type='text' name='search' class="search" placeholder="输入姓名/手机号" />

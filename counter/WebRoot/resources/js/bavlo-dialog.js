@@ -26,6 +26,7 @@ function openURL(url, title,width, height,isFull) {
 				title: jtitle,
 				resizeOnWindowResize: true,
 				resizeAccordingToViewport: true,
+				scrollWithViewport:false,
 				forceFullscreen:isFull
 			}
 		});
@@ -35,6 +36,7 @@ function openURL(url, title,width, height,isFull) {
 				title: jtitle,
 				resizeOnWindowResize: true,
 				resizeAccordingToViewport: true,
+				scrollWithViewport:false,
 				width:jwidth,
 				height:jheight
 			}

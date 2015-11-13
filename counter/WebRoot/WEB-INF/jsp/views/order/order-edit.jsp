@@ -437,7 +437,7 @@ function getOrderListInfo(){
 			}else if(type == "order-view"){
 				url = "${ctx}/order/view.do?id="+id;//根据id查询客户信息
 				window.location = url;
-			}else if(type == "gem"){
+			}else if(type == "signGem"){
 				url = "${ctx}/gem-sign/view.do?id="+id;//根据id查询客户信息
 				window.location = url;
 			}else if(type == "entity"){
@@ -497,7 +497,7 @@ text-overflow:ellipsis;
 <div class="header">
 	<div class="head1">
 		<div class="top">
-			<b><a href="javascript:;" onclick="EditShow_Hidden(ed1)"><img src="${ctx}/resources/images/plus.png"></a> ${pageOrderType}定单
+			<b><a href="#" onclick="EditShow_Hidden(ed1)"><img src="${ctx}/resources/images/plus.png"></a> ${pageOrderType}定单
 			<c:choose>
 						 <c:when test="${empty ordervo['vorderCode']}">   
 						 ${number }
@@ -509,17 +509,17 @@ text-overflow:ellipsis;
 						 </c:otherwise>	
 					</c:choose> 
 			</b>
-			<font><a href="javascript:;" onclick="Show_Hidden(tr1)"><img src="${ctx}/resources/images/plus.png"></a></font>
+			<font><a href="#" onclick="Show_Hidden(tr1)"><img src="${ctx}/resources/images/plus.png"></a></font>
 		</div>
 		<div class="hidden_enent1" id="tr1" style="display:none;">
 			<ul>
-				<li class="jian"><a href="javascript:;" onclick="Show_Hidden(tr1)">—</a></li>
+				<li class="jian"><a href="#" onclick="Show_Hidden(tr1)">—</a></li>
 				<jsp:include page="../menu_pg.jsp"></jsp:include>
 			</ul>
 		</div>
 		<div class="edit_hidden1" id="ed1" style="display:none;">
 			<ul>
-				<li class="jian2"><a href="javascript:;" onclick="EditShow_Hidden(ed1)">—</a></li>
+				<li class="jian2"><a href="#" onclick="EditShow_Hidden(ed1)">—</a></li>
 				<jsp:include page="../menu_cau.jsp"></jsp:include>
 			</ul>
 		</div>
@@ -530,9 +530,9 @@ text-overflow:ellipsis;
     <div class="mainleft">	
       <div class="customer">
         <ul>
-          <li><a href=""><img class="cusheader" src="${ctx}/resources/images/customer_01.png"></a></li>
+          <li><a href="#"><img class="cusheader" src="${ctx}/resources/images/customer_01.png"></a></li>
 		  <!--<li class="file"><a href="javascript:;"><input type="file" name="file" id="file"></a></li>-->
-		  <li class="file"><a href="javascript:;"><img src="${ctx}/resources/images/customer_02.png"></a></li>
+		  <li class="file"><a href="#"><img src="${ctx}/resources/images/customer_02.png"></a></li>
           <div class="clear"></div>
         </ul>
       </div>
@@ -556,18 +556,12 @@ text-overflow:ellipsis;
       <div class="list">
         <h3>清单</h3>
         <dl id="order-list">
-          <!--<dd class="mainGem" style="display: none"><img src="${ctx}/resources/images/good_01.png"><input type='text' value="1对"><b>6590元</b><a href="javascript:h('mainGem')" class="close_c"><img src="${ctx}/resources/images/close.png"></a></dd>-->
-          <!--<dd class="partsGem" uid=""><span class="list_name"></span><input class="list_num" style="width:40px;margin-left:10px;" type='text' value="" placeholder="条"><b class="list_price"></b><a href="javascript:h('partsGem')" class="close_c"><img src="${ctx}/resources/images/close.png"></a></dd>-->
-          <!--<dd class="zuanshiGem" style="display: none;"><img src="${ctx}/resources/images/good_03.png"><input type='text' value="1颗"><b>12590元</b><a href="javascript:h('zuanshiGem')" class="close_c"><img src="${ctx}/resources/images/close.png"></a></dd>-->
           <div class="clear"></div>
         </dl>
       </div>
       <div class="list1">
         <dl>
-          <!--<dd><a href="javascript:void(0);" class="mainGem_btn">+款式</a></dd>-->
-          <!--<dd><a href="javascript:void(0);" class="partsGem_btn">+链子</a></dd>-->
-          <dd><a href="javascript:void(0);" class="custom_btn">+定制单</a></dd>
-          <!--<dd><a href="javascript:void(0);" class="zuanshiGem_btn">+钻石</a></dd>-->
+          <dd><a href="#" class="custom_btn">+定制单</a></dd>
 		  <div class="clear"></div>
         </dl>
       </div>
@@ -584,8 +578,8 @@ text-overflow:ellipsis;
 			  R = tbl.insertRow();
 			  C = R.insertCell();
 			  C.innerHTML = "<input class='addrlist' value='"+val+"' id='"+id+"' onclick='clickSelAddr("+id+")' readonly>";
-			  C = R.insertCell();
-			  C.innerHTML = "<a onclick='deleteRow(this,"+id+")' class='address-close'>X</a>";
+			  D = R.insertCell();
+			  D.innerHTML = "<a onclick='deleteRow(this,"+id+")' class='address-close'>X</a>";
 			 }
 			 function deleteRow(obj,aid){
 			  if(confirm('确定要删除吗')){

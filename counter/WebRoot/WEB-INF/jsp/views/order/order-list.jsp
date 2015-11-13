@@ -45,10 +45,12 @@
 				var part = "";
 				var headp = "";
 				$.get(purl,{id:data[i].id},function(msg){
-					for(var j = 0; j < msg.length; j++){
+					if(msg != null){
+						for(var j = 0; j < msg.length; j++){
 						if(msg.vname != null && msg.vname != ""){
 							part += "<dd><img src='${ctx}/staticRes/"+msg.vpath+"/min/"+msg.vname+"'></dd>";
 						}
+					}
 					}
 				});
 				if(data[i].vdef1 == null || data[i].vdef1 == ""){
@@ -58,7 +60,7 @@
 				}
 				$("#juheweb").append("<li><h4><img style='width:60px;height:60px;' "+
 				headp+
-				"><b>"+data[i].customerName+"</b><a href='javascript:void()'>"+data[i].vorderCode+"</a><span><a href='javascript:void();' onclick='selHander("+data[i].id+")'>选择</a></span></h4>"+
+				"><b>"+data[i].customerName+"</b><a href='#'>"+data[i].vorderCode+"</a><span><a href='#' onclick='selHander("+data[i].id+")'>选择</a></span></h4>"+
 				"<div class='list-item none'><dl>"+
 				part+
 				"</dl><div class='clear'></div>"+

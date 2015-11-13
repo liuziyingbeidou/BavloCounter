@@ -131,7 +131,7 @@ function loadOrderList(){
 			}else if(type == "order-view"){
 				url = "${ctx}/order/view.do?id="+id;//根据id查询客户信息
 				window.location = url;
-			}else if(type == "gem"){
+			}else if(type == "signGem"){
 				url = "${ctx}/gem-sign/view.do?id="+id;//根据id查询客户信息
 				window.location = url;
 			}else if(type == "entity"){
@@ -159,18 +159,18 @@ function loadOrderList(){
 <div class="header">
 	<div class="head1">
 		<div class="top">
-			<b><a href="javascript:;" onclick="EditShow_Hidden(ed1)"><img src="${ctx}/resources/images/plus.png"></a> ${pageOrderType }定单${ordervo['vorderCode']}</b>
-			<font><a href="javascript:;" onclick="Show_Hidden(tr1)"><img src="${ctx}/resources/images/plus.png"></a></font>
+			<b><a href="#" onclick="EditShow_Hidden(ed1)"><img src="${ctx}/resources/images/plus.png"></a> ${pageOrderType }定单${ordervo['vorderCode']}</b>
+			<font><a href="#" onclick="Show_Hidden(tr1)"><img src="${ctx}/resources/images/plus.png"></a></font>
 		</div>
 		<div class="hidden_enent1" id="tr1" style="display:none;">
 			<ul>
-				<li class="jian"><a href="javascript:;" onclick="Show_Hidden(tr1)">—</a></li>
+				<li class="jian"><a href="#" onclick="Show_Hidden(tr1)">—</a></li>
 				<jsp:include page="../menu_pg.jsp"></jsp:include>
 			</ul>
 		</div>
 		<div class="edit_hidden1" id="ed1" style="display:none;">
 			<ul>
-				<li class="jian2"><a href="javascript:;" onclick="EditShow_Hidden(ed1)">—</a></li>
+				<li class="jian2"><a href="#" onclick="EditShow_Hidden(ed1)">—</a></li>
 				<jsp:include page="../menu_cau.jsp"></jsp:include>		
 			</ul>
 		</div>
@@ -242,11 +242,11 @@ function loadOrderList(){
 			  <div class="clear"></div>
 		  </p>
 		  		<div class="cankao">
-					<h2><a href="javascript:;" style="color:#fff" class="cankaotu cptu">+ 成品图 </a></h2>
+					<h2><a href="#" style="color:#fff" class="cankaotu cptu">+ 成品图 </a></h2>
 					<div class="pro">
 						<div class="demo" id='pic' style='display: ;'>
 							<div class="my-gallery">
-								<a class="gem-pic-show" href="javascript:;">
+								<a class="gem-pic-show" href="#">
 								<c:choose>
 								 <c:when test="${empty ordervo['FILE_0']}">   
 								 <img src="${ctx}/resources/images/pic_02.png">
