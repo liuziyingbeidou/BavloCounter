@@ -47,7 +47,9 @@
 			 };
 		})();
 		initData();
-		
+		$("#add-customer").click(function(){
+			window.open("${ctx}/customer/info.do");
+		});
 	});
 	
 	function initData(){
@@ -86,7 +88,7 @@
 	<div class="orderlist" id='pic2'>
 		<div class="order-main">
 			<div class="order-list">
-				客户列表 
+				<a id="add-customer" href="javascript:;"><img style="height:50px;width:50px;" src="${ctx}/resources/images/customer_02.png"></a>
 			</div>
 			<div class="search-1">
 				<input type='text' name='search' class="search" placeholder="输入姓名/手机号" />

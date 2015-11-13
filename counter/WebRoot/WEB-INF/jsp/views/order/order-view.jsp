@@ -88,7 +88,13 @@ function loadOrderList(){
 			for(var i = 0; i < data.length; i++){
 				var type = data[i].vsourceType;
 				if(type == "dz"){
-					$("#olist").append("<dd type='dz' sid='"+data[i].vsourceId+"' class='"+data[i].vsourceId+" bill'><img class='bill-pic' src='${ctx}/resources/images/good_01.png'><b class='bill-num'>"+data[i].nnumber+"对</b><a href='javascript:rlist("+data[i].vsourceId+")' class='close_c'><img src='${ctx}/resources/images/close.png'></a></dd>");
+					var pic = "";
+					if(data[i].FILE_0 != "" && data[i].FILE_0 != null){
+						pic = "<img class='bill-pic' src='${ctx}/"+data[i].FILE_0+"'>";
+					}else{
+						pic = "<img class='bill-pic' src='${ctx}/resources/images/good_01.png'>";
+					}
+					$("#olist").append("<dd type='dz' sid='"+data[i].vsourceId+"' class='"+data[i].vsourceId+" bill'>"+pic+"<b class='bill-num'>"+data[i].nnumber+"对</b><a href='javascript:rlist("+data[i].vsourceId+")' class='close_c'><img src='${ctx}/resources/images/close.png'></a></dd>");
 				}/*else if(type == "ch"){
 					$("#olist").append("<dd type='ch' sid='"+data[i].vsourceId+"' class='"+data[i].vsourceId+" bill'><span class='list_name bill-name'>"+data[i].vname+"</span><b class='list_price bill-num'>"+data[i].nnumber+"条</b><a href='javascript:rlist("+data[i].vsourceId+")' class='close_c'><img src='${ctx}/resources/images/close.png'></a></dd>");
 				}*/
