@@ -214,7 +214,7 @@ public class CustomController extends BaseController implements IConstant {
 	 * @param @return
 	 * @return ModelAndView
 	 */
-	@RequestMapping(value="listJson",method = RequestMethod.POST)
+	@RequestMapping(value="listJson")
 	public void listJson(HttpServletRequest request,Map<String, Object> map) {
 		String content = request.getParameter("content");
 		String wh = "";
