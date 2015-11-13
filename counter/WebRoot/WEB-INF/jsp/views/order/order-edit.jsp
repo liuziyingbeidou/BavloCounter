@@ -507,7 +507,7 @@ text-overflow:ellipsis;
 						 ${ordervo['vorderCode']}
 						 <input type="hidden" id="orderCode" name="vorderCode" value="${ordervo['vorderCode']}">
 						 </c:otherwise>	
-					</c:choose> 
+			</c:choose> 
 			</b>
 			<font><a href="#" onclick="Show_Hidden(tr1)"><img src="${ctx}/resources/images/plus.png"></a></font>
 		</div>
@@ -539,7 +539,32 @@ text-overflow:ellipsis;
       <div class="gylc">
 		<dl class="barbox">
 			<dd class="barline">
-				<div w="50" style="width: 50%;" class="charts"></div>
+				<c:choose>
+						 <c:when test="${ordervo['iorderState'] == -1}">   
+						 <div w="50" style="width: 0%;" class="charts"></div>
+						 </c:when>
+						 <c:when test="${ordervo['iorderState'] == 0}">   
+						 <div w="50" style="width: 10%;" class="charts"></div>
+						 </c:when>
+						 <c:when test="${ordervo['iorderState'] == 1}">   
+						 <div w="50" style="width: 26%;" class="charts"></div>
+						 </c:when>
+						 <c:when test="${ordervo['iorderState'] == 2}">   
+						 <div w="50" style="width: 46%;" class="charts"></div>
+						 </c:when>
+						 <c:when test="${ordervo['iorderState'] == 3}">   
+						 <div w="50" style="width: 66%;" class="charts"></div>
+						 </c:when>
+						 <c:when test="${ordervo['iorderState'] == 4}">   
+						 <div w="50" style="width: 85%;" class="charts"></div>
+						 </c:when>
+						 <c:when test="${ordervo['iorderState'] == 5}">   
+						 <div w="50" style="width: 100%;" class="charts"></div>
+						 </c:when>
+						 <c:otherwise>
+						 <div w="50" style="width: 0%;" class="charts"></div>
+						 </c:otherwise>	
+			</c:choose> 
 			</dd>
 		</dl>
 		<!--<dt><i class="status" style=" width:182px; position:absolute; top:180px; left:105px;"></i></dt>-->
