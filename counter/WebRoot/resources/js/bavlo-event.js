@@ -94,7 +94,7 @@
     }
     
 })( jQuery );
-//去前缀
+//去后缀
 function clearSuffix(myClass,suffix){
 	var worth = $("."+myClass).val();
 	var index = isContain(worth,suffix);
@@ -102,7 +102,7 @@ function clearSuffix(myClass,suffix){
 		$("."+myClass).val(worth.substring(0,index));
 	}
 }
-//加前缀
+//加后缀
 function initSuffix(myClass,suffix){
 	var worth = $("."+myClass).val();
 	var index = isContain(worth,suffix);
