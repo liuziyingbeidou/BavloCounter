@@ -222,7 +222,7 @@ public class BaseController {
 	}
 	
 	/***********************文件上传***********************/
-	    private String allowSuffix = "jpg,png,gif,jpeg,txt";//允许文件格式
+	    private String allowSuffix = "jpg,png,gif,jpeg,txt,cdr,jcd,3dm";//允许文件格式
 	    private long allowSize = 2L;//允许文件大小
 	    private String fileName;//文件名(包含完整路径)
 	    private String[] fileNames;
