@@ -202,11 +202,11 @@ function saveOrUpdate() {
 		success : function(data) {
 			$("#customid").val(data.id);
 			alert("保存成功!");
-			//initFieldSuffix();
+			initFieldSuffix();
 		},
 		error : function(e) {
 			alert("保存失败!");
-			//initFieldSuffix();
+			initFieldSuffix();
 		}
 	});
 }
@@ -224,10 +224,6 @@ function initFieldSuffix(){
   	if($(".kps_count").val() != ""){
 		//数量
 		initSuffix("kps_count","颗"); 
-	}
-	if($(".custom_item").val() != ""){
-		//数量
-		initSuffix("custom_item","条");
 	}
   	if($(".costom_otherPrice").val() != ""){
 		//金额 
@@ -248,7 +244,7 @@ function cleanFieldSuffix(){
 	//数量
 	//clearSuffix("custom_item","条");
 	//刻字 
-	//clearSuffix("custom_engrave","刻字标签:,");
+	//clearSuffix("custom_engrave","刻字标签：,");
 }
 
 //子窗体调用
@@ -258,6 +254,22 @@ function setValueByFrame(type,id,callback,json,gem){
 		var data = JSON.parse(json);
 		$(".chain").append("<dd class='"+data.sid+"'><div class='lianzi'><h3>链子</h3><a href='javascript:rlist("+data.sid+")' class='close_c'><font>X</font></a><div class='clear'></div><input class='custom_item' id='iitem' name='iitem' type='text' value='' placeholder='条'><strong>"+data.sname+"</strong></div></dd>");
 		closeMultiDlg();
+	}else if(type == "signGem"){
+		var data = JSON.parse(id);
+			var signGem = $("#gemSignId").val();
+			if(data != null){
+				if(signGem == ""){
+					$("#gemSignId").val(data);
+					$(".kong").append("<img class='kzs_img' src='${ctx}/resources/images/kzs_"+data+".png' >");
+					alert("id="+data);
+				}else{
+					var kzs_img=$(".kzs_img").attr("src");
+					$("#gemSignId").val(data);
+					$(".kzs_img").attr("src","${ctx}/resources/images/kzs_"+data+".png");
+					alert("id="+data);
+				}
+			}
+			closeMultiDlg();
 	}else if(type == "gem"){
 		 var html="";
 		 var data = JSON.parse(json);
@@ -309,6 +321,10 @@ function rlist(className){
 		value="${customEdit.orderId }" />
 	<input type="hidden" id='customerId' name='customerId'
 		value="${customEdit.customerId }" />
+	<input type="hidden" id='gemSignId' name='gemSignId'
+		value="${customEdit.iprimaryGemID }" />
+	<input type="hidden" id='gemSignIdB' name='gemSignIdB'
+		value="${customEdit.iforeignGemID }" />
 	<div class="all">
 		<div class="main">
 			<div class="mainleft">
@@ -346,22 +362,17 @@ function rlist(className){
 							<b><a href="javascript:;" onclick="Pic1Show_Hidden(pic1)">隐藏</a></b>
 							<!--<b class="hide">隐藏</b>-->
 							<div class="my-gallery">
-								<volist name="list" id="list"> <figure> <a
-									href="${ctx}/resources/images/zb_06.png" data-size="800x1142"><img
-									src="${ctx}/resources/images/zb_06.png" alt="Image description" /></a>
-								<figcaption itemprop="caption description">
-								<h3>图片名称8</h3>
-								<!--<div class="bottom"><ul><li><a href="#"><img src="images/share.png"></a></li><li><a href="#"><img src="images/download.png"></a></li><li><a href="#"><img src="images/link.png"></a></li></ul></div>-->
-								</figcaption> </figure> <figure style="display:none;"> <a
-									href="${ctx}/resources/images/zb_06.png" data-size="800x1142"><img
-									src="${ctx}/resources/images/zb_06.png" alt="Image description" /></a>
-								<figcaption itemprop="caption description">
-								<h3>图片名称8</h3>
-								</figcaption> </figure> <figure style="display:none;"> <a
-									href="${ctx}/resources/images/zb_06.png" data-size="800x1142"><img
-									src="${ctx}/resources/images/zb_06.png" alt="Image description" /></a>
-								<figcaption itemprop="caption description">
-								<h3>图片名称8</h3>
+								<volist name="list" id="list"> <figure>
+								<a class="costomPicShow" href="javascript:void();">
+									<c:choose>
+										<c:when test="${empty customEdit['FILE_0']}">   
+											<img src="${ctx}/resources/images/zb_03.png">
+										</c:when>
+										<c:otherwise>
+											<img src="${ctx}/staticRes/${customEdit['FILE_0']}">
+										</c:otherwise>
+									</c:choose> 
+								</a>
 								</figcaption> </figure> </volist>
 
 							</div>
@@ -460,7 +471,7 @@ function rlist(className){
 								</li>
 								<li class="kzs_gl"><input type='button' name="guanlian" class="kzs_guanlian"
 									value="+ 关联" /></li>
-								<li class="kong">空</li>
+								<li class="kong"></li>
 								<li class="cha"><a href="javascript:h('kzsGem')"><font>X</font></a></li>
 							</ul>
 							<div class="clear"></div>
@@ -475,9 +486,9 @@ function rlist(className){
 								<li><input type="text" id="iforeignGem" name="iforeignGem" class="kps_count"
 										placeholder="颗"/>
 								</li>
-								<li class="kzs_gl"><input type='button' name="guanlian" class="kps_guanlian"
-									value="+ 关联" /></li>
-								<li class="kong">空</li>
+								<li class="kzs_gl"><a href="javascript:h('kpsGem')"><input type='button' name="guanlian" class="kps_guanlian"
+									value="+ 关联" /></a></li>
+								<li class="kong"></li>
 								<%-- <li class="kps"><img src="${ctx}/resources/images/zb_09.png" width="42"
 									height="42" /></li> --%>
 								<li class="cha"><a href="javascript:h('kpsGem')"><font>X</font></a></li>

@@ -57,9 +57,9 @@
 	//调用父窗体方法
 	function selHander(id){
 		if(isExitsFunction(window.parent.setValueByFrame)){
-			window.parent.setValueByFrame("gem",id,callbackMuilt());
+			window.parent.setValueByFrame("signGem",id,callbackMuilt()); 
 		}else{
-			alert("请在父窗口添加setValueByFrame(type,id,callback){处理逻辑}type='gem']");
+			alert("请在父窗口添加setValueByFrame(type,id,callback){处理逻辑}type='signGem']");
 		}
 	}
 	</script>

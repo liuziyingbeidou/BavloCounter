@@ -43,7 +43,7 @@
 	
 	function initData(){
 		$("#juheweb").empty();
-		var url = "${ctx}/customer/listJson.do";
+		var url = "${ctx}/custom/listJson.do";
 		$.post(url,{content:$(".search").val()},function(row){
 			var data = row;
 			for(var i = 0; i < data.length; i++){

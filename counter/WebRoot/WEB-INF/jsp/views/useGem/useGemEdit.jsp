@@ -22,6 +22,17 @@
 
 <!-- 定义JS -->
 <script src="${ctx}/resources/js/bavlo-initdata.js"></script>
+<script src="${ctx}/resources/js/bavlo-event.js"></script>
+
+<!-- 弹框 -->
+<!-- jQuery & jQuery UI files (needed)--> 
+<link rel="stylesheet" href="/counter/resources/jquery.multiDialog/css/jquery-ui-1.10.3.custom.css">
+<script src="/counter/resources/jquery.multiDialog/js/jquery/jquery-ui-1.10.3.custom.js"></script> 
+<!-- MultiDialog files (needed) --> 
+<link rel="stylesheet" href="/counter/resources/jquery.multiDialog/css/jquery.multiDialog.css"> 
+<script src="/counter/resources/jquery.multiDialog/js/jquery.ui.dialog.extended-1.0.2.js"></script> 
+<script src="/counter/resources/jquery.multiDialog/js/jquery.multiDialog.js"></script> 
+<script src="/counter/resources/js/bavlo-dialog.js"></script>
 
 <script type="text/javascript">
 	//本地webservice
@@ -49,6 +60,10 @@
 		/**
 		 *$(document).ajaxStop(function () {setNowSelData(); });
 		 **/
+		 //宝石签收单列表
+		 $(".custom_list").bind("click",function(){
+		 	openURL("${ctx}/custom/listJson.do","定制单列表");
+		 });
 
 	});
 
@@ -141,7 +156,7 @@
 							<div class="clear"></div>
 						</ul>
 						<dt>
-							定制单号： <a href="javascript:;" onclick="Pic2Show_Hidden(pic2)">123123</a>
+							定制单号： <a href="javascript:;" class="custom_list">2015121031454646</a>
 						</dt>
 					</div>
 				</div>
