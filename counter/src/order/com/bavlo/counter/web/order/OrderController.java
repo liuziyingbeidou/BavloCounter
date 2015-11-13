@@ -15,12 +15,12 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.bavlo.counter.constant.IConstant;
+import com.bavlo.counter.model.custom.CustomBVO;
 import com.bavlo.counter.model.custom.CustomVO;
 import com.bavlo.counter.model.order.AddressVO;
 import com.bavlo.counter.model.order.OrderBVO;
 import com.bavlo.counter.model.order.OrderCVO;
 import com.bavlo.counter.model.order.OrderVO;
-import com.bavlo.counter.model.sign.GemSignBVO;
 import com.bavlo.counter.service.custom.itf.ICustomService;
 import com.bavlo.counter.service.order.itf.IOrderService;
 import com.bavlo.counter.utils.CommonUtils;
@@ -64,6 +64,16 @@ public class OrderController extends BaseController {
 		}*/
 		List<OrderVO> orderList = orderService.findListOrderBySql(content);
 		
+		renderJson(orderList);
+	}
+	
+	@RequestMapping(value="/listPicJson")
+	public void orderListPicJson(HttpServletRequest request){
+		String id = request.getParameter("id");
+		List<CustomBVO> orderList = new ArrayList<CustomBVO>();
+		if(StringUtil.isNotEmpty(id)){
+			orderList = orderService.getCumPicList(Integer.valueOf(id));
+		}
 		renderJson(orderList);
 	}
 	

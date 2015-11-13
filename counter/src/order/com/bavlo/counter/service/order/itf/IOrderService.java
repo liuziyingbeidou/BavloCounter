@@ -2,6 +2,7 @@ package com.bavlo.counter.service.order.itf;
 
 import java.util.List;
 
+import com.bavlo.counter.model.custom.CustomBVO;
 import com.bavlo.counter.model.order.AddressVO;
 import com.bavlo.counter.model.order.OrderBVO;
 import com.bavlo.counter.model.order.OrderCVO;
@@ -48,6 +49,8 @@ public interface IOrderService {
 	public List<OrderCVO> findListOrderC(Integer mid);
 	
 	public void saveOrderCVO(List<OrderCVO> listcvo);
+	
+	public List<CustomBVO> getCumPicList(Integer id);
 	
 	/*******************************以下是交付地址***********************************/
 	
