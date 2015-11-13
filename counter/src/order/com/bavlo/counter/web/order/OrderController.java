@@ -95,12 +95,14 @@ public class OrderController extends BaseController {
 		}
 		
 		//组织子表数据-删除更新
-		List list = JsonUtils.getList4Json(listbvo, OrderBVO.class);
-		if(list != null){
-			orderService.delOrderByMid(id);
-			orderService.saveOrderBVO(id,list);
+		if(listbvo != null){
+			List list = JsonUtils.getList4Json(listbvo, OrderBVO.class);
+			if(list != null){
+				for (OrderBVO orderBVO : (List<OrderBVO>)list) {
+					orderService.updateNumByCumId(id,orderBVO.getVsourceId(),orderBVO.getNnumber());
+				}
+			}
 		}
-		
 		renderJson("{\"id\":"+id+"}");
 	}
 	

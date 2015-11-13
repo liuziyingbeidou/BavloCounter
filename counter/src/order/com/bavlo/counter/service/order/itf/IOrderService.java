@@ -82,4 +82,12 @@ public interface IOrderService {
 	 * @param cnum
 	 */
 	public void updateOrderCNumber(Integer orderId,String cnum);
+	/**
+	 * @Description: 更新数量
+	 * @param @param orderId
+	 * @param @param cumId
+	 * @param @param num
+	 * @return void
+	 */
+	public void updateNumByCumId(Integer orderId,String cumId,Integer num);
 }

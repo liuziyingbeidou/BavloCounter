@@ -10,12 +10,12 @@ import net.sf.json.JSONArray;
 import org.springframework.stereotype.Service;
 
 import com.bavlo.counter.constant.IConstant;
+import com.bavlo.counter.model.custom.CustomBVO;
 import com.bavlo.counter.model.custom.CustomVO;
 import com.bavlo.counter.model.order.AddressVO;
 import com.bavlo.counter.model.order.OrderBVO;
 import com.bavlo.counter.model.order.OrderCVO;
 import com.bavlo.counter.model.order.OrderVO;
-import com.bavlo.counter.model.sign.GemSignBVO;
 import com.bavlo.counter.service.custom.itf.ICustomService;
 import com.bavlo.counter.service.impl.CommonService;
 import com.bavlo.counter.service.order.itf.IOrderService;
@@ -295,10 +295,35 @@ public class OrderService extends CommonService implements IOrderService {
 	 */
 	public void backWriteByCum(Integer orderId,Integer customId){
 		CustomVO vo = customService.findCustomById(customId);
-		String[] attrname = new String[]{"nprice"};
-		Object[] attrval = new Object[]{vo.getNprice()};
+		
+		String bwh = " customId="+customId +" and biscover='Y'";
+		CustomBVO cbvo = findFirst(CustomBVO.class, bwh);
+		if(cbvo != null){
+			vo.setFILE_0(cbvo.getVpath()+"/min/"+CommonUtils.getMinPicName(cbvo.getVname()));//·âÃæ
+		}
+		
+		String[] attrname = new String[]{"nprice","vpic"};
+		Object[] attrval = new Object[]{vo.getNprice(),vo.getFILE_0()};
 		String wh = " orderId="+orderId+" and vsourceId="+customId;
-		updateAttrs(OrderBVO.class, attrname, attrval, wh);
+		
+		Integer count = getCountByHQL(OrderBVO.class, wh);
+		
+		if(count > 0){
+			updateAttrs(OrderBVO.class, attrname, attrval, wh);
+		}else{
+			OrderBVO bvo = new OrderBVO();
+			bvo.setOrderId(orderId);
+			bvo.setVsourceId(customId+"");
+			bvo.setNnumber(1);
+			bvo.setNprice(vo.getNprice());
+			bvo.setVpic(vo.getFILE_0());
+			bvo.setVsourceType("dz");
+			try {
+				save(bvo);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
 	}
 	
 	/**
@@ -323,5 +348,13 @@ public class OrderService extends CommonService implements IOrderService {
 		Object[] attrval = new Object[]{cnum,IConstant.ORDER_EXPRESS};
 		Integer[] IDs = new Integer[]{orderId};
 		updateAttrsByIDs(OrderVO.class, attrname, attrval, IDs);
+	}
+	
+	public void updateNumByCumId(Integer orderId,String cumId,Integer num){
+		String[] attrname = new String[]{"nnumber"};
+		Object[] attrval = new Object[]{num};
+		String wh = " orderId="+orderId+" and vsourceId="+cumId;
+		
+		updateAttrs(OrderBVO.class, attrname, attrval, wh);
 	}
 }
