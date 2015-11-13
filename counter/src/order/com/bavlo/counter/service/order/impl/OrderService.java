@@ -105,7 +105,8 @@ public class OrderService extends CommonService implements IOrderService {
 			for (int i = 0; i < size; i++) {
 				OrderVO dto = new OrderVO();
 				Object[] arry = jsonArr.getJSONArray(i).toArray();
-				dto.setId(CommonUtils.isNull(arry[0]) ? null :Integer.valueOf(arry[0]+""));
+				Integer id = CommonUtils.isNull(arry[0]) ? null :Integer.valueOf(arry[0]+"");
+				dto.setId(id);
 				dto.setCustomerName(CommonUtils.isNull(arry[1]) ? null :arry[1]+"");
 				dto.setVorderCode(CommonUtils.isNull(arry[2]) ? null :arry[2]+"");
 				dto.setIorderState(CommonUtils.isNull(arry[3]) ? null :Integer.valueOf(arry[3]+""));
@@ -114,11 +115,48 @@ public class OrderService extends CommonService implements IOrderService {
 				dto.setNnonPayment(CommonUtils.isNull(arry[6]) ? null :Double.valueOf(arry[6]+""));
 				dto.setNtailPaid(CommonUtils.isNull(arry[7]) ? null :Double.valueOf(arry[7]+""));
 				dto.setVdef1(CommonUtils.isNull(arry[8]) ? null :arry[8]+"");
+				
 				nList.add(dto);
 			}
 		}
 		
 		return nList;
+	}
+	
+	@Override
+	public List<CustomBVO> getCumPicList(Integer id){
+		/**订单中定制单默认图-start**/
+		List<CustomBVO> list = new ArrayList<CustomBVO>();
+		if(id != null){
+			StringBuilder bsql = new StringBuilder();
+			bsql.append("select ");
+			bsql.append(" d.id,d.vname,d.vpath");
+			bsql.append(" from blct_order_b b");
+			bsql.append(" left join blct_custom c");
+			bsql.append(" on (b.vsource_id+0)=c.id");
+			bsql.append(" left join blct_custom_img d");
+			bsql.append(" on c.id=d.custom_id");
+			bsql.append(" where d.biscover='Y'");
+			bsql.append(" and b.order_id="+id);
+			
+			Integer num = getCountBySQL(bsql.toString());
+			List<CustomBVO> list_ = (List<CustomBVO>)findListBySQL(bsql.toString(), null, 0, num);
+			if(list_ != null){
+				String jsonstr_ = ObjectToJSON.writeListJSON(list_);
+				JSONArray jsonArr_ = JSONArray.fromObject(jsonstr_);
+				int size_ = jsonArr_.size();
+				for (int j = 0; j < size_; j++) {
+					CustomBVO dto = new CustomBVO();
+					Object[] arry = jsonArr_.getJSONArray(j).toArray();
+					dto.setId(CommonUtils.isNull(arry[0]) ? null :Integer.valueOf(arry[0]+""));
+					dto.setVname(CommonUtils.isNull(arry[0]) ? null :arry[0]+"");
+					dto.setVpath(CommonUtils.isNull(arry[0]) ? null :arry[0]+"");
+					list.add(dto);
+				}
+			}
+		}
+		return list;
+		/**订单中定制单默认图-end**/
 	}
 
 	@Override
