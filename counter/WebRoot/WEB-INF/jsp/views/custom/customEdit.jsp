@@ -90,7 +90,7 @@ $(function() {
 	//初始化刻字
 	var WS = function(opt) {
 
-		var regexp = opt.regexp || /\S/, el = $(opt.el), list = el.val().split(','), holder = $('<span class="words-split"></span>'), add = $('<div class="kezi"><a href="javascript:void(0)" class="words-split-add">+刻字</a></div>');
+		var regexp = opt.regexp || /\S/, el = $(opt.el), list = el.val().split(','), holder = $('<span class="words-split"></span>')
 
 		for (var i = 0; i < list.length; i++) {
 			holder.append($('<a href="javascript:void(0)" class="fm-button">'
@@ -98,49 +98,25 @@ $(function() {
 		}
 
 		el.hide().after(holder);
-		holder.after(add);
 
 		holder.on('click', 'a>em', function() { // 刪除
 			$(this).parent().remove();
 			el.val(holder.text().match(/\S+/g).join(','))
 		});
 
-		add.on('click', function() { // 添加预处理
-			$(this).hide();
-			$(".zhanwei").append(
-					$('<span class="lbl-input" contenteditable="true"/>'))
-		});
-
-		$(".zhanwei")
-				.on(
-						'blur',
-						'.lbl-input',
-						function() { // 验证添加字段
-							var t = $(this), v = t.text();
-							if (v) {
-								t.remove();
-								add.show();
-								holder
-										.append($('<a href="javascript:void(0)" class="fm-button">'
-												+ v + '<em> </em></a>'));
-								el.val(holder.text().match(/\S+/g).join(','));
-							} else {
-								t.remove();
-								add.show();
-							}
-						});
-
-		holder.on('keydown', '.lbl-input', function(e) {
-			switch (e.keyCode) {
-			case 13:
-			case 27:
-				$(this).trigger('blur');
-			}
+		$(".gongyi1").change(function() { // 添加
+			var t = $(this).find("option:selected").val();
+			alert(t);
+				if (t) {
+					holder.append($('<a href="javascript:void(0)" class="fm-button">'
+									+ t + '<em> </em></a>'));
+					el.val(holder.text().match(/\S+/g).join(','));
+				} 
 		});
 	}
 
 	WS({
-		el : '#vengrave',
+		el : '#vcraftTag',
 		regexp : /\w+\.\w+/
 	});
 	
@@ -151,8 +127,14 @@ $(function() {
 	 $(".qibantu").bind("click",function(){
 	 		openURL("${ctx}/upload/uppage.do","上传起版图"); 
 	 });
+	 $(".vectorgraph").bind("click",function(){
+	 		openURL("${ctx}/upload/uppage.do","上传刻字矢量图"); 
+	 });
+	 $(".cad_file").bind("click",function(){
+	 		openURL("${ctx}/upload/uppage.do","上传CAD文件"); 
+	 });
 	 //图片显示
-	 $(".costomPicShow").bind("click",function(){
+	 $(".customPicShow").bind("click",function(){
 	 	var mid = $("#customid").val();
 	 	if(mid == ""){
 	 		alert("请保存后查看!");
@@ -160,6 +142,13 @@ $(function() {
 	 		openURL("${ctx}/upload/showpic.do?cpath=com.bavlo.counter.model.custom.CustomBVO&fkey=customId&id="+mid,"图片展示");
 	 	}
 	 });
+	 
+	 //字体改变样式
+	 $(".ziti").change(function(){
+		 var font=$('.ziti').val();
+		 $(".kezi").css({"font-family":font}); 
+	 })
+	 
 	 //宝石签收单列表
 	 $(".kzs_guanlian").bind("click",function(){
 	 	openURL("${ctx}/gem-sign/list.do","宝石签收单列表");
@@ -169,7 +158,7 @@ $(function() {
 	 	openURL("${ctx}/gem-sign/list.do","宝石签收单列表");
 	 });
 	 //有值加后缀
- 	//initFieldSuffix();
+ 	initFieldSuffix();
 	 
 	//加载子表数据
 	function loadSubData(mid){
@@ -193,10 +182,11 @@ $(function() {
 function saveOrUpdate() {
 	cleanFieldSuffix();
 	var bvo = JSON.stringify($('#customBId').serializeJson());
+	var cvo = JSON.stringify($('#customCId').serializeJson());
 	$.ajax({
 		type : "POST",
 		url : "save.do",
-		data : $('#custom').serialize()+"&bvo="+bvo,// formid
+		data : $('#custom').serialize()+"&bvo="+bvo+"&cvo="+cvo,// formid
 		async : false,
 		cache : false,
 		success : function(data) {
@@ -225,9 +215,9 @@ function initFieldSuffix(){
 		//数量
 		initSuffix("kps_count","颗"); 
 	}
-  	if($(".costom_otherPrice").val() != ""){
+  	if($(".custom_otherPrice").val() != ""){
 		//金额 
-		initSuffix("costom_otherPrice","元"); 
+		initSuffix("custom_otherPrice","元"); 
 	}
 }
 
@@ -240,7 +230,7 @@ function cleanFieldSuffix(){
 	//数量
 	clearSuffix("kps_count","颗");
 	//金额 
-	clearSuffix("costom_otherPrice","元");
+	clearSuffix("custom_otherPrice","元");
 	//数量
 	//clearSuffix("custom_item","条");
 	//刻字 
@@ -255,19 +245,29 @@ function setValueByFrame(type,id,callback,json,gem){
 		$(".chain").append("<dd class='"+data.sid+"'><div class='lianzi'><h3>链子</h3><a href='javascript:rlist("+data.sid+")' class='close_c'><font>X</font></a><div class='clear'></div><input class='custom_item' id='iitem' name='iitem' type='text' value='' placeholder='条'><strong>"+data.sname+"</strong></div></dd>");
 		closeMultiDlg();
 	}else if(type == "signGem"){
-		var data = JSON.parse(id);
 			var signGem = $("#gemSignId").val();
-			if(data != null){
+				var url = "${ctx}/gem-sign/listJson.do";
+				$.post(url,{content:$(".search").val()},function(row){
+					var data = row;
+					for(var i = 0; i < data.length; i++){
+						var pic = "";
+						if(data[i].vdef3 != "" && data[i].vdef3 != null){
+							pic = "src='${ctx}/staticRes/"+data[i].vdef2+"/min/"+data[i].vdef3+"'";
+						}else{
+							pic = "src='${ctx}/resources/images/good_01.png'";
+						}
+						$("#juheweb").append("<li><h4><img style='width:60px;height:60px;' "+pic+"><b>"+data[i].vnumber+"</b><span><a href='#' onclick='selHander("+data[i].id+")'>选择</a></span></h4><div class='clear'></div></li>");
+					}
+				});
 				if(signGem == ""){
 					$("#gemSignId").val(data);
-					$(".kong").append("<img class='kzs_img' src='${ctx}/resources/images/kzs_"+data+".png' >");
-					alert("id="+data);
+					$(".kong").append("<img style='width:60px;height:60px;' "+pic+" >");
+					alert(1);
 				}else{
 					var kzs_img=$(".kzs_img").attr("src");
 					$("#gemSignId").val(data);
-					$(".kzs_img").attr("src","${ctx}/resources/images/kzs_"+data+".png");
-					alert("id="+data);
-				}
+					$(".kzs_img").attr("+pic+");
+					alert(1);
 			}
 			closeMultiDlg();
 	}else if(type == "gem"){
@@ -337,7 +337,7 @@ function rlist(className){
 							<!--<b class="hide">隐藏</b>-->
 							<div class="my-gallery">
 								<volist name="list" id="list"> <figure> 
-								<a class="costomPicShow" href="javascript:void();">
+								<a class="customPicShow" href="javascript:void();">
 									<c:choose>
 										<c:when test="${empty customEdit['FILE_0']}">   
 											<img src="${ctx}/resources/images/zb_03.png">
@@ -363,7 +363,7 @@ function rlist(className){
 							<!--<b class="hide">隐藏</b>-->
 							<div class="my-gallery">
 								<volist name="list" id="list"> <figure>
-								<a class="costomPicShow" href="javascript:void();">
+								<a class="customPicShow" href="javascript:void();">
 									<c:choose>
 										<c:when test="${empty customEdit['FILE_0']}">   
 											<img src="${ctx}/resources/images/zb_03.png">
@@ -513,10 +513,9 @@ function rlist(className){
 			<div class="mainrig">
 				<h2>其他信息</h2>
 				
-				<!-- 标签 -->
-				<input type="text" class="custom_engrave" name="vengrave" value="刻字标签：" id="vengrave" />
-				<div class="zhanwei">
+				<input type="text" class="kezi" id="vengrave" name="vengrave" placeholder="刻字" />
 				<select id="vfont" name="vfont" class="ziti">
+					<option value="" >字体</option>
 					<option value="华文细黑" >华文细黑</option>
 					<option value="华文仿宋" >华文仿宋</option>
 					<option value="华文楷体" >华文楷体</option>
@@ -529,30 +528,35 @@ function rlist(className){
 					<option value="Segoe Script" >Segoe Script</option>
 					<option value="Verdana" >Verdana</option>
 				</select>
-				</div>
 				<br />
 	
+				<div class="zhanwei">
+				<input type="text" class="custom_engrave" name="vcraftTag" value="工艺标签：" id="vcraftTag" />
+				<select class="gongyi1">
+					<option value="">表面工艺</option>
+					<option value="喷砂">喷砂</option>
+					<option value="拉丝">拉丝</option>
+					<option value="珐琅">珐琅</option>
+				</select>
 				<textarea id="vrequirementB" name="vrequirementB" cols="" rows="" 
 				placeholder="表面工艺描述"			
 				class="miaoshu1"></textarea>
 				<br />
-				
 				<select name="icertificate" name="icertificate" class="jianding1">
 					<option value="0">鉴定证书 -无</option>
 					<option value="1">鉴定证书 -有</option>
 				</select>
-				<!-- 
+				</div>
 				<div class="tu">
 					<div class="tu1">
-						<input type="file" id="kezitu" style="display: none;">
-						<a href="javascript:;" class="kzsGem_btn">+ 刻字矢量图</a><strong>Love.cdr</strong><br />
+						<a href="javascript:;" class="vectorgraph">+ 刻字矢量图</a>
+						<a href="javascript:;" class="cad_file"> + CAD文件   </a>
 					</div>
-					<u>+ CAD文件</u><strong>无</strong>
-				</div> -->
+				</div>
 				<div class="qita">
 					<div class="clear"></div>
 					<input type="text" 
-					id="notherPrice" name="notherPrice" class="costom_otherPrice"
+					id="notherPrice" name="notherPrice" class="custom_otherPrice"
 					placeholder="其他 元" />
 					<!-- <strong>13325+13150=<u>26800 </u>元</strong> -->
 				</div>
@@ -577,8 +581,21 @@ function rlist(className){
 	</div>
 	</form>
 	<form id="customBId">
-	<input type="hidden" name="filemodel" id="filemodel" value="costom">
+	<input type="hidden" name="filemodel" id="filemodel" value="custom">
 	<input type="hidden" name="filetype" id="filetype" value="pic">
+	<input type="hidden" name="FILE_0" id="FILE_0"></input>
+	<input type="hidden" name="FILE_1" id="FILE_1"></input>
+	<input type="hidden" name="FILE_2" id="FILE_2"></input>
+	<input type="hidden" name="FILE_3" id="FILE_3"></input>
+	<input type="hidden" name="FILE_4" id="FILE_4"></input>
+	<input type="hidden" name="FILE_5" id="FILE_5"></input>
+	<input type="hidden" name="FILE_6" id="FILE_6"></input>
+	<input type="hidden" name="FILE_7" id="FILE_7"></input>
+	<input type="hidden" name="FILE_8" id="FILE_8"></input>
+	</form>
+	<form id="customCId">
+	<input type="hidden" name="filemodel" id="filemodel" value="custom">
+	<input type="hidden" name="filetype" id="filetype" value="file">
 	<input type="hidden" name="FILE_0" id="FILE_0"></input>
 	<input type="hidden" name="FILE_1" id="FILE_1"></input>
 	<input type="hidden" name="FILE_2" id="FILE_2"></input>

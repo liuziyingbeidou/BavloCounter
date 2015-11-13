@@ -178,7 +178,7 @@ font-family:"Microsoft yahei";
 	float: right;
 	width: 325px;
 }
-.kezi a{
+/* .kezi a{
 	font-family: "Microsoft yahei";
 	font-size: 16px;
 	color: #ddd;
@@ -190,21 +190,41 @@ font-family:"Microsoft yahei";
 	margin-right: 10px;
 	line-height: 40px;
 	text-align: center;
-}
+} */
 
+.kezi{
+	width: 155px;
+	height: 40px;
+	font-family: "Microsoft yahei";
+	font-size: 16px;
+	color: #555;
+	margin-bottom: 20px;
+	background-color: #ddd;
+	padding-left: 10px;
+}
 .ziti{
 	width: 155px;
 	height: 40px;
 	font-family: "Microsoft yahei";
 	font-size: 16px;
 	color: #555;
-	margin-top: 20px;
+	margin-bottom: 20px;
 	background-color: #ddd;
 	padding-left: 10px;
 	margin-left:10px;
 	
 }
 .jianding{
+	width: 325px;
+	height: 40px;
+	font-family: "Microsoft yahei";
+	font-size: 16px;
+	color: #555;
+	background-color: #ddd;
+	padding-left: 10px;
+    margin-top:20px;
+}
+.gongyi1{
 	width: 325px;
 	height: 40px;
 	font-family: "Microsoft yahei";
@@ -235,11 +255,11 @@ font-family:"Microsoft yahei";
 	font-size: 16px;
 	color: #ddd;
 	background-color: #777;
-	line-height: 35px;
+	line-height: 100px;
 	text-align: center;
 	font-weight: normal;
 	padding-top: 9px;
-	padding-right: 25px;
+	padding-right: 46px;
 	padding-bottom: 9px;
 	padding-left: 25px;
 }
