@@ -310,6 +310,7 @@
 	<input type="hidden" name="FILE_6" id="FILE_6"></input>
 	<input type="hidden" name="FILE_7" id="FILE_7"></input>
 	<input type="hidden" name="FILE_8" id="FILE_8"></input>
+	<input type="hidden" name="filevalue" id="filevalue"></input>
 	</form>
 	</body>
 </html>
