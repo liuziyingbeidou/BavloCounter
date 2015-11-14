@@ -1,6 +1,8 @@
 package com.bavlo.counter.model.custom;
 
-import javax.persistence.Column;
+import java.math.BigDecimal;
+import java.util.Date;
+
 import javax.persistence.Entity;
 import javax.persistence.Table;
 
@@ -25,52 +27,38 @@ public class CustomVO extends IdEntity {
 	/**
 	 * 定制单编号
 	 */
-	@Column(length = 50)
 	private String vcustomCode;
 	/**
 	 * 款式类型
 	 */
-	@Column(length = 50)
 	private String srcstyleType;
-	/**
-	 * 链子
-	 */
-	@Column(length = 50)
-	private String srcchain;
 	/**
 	 * 金属
 	 */
-	@Column(length = 50)
 	private String srcmetail;
 	/**
 	 * 戒指手寸
 	 */
-	@Column(length = 50)
 	private String srcringSize;
 	/**
 	 * 款式名称
 	 */
-	@Column(length = 50)
 	private String vstyleName;
 	/**
 	 * 款式性别
 	 */
-	@Column(length = 50)
 	private String vsex;
 	/**
 	 * 重量
 	 */
-	@Column(precision = 20, scale = 8)
 	private Double nweight;
 	/**
 	 * 主石（元）
 	 */
-	@Column(precision = 20, scale = 8)
-	private Double nprimaryGemCost;
+	private BigDecimal nprimaryGemCost;
 	/**
 	 * 主石（ID）
 	 */
-	@Column(precision = 20, scale = 8)
 	private Integer iprimaryGemID;
 	/**
 	 * 配石（颗）
@@ -81,48 +69,33 @@ public class CustomVO extends IdEntity {
 	 */
 	private Integer iforeignGemID;
 	/**
-	 * 库选石（元）
-	 */
-	private Integer stockGemNum;
-	/**
-	 * 库选石（颗）
-	 */
-	private Integer stockGemID;
-	/**
 	 * 总价格
 	 */
-	@Column(precision = 20, scale = 8)
-	private Double nprice;
+	private BigDecimal nprice;
 	/**
 	 * 其他款项
 	 */
-	@Column(precision = 20, scale = 8)
-	private Double notherPrice;
+	private BigDecimal notherPrice;
 	/**
 	 * 刻字
 	 */
-	@Column(length = 50)
 	private String vengrave;
 	/**
 	 * 刻字矢量图
 	 */
-	@Column(length = 50)
 	private String vengraveVh;
 	/**
 	 * 刻字字体
 	 */
-	@Column(length = 50)
 	private String vfont;
 	/**
 	 * CAD文件
 	 */
-	@Column(length = 50)
 	private String vcadFile;
 	/**
 	 * 定制单创建时间
 	 */
-	@Column(length = 50)
-	private String vcreatedate;
+	private Date vcreatedate;
 	/**
 	 * 状态:0:未处理；1：设计中；2：已完成
 	 */
@@ -176,14 +149,6 @@ public class CustomVO extends IdEntity {
 		this.srcstyleType = srcstyleType;
 	}
 
-	public String getSrcchain() {
-		return srcchain;
-	}
-
-	public void setSrcchain(String srcchain) {
-		this.srcchain = srcchain;
-	}
-
 	public String getSrcmetail() {
 		return srcmetail;
 	}
@@ -224,11 +189,11 @@ public class CustomVO extends IdEntity {
 		this.nweight = nweight;
 	}
 
-	public Double getNprimaryGemCost() {
+	public BigDecimal getNprimaryGemCost() {
 		return nprimaryGemCost;
 	}
 
-	public void setNprimaryGemCost(Double nprimaryGemCost) {
+	public void setNprimaryGemCost(BigDecimal nprimaryGemCost) {
 		this.nprimaryGemCost = nprimaryGemCost;
 	}
 
@@ -256,35 +221,19 @@ public class CustomVO extends IdEntity {
 		this.iforeignGemID = iforeignGemID;
 	}
 
-	public Integer getStockGemNum() {
-		return stockGemNum;
-	}
-
-	public void setStockGemNum(Integer stockGemNum) {
-		this.stockGemNum = stockGemNum;
-	}
-
-	public Integer getStockGemID() {
-		return stockGemID;
-	}
-
-	public void setStockGemID(Integer stockGemID) {
-		this.stockGemID = stockGemID;
-	}
-
-	public Double getNprice() {
+	public BigDecimal getNprice() {
 		return nprice;
 	}
 
-	public void setNprice(Double nprice) {
+	public void setNprice(BigDecimal nprice) {
 		this.nprice = nprice;
 	}
 
-	public Double getNotherPrice() {
+	public BigDecimal getNotherPrice() {
 		return notherPrice;
 	}
 
-	public void setNotherPrice(Double notherPrice) {
+	public void setNotherPrice(BigDecimal notherPrice) {
 		this.notherPrice = notherPrice;
 	}
 
@@ -320,11 +269,11 @@ public class CustomVO extends IdEntity {
 		this.vcadFile = vcadFile;
 	}
 
-	public String getVcreatedate() {
+	public Date getVcreatedate() {
 		return vcreatedate;
 	}
 
-	public void setVcreatedate(String vcreatedate) {
+	public void setVcreatedate(Date vcreatedate) {
 		this.vcreatedate = vcreatedate;
 	}
 

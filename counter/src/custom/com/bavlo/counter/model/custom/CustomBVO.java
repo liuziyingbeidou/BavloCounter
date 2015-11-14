@@ -9,7 +9,7 @@ import com.bavlo.counter.model.IdEntity;
 
 /**
  * @Title: 宝珑Counter
- * @ClassName: CustomImgVO 
+ * @ClassName: CustomBVO 
  * @Description: 实物签收单子表（图片）
  * @author shijf
  * @date 2015-11-9 下午07:21:21
