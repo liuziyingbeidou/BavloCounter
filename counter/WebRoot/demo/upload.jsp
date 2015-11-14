@@ -44,6 +44,7 @@
 	<input type="hidden" id="FILE_7"></input>
 	<input type="hidden" id="FILE_8"></input>
 	<input type="hidden" id="FILE_9"></input>
+	<input type="text" name="filevalue" id="filevalue" value="filevalue"></input>
 <a class="gem-upload" href="javascript:;"><img src="${ctx}/resources/images/camera.png"></a>
 <br>
 <xmp>
