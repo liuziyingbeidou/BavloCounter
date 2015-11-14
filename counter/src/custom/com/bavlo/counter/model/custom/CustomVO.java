@@ -104,10 +104,20 @@ public class CustomVO extends IdEntity {
 	@Column(length = 50)
 	private String vengrave;
 	/**
+	 * 刻字矢量图
+	 */
+	@Column(length = 50)
+	private String vengraveVh;
+	/**
 	 * 刻字字体
 	 */
 	@Column(length = 50)
 	private String vfont;
+	/**
+	 * CAD文件
+	 */
+	@Column(length = 50)
+	private String vcadFile;
 	/**
 	 * 定制单创建时间
 	 */
@@ -126,7 +136,11 @@ public class CustomVO extends IdEntity {
 	 */
 	private String vrequirement;
 	/**
-	 * 细节描述
+	 * 工艺标签
+	 */
+	private String vcraftTag;
+	/**
+	 * 工艺细节描述
 	 */
 	private String vrequirementB;
 	/**
@@ -282,12 +296,28 @@ public class CustomVO extends IdEntity {
 		this.vengrave = vengrave;
 	}
 
+	public String getVengraveVh() {
+		return vengraveVh;
+	}
+
+	public void setVengraveVh(String vengraveVh) {
+		this.vengraveVh = vengraveVh;
+	}
+
 	public String getVfont() {
 		return vfont;
 	}
 
 	public void setVfont(String vfont) {
 		this.vfont = vfont;
+	}
+
+	public String getVcadFile() {
+		return vcadFile;
+	}
+
+	public void setVcadFile(String vcadFile) {
+		this.vcadFile = vcadFile;
 	}
 
 	public String getVcreatedate() {
@@ -322,12 +352,28 @@ public class CustomVO extends IdEntity {
 		this.vrequirement = vrequirement;
 	}
 
+	public String getVcraftTag() {
+		return vcraftTag;
+	}
+
+	public void setVcraftTag(String vcraftTag) {
+		this.vcraftTag = vcraftTag;
+	}
+
 	public String getVrequirementB() {
 		return vrequirementB;
 	}
 
 	public void setVrequirementB(String vrequirementB) {
 		this.vrequirementB = vrequirementB;
+	}
+
+	public Integer getOrderId() {
+		return orderId;
+	}
+
+	public void setOrderId(Integer orderId) {
+		this.orderId = orderId;
 	}
 
 	public String getVorderCode() {
@@ -340,14 +386,6 @@ public class CustomVO extends IdEntity {
 
 	public static long getSerialversionuid() {
 		return serialVersionUID;
-	}
-
-	public Integer getOrderId() {
-		return orderId;
-	}
-
-	public void setOrderId(Integer orderId) {
-		this.orderId = orderId;
 	}
 
 }
