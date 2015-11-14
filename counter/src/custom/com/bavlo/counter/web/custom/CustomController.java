@@ -15,13 +15,16 @@ import net.sf.json.JSONObject;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.bavlo.counter.constant.IConstant;
 import com.bavlo.counter.model.custom.CustomBVO;
 import com.bavlo.counter.model.custom.CustomVO;
+import com.bavlo.counter.model.sign.GemSignVO;
 import com.bavlo.counter.service.custom.itf.ICustomService;
+import com.bavlo.counter.service.sign.itf.IGemSignService;
 import com.bavlo.counter.utils.StringUtil;
 import com.bavlo.counter.web.BaseController;
 
@@ -38,6 +41,8 @@ public class CustomController extends BaseController implements IConstant {
 
 	@Resource
 	private ICustomService customService;
+	@Resource
+	private IGemSignService gemSignService;
 
 	/**
 	 * @Description: ¶¨ÖÆµ¥±à¼­
@@ -225,6 +230,14 @@ public class CustomController extends BaseController implements IConstant {
 		}
 		List<CustomVO> customList = customService.findCustomList(wh);
 		renderJson(customList);
+	}
+	
+	@RequestMapping(value="/getGem")
+	public void getGem(@RequestParam(value="id",required=false) Integer id){
+		
+		GemSignVO gemSignVO = gemSignService.findSigleGem(id);
+		
+		renderJson(gemSignVO);
 	}
 
 	@RequestMapping("/calculate")
