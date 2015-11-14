@@ -105,6 +105,12 @@ public class UploadController extends BaseController {
 		}
 	}
 	
+	@RequestMapping("/uploadSGFile")
+	public void uploadFile(@RequestParam("sfile") MultipartFile sfile,HttpServletRequest request, HttpServletResponse response) throws Exception {
+	    
+		uploadHeadPic(sfile,request,response);
+	}
+	
 	@RequestMapping("/uploadFile")
     public void uploadHeadPic(@RequestParam("file")MultipartFile file,HttpServletRequest request,HttpServletResponse response){
         try {
@@ -132,6 +138,7 @@ public class UploadController extends BaseController {
                 out.close();
             }
             response.getWriter().print(picName);
+            response.getWriter().close();
             System.out.println(picName);
         } catch (Exception e) {
             e.printStackTrace();
