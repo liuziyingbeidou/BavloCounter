@@ -44,7 +44,7 @@
 	<input type="hidden" id="FILE_7"></input>
 	<input type="hidden" id="FILE_8"></input>
 	<input type="hidden" id="FILE_9"></input>
-	<input type="text" name="filevalue" id="filevalue" value="filevalue"></input>
+	<input type="hidden" name="filevalue" id="filevalue" value="filevalue"></input>
 <a class="gem-upload" href="javascript:;"><img src="${ctx}/resources/images/camera.png"></a>
 <br>
 <xmp>
@@ -62,6 +62,7 @@
     
 2、9个隐藏文本框（其中id必须为以下名称，用于接收上传成功返回的文件名称）
 	name/id分别为FILE_0~FILE_9
+	filevalue 隐藏域：用来在上传时临时存放上传完成后图片名称文本对应的id
 
 3、2个隐藏文本框
 	name/id="filetype";//上传文件类型，value值为pic代表上传图片，file代表上传普通文件
