@@ -1305,7 +1305,7 @@ $.ui.position = {
 				position.left = max( position.left - collisionPosLeft, position.left );
 			}
 		},
-		top: function( position, data ) {debugger;
+		top: function( position, data ) {
 			var within = data.within,
 				withinOffset = within.isWindow ? within.scrollTop : within.offset.top,
 				outerHeight = data.within.height,
