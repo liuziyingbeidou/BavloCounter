@@ -153,6 +153,8 @@ font-family:"Microsoft yahei";
 .custom_item { float: left; width: 90px; background: #dbdbdb; color: #555555; height: 37px; line-height: 37px; text-align: center;}
 .kzs_gl { width: 70px; float: left; margin: 0 20px; line-height: 37px; height: 37px;}
 .kzs_gl input { width:70px; height: 37px; line-height: 37px; color: #ccc; font-size: 14px; border: none; text-align: center; background: #767676; }
+.kzs_img  { float: left; width: 50px; height: 37px; line-height: 37px; text-align: center; border: 1px solid #777;}
+.kps_img  { float: left; width: 50px; height: 37px; line-height: 37px; text-align: center; border: 1px solid #777;}
 .kong  { float: left; width: 50px; height: 37px; line-height: 37px; text-align: center; border: 1px solid #777;}
 .kps { height: 37px; float: left;}
 .kxs { float: left;}

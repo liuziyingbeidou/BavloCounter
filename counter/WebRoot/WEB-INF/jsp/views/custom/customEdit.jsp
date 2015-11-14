@@ -43,6 +43,8 @@
 <script type="text/javascript">
 //本地webservice
 var nativeUrl = "${pageScope.basePath}/counter/webservice/http.do";
+//宝石图片class名 
+var gemSignClass = "";
 $(function() {
 
 	// 款式类型下拉框值
@@ -76,8 +78,17 @@ $(function() {
 			});
 		}
 	});
-
-	
+	 
+	//宝石签收单列表
+	$(".kzs_guanlian").bind("click",function(){
+		openURL("${ctx}/gem-sign/list.do","宝石签收单列表");
+		gemSignClass = "kzs_img";
+	});
+	//宝石签收单列表
+	$(".kps_guanlian").bind("click",function(){
+		openURL("${ctx}/gem-sign/list.do","宝石签收单列表");
+		gemSignClass = "kps_img";
+	});
 	//宝石弹框
 	$(".kxsGem_btn").click(function(){
 		openURL("${ctx}/common/getGemInfo.do","库选石");
@@ -96,7 +107,6 @@ $(function() {
 			holder.append($('<a href="javascript:void(0)" class="fm-button">'
 					+ list[i] + '<em> </em></a>'));
 		}
-
 		el.hide().after(holder);
 
 		holder.on('click', 'a>em', function() { // 刪除
@@ -106,12 +116,14 @@ $(function() {
 
 		$(".gongyi1").change(function() { // 添加
 			var t = $(this).find("option:selected").val();
-			alert(t);
+			var str = $(".custom_engrave").val();
+			if(str.indexOf(t) < 0){
 				if (t) {
 					holder.append($('<a href="javascript:void(0)" class="fm-button">'
 									+ t + '<em> </em></a>'));
 					el.val(holder.text().match(/\S+/g).join(','));
 				} 
+			}
 		});
 	}
 
@@ -129,9 +141,11 @@ $(function() {
 	 });
 	 $(".vectorgraph").bind("click",function(){
 	 		openURL("${ctx}/upload/uppage.do","上传刻字矢量图"); 
+	 		$("#filevalue").val("vengraveVh");
 	 });
 	 $(".cad_file").bind("click",function(){
 	 		openURL("${ctx}/upload/uppage.do","上传CAD文件"); 
+	 		$("#filevalue").val("vcadFile");
 	 });
 	 //图片显示
 	 $(".customPicShow").bind("click",function(){
@@ -148,15 +162,7 @@ $(function() {
 		 var font=$('.ziti').val();
 		 $(".kezi").css({"font-family":font}); 
 	 })
-	 
-	 //宝石签收单列表
-	 $(".kzs_guanlian").bind("click",function(){
-	 	openURL("${ctx}/gem-sign/list.do","宝石签收单列表");
-	 });
-	 //宝石签收单列表
-	 $(".kps_guanlian").bind("click",function(){
-	 	openURL("${ctx}/gem-sign/list.do","宝石签收单列表");
-	 });
+
 	 //有值加后缀
  	initFieldSuffix();
 	 
@@ -204,37 +210,35 @@ function saveOrUpdate() {
 //增加后缀 
 function initFieldSuffix(){
 	if($(".custom_weight").val() != ""){
-		 //重量 
+		 //金属重量 
 		initSuffix("custom_weight","克");
 	}
   	if($(".kzs_price").val() != ""){
-		//金额 
+		//主石金额 
 		initSuffix("kzs_price","元"); 
 	}
   	if($(".kps_count").val() != ""){
-		//数量
+		//配石数量
 		initSuffix("kps_count","颗"); 
 	}
   	if($(".custom_otherPrice").val() != ""){
-		//金额 
+		//其他金额 
 		initSuffix("custom_otherPrice","元"); 
 	}
 }
 
 //清除后缀
 function cleanFieldSuffix(){
-	//重量 
+	//金属重量 
 	clearSuffix("custom_weight","克");
-	//金额 
+	//主石金额 
 	clearSuffix("kzs_price","元");
-	//数量
+	//配石数量
 	clearSuffix("kps_count","颗");
-	//金额 
+	//其他金额 
 	clearSuffix("custom_otherPrice","元");
-	//数量
+	//链子数量
 	//clearSuffix("custom_item","条");
-	//刻字 
-	//clearSuffix("custom_engrave","刻字标签：,");
 }
 
 //子窗体调用
@@ -245,31 +249,41 @@ function setValueByFrame(type,id,callback,json,gem){
 		$(".chain").append("<dd class='"+data.sid+"'><div class='lianzi'><h3>链子</h3><a href='javascript:rlist("+data.sid+")' class='close_c'><font>X</font></a><div class='clear'></div><input class='custom_item' id='iitem' name='iitem' type='text' value='' placeholder='条'><strong>"+data.sname+"</strong></div></dd>");
 		closeMultiDlg();
 	}else if(type == "signGem"){
-			var signGem = $("#gemSignId").val();
-				var url = "${ctx}/gem-sign/listJson.do";
-				$.post(url,{content:$(".search").val()},function(row){
-					var data = row;
-					for(var i = 0; i < data.length; i++){
-						var pic = "";
-						if(data[i].vdef3 != "" && data[i].vdef3 != null){
-							pic = "src='${ctx}/staticRes/"+data[i].vdef2+"/min/"+data[i].vdef3+"'";
-						}else{
-							pic = "src='${ctx}/resources/images/good_01.png'";
-						}
-						$("#juheweb").append("<li><h4><img style='width:60px;height:60px;' "+pic+"><b>"+data[i].vnumber+"</b><span><a href='#' onclick='selHander("+data[i].id+")'>选择</a></span></h4><div class='clear'></div></li>");
-					}
-				});
-				if(signGem == ""){
-					$("#gemSignId").val(data);
-					$(".kong").append("<img style='width:60px;height:60px;' "+pic+" >");
-					alert(1);
+		alert(id);
+		var gemSign = $("#gemSignId").val();
+		var gemSignB = $("#gemSignBId").val();
+		var url = "${ctx}/custom/getGem.do";
+		$.post(url,{id:id},function(row){
+			var data = row;
+			if(data!=null){
+				var pic = "";
+				if(data.FILE_0 != "" && data.FILE_0 != null){
+					pic = "'${ctx}/staticRes/"+data.FILE_0+"'";
 				}else{
-					var kzs_img=$(".kzs_img").attr("src");
-					$("#gemSignId").val(data);
-					$(".kzs_img").attr("+pic+");
-					alert(1);
+					pic = "'${ctx}/resources/images/good_01.png'";
+				}
 			}
-			closeMultiDlg();
+			if(gemSignClass == "kzs_img"){
+				if(gemSign == ""){
+					$("#gemSignId").val(id);
+					$("."+gemSignClass).append("<img class='gem_img' style='width:38px;height:38px;' src="+pic+" >");
+				}else {
+					$("#gemSignId").val(id);
+					$(".gem_img").attr("src",pic);
+				}
+			}
+			if(gemSignClass == "kps_img"){
+				if(gemSignB == ""){
+					$("#gemSignBId").val(id);
+					$("."+gemSignClass).append("<img class='gem_img' style='width:38px;height:38px;' src="+pic+" >");
+				}else {
+					$("#gemSignBId").val(id);
+					$(".gem_img").attr("src",pic);
+				}
+			}
+		});
+		
+		closeMultiDlg();
 	}else if(type == "gem"){
 		 var html="";
 		 var data = JSON.parse(json);
@@ -323,8 +337,12 @@ function rlist(className){
 		value="${customEdit.customerId }" />
 	<input type="hidden" id='gemSignId' name='gemSignId'
 		value="${customEdit.iprimaryGemID }" />
-	<input type="hidden" id='gemSignIdB' name='gemSignIdB'
+	<input type="hidden" id='gemSignBId' name='gemSignBId'
 		value="${customEdit.iforeignGemID }" />
+	<input type="hidden" id='vengraveVh' name='vengraveVh'
+		value="${customEdit.vengraveVh }" />
+	<input type="hidden" id='vcadFile' name='vcadFile'
+		value="${customEdit.vcadFile }" />
 	<div class="all">
 		<div class="main">
 			<div class="mainleft">
@@ -471,7 +489,7 @@ function rlist(className){
 								</li>
 								<li class="kzs_gl"><input type='button' name="guanlian" class="kzs_guanlian"
 									value="+ 关联" /></li>
-								<li class="kong"></li>
+								<li class="kzs_img"></li>
 								<li class="cha"><a href="javascript:h('kzsGem')"><font>X</font></a></li>
 							</ul>
 							<div class="clear"></div>
@@ -486,9 +504,9 @@ function rlist(className){
 								<li><input type="text" id="iforeignGem" name="iforeignGem" class="kps_count"
 										placeholder="颗"/>
 								</li>
-								<li class="kzs_gl"><a href="javascript:h('kpsGem')"><input type='button' name="guanlian" class="kps_guanlian"
+								<li class="kzs_gl"><input type='button' name="guanlian" class="kps_guanlian"
 									value="+ 关联" /></a></li>
-								<li class="kong"></li>
+								<li class="kps_img"></li>
 								<%-- <li class="kps"><img src="${ctx}/resources/images/zb_09.png" width="42"
 									height="42" /></li> --%>
 								<li class="cha"><a href="javascript:h('kpsGem')"><font>X</font></a></li>
@@ -592,19 +610,7 @@ function rlist(className){
 	<input type="hidden" name="FILE_6" id="FILE_6"></input>
 	<input type="hidden" name="FILE_7" id="FILE_7"></input>
 	<input type="hidden" name="FILE_8" id="FILE_8"></input>
-	</form>
-	<form id="customCId">
-	<input type="hidden" name="filemodel" id="filemodel" value="custom">
-	<input type="hidden" name="filetype" id="filetype" value="file">
-	<input type="hidden" name="FILE_0" id="FILE_0"></input>
-	<input type="hidden" name="FILE_1" id="FILE_1"></input>
-	<input type="hidden" name="FILE_2" id="FILE_2"></input>
-	<input type="hidden" name="FILE_3" id="FILE_3"></input>
-	<input type="hidden" name="FILE_4" id="FILE_4"></input>
-	<input type="hidden" name="FILE_5" id="FILE_5"></input>
-	<input type="hidden" name="FILE_6" id="FILE_6"></input>
-	<input type="hidden" name="FILE_7" id="FILE_7"></input>
-	<input type="hidden" name="FILE_8" id="FILE_8"></input>
+	<input type="hidden" name="filevalue" id="filevalue" value=""></input>
 	</form>
 </body>
 </html>
