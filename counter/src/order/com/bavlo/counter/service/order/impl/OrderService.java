@@ -1,5 +1,6 @@
 package com.bavlo.counter.service.order.impl;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -353,7 +354,7 @@ public class OrderService extends CommonService implements IOrderService {
 			bvo.setOrderId(orderId);
 			bvo.setVsourceId(customId+"");
 			bvo.setNnumber(1);
-			bvo.setNprice(vo.getNprice());
+			bvo.setNprice(CommonUtils.isNull(vo.getNprice()) ? 0.0 : Double.valueOf(vo.getNprice()+""));
 			bvo.setVpic(vo.getFILE_0());
 			bvo.setVsourceType("dz");
 			try {
