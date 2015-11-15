@@ -56,6 +56,7 @@ $(function(){
 		var url = "${ctx}/order/updateState.do";
 		$.post(url,{orderId:orderId,ista:ista},function(data){
 			alert(data);
+			location.reload();
 		});
 	});
 	//更新顺丰单号
@@ -65,6 +66,7 @@ $(function(){
 		var url = "${ctx}/order/updateOrderCNumber.do";
 		$.post(url,{orderId:orderId,cnum:cnum},function(data){
 			alert(data);
+			location.reload();
 		});
 	});
 	//保存上传图片
@@ -74,6 +76,7 @@ $(function(){
 		var bvo = JSON.stringify($('#orderCId').serializeJson());
 		$.post(url,{orderId:orderId,bvo:bvo},function(data){
 			alert(data);
+			location.reload();
 		});
 	});
 });
@@ -89,8 +92,8 @@ function loadOrderList(){
 				var type = data[i].vsourceType;
 				if(type == "dz"){
 					var pic = "";
-					if(data[i].FILE_0 != "" && data[i].FILE_0 != null){
-						pic = "<img class='bill-pic' src='${ctx}/"+data[i].FILE_0+"'>";
+					if(data[i].vpic != "" && data[i].vpic != null){
+						pic = "<img style='width:60px;height:60px;' class='bill-pic' src='${ctx}/staticRes/"+data[i].vpic+"'>";
 					}else{
 						pic = "<img class='bill-pic' src='${ctx}/resources/images/good_01.png'>";
 					}
@@ -185,7 +188,32 @@ function loadOrderList(){
       <div class="gylc">
 		<dl class="barbox">
 			<dd class="barline">
-				<div w="50" style="width: 50%;" class="charts"></div>
+				<c:choose>
+						 <c:when test="${ordervo['iorderState'] == -1}">   
+						 <div w="50" style="width: 0%;" class="charts"></div>
+						 </c:when>
+						 <c:when test="${ordervo['iorderState'] == 0}">   
+						 <div w="50" style="width: 10%;" class="charts"></div>
+						 </c:when>
+						 <c:when test="${ordervo['iorderState'] == 1}">   
+						 <div w="50" style="width: 26%;" class="charts"></div>
+						 </c:when>
+						 <c:when test="${ordervo['iorderState'] == 2}">   
+						 <div w="50" style="width: 46%;" class="charts"></div>
+						 </c:when>
+						 <c:when test="${ordervo['iorderState'] == 3}">   
+						 <div w="50" style="width: 66%;" class="charts"></div>
+						 </c:when>
+						 <c:when test="${ordervo['iorderState'] == 4}">   
+						 <div w="50" style="width: 85%;" class="charts"></div>
+						 </c:when>
+						 <c:when test="${ordervo['iorderState'] == 5}">   
+						 <div w="50" style="width: 100%;" class="charts"></div>
+						 </c:when>
+						 <c:otherwise>
+						 <div w="50" style="width: 0%;" class="charts"></div>
+						 </c:otherwise>	
+			</c:choose> 
 			</dd>
 		</dl>
         <ul>

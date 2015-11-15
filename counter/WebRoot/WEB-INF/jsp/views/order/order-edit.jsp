@@ -103,8 +103,8 @@ function loadOrderList(){
 				var type = data[i].vsourceType;
 				if(type == "dz"){
 					var pic = "";
-					if(data[i].FILE_0 != "" && data[i].FILE_0 != null){
-						pic = "<img class='bill-pic' src='${ctx}/"+data[i].FILE_0+"'>";
+					if(data[i].vpic != "" && data[i].vpic != null){
+						pic = "<img style='width:60px;height:60px;' class='bill-pic' src='${ctx}/staticRes/"+data[i].vpic+"'>";
 					}else{
 						pic = "<img class='bill-pic' src='${ctx}/resources/images/good_01.png'>";
 					}
@@ -113,7 +113,12 @@ function loadOrderList(){
 					$("#order-list").append("<dd type='ch' sid='"+data[i].vsourceId+"' class='ch-"+data[i].vsourceId+" bill'><span class='list_name bill-name'>"+data[i].vname+"</span><input class='list_num bill-num' style='width:40px;margin-left:10px;' type='text' value='"+data[i].nnumber+"' placeholder='条'><b class='list_price bill-price'>"+data[i].nprice+"</b><a href='javascript:rlist("+data[i].vsourceId+")' class='close_c'><img src='${ctx}/resources/images/close.png'></a></dd>");
 				}*/
 			}
+			$(".file").hide();
+		}else{
+			$(".file").show();
 		}
+		$("#tbl").empty();
+		initAddr();
 	});
 }
 
