@@ -48,7 +48,7 @@ public class CustomService extends CommonService implements ICustomService {
 	public void saveOrUpdateCustom(CustomVO customVO) {
 		try {
 			saveOrUpdate(customVO);
-			orderService.backWriteByCum(customVO.getOrderId(), customVO.getCustomerId());
+//			orderService.backWriteByCum(customVO.getOrderId(), customVO.getCustomerId());
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
