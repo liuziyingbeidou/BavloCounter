@@ -24,6 +24,7 @@ import com.bavlo.counter.model.custom.CustomBVO;
 import com.bavlo.counter.model.custom.CustomVO;
 import com.bavlo.counter.model.sign.GemSignVO;
 import com.bavlo.counter.service.custom.itf.ICustomService;
+import com.bavlo.counter.service.order.itf.IOrderService;
 import com.bavlo.counter.service.sign.itf.IGemSignService;
 import com.bavlo.counter.utils.StringUtil;
 import com.bavlo.counter.web.BaseController;
@@ -43,6 +44,8 @@ public class CustomController extends BaseController implements IConstant {
 	private ICustomService customService;
 	@Resource
 	private IGemSignService gemSignService;
+	@Resource
+	private IOrderService orderService;
 
 	/**
 	 * @Description: ¶¨ÖÆµ¥±à¼­
@@ -199,7 +202,7 @@ public class CustomController extends BaseController implements IConstant {
 		
 		customService.deleteCustomB(customVO.id);
 		customService.saveCustomB(listbvo);
-		
+		orderService.backWriteByCum(customVO.getOrderId(), customVO.getCustomerId());
 		renderJson("{\"id\":"+customVO.id+"}");
 	}
 	
