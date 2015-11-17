@@ -254,12 +254,14 @@ function check(){
 
 //保存地址
 function saveAddr(){
-	
 	//客户ID
 	var customerId = $("#customerId").val();
 	if(customerId == ""){
 		alert("请选择客户...");
 		return ;
+	}
+	if(!ckLose("add_dizhi","lose-addr")){
+		return;
 	}
 	var customerId = $("#customerId").val();
 	//姓名
@@ -484,6 +486,7 @@ function getOrderListInfo(){
 .addrlist{
 text-overflow:ellipsis;
 }
+.order-quotedPrice{border-color:red;border-style:solid;border-width:2px}
 </style>
 </head>
 
@@ -637,18 +640,18 @@ text-overflow:ellipsis;
             <input type="button" value="+新建地址" onclick="add_addr()" />
           </div>
           <div class="add_dizhi" style="display:none;">
-            <div class="save1"><input type='text' name='vreceiverName' class="add name receiverName" value='' placeholder="姓名"></div>
+            <div class="save1"><input type='text' name='vreceiverName' class="add name receiverName bl-ck-null lose-addr" value='' placeholder="姓名"></div>
             <p>
-            <select name="vprovince" id="vprovince" class="add area1 prov province">
+            <select name="vprovince" id="vprovince" class="add area1 prov province lose-addr">
             </select>
-            <select name="vcity" id="vcity" class="add area2 city">
+            <select name="vcity" id="vcity" class="add area2 city lose-addr">
             </select>
             </p>
-            <select name="vdistrict" id="vdistrict" class="district">
+            <select name="vdistrict" id="vdistrict" class="district lose-addr">
             </select>
             <p>
-            <div class="save1"><input type='text' name='vstreet' class="add dizhi street" value='' placeholder="如街道名称，门牌号码，楼层和房间号等信息"></div>
-            <p><input type='text' name='vphoneCode' class="add tel phoneCode" value="" placeholder="手机电话"><input type='text' class="add email" name='vemail' value="" placeholder="邮箱"></p>
+            <div class="save1"><input type='text' name='vstreet' class="add dizhi street bl-ck-null lose-addr" value='' placeholder="如街道名称，门牌号码，楼层和房间号等信息"></div>
+            <p><input type='text' name='vphoneCode' class="add tel phoneCode bl-ck-null lose-addr" value="" placeholder="手机电话"><input type='text' class="add email" name='vemail' value="" placeholder="邮箱"></p>
             <div class="save1"><input type="button" id="addrSave" name="Submit" class="save" value="Save" /></div>
           </div>
           <div class="fapiao">
@@ -662,7 +665,7 @@ text-overflow:ellipsis;
                 <option value="珠宝首饰">珠宝首饰</option>
               </select>
             </p>
-            <input type='text' name='vinvoiceTitle' value="${ordervo['vinvoiceTitle'] }" placeholder="发票抬头">
+            <input type='text' class="invoiceTitle" name='vinvoiceTitle' value="${ordervo['vinvoiceTitle'] }" placeholder="发票抬头">
           </div>
         </div>
         <div class="mainrig">
@@ -673,7 +676,7 @@ text-overflow:ellipsis;
             <option value="3">30001-40000元</option>
             <option value="4">40001-50000元</option>
           </select>
-          <p><input type='text' name="nquotedPrice" class="zf bj order-quotedPrice" value="${ordervo['nquotedPrice'] }" placeholder="报价"><input type='text' name="npayment" class="zf yf order-payment" value="${ordervo['npayment'] }" placeholder="已付"></p>
+          <p><input type='text' name="nquotedPrice" class="zf bj order-quotedPrice" value="${ordervo['nquotedPrice'] }" placeholder="报价"><input type='text' name="npayment" class="zf yf order-payment bl-suf-null" value="${ordervo['npayment'] }" placeholder="已付"></p>
           <p><input type='text' name="nnonPayment" class="zf bj order-nonPayment" value="${ordervo['nnonPayment'] }" placeholder="未付"><input type='text' name="ntailPaid" class="zf yf order-tailPaid" value="${ordervo['ntailPaid'] }" placeholder="尾款实收"></p>
           <input type="text" name="ddeliverdate" value="${ordervo['ddeliverdate'] }" id="datetimepicker" class="jianding" placeholder="交付时间" />
           
@@ -689,5 +692,21 @@ text-overflow:ellipsis;
     </div>
 </div>
 </form>
+<script type="text/javascript">
+	$(function(){
+		$(".invoice").change(function(){
+			if($(this).val() == "Y"){
+				if($(".invoiceTitle").val() == ""){
+					setBorderRed("invoiceTitle");
+        		}else{
+        			cancelBorderRed("invoiceTitle");
+        		}
+			}else{
+				$(".invoiceTitle").val("");
+				cancelBorderRed("invoiceTitle");
+			}
+		});
+	});
+</script>
 	</body>
 </html>
