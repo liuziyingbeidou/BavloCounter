@@ -66,7 +66,24 @@
     	//其他金额
     	setSuffix("costom_otherPrice","元");
     	/***************定制单-结束*******************/
+    	
+    	/*********************校验-start*******************/
+    	//非空校验{class='bl-ck-null'}
+    	checkNull("bl-ck-null");
+    	/*********************校验-end*******************/
     });
+    
+    //非空校验
+    function checkNull(myClass){
+    	//失去焦点
+    	$("."+myClass).bind("focusout",function(){
+    		if($(this).val() == ""){
+				setBorderRed(this);
+    		}else{
+    			cancelBorderRed(this);
+    		}
+    	});    	
+    }
     
     /**
      * 设置后缀
@@ -90,10 +107,64 @@
         			$("."+myClass).val(worth + suffix);
         		}
     		}
+    		//必输项校验
+    		var classV = $("."+myClass).prop("class");
+    		if(classV.indexOf("bl-suf-null") >= 0){
+    			if($("."+myClass).val() == ""){
+    				setBorderRed(myClass);
+        		}else{
+        			cancelBorderRed(myClass);
+        		}
+    		}
     	});    	
     }
     
 })( jQuery );
+
+function setBorderRed(em){
+	if(typeof(em) == "object"){
+		$(em).css({"border-color":"red","border-style":"solid","border-width":"2px"});
+	}else{
+		$("."+em).css({"border-color":"red","border-style":"solid","border-width":"2px"});
+	}
+}
+
+function cancelBorderRed(em){
+	if(typeof(em) == "object"){
+		$(em).css({"border-color":"","border-style":"none","border":"0"});
+	}else{
+		$("."+em).css({"border-color":"","border-style":"none","border":"0"});
+	}
+	
+}
+
+//必输项校验
+function ckLose(loc,cls){
+	var flag = true;
+	$("."+loc + " ." + cls).each(function(){
+		var type = $(this).prop("type");
+		//文本框
+		if(type == "text"){
+			if($(this).val() == ""){
+				setBorderRed(this);
+				flag = false;
+			}else{
+				cancelBorderRed(this);
+			}
+		}
+		//下拉框
+		else if(type == "select-one"){
+			if(("省份城市区县-1").indexOf($(this).val()) >= 0){
+				setBorderRed(this);
+				flag = false;
+			}else{
+				cancelBorderRed(this);
+			}
+		}
+	});
+	return flag;
+}
+
 //去后缀
 function clearSuffix(myClass,suffix){
 	var worth = $("."+myClass).val();
