@@ -47,7 +47,7 @@
 				var customerSex = "${customerDetail.vsex}";
 				var customerLanguage = "${customerDetail.vlanguage}";
 				var customerGroup = "${customerDetail.vgroup}";
-				if (customerName == "") {
+/*				if (customerName == "") {
 					$("#vname").val("姓名");
 				}
 				if (customerNickname == "") {
@@ -58,7 +58,7 @@
 				}
 				if (customerPhone == "") {
 					$("#vphoneCode").val("手机");
-				}
+				}*/
 				showLocation();
 				if (customerId != "") {
 					$("#vprovince").val(customerProvince);
@@ -73,6 +73,9 @@
 			});
 			// 保存
 			function saveOrUpdate() {
+				if(!ckLose("edit_btn","lose-cus")){
+					return;
+				}
 				$.ajax({
 					type : "POST",
 					url : "saveOrUpdate.do",
@@ -180,7 +183,7 @@
 								value="${customerDetail.id }" />
 							<input type='text' id='vname' name='vname'
 								value="${customerDetail.vname }"
-								placeholder="姓名" class="edit_2 edit_1_name" />
+								placeholder="姓名" class="edit_2 edit_1_name bl-ck-null lose-cus" />
 							<select id="vsex" name="vsex" class="edit_2 edit_1_area_son">
 								<option>
 									女
@@ -194,7 +197,7 @@
 						<div class="edit_1">
 							<input type='text' id='vphoneCode' name='vphoneCode'
 								value="${customerDetail.vphoneCode}"
-								placeholder="手机" class="edit_2 edit_1_name" />
+								placeholder="手机" class="edit_2 edit_1_name bl-ck-null lose-cus" />
 							<input type='text' id='vemail' name='vemail'
 								value="${customerDetail.vemail}"
 								placeholder="邮箱" class="edit_2 edit_1_sex" />
@@ -209,9 +212,9 @@
 							<div class="clear"></div>
 						</div>
 						<div class="edit_1">
-							<select id="vcity" name="vcity" class="edit_2 edit_1_area"></select>
+							<select id="vcity" name="vcity" class="edit_2 edit_1_area lose-cus"></select>
 							<select id="vdistrict" name="vdistrict"
-								class="edit_2 edit_1_area_son"></select>
+								class="edit_2 edit_1_area_son lose-cus"></select>
 							<div class="clear"></div>
 						</div>
 						<div class="edit_1">
