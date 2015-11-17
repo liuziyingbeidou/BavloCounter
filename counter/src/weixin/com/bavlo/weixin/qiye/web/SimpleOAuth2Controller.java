@@ -29,7 +29,7 @@ public class SimpleOAuth2Controller {
 	@RequestMapping(value = { "/oauth2wx.do" })
 	public String Oauth2API(HttpServletRequest request){
 		//获取项目域名
-		String reqUrl = "bavlo.tunnel.mobi/counter";
+		String reqUrl = Constants.REQURL;
 		//拼接微信回调地址
 		//TODO 此处测试上面的方法，把参数：“reqUrl” 拼接你自己的 URL
 		String backUrl ="http://" +reqUrl + "/oauth2me.do";

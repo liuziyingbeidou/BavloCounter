@@ -33,7 +33,7 @@ public class OAuth2Controller {
 		String CropId = Constants.CORPID;
 		String redirectUrl = "";
 		if (resultUrl != null) {
-			String reqUrl = "bavlo.tunnel.mobi/counter";
+			String reqUrl = Constants.REQURL;
 			//TODO 此处测试上面的方法，把参数：“reqUrl” 拼接你自己的 URL
 			String backUrl ="http://" + reqUrl + "/oauth2url.do?oauth2url=" + resultUrl;
 			redirectUrl = oAuth2Url(CropId, backUrl);
