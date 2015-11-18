@@ -213,9 +213,10 @@ public class CustomController extends BaseController implements IConstant {
 	 * @return ModelAndView
 	 */
 	@RequestMapping("getList")
-	public ModelAndView getList(Map<String, Object> map) {
-
-		return new ModelAndView(PATH_CUSTOM + "customList");
+	public ModelAndView getList(Map<String, Object> map,String listType) {
+		ModelAndView model = new ModelAndView(PATH_CUSTOM + "customList");
+		model.addObject("listType", listType);
+		return model;
 	}
 	
 	/**
