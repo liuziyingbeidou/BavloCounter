@@ -439,19 +439,25 @@ function getOrderListInfo(){
 				$("#order-list").append("<dd type='ch' sid='"+data.sid+"' class='"+data.sid+" bill'><span class='list_name bill-name'>"+data.sname+"</span><input class='list_num bill-num' style='width:40px;margin-left:10px;' type='text' value='1' placeholder='条'><b class='list_price bill-price'>"+data.sprice+"</b><a href='javascript:rlist("+data.sid+")' class='close_c'><img src='${ctx}/resources/images/close.png'></a></dd>");
 				closeMultiDlg();
 			}*/else if(type == "order"){
-				url = "${ctx}/order/edit.do?id="+id;//根据id查询客户信息
+				url = "${ctx}/order/edit.do?id="+id;//根据id查询订单信息
 				window.location = url;
 			}else if(type == "order-view"){
-				url = "${ctx}/order/view.do?id="+id;//根据id查询客户信息
+				url = "${ctx}/order/view.do?id="+id;//根据id查询订单信息
 				window.location = url;
 			}else if(type == "signGem"){
-				url = "${ctx}/gem-sign/view.do?id="+id;//根据id查询客户信息
+				url = "${ctx}/gem-sign/view.do?id="+id;//根据id查询宝石签收单信息
 				window.location = url;
 			}else if(type == "entity"){
-				url = "${ctx}/entity-sign/view.do?id="+id;//根据id查询客户信息
+				url = "${ctx}/entity-sign/view.do?id="+id;//根据id查询实物签收单信息
 				window.location = url;
 			}else if(type == "customer-menu"){
 				url = "${ctx}/customer/info.do?id="+id;//根据id查询客户信息
+				window.location = url;
+			}else if(type == "custom"){
+				url = "${ctx}/custom/edit.do?id="+id;//根据id定制单信息
+				window.location = url;
+			}else if(type == "custom-view"){
+				url = "${ctx}/custom/detail.do?id="+id;//根据id显示定制单信息
 				window.location = url;
 			}
 			/*if(typeof(callback)!=='undefined'){

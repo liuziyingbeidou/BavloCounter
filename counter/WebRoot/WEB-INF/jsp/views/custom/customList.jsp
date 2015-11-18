@@ -49,10 +49,10 @@
 			for(var i = 0; i < data.length; i++){
 				var ht = "<li><h4><img style='width:60px;height:60px;' ";
 				var img = "src='${ctx}/resources/images/customer_01.png'";
-				if(data[i].vhendimgurl != ""){
-					img = "src='"+data[i].vhendimgurl+"'";
+				if(data[i].vdef1 != ""){
+					img = "src='"+data[i].vdef1+"'";
 				}
-				var ml = "><b>"+data[i].vname+"</b><a href='javascript:void();'>"+data[i].vphoneCode+"</a><span><a href='javascript:void();' onclick='selHander("+data[i].id+")'>选择</a></span></h4><div class='clear'></div></li>";
+				var ml = "><b>"+data[i].vdef2+"</b><a href='javascript:void();'>"+data[i].vcustomCode+"</a><span><a href='javascript:void();' onclick='selHander("+data[i].id+")'>选择</a></span></h4><div class='clear'></div></li>";
 				$("#juheweb").append(ht+img+ml);
 			}
 		});
@@ -60,7 +60,13 @@
 	//调用父窗体方法
 	function selHander(id){
 		if(isExitsFunction(window.parent.setValueByFrame)){
-			window.parent.setValueByFrame("custom",id);
+			if("${listType}" == "view"){
+				//查看
+				window.parent.setValueByFrame("custom-view",id,callbackMuilt());
+			}else{
+				//编辑
+				window.parent.setValueByFrame("custom",id,callbackMuilt());
+			}
 		}else{
 			alert("请在父窗口添加setValueByFrame(type,id){处理逻辑}type='custom'");
 		}
@@ -76,9 +82,7 @@
 				定制单列表 
 			</div>
 			<div class="search-1">
-				<input type='text' name='search' class="search" value="搜索"
-					onfocus="if(value =='搜索'){value =''}"
-					onblur="if(value ==''){value='搜索'}" />
+				<input type='text' name='search' class="search" placeholder="定制单编号/客户名称/手机号" />
 			</div>
 			<div class="">
 				<div class="main1 content">
