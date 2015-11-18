@@ -13,7 +13,7 @@ import com.bavlo.counter.constant.IConstant;
  * @author liuzy
  * @date 2015-11-5 ионГ10:57:03
  */
-@Controller(value="CommonController")
+@Controller(value="commonController")
 @RequestMapping(value="/common")
 public class CommonController extends BaseController {
 
