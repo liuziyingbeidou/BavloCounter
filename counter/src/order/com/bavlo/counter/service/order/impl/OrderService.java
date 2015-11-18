@@ -135,7 +135,7 @@ public class OrderService extends CommonService implements IOrderService {
 			bsql.append(" from blct_order_b b");
 			bsql.append(" left join blct_custom c");
 			bsql.append(" on (b.vsource_id+0)=c.id");
-			bsql.append(" left join blct_custom_img d");
+			bsql.append(" left join blct_custom_b d");
 			bsql.append(" on c.id=d.custom_id");
 			bsql.append(" where d.biscover='Y'");
 			bsql.append(" and b.order_id="+id);
@@ -334,33 +334,34 @@ public class OrderService extends CommonService implements IOrderService {
 	 */
 	public void backWriteByCum(Integer orderId,Integer customId){
 		CustomVO vo = customService.findCustomById(customId);
-		
-		String bwh = " customId="+customId +" and biscover='Y'";
-		CustomBVO cbvo = findFirst(CustomBVO.class, bwh);
-		if(cbvo != null){
-			vo.setFILE_0(cbvo.getVpath()+"/min/"+CommonUtils.getMinPicName(cbvo.getVname()));//·âÃæ
-		}
-		
-		String[] attrname = new String[]{"nprice","vpic"};
-		Object[] attrval = new Object[]{vo.getNprice(),vo.getFILE_0()};
-		String wh = " orderId="+orderId+" and vsourceId="+customId;
-		
-		Integer count = getCountByHQL(OrderBVO.class, wh);
-		
-		if(count > 0){
-			updateAttrs(OrderBVO.class, attrname, attrval, wh);
-		}else{
-			OrderBVO bvo = new OrderBVO();
-			bvo.setOrderId(orderId);
-			bvo.setVsourceId(customId+"");
-			bvo.setNnumber(1);
-			bvo.setNprice(CommonUtils.isNull(vo.getNprice()) ? 0.0 : Double.valueOf(vo.getNprice()+""));
-			bvo.setVpic(vo.getFILE_0());
-			bvo.setVsourceType("dz");
-			try {
-				save(bvo);
-			} catch (Exception e) {
-				e.printStackTrace();
+		if(vo != null){
+			String bwh = " customId="+customId +" and biscover='Y'";
+			CustomBVO cbvo = findFirst(CustomBVO.class, bwh);
+			if(cbvo != null){
+				vo.setFILE_0(cbvo.getVpath()+"/min/"+CommonUtils.getMinPicName(cbvo.getVname()));//·âÃæ
+			}
+			
+			String[] attrname = new String[]{"nprice","vpic"};
+			Object[] attrval = new Object[]{vo.getNprice(),vo.getFILE_0()};
+			String wh = " orderId="+orderId+" and vsourceId="+customId;
+			
+			Integer count = getCountByHQL(OrderBVO.class, wh);
+			
+			if(count > 0){
+				updateAttrs(OrderBVO.class, attrname, attrval, wh);
+			}else{
+				OrderBVO bvo = new OrderBVO();
+				bvo.setOrderId(orderId);
+				bvo.setVsourceId(customId+"");
+				bvo.setNnumber(1);
+				bvo.setNprice(CommonUtils.isNull(vo.getNprice()) ? 0.0 : Double.valueOf(vo.getNprice()+""));
+				bvo.setVpic(vo.getFILE_0());
+				bvo.setVsourceType("dz");
+				try {
+					save(bvo);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
 			}
 		}
 	}
