@@ -33,6 +33,7 @@ public interface IConstant {
 	//¶©µ¥
 	public static final String CODE_ORDER = "OD";
 	/*****************************ViewÄ£¿éºÍViewName***************************/
+	
 	public static final String PATH_COMMON = "common/";
 	public static final String COMMON_UPLOAD = "upload";
 	public static final String COMMON_SHOWPIC = "showpic";
