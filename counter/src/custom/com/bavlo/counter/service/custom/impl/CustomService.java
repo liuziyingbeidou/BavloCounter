@@ -1,18 +1,23 @@
 package com.bavlo.counter.service.custom.impl;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.annotation.Resource;
+
+import net.sf.json.JSONArray;
 
 import org.springframework.stereotype.Service;
 
 import com.bavlo.counter.model.custom.CustomBVO;
 import com.bavlo.counter.model.custom.CustomVO;
-import com.bavlo.counter.model.sign.GemSignBVO;
-import com.bavlo.counter.model.sign.GemSignVO;
+import com.bavlo.counter.model.order.OrderVO;
 import com.bavlo.counter.service.custom.itf.ICustomService;
 import com.bavlo.counter.service.impl.CommonService;
 import com.bavlo.counter.service.order.itf.IOrderService;
+import com.bavlo.counter.utils.CommonUtils;
+import com.bavlo.counter.utils.ObjectToJSON;
+import com.bavlo.counter.utils.StringUtil;
 
 
 /** 
@@ -62,8 +67,39 @@ public class CustomService extends CommonService implements ICustomService {
 	}
 
 	@Override
-	public List<CustomVO> findCustomByWh() {
-		return null;
+	public List<CustomVO> findCustomByWh(String content) {
+		StringBuilder sql = new StringBuilder();
+		sql.append("select ");
+		sql.append(" a.id,a.vcustom_code,c.vname as vdef2,c.vhendimgurl as vdef1");
+		sql.append(" from blct_custom a");
+		sql.append(" left join blct_customer c");
+		sql.append(" on a.customer_id=c.id");
+		sql.append(" where ifnull(a.dr,0)=0");
+		if(StringUtil.isNotEmpty(content)){
+			sql.append(content);
+		}
+		
+		Integer count = getCountBySQL(sql.toString());
+		List<CustomVO> list = (List<CustomVO>)findListBySQL(sql.toString(), null, 0, count);
+		List<CustomVO> list_ = new ArrayList<CustomVO>();
+		if(list != null){
+			if(!list.isEmpty()){
+				String jsonstr = ObjectToJSON.writeListJSON(list);
+				JSONArray jsonArr = JSONArray.fromObject(jsonstr);
+				int size = jsonArr.size();
+				for (int i = 0; i < size; i++) {
+					CustomVO dto = new CustomVO();
+					Object[] arry = jsonArr.getJSONArray(i).toArray();
+					dto.setId(CommonUtils.isNull(arry[0]) ? null :Integer.valueOf(arry[0]+""));
+					dto.setVcustomCode(CommonUtils.isNull(arry[1]) ? null : arry[1]+"");
+					dto.setVdef2(CommonUtils.isNull(arry[2]) ? null : arry[2]+"");
+					dto.setVdef1(CommonUtils.isNull(arry[3]) ? null : arry[3]+"");
+					list_.add(dto);
+				}
+			}
+		}
+		
+		return list_;
 	}
 
 	@Override

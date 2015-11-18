@@ -229,9 +229,9 @@ public class CustomController extends BaseController implements IConstant {
 		String content = request.getParameter("content");
 		String wh = "";
 		if(StringUtil.isNotEmpty(content)){
-			wh = " vname like '%"+content+"%' or vphoneCode like '%"+content+"%'";
+			wh = " and a.vcustom_code like '%"+content+"%' or c.vname like '%"+content+"%' or c.vphone_code like '%"+content+"%'";
 		}
-		List<CustomVO> customList = customService.findCustomList(wh);
+		List<CustomVO> customList = customService.findCustomByWh(wh);
 		renderJson(customList);
 	}
 	

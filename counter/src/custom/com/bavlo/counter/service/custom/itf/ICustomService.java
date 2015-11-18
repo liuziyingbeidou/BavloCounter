@@ -54,7 +54,7 @@ public interface ICustomService {
 	 * @param @return
 	 * @return List<CustomVO>
 	 */
-	public List<CustomVO> findCustomByWh();
+	public List<CustomVO> findCustomByWh(String content);
 
 	/**
 	 * @Description: 通过条件查找定制单列表
