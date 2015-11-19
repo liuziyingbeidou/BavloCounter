@@ -13,6 +13,7 @@ import com.bavlo.weixin.qiye.pojo.AccessToken;
 import com.bavlo.weixin.qiye.util.Constants;
 import com.bavlo.weixin.qiye.util.QiYeUtil;
 import com.bavlo.weixin.qiye.util.Result;
+import com.bavlo.weixin.qiye.util.WechatDepart;
 
 /**
  * OAuth2 处理控制器
@@ -59,7 +60,9 @@ public class OAuth2Controller {
 			String Userid = getMemberGuidByCode(accessToken.getToken(), code, Constants.AGENTID);
 			if (Userid != null) {
 				session.setAttribute("UserId", Userid);
-				session.setAttribute("Tagname", QiYeUtil.getUserTag(Userid));
+				session.setAttribute("Tagname", QiYeUtil.getUserTag(Userid).get("roleTag"));
+				System.out.println(session.getAttribute("Tagname"));
+//				WechatDepart.getUserInfo(Userid);
 			}
 		}
 		// 这里简单处理,存储到session中
@@ -84,7 +87,7 @@ public class OAuth2Controller {
 			e.printStackTrace();
 		}
 		String oauth2Url = "https://open.weixin.qq.com/connect/oauth2/authorize?appid=" + corpid + "&redirect_uri=" + redirect_uri
-				+ "&response_type=code&scope=snsapi_base&state=shijf#wechat_redirect";
+				+ "&response_type=code&scope=snsapi_base&state=bavlo#wechat_redirect";
 		return oauth2Url;
 	}
 
