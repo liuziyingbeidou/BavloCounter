@@ -7,12 +7,15 @@ import java.io.OutputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
-
-import com.bavlo.weixin.qiye.pojo.AccessToken;
+import java.util.Map;
 
 import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
+
+import com.bavlo.counter.utils.StringUtil;
+import com.bavlo.weixin.qiye.pojo.AccessToken;
 
 /**
  * 微信企业号调用类 {"errcode":0,"errmsg":"ok"} 此结果表示调用方法成功返回
@@ -67,6 +70,28 @@ public class QiYeUtil {
 	}
 	
 	/**
+	 * @Description: 获取标签键值对
+	 * @param @return
+	 * @return Map<Integer,String>
+	 */
+	public static Map<Integer,String> getTagMap(){
+		//接收到微信返回结果
+		JSONObject jo = WechatTag.getTagList();
+		//把标签列表转为JSONArray
+		JSONArray tagList = (JSONArray) jo.get("taglist");
+		//遍历标签并放入map
+		Map<Integer,String> tag = new HashMap<Integer,String>();
+		for(int i=0; i< tagList.size(); i++){
+			try {
+				tag.put(Integer.valueOf(tagList.getJSONObject(i).getString("tagid")).intValue(), tagList.getJSONObject(i).getString("tagname"));
+			} catch (NumberFormatException e) {
+			    e.printStackTrace();
+			}
+		}
+		return tag;
+	}
+	
+	/**
 	 * 获取所有标签ID
 	 * @return
 	 */
@@ -113,11 +138,43 @@ public class QiYeUtil {
 	 * @param UserId
 	 * @return
 	 */
-	public static List<String> getUserTag(String UserId) {
+	public static Map<String,List<String>> getUserTag(String UserId) {
+		//角色标签
+		List<String> userRLTag = new ArrayList<String>();
+		//店标签
+		List<String> userRDTag = new ArrayList<String>();
 		
-		List<String> userTag = new ArrayList<String>();
-		
-		//获取所有标签ID
+		Map<Integer,String> tagMap = QiYeUtil.getTagMap();
+		if(tagMap != null){
+			//遍历标签
+			for (Map.Entry<Integer,String> tagEntry : tagMap.entrySet()) {
+				//查找当前标签下的用户{返回列表仅包含管理组管辖范围的成员}
+				JSONObject userList = WechatTag.getUserList(tagEntry.getKey());
+				if(userList != null){
+					//标签对应该管理组下的成员列表
+					JSONArray userAry = userList.getJSONArray("userlist");
+					if(userAry != null){
+						for (int i = 0; i < userAry.size(); i++) {
+							String uid = userAry.getJSONObject(i).getString("userid");
+							if(StringUtil.equals(UserId, uid)){
+								String tagName = tagEntry.getValue();
+								if(tagName!=null && tagName.length()>3){
+									//角色
+									if(Constants.LB_ROLE.equals(tagName.substring(0, 3))){
+										userRLTag.add(tagEntry.getValue().substring(3));
+									}
+									//店名
+									else if(Constants.LB_DEPART.equals(tagName.substring(0, 3))){
+										userRDTag.add(tagEntry.getValue().substring(3));
+									}
+								}
+							}
+						}
+					}
+				}
+			}
+		}
+		/*//获取所有标签ID
 		List<Integer> tagIds = QiYeUtil.getTagIdList();
 		//获取所有标签名称
 		List<String> tagNames = QiYeUtil.getTagNameList();
@@ -138,7 +195,10 @@ public class QiYeUtil {
 					e.printStackTrace();
 				}
 			}
-		}
+		}*/
+		Map<String,List<String>> userTag = new HashMap<String,List<String>>();
+		userTag.put("roleTag", userRLTag);
+		userTag.put("departTag", userRDTag);
 		return userTag;
 	}
 	
