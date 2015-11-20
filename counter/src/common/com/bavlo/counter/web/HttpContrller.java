@@ -1,5 +1,7 @@
 package com.bavlo.counter.web;
 
+import net.sf.json.JSONObject;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -25,5 +27,15 @@ public class HttpContrller extends BaseController {
 		String info = HttpTools.getDataByURL(url);
 		System.out.println("返回数据:"+info);
 		return info;
+	}
+	
+	@RequestMapping(value="/httprequest",produces = "application/json; charset=utf-8")
+	@ResponseBody
+	public String httprequest(String requestUrl, String requestMethod, String outputStr){
+		
+		System.out.println("开始调用远程接口..."+requestUrl);
+		JSONObject info = HttpTools.httpRequest(requestUrl, requestMethod, outputStr);
+		System.out.println("返回数据:"+info);
+		return info == null ? null :info.toString();
 	}
 }
