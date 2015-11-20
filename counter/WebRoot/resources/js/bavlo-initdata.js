@@ -198,3 +198,13 @@ function loadGemShape(nativeUrl,remoteUrl,emName){
 		
 	});
 }
+
+/**
+ * http远程请求
+ * var nativeUrl = "${pageScope.basePath}/counter/webservice/httprequest.do";
+ */
+function httpRequest(nativeurl,requestUrl,requestMethod,outputStr){
+	$.post(nativeurl,{requestUrl:requestUrl,requestMethod:requestMethod,outputStr:outputStr},function(data){
+		return data;
+	});
+}
