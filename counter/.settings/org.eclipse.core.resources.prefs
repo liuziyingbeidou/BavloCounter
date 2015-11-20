@@ -1,6 +1,7 @@
-#Sun Oct 18 11:10:31 CST 2015
 eclipse.preferences.version=1
 encoding//WebRoot/page/counter=UTF-8
+encoding//WebRoot/resources/css=UTF-8
+encoding//WebRoot/resources/css/bootstrap.css=UTF-8
 encoding//src/common/com/bavlo/counter/bean=UTF-8
 encoding//src/common/com/bavlo/counter/bean/UUID.java=UTF-8
 encoding//src/common/com/bavlo/counter/cache=UTF-8
@@ -11,3 +12,4 @@ encoding//src/common/com/bavlo/counter/utils/ICheckRule.java=UTF-8
 encoding//src/weixin=UTF-8
 encoding//src/weixin/com/bavlo/weixin/fuwu/util/AdvancedUtil.java=UTF-8
 encoding//src/weixin/com/bavlo/weixin/qiye=UTF-8
+encoding//src/weixin/com/bavlo/weixin/weixin/main/MenuManager.java=GBK

@@ -55,9 +55,9 @@ $(function() {
 			},"款式");
 	// 金属材质下拉框值
 	var typeUrl = "http://www.bavlo.com/getAllMetalMaterialType";
-	loadSelData(nativeUrl, typeUrl, "srcmetail", "data[i].id",
+	loadSelData(nativeUrl, typeUrl, "srcmetal", "data[i].id",
 			"data[i].metal_type_cn", function() {
-				$("#srcmetail").val("${customEdit['srcmetail']}");
+				$("#srcmetal").val("${customEdit['srcmetal']}");
 			},"金属");
 	// 款式类型下拉框值
 	var typeUrl = "http://www.bavlo.com/getAllRingSize";
@@ -209,7 +209,7 @@ function saveOrUpdate() {
 
 //增加后缀 
 function initFieldSuffix(){
-	if($(".custom_weight").val() != ""){
+	if($(".metal_weight").val() != ""){
 		 //金属重量 
 		initSuffix("custom_weight","克");
 	}
@@ -221,22 +221,28 @@ function initFieldSuffix(){
 		//配石数量
 		initSuffix("kps_count","颗"); 
 	}
-  	if($(".custom_otherPrice").val() != ""){
+  	if($(".other_price").val() != ""){
+		//制版金额 
+		initSuffix("pm_price","元"); 
+	}
+  	if($(".other_price").val() != ""){
 		//其他金额 
-		initSuffix("custom_otherPrice","元"); 
+		initSuffix("other_price","元"); 
 	}
 }
 
 //清除后缀
 function cleanFieldSuffix(){
 	//金属重量 
-	clearSuffix("custom_weight","克");
+	clearSuffix("metal_weight","克");
 	//主石金额 
 	clearSuffix("kzs_price","元");
 	//配石数量
 	clearSuffix("kps_count","颗");
+	//制版金额 
+	clearSuffix("pm_price","元");
 	//其他金额 
-	clearSuffix("custom_otherPrice","元");
+	clearSuffix("other_price","元");
 	//链子数量
 	//clearSuffix("custom_item","条");
 }
@@ -299,7 +305,7 @@ function setValueByFrame(type,id,callback,json,gem){
 	    	 	"<div div class='lianzi'>"+	
 			    "<h3>库选宝石</h3>"+
 			    "<a href='javascript:rlist("+data.sid+")' class='close_c'><font>X</font></a><div class='clear'></div>"+
-			    "<input class='custom_item' id='iitem' name='iitem' type='text' value='' placeholder='颗'>"+
+			    "<input class='stockGem_num' id='stockGem' name='iitem' type='text' value='' price='"+costPrice+"' placeholder='颗'>"+
 				"<img src='"+pic+"'/><strong>"+type+" "+weight+"ct</strong>"+
 				"<input type='hidden' class='sgPrice' value='"+costPrice+"'/>"+
 				"</div></dd>";
@@ -307,7 +313,7 @@ function setValueByFrame(type,id,callback,json,gem){
 				
 				
 		 $(".chain").append(html);
-		$("input[name='stockGemQ']").blur(function(){
+		$("input[id='stockGem']").blur(function(){
 			 checkNum(this);
 			 var qutity=$(this).val();
 			 var price=$(this).attr("price");
@@ -477,25 +483,26 @@ function rlist(className){
 			<div class="mainmid">
 				<h2>BOM</h2>
 				<div class="bom">
-					<select id="styleTypeId" name="srcstyleType" class="jiezhi">
+					<select id="styleType" name="srcstyleType" class="jiezhi">
 						<option>选择款式</option>
-					</select> <select class="nvkuan">
+					</select>
+					<select class="nvkuan">
 						<option  id="vsex" name="vsex">女款</option>
 						<option  id="vsex" name="vsex">男款</option>
 					</select>
 				</div>
 				<div class="changdu">
-					<select id="ringSizeId" name="srcringSize" class="neijin">
+					<select id="ringSize" name="srcringSize" class="neijin">
 						<option>选择手寸</option>
 					</select>
 				</div>
 				<div class="weight">
-					<select id="srcmetail" name="srcmetail" class="wk">
+					<select id="metalType" name="srcmetal" class="wk">
 						<option>选择金属</option>
 					</select>
-					<input type="text" id="nweight" name="nweight"
+					<input type="text" id="metal_weight" name="nweight"
 						placeholder="克"
-						class="custom_weight" value="" />
+						class="metalWeight" value="" />
 				</div>
 				<!-- <div class="price">
 					<input id="iprice" name="iprice" 
@@ -513,7 +520,7 @@ function rlist(className){
 							</h3>
 							<ul>
 								<li><input type="text" 
-								id="nprimaryGem" name="nprimaryGem" class="kzs_price"
+								id="mainGemPrice" name="nprimaryGem" class="kzs_price"
 								placeholder="元"/>
 								</li>
 								<li class="kzs_gl"><input type='button' name="guanlian" class="kzs_guanlian"
@@ -530,7 +537,7 @@ function rlist(className){
 								<a href="">客配石</a>
 							</h3>
 							<ul>
-								<li><input type="text" id="iforeignGem" name="iforeignGem" class="kps_count"
+								<li><input type="text" id="inlayPrice" name="iforeignGem" class="kps_count"
 										placeholder="颗"/>
 								</li>
 								<li class="kzs_gl"><input type='button' name="guanlian" class="kps_guanlian"
@@ -589,7 +596,7 @@ function rlist(className){
 				placeholder="表面工艺描述"			
 				class="miaoshu1"></textarea>
 				<br />
-				<select name="icertificate" name="icertificate" class="jianding1">
+				<select name="certificate" name="icertificate" class="jianding1">
 					<option value="0">鉴定证书 -无</option>
 					<option value="1">鉴定证书 -有</option>
 				</select>
@@ -603,17 +610,23 @@ function rlist(className){
 				<div class="qita">
 					<div class="clear"></div>
 					<input type="text" 
-					id="notherPrice" name="notherPrice" class="custom_otherPrice"
-					placeholder="其他 元" />
-					<!-- <strong>13325+13150=<u>26800 </u>元</strong> -->
+					id="pmPrice" name="npmPrice" class="pm_price"
+					placeholder="起版 元" />
 				</div>
+				<div class="qita">
+					<div class="clear"></div>
+					<input type="text" 
+					id="otherPrice" name="notherPrice" class="other_price"
+					placeholder="其他 元" />
+				</div>
+
 				<div class="jisuan">
 					<dl>
 						<dd class="plus">
-							<a href="">+</a>
+							<a href="javascript:;" class="calculator_btn2">+</a>
 						</dd>
 						<dd class="sum">
-							<a href="">计算</a>
+							<a href="javascript:;" class="calculator_btn">计算</a>
 						</dd>
 					</dl>
 					<div class="clear"></div>

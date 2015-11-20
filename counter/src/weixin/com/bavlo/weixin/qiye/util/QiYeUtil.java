@@ -183,7 +183,7 @@ public class QiYeUtil {
 			int tagid = tagIds.get(i);
 			String tagname = tagNames.get(i);
 			JSONObject jo = WechatTag.getUserList(tagid);//查找所有标签里的所有用户
-			JSONArray ja = (JSONArray) jo.get("userlist");
+			JSONArray ja = (JSONArray) jo.get("userlist");//
 			for(int j=0; j< ja.size(); j++){
 				try {
 					String userId = ja.getJSONObject(j).getString("userid");

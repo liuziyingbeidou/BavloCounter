@@ -35,7 +35,7 @@ public class CustomVO extends IdEntity {
 	/**
 	 * 金属
 	 */
-	private String srcmetail;
+	private String srcmetal;
 	/**
 	 * 戒指手寸
 	 */
@@ -69,13 +69,17 @@ public class CustomVO extends IdEntity {
 	 */
 	private Integer iforeignGemID;
 	/**
-	 * 总价格
+	 * 其他款项
 	 */
-	private BigDecimal nprice;
+	private BigDecimal npmPrice;
 	/**
 	 * 其他款项
 	 */
 	private BigDecimal notherPrice;
+	/**
+	 * 总价格
+	 */
+	private BigDecimal nprice;
 	/**
 	 * 刻字
 	 */
@@ -149,12 +153,12 @@ public class CustomVO extends IdEntity {
 		this.srcstyleType = srcstyleType;
 	}
 
-	public String getSrcmetail() {
-		return srcmetail;
+	public String getSrcmetal() {
+		return srcmetal;
 	}
 
-	public void setSrcmetail(String srcmetail) {
-		this.srcmetail = srcmetail;
+	public void setSrcmetal(String srcmetal) {
+		this.srcmetal = srcmetal;
 	}
 
 	public String getSrcringSize() {
@@ -335,6 +339,14 @@ public class CustomVO extends IdEntity {
 
 	public static long getSerialversionuid() {
 		return serialVersionUID;
+	}
+
+	public BigDecimal getNpmPrice() {
+		return npmPrice;
+	}
+
+	public void setNpmPrice(BigDecimal npmPrice) {
+		this.npmPrice = npmPrice;
 	}
 
 }
