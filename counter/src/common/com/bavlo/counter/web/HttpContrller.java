@@ -34,8 +34,13 @@ public class HttpContrller extends BaseController {
 	public String httprequest(String requestUrl, String requestMethod, String outputStr){
 		
 		System.out.println("开始调用远程接口..."+requestUrl);
-		JSONObject info = HttpTools.httpRequest(requestUrl, requestMethod, outputStr);
+		String info = null;
+		if("GET".equals(requestMethod)){
+			info = HttpTools.submitGet(requestUrl);
+		}else if("POST".equals(requestMethod)){
+			info = HttpTools.submitPost(requestUrl, outputStr)+"";
+		}
 		System.out.println("返回数据:"+info);
-		return info == null ? null :info.toString();
+		return info;
 	}
 }
