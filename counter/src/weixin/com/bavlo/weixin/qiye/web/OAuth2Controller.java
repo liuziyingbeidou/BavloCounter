@@ -63,6 +63,8 @@ public class OAuth2Controller {
 				session.setAttribute("Tagname", QiYeUtil.getUserTag(Userid).get("roleTag"));
 				System.out.println(session.getAttribute("Tagname"));
 //				WechatDepart.getUserInfo(Userid);
+				
+				System.out.println("标签是"+session.getAttribute("Tagname"));
 			}
 		}
 		// 这里简单处理,存储到session中
