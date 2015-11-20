@@ -7,13 +7,24 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
 <script src="${ctx }/resources/jquery.multiDialog/js/jquery/jquery-1.9.1.js"></script>
+<script src="${ctx }/resources/js/bavlo-initdata.js"></script>
 <script type="text/javascript">
 $(function(){
 	$(".multidialog").click(function(){
 		var cont = $("#api-button",window.parent.document).text();
 		alert(cont);
 	});
+	$(".remote").click(function(){
+		var nativeUrl = "${pageScope.basePath}/counter/webservice/httprequest.do";
+		var requestUrl = "http://www.bavlo.com/getGemCalibrated";
+		var requestMethod = "POST";//GET
+		var outputStr = "typeId=3&shapeId=4";
+		var info = httpRequest(nativeUrl,requestUrl,requestMethod,outputStr,test);
+	});
 });
+function test(data){
+	alert(data);
+}
 </script>
 </head>
 <body>
@@ -38,8 +49,18 @@ $(function(){
        <a href="${ctx}/custom/getList.do">定制单列表</a>
        <a href="${ctx}/custom/detail.do">定制单详细</a>
     <br>
+    <button class="remote">远程接口测试</button>
     <br>
-     <fieldset>
+    <fieldset>
+    	<legend>下载文件Controller</legend>
+    	http://127.0.0.1:8080/counter/file/download.do<br>
+		参数：  模块filePath   文件名fileName <br>
+		调用下载文件controller回写订单状态<br>
+		@Resource<br>
+		IOrderService orderService;<br>
+		orderService.updateOrderState(订单id,2);
+    </fieldset>
+    <fieldset>
     	<legend>订单→定制单→订单</legend>
     	1、订单中添加定制单时调用url=info.do?orderId="+data.id+"&customerId="+customerId{orderId:订单ID,customerId:客户ID}<br>
     	2、定制单保存后需要回写订单中的子表信息；回写条件：订单ID+定制单ID
@@ -88,5 +109,6 @@ $(function(){
 		 */<br>
 		public void updateOrderCNumber(Integer orderId,String cnum);
     </fieldset>
+    
 </body>
 </html>
