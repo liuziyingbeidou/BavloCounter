@@ -203,8 +203,10 @@ function loadGemShape(nativeUrl,remoteUrl,emName){
  * http远程请求
  * var nativeUrl = "${pageScope.basePath}/counter/webservice/httprequest.do";
  */
-function httpRequest(nativeurl,requestUrl,requestMethod,outputStr){
+function httpRequest(nativeurl,requestUrl,requestMethod,outputStr,callback){
 	$.post(nativeurl,{requestUrl:requestUrl,requestMethod:requestMethod,outputStr:outputStr},function(data){
-		return data;
+		if(typeof(callback)!=='undefined'){
+			callback&&callback(JSON.stringify(data));
+		}
 	});
 }
