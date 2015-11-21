@@ -9,10 +9,8 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.bavlo.counter.model.LoginVO;
 import com.bavlo.counter.utils.JsonUtils;
-import com.bavlo.weixin.qiye.interceptor.OAuthRequired;
 
 @Controller(value="systemController")
-@RequestMapping(value="/sys")
 public class SystemController extends BaseController {
 
 	@RequestMapping(value={"/index.do"})
