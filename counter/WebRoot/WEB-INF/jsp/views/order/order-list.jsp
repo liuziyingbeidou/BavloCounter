@@ -32,7 +32,10 @@
 			 };
 		})();
 		initData();
-		
+		$(".add-order").click(function(){
+			url = "${ctx}/order/add.do";//订单新增页
+			window.parent.location = url;
+		});
 	});
 	
 	function initData(){
@@ -94,6 +97,7 @@
 		<div class="search-1">
 			<form action='' method='post'>
 				<input type='text' name='search' class="search" placehoder='搜索'>
+				<span class="add-order" style="color:#FFFFFF;cursor: pointer;">&nbsp;+</span>
 			</form>
 		</div>
 		<div class="">

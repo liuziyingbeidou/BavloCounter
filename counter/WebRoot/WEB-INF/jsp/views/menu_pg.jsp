@@ -24,10 +24,14 @@ $(function(){
 	$(".menu-customer-list").bind("click",function(){
 		openURL("${ctx}/customer/list.do?listType=menu","客户列表");
 	});
+	//选择定制单
+	$(".menu-custom-list").bind("click",function(){
+		openURL("${ctx}/custom/getList.do?listType=menu","定制单列表");
+	});
 });
 </script>
 
-<li><a href="#">定制单</a></li>
+<li class="menu-custom-list"><a href="#">定制单</a></li>
 <li class="menu-entity-list"><a href="#">实物签收单</a></li>
 <li class="menu-gem-list"><a href="#">宝石签收单</a></li>
 <li class="menu-order-list"><a href="#">订单</a></li>

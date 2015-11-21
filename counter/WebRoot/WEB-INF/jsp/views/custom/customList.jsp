@@ -78,9 +78,6 @@
 	<!--定制单列表弹窗-->
 	<div class="orderlist" id='pic2'>
 		<div class="order-main">
-			<div class="order-list">
-				定制单列表 
-			</div>
 			<div class="search-1">
 				<input type='text' name='search' class="search" placeholder="定制单编号/客户名称/手机号" />
 			</div>
