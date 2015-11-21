@@ -35,7 +35,10 @@
 			 };
 		})();
 		initData();
-		
+		$(".add-gemsign").click(function(){
+			url = "${ctx}/gem-sign/add.do";//宝石签收单新增页
+			window.parent.location = url;
+		});
 	});
 	
 	function initData(){
@@ -69,10 +72,10 @@
 <div id="orderlist">
   <div class="orderlist">
     <div class="order-main">
-		<div class="order-list">宝石签收单列表 </div>
 		<div class="search-1">
 			<form action='' method='post'>
 				<input type='text' name='search' class="search" placeholder="输入编号">
+				<span class="add-gemsign" style="color:#FFFFFF;cursor: pointer;">&nbsp;+</span>
 			</form>
 		</div>
 		<div class="">
