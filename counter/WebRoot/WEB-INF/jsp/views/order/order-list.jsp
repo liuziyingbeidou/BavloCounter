@@ -35,6 +35,7 @@
 		$(".add-order").click(function(){
 			url = "${ctx}/order/add.do";//订单新增页
 			window.parent.location = url;
+			window.parent.closeMultiDlg();
 		});
 	});
 	

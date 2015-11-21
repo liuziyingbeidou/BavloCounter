@@ -38,6 +38,7 @@
 		$(".add-entysign").click(function(){
 			url = "${ctx}/entity-sign/add.do";//实物签收单新增页
 			window.parent.location = url;
+			window.parent.closeMultiDlg();
 		});
 	});
 	
