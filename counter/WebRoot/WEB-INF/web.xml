@@ -5,10 +5,11 @@
 	http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd">
 	<display-name></display-name>
 	<welcome-file-list>
-		<welcome-file>index.jsp</welcome-file>
+		<welcome-file>index.do</welcome-file>
+		<!--<welcome-file>index.jsp</welcome-file>
 		<welcome-file>index.htm</welcome-file>
 		<welcome-file>index.html</welcome-file>
-	</welcome-file-list>
+	--></welcome-file-list>
 
 <context-param>
   <param-name>webAppRootKey</param-name>
