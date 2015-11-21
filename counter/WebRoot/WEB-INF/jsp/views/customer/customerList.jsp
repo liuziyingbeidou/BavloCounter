@@ -50,6 +50,7 @@
 		$("#add-customer").click(function(){
 			url = "${ctx}/customer/info.do";//客户新增页
 			window.parent.location = url;
+			window.parent.closeMultiDlg();
 		});
 	});
 	
