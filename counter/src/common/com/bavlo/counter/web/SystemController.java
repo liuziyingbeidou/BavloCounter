@@ -16,7 +16,7 @@ import com.bavlo.weixin.qiye.interceptor.OAuthRequired;
 public class SystemController extends BaseController {
 
 	@RequestMapping(value={"/index.do"})
-	@OAuthRequired
+	//@OAuthRequired
 	public ModelAndView index(HttpServletRequest request){
 		ModelAndView model = new ModelAndView("index");
 		HttpSession session = request.getSession();
