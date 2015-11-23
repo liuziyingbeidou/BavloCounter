@@ -552,6 +552,13 @@ text-overflow:ellipsis;
       </div>
       <div class="gylc">
 		<dl class="barbox">
+			<dd class="st-tj" style="background:url('${ctx}/resources/images/Arrow2.png')"></dd>
+			<dd class="st-zb"></dd>
+			<dd class="st-sc"></dd>
+			<dd class="st-zj"></dd>
+			<dd class="st-kd"></dd>
+			<dd class="st-jf"></dd>
+		<!--
 			<dd class="barline">
 				<c:choose>
 						 <c:when test="${ordervo['iorderState'] == -1}">   
@@ -578,8 +585,10 @@ text-overflow:ellipsis;
 						 <c:otherwise>
 						 <div w="50" style="width: 0%;" class="charts"></div>
 						 </c:otherwise>	
-			</c:choose> 
+				</c:choose> 
+			
 			</dd>
+			-->
 		</dl>
 		<!--<dt><i class="status" style=" width:182px; position:absolute; top:180px; left:105px;"></i></dt>-->
         <ul>

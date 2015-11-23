@@ -164,7 +164,11 @@
 			}
 		}
 		</script>
-		
+		<style type="text/css">
+		.camera a{
+			background:none;
+		}
+		</style>
 	</head>
 <body>
 <form id="entityfrmId" method="post">
@@ -210,7 +214,7 @@
         <li class="camera"><a class="entity-upload" href="#"><img src="${ctx}/resources/images/camera.png"></a></li>
         <div class="clear"></div>
       </ul>
-      <p><a class="entity-pic-show" href="#">
+      <dt><a class="entity-pic-show" href="#">
       <c:choose>
 		<c:when test="${empty entityvo['FILE_0']}">   
 		<img src="${ctx}/resources/images/pic_03.png">
@@ -219,7 +223,8 @@
 		<img src="${ctx}/staticRes/${entityvo['FILE_0']}">
 		</c:otherwise>
 	  </c:choose> 
-      </a></p>
+      </a>
+      </dt>
     </div>
     <div class="qsd_right">
       <div class="qsd_right_1">
