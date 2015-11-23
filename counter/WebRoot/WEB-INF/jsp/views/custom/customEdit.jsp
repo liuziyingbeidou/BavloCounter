@@ -1,11 +1,10 @@
 <%@ page language="java" import="java.util.*" pageEncoding="utf-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@ taglib prefix='fmt' uri="http://java.sun.com/jsp/jstl/fmt"%>
 <c:set var="ctx" value="${pageContext.request.contextPath}" />
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html>
 <head>
-<title>${customPageType}定制单</title>
+<title>${pageCustomType}定制单</title>
 
 <meta http-equiv="pragma" content="no-cache" />
 <meta http-equiv="cache-control" content="no-cache" />
@@ -29,6 +28,7 @@
 <!-- 定义JS -->
 <script src="${ctx}/resources/js/bavlo-initdata.js"></script>
 <script src="${ctx}/resources/js/bavlo-event.js"></script>
+<script src="${ctx}/resources/js/custom.js"></script>
 
 <!-- 弹框 -->
 <!-- jQuery & jQuery UI files (needed)--> 
@@ -40,296 +40,6 @@
 <script src="/counter/resources/jquery.multiDialog/js/jquery.multiDialog.js"></script> 
 <script src="/counter/resources/js/bavlo-dialog.js"></script>
 
-<script type="text/javascript">
-//本地webservice
-var nativeUrl = "${pageScope.basePath}/counter/webservice/http.do";
-//宝石图片class名 
-var gemSignClass = "";
-$(function() {
-
-	// 款式类型下拉框值
-	var typeUrl = "http://www.bavlo.com/getAllStyleType";
-	loadSelData(nativeUrl, typeUrl, "styleTypeId", "data[i].id",
-			"data[i].type_name_cn", function() {
-				$("#styleTypeId").val("${customEdit['srcstyleType']}");
-			},"款式");
-	// 金属材质下拉框值
-	var typeUrl = "http://www.bavlo.com/getAllMetalMaterialType";
-	loadSelData(nativeUrl, typeUrl, "srcmetal", "data[i].id",
-			"data[i].metal_type_cn", function() {
-				$("#srcmetal").val("${customEdit['srcmetal']}");
-			},"金属");
-	// 款式类型下拉框值
-	var typeUrl = "http://www.bavlo.com/getAllRingSize";
-	loadRingSizeData(nativeUrl, typeUrl, "ringSizeId", "data[i].id",
-			"data[i].china", "data[i].diameter", "data[i].circumference",
-			function() {
-				$("#ringSizeId").val("${customEdit['srcringSize']}");
-			},"手寸");
-	// 当款式类型不是戒指时，隐藏戒指手寸选项
-	$("#styleTypeId").change(function() {
-		if ($("#styleTypeId").val() == "1") {
-			$("#ringSizeId").css({
-				display : "block"
-			});
-		} else {
-			$("#ringSizeId").css({
-				display : "none"
-			});
-		}
-	});
-	 
-	//宝石签收单列表
-	$(".kzs_guanlian").bind("click",function(){
-		openURL("${ctx}/gem-sign/list.do","宝石签收单列表");
-		gemSignClass = "kzs_img";
-	});
-	//宝石签收单列表
-	$(".kps_guanlian").bind("click",function(){
-		openURL("${ctx}/gem-sign/list.do","宝石签收单列表");
-		gemSignClass = "kps_img";
-	});
-	//宝石弹框
-	$(".kxsGem_btn").click(function(){
-		openURL("${ctx}/common/getGemInfo.do","库选石");
-	});
-	//链子弹框
-	$(".lzGem_btn").click(function(){
-		openURL("${ctx}/common/getChainInfo.do","链子");
-	});
-	
-	//初始化刻字
-	var WS = function(opt) {
-
-		var regexp = opt.regexp || /\S/, el = $(opt.el), list = el.val().split(','), holder = $('<span class="words-split"></span>')
-
-		for (var i = 0; i < list.length; i++) {
-			holder.append($('<a href="javascript:void(0)" class="fm-button">'
-					+ list[i] + '<em> </em></a>'));
-		}
-		el.hide().after(holder);
-
-		holder.on('click', 'a>em', function() { // 刪除
-			$(this).parent().remove();
-			el.val(holder.text().match(/\S+/g).join(','))
-		});
-
-		$(".gongyi1").change(function() { // 添加
-			var t = $(this).find("option:selected").val();
-			var str = $(".custom_engrave").val();
-			if(str.indexOf(t) < 0){
-				if (t) {
-					holder.append($('<a href="javascript:void(0)" class="fm-button">'
-									+ t + '<em> </em></a>'));
-					el.val(holder.text().match(/\S+/g).join(','));
-				} 
-			}
-		});
-	}
-
-	WS({
-		el : '#vcraftTag',
-		regexp : /\w+\.\w+/
-	});
-	
-	 //上传图片
-	 $(".cankaotu").bind("click",function(){
-	 		openURL("${ctx}/upload/uppage.do","上传参考图"); 
-	 });
-	 $(".qibantu").bind("click",function(){
-	 		openURL("${ctx}/upload/uppage.do","上传起版图"); 
-	 });
-	 $(".vectorgraph").bind("click",function(){
-	 		openURL("${ctx}/upload/uppage.do","上传刻字矢量图"); 
-	 		$("#filevalue").val("vengraveVh");
-	 });
-	 $(".cad_file").bind("click",function(){
-	 		openURL("${ctx}/upload/uppage.do","上传CAD文件"); 
-	 		$("#filevalue").val("vcadFile");
-	 });
-	 //图片显示
-	 $(".customPicShow").bind("click",function(){
-	 	var mid = $("#customid").val();
-	 	if(mid == ""){
-	 		alert("请保存后查看!");
-	 	}else{
-	 		openURL("${ctx}/upload/showpic.do?cpath=com.bavlo.counter.model.custom.CustomBVO&fkey=customId&id="+mid,"图片展示");
-	 	}
-	 });
-	 
-	 //字体改变样式
-	 $(".ziti").change(function(){
-		 var font=$('.ziti').val();
-		 $(".kezi").css({"font-family":font}); 
-	 })
-
-	 //有值加后缀
- 	initFieldSuffix();
-	 
-	//加载子表数据
-	function loadSubData(mid){
-		var url = "${ctx}/upload/showpicJson.do";
-		$.get(url,{cpath:"com.bavlo.counter.model.custom.CustomBVO",fkey:"customId",id:mid},function(row){
-			var data = row;
-			if(data != "" && data != null){
-				for(var i = 0; i < data.length; i++){
-					if(data[i].biscover == "Y"){
-						$("#FILE_0").val(data[i].vname);
-					}else{
-						$("#FILE_"+i).val(data[i].vname);
-					}
-				}
-			}
-		});
-	}
-});
-
-// 定制单保存
-function saveOrUpdate() {
-	cleanFieldSuffix();
-	var bvo = JSON.stringify($('#customBId').serializeJson());
-	var cvo = JSON.stringify($('#customCId').serializeJson());
-	$.ajax({
-		type : "POST",
-		url : "save.do",
-		data : $('#custom').serialize()+"&bvo="+bvo+"&cvo="+cvo,// formid
-		async : false,
-		cache : false,
-		success : function(data) {
-			$("#customid").val(data.id);
-			alert("保存成功!");
-			initFieldSuffix();
-		},
-		error : function(e) {
-			alert("保存失败!");
-			initFieldSuffix();
-		}
-	});
-}
-
-//增加后缀 
-function initFieldSuffix(){
-	if($(".metal_weight").val() != ""){
-		 //金属重量 
-		initSuffix("custom_weight","克");
-	}
-  	if($(".kzs_price").val() != ""){
-		//主石金额 
-		initSuffix("kzs_price","元"); 
-	}
-  	if($(".kps_count").val() != ""){
-		//配石数量
-		initSuffix("kps_count","颗"); 
-	}
-  	if($(".other_price").val() != ""){
-		//制版金额 
-		initSuffix("pm_price","元"); 
-	}
-  	if($(".other_price").val() != ""){
-		//其他金额 
-		initSuffix("other_price","元"); 
-	}
-}
-
-//清除后缀
-function cleanFieldSuffix(){
-	//金属重量 
-	clearSuffix("metal_weight","克");
-	//主石金额 
-	clearSuffix("kzs_price","元");
-	//配石数量
-	clearSuffix("kps_count","颗");
-	//制版金额 
-	clearSuffix("pm_price","元");
-	//其他金额 
-	clearSuffix("other_price","元");
-	//链子数量
-	//clearSuffix("custom_item","条");
-}
-
-//子窗体调用
-function setValueByFrame(type,id,callback,json,gem){
-	var url;
-	if(type == "chain"){
-		var data = JSON.parse(json);
-		$(".chain").append("<dd class='"+data.sid+"'><div class='lianzi'><h3>链子</h3><a href='javascript:rlist("+data.sid+")' class='close_c'><font>X</font></a><div class='clear'></div><input class='custom_item' id='iitem' name='iitem' type='text' value='' placeholder='条'><strong>"+data.sname+"</strong></div></dd>");
-		closeMultiDlg();
-	}else if(type == "signGem"){
-		alert(id);
-		var gemSign = $("#gemSignId").val();
-		var gemSignB = $("#gemSignBId").val();
-		var url = "${ctx}/custom/getGem.do";
-		$.post(url,{id:id},function(row){
-			var data = row;
-			if(data!=null){
-				var pic = "";
-				if(data.FILE_0 != "" && data.FILE_0 != null){
-					pic = "'${ctx}/staticRes/"+data.FILE_0+"'";
-				}else{
-					pic = "'${ctx}/resources/images/good_01.png'";
-				}
-			}
-			if(gemSignClass == "kzs_img"){
-				if(gemSign == ""){
-					$("#gemSignId").val(id);
-					$("."+gemSignClass).append("<img class='gem_img' style='width:38px;height:38px;' src="+pic+" >");
-				}else {
-					$("#gemSignId").val(id);
-					$(".gem_img").attr("src",pic);
-				}
-			}
-			if(gemSignClass == "kps_img"){
-				if(gemSignB == ""){
-					$("#gemSignBId").val(id);
-					$("."+gemSignClass).append("<img class='gem_img' style='width:38px;height:38px;' src="+pic+" >");
-				}else {
-					$("#gemSignBId").val(id);
-					$(".gem_img").attr("src",pic);
-				}
-			}
-		});
-		
-		closeMultiDlg();
-	}else if(type == "gem"){
-		 var html="";
-		 var data = JSON.parse(json);
-		 
-		 var type=gem.attr("type");
-		 var shape=gem.attr("shape");
-		 var calibrated=gem.attr("calibrated");
-		 var weight=gem.attr("weight");
-		 var costPrice=gem.attr("costPrice");
-		 var pic=gem.find("img").attr("src");
-			
-	     html+= "<dd class='"+data.sid+"'>"+
-	    	 	"<div div class='lianzi'>"+	
-			    "<h3>库选宝石</h3>"+
-			    "<a href='javascript:rlist("+data.sid+")' class='close_c'><font>X</font></a><div class='clear'></div>"+
-			    "<input class='stockGem_num' id='stockGem' name='iitem' type='text' value='' price='"+costPrice+"' placeholder='颗'>"+
-				"<img src='"+pic+"'/><strong>"+type+" "+weight+"ct</strong>"+
-				"<input type='hidden' class='sgPrice' value='"+costPrice+"'/>"+
-				"</div></dd>";
-				 
-				
-				
-		 $(".chain").append(html);
-		$("input[id='stockGem']").blur(function(){
-			 checkNum(this);
-			 var qutity=$(this).val();
-			 var price=$(this).attr("price");
-			 $(this).parent().nextAll(".sgPrice").val((price*qutity+qutity*2).toFixed(2));
-		 })
-		 closeMultiDlg();
-	}
-	
-}
-//删除清单
-function rlist(className){
-	$("."+className).remove();
-}
-
-</script>
-
 </head>
 
 <body>
@@ -339,7 +49,18 @@ function rlist(className){
 			<div class="top">
 				<b><a href="javascript:;" onclick="EditShow_Hidden(ed1)"><img
 							src="${ctx}/resources/images/plus.png" />
-				</a> 定制单 81812560 </b>
+				</a> ${pageCustomType}定制单
+				 <c:choose>
+					 <c:when test="${empty customEdit['vcustomCode']}">   
+					 ${number }
+					 <input type="hidden" id="customCode" name="vcustomCode" value="${number }">
+					 </c:when>
+					 <c:otherwise>
+					 ${customEdit['vcustomCode']}
+					 <input type="hidden" id="customCode" name="vcustomCode" value="${customEdit['vcustomCode']}">
+					 </c:otherwise>	
+				</c:choose>
+				</b>
 				<font><a href="javascript:;" onclick="Show_Hidden(tr1)"><img
 							src="${ctx}/resources/images/plus.png" />
 				</a> </font>
@@ -364,8 +85,8 @@ function rlist(className){
 			<div class="clear"></div>
 		</div>
 	</div>
-	<input type="hidden" id='customid' name='id'
-		value="${customEdit.id }" />
+	<input type="hidden" id='vcustomCode' name='vcustomCode'
+		value="${number }" />
 	<input type="hidden" id='orderId' name='orderId'
 		value="${customEdit.orderId }" />
 	<input type="hidden" id='customerId' name='customerId'
@@ -470,12 +191,14 @@ function rlist(className){
 				</div>
 				<div class="clear"></div>
 				<div class="name">
-					<input type="text" id="vstyleName" name="vstyleName"
+					<input type="text" id="styleName" name="vstyleName"
+						value="${customEdit['vstyleName']}"
 						placeholder="给本款取个名字把"
 						class="quming" />
 				</div>
 				<div class="xuqiu">
-					<textarea id="vrequirement" name="vrequirement" cols="" rows=""
+					<textarea id="requirement" name="vrequirement" cols="" rows=""
+						value="${customEdit['vrequirement']}"
 						placeholder="需求描述"
 						class="miaoshu1"></textarea>
 				</div>
@@ -487,8 +210,8 @@ function rlist(className){
 						<option>选择款式</option>
 					</select>
 					<select class="nvkuan">
-						<option  id="vsex" name="vsex">女款</option>
-						<option  id="vsex" name="vsex">男款</option>
+						<option name="vsex" value="0" <c:if test="${customEdit['vsex']=='0'}">selected</c:if>>女款</option>
+						<option name="vsex" value="1" <c:if test="${customEdit['vsex']=='1'}">selected</c:if>>男款</option>
 					</select>
 				</div>
 				<div class="changdu">
@@ -500,9 +223,9 @@ function rlist(className){
 					<select id="metalType" name="srcmetal" class="wk">
 						<option>选择金属</option>
 					</select>
-					<input type="text" id="metal_weight" name="nweight"
+					<input type="text" id="metalWeight" name="nweight"
 						placeholder="克"
-						class="metalWeight" value="" />
+						class="metal_weight" value="" />
 				</div>
 				<!-- <div class="price">
 					<input id="iprice" name="iprice" 
@@ -570,17 +293,17 @@ function rlist(className){
 				<input type="text" class="kezi" id="vengrave" name="vengrave" placeholder="刻字" />
 				<select id="vfont" name="vfont" class="ziti">
 					<option value="" >字体</option>
-					<option value="华文细黑" >华文细黑</option>
-					<option value="华文仿宋" >华文仿宋</option>
-					<option value="华文楷体" >华文楷体</option>
-					<option value="华文宋体" >华文宋体</option>
-					<option value="华文中宋" >华文中宋</option>
-					<option value="仿宋" >仿宋</option>
-					<option value="黑体" >黑体</option>
-					<option value="楷体" >楷体</option>
-					<option value="Bradley Hand ITC" >Bradley Hand ITC</option>
-					<option value="Segoe Script" >Segoe Script</option>
-					<option value="Verdana" >Verdana</option>
+					<option value="华文细黑" <c:if test="${customEdit['vengrave']=='华文细黑'}">selected</c:if>>华文细黑</option>
+					<option value="华文仿宋" <c:if test="${customEdit['vengrave']=='华文仿宋'}">selected</c:if>>华文仿宋</option>
+					<option value="华文楷体" <c:if test="${customEdit['vengrave']=='华文楷体'}">selected</c:if>>华文楷体</option>
+					<option value="华文宋体" <c:if test="${customEdit['vengrave']=='华文宋体'}">selected</c:if>>华文宋体</option>
+					<option value="华文中宋" <c:if test="${customEdit['vengrave']=='华文中宋'}">selected</c:if>>华文中宋</option>
+					<option value="仿宋" <c:if test="${customEdit['vengrave']=='仿宋'}">selected</c:if>>仿宋</option>
+					<option value="黑体" <c:if test="${customEdit['vengrave']=='黑体'}">selected</c:if>>黑体</option>
+					<option value="楷体" <c:if test="${customEdit['vengrave']=='楷体'}">selected</c:if>>楷体</option>
+					<option value="Bradley Hand ITC" <c:if test="${customEdit['vengrave']=='Bradley Hand ITC'}">selected</c:if>>Bradley Hand ITC</option>
+					<option value="Segoe Script" <c:if test="${customEdit['vengrave']=='Segoe Script'}">selected</c:if>>Segoe Script</option>
+					<option value="Verdana" <c:if test="${customEdit['vengrave']=='Verdana'}">selected</c:if>>Verdana</option>
 				</select>
 				<br />
 	
@@ -597,8 +320,8 @@ function rlist(className){
 				class="miaoshu1"></textarea>
 				<br />
 				<select name="certificate" name="icertificate" class="jianding1">
-					<option value="0">鉴定证书 -无</option>
-					<option value="1">鉴定证书 -有</option>
+					<option value="0" <c:if test="${customEdit['icertificate']=='0'}">selected</c:if>>鉴定证书 -无</option>
+					<option value="1" <c:if test="${customEdit['icertificate']=='1'}">selected</c:if>>鉴定证书 -有</option>
 				</select>
 				</div>
 				<div class="tu">
@@ -618,6 +341,7 @@ function rlist(className){
 					<input type="text" 
 					id="otherPrice" name="notherPrice" class="other_price"
 					placeholder="其他 元" />
+					<strong><u class="price"></u> 元</strong>
 				</div>
 
 				<div class="jisuan">
