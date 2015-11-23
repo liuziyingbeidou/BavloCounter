@@ -32,6 +32,8 @@ public interface IConstant {
 	public static final String CODE_ENTITYSIGN = "ES";
 	//订单
 	public static final String CODE_ORDER = "OD";
+	//客户
+	public static final String CODE_CUSTER = "CR";
 	/*****************************View模块和ViewName***************************/
 	
 	public static final String PATH_COMMON = "common/";

@@ -14,6 +14,7 @@ import org.springframework.web.servlet.ModelAndView;
 import com.bavlo.counter.constant.IConstant;
 import com.bavlo.counter.model.customer.CustomerVO;
 import com.bavlo.counter.service.customer.itf.ICustomerService;
+import com.bavlo.counter.utils.CommonUtils;
 import com.bavlo.counter.utils.StringUtil;
 import com.bavlo.counter.web.BaseController;
 
@@ -40,6 +41,13 @@ public class CustomerController extends BaseController implements IConstant {
 	public ModelAndView info(Map<String, Object> map, Integer id) {
 
 		CustomerVO customerDetail = customerService.findCustomerById(id);
+		if(id != null){
+			map.put("pageOrderType", IConstant.PAGE_TYPE_EDIT);
+		}else{
+			//±àºÅ
+			map.put("number", CommonUtils.getBillCode(IConstant.CODE_ORDER));
+			map.put("pageOrderType", IConstant.PAGE_TYPE_ADD);
+		}
 		map.put("customerDetail", customerDetail);
 		return new ModelAndView(PATH_CUSTOMER + "customerEdit");
 	}
