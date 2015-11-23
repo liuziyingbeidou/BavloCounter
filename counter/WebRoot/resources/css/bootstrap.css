@@ -249,9 +249,12 @@
 	width:90%;
 	margin:0 auto;
 }
-.wk,.ke,.jiege,.metal_weight {font-size:26px;height:60px; line-height:60px;}
+.wk,.ke,.stockGem_num,.jiege,.metal_weight {font-size:26px;height:60px; line-height:60px;}
 .wk {
 	width:55%;
+}
+.stockGem_num {
+	width:40%;
 }
 .ke {
 	width:40%;
