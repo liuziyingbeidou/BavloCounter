@@ -216,7 +216,11 @@
 			}
 		}
 		</script>
-		
+		<style type="text/css">
+		.camera a{
+			background:none;
+		}
+		</style>
 	</head>
 	<body>
 	<form id="gemfrmId">
