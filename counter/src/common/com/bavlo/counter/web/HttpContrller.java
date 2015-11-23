@@ -1,5 +1,7 @@
 package com.bavlo.counter.web;
 
+import java.math.BigDecimal;
+
 import net.sf.json.JSONObject;
 
 import org.springframework.stereotype.Controller;
@@ -42,5 +44,20 @@ public class HttpContrller extends BaseController {
 		}
 		System.out.println("返回数据:"+info);
 		return info;
+	}
+	
+	
+	@RequestMapping(value="/httpcalculator",produces = "application/json; charset=utf-8")
+	@ResponseBody
+	public String httpcalculator(String requestUrl, String outputStr){
+		
+		requestUrl = "http://www.bavlo.com/calculate";
+		System.out.println("开始调用远程接口..."+requestUrl);
+		String info = null;
+
+		info = HttpTools.submitPost(requestUrl, outputStr)+"";
+		System.out.println("返回数据:"+info);
+		StringBuffer sb = new StringBuffer(info);
+		return sb.toString();
 	}
 }
