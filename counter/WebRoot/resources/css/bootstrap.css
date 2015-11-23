@@ -99,7 +99,7 @@
 .mainGem a { position:absolute; right:30px;}
 .partsGem a { position:absolute; right:30px;}
 .zuanshiGem a { position:absolute; right:30px;}
-.miaoshu {	width:96%;}
+.miaoshu {	width:100%;}
 .miaoshu2 {	width:90%;	margin:0 auto;}
 .mainmid {margin-left:0;}
 .mainrig {margin:0px auto;font-size:20px;width:90%;	float:none;}
@@ -217,7 +217,7 @@
 	width:100%;
 }
 .quming {
-	width:96%;
+	width:100%;
 	font-size:26px; height:60px; line-height:60px;
 }
 .name {
@@ -230,14 +230,13 @@
 }
 .bom select { font-size:26px !important; height:60px; line-height:60px;}
 .jiezhi {
-	width:55%;
+	width: 55%;
 }
 .nvkuan {
-	width:40%;
+	width:41%;
 }
 .neijin {
 	width:98%;
-	padding:0;
 	font-size:26px;
 	margin:0 auto; height:60px; line-height:60px;
 }
@@ -250,15 +249,15 @@
 	width:90%;
 	margin:0 auto;
 }
-.wk,.ke,.jiege,.custom_weight {font-size:26px;height:60px; line-height:60px;}
+.wk,.ke,.jiege,.metal_weight {font-size:26px;height:60px; line-height:60px;}
 .wk {
 	width:55%;
 }
 .ke {
 	width:40%;
 }
-.custom_weight {
-	width:40%;
+.metal_weight {
+	width:41%;
 }
 .price {
 	width:90%;
@@ -305,7 +304,7 @@
 font-size:23px;
 	width:24%;
 	margin-bottom:10px;
-	margin-right:3px;
+	margin-right:4px;
 	height:60px; line-height:60px;
 }
 
@@ -343,7 +342,7 @@ font-size:23px;
 	margin:0px auto;
 }
 .miaoshu1 {
-	width:96%;font-size:26px;
+	width:100%;font-size:26px;
 }
 .tu b {
 	padding:9px 14px;
@@ -365,12 +364,15 @@ font-size:23px;
 	font-size:26px;
 	margin-left:5px;
 }
+.tu1 a {
+	width:45%;font-size:26px;height:60px; line-height:60px;
+}
 .plus {
 	width:45%;font-size:26px;height:60px; line-height:60px;
 }
 .sum {width: 45%; height:60px; line-height:60px;}
 .sum a {
-	padding:0px 73px;font-size:26px;height:60px; line-height:60px;
+	padding:0px ;font-size:23px;height:60px; line-height:60px;
 }
 .baocun1 input {
 	width:100%;font-size:26px;height:60px; line-height:60px;
