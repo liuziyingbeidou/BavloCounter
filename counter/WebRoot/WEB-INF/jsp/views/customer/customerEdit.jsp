@@ -70,6 +70,10 @@
 					$("#vlanguage").val(customerLanguage);
 					$("#vgroup").val(customerGroup);
 				}
+				
+				$(".customer-edit").click(function(){
+					openURL("${ctx}/customer/list.do?listType=menu","客户列表");
+				});
 			});
 			// 保存
 			function saveOrUpdate() {
@@ -111,16 +115,16 @@
 				$("#order-list").append("<dd type='ch' sid='"+data.sid+"' class='"+data.sid+" bill'><span class='list_name bill-name'>"+data.sname+"</span><input class='list_num bill-num' style='width:40px;margin-left:10px;' type='text' value='1' placeholder='条'><b class='list_price bill-price'>"+data.sprice+"</b><a href='javascript:rlist("+data.sid+")' class='close_c'><img src='${ctx}/resources/images/close.png'></a></dd>");
 				closeMultiDlg();
 			}else if(type == "order"){
-				url = "${ctx}/order/edit.do?id="+id;//根据id查询客户信息
+				url = "${ctx}/order/edit.do?id="+id;//根据id查询订单信息
 				window.location = url;
 			}else if(type == "order-view"){
-				url = "${ctx}/order/view.do?id="+id;//根据id查询客户信息
+				url = "${ctx}/order/view.do?id="+id;//根据id查询订单信息
 				window.location = url;
 			}else if(type == "gem"){
-				url = "${ctx}/gem-sign/view.do?id="+id;//根据id查询客户信息
+				url = "${ctx}/gem-sign/view.do?id="+id;//根据id查询宝石信息
 				window.location = url;
 			}else if(type == "entity"){
-				url = "${ctx}/entity-sign/view.do?id="+id;//根据id查询客户信息
+				url = "${ctx}/entity-sign/view.do?id="+id;//根据id查询实物信息
 				window.location = url;
 			}else if(type == "customer-menu"){
 				url = "${ctx}/customer/info.do?id="+id;//根据id查询客户信息
@@ -134,7 +138,6 @@
 			}
 		}
 		</script>
-		</script>
 	</head>
 
 	<body>
@@ -142,9 +145,20 @@
 			<div class="header">
 	<div class="head2">
 		<div class="top2">
-			<b><a href="javascript:;" onclick="EditShow_Hidden(ed1)"><img
+			<b><a href="#" onclick="EditShow_Hidden(ed1)"><img
 						src="${ctx}/resources/images/plus.png" />
-			</a> 定制单 81812560 </b>
+			</a> ${pageOrderType}客户
+			<c:choose>
+						 <c:when test="${empty customerDetail['vcustomerCode']}">   
+						 ${number }
+						 <input type="hidden" id="orderCode" name="vcustomerCode" value="${number }" />
+						 </c:when>
+						 <c:otherwise>
+						 ${customerDetail['vcustomerCode']}
+						 <input type="hidden" id="orderCode" name="vcustomerCode" value="${customerDetail['vcustomerCode']}" />
+						 </c:otherwise>	
+			</c:choose> 
+			</b>
 			<font><a href="javascript:;" onclick="Show_Hidden(tr1)"><img
 						src="${ctx}/resources/images/plus.png" />
 			</a> </font>
@@ -172,11 +186,11 @@
 				<div class="edit_left">
 					<ul>
 						<li>
-							<a href="getList.do"><img
+							<a href="#"><img
 									src="${ctx}/resources/images/customer_01.png" /> </a>
 						</li>
-						<li>
-							<a href="getList.do"><img
+						<li class="customer-edit">
+							<a href="#"><img
 									src="${ctx}/resources/images/customer_02.png" /> </a>
 						</li>
 						<li class="focus">
