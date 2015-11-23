@@ -4,6 +4,7 @@ params.insuranceRate = 0.005;
 params.expressPrice = 22;
 params.typeId = 1;
 params.metalId = 1;
+params.metalWeight = 0;
 params.mainGemPrice = 0;
 params.inlayPrice = 0;
 params.chainPrice = 0;
@@ -12,8 +13,6 @@ params.otherPrice = 0;
 params.reportPrice = 25;
 params.stockGemPrice = "";
 
-// 本地webservice
-var nativeUrl = "${pageScope.basePath}/counter/webservice/http.do";
 $(function() {
 	// 客主石显示和隐藏
 	$(".kzsGem_btn").click(function() {
@@ -35,12 +34,10 @@ $(function() {
 	// 款式类型值
 	$("select[id='styleType']").change(function() {
 		params.typeId = $(this).val();
-		alert("款式类型是" + typeId);
 	})
 	// 金属类型值
 	$("select[id='metalType']").change(function() {
 		params.metalId = $(this).val();
-		alert("金属类型是" + metalId);
 	})
 	// 金属重量值
 	$("input[id='metalWeight']").blur(function() {
@@ -80,7 +77,6 @@ $(function() {
 	// 最终价格
 	$(".calculator_btn").click(function() {
 		var weight = $("input[id='metal_weight']");
-		var requestUrl = 'http://www.bavlo.com/mobile/calculate',
 		checkNum(weight);
 		if (weight.val() == "" || weight.val() == 0) {
 			$(weight).val("");
@@ -91,19 +87,30 @@ $(function() {
 		$(".sgPrice").each(function() {
 			params.stockGemPrice += $(this).val() + ";";
 		})
-		$.ajax({
-			url : 'www.bavlo.com/mobile/calculate',
-			type : 'POST',
-			data : params,
-			dataType : 'json',
-			success : function(data) {
-				$(".price").text(data.price + "元");
-			}
-		})
-		httpRequest(nativeurl,requestUrl,requestMethod,outputStr,callback)
-	})
+		
+		//本地webservice
+		var nativeUrl = "/counter/webservice/httpcalculator.do";
+		var requestUrl = 'http://www.bavlo.com/calculate';
+		var requestMethod = "POST";//GET
+		var outputStr = 'typeId='+params.typeId+'&metalId='+params.metalId+'&metalWeight='+params.metalWeight+'&pmPrice='+params.pmPrice+'&mainGemPrice='+params.mainGemPrice+'&inlayPrice='+params.inlayPrice+'&otherPrice='+params.otherPrice+'&reportPrice='+params.reportPrice+'&expressPrice='+params.expressPrice+'&insuranceRate='+params.insuranceRate+'&chainPrice='+params.chainPrice+'&stockGemPrice='+params.stockGemPrice+'';
 
-	// 价格详情
+		 /*$.ajax({
+			 url : nativeUrl,
+				type : 'POST',
+				data : outputStr,
+				success : function(data) {
+					$(".price").text(data.price+"元");
+				}
+		 })*/ 
+		 httpRequest(nativeUrl,requestUrl,requestMethod,outputStr,function(data) {
+			 	var jsonStr = JSON.parse(data);
+				$(".price").text(jsonStr.price);
+				alert(jsonStr.price);
+		 });
+
+	})
+	
+/*	// 价格详情
 	$(".calculator_btn2").click(
 		function() {
 			var weight = $("input[name='metal_weight']");
@@ -117,41 +124,13 @@ $(function() {
 			$(".sgPrice").each(function() {
 				params.stockGemPrice += $(this).val() + ";";
 			})
-			$.ajax({
-				url : 'www.bavlo.com/mobile/calculate',
-				type : 'POST',
-				data : params,
-				dataType : 'json',
-				success : function(data) {
-					$("#makePrice").text(
-							parseInt(data.makePrice) + "元");
-					$("#metalPrice")
-							.text(
-									parseInt(data.metalPrice)
-											+ "元");
-					$(".detailCost").find(".cont_2").text(
-							data.sumDetail);
-					$(".price")
-							.text(
-									parseInt(data.cost)
-											+ " + "
-											+ (parseInt(data.price) - parseInt(data.cost))
-											+ " = "
-											+ data.price
-											+ "元");
-				}
+			var requestUrl = 'http://www.bavlo.com/mobile/calculate';
+			var requestMethod = "POST";//GET
+			var outputStr = "typeId=";
+			httpRequest(nativeurl,requestUrl,requestMethod,outputStr,function(data) {
+				$(".price").text(data.price + "元");
 			})
-		})
-	$(".gem_type").bind("change", loadShape);
-	$(".gem_shape").bind("change", loadCalibrated);
-	$(".gem_calibrated").bind("change", loadGem);
-	$("select[name='chain_metal']").bind("change", loadChainStyleList);
-	$("select[name='chain_style']").bind("change", loadChain);
-	$("select[name='chain_detail']").change(function() {
-		$("#chainPrice").text($(this).val() + "元");
-		params.chainPrice = $(this).val();
-	})
-	loadGem();
+		})*/
 })
 function h(str) {
 	if ("kzsGem" == str) {
@@ -166,7 +145,7 @@ function h(str) {
 function removeStockGem(id) {
 	$(".stockGem" + id).remove();
 }
-function loadShape() {
+/*function loadShape() {
 	var type = $(".gem_type").val();
 	if (type == 1) {
 		$(".gem_shape").prepend("<option value='4'>圆形</option>");
@@ -301,7 +280,7 @@ function loadChain() {
 			$("select[name='chain_detail']:first").trigger("change");
 		}
 	})
-}
+}*/
 function checkNum(obj) {
 	var reg = new RegExp("^[0-9].*$");
 	if ($(obj).val() == "") {
