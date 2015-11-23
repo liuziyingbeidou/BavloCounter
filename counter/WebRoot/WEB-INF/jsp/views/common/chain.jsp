@@ -39,8 +39,9 @@ $(function(){
 		if(isExitsFunction(window.parent.setValueByFrame)){
 			var sname = $("#chain-material-id").find("option:selected").text()+" "+ $("#chain-style-id").find("option:selected").text()+" "+$("#chain-spec-id").find("option:selected").text();
 			var sprice = $("#chain-spec-id").find("option:selected").attr("cost");
+			var chainCost = $("#chain-spec-id").find("option:selected").attr("chainCost");
 			var sid = $("#chain-material-id").find("option:selected").val()+ $("#chain-style-id").find("option:selected").val()+$("#chain-spec-id").find("option:selected").val();
-			var json = "{\"sname\":\""+sname+"\",\"sprice\":\""+sprice+"\",\"sid\":\""+sid+"\"}";
+			var json = "{\"sname\":\""+sname+"\",\"sprice\":\""+sprice+"\",\"chainCost\":\""+chainCost+"\",\"sid\":\""+sid+"\"}";
 			window.parent.setValueByFrame("chain","",callbackMuilt(),json);
 		}else{
 			alert("请在父窗口添加setValueByFrame(type,id,callback,json){处理逻辑}type='chain']");
