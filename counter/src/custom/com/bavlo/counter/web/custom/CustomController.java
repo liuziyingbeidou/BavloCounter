@@ -26,6 +26,7 @@ import com.bavlo.counter.model.sign.GemSignVO;
 import com.bavlo.counter.service.custom.itf.ICustomService;
 import com.bavlo.counter.service.order.itf.IOrderService;
 import com.bavlo.counter.service.sign.itf.IGemSignService;
+import com.bavlo.counter.utils.CommonUtils;
 import com.bavlo.counter.utils.StringUtil;
 import com.bavlo.counter.web.BaseController;
 
@@ -66,8 +67,11 @@ public class CustomController extends BaseController implements IConstant {
 		if(customerId != null){
 			customEdit.setCustomerId(customerId);
 		}
-		map.put("customEdit", customEdit);
-		return new ModelAndView(PATH_CUSTOM + "customEdit");
+		ModelAndView model = new ModelAndView(PATH_CUSTOM + "customEdit");
+		model.addObject("customEdit", customEdit);
+		model.addObject("pageCustomType", IConstant.PAGE_TYPE_ADD);
+		model.addObject("number", CommonUtils.getBillCode("CM"));
+		return model;
 	}
 	
 	/**
