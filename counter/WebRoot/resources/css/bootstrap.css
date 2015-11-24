@@ -249,12 +249,9 @@
 	width:90%;
 	margin:0 auto;
 }
-.wk,.ke,.stockGem_num,.jiege,.metal_weight {font-size:26px;height:60px; line-height:60px;}
+.wk,.ke,.jiege,.metal_weight {font-size:26px;height:60px; line-height:60px;}
 .wk {
 	width:55%;
-}
-.stockGem_num {
-	width:40%;
 }
 .ke {
 	width:40%;
@@ -295,7 +292,8 @@
 .kzs h3 a { font-size:26px;}
 .kzs_price { font-size:26px; width:33%; height:60px; line-height:60px;}
 .kps_count { font-size:26px; width:33%; height:60px; line-height:60px;}
-.custom_item { font-size:26px; width:33%; height:60px; line-height:60px;}
+.chain_item { font-size:26px; width:33%; height:60px; line-height:60px;}
+.stockGem_num { font-size:26px; width:33%; height:60px; line-height:60px;}
 
 .kzs_gl {margin:0 14px; width:22%; font-size:26px;}
 .kzs_gl input {font-size:26px; width:100%;}
@@ -370,12 +368,11 @@ font-size:23px;
 .tu1 a {
 	width:45%;font-size:26px;height:60px; line-height:60px;
 }
-.plus {
-	width:45%;font-size:26px;height:60px; line-height:60px;
+.plus a{
+	width: 45%; height:60px; line-height:60px;font-size:23px;height:60px; line-height:60px;
 }
-.sum {width: 45%; height:60px; line-height:60px;}
 .sum a {
-	padding:0px ;font-size:23px;height:60px; line-height:60px;
+	width: 45%; height:60px; line-height:60px;font-size:23px;height:60px; line-height:60px;
 }
 .baocun1 input {
 	width:100%;font-size:26px;height:60px; line-height:60px;
