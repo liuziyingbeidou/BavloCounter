@@ -56,15 +56,15 @@
     	
     	/***************定制单-开始*******************/
     	//金属重量
-    	setSuffix("custom_weight","克");
+    	//setSuffix("custom_weight","克");
     	//主石金额
-    	setSuffix("kzs_price","元");
+    	//setSuffix("kzs_price","元");
     	//配石数量
-    	setSuffix("kps_count","颗");
+    	//setSuffix("kps_count","颗");
     	//链子条数
-    	setSuffix("custom_item","条");
+    	//setSuffix("custom_item","条");
     	//其他金额
-    	setSuffix("costom_otherPrice","元");
+    	//setSuffix("costom_otherPrice","元");
     	/***************定制单-结束*******************/
     	
     	/*********************校验-start*******************/

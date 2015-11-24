@@ -225,7 +225,7 @@
 					</select>
 					<input type="text" id="metalWeight" name="nweight"
 						placeholder="克"
-						class="metal_weight" value="" />
+						class="metal_weight"/>
 				</div>
 				<!-- <div class="price">
 					<input id="iprice" name="iprice" 

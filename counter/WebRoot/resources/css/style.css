@@ -95,8 +95,6 @@ font-family:"Microsoft yahei";
 	background-color: #ddd;padding-left: 10px;margin-top: 20px;}
 .ke {width: 95px;height: 40px;font-family: "Microsoft yahei";font-size: 16px;color: #555;margin-left: 10px;
 	background-color: #ddd;	padding-left: 10px;}
-.stockGem_num {width: 95px;height: 40px;font-family: "Microsoft yahei";font-size: 16px;color: #555;margin-left: 10px;
-	background-color: #ddd;	padding-left: 10px;}
 .metal_weight {width: 95px;height: 40px;font-family: "Microsoft yahei";font-size: 16px;color: #555;margin-left: 10px;
 	background-color: #ddd;	padding-left: 10px;}
 .jiege {
@@ -152,7 +150,8 @@ font-family:"Microsoft yahei";
 .kzs h3 a { color: #ddd; line-height: 50px;}
 .kzs_price { float: left; width: 90px; background: #dbdbdb; color: #555555; height: 37px; line-height: 37px; text-align: center;}
 .kps_count { float: left; width: 90px; background: #dbdbdb; color: #555555; height: 37px; line-height: 37px; text-align: center;}
-.custom_item { float: left; width: 90px; background: #dbdbdb; color: #555555; height: 37px; line-height: 37px; text-align: center;}
+.chain_item { float: left; width: 90px; background: #dbdbdb; color: #555555; height: 37px; line-height: 37px; text-align: center;}
+.stockGem_num { float: left; width: 90px; background: #dbdbdb; color: #555555; height: 37px; line-height: 37px; text-align: center;}
 .kzs_gl { width: 70px; float: left; margin: 0 20px; line-height: 37px; height: 37px;}
 .kzs_gl input { width:70px; height: 37px; line-height: 37px; color: #ccc; font-size: 14px; border: none; text-align: center; background: #767676; }
 .kzs_img  { float: left; width: 50px; height: 37px; line-height: 37px; text-align: center; border: 1px solid #777;}
@@ -324,10 +323,8 @@ font-family:"Microsoft yahei";
 }
 .jisuan { margin:10px auto 20px;}
 .jisuan b { border:1px solid #bbb; border-radius:25px; padding:0 5px; background:#777;}
-.plus { text-align:center; width:102px; height:40px; line-height:40px; background:#777777; float:left;}
-.plus a { text-decoration:none; color:#fff; padding:0 80px;}
-.sum { text-align:center; line-height:40px; height:40px; background:#777; float:right;}
-.sum a { text-decoration:none; color:#fff; padding:0 80px;}
+.plus a { text-decoration:none; color:#fff;text-align:center; width:102px; height:40px; line-height:40px; background:#777777; float:left;}
+.sum a { text-decoration:none; color:#fff; width:192px;text-align:center; line-height:40px; height:40px; background:#777; float:right;}
 .baocun { margin-top: 100px;}
 .baocun input { width: 325px; text-align: center; font-size: 14px; background: #777; color: #fff; border: none; height: 40px; line-height: 40px;}
 .baocun1 { margin-top: 100px;}
