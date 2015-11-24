@@ -4,13 +4,14 @@ params.insuranceRate = 0.005;
 params.expressPrice = 22;
 params.typeId = 1;
 params.metalId = 1;
+params.metalWeight = 0;
 params.mainGemPrice = 0;
 params.inlayPrice = 0;
-params.chainPrice = 0;
 params.pmPrice = 0;
 params.otherPrice = 0;
 params.reportPrice = 25;
 params.stockGemPrice = "";
+params.chainPrice = "";
 
 $(function() {
 
@@ -27,47 +28,35 @@ $(function() {
 		checkNum(this);
 		params.metalWeight = $(this).val();
 		// 增加后缀
-		if($(this).val() != "" && $(this).val() != 0){
-			initSuffix("metal_weight","克");
-		}
+		initSuffix("metal_weight","克");
 	})
 	// 制版费用值
 	$("input[id='pmPrice']").blur(function() {
 		checkNum(this);
 		params.pmPrice = $(this).val();
 		// 增加后缀
-		if($(this).val() != "" && $(this).val() != 0){
-			initSuffix("pm_price","元");
-		}
+		initSuffix("pm_price","元");
 	})
 	// 主石保价值
 	$("input[id='mainGemPrice']").blur(function() {
 		checkNum(this);
 		params.mainGemPrice = parseInt($(this).val()) * 0.04;
 		// 增加后缀
-		if($(this).val() != "" && $(this).val() != 0){
-			initSuffix("kzs_price","元");
-		}
+		initSuffix("kzs_price","元");
 	})
 	// 配石数量
 	$("input[id='inlayPrice']").blur(function() {
 		checkNum(this);
 		params.inlayPrice = parseInt($(this).val()) * 2;
 		// 增加后缀
-		if($(this).val() != "" && $(this).val() != 0){
-			initSuffix("kps_price","颗");
-		}else{
-			
-		}
+		initSuffix("kps_price","颗");
 	})
 	// 其他价格
 	$("input[id='otherPrice']").blur(function() {
 		checkNum(this);
 		params.otherPrice = $(this).val();
 		// 增加后缀
-  		if($(this).val() != "" && $(this).val() != 0){
-  			initSuffix("other_price","元");
-		}
+  		initSuffix("other_price","元");
 	})
 	// 鉴定费用
 	$("select[id='certificate']").change(function() {
@@ -91,21 +80,24 @@ $(function() {
 	
 })
 
+//计算价格
 function calculator(str) {
-	var weight = $("input[id='metalWeight']");
+	var weight = params.metalWeight;
 	checkNum(weight);
-	if (weight.val() == "" || weight.val() == 0) {
-		alert("请输入金属重量");
-		$(weight).val("");
-		$(weight).focus();
+	if (weight == "" || weight == 0) {
+		alert("请输入正确的金属重量");
+		$("#metalWeight").val("");
+		$("#metalWeight").focus();
 		return;
 	}
-	params.stockGemPrice = "";
 	$(".sgPrice").each(function() {
 		params.stockGemPrice += $(this).val() + ";";
 	})
+	$(".chainPrice").each(function() {
+		params.chainPrice += $(this).val() + ";";
+	})
 
-	var requestUrl = 'http://www.bavlo.com/calculate';
+	var requestUrl = 'http://192.168.1.115/calculate';
 	var requestMethod = "POST";//GET
 	var outputStr = 'typeId='+params.typeId+'&metalId='+params.metalId+'&metalWeight='+params.metalWeight+'&pmPrice='+params.pmPrice+'&mainGemPrice='+params.mainGemPrice+'&inlayPrice='+params.inlayPrice+'&otherPrice='+params.otherPrice+'&reportPrice='+params.reportPrice+'&expressPrice='+params.expressPrice+'&insuranceRate='+params.insuranceRate+'&chainPrice='+params.chainPrice+'&stockGemPrice='+params.stockGemPrice+'';
 	
@@ -325,6 +317,12 @@ function saveOrUpdate() {
 			initFieldSuffix();
 		}
 	});
+	var orderId = $("#orderId").val();
+	//跳转到订单页面
+	if(orderId != ""){
+		url = "/counter/order/edit.do?id="+orderId;//根据id查询客户信息
+		window.location = url;
+	}
 }
 
 //增加后缀 
@@ -367,7 +365,7 @@ function cleanFieldSuffix(){
 }
 
 //子窗体调用
-function setValueByFrame(type,id,callback,json,gem){
+function setValueByFrame(type,id,callback,json,v){
 	var url;
 	if(type == "chain"){
 		var data = JSON.parse(json);
@@ -375,14 +373,15 @@ function setValueByFrame(type,id,callback,json,gem){
 						   "<div class='lianzi'>"+
 						   "<h3>链子</h3><a href='javascript:rlist("+data.sid+")' class='close_c'><font>X</font></a>"+
 						   "<div class='clear'></div>"+
-						   "<input class='chain_item' id='chainItem' name='ichainItem' type='text' price='"+data.chainCost+"' value='' placeholder='条'>"+
+						   "<input class='chain_item' id='chainItem' name='ichainItem' type='text' price='"+data.sprice+"' value='' placeholder='条'>"+
 						   "<strong>"+data.sname+"</strong></div></dd>"+
-						   "<input type='hidden' class='chainPrice' value='"+data.chainCost+"'/>");
-		$("input[id='iitem']").blur(function(){
+						   "<input type='hidden' class='chainPrice' value='"+data.sprice+"'/>");
+		$("input[id='chainItem']").blur(function(){
 			 checkNum(this);
 			 var qutity=$(this).val();
 			 var price=$(this).attr("price");
-			 $(this).parent().nextAll(".chainPrice").val(price*qutity);
+			 $(this).parent().nextAll(".chainPrice").val((price*qutity).toFixed(2));
+			 alert($(".chainPrice").val())
 		 })
 		closeMultiDlg();
 	}else if(type == "signGem"){
@@ -425,12 +424,12 @@ function setValueByFrame(type,id,callback,json,gem){
 		 var html="";
 		 var data = JSON.parse(json);
 		 
-		 var type=gem.attr("type");
-		 var shape=gem.attr("shape");
-		 var calibrated=gem.attr("calibrated");
-		 var weight=gem.attr("weight");
-		 var costPrice=gem.attr("costPrice");
-		 var pic=gem.find("img").attr("src");
+		 var type=v.attr("type");
+		 var shape=v.attr("shape");
+		 var calibrated=v.attr("calibrated");
+		 var weight=v.attr("weight");
+		 var costPrice=v.attr("costPrice");
+		 var pic=v.find("img").attr("src");
 			
 	     html+= "<dd class='"+data.sid+"'>"+
 	    	 	"<div div class='lianzi'>"+	

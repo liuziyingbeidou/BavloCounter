@@ -224,6 +224,7 @@
 						<option>选择金属</option>
 					</select>
 					<input type="text" id="metalWeight" name="nweight"
+						value=""
 						placeholder="克"
 						class="metal_weight"/>
 				</div>
