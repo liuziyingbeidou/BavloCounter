@@ -14,16 +14,17 @@
 <script src="${ctx}/resources/js/top.js"></script>
 
 <!-- 自定义 -->
-	<script src="${ctx}/resources/js/bavlo-event.js"></script>
-		<!-- 弹框 -->
-		<!-- jQuery & jQuery UI files (needed)--> 
-		<link rel="stylesheet" href="/counter/resources/jquery.multiDialog/css/jquery-ui-1.10.3.custom.css">
-		<script src="/counter/resources/jquery.multiDialog/js/jquery/jquery-ui-1.10.3.custom.js"></script> 
-		<!-- MultiDialog files (needed) --> 
-		<link rel="stylesheet" href="/counter/resources/jquery.multiDialog/css/jquery.multiDialog.css"> 
-		<script src="/counter/resources/jquery.multiDialog/js/jquery.ui.dialog.extended-1.0.2.js"></script> 
-		<script src="/counter/resources/jquery.multiDialog/js/jquery.multiDialog.js"></script> 
-		<script src="/counter/resources/js/bavlo-dialog.js"></script>
+<script src="${ctx}/resources/js/bavlo-event.js"></script>
+<script src="${ctx}/resources/js/bavlo-order.js"></script>
+<!-- 弹框 -->
+<!-- jQuery & jQuery UI files (needed)--> 
+<link rel="stylesheet" href="/counter/resources/jquery.multiDialog/css/jquery-ui-1.10.3.custom.css">
+<script src="/counter/resources/jquery.multiDialog/js/jquery/jquery-ui-1.10.3.custom.js"></script> 
+<!-- MultiDialog files (needed) --> 
+<link rel="stylesheet" href="/counter/resources/jquery.multiDialog/css/jquery.multiDialog.css"> 
+<script src="/counter/resources/jquery.multiDialog/js/jquery.ui.dialog.extended-1.0.2.js"></script> 
+<script src="/counter/resources/jquery.multiDialog/js/jquery.multiDialog.js"></script> 
+<script src="/counter/resources/js/bavlo-dialog.js"></script>
 <script type="text/javascript">
 $(function(){
 	//客户
@@ -48,7 +49,8 @@ $(function(){
 			openURL("${ctx}/upload/showpic.do?cpath=com.bavlo.counter.model.order.OrderCVO&fkey=orderId&id="+mid,"图片展示",'','',true);
 		}
 	});
-	
+	//订单状态条
+	freshOrderState("${ordervo['iorderState']}");
 	//更新状态
 	$("#ssave").bind("click",function(){
 		var orderId = $("#orderId").val();
@@ -56,7 +58,7 @@ $(function(){
 		var url = "${ctx}/order/updateState.do";
 		$.post(url,{orderId:orderId,ista:ista},function(data){
 			alert(data);
-			location.reload();
+			freshOrderState(ista);
 		});
 	});
 	//更新顺丰单号
@@ -66,7 +68,7 @@ $(function(){
 		var url = "${ctx}/order/updateOrderCNumber.do";
 		$.post(url,{orderId:orderId,cnum:cnum},function(data){
 			alert(data);
-			location.reload();
+			freshOrderState("4");
 		});
 	});
 	//保存上传图片
@@ -158,6 +160,9 @@ function loadOrderList(){
 </script>
 <style type="text/css">
 .check{background:#444;text-align: left;}
+.barbox{width:315px;}
+.st-tj,.st-zb,.st-sc,.st-zj,.st-kd{width:56px;height:15px;background:url('/counter/resources/images/Arrow2.png') no-repeat;}
+.st-jf{width:16px;height:15px;background:url('/counter/resources/images/Arrow4.png') no-repeat}
 </style>
 </head>
 
@@ -193,34 +198,12 @@ function loadOrderList(){
       </div>
       <div class="gylc">
 		<dl class="barbox">
-			<dd class="barline">
-				<c:choose>
-						 <c:when test="${ordervo['iorderState'] == -1}">   
-						 <div w="50" style="width: 0%;" class="charts"></div>
-						 </c:when>
-						 <c:when test="${ordervo['iorderState'] == 0}">   
-						 <div w="50" style="width: 10%;" class="charts"></div>
-						 </c:when>
-						 <c:when test="${ordervo['iorderState'] == 1}">   
-						 <div w="50" style="width: 26%;" class="charts"></div>
-						 </c:when>
-						 <c:when test="${ordervo['iorderState'] == 2}">   
-						 <div w="50" style="width: 46%;" class="charts"></div>
-						 </c:when>
-						 <c:when test="${ordervo['iorderState'] == 3}">   
-						 <div w="50" style="width: 66%;" class="charts"></div>
-						 </c:when>
-						 <c:when test="${ordervo['iorderState'] == 4}">   
-						 <div w="50" style="width: 85%;" class="charts"></div>
-						 </c:when>
-						 <c:when test="${ordervo['iorderState'] == 5}">   
-						 <div w="50" style="width: 100%;" class="charts"></div>
-						 </c:when>
-						 <c:otherwise>
-						 <div w="50" style="width: 0%;" class="charts"></div>
-						 </c:otherwise>	
-			</c:choose> 
-			</dd>
+				<dd class="st-tj"></dd>
+				<dd class="st-zb"></dd>
+				<dd class="st-sc"></dd>
+				<dd class="st-zj"></dd>
+				<dd class="st-kd"></dd>
+				<dd class="st-jf"></dd>
 		</dl>
         <ul>
           <li>提交</li>
