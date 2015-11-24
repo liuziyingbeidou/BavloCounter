@@ -290,6 +290,35 @@ function setValueByFrame(type,id,callback,json,gem){
 			 $(this).parent().nextAll(".sgPrice").val((price*qutity+qutity*2).toFixed(2));
 		 })
 		 closeMultiDlg();
+	}else if(type == "customer"){
+		url = "/counter/customer/infoJson.do";
+		$.get(url,{id:id},function(data){
+			if(data != null){
+				if(data.vhendimgurl != ""){
+					$(".cusheader").prop("src",data.vhendimgurl);
+				}
+				$("#customerId").val(data.id);
+			}
+			closeMultiDlg();
+		});
+	}else if(type == "order"){
+		url = "/counter/order/edit.do?id="+id;//根据id查询客户信息
+		window.location = url;
+	}else if(type == "order-view"){
+		url = "/counter/order/view.do?id="+id;//根据id查询客户信息
+		window.location = url;
+	}else if(type == "entity"){
+		url = "/counter/entity-sign/view.do?id="+id;//根据id查询客户信息
+		window.location = url;
+	}else if(type == "customer-menu"){
+		url = "/counter/customer/info.do?id="+id;//根据id查询客户信息
+		window.location = url;
+	}else if(type == "custom"){
+		url = "/counter/custom/edit.do?id="+id;//根据id定制单信息
+		window.location = url;
+	}else if(type == "custom-view"){
+		url = "/counter/custom/detail.do?id="+id;//根据id显示定制单信息
+		window.location = url;
 	}
 	
 }
