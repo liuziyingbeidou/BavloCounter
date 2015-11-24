@@ -26,16 +26,17 @@
 <script type="text/javascript" src="${ctx}/resources/timepicker/bootstrap-datetimepicker.zh-CN.js" charset="UTF-8"></script>
 
 <!-- 自定义 -->
-	<script src="${ctx}/resources/js/bavlo-event.js"></script>
-		<!-- 弹框 -->
-		<!-- jQuery & jQuery UI files (needed)--> 
-		<link rel="stylesheet" href="${ctx}/resources/jquery.multiDialog/css/jquery-ui-1.10.3.custom.css">
-		<script src="${ctx}/resources/jquery.multiDialog/js/jquery/jquery-ui-1.10.3.custom.js"></script> 
-		<!-- MultiDialog files (needed) --> 
-		<link rel="stylesheet" href="${ctx}/resources/jquery.multiDialog/css/jquery.multiDialog.css"> 
-		<script src="${ctx}/resources/jquery.multiDialog/js/jquery.ui.dialog.extended-1.0.2.js"></script> 
-		<script src="${ctx}/resources/jquery.multiDialog/js/jquery.multiDialog.js"></script> 
-		<script src="${ctx}/resources/js/bavlo-dialog.js"></script>
+<script src="${ctx}/resources/js/bavlo-event.js"></script>
+<script src="${ctx}/resources/js/bavlo-order.js"></script>
+<!-- 弹框 -->
+<!-- jQuery & jQuery UI files (needed)--> 
+<link rel="stylesheet" href="${ctx}/resources/jquery.multiDialog/css/jquery-ui-1.10.3.custom.css">
+<script src="${ctx}/resources/jquery.multiDialog/js/jquery/jquery-ui-1.10.3.custom.js"></script> 
+<!-- MultiDialog files (needed) --> 
+<link rel="stylesheet" href="${ctx}/resources/jquery.multiDialog/css/jquery.multiDialog.css"> 
+<script src="${ctx}/resources/jquery.multiDialog/js/jquery.ui.dialog.extended-1.0.2.js"></script> 
+<script src="${ctx}/resources/jquery.multiDialog/js/jquery.multiDialog.js"></script> 
+<script src="${ctx}/resources/js/bavlo-dialog.js"></script>
 
 <!-- 远程数据初始下拉框值 -->
 <script src="${ctx}/resources/js/bavlo-initdata.js"></script>
@@ -96,7 +97,20 @@ $(function(){
 	}else{
 		$(".header-loc").hide();
 	}
+	//订单状态条
+	freshOrderState("${ordervo['iorderState']}");
+	//更新状态
+	$("#orderSubmit").bind("click",function(){
+		var orderId = $("#orderId").val();
+		var ista = "0";
+		var url = "${ctx}/order/updateState.do";
+		$.post(url,{orderId:orderId,ista:ista},function(data){
+			alert(data);
+			freshOrderState("0");
+		});
+	});
 });
+
 
 //加载清单列表
 function loadOrderList(){
@@ -504,6 +518,9 @@ function getOrderListInfo(){
 text-overflow:ellipsis;
 }
 .order-quotedPrice{border-color:red;border-style:solid;border-width:2px}
+.barbox{width:315px;}
+.st-tj,.st-zb,.st-sc,.st-zj,.st-kd{width:56px;height:15px;background:url('/counter/resources/images/Arrow2.png') no-repeat;}
+.st-jf{width:16px;height:15px;background:url('/counter/resources/images/Arrow4.png') no-repeat}
 </style>
 </head>
 
@@ -563,43 +580,12 @@ text-overflow:ellipsis;
       </div>
       <div class="gylc">
 		<dl class="barbox">
-			<dd class="st-tj" style="background:{url('${ctx}/resources/images/Arrow2.png')}"></dd>
+			<dd class="st-tj"></dd>
 			<dd class="st-zb"></dd>
 			<dd class="st-sc"></dd>
 			<dd class="st-zj"></dd>
 			<dd class="st-kd"></dd>
 			<dd class="st-jf"></dd>
-		<!--
-			<dd class="barline">
-				<c:choose>
-						 <c:when test="${ordervo['iorderState'] == -1}">   
-						 <div w="50" style="width: 0%;" class="charts"></div>
-						 </c:when>
-						 <c:when test="${ordervo['iorderState'] == 0}">   
-						 <div w="50" style="width: 10%;" class="charts"></div>
-						 </c:when>
-						 <c:when test="${ordervo['iorderState'] == 1}">   
-						 <div w="50" style="width: 26%;" class="charts"></div>
-						 </c:when>
-						 <c:when test="${ordervo['iorderState'] == 2}">   
-						 <div w="50" style="width: 46%;" class="charts"></div>
-						 </c:when>
-						 <c:when test="${ordervo['iorderState'] == 3}">   
-						 <div w="50" style="width: 66%;" class="charts"></div>
-						 </c:when>
-						 <c:when test="${ordervo['iorderState'] == 4}">   
-						 <div w="50" style="width: 85%;" class="charts"></div>
-						 </c:when>
-						 <c:when test="${ordervo['iorderState'] == 5}">   
-						 <div w="50" style="width: 100%;" class="charts"></div>
-						 </c:when>
-						 <c:otherwise>
-						 <div w="50" style="width: 0%;" class="charts"></div>
-						 </c:otherwise>	
-				</c:choose> 
-			
-			</dd>
-			-->
 		</dl>
 		<!--<dt><i class="status" style=" width:182px; position:absolute; top:180px; left:105px;"></i></dt>-->
         <ul>
@@ -712,6 +698,8 @@ text-overflow:ellipsis;
           </select>
           <div class="baocun">
             <input type="button" id="orderSave" name="button" value="保存">
+            <p><p>
+            <input type="button" id="orderSubmit" name="button" value="提交">
           </div>
       </div>
         <div class="clear"></div>
