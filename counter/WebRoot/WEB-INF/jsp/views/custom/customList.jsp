@@ -52,7 +52,7 @@
 				if(data[i].vdef1 != ""){
 					img = "src='"+data[i].vdef1+"'";
 				}
-				var ml = "><b>"+data[i].vdef2+"</b><a href='javascript:void();'>"+data[i].vcustomCode+"</a><span><a href='javascript:void();' onclick='selHander("+data[i].id+")'>选择</a></span></h4><div class='clear'></div></li>";
+				var ml = "><b>"+data[i].vdef2+"</b><a href='#'>"+data[i].vcustomCode+"</a><span><a href='#' onclick='selHander("+data[i].id+")'>选择</a></span></h4><div class='clear'></div></li>";
 				$("#juheweb").append(ht+img+ml);
 			}
 		});
