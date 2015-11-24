@@ -52,11 +52,11 @@
 				 <c:choose>
 					 <c:when test="${empty customEdit['vcustomCode']}">   
 					 ${number }
-					 <input type="hidden" id="customCode" name="vcustomCode" value="${number }">
+					 <input type="hidden" id="vcustomCode" name="vcustomCode" value="${number }">
 					 </c:when>
 					 <c:otherwise>
 					 ${customEdit['vcustomCode']}
-					 <input type="hidden" id="customCode" name="vcustomCode" value="${customEdit['vcustomCode']}">
+					 <input type="hidden" id="vcustomCode" name="vcustomCode" value="${customEdit['vcustomCode']}">
 					 </c:otherwise>	
 				</c:choose>
 				</b>
@@ -84,8 +84,9 @@
 			<div class="clear"></div>
 		</div>
 	</div>
-	<input type="hidden" id='vcustomCode' name='vcustomCode'
+	<!--<input type="hidden" id='vcustomCode' name='vcustomCode'
 		value="${number }" />
+	-->
 	<input type="hidden" id='orderId' name='orderId'
 		value="${customEdit.orderId }" />
 	<input type="hidden" id='customerId' name='customerId'
