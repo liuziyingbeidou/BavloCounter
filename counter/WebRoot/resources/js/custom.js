@@ -36,6 +36,23 @@ $(function() {
 			});
 		}
 	});
+	
+	// 客主石显示和隐藏
+	$(".kzsGem_btn").click(function() {
+		if ($(".kzsGem").css("display") == 'none') {
+			$(".kzsGem").show();
+		} else {
+			h("kzsGem");
+		}
+	})
+	// 客配石显示和隐藏
+	$(".kpsGem_btn").click(function() {
+		if ($(".kpsGem").css("display") == 'none') {
+			$(".kpsGem").show();
+		} else {
+			h("kpsGem");
+		}
+	})
 	 
 	//宝石签收单列表
 	$(".kzs_guanlian").bind("click",function(){
@@ -344,22 +361,6 @@ params.reportPrice = 25;
 params.stockGemPrice = "";
 
 $(function() {
-	// 客主石显示和隐藏
-	$(".kzsGem_btn").click(function() {
-		if ($(".kzsGem").css("display") == 'none') {
-			$(".kzsGem").show();
-		} else {
-			h('kzsGem');
-		}
-	})
-	// 客配石显示和隐藏
-	$(".kpsGem_btn").click(function() {
-		if ($(".kpsGem").css("display") == 'none') {
-			$(".kpsGem").show();
-		} else {
-			h('kpsGem');
-		}
-	})
 
 	// 款式类型值
 	$("select[id='styleType']").change(function() {
@@ -453,7 +454,7 @@ $(function() {
 				 	var jsonStr = JSON.parse(data);
 				 	$(".price").text(parseInt(jsonStr.cost)+" + "+(parseInt(jsonStr.price)-parseInt(jsonStr.cost))+" = "+jsonStr.price);
 			});
-		})
+	  })
 })
 function h(str) {
 	if ("kzsGem" == str) {
@@ -462,7 +463,7 @@ function h(str) {
 		params.inlayPrice = 0;
 	}
 	var value = $("." + str + "_btn").val();
-	$("." + str + "_btn").val(value.replace('+', '-'));
+	$("." + str + "_btn").text(value.replace('-', '+'));
 	$("." + str).hide();
 }
 function removeStockGem(id) {
