@@ -90,6 +90,12 @@ $(function(){
 	});*/
 	//订单清单
 	loadOrderList();
+	//控制头像显示
+	if($("#customerId").val()){
+		$(".header-loc").show();
+	}else{
+		$(".header-loc").hide();
+	}
 });
 
 //加载清单列表
@@ -432,6 +438,11 @@ function getOrderListInfo(){
 						$("#tbl").empty();
 						initAddr();
 					}
+					if($("#customerId").val()){
+						$(".header-loc").show();
+					}else{
+						$(".header-loc").hide();
+					}
 					closeMultiDlg();
 				});
 			}/*else if(type == "chain"){
@@ -541,10 +552,10 @@ text-overflow:ellipsis;
 </div>
 <div class="all">
 	<div class="main">
-    <div class="mainleft">	
+    <div class="mainleft">
       <div class="customer">
         <ul>
-          <li><a href="#"><img class="cusheader" src="${ctx}/resources/images/customer_01.png"></a></li>
+          <li class="header-loc"><a href="#"><img class="cusheader" src="${ctx}/resources/images/customer_01.png"></a></li>
 		  <!--<li class="file"><a href="javascript:;"><input type="file" name="file" id="file"></a></li>-->
 		  <li class="file"><a href="#"><img src="${ctx}/resources/images/customer_02.png"></a></li>
           <div class="clear"></div>
@@ -552,7 +563,7 @@ text-overflow:ellipsis;
       </div>
       <div class="gylc">
 		<dl class="barbox">
-			<dd class="st-tj" style="background:url('${ctx}/resources/images/Arrow2.png')"></dd>
+			<dd class="st-tj" style="background:{url('${ctx}/resources/images/Arrow2.png')}"></dd>
 			<dd class="st-zb"></dd>
 			<dd class="st-sc"></dd>
 			<dd class="st-zj"></dd>

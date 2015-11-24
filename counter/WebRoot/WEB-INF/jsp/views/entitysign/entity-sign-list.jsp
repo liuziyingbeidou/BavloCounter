@@ -68,6 +68,11 @@
 		}
 	}
 	</script>
+	<style type="text/css">
+	@media screen and (max-width: 1280px) and (min-width: 320px){
+		.operate ul li h4{background:none!important}
+	}
+	</style>
 	</head>
 
 <body>

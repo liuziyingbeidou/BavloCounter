@@ -75,14 +75,21 @@
 		if(isExitsFunction(window.parent.setValueByFrame)){
 			if("${listType}" == "menu"){
 				window.parent.setValueByFrame("customer-menu",id,callbackMuilt());
+				window.parent.closeMultiDlg();
 			}else{
 				window.parent.setValueByFrame("customer",id,callbackMuilt());
+				window.parent.closeMultiDlg();
 			}
 		}else{
 			alert("请在父窗口添加setValueByFrame(type,id,callback){处理逻辑}type='customer'");
 		}
 	}
 	</script>
+	<style type="text/css">
+	@media screen and (max-width: 1280px) and (min-width: 320px){
+		.operate ul li h4{background:none!important}
+	}
+	</style>
 </head>
 
 <body>
