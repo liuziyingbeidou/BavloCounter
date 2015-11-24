@@ -58,8 +58,11 @@ public class CustomController extends BaseController implements IConstant {
 	public ModelAndView edit(Map<String, Object> map, Integer id, Integer orderId, Integer customerId) {
 
 		CustomVO customEdit = customService.findCustomById(id);
+		ModelAndView model = new ModelAndView(PATH_CUSTOM + "customEdit");
+		model.addObject("pageCustomType", IConstant.PAGE_TYPE_EDIT);
 		if(customEdit == null){
 			customEdit = new CustomVO();
+			model.addObject("pageCustomType", IConstant.PAGE_TYPE_ADD);
 		}
 		if(orderId != null){
 			customEdit.setOrderId(orderId);
@@ -67,9 +70,7 @@ public class CustomController extends BaseController implements IConstant {
 		if(customerId != null){
 			customEdit.setCustomerId(customerId);
 		}
-		ModelAndView model = new ModelAndView(PATH_CUSTOM + "customEdit");
 		model.addObject("customEdit", customEdit);
-		model.addObject("pageCustomType", IConstant.PAGE_TYPE_ADD);
 		model.addObject("number", CommonUtils.getBillCode("CM"));
 		return model;
 	}
