@@ -220,6 +220,7 @@
 		.camera a{
 			background:none;
 		}
+		.qsd_left ul li { width: auto; padding-right: 20px; float: left;}
 		</style>
 	</head>
 	<body>
