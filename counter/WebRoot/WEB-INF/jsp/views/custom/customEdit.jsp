@@ -20,7 +20,6 @@
 
 <script src="${ctx}/resources/js/jquery-1.8.3.min.js"></script>
 <script src="${ctx}/resources/js/top.js"></script>
-<script	src="${ctx}/resources/js/add-input.js"></script>
 <script src="${ctx}/resources/js/photoswipe.min.js"></script>
 <script src="${ctx}/resources/js/photoswipe-ui-default.min.js"></script>
 <script src="${ctx}/resources/js/photoswipefromdom.js"></script>
@@ -282,7 +281,7 @@
 						<li><a href="javascript:;" class="kzsGem_btn">+客主石</a></li>
 						<li><a href="javascript:;" class="kpsGem_btn">+客配石</a></li>
 						<li><a href="javascript:;" class="kxsGem_btn">+库选石</a></li>
-						<li><a href="javascript:void(0);" class="lzGem_btn">+链子</a></li>
+						<li><a href="javascript:;" class="lzGem_btn">+链子</a></li>
 					</ul>
 					<div class="clear"></div>
 				</div>
