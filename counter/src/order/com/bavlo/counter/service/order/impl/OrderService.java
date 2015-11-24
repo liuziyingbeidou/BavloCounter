@@ -231,16 +231,16 @@ public class OrderService extends CommonService implements IOrderService {
 				case 5: vsta = "Ö§¸¶";break;
 				}
 				dto.setOrderState(vsta);
-				dto.setVorderCode(CommonUtils.isNull(arry[7]) ? null :arry[7]+"");
-				dto.setVcourierNumber(CommonUtils.isNull(arry[8]) ? null :arry[8]+"");
-				dto.setVrname(CommonUtils.isNull(arry[9]) ? null :arry[9]+"");
-				String vdef1 = CommonUtils.isNull(arry[10]) ? null :arry[10]+"";
-				String vdef2 = CommonUtils.isNull(arry[11]) ? null :arry[11]+"";
-				String vdef3 = CommonUtils.isNull(arry[12]) ? null :arry[12]+"";
-				String vdef4 = CommonUtils.isNull(arry[13]) ? null :arry[13]+"";
+				dto.setVorderCode(CommonUtils.isNull(arry[7]) ? "" :arry[7]+"");
+				dto.setVcourierNumber(CommonUtils.isNull(arry[8]) ? "" :arry[8]+"");
+				dto.setVrname(CommonUtils.isNull(arry[9]) ? "" :arry[9]+"");
+				String vdef1 = CommonUtils.isNull(arry[10]) ? "" :arry[10]+"";
+				String vdef2 = CommonUtils.isNull(arry[11]) ? "" :arry[11]+"";
+				String vdef3 = CommonUtils.isNull(arry[12]) ? "" :arry[12]+"";
+				String vdef4 = CommonUtils.isNull(arry[13]) ? "" :arry[13]+"";
 				dto.setVaddress(vdef1+ " " + vdef2 + " " + vdef3 + " " +  vdef4);
-				dto.setVtel(CommonUtils.isNull(arry[14]) ? null :arry[14]+"");
-				dto.setVmail(CommonUtils.isNull(arry[15]) ? null :arry[15]+"");
+				dto.setVtel(CommonUtils.isNull(arry[14]) ? "" :arry[14]+"");
+				dto.setVmail(CommonUtils.isNull(arry[15]) ? "" :arry[15]+"");
 				nList.add(dto);
 			}
 		}
