@@ -45,7 +45,7 @@ public class CustomerController extends BaseController implements IConstant {
 			map.put("pageOrderType", IConstant.PAGE_TYPE_EDIT);
 		}else{
 			//±àºÅ
-			map.put("number", CommonUtils.getBillCode(IConstant.CODE_ORDER));
+			map.put("number", CommonUtils.getBillCode(IConstant.CODE_CUSTER));
 			map.put("pageOrderType", IConstant.PAGE_TYPE_ADD);
 		}
 		map.put("customerDetail", customerDetail);
