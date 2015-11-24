@@ -511,7 +511,7 @@ text-overflow:ellipsis;
 <div class="header">
 	<div class="head1">
 		<div class="top">
-			<b><a href="#" onclick="EditShow_Hidden(ed1)"><img src="${ctx}/resources/images/plus.png"></a> ${pageOrderType}定单
+			<b><a href="#" onclick="EditShow_Hidden(ed1)"><img src="${ctx}/resources/images/plus.png"></a> ${pageOrderType}订单
 			<c:choose>
 						 <c:when test="${empty ordervo['vorderCode']}">   
 						 ${number }

@@ -63,9 +63,11 @@
 			if("${listType}" == "view"){
 				//查看
 				window.parent.setValueByFrame("custom-view",id,callbackMuilt());
+				window.parent.closeMultiDlg();
 			}else{
 				//编辑
 				window.parent.setValueByFrame("custom",id,callbackMuilt());
+				window.parent.closeMultiDlg();
 			}
 		}else{
 			alert("请在父窗口添加setValueByFrame(type,id){处理逻辑}type='custom'");
