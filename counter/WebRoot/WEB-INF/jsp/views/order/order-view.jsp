@@ -7,7 +7,7 @@
   <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <meta name="viewport" content="width=device-width,target-densitydpi=high-dpi,initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
-<title>编辑定单</title>
+<title>编辑订单</title>
 <script language="javascript" type="text/javascript" src="${ctx}/resources/js/jquery-1.9.1.min.js"></script>
 <link type='text/css' rel='stylesheet' href='${ctx}/resources/css/style.css' media='all' />
 <link type='text/css' rel='stylesheet' href='${ctx}/resources/css/bootstrap.css' media='all' />
@@ -168,7 +168,7 @@ function loadOrderList(){
 <div class="header">
 	<div class="head1">
 		<div class="top">
-			<b><a href="#" onclick="EditShow_Hidden(ed1)"><img src="${ctx}/resources/images/plus.png"></a> ${pageOrderType }定单${ordervo['vorderCode']}</b>
+			<b><a href="#" onclick="EditShow_Hidden(ed1)"><img src="${ctx}/resources/images/plus.png"></a> ${pageOrderType }订单${ordervo['vorderCode']}</b>
 			<font><a href="#" onclick="Show_Hidden(tr1)"><img src="${ctx}/resources/images/plus.png"></a></font>
 		</div>
 		<div class="hidden_enent1" id="tr1" style="display:none;">

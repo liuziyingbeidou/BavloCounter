@@ -61,6 +61,7 @@
 	function selHander(id){
 		if(isExitsFunction(window.parent.setValueByFrame)){
 			window.parent.setValueByFrame("signGem",id,callbackMuilt()); 
+			window.parent.closeMultiDlg();
 		}else{
 			alert("请在父窗口添加setValueByFrame(type,id,callback){处理逻辑}type='signGem']");
 		}

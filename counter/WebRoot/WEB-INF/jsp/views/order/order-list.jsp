@@ -80,8 +80,10 @@
 		if(isExitsFunction(window.parent.setValueByFrame)){
 			if("${listType}" == "view"){
 				window.parent.setValueByFrame("order-view",id,callbackMuilt());
+				window.parent.closeMultiDlg();
 			}else{
 				window.parent.setValueByFrame("order",id,callbackMuilt());
+				window.parent.closeMultiDlg();
 			}
 		}else{
 			alert("请在父窗口添加setValueByFrame(type,id,callback){处理逻辑}type='order'");
