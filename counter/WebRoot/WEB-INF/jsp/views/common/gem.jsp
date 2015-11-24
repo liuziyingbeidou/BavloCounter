@@ -49,8 +49,8 @@
 		 
 		//确定 
 		$(".ok").click(function(){
-			var gem=$(".gem_img_sel");
-			 if(gem.length==0){
+			var v=$(".gem_img_sel");
+			 if(v.length==0){
 				alert("请选择宝石!");
 				return ;
 			}
@@ -58,7 +58,7 @@
 				var sname = $("gemTypeId").find("option:selected").text()+" "+ $("#gemShapeId").find("option:selected").text()+" "+$("#gemSpecId").find("option:selected").text();
 				var sid = $("#gemTypeId").find("option:selected").val()+ $("#gemShapeId").find("option:selected").val()+$("#gemSpecId").find("option:selected").val();
 				var json = "{\"sname\":\""+sname+"\",\"sid\":\""+sid+"\"}";
-				window.parent.setValueByFrame("gem","",callbackMuilt(),json,gem);
+				window.parent.setValueByFrame("gem","",callbackMuilt(),json,v);
 			}else{
 				alert("请在父窗口添加setValueByFrame(type,id,json){处理逻辑}type='gem']");
 			}
