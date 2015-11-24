@@ -108,7 +108,7 @@ $(function() {
 	 //图片显示
 	 $(".customPicShow").bind("click",function(){
 	 	var mid = $("#customid").val();
-	 	if(mid == ""){
+	 	if(mid == "" || mid == undefined){
 	 		alert("请保存后查看!");
 	 	}else{
 	 		openURL("/counter/upload/showpic.do?cpath=com.bavlo.counter.model.custom.CustomBVO&fkey=customId&id="+mid,"图片展示");
