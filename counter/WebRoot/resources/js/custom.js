@@ -10,8 +10,8 @@ params.inlayPrice = 0;
 params.pmPrice = 0;
 params.otherPrice = 0;
 params.reportPrice = 25;
-params.stockGemPrice = "";
 params.chainPrice = "";
+params.stockGemPrice = "";
 
 $(function() {
 
@@ -49,7 +49,7 @@ $(function() {
 		checkNum(this);
 		params.inlayPrice = parseInt($(this).val()) * 2;
 		// 增加后缀
-		initSuffix("kps_price","颗");
+		initSuffix("kps_count","颗");
 	})
 	// 其他价格
 	$("input[id='otherPrice']").blur(function() {
@@ -90,14 +90,16 @@ function calculator(str) {
 		$("#metalWeight").focus();
 		return;
 	}
-	$(".sgPrice").each(function() {
-		params.stockGemPrice += $(this).val() + ";";
+	params.chainPrice = "";
+	$(".cPrice").each(function() {
+		params.chainPrice+=$(this).val()+";";
 	})
-	$(".chainPrice").each(function() {
-		params.chainPrice += $(this).val() + ";";
+	params.stockGemPrice = "";
+	$(".sgPrice").each(function() {
+		params.stockGemPrice+=$(this).val()+";";
 	})
 
-	var requestUrl = 'http://192.168.1.115/calculate';
+	var requestUrl = 'http://192.168.1.115:8888/bavlo/calculate';
 	var requestMethod = "POST";//GET
 	var outputStr = 'typeId='+params.typeId+'&metalId='+params.metalId+'&metalWeight='+params.metalWeight+'&pmPrice='+params.pmPrice+'&mainGemPrice='+params.mainGemPrice+'&inlayPrice='+params.inlayPrice+'&otherPrice='+params.otherPrice+'&reportPrice='+params.reportPrice+'&expressPrice='+params.expressPrice+'&insuranceRate='+params.insuranceRate+'&chainPrice='+params.chainPrice+'&stockGemPrice='+params.stockGemPrice+'';
 	
@@ -109,33 +111,6 @@ function calculator(str) {
 				$(".price").text(parseInt(jsonStr.cost)+" + "+(parseInt(jsonStr.price)-parseInt(jsonStr.cost))+" = "+jsonStr.price);
 			}
 	});
-}
-
-function h(str) {
-	if ("kzsGem" == str) {
-		params.mainGemPrice = 0;
-	} else if ("kpsGem" == str) {
-		params.inlayPrice = 0;
-	}
-	var value = $("." + str + "_btn").val();
-	$("." + str + "_btn").text(value.replace('-', '+'));
-	$("." + str).hide();
-}
-function removeStockGem(id) {
-	$(".stockGem" + id).remove();
-}
-function checkNum(obj) {
-	var reg = new RegExp("^[0-9].*$");
-	if ($(obj).val() == "") {
-		$(obj).val(0);
-		return;
-	} else {
-		if (!reg.test($(obj).val())) {
-			$(obj).focus();
-			$(obj).val("");
-			return;
-		}
-	}
 }
 
 //本地webservice
@@ -181,6 +156,8 @@ $(function() {
 	$(".kzsGem_btn").click(function() {
 		if ($(".kzsGem").css("display") == 'none') {
 			$(".kzsGem").show();
+			//var text = $(this).text();
+			//$(this).text(text.replace('+', '-'));
 		} else {
 			h("kzsGem");
 		}
@@ -189,6 +166,8 @@ $(function() {
 	$(".kpsGem_btn").click(function() {
 		if ($(".kpsGem").css("display") == 'none') {
 			$(".kpsGem").show();
+			//var text = $(this).text();
+			//$(this).text(text.replace('+', '-'));
 		} else {
 			h("kpsGem");
 		}
@@ -368,20 +347,32 @@ function cleanFieldSuffix(){
 function setValueByFrame(type,id,callback,json,v){
 	var url;
 	if(type == "chain"){
+		var i=1;
+		for(var c=1;c<100;c++){
+			if($(".chain"+c).length==0){
+				i=g;
+				break;
+			}
+		}
+		var html="";
 		var data = JSON.parse(json);
-		$(".chain").append("<dd class='"+data.sid+"'>"+
-						   "<div class='lianzi'>"+
-						   "<h3>链子</h3><a href='javascript:rlist("+data.sid+")' class='close_c'><font>X</font></a>"+
-						   "<div class='clear'></div>"+
-						   "<input class='chain_item' id='chainItem' name='ichainItem' type='text' price='"+data.sprice+"' value='' placeholder='条'>"+
-						   "<strong>"+data.sname+"</strong></div></dd>"+
-						   "<input type='hidden' class='chainPrice' value='"+data.sprice+"'/>");
+		
+		html+= "<dd class='chain"+i+"'>"+
+			   "<div class='lianzi'>"+
+			   "<h3>链子</h3><a href='javascript:removeChain("+i+")' class='close_c'><font>X</font></a>"+
+			   "<div class='clear'></div>"+
+			   "<input class='chain_item' id='chainItem' name='ichainItem' type='text' price='"+data.sprice+"' value='' placeholder='条'>"+
+			   "<strong>"+data.sname+"</strong>" +
+			   "</div>" +
+			   "<input type='hidden' class='cPrice'/>"+
+			   "</dd>";
+		
+		$(".chain").append(html);
 		$("input[id='chainItem']").blur(function(){
 			 checkNum(this);
 			 var qutity=$(this).val();
 			 var price=$(this).attr("price");
-			 $(this).parent().nextAll(".chainPrice").val((price*qutity).toFixed(2));
-			 alert($(".chainPrice").val())
+			 $(this).parent().nextAll(".cPrice").val((price*qutity).toFixed(2));
 		 })
 		closeMultiDlg();
 	}else if(type == "signGem"){
@@ -421,9 +412,15 @@ function setValueByFrame(type,id,callback,json,v){
 		
 		closeMultiDlg();
 	}else if(type == "gem"){
+		 var i=1;
+		 for(var g=1;g<100;g++){
+			 if($(".stockGem"+g).length==0){
+				 i=g;
+				 break;
+			 }
+		 }
 		 var html="";
 		 var data = JSON.parse(json);
-		 
 		 var type=v.attr("type");
 		 var shape=v.attr("shape");
 		 var calibrated=v.attr("calibrated");
@@ -431,23 +428,22 @@ function setValueByFrame(type,id,callback,json,v){
 		 var costPrice=v.attr("costPrice");
 		 var pic=v.find("img").attr("src");
 			
-	     html+= "<dd class='"+data.sid+"'>"+
+	     html+= "<dd class='stockGem"+i+"'>"+
 	    	 	"<div div class='lianzi'>"+	
 			    "<h3>库选宝石</h3>"+
-			    "<a href='javascript:rlist("+data.sid+")' class='close_c'><font>X</font></a><div class='clear'></div>"+
+			    "<a href='javascript:removeStockGem("+i+")' class='close_c'><font>X</font></a><div class='clear'></div>"+
 			    "<input class='stockGem_num' id='stockGem' name='istockGemNum' type='text' value='' price='"+costPrice+"' placeholder='颗'>"+
 				"<img src='"+pic+"'/><strong>"+type+" "+weight+"ct</strong>"+
-				"<input type='hidden' class='sgPrice' value='"+costPrice+"'/>"+
-				"</div></dd>";
-				 
-				
+				"</div>" +
+				"<input type='hidden' class='sgPrice'/>"+
+				"</dd>";
 				
 		 $(".chain").append(html);
-		$("input[id='stockGem']").blur(function(){
-			 checkNum(this);
-			 var qutity=$(this).val();
-			 var price=$(this).attr("price");
-			 $(this).parent().nextAll(".sgPrice").val((price*qutity+qutity*2).toFixed(2));
+		 $("input[id='stockGem']").blur(function(){
+		 	  checkNum(this);
+			  var qutity=$(this).val();
+			  var price=$(this).attr("price");
+			  $(this).parent().nextAll(".sgPrice").val((price*qutity+qutity*2).toFixed(2));
 		 })
 		 closeMultiDlg();
 	}else if(type == "customer"){
@@ -485,4 +481,35 @@ function setValueByFrame(type,id,callback,json,v){
 //删除清单
 function rlist(className){
 	$("."+className).remove();
+}
+
+
+function h(str) {
+	if ("kzsGem" == str) {
+		params.mainGemPrice = 0;
+	} else if ("kpsGem" == str) {
+		params.inlayPrice = 0;
+	}
+	var text = $("." + str + "_btn").text();
+	//$("." + str + "_btn").text(text.replace('-', '+'));
+	$("." + str).hide();
+}
+function removeStockGem(id) {
+	$(".stockGem" + id).remove();
+}
+function removeChain(id) {
+	$(".chain" + id).remove();
+}
+function checkNum(obj) {
+	var reg = new RegExp("^[0-9].*$");
+	if ($(obj).val() == "") {
+		$(obj).val(0);
+		return;
+	} else {
+		if (!reg.test($(obj).val())) {
+			$(obj).focus();
+			$(obj).val("");
+			return;
+		}
+	}
 }

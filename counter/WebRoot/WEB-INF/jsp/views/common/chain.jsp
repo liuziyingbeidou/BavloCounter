@@ -38,10 +38,9 @@ $(function(){
 		}
 		if(isExitsFunction(window.parent.setValueByFrame)){
 			var sname = $("#chain-material-id").find("option:selected").text()+" "+ $("#chain-style-id").find("option:selected").text()+" "+$("#chain-spec-id").find("option:selected").text();
-			var sprice = $("#chain-spec-id").find("option:selected").attr("cost");
-			var chainCost = $("#chain-spec-id").find("option:selected").attr("chainCost");
+			var sprice = $("#chain-spec-id").find("option:selected").val();
 			var sid = $("#chain-material-id").find("option:selected").val()+ $("#chain-style-id").find("option:selected").val()+$("#chain-spec-id").find("option:selected").val();
-			var json = "{\"sname\":\""+sname+"\",\"sprice\":\""+sprice+"\",\"chainCost\":\""+chainCost+"\",\"sid\":\""+sid+"\"}";
+			var json = "{\"sname\":\""+sname+"\",\"sprice\":\""+sprice+"\",\"sid\":\""+sid+"\"}";
 			window.parent.setValueByFrame("chain","",callbackMuilt(),json);
 		}else{
 			alert("请在父窗口添加setValueByFrame(type,id,callback,json){处理逻辑}type='chain']");
@@ -72,7 +71,8 @@ function initChainSpec(emName){
 	$.get(nativeUrl,{url:styleUrl},function(row){
 		var data = row;
 		for(var i=0;i<data.length;i++){
-			$('#'+emName).append("<option cost="+data[i].chainCost+" value='"+data[i].id+"'>"+data[i].x+" x "+data[i].y+" x "+data[i].z+"</option>");
+			//$('#'+emName).append("<option cost="+data[i].chainCost+" value='"+data[i].id+"'>"+data[i].x+" x "+data[i].y+" x "+data[i].z+"</option>");
+			$('#'+emName).append("<option value='"+data[i].chainCost+"'>"+data[i].chainLength +" × "+data[i].y+"</option>");
 		}
 	});
 }
