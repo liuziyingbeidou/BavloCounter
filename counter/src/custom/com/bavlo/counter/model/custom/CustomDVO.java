@@ -11,7 +11,7 @@ import com.bavlo.counter.model.IdEntity;
 /**
  * @Title: 宝珑Counter
  * @ClassName: CustomDVO
- * @Description: 实物签收单子表（库选石）
+ * @Description: 定制单子表（库选石）
  * @author shijf
  * @date 2015-11-9 下午07:21:21
  */
@@ -25,29 +25,21 @@ public class CustomDVO extends IdEntity implements Serializable {
 	 */
 	private Integer customId;
 	/**
-	 * 宝石主键
-	 */
-	private Integer srcgemId;
-	/**
 	 * 库选石名称
 	 */
-	private String vgemName;
+	private String vstockGemName;
 	/**
-	 * 库选石形状
+	 * 库选石数量
 	 */
-	private String vgemShape;
-	/**
-	 * 库选石规格
-	 */
-	private String vgemSize;
+	private Integer istockGemNum;
 	/**
 	 * 库选石图片路径
 	 */
-	private String vgemImgPath;
+	private String vstockGemImgPath;
 	/**
 	 * 库选石价格
 	 */
-	private BigDecimal vgemCost;
+	private BigDecimal nstockGemCost;
 
 	public Integer getCustomId() {
 		return customId;
@@ -57,52 +49,36 @@ public class CustomDVO extends IdEntity implements Serializable {
 		this.customId = customId;
 	}
 
-	public Integer getSrcgemId() {
-		return srcgemId;
+	public String getVstockGemName() {
+		return vstockGemName;
 	}
 
-	public void setSrcgemId(Integer srcgemId) {
-		this.srcgemId = srcgemId;
+	public void setVstockGemName(String vstockGemName) {
+		this.vstockGemName = vstockGemName;
 	}
 
-	public String getVgemName() {
-		return vgemName;
+	public Integer getIstockGemNum() {
+		return istockGemNum;
 	}
 
-	public void setVgemName(String vgemName) {
-		this.vgemName = vgemName;
+	public void setIstockGemNum(Integer istockGemNum) {
+		this.istockGemNum = istockGemNum;
 	}
 
-	public String getVgemShape() {
-		return vgemShape;
+	public String getVstockGemImgPath() {
+		return vstockGemImgPath;
 	}
 
-	public void setVgemShape(String vgemShape) {
-		this.vgemShape = vgemShape;
+	public void setVstockGemImgPath(String vstockGemImgPath) {
+		this.vstockGemImgPath = vstockGemImgPath;
 	}
 
-	public String getVgemSize() {
-		return vgemSize;
+	public BigDecimal getNstockGemCost() {
+		return nstockGemCost;
 	}
 
-	public void setVgemSize(String vgemSize) {
-		this.vgemSize = vgemSize;
-	}
-
-	public String getVgemImgPath() {
-		return vgemImgPath;
-	}
-
-	public void setVgemImgPath(String vgemImgPath) {
-		this.vgemImgPath = vgemImgPath;
-	}
-
-	public BigDecimal getVgemCost() {
-		return vgemCost;
-	}
-
-	public void setVgemCost(BigDecimal vgemCost) {
-		this.vgemCost = vgemCost;
+	public void setNstockGemCost(BigDecimal nstockGemCost) {
+		this.nstockGemCost = nstockGemCost;
 	}
 
 	public static long getSerialversionuid() {

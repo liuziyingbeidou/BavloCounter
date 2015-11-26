@@ -87,6 +87,8 @@
 	<!--<input type="hidden" id='vcustomCode' name='vcustomCode'
 		value="${number }" />
 	-->
+	<input type="hidden" id='id' name='id'
+		value="${customEdit.id }" />
 	<input type="hidden" id='orderId' name='orderId'
 		value="${customEdit.orderId }" />
 	<input type="hidden" id='customerId' name='customerId'
@@ -127,7 +129,7 @@
 						</div>
 					</div>
 				</div>
-				<div class="sheji">
+				<div class="sheji" style="display: none;">
 					<h2><a href="javascript:;" style="color:#fff" class="qibantu">+ 起版设计图</a></h2>
 					<div class="pro">
 						<!--<img src="images/zb_06.png" />-->
@@ -198,9 +200,8 @@
 				</div>
 				<div class="xuqiu">
 					<textarea id="requirement" name="vrequirement" cols="" rows=""
-						value="${customEdit['vrequirement']}"
 						placeholder="需求描述"
-						class="miaoshu1"></textarea>
+						class="miaoshu1">${customEdit['vrequirement']}</textarea>
 				</div>
 			</div>
 			<div class="mainmid">
@@ -209,9 +210,9 @@
 					<select id="styleType" name="srcstyleType" class="jiezhi">
 						<option>选择款式</option>
 					</select>
-					<select class="nvkuan">
-						<option name="vsex" value="0" <c:if test="${customEdit['vsex']=='0'}">selected</c:if>>女款</option>
-						<option name="vsex" value="1" <c:if test="${customEdit['vsex']=='1'}">selected</c:if>>男款</option>
+					<select name="vsex" class="nvkuan">
+						<option value="0" <c:if test="${customEdit['vsex']=='0'}">selected</c:if>>女款</option>
+						<option value="1" <c:if test="${customEdit['vsex']=='1'}">selected</c:if>>男款</option>
 					</select>
 				</div>
 				<div class="changdu">
@@ -293,18 +294,18 @@
 				
 				<input type="text" class="kezi" id="vengrave" name="vengrave" placeholder="刻字" />
 				<select id="vfont" name="vfont" class="ziti">
-					<option value="" >字体</option>
-					<option value="华文细黑" <c:if test="${customEdit['vengrave']=='华文细黑'}">selected</c:if>>华文细黑</option>
-					<option value="华文仿宋" <c:if test="${customEdit['vengrave']=='华文仿宋'}">selected</c:if>>华文仿宋</option>
-					<option value="华文楷体" <c:if test="${customEdit['vengrave']=='华文楷体'}">selected</c:if>>华文楷体</option>
-					<option value="华文宋体" <c:if test="${customEdit['vengrave']=='华文宋体'}">selected</c:if>>华文宋体</option>
-					<option value="华文中宋" <c:if test="${customEdit['vengrave']=='华文中宋'}">selected</c:if>>华文中宋</option>
-					<option value="仿宋" <c:if test="${customEdit['vengrave']=='仿宋'}">selected</c:if>>仿宋</option>
-					<option value="黑体" <c:if test="${customEdit['vengrave']=='黑体'}">selected</c:if>>黑体</option>
-					<option value="楷体" <c:if test="${customEdit['vengrave']=='楷体'}">selected</c:if>>楷体</option>
-					<option value="Bradley Hand ITC" <c:if test="${customEdit['vengrave']=='Bradley Hand ITC'}">selected</c:if>>Bradley Hand ITC</option>
-					<option value="Segoe Script" <c:if test="${customEdit['vengrave']=='Segoe Script'}">selected</c:if>>Segoe Script</option>
-					<option value="Verdana" <c:if test="${customEdit['vengrave']=='Verdana'}">selected</c:if>>Verdana</option>
+					<option value="" <c:if test="${customEdit.vengrave==''}">selected</c:if>>字体</option>
+					<option value="华文细黑" <c:if test="${customEdit.vengrave=='华文细黑'}">selected</c:if>>华文细黑</option>
+					<option value="华文仿宋" <c:if test="${customEdit.vengrave=='华文仿宋'}">selected</c:if>>华文仿宋</option>
+					<option value="华文楷体" <c:if test="${customEdit.vengrave=='华文楷体'}">selected</c:if>>华文楷体</option>
+					<option value="华文宋体" <c:if test="${customEdit.vengrave=='华文宋体'}">selected</c:if>>华文宋体</option>
+					<option value="华文中宋" <c:if test="${customEdit.vengrave=='华文中宋'}">selected</c:if>>华文中宋</option>
+					<option value="仿宋" <c:if test="${customEdit.vengrave=='仿宋'}">selected</c:if>>仿宋</option>
+					<option value="黑体" <c:if test="${customEdit.vengrave=='黑体'}">selected</c:if>>黑体</option>
+					<option value="楷体" <c:if test="${customEdit.vengrave=='楷体'}">selected</c:if>>楷体</option>
+					<option value="Bradley Hand ITC" <c:if test="${customEdit.vengrave=='Bradley Hand ITC'}">selected</c:if>>Bradley Hand ITC</option>
+					<option value="Segoe Script" <c:if test="${customEdit.vengrave=='Segoe Script'}">selected</c:if>>Segoe Script</option>
+					<option value="Verdana" <c:if test="${customEdit.vengrave=='Verdana'}">selected</c:if>>Verdana</option>
 				</select>
 				<br />
 	
@@ -320,7 +321,7 @@
 				placeholder="表面工艺描述"			
 				class="miaoshu1"></textarea>
 				<br />
-				<select name="certificate" name="icertificate" class="jianding1">
+				<select id="certificate" name="icertificate" class="jianding1">
 					<option value="0" <c:if test="${customEdit['icertificate']=='0'}">selected</c:if>>鉴定证书 -无</option>
 					<option value="1" <c:if test="${customEdit['icertificate']=='1'}">selected</c:if>>鉴定证书 -有</option>
 				</select>
@@ -343,6 +344,7 @@
 					id="otherPrice" name="notherPrice" class="other_price"
 					placeholder="其他 元" />
 					<strong><u class="price"></u> 元</strong>
+					<input type="hidden" class="finalPrice" id='nprice' name='nprice' value="${customEdit.nprice }" />
 				</div>
 
 				<div class="jisuan">
