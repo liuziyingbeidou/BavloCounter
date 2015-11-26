@@ -268,7 +268,7 @@ public class CustomController extends BaseController implements IConstant {
 		customService.saveCustomC(listcvo);
 		customService.deleteCustomD(customVO.id);
 		customService.saveCustomD(listdvo);
-		orderService.backWriteByCum(customVO.getOrderId(), customVO.getCustomerId());
+		orderService.backWriteByCum(customVO.getOrderId(), customVO.getId());
 		renderJson("{\"id\":"+customVO.id+"}");
 	}
 	
