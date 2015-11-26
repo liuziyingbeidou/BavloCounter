@@ -138,6 +138,10 @@
 			}
 		}
 		</script>
+		<style type="text/css">
+		.edit_hidden2 { width:110px; position:relative; top:10px; left:-15px; z-index:9999}
+		.hidden_enent2 { width:110px; position:relative; top:10px; right:-243px; z-index:9999}
+		</style>
 	</head>
 
 	<body>

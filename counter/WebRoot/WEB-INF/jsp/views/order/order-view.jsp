@@ -7,7 +7,7 @@
   <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <meta name="viewport" content="width=device-width,target-densitydpi=high-dpi,initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
-<title>编辑订单</title>
+<title>查看订单</title>
 <script language="javascript" type="text/javascript" src="${ctx}/resources/js/jquery-1.9.1.min.js"></script>
 <link type='text/css' rel='stylesheet' href='${ctx}/resources/css/style.css' media='all' />
 <link type='text/css' rel='stylesheet' href='${ctx}/resources/css/bootstrap.css' media='all' />
@@ -163,6 +163,9 @@ function loadOrderList(){
 .barbox{width:315px;}
 .st-tj,.st-zb,.st-sc,.st-zj,.st-kd{width:56px;height:15px;background:url('/counter/resources/images/Arrow2.png') no-repeat;}
 .st-jf{width:16px;height:15px;background:url('/counter/resources/images/Arrow4.png') no-repeat}
+.hidden_enent1 { width:110px; position:absolute; top:10px; right:365px; z-index:9999}
+.edit_hidden1 { width:110px; position:absolute; top:10px; left:350px; z-index:9999}
+.resave{cursor:pointer;}
 </style>
 </head>
 
@@ -173,7 +176,7 @@ function loadOrderList(){
 <div class="header">
 	<div class="head1">
 		<div class="top">
-			<b><a href="#" onclick="EditShow_Hidden(ed1)"><img src="${ctx}/resources/images/plus.png"></a> ${pageOrderType }订单${ordervo['vorderCode']}</b>
+			<b><a href="#" onclick="EditShow_Hidden(ed1)"><img src="${ctx}/resources/images/plus.png"></a> ${pageOrderType }订单 ${ordervo['vorderCode']}</b>
 			<font><a href="#" onclick="Show_Hidden(tr1)"><img src="${ctx}/resources/images/plus.png"></a></font>
 		</div>
 		<div class="hidden_enent1" id="tr1" style="display:none;">
@@ -245,7 +248,7 @@ function loadOrderList(){
           </div>
         </div>
         <div class="mainrig">
-          <div class="repair">
+          <div class="repair o-ssave">
             <select name="" class="repair1 ista">
               <option value="3">质检</option>
               <option value="5">完成</option>
@@ -253,8 +256,8 @@ function loadOrderList(){
             <input id="ssave" type='text' class="resave" value="保存">
             <div class="clear"></div>
           </div>
-          <p>
-			  <input type="text" name="" class="repair1 cnum" value="" placeholder="顺丰单号">
+          <p class="o-csave">
+			  <input type="text" name="vcourierNumber" class="repair1 cnum" value="${ordervo['vcourierNumber']}" placeholder="顺丰单号">
 			  <input id="csave" type='text' class="resave" value="保存">
 			  <div class="clear"></div>
 		  </p>

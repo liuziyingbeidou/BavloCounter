@@ -99,7 +99,7 @@
 		<!--<div class="order-list">订单列表 X</div>-->
 		<div class="search-1">
 			<form action='' method='post'>
-				<input type='text' name='search' class="search" placehoder='搜索'>
+				<input type='text' name='search' class="search" placeholder='输入订单号'>
 				<span class="add-order" style="color:#FFFFFF;cursor: pointer;">&nbsp;+</span>
 			</form>
 		</div>

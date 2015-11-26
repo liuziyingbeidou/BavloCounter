@@ -56,9 +56,20 @@
 			 initFieldSuffix();
 			 //加载子表数据
 		  	loadSubData("${entityvo['id']}");
+		  	//控制头像显示
+			if($("#customerId").val()){
+				$(".header-loc").show();
+			}else{
+				$(".header-loc").hide();
+			}
 		});
 		//实物签收单保存
 		function save(){
+		
+			if(!ckLose("edit_btn","lose-entity")){
+				return;
+			}
+			
 			//数量
 	    	clearSuffix("entity-count","件");
 	    	//重量
@@ -78,6 +89,7 @@
 			     success : function(data) {
 			     	 $("#entityid").val(data.id);
 			     	 alert("保存成功!");
+			     	 $(".entity-pic-show img").prop("src","/counter/staticRes/"+$("#filemodel").val()+"/"+$("#FILE_0").val());
 			     },
 			     error : function(e) {
 			     	alert("保存失败!");
@@ -134,6 +146,11 @@
 						}
 						$("#customerId").val(data.id);
 					}
+					if($("#customerId").val()){
+						$(".header-loc").show();
+					}else{
+						$(".header-loc").hide();
+					}
 					closeMultiDlg();
 				});
 			}else if(type == "chain"){
@@ -169,6 +186,10 @@
 			background:none;
 		}
 		.qsd_left ul li { width: auto; padding-right: 20px; float: left;}
+		.hidden_enent { width:110px; position:relative; top:10px; right:-690px;}
+		.edit_hidden { width:110px; position:relative; top:10px; left:-15;}
+		.e-customer-add{cursor:pointer;}
+		.swqsd,.swqsd1,.qssm,.qsdn1{width:328px;}
 		</style>
 	</head>
 <body>
@@ -210,8 +231,8 @@
   <div class="qsd_main">
     <div class="qsd_left">
       <ul>
-        <li><a href="#"><img class="cusheader" src="${ctx}/resources/images/customer_01.png"></a></li>
-		<li><div class="file3"><a href="#"><input type="text" name="file" id="file"></a></div></li>
+        <li class="header-loc"><a href="#"><img class="cusheader" src="${ctx}/resources/images/customer_01.png"></a></li>
+		<li><div class="file3"><a href="#"><input class="e-customer-add" type="text" name="file" id="file"></a></div></li>
         <li class="camera"><a class="entity-upload" href="#"><img src="${ctx}/resources/images/camera.png"></a></li>
         <div class="clear"></div>
       </ul>
@@ -227,16 +248,16 @@
       </a>
       </dt>
     </div>
-    <div class="qsd_right">
+    <div class="qsd_right edit_btn">
       <div class="qsd_right_1">
-        <input type='text' name='vtype' value="${entityvo['vtype']}" placeholder='声明类型 ' class="swqsd entity-type">
+        <input type='text' name='vtype' value="${entityvo['vtype']}" placeholder='声明类型 ' class="swqsd entity-type bl-ck-null lose-entity">
       </div>
       <div class="qsd_right_1">
-        <dt><input type='text' name='icount' value="${entityvo['icount']}" placeholder="数量" class="swqs t3 entity-count"></dt>
-        <dt><input type='text' name='nweight' value="${entityvo['nweight']}" placeholder="重量" class="qsdr r2 entity-weight"></dt>
+        <dt><input type='text' name='icount' value="${entityvo['icount']}" placeholder="数量" class="swqs t3 entity-count bl-ck-null lose-entity"></dt>
+        <dt><input type='text' name='nweight' value="${entityvo['nweight']}" placeholder="重量" class="qsdr r2 entity-weight bl-ck-null lose-entity"></dt>
         <div class="clear"></div>
       </div>
-      <div class="save1"><input type='text' name='nworth' value="${entityvo['nworth']}"  placeholder='声明价值' class="swqsd1 entity-worth"></div>
+      <div class="save1"><input type='text' name='nworth' value="${entityvo['nworth']}"  placeholder='声明价值' class="swqsd1 entity-worth bl-ck-null lose-entity"></div>
       <div class="save1"><textarea name="" cols="" rows="" class="qssm" placeholder="说明">${entityvo['vmemo']}</textarea></div>
       <div class="save1"><input type='text' name='nrecoveryPrice' value="${entityvo['nrecoveryPrice']}" placeholder='回收价格' class="qsdn1 t3 entity-recoveryPrice"></div>
       <div class="qs_save1">
