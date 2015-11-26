@@ -30,13 +30,14 @@ xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.sprin
         <property name="maxUploadSize" value="5000000"></property>  
     </bean> 
     <!-- OAuth2拦截器 -->
-	<mvc:interceptors>
+	<!--<mvc:interceptors>
 		<mvc:interceptor>
-			<!-- 对所有的请求拦截使用/** ,对某个模块下的请求拦截使用：/myPath/* -->
+			 对所有的请求拦截使用/** ,对某个模块下的请求拦截使用：/myPath/* 
 			<mvc:mapping path="/**" />
 			<bean id="oauth2Interceptor" class="com.bavlo.weixin.qiye.interceptor.OAuth2Interceptor">
 			</bean>
 		</mvc:interceptor>
 	</mvc:interceptors>
 	
+-->
 </beans>
