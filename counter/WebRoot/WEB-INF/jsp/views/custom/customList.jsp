@@ -13,7 +13,7 @@
 <script src="${ctx}/resources/js/top.js"></script>
 <link href="${ctx}/resources/css/style.css" rel="stylesheet"
 	type="text/css" />
-<link href="${ctx}/resources/css/bootstrap.css" rel="stylesheet"
+<link href="${ctx}/resources/css/bootstrap-list.css" rel="stylesheet"
 	type="text/css" />
 <link href="${ctx}/resources/css/orderlist.css" rel="stylesheet"
 	type="text/css" />
@@ -78,6 +78,13 @@
 	@media screen and (max-width: 1280px) and (min-width: 320px){
 		.operate ul li h4{background:none!important}
 	}
+	.orderlist{left:0;width:470px;text-align: center;}
+	.order-main{width:480px;}
+	.operate ul li{width:auto;}
+	.main1 .left-sider{width:485px;}
+	.list-item dt{font-size:14px;}
+	
+	.operate ul li h4 span{float:none;margin-right:0px;}
 	</style>
 </head>
 

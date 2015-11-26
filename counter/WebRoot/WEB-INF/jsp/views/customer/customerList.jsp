@@ -13,23 +13,23 @@
 <script src="${ctx}/resources/js/top.js"></script>
 <link href="${ctx}/resources/css/style.css" rel="stylesheet"
 	type="text/css" />
-<link href="${ctx}/resources/css/bootstrap.css" rel="stylesheet"
+<link href="${ctx}/resources/css/bootstrap-list.css" rel="stylesheet"
 	type="text/css" />
 <link href="${ctx}/resources/css/orderlist.css" rel="stylesheet"
 	type="text/css" />
 <script src="${ctx}/resources/js/showList.js" type="text/javascript"></script>
 
-	<!-- 自定义 -->
-	<script src="${ctx}/resources/js/bavlo-event.js"></script>
-	
-	<!-- 自定义 -->
-	<script src="${ctx}/resources/js/bavlo-event.js"></script>
-		<!-- 弹框 -->
-		<!-- jQuery & jQuery UI files (needed)--> 
-		<script src="/counter/resources/jquery.multiDialog/js/jquery/jquery-ui-1.10.3.custom.js"></script> 
-		<!-- MultiDialog files (needed) --> 
-		<script src="/counter/resources/jquery.multiDialog/js/jquery.ui.dialog.extended-1.0.2.js"></script> 
-		<script src="/counter/resources/jquery.multiDialog/js/jquery.multiDialog.js"></script> 
+<!-- 自定义 -->
+<script src="${ctx}/resources/js/bavlo-event.js"></script>
+
+<!-- 自定义 -->
+<script src="${ctx}/resources/js/bavlo-event.js"></script>
+<!-- 弹框 -->
+<!-- jQuery & jQuery UI files (needed)--> 
+<script src="/counter/resources/jquery.multiDialog/js/jquery/jquery-ui-1.10.3.custom.js"></script> 
+<!-- MultiDialog files (needed) --> 
+<script src="/counter/resources/jquery.multiDialog/js/jquery.ui.dialog.extended-1.0.2.js"></script> 
+<script src="/counter/resources/jquery.multiDialog/js/jquery.multiDialog.js"></script> 
 	
 	<script type="text/javascript">
 	$(function(){
@@ -89,6 +89,13 @@
 	@media screen and (max-width: 1280px) and (min-width: 320px){
 		.operate ul li h4{background:none!important}
 	}
+	.orderlist{left:0;width:450px;text-align: center;}
+	.order-main{width:450px;}
+	.operate ul li{width:auto;}
+	.main1 .left-sider{width:465px;}
+	.list-item dt{font-size:14px;}
+	
+	.operate ul li h4 span{float:none;margin-right:0px;}
 	</style>
 </head>
 

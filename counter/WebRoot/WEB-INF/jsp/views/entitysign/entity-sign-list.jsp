@@ -14,7 +14,7 @@
 	<script type="text/javascript" src="${ctx}/resources/js/jquery.min.js"></script>
 	<script src="${ctx}/resources/js/top.js"></script>
 	<link href="${ctx}/resources/css/style.css" rel="stylesheet" type="text/css" />
-	<link href="${ctx}/resources/css/bootstrap.css" rel="stylesheet" type="text/css" />
+	<link href="${ctx}/resources/css/bootstrap-list.css" rel="stylesheet" type="text/css" />
 	<link href="${ctx}/resources/css/orderlist.css" rel="stylesheet" type="text/css" />
 	<script src="${ctx}/resources/js/showList.js" type="text/javascript"></script>
 	<!-- 自定义 -->
@@ -72,6 +72,13 @@
 	@media screen and (max-width: 1280px) and (min-width: 320px){
 		.operate ul li h4{background:none!important}
 	}
+	.orderlist{left:0;width:450px;text-align: center;}
+	.order-main{width:450px;}
+	.operate ul li{width:auto;}
+	.main1 .left-sider{width:465px;}
+	.list-item dt{font-size:14px;}
+	
+	.operate ul li h4 span{float:none;margin-right:0px;}
 	</style>
 	</head>
 
