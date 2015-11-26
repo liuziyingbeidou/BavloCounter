@@ -32,9 +32,9 @@
 		<div class="header">
 		<div class="head1">
 				<div class="top">
-					<b><a href="javascript:;" onclick="EditShow_Hidden(ed1)"><img
+					<b><a href="#" onclick="EditShow_Hidden(ed1)"><img
 								src="${ctx}/resources/images/plus.png" />
-					</a> 定制单 81812560 </b>
+					</a> 定制单${customDetail.vcustomCode }</b>
 					<font><a href="javascript:;" onclick="Show_Hidden(tr1)"><img
 								src="${ctx}/resources/images/plus.png" />
 					</a> </font>
@@ -42,7 +42,7 @@
 				<div class="hidden_enent2" id="tr1" style="display: none;">
 					<ul>
 						<li class="jian">
-							<a href="javascript:;" onclick="Show_Hidden(tr1)">一</a>
+							<a href="#" onclick="Show_Hidden(tr1)">一</a>
 						</li>
 						<jsp:include page="../menu_pg.jsp"></jsp:include>
 					</ul>
@@ -50,7 +50,7 @@
 				<div class="edit_hidden1" id="ed1" style="display: none;">
 					<ul>
 						<li class="jian2">
-							<a href="javascript:;" onclick="EditShow_Hidden(ed1)">一</a>
+							<a href="#" onclick="EditShow_Hidden(ed1)">一</a>
 						</li>
 						<jsp:include page="../menu_cau.jsp"></jsp:include>
 						</li>
@@ -69,10 +69,10 @@
 						<div class="pro">
 							<!--<img src="${ctx}/resources/images/zb_03.png" />-->
 
-							<b><a href="javascript:;" onclick="PicShow_Hidden(pic)">显示</a>
+							<b><a href="#" onclick="PicShow_Hidden(pic)">显示</a>
 							</b>
 							<div class="demo" id='pic' style='display: block;'>
-								<b><a href="javascript:;" onclick="PicShow_Hidden(pic)">隐藏</a>
+								<b><a href="#" onclick="PicShow_Hidden(pic)">隐藏</a>
 								</b>
 								<!--<b class="hide">隐藏</b>-->
 								<div class="my-gallery">
@@ -86,26 +86,6 @@
 										图片名称8
 									</h3>
 									<!--<div class="bottom"><ul><li><a href="#"><img src="${ctx}/resources/images/share.png"></a></li><li><a href="#"><img src="${ctx}/resources/images/download.png"></a></li><li><a href="#"><img src="${ctx}/resources/images/link.png"></a></li></ul></div>-->
-									</figcaption>
-									</figure>
-									<figure style="display:none;">
-									<a href="${ctx}/resources/images/zb_03.png" data-size="800x1142"><img
-											src="${ctx}/resources/images/zb_03.png" alt="Image description" />
-									</a>
-									<figcaption itemprop="caption description">
-									<h3>
-										图片名称8
-									</h3>
-									</figcaption>
-									</figure>
-									<figure style="display:none;">
-									<a href="${ctx}/resources/images/zb_03.png" data-size="800x1142"><img
-											src="${ctx}/resources/images/zb_03.png" alt="Image description" />
-									</a>
-									<figcaption itemprop="caption description">
-									<h3>
-										图片名称8
-									</h3>
 									</figcaption>
 									</figure>
 									</volist>
@@ -138,28 +118,7 @@
 									<!--<div class="bottom"><ul><li><a href="#"><img src="${ctx}/resources/images/share.png"></a></li><li><a href="#"><img src="${ctx}/resources/images/download.png"></a></li><li><a href="#"><img src="${ctx}/resources/images/link.png"></a></li></ul></div>-->
 									</figcaption>
 									</figure>
-									<figure style="display:none;">
-									<a href="${ctx}/resources/images/zb_06.png" data-size="800x1142"><img
-											src="${ctx}/resources/images/zb_06.png" alt="Image description" />
-									</a>
-									<figcaption itemprop="caption description">
-									<h3>
-										图片名称8
-									</h3>
-									</figcaption>
-									</figure>
-									<figure style="display:none;">
-									<a href="${ctx}/resources/images/zb_06.png" data-size="800x1142"><img
-											src="${ctx}/resources/images/zb_06.png" alt="Image description" />
-									</a>
-									<figcaption itemprop="caption description">
-									<h3>
-										图片名称8
-									</h3>
-									</figcaption>
-									</figure>
 									</volist>
-
 								</div>
 
 								<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
@@ -220,7 +179,7 @@
 								金属：${customDetail.nprice }
 							</dd>
 							<dd>
-								链子：${customDetail.srcchain }
+								链子：
 							</dd>
 							<dd>
 								客主石：${customDetail.iprimaryGemID } ${customDetail.iprimaryGemID }元
@@ -229,7 +188,7 @@
 								客配石：${customDetail.iforeignGemID } ${customDetail.iforeignGemNum }颗
 							</dd>
 							<dd>
-								库选石：${customDetail.stockGemID } ${customDetail.stockGemNum }颗
+								库选石：颗
 							</dd>
 							<dd>
 								刻字：${customDetail.vengrave }

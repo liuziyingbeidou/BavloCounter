@@ -521,6 +521,8 @@ text-overflow:ellipsis;
 .barbox{width:315px;}
 .st-tj,.st-zb,.st-sc,.st-zj,.st-kd{width:56px;height:15px;background:url('/counter/resources/images/Arrow2.png') no-repeat;}
 .st-jf{width:16px;height:15px;background:url('/counter/resources/images/Arrow4.png') no-repeat}
+
+.hidden_enent1 a:hover,.edit_hidden1 a:hover{text-decoration:none;}
 </style>
 </head>
 
@@ -621,10 +623,10 @@ text-overflow:ellipsis;
 			 function insert_row(id,val){
 			  i ++;
 			  R = tbl.insertRow();
-			  C = R.insertCell();
-			  C.innerHTML = "<input class='addrlist' value='"+val+"' id='"+id+"' onclick='clickSelAddr("+id+")' readonly>";
 			  D = R.insertCell();
 			  D.innerHTML = "<a onclick='deleteRow(this,"+id+")' class='address-close'>X</a>";
+			  C = R.insertCell();
+			  C.innerHTML = "<input class='addrlist' value='"+val+"' id='"+id+"' onclick='clickSelAddr("+id+")' readonly>";
 			 }
 			 function deleteRow(obj,aid){
 			  if(confirm('确定要删除吗')){

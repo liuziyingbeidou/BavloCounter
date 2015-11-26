@@ -33,7 +33,7 @@
 		//本地webservice
 		var nativeUrl = "${pageScope.basePath}/counter/webservice/http.do";
 		$(function() {
-			//宝石类型下拉框值
+			/*//宝石类型下拉框值
 			var typeUrl = "http://www.bavlo.com/getAllGemType";
 			loadSelDataStr(nativeUrl, typeUrl, "gem-type-id", "data[i].id",
 					"data[i].type_cn", function() {
@@ -51,7 +51,7 @@
 			});
 			$("#gem-shape-id").change(function() {
 				initSpecByTypeShape();
-			});
+			});*/
 			/**
 			 *$(document).ajaxStop(function () {setNowSelData(); });
 			 **/
@@ -81,6 +81,12 @@
 		  	initFieldSuffix();
 			 //加载子表数据
 		  	loadSubData("${gemvo['id']}");
+		  	//控制头像显示
+			if($("#customerId").val()){
+				$(".header-loc").show();
+			}else{
+				$(".header-loc").hide();
+			}
 		});
 		
 		//加载子表数据
@@ -100,7 +106,7 @@
 			});
 		}
 		
-		//初始化形状下拉框值
+/*		//初始化形状下拉框值
 		function initShapeByType() {
 			var gemTypeId = $("#gem-type-id").find("option:selected").attr("sid");
 			if (gemTypeId == "-1") {
@@ -117,23 +123,22 @@
 		function initSpecByTypeShape() {
 			var gemTypeId = $("#gem-type-id").find("option:selected").attr("sid");
 			var gemShapeId = $("#gem-shape-id").find("option:selected").attr("sid");
-			/*if (gemTypeId == "-1") {
-				gemTypeId = "${gemvo['vtype']}";
-			}
-			if (gemShapeId == "-1") {
-				gemShapeId = "${gemvo['vshape']}";
-			}*/
 			var specUrl = "http://www.bavlo.com/getGemCalibrated?typeId="
 					+ gemTypeId + "&shapeId=" + gemShapeId;
 			loadSelDataStr(nativeUrl, specUrl, "gem-spec-id", "data[i].id",
 					"data[i].size", function() {
 						$("#gem-spec-id").val("${gemvo['vspec']}");
 					},"选规格");
-		}
+		}*/
 		
 		
 		//宝石签收单保存
 		function save(){
+		
+			if(!ckLose("edit_btn","lose-gem")){
+				return;
+			}
+		
 			//价值
 	    	clearSuffix("gem-worth","元");
 	    	//重量
@@ -151,6 +156,9 @@
 			     success : function(data) {
 			     	 $("#gemid").val(data.id);
 			     	 alert("保存成功!");
+			     	 if($("#FILE_0").val() != "" && $("#FILE_0").val() != null && $("#FILE_0").val() != undefined){
+			     	 	$(".gem-pic-show img").prop("src","/counter/staticRes/"+$("#filemodel").val()+"/"+$("#FILE_0").val());
+			     	 }
 			     },
 			     error : function(e) {
 			     	alert("保存失败!");
@@ -185,6 +193,11 @@
 							$(".cusheader").prop("src",data.vhendimgurl);
 						}
 						$("#customerId").val(data.id);
+					}
+					if($("#customerId").val()){
+						$(".header-loc").show();
+					}else{
+						$(".header-loc").hide();
 					}
 					closeMultiDlg();
 				});
@@ -221,6 +234,11 @@
 			background:none;
 		}
 		.qsd_left ul li { width: auto; padding-right: 20px; float: left;}
+		
+		.hidden_enent { width:110px; position:relative; top:10px; right:-690px;}
+		.edit_hidden { width:110px; position:relative; top:10px; left:-15;}
+		.qsdn,.qssm{width:328px}
+		#file{cursor:pointer;}
 		</style>
 	</head>
 	<body>
@@ -241,7 +259,8 @@
 						 <input type="hidden" name="vnumber" value="${gemvo['vnumber']}">
 						 </c:otherwise>	
 					</c:choose> </b>
-			<font><a href="#" onclick="Show_Hidden(tr1)"><img src="${ctx}/resources/images/plus.png"></a></font>
+			<font>
+			<a href="#" onclick="Show_Hidden(tr1)"><img src="${ctx}/resources/images/plus.png"></a></font>
 		</div>
 		<div class="hidden_enent" id="tr1" style="display:none;">
 			<ul>
@@ -263,7 +282,7 @@
   <div class="qsd_main">
     <div class="qsd_left">
       <ul>
-        <li><a href="#"><img src="${ctx}/resources/images/customer_01.png"></a></li>
+        <li class="header-loc"><a href="#"><img src="${ctx}/resources/images/customer_01.png"></a></li>
         <li><div class="file3"><a href="#"><input type="text" name="file" id="file"></a></div></li>
         <li class="camera"><a class="gem-upload" href="#"><img src="${ctx}/resources/images/camera.png"></a></li>
         <div class="clear"></div>
@@ -281,28 +300,35 @@
 		</a>
 	</dt>
     </div>
-    <div class="qsd_right">
+    <div class="qsd_right edit_btn">
       <div class="qsd_right_1">
+      <!--
         <select name="vtype" class="qsdr r1" id="gem-type-id">
           <option value="-1">宝石</option>
         </select>
-        <dt><input type='text' name='nworth' placeholder="声明价值" class="qsdr r2 gem-worth" value="${gemvo['nworth']}"></dt>
+        -->
+        <input type='text' name='vtype' placeholder="宝石类型" class="qsdr r1 gem-type bl-ck-null lose-gem" value="${gemvo['vtype']}">
+        <dt><input type='text' name='nworth' placeholder="声明价值" class="qsdr r2 gem-worth bl-ck-null lose-gem" value="${gemvo['nworth']}"></dt>
         <div class="clear"></div>
       </div>
       <div class="qsd_right_1">
-        <select name="vshape" class="qsdr r1"  id="gem-shape-id">
+        <!--<select name="vshape" class="qsdr r1"  id="gem-shape-id">
           <option value="-1">形状</option>
         </select>
-        <dt><input type='text' name='nweight' placeholder="重量" class="qsdr r2 gem-weight" value="${gemvo['nweight']}"></dt>
+        -->
+        <input type='text' name='vshape' placeholder="宝石形状" class="qsdr r1 gem-shape bl-ck-null lose-gem" value="${gemvo['vshape']}">
+        <dt><input type='text' name='nweight' placeholder="重量" class="qsdr r2 gem-weight bl-ck-null lose-gem" value="${gemvo['nweight']}"></dt>
         <div class="clear"></div>
       </div>
       <div class="qsdtt">
-		<select name="vspec"  class="qsdt" id="gem-spec-id">
+		<!--<select name="vspec"  class="qsdt" id="gem-spec-id">
           <option value="-1">规格</option>
         </select>
+        -->
+        <input type='text' name='vspec' placeholder="宝石规格" class="qsdt gem-spec bl-ck-null lose-gem" value="${gemvo['vspec']}">
       </div>
       <div class="clear"></div>
-      <div class="qsdtt"><input type='text' name='icount' placeholder="数量" value="${gemvo['icount']}" class="qsdn t3 gem-count"></div>
+      <div class="qsdtt"><input type='text' name='icount' placeholder="数量" value="${gemvo['icount']}" class="qsdn t3 gem-count bl-ck-null lose-gem"></div>
       <div class="qssm-l"><textarea name="vmemo" cols="" rows="" class="qssm" placeholder="签收说明">${gemvo['vmemo']}</textarea></div>
       <div class="qs_save">
         <input type="button" name="button" onclick="javascript:save()" value="保存">
