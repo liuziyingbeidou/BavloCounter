@@ -13,21 +13,25 @@
 function freshOrderState(iorderState){
 	if(iorderState != "-1"){
 		$("#orderSubmit").hide();
+		$(".custom_btn").show();
 	}else{
 		$(".o-ssave").hide();
 		$(".o-csave").hide();
+		$(".custom_btn").show();
 	}
 	switch (iorderState) {
 	case "0":
 		$(".st-tj").css({"background":"url('/counter/resources/images/Arrow3.png') no-repeat"});
 		$(".o-ssave").hide();
 		$(".o-csave").hide();
+		$(".custom_btn").show();
 		break;
 	case "1":
 		$(".st-tj").css({"background":"url('/counter/resources/images/Arrow1.png') no-repeat"});
 		$(".st-zb").css({"background":"url('/counter/resources/images/Arrow3.png') no-repeat"});
 		$(".o-ssave").hide();
 		$(".o-csave").hide();
+		$(".custom_btn").show();
 		break;
 	case "2":
 		$(".st-tj").css({"background":"url('/counter/resources/images/Arrow1.png') no-repeat"});
@@ -36,6 +40,7 @@ function freshOrderState(iorderState){
 		$(".o-csave").hide();
 		$(".o-ssave").show();
 		$(".ista option[value='5']").remove(); 
+		$(".custom_btn").hide();
 		break;
 	case "3":
 		$(".st-tj").css({"background":"url('/counter/resources/images/Arrow1.png') no-repeat"});
@@ -46,6 +51,7 @@ function freshOrderState(iorderState){
 		$(".o-ssave").hide();
 		$(".o-csave").show();
 		$(".o-csave").css("padding-top","30px");
+		$(".custom_btn").hide();
 		break;
 	case "4":
 		$(".st-tj").css({"background":"url('/counter/resources/images/Arrow1.png') no-repeat"});
@@ -59,6 +65,7 @@ function freshOrderState(iorderState){
 		$(".o-csave").show();
 		$(".o-csave").css("padding-top","");
 		$(".ista option[value='3']").remove(); 
+		$(".custom_btn").hide();
 		break;
 	case "5":
 		$(".st-tj").css({"background":"url('/counter/resources/images/Arrow1.png') no-repeat"});
@@ -74,6 +81,7 @@ function freshOrderState(iorderState){
 		$(".o-csave").css("padding-top","30px");
 		//$(".ista option[value='3']").remove(); 
 		$("#ssave").hide();
+		$(".custom_btn").hide();
 		break;								
 	}
 }
