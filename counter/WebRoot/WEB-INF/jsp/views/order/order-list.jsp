@@ -10,7 +10,7 @@
 <script language="javascript" type="text/javascript" src="${ctx}/resources/js/jquery-1.8.3.min.js"></script>
 <script src="${ctx}/resources/js/top.js"></script>
 <link href="${ctx}/resources/css/style.css" rel="stylesheet" type="text/css" />
-<link href="${ctx}/resources/css/bootstrap.css" rel="stylesheet" type="text/css" />
+<link href="${ctx}/resources/css/bootstrap-list.css" rel="stylesheet" type="text/css" />
 <link href="${ctx}/resources/css/orderlist.css" rel="stylesheet" type="text/css" />
 <script src="${ctx}/resources/js/showList.js" type="text/javascript"></script>
 
@@ -90,13 +90,21 @@
 		}
 	}
 	</script>
+	<style type="text/css">
+	.orderlist{left:0;width:470px;text-align: center;}
+	.order-main{width:480px;}
+	.operate ul li{width:425px;}
+	.main1 .left-sider{width:485px;}
+	.list-item dt{font-size:14px;}
+	.search-1{width:500px;}
+	.operate ul li h4 span{float:none;margin-right:0px;}
+	</style>
 </head>
 
 <body>
-<div id="orderlist">
+<!--<div id="orderlist">-->
   <div class="orderlist">
     <div class="order-main">
-		<!--<div class="order-list">订单列表 X</div>-->
 		<div class="search-1">
 			<form action='' method='post'>
 				<input type='text' name='search' class="search" placeholder='输入订单号'>
@@ -108,7 +116,7 @@
 				<div class="left-sider">
 				  <div class="operate">
 					<ul id="juheweb">
-					<!--<c:forEach items="${orderList}" var="bean">
+					<c:forEach items="${orderList}" var="bean">
 					  <li >
 						<h4 ><img src="${ctx}/resources/images/customer_01.png"><b>${bean.customerId}</b><a href="">${bean.vorderCode}</a><span><a href="${ctx}/order/view.do?id=${bean.id}">选择</a></span></h4>
 						<div class="list-item none">
@@ -123,7 +131,7 @@
 						<div class="clear"></div>
 					  </li>
 					  </c:forEach>
-					--></ul>
+					</ul>
 					<script type="text/javascript" language="javascript">
 						//navList(12);
 					</script>
@@ -133,7 +141,7 @@
 		</div>
     </div>
   </div>
-</div>
+<!--</div>-->
 </body>
 </html>
 

@@ -10,7 +10,7 @@ h1, h2, h3, h4, h5, h6 { font-size:100%; }
 /*通用*/
 
 .main1 { margin:15px auto 0 auto;  overflow:hidden; zoom:1 }
-.main1 .left-sider { float:left; width:700px; height:400px; overflow-y:scroll; scrollbar-face-color: #fcfcfc !important; 
+.main1 .left-sider { float:left; width:600px; height:400px; overflow-y:scroll; scrollbar-face-color: #fcfcfc !important; 
 scrollbar-highlight-color: #6c6c90 !important; 
 scrollbar-shadow-color: #fcfcfc !important; 
 scrollbar-3dlight-color: #fcfcfc !important; 
@@ -26,7 +26,7 @@ scrollbar-base-color: #fcfcfc !important;}
 .operate ul li a.selected:hover { color:#fff; }
 .operate ul li .selected { background-color:#8caf00;  background-position:200px -9px; color:#fff; }
 .operate ul li {display:inline-block; margin-bottom:10px; width:100%; position: relative; right:10px; min-height:43px; _height:43px; z-index: 10; zoom:1 }
-.operate ul li h4 { cursor:pointer; background:url(../images/bg3.png) no-repeat right 19px; text-decoration:none; font-size:14px; color:#f8f8f8; line-height:43px; font-weight:normal; }
+.operate ul li h4 { cursor:pointer; background:url(../images/bg3.png) no-repeat right 25px; text-decoration:none; font-size:14px; color:#f8f8f8; line-height:43px; font-weight:normal; }
 .operate ul li h4  span { float:right; margin-right:40px;}
 .operate ul li h4  span a { text-decoration:none !important;}
 .operate ul li h4 a { text-decoration:underline;}

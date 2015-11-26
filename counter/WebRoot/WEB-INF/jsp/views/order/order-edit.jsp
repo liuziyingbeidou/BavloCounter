@@ -128,7 +128,7 @@ function loadOrderList(){
 					}else{
 						pic = "<img class='bill-pic' src='${ctx}/resources/images/good_01.png'>";
 					}
-					$("#order-list").append("<dd type='dz' sid='"+data[i].vsourceId+"' class='dz-"+data[i].vsourceId+" bill'>"+pic+"<input class='bill-num' onchange='calPrice("+data[i].vsourceId+")' type='text' placehoder='对' onum='"+data[i].nnumber+"'  value='"+data[i].nnumber+"'><b class='bill-price'>"+data[i].nprice+"元</b><a href='javascript:rlist("+data[i].vsourceId+")' class='close_c'><img src='${ctx}/resources/images/close.png'></a></dd>");
+					$("#order-list").append("<dd type='dz' sid='"+data[i].vsourceId+"' class='dz-"+data[i].vsourceId+" bill'>"+pic+"<input class='bill-num' onchange='calPrice("+data[i].vsourceId+")' type='text' placehoder='对' onum='"+data[i].nnumber+"'  value='"+data[i].nnumber+"'><b class='bill-price'>"+data[i].nprice+"元</b><a href='javascript:rlist("+data[i].vsourceId+")' class='close_c order_list_close'><img src='${ctx}/resources/images/close.png'></a></dd>");
 				}/*else if(type == "ch"){
 					$("#order-list").append("<dd type='ch' sid='"+data[i].vsourceId+"' class='ch-"+data[i].vsourceId+" bill'><span class='list_name bill-name'>"+data[i].vname+"</span><input class='list_num bill-num' style='width:40px;margin-left:10px;' type='text' value='"+data[i].nnumber+"' placeholder='条'><b class='list_price bill-price'>"+data[i].nprice+"</b><a href='javascript:rlist("+data[i].vsourceId+")' class='close_c'><img src='${ctx}/resources/images/close.png'></a></dd>");
 				}*/
@@ -139,6 +139,12 @@ function loadOrderList(){
 		}
 		$("#tbl").empty();
 		initAddr();
+		//控制清单删除
+		if("${ordervo['iorderState']}" > "1"){
+			$(".order_list_close").hide();
+		}else{
+			$(".order_list_close").show();
+		}
 	});
 }
 
