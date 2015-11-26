@@ -51,7 +51,6 @@ public class HttpContrller extends BaseController {
 	@ResponseBody
 	public String httpcalculator(String requestUrl, String outputStr){
 		
-		requestUrl = "http://www.bavlo.com/calculate";
 		System.out.println("开始调用远程接口..."+requestUrl);
 		String info = null;
 

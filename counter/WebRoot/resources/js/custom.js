@@ -99,13 +99,16 @@ function calculator(str) {
 		params.stockGemPrice+=$(this).val()+";";
 	})
 
-	var requestUrl = 'http://192.168.1.115:8888/bavlo/calculate';
+	var requestUrl = 'http://www.bavlo.com/calculate';
 	var requestMethod = "POST";//GET
 	var outputStr = 'typeId='+params.typeId+'&metalId='+params.metalId+'&metalWeight='+params.metalWeight+'&pmPrice='+params.pmPrice+'&mainGemPrice='+params.mainGemPrice+'&inlayPrice='+params.inlayPrice+'&otherPrice='+params.otherPrice+'&reportPrice='+params.reportPrice+'&expressPrice='+params.expressPrice+'&insuranceRate='+params.insuranceRate+'&chainPrice='+params.chainPrice+'&stockGemPrice='+params.stockGemPrice+'';
 	
 	httpRequest(calculatorUrl,requestUrl,requestMethod,outputStr,function(data) {
 		 	var jsonStr = JSON.parse(data);
-		 	if ("totalPrice" == str) {
+		 	if ("savePrice" == str) {
+		 		$(".finalPrice").val(jsonStr.price);
+		 		save();
+		 	} else if ("totalPrice" == str) {
 		 		$(".price").text(jsonStr.price);
 			} else if ("detailPrice" == str) {
 				$(".price").text(parseInt(jsonStr.cost)+" + "+(parseInt(jsonStr.price)-parseInt(jsonStr.cost))+" = "+jsonStr.price);
@@ -277,13 +280,18 @@ $(function() {
 
 // 定制单保存
 function saveOrUpdate() {
+	calculator("savePrice");
+}
+function save(){
 	cleanFieldSuffix();
 	var bvo = JSON.stringify($('#customBId').serializeJson());
-	var cvo = JSON.stringify($('#customCId').serializeJson());
+	var cvo = chainJson();
+	var dvo = stockGemJson();
+	
 	$.ajax({
 		type : "POST",
 		url : "save.do",
-		data : $('#custom').serialize()+"&bvo="+bvo+"&cvo="+cvo,// formid
+		data : $('#custom').serialize()+"&bvo="+bvo+"&cvo="+cvo+"&dvo="+dvo,// formid
 		async : false,
 		cache : false,
 		success : function(data) {
@@ -303,7 +311,56 @@ function saveOrUpdate() {
 		window.location = url;
 	}
 }
-
+// 拼接链子Json
+function chainJson(){
+	
+	var jsonStr = "[";
+	
+	$(".chainList").each(function(){
+		var chain_name = $(this).find(".chain_name").text();
+		var chain_item = $(this).find(".chain_item").val();
+		var cPrice = $(this).find(".cPrice").val();
+		jsonStr+="{";
+		jsonStr+="\"vchainName\":\""+chain_name+"\",";
+		jsonStr+="\"ichainItem\":\""+chain_item+"\",";
+		jsonStr+="\"nchainCost\":\""+cPrice+"\"";
+		jsonStr+="},";
+	});
+	
+	if(jsonStr.length != 1){
+		jsonStr = jsonStr.substring(0, jsonStr.length-1);
+	}
+	
+	jsonStr+="]";
+	
+	return jsonStr;
+}
+//拼接库选宝石Json
+function stockGemJson(){
+	
+	var jsonStr = "[";
+	
+	$(".stockGemList").each(function(){
+		var stockGem_name = $(this).find(".stockGem_name").text();
+		var stockGem_num = $(this).find(".stockGem_num").val();
+		var stockGem_img_path = $(this).find(".stockGem_img_path").attr("src");
+		var sgPrice = $(this).find(".sgPrice").val();
+		jsonStr+="{";
+		jsonStr+="\"vstockGemName\":\""+stockGem_name+"\",";
+		jsonStr+="\"istockGemNum\":\""+stockGem_num+"\",";
+		jsonStr+="\"vstockGemImgPath\":\""+stockGem_img_path+"\",";
+		jsonStr+="\"nstockGemCost\":\""+sgPrice+"\"";
+		jsonStr+="},";
+	});
+	
+	if(jsonStr.length != 1){
+		jsonStr = jsonStr.substring(0, jsonStr.length-1);
+	}
+	
+	jsonStr+="]";
+	
+	return jsonStr;
+}
 //增加后缀 
 function initFieldSuffix(){
 	if($(".metal_weight").val() != ""){
@@ -350,19 +407,19 @@ function setValueByFrame(type,id,callback,json,v){
 		var i=1;
 		for(var c=1;c<100;c++){
 			if($(".chain"+c).length==0){
-				i=g;
+				i=c;
 				break;
 			}
 		}
 		var html="";
 		var data = JSON.parse(json);
 		
-		html+= "<dd class='chain"+i+"'>"+
+		html+= "<dd class='chainList chain"+i+"'>"+
 			   "<div class='lianzi'>"+
 			   "<h3>链子</h3><a href='javascript:removeChain("+i+")' class='close_c'><font>X</font></a>"+
 			   "<div class='clear'></div>"+
 			   "<input class='chain_item' id='chainItem' name='ichainItem' type='text' price='"+data.sprice+"' value='' placeholder='条'>"+
-			   "<strong>"+data.sname+"</strong>" +
+			   "<strong class='chain_name'>"+data.sname+"</strong>" +
 			   "</div>" +
 			   "<input type='hidden' class='cPrice'/>"+
 			   "</dd>";
@@ -428,12 +485,12 @@ function setValueByFrame(type,id,callback,json,v){
 		 var costPrice=v.attr("costPrice");
 		 var pic=v.find("img").attr("src");
 			
-	     html+= "<dd class='stockGem"+i+"'>"+
+	     html+= "<dd class='stockGemList stockGem"+i+"'>"+
 	    	 	"<div div class='lianzi'>"+	
 			    "<h3>库选宝石</h3>"+
 			    "<a href='javascript:removeStockGem("+i+")' class='close_c'><font>X</font></a><div class='clear'></div>"+
 			    "<input class='stockGem_num' id='stockGem' name='istockGemNum' type='text' value='' price='"+costPrice+"' placeholder='颗'>"+
-				"<img src='"+pic+"'/><strong>"+type+" "+weight+"ct</strong>"+
+				"<img class='stockGem_img_path' src='"+pic+"'/><strong class='stockGem_name'>"+type+" "+weight+"ct</strong>"+
 				"</div>" +
 				"<input type='hidden' class='sgPrice'/>"+
 				"</dd>";

@@ -3,18 +3,16 @@ package com.bavlo.counter.service.custom.impl;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.annotation.Resource;
-
 import net.sf.json.JSONArray;
 
 import org.springframework.stereotype.Service;
 
 import com.bavlo.counter.model.custom.CustomBVO;
+import com.bavlo.counter.model.custom.CustomCVO;
+import com.bavlo.counter.model.custom.CustomDVO;
 import com.bavlo.counter.model.custom.CustomVO;
-import com.bavlo.counter.model.order.OrderVO;
 import com.bavlo.counter.service.custom.itf.ICustomService;
 import com.bavlo.counter.service.impl.CommonService;
-import com.bavlo.counter.service.order.itf.IOrderService;
 import com.bavlo.counter.utils.CommonUtils;
 import com.bavlo.counter.utils.ObjectToJSON;
 import com.bavlo.counter.utils.StringUtil;
@@ -29,14 +27,21 @@ import com.bavlo.counter.utils.StringUtil;
  */
 @Service("CustomService")
 public class CustomService extends CommonService implements ICustomService {
-	
-	
-	@Resource
-	private IOrderService orderService;
 
 	@Override
 	public void saveCustom(CustomVO customVO) {
 
+	}
+	
+	@Override
+	public Integer saveCustomRelID(CustomVO customVO) {
+		Integer id = null;
+		try {
+			id = saveReID(customVO);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return id;
 	}
 
 	@Override
@@ -46,14 +51,13 @@ public class CustomService extends CommonService implements ICustomService {
 
 	@Override
 	public void updateCustom(CustomVO customVO) {
-		
+		update(customVO);
 	}
 	
 	@Override
 	public void saveOrUpdateCustom(CustomVO customVO) {
 		try {
 			saveOrUpdate(customVO);
-//			orderService.backWriteByCum(customVO.getOrderId(), customVO.getCustomerId());
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -131,6 +135,56 @@ public class CustomService extends CommonService implements ICustomService {
 	public List<CustomBVO> findListCustomB(Integer mid) {
 		List<CustomBVO>  list = findAll(CustomBVO.class, " customId="+mid);
 		return list;
+	}
+	
+	@Override
+	public List<CustomCVO> findListCustomC(Integer mid) {
+		List<CustomCVO>  list = findAll(CustomCVO.class, " customId="+mid);
+		return list;
+	}
+	
+	@Override
+	public List<CustomDVO> findListCustomD(Integer mid) {
+		List<CustomDVO>  list = findAll(CustomDVO.class, " customId="+mid);
+		return list;
+	}
+
+	@Override
+	public void saveCustomC(List<CustomCVO> listCVO) {
+		try {
+			save(listCVO);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+
+	@Override
+	public void deleteCustomC(Integer mid) {
+		List<CustomCVO>  list = findListCustomC(mid);
+		if(list != null){
+			for (CustomCVO customCVO : list) {
+				delete(customCVO);
+			}
+		}
+	}
+
+	@Override
+	public void saveCustomD(List<CustomDVO> listDVO) {
+		try {
+			save(listDVO);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+
+	@Override
+	public void deleteCustomD(Integer mid) {
+		List<CustomDVO>  list = findListCustomD(mid);
+		if(list != null){
+			for (CustomDVO customDVO : list) {
+				delete(customDVO);
+			}
+		}
 	}
 
 }

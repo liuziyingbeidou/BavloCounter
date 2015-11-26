@@ -11,7 +11,7 @@ import com.bavlo.counter.model.IdEntity;
 /**
  * @Title: 宝珑Counter
  * @ClassName: CustomCVO
- * @Description: 实物签收单子表（链子）
+ * @Description: 定制单子表（链子）
  * @author shijf
  * @date 2015-11-9 下午07:21:21
  */
@@ -25,25 +25,17 @@ public class CustomCVO extends IdEntity implements Serializable {
 	 */
 	private Integer customId;
 	/**
-	 * 链子主键
-	 */
-	private Integer srcchainId;
-	/**
 	 * 链子名称
 	 */
 	private String vchainName;
 	/**
-	 * 链子材质
+	 * 链子数量
 	 */
-	private String vchainMetal;
-	/**
-	 * 链子规格
-	 */
-	private String vchainSize;
+	private Integer ichainItem;
 	/**
 	 * 链子价格
 	 */
-	private BigDecimal vchainCost;
+	private BigDecimal nchainCost;
 
 	public Integer getCustomId() {
 		return customId;
@@ -51,14 +43,6 @@ public class CustomCVO extends IdEntity implements Serializable {
 
 	public void setCustomId(Integer customId) {
 		this.customId = customId;
-	}
-
-	public Integer getSrcchainId() {
-		return srcchainId;
-	}
-
-	public void setSrcchainId(Integer srcchainId) {
-		this.srcchainId = srcchainId;
 	}
 
 	public String getVchainName() {
@@ -69,28 +53,20 @@ public class CustomCVO extends IdEntity implements Serializable {
 		this.vchainName = vchainName;
 	}
 
-	public String getVchainMetal() {
-		return vchainMetal;
+	public Integer getIchainItem() {
+		return ichainItem;
 	}
 
-	public void setVchainMetal(String vchainMetal) {
-		this.vchainMetal = vchainMetal;
+	public void setIchainItem(Integer ichainItem) {
+		this.ichainItem = ichainItem;
 	}
 
-	public String getVchainSize() {
-		return vchainSize;
+	public BigDecimal getNchainCost() {
+		return nchainCost;
 	}
 
-	public void setVchainSize(String vchainSize) {
-		this.vchainSize = vchainSize;
-	}
-
-	public BigDecimal getVchainCost() {
-		return vchainCost;
-	}
-
-	public void setVchainCost(BigDecimal vchainCost) {
-		this.vchainCost = vchainCost;
+	public void setNchainCost(BigDecimal nchainCost) {
+		this.nchainCost = nchainCost;
 	}
 
 	public static long getSerialversionuid() {

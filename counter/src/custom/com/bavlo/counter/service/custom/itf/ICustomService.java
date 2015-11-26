@@ -3,6 +3,8 @@ package com.bavlo.counter.service.custom.itf;
 import java.util.List;
 
 import com.bavlo.counter.model.custom.CustomBVO;
+import com.bavlo.counter.model.custom.CustomCVO;
+import com.bavlo.counter.model.custom.CustomDVO;
 import com.bavlo.counter.model.custom.CustomVO;
 
 /**
@@ -20,6 +22,14 @@ public interface ICustomService {
 	 * @return void
 	 */
 	public void saveCustom(CustomVO customVO);
+	
+	
+	/** 
+	 * @Description: 保存定制单并返回ID 
+	 * @param customVO
+	 * @return Integer
+	 */
+	public Integer saveCustomRelID(CustomVO customVO);
 
 	/**
 	 * @Description: 删除定制单
@@ -78,11 +88,55 @@ public interface ICustomService {
 	public void deleteCustomB(Integer mid);
 	
 	/**
+	 * @Description: 保存子表
+	 * @param @param listCVO
+	 * @return void
+	 */
+	public void saveCustomC(List<CustomCVO> listCVO);
+	
+	/** 
+	 * @Description: 根据主表主键删除子表数据
+	 * @param @param mid
+	 * @return void
+	 */
+	public void deleteCustomC(Integer mid);
+	
+	/**
+	 * @Description: 保存子表
+	 * @param @param listDVO
+	 * @return void
+	 */
+	public void saveCustomD(List<CustomDVO> listDVO);
+	
+	/** 
+	 * @Description: 根据主表主键删除子表数据
+	 * @param @param mid
+	 * @return void
+	 */
+	public void deleteCustomD(Integer mid);
+	
+	/**
 	 * @Description: 根据主表主键查询子表数据
 	 * @param @param id
 	 * @param @return
 	 * @return List<CustomBVO>
 	 */
 	public List<CustomBVO> findListCustomB(Integer id);
+	
+	/**
+	 * @Description: 根据主表主键查询子表数据
+	 * @param @param id
+	 * @param @return
+	 * @return List<CustomCVO>
+	 */
+	public List<CustomCVO> findListCustomC(Integer id);
+	
+	/**
+	 * @Description: 根据主表主键查询子表数据
+	 * @param @param id
+	 * @param @return
+	 * @return List<CustomDVO>
+	 */
+	public List<CustomDVO> findListCustomD(Integer id);
 
 }
