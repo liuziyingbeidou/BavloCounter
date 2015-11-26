@@ -226,7 +226,7 @@ public class OrderController extends BaseController {
 		OrderVO orderVO = orderService.findOrderInfoBySql(id);
 		
 		ModelAndView model = new ModelAndView(IConstant.PATH_ORDER + IConstant.ORDER_VIEW);
-		model.addObject("pageOrderType", IConstant.PAGE_TYPE_EDIT);
+		model.addObject("pageOrderType", IConstant.PAGE_TYPE_VIEW);
 		model.addObject("ordervo",orderVO);
 		return model;
 	}
