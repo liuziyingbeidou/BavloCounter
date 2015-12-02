@@ -66,9 +66,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     </div>
     </form>
     <br />
-    <p class="text-right text-gray">基于<a class="text-gray" target="_blank" href="http://www.pintuer.com">拼图前端框架</a>构建</p>
 </div>
-
-<div class="hidden"><script src="http://s4.cnzz.com/stat.php?id=5952475&web_id=5952475" language="JavaScript"></script></div>
 </body>
 </html>
