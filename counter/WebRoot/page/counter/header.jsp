@@ -26,23 +26,23 @@ String lstName = request.getParameter("lstName");
             <ul class="nav nav-inline admin-nav">
                 <li><a href="index.jsp" class="icon-home"> 开始</a>
                     <ul>
-                    <li><a href="system.jsp">系统设置</a></li>
+                    <li class="active"><a href="system.jsp">系统设置</a></li>
                     <li><a href="content.jsp">内容管理</a></li>
                     <li><a href="#">订单管理</a></li>
-                    <li class="active"><a href="#">会员管理</a></li>
+                    <li><a href="#">会员管理</a></li>
                     <li><a href="#">文件管理</a></li>
                     <li><a href="#">栏目管理</a></li>
                     </ul>
                 </li>
-                <li class="system"><a href="system.jsp?mod=system" class="icon-cog"> 系统</a>
+                <li class="system"><a href="system.jsp?mod=system" class="icon-user"> 客户</a>
             		<ul>
-            		<li class="set-pub"><a href="system.jsp?mod=system&lst=set-pub&modName=系统&lstName=全局设置">全局设置</a></li>
-            		<li class="set-sys active"><a href="system.jsp?mod=system&lst=set-sys&modName=系统&lstName=系统设置">系统设置</a></li>
+            		<li class="set-pub"><a href="index.jsp?mod=system&lst=set-pub&modName=系统&lstName=全局设置">全局设置</a></li>
+            		<li class="set-sys active"><a href="index.jsp?mod=system&lst=set-sys&modName=系统&lstName=系统设置">系统设置</a></li>
             		<li><a href="#">会员设置</a></li>
             		<li><a href="#">积分设置</a></li>
             		</ul>
                 </li>
-                <li class="active"><a href="content.jsp" class="icon-file-text"> 内容</a>
+                <li class="active"><a href="content.jsp" class="icon-file-text"> 订单</a>
 					<ul>
 					<li><a href="#">添加内容</a></li>
 					<li class="active"><a href="#">内容管理</a></li>
@@ -50,10 +50,10 @@ String lstName = request.getParameter("lstName");
 					<li><a href="#">链接管理</a></li>
 					</ul>
                 </li>
-                <li><a href="#" class="icon-shopping-cart"> 订单</a></li>
-                <li><a href="#" class="icon-user"> 会员</a></li>
-                <li><a href="#" class="icon-file"> 文件</a></li>
-                <li><a href="#" class="icon-th-list"> 栏目</a></li>
+                <li><a href="#" class="icon-shopping-cart"> 定制单</a></li>
+                <li><a href="#" class="icon-user"> 宝石签收单</a></li>
+                <li><a href="#" class="icon-cog"> 实物签收单</a></li>
+                <li><a href="#" class="icon-th-list"> 配石单</a></li>
             </ul>
         </div>
         <div class="admin-bread">

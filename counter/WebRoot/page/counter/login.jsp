@@ -35,7 +35,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
             <br /><br />
             <form action="index.jsp" method="post">
             <div class="panel">
-                <div class="panel-head"><strong>登录宝珑电子柜台管理系统</strong></div>
+                <div class="panel-head"><strong>(宝珑)电子柜台管理系统</strong></div>
                 <div class="panel-body" style="padding:30px;">
                     <div class="form-group">
                         <div class="field field-icon-right">
@@ -53,7 +53,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                 <div class="panel-foot text-center"><button class="button button-block bg-main text-big">立即登录后台</button></div>
             </div>
             </form>
-            <div class="text-right text-small text-gray padding-top">基于<a class="text-gray" target="_blank" href="http://www.pintuer.com">拼图前端框架</a>构建</div>
+            <div class="text-right text-small text-gray padding-top">构建于2015.12</div>
         </div>
     </div>
 </div>
