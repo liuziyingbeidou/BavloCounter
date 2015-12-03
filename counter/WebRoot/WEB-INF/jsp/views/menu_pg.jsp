@@ -46,10 +46,10 @@ function closeMenu(){
 }
 </script>
 
-<!--
+
 <li class="menu-custom-list"><a href="#">定制单</a></li>
 <li class="menu-custom-list-view"><a href="#">查看定制单</a></li>
--->
+
 <li class="menu-entity-list"><a href="#">实物签收单</a></li>
 <li class="menu-gem-list"><a href="#">宝石签收单</a></li>
 <li class="menu-order-list"><a href="#">订单</a></li>
