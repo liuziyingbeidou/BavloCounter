@@ -19,7 +19,7 @@ public class CustomerVO extends IdEntity {
 	/** 
 	 * ¼ÓÃËµêID 
 	 */ 
-	private Long agentId;
+	private String agentId;
 	/** 
 	 * ¿Í·þ±àºÅ
 	 */ 
@@ -114,11 +114,11 @@ public class CustomerVO extends IdEntity {
 	@Column(length=50)
 	private String vsubscribeTime;
 
-	public Long getAgentId() {
+	public String getAgentId() {
 		return agentId;
 	}
 
-	public void setAgentId(Long agentId) {
+	public void setAgentId(String agentId) {
 		this.agentId = agentId;
 	}
 
