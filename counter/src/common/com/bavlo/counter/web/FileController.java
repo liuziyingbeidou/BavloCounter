@@ -25,8 +25,8 @@ public class FileController extends BaseController implements ServletContextAwar
 	
     /**
      * @Description: 下载
-     * @param @param filePath 模块存储路径
-     * @param @param fileName 文件名
+     * @param @param filePath 模块存储路径 eg：entitysign
+     * @param @param fileName 文件名 eg:2015120200909.jpg
      * @param @param request
      * @param @param response
      * @param @return
