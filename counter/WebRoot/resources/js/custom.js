@@ -9,7 +9,7 @@ params.mainGemPrice = 0;
 params.inlayPrice = 0;
 params.pmPrice = 0;
 params.otherPrice = 0;
-params.reportPrice = 25;
+params.reportPrice = 0;
 params.chainPrice = "";
 params.stockGemPrice = "";
 
@@ -25,38 +25,38 @@ $(function() {
 	})
 	// 金属重量值
 	$("input[id='metalWeight']").blur(function() {
-		checkNum(this);
-		params.metalWeight = $(this).val();
+		params.metalWeight = parseInt($(this).val()) * 1;
 		// 增加后缀
 		initSuffix("metal_weight","克");
+		checkNum(this);
 	})
 	// 制版费用值
 	$("input[id='pmPrice']").blur(function() {
-		checkNum(this);
-		params.pmPrice = $(this).val();
+		params.pmPrice = parseInt($(this).val()) * 1;
 		// 增加后缀
 		initSuffix("pm_price","元");
+		checkNum(this);
 	})
 	// 主石保价值
 	$("input[id='mainGemPrice']").blur(function() {
-		checkNum(this);
 		params.mainGemPrice = parseInt($(this).val()) * 0.04;
 		// 增加后缀
 		initSuffix("kzs_price","元");
+		checkNum(this);
 	})
 	// 配石数量
 	$("input[id='inlayPrice']").blur(function() {
-		checkNum(this);
 		params.inlayPrice = parseInt($(this).val()) * 2;
 		// 增加后缀
 		initSuffix("kps_count","颗");
+		checkNum(this);
 	})
 	// 其他价格
 	$("input[id='otherPrice']").blur(function() {
-		checkNum(this);
-		params.otherPrice = $(this).val();
+		params.otherPrice = parseInt($(this).val()) * 1;
 		// 增加后缀
   		initSuffix("other_price","元");
+  		checkNum(this);
 	})
 	// 鉴定费用
 	$("select[id='certificate']").change(function() {
@@ -83,8 +83,13 @@ $(function() {
 //计算价格
 function calculator(str) {
 	var weight = params.metalWeight;
-	checkNum(weight);
-	if (weight == "" || weight == 0) {
+	if (weight >= 500) {
+		alert("金属不能大于500克");
+		$("#metalWeight").val("");
+		$("#metalWeight").focus();
+		return;
+	}
+	if (weight == "" || weight == 0 || isNaN(weight)) {
 		alert("请输入正确的金属重量");
 		$("#metalWeight").val("");
 		$("#metalWeight").focus();
@@ -433,7 +438,6 @@ function setValueByFrame(type,id,callback,json,v){
 		 })
 		closeMultiDlg();
 	}else if(type == "signGem"){
-		alert(id);
 		var gemSign = $("#gemSignId").val();
 		var gemSignB = $("#gemSignBId").val();
 		var url = "/counter/custom/getGem.do";
@@ -562,11 +566,8 @@ function checkNum(obj) {
 	if ($(obj).val() == "") {
 		$(obj).val(0);
 		return;
-	} else {
-		if (!reg.test($(obj).val())) {
-			$(obj).focus();
+	} else if (!reg.test($(obj).val())) {
 			$(obj).val("");
 			return;
-		}
 	}
 }
