@@ -1,8 +1,6 @@
 <%@ page language="java" import="java.util.*" pageEncoding="utf-8"%>
-<%
-String path = request.getContextPath();
-String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
-%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<c:set var="ctx" value="${pageContext.request.contextPath }"></c:set>
 
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html>
@@ -60,7 +58,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
       </div>
     </form>
     <hr>
-    <p>© 2015 Build.</p>
+    <p>© 2015 Build By Bavlo.</p>
   </div>
 </div>
 </body>

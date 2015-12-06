@@ -350,7 +350,7 @@ gallery.html css
 .fixed-layout .admin-sidebar {
   height: 100%;
   overflow-x: hidden;
-  overflow-y: scroll;
+  /**overflow-y: scroll;**/
 }
 
 .fixed-layout .admin-sidebar.am-active {
