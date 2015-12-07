@@ -629,10 +629,10 @@ text-overflow:ellipsis;
 			 function insert_row(id,val){
 			  i ++;
 			  R = tbl.insertRow();
+			  C.innerHTML = "<input class='addrlist' value='"+val+"' id='"+id+"' onclick='clickSelAddr("+id+")' readonly>";
 			  D = R.insertCell();
 			  D.innerHTML = "<a onclick='deleteRow(this,"+id+")' class='address-close'>X</a>";
 			  C = R.insertCell();
-			  C.innerHTML = "<input class='addrlist' value='"+val+"' id='"+id+"' onclick='clickSelAddr("+id+")' readonly>";
 			 }
 			 function deleteRow(obj,aid){
 			  if(confirm('确定要删除吗')){
