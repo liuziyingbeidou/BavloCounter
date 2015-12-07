@@ -1,142 +1,25 @@
-// 计算价格
-var params = {};
-params.insuranceRate = 0.005;
-params.expressPrice = 22;
-params.typeId = 1;
-params.metalId = 1;
-params.metalWeight = 0;
-params.mainGemPrice = 0;
-params.inlayPrice = 0;
-params.pmPrice = 0;
-params.otherPrice = 0;
-params.reportPrice = 0;
-params.chainPrice = "";
-params.stockGemPrice = "";
-
-$(function() {
-
-	// 款式类型值
-	$("select[id='styleType']").change(function() {
-		params.typeId = $(this).val();
-	})
-	// 金属类型值
-	$("select[id='metalType']").change(function() {
-		params.metalId = $(this).val();
-	})
-	// 金属重量值
-	$("input[id='metalWeight']").blur(function() {
-		params.metalWeight = parseInt($(this).val()) * 1;
-		// 增加后缀
-		initSuffix("metal_weight","克");
-		checkNum(this);
-	})
-	// 制版费用值
-	$("input[id='pmPrice']").blur(function() {
-		params.pmPrice = parseInt($(this).val()) * 1;
-		// 增加后缀
-		initSuffix("pm_price","元");
-		checkNum(this);
-	})
-	// 主石保价值
-	$("input[id='mainGemPrice']").blur(function() {
-		params.mainGemPrice = parseInt($(this).val()) * 0.04;
-		// 增加后缀
-		initSuffix("kzs_price","元");
-		checkNum(this);
-	})
-	// 配石数量
-	$("input[id='inlayPrice']").blur(function() {
-		params.inlayPrice = parseInt($(this).val()) * 2;
-		// 增加后缀
-		initSuffix("kps_count","颗");
-		checkNum(this);
-	})
-	// 其他价格
-	$("input[id='otherPrice']").blur(function() {
-		params.otherPrice = parseInt($(this).val()) * 1;
-		// 增加后缀
-  		initSuffix("other_price","元");
-  		checkNum(this);
-	})
-	// 鉴定费用
-	$("select[id='certificate']").change(function() {
-		if ($(this).val() == 1) {
-			params.reportPrice = 25;
-		} else {
-			params.reportPrice = 0;
-		}
-
-	})
-
-	// 最终价格
-	$(".calculator_btn").click(function() {
-		calculator("totalPrice")
-	})
-	
-	// 价格详情
-	$(".calculator_btn2").click(function() {
-		calculator("detailPrice")
-	})
-	
-})
-
-//计算价格
-function calculator(str) {
-	var weight = params.metalWeight;
-	if (weight >= 500) {
-		alert("金属不能大于500克");
-		$("#metalWeight").val("");
-		$("#metalWeight").focus();
-		return;
-	}
-	if (weight == "" || weight == 0 || isNaN(weight)) {
-		alert("请输入正确的金属重量");
-		$("#metalWeight").val("");
-		$("#metalWeight").focus();
-		return;
-	}
-	params.chainPrice = "";
-	$(".cPrice").each(function() {
-		params.chainPrice+=$(this).val()+";";
-	})
-	params.stockGemPrice = "";
-	$(".sgPrice").each(function() {
-		params.stockGemPrice+=$(this).val()+";";
-	})
-
-	var requestUrl = 'http://www.bavlo.com/calculate';
-	var requestMethod = "POST";//GET
-	var outputStr = 'typeId='+params.typeId+'&metalId='+params.metalId+'&metalWeight='+params.metalWeight+'&pmPrice='+params.pmPrice+'&mainGemPrice='+params.mainGemPrice+'&inlayPrice='+params.inlayPrice+'&otherPrice='+params.otherPrice+'&reportPrice='+params.reportPrice+'&expressPrice='+params.expressPrice+'&insuranceRate='+params.insuranceRate+'&chainPrice='+params.chainPrice+'&stockGemPrice='+params.stockGemPrice+'';
-	
-	httpRequest(calculatorUrl,requestUrl,requestMethod,outputStr,function(data) {
-		 	var jsonStr = JSON.parse(data);
-		 	if ("savePrice" == str) {
-		 		$(".finalPrice").val(jsonStr.price);
-		 		save();
-		 	} else if ("totalPrice" == str) {
-		 		$(".price").text(jsonStr.price);
-			} else if ("detailPrice" == str) {
-				$(".price").text(parseInt(jsonStr.cost)+" + "+(parseInt(jsonStr.price)-parseInt(jsonStr.cost))+" = "+jsonStr.price);
-			}
-	});
-}
-
+/**
+ * @author shijf
+ * 定制单js
+ */
 //本地webservice
 var nativeUrl = "/counter/webservice/http.do";
+//计算价格webservice
 var calculatorUrl = "/counter/webservice/httpcalculator.do";
 //宝石图片class名 
 var gemSignClass = "";
+//初始基础数据
 $(function() {
 
 	// 款式类型下拉框值
 	var typeUrl = "http://www.bavlo.com/getAllStyleType";
-	loadSelData(nativeUrl, typeUrl, "styleType", "data[i].id",
+	loadSelDataStr(nativeUrl, typeUrl, "styleType", "data[i].id",
 			"data[i].type_name_cn", function() {
 				$("#styleType").val("${customEdit['srcstyleType']}");
 			},"款式");
 	// 金属材质下拉框值
 	var typeUrl = "http://www.bavlo.com/getAllMetalMaterialType";
-	loadSelData(nativeUrl, typeUrl, "metalType", "data[i].id",
+	loadSelDataStr(nativeUrl, typeUrl, "metalType", "data[i].id",
 			"data[i].metal_type_cn", function() {
 				$("#metalType").val("${customEdit['srcmetal']}");
 			},"金属");
@@ -149,7 +32,7 @@ $(function() {
 			},"手寸");
 	// 当款式类型不是戒指时，隐藏戒指手寸选项
 	$("#styleType").change(function() {
-		if ($("#styleType").val() == "1") {
+		if ($("#styleType").val() == "戒指") {
 			$("#ringSize").css({
 				display : "block"
 			});
@@ -259,10 +142,10 @@ $(function() {
 	 	}
 	 });
 	 
-	 //字体改变样式
+	 //刻字字体样式
+	 initFont();
 	 $(".ziti").change(function(){
-		 var font=$('.ziti').val();
-		 $(".kezi").css({"font-family":font}); 
+		 initFont();
 	 })
 	 
 	//加载子表数据
@@ -281,12 +164,145 @@ $(function() {
 			}
 		});
 	}
+	initFieldSuffix();
 });
+
+// 计算价格
+var params = {};
+params.insuranceRate = 0.005;
+params.expressPrice = 22;
+params.typeId = 1;
+params.metalId = 1;
+params.metalWeight = 0;
+params.mainGemPrice = 0;
+params.inlayPrice = 0;
+params.pmPrice = 0;
+params.otherPrice = 0;
+params.reportPrice = 0;
+params.chainPrice = "";
+params.stockGemPrice = "";
+
+$(function() {
+	
+	// 款式类型值
+	$("select[id='styleType']").change(function() {
+		params.typeId = $(this).find("option:selected").attr("sid");
+	})
+	
+	// 金属类型值
+	$("select[id='metalType']").change(function() {
+		params.metalId = $(this).find("option:selected").attr("sid");
+	})
+	
+	// 金属重量值
+	$("input[id='metalWeight']").blur(function() {
+		params.metalWeight = parseInt($(this).val()) * 1;
+		// 增加后缀
+		initSuffix("metal_weight","克");
+		checkNum(this);
+	})
+	
+	// 制版费用值
+	$("input[id='pmPrice']").blur(function() {
+		params.pmPrice = parseInt($(this).val()) * 1;
+		// 增加后缀
+		initSuffix("pm_price","元");
+		checkNum(this);
+	})
+	
+	// 主石保价值
+	$("input[id='mainGemPrice']").blur(function() {
+		params.mainGemPrice = parseInt($(this).val()) * 0.04;
+		// 增加后缀
+		initSuffix("kzs_price","元");
+		checkNum(this);
+	})
+	
+	// 配石数量
+	$("input[id='inlayPrice']").blur(function() {
+		params.inlayPrice = parseInt($(this).val()) * 2;
+		// 增加后缀
+		initSuffix("kps_count","颗");
+		checkNum(this);
+	})
+	
+	// 其他价格
+	$("input[id='otherPrice']").blur(function() {
+		params.otherPrice = parseInt($(this).val()) * 1;
+		// 增加后缀
+  		initSuffix("other_price","元");
+  		checkNum(this);
+	})
+	
+	// 鉴定费用
+	$("select[id='certificate']").change(function() {
+		if ($(this).val() == 1) {
+			params.reportPrice = 25;
+		} else {
+			params.reportPrice = 0;
+		}
+
+	})
+
+	// 最终价格
+	$(".calculator_btn").click(function() {
+		calculator("totalPrice")
+	})
+	
+	// 价格详情
+	$(".calculator_btn2").click(function() {
+		calculator("detailPrice")
+	})
+	
+})
+
+//计算价格
+function calculator(str) {
+	var weight = params.metalWeight;
+	if (weight >= 500) {
+		alert("金属不能大于500克");
+		$("#metalWeight").val("");
+		$("#metalWeight").focus();
+		return;
+	}
+	if (weight == "" || weight == 0 || isNaN(weight)) {
+		alert("请输入正确的金属重量");
+		$("#metalWeight").val("");
+		$("#metalWeight").focus();
+		return;
+	}
+	params.chainPrice = "";
+	$(".cPrice").each(function() {
+		params.chainPrice+=$(this).val()+";";
+	})
+	params.stockGemPrice = "";
+	$(".sgPrice").each(function() {
+		params.stockGemPrice+=$(this).val()+";";
+	})
+
+	var requestUrl = 'http://www.bavlo.com/calculate';
+	var requestMethod = "POST";//GET
+	var outputStr = 'typeId='+params.typeId+'&metalId='+params.metalId+'&metalWeight='+params.metalWeight+'&pmPrice='+params.pmPrice+'&mainGemPrice='+params.mainGemPrice+'&inlayPrice='+params.inlayPrice+'&otherPrice='+params.otherPrice+'&reportPrice='+params.reportPrice+'&expressPrice='+params.expressPrice+'&insuranceRate='+params.insuranceRate+'&chainPrice='+params.chainPrice+'&stockGemPrice='+params.stockGemPrice+'';
+	
+	httpRequest(calculatorUrl,requestUrl,requestMethod,outputStr,function(data) {
+		 	var jsonStr = JSON.parse(data);
+		 	if ("savePrice" == str) {
+		 		$(".finalPrice").val(jsonStr.price);
+		 		save();
+		 	} else if ("totalPrice" == str) {
+		 		$(".price").text(jsonStr.price);
+			} else if ("detailPrice" == str) {
+				$(".price").text(parseInt(jsonStr.cost)+" + "+(parseInt(jsonStr.price)-parseInt(jsonStr.cost))+" = "+jsonStr.price);
+			}
+	});
+}
 
 // 定制单保存
 function saveOrUpdate() {
+	//通过计算后保存
 	calculator("savePrice");
 }
+// 定制单保存方法
 function save(){
 	cleanFieldSuffix();
 	var bvo = JSON.stringify($('#customBId').serializeJson());
@@ -316,6 +332,7 @@ function save(){
 		window.location = url;
 	}
 }
+
 // 拼接链子Json
 function chainJson(){
 	
@@ -340,6 +357,7 @@ function chainJson(){
 	
 	return jsonStr;
 }
+
 //拼接库选宝石Json
 function stockGemJson(){
 	
@@ -365,44 +383,6 @@ function stockGemJson(){
 	jsonStr+="]";
 	
 	return jsonStr;
-}
-//增加后缀 
-function initFieldSuffix(){
-	if($(".metal_weight").val() != ""){
-		 //金属重量 
-		initSuffix("metal_weight","克");
-	}
-  	if($(".kzs_price").val() != ""){
-		//主石金额 
-		initSuffix("kzs_price","元"); 
-	}
-  	if($(".kps_count").val() != ""){
-		//配石数量
-		initSuffix("kps_count","颗"); 
-	}
-  	if($(".pm_price").val() != ""){
-  		//起版费用
-  		initSuffix("pm_price","元"); 
-  	}
-  	if($(".other_price").val() != ""){
-		//其他金额 
-		initSuffix("other_price","元"); 
-	}
-}
-
-//清除后缀
-function cleanFieldSuffix(){
-	//金属重量 
-	clearSuffix("metal_weight","克");
-	//主石金额 
-	clearSuffix("kzs_price","元");
-	//配石数量
-	clearSuffix("kps_count","颗");
-	//制版金额 
-	clearSuffix("pm_price","元");
-	//其他金额 
-	clearSuffix("other_price","元");
-
 }
 
 //子窗体调用
@@ -539,12 +519,13 @@ function setValueByFrame(type,id,callback,json,v){
 	}
 	
 }
+
 //删除清单
 function rlist(className){
 	$("."+className).remove();
 }
 
-
+//隐藏主石或配石
 function h(str) {
 	if ("kzsGem" == str) {
 		params.mainGemPrice = 0;
@@ -555,12 +536,18 @@ function h(str) {
 	//$("." + str + "_btn").text(text.replace('-', '+'));
 	$("." + str).hide();
 }
+
+//删除库选石
 function removeStockGem(id) {
 	$(".stockGem" + id).remove();
 }
+
+//删除链子
 function removeChain(id) {
 	$(".chain" + id).remove();
 }
+
+//检查数值
 function checkNum(obj) {
 	var reg = new RegExp("^[0-9].*$");
 	if ($(obj).val() == "") {
@@ -570,4 +557,49 @@ function checkNum(obj) {
 			$(obj).val("");
 			return;
 	}
+}
+
+//增加后缀 
+function initFieldSuffix(){
+	if($(".metal_weight").val() != ""){
+		 //金属重量 
+		initSuffix("metal_weight","克");
+	}
+  	if($(".kzs_price").val() != ""){
+		//主石金额 
+		initSuffix("kzs_price","元"); 
+	}
+  	if($(".kps_count").val() != ""){
+		//配石数量
+		initSuffix("kps_count","颗"); 
+	}
+  	if($(".pm_price").val() != ""){
+  		//起版费用
+  		initSuffix("pm_price","元"); 
+  	}
+  	if($(".other_price").val() != ""){
+		//其他金额 
+		initSuffix("other_price","元"); 
+	}
+}
+
+//清除后缀
+function cleanFieldSuffix(){
+	//金属重量 
+	clearSuffix("metal_weight","克");
+	//主石金额 
+	clearSuffix("kzs_price","元");
+	//配石数量
+	clearSuffix("kps_count","颗");
+	//制版金额 
+	clearSuffix("pm_price","元");
+	//其他金额 
+	clearSuffix("other_price","元");
+
+}
+
+//改变字体
+function initFont(){
+	var font=$('.ziti').find("option:selected").val();
+	$(".kezi").css({"font-family":font});
 }

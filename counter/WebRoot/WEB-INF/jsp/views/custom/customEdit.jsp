@@ -88,19 +88,19 @@
 		value="${number }" />
 	-->
 	<input type="hidden" id='id' name='id'
-		value="${customEdit.id }" />
+		value="${customEdit['id'] }" />
 	<input type="hidden" id='orderId' name='orderId'
-		value="${customEdit.orderId }" />
+		value="${customEdit['orderId'] }" />
 	<input type="hidden" id='customerId' name='customerId'
-		value="${customEdit.customerId }" />
+		value="${customEdit['customerId'] }" />
 	<input type="hidden" id='gemSignId' name='gemSignId'
-		value="${customEdit.iprimaryGemID }" />
+		value="${customEdit['iprimaryGemID'] }" />
 	<input type="hidden" id='gemSignBId' name='gemSignBId'
-		value="${customEdit.iforeignGemID }" />
+		value="${customEdit['iforeignGemID'] }" />
 	<input type="hidden" id='vengraveVh' name='vengraveVh'
-		value="${customEdit.vengraveVh }" />
+		value="${customEdit['vengraveVh'] }" />
 	<input type="hidden" id='vcadFile' name='vcadFile'
-		value="${customEdit.vcadFile }" />
+		value="${customEdit['vcadFile'] }" />
 	<div class="all">
 		<div class="main">
 			<div class="mainleft">
@@ -225,7 +225,7 @@
 						<option>选择金属</option>
 					</select>
 					<input type="text" id="metalWeight" name="nweight"
-						value=""
+						value="${customEdit['nweight']}"
 						placeholder="克"
 						class="metal_weight"/>
 				</div>
@@ -292,20 +292,20 @@
 			<div class="mainrig">
 				<h2>其他信息</h2>
 				
-				<input type="text" class="kezi" id="vengrave" name="vengrave" placeholder="刻字" />
+				<input type="text" class="kezi" id="vengrave" name="vengrave" value="${customEdit['vengrave']}" placeholder="刻字" />
 				<select id="vfont" name="vfont" class="ziti">
-					<option value="" <c:if test="${customEdit.vengrave==''}">selected</c:if>>字体</option>
-					<option value="华文细黑" <c:if test="${customEdit.vengrave=='华文细黑'}">selected</c:if>>华文细黑</option>
-					<option value="华文仿宋" <c:if test="${customEdit.vengrave=='华文仿宋'}">selected</c:if>>华文仿宋</option>
-					<option value="华文楷体" <c:if test="${customEdit.vengrave=='华文楷体'}">selected</c:if>>华文楷体</option>
-					<option value="华文宋体" <c:if test="${customEdit.vengrave=='华文宋体'}">selected</c:if>>华文宋体</option>
-					<option value="华文中宋" <c:if test="${customEdit.vengrave=='华文中宋'}">selected</c:if>>华文中宋</option>
-					<option value="仿宋" <c:if test="${customEdit.vengrave=='仿宋'}">selected</c:if>>仿宋</option>
-					<option value="黑体" <c:if test="${customEdit.vengrave=='黑体'}">selected</c:if>>黑体</option>
-					<option value="楷体" <c:if test="${customEdit.vengrave=='楷体'}">selected</c:if>>楷体</option>
-					<option value="Bradley Hand ITC" <c:if test="${customEdit.vengrave=='Bradley Hand ITC'}">selected</c:if>>Bradley Hand ITC</option>
-					<option value="Segoe Script" <c:if test="${customEdit.vengrave=='Segoe Script'}">selected</c:if>>Segoe Script</option>
-					<option value="Verdana" <c:if test="${customEdit.vengrave=='Verdana'}">selected</c:if>>Verdana</option>
+					<option value="" <c:if test="${customEdit['vfont']==''}">selected</c:if>>字体</option>
+					<option value="华文细黑" <c:if test="${customEdit['vfont']=='华文细黑'}">selected</c:if>>华文细黑</option>
+					<option value="华文仿宋" <c:if test="${customEdit['vfont']=='华文仿宋'}">selected</c:if>>华文仿宋</option>
+					<option value="华文楷体" <c:if test="${customEdit['vfont']=='华文楷体'}">selected</c:if>>华文楷体</option>
+					<option value="华文宋体" <c:if test="${customEdit['vfont']=='华文宋体'}">selected</c:if>>华文宋体</option>
+					<option value="华文中宋" <c:if test="${customEdit['vfont']=='华文中宋'}">selected</c:if>>华文中宋</option>
+					<option value="仿宋" <c:if test="${customEdit['vfont']=='仿宋'}">selected</c:if>>仿宋</option>
+					<option value="黑体" <c:if test="${customEdit['vfont']=='黑体'}">selected</c:if>>黑体</option>
+					<option value="楷体" <c:if test="${customEdit['vfont']=='楷体'}">selected</c:if>>楷体</option>
+					<option value="Bradley Hand ITC" <c:if test="${customEdit['vfont']=='Bradley Hand ITC'}">selected</c:if>>Bradley Hand ITC</option>
+					<option value="Segoe Script" <c:if test="${customEdit['vfont']=='Segoe Script'}">selected</c:if>>Segoe Script</option>
+					<option value="Verdana" <c:if test="${customEdit['vfont']=='Verdana'}">selected</c:if>>Verdana</option>
 				</select>
 				<br />
 	
@@ -319,7 +319,7 @@
 				</select>
 				<textarea id="vrequirementB" name="vrequirementB" cols="" rows="" 
 				placeholder="表面工艺描述"			
-				class="miaoshu1"></textarea>
+				class="miaoshu1">${customEdit['vrequirementB'] }</textarea>
 				<br />
 				<select id="certificate" name="icertificate" class="jianding1">
 					<option value="0" <c:if test="${customEdit['icertificate']=='0'}">selected</c:if>>鉴定证书 -无</option>
@@ -336,15 +336,17 @@
 					<div class="clear"></div>
 					<input type="text" 
 					id="pmPrice" name="npmPrice" class="pm_price"
+					value="${customEdit['npmPrice'] }"
 					placeholder="起版 元" />
 				</div>
 				<div class="qita">
 					<div class="clear"></div>
 					<input type="text" 
 					id="otherPrice" name="notherPrice" class="other_price"
+					value="${customEdit['notherPrice'] }"
 					placeholder="其他 元" />
 					<strong><u class="price"></u> 元</strong>
-					<input type="hidden" class="finalPrice" id='nprice' name='nprice' value="${customEdit.nprice }" />
+					<input type="hidden" class="finalPrice" id='nprice' name='nprice' value="${customEdit['nprice'] }" />
 				</div>
 
 				<div class="jisuan">
