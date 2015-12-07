@@ -2,19 +2,25 @@
 <beans xmlns="http://www.springframework.org/schema/beans"    
 xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"    
     xmlns:p="http://www.springframework.org/schema/p"    
-xmlns:mvc="http://www.springframework.org/schema/mvc"    
+xmlns:mvc="http://www.springframework.org/schema/mvc" 
+xmlns:cache="http://www.springframework.org/schema/cache"  
     xmlns:context="http://www.springframework.org/schema/context"    
 xmlns:util="http://www.springframework.org/schema/util"    
 xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd    
          http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.0.xsd    
             http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc-3.0.xsd    
-            http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-3.0.xsd"
+            http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-3.0.xsd
+            http://www.springframework.org/schema/cache
+			http://www.springframework.org/schema/cache/spring-cache.xsd"
              default-lazy-init="true">
+    <!-- 它背后注册了很多用于解析注解的处理器,其中就包括<context:annotation-config/>配置的注解所使用的处理器 -->  
+    <!-- 所以配置了<context:component-scan base-package="">之后,便无需再配置<context:annotation-config> -->  
     <context:annotation-config />
     <!-- 对web包中的所有类进行扫描，以完成Bean创建和自动依赖注入的功能 -->
-	<context:component-scan base-package="com.bavlo.counter.web,com.bavlo.weixin.qiye.web,com.bavlo.weixin.fuwu.web"/>
+	<context:component-scan base-package="com.bavlo.counter.web,com.bavlo.weixin.qiye.web,com.bavlo.weixin.fuwu.web,com.bavlo.counter.security"/>
     <!-- 静态资源访问 -->
     <mvc:resources location="/resources/" mapping="/resources/**"/> 
+    <!-- 启用SpringMVC的注解功能,它会自动注册HandlerMapping、HandlerAdapter、ExceptionResolver的相关实例 --> 
     <mvc:annotation-driven />  <!-- 支持spring3.0新的mvc注解 -->
     <bean class="org.springframework.web.servlet.mvc.annotation.DefaultAnnotationHandlerMapping" />   
     <!-- 启动Spring MVC的注解功能，完成请求和注解POJO的映射 -->
@@ -25,11 +31,46 @@ xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.sprin
          <!-- 如果使用jstl的话，配置下面的属性 -->
         <property name="viewClass" value="org.springframework.web.servlet.view.JstlView" />   
     </bean>
+    <!-- 默认访问跳转到登录页面(即定义无需Controller的url<->view直接映射) -->  
+    <!--<mvc:view-controller path="/" view-name="forward:/login.jsp"/>-->  
     <!-- 上传文件时需要做的配置 -->
     <bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">  
         <property name="maxUploadSize" value="5000000"></property>  
     </bean> 
-    <!-- OAuth2拦截器 -->
+    <!-- 避免IE执行AJAX时,返回JSON出现下载文件 -->
+	<bean id="mappingJacksonHttpMessageConverter"
+		class="org.springframework.http.converter.json.MappingJacksonHttpMessageConverter">
+		<property name="supportedMediaTypes">
+			<list>
+				<value>text/html;charset=UTF-8</value>
+			</list>
+		</property>
+	</bean>
+	
+	<!-- 缓存配置 -->
+	<!-- 启用缓存注解功能(请将其配置在Spring主配置文件中) -->
+	<cache:annotation-driven cache-manager="cacheManager" />
+	<!-- Spring自己的基于java.util.concurrent.ConcurrentHashMap实现的缓存管理器(该功能是从Spring3.1开始提供的) -->
+	<!-- 
+	<bean id="cacheManager" class="org.springframework.cache.support.SimpleCacheManager">
+	  <property name="caches">
+	    <set>
+	      <bean name="myCache" class="org.springframework.cache.concurrent.ConcurrentMapCacheFactoryBean"/>
+	    </set>
+	  </property>
+	</bean>
+	 -->
+	<!-- 若只想使用Spring自身提供的缓存器,则注释掉下面的两个关于Ehcache配置的bean,并启用上面的SimpleCacheManager即可 -->
+	<!-- Spring提供的基于的Ehcache实现的缓存管理器 -->
+	<bean id="cacheManagerFactory" class="org.springframework.cache.ehcache.EhCacheManagerFactoryBean">
+	  <property name="configLocation" value="classpath:ehcache.xml"/>
+	</bean>
+	<bean id="cacheManager" class="org.springframework.cache.ehcache.EhCacheCacheManager">
+	  <property name="cacheManager" ref="cacheManagerFactory"/>
+	</bean>
+
+	<!-- 微信***************开始 -->
+	<!-- OAuth2拦截器 -->
 	<mvc:interceptors>
 		<mvc:interceptor>
 			 <!--对所有的请求拦截使用/** ,对某个模块下的请求拦截使用：/myPath/* -->
@@ -38,5 +79,5 @@ xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.sprin
 			</bean>
 		</mvc:interceptor>
 	</mvc:interceptors>
-	
+	<!-- 微信*****************结束 -->
 </beans>
