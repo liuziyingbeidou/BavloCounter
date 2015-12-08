@@ -1,7 +1,13 @@
-<%@ page language="java" import="java.util.*" pageEncoding="utf-8"%>
+<%@ page language="java" import="java.util.*,com.bavlo.counter.model.LoginVO" pageEncoding="utf-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <c:set var="ctx" value="${pageContext.request.contextPath}"/>
-
+<%
+Object info = request.getSession().getAttribute("loginInfo");
+if(info != null){
+	LoginVO loginVO = (LoginVO)info;
+	String uuid = loginVO.getMuserId();
+}
+ %>
 <script type="text/javascript">
 $(function(){
 	//实物签收单列表
@@ -46,10 +52,19 @@ function closeMenu(){
 }
 </script>
 
+<c:choose>
+<c:when test='${uuid == "test"}'>
+</c:when>
+<c:when test='${uuid != "test"}'>
+<li class="menu-custom-list-view"><a href="#">查看定制单</a></li>
+</c:when>
+<c:otherwise>
+</c:otherwise>
+</c:choose>
+
 
 <li class="menu-custom-list"><a href="#">定制单</a></li>
 <li class="menu-custom-list-view"><a href="#">查看定制单</a></li>
-
 <li class="menu-entity-list"><a href="#">实物签收单</a></li>
 <li class="menu-gem-list"><a href="#">宝石签收单</a></li>
 <li class="menu-order-list"><a href="#">订单</a></li>
