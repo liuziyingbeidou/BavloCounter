@@ -38,7 +38,125 @@
 <script src="/counter/resources/jquery.multiDialog/js/jquery.ui.dialog.extended-1.0.2.js"></script> 
 <script src="/counter/resources/jquery.multiDialog/js/jquery.multiDialog.js"></script> 
 <script src="/counter/resources/js/bavlo-dialog.js"></script>
+<script>
+//本地webservice
+var nativeUrl = "/counter/webservice/http.do";
+//初始基础数据
+$(function(){
+	// 款式类型下拉框值
+	var typeUrl = "http://www.bavlo.com/getAllStyleType";
+	loadSelDataStr(nativeUrl, typeUrl, "styleType", "data[i].id",
+			"data[i].type_name_cn", function() {
+				$("#styleType").val("${customEdit['srcstyleType']}");
+			},"款式");
+	// 金属材质下拉框值
+	var typeUrl = "http://www.bavlo.com/getAllMetalMaterialType";
+	loadSelDataStr(nativeUrl, typeUrl, "metalType", "data[i].id",
+			"data[i].metal_type_cn", function() {
+				$("#metalType").val("${customEdit['srcmetal']}");
+			},"金属");
+	// 款式类型下拉框值
+	var typeUrl = "http://www.bavlo.com/getAllRingSize";
+	loadRingSizeData(nativeUrl, typeUrl, "ringSize", "data[i].id",
+			"data[i].china", "data[i].diameter", "data[i].circumference",
+			function() {
+				$("#ringSize").val("${customEdit['srcringSize']}");
+			},"手寸");
+	// 当款式类型不是戒指时，隐藏戒指手寸选项
+	$("#styleType").change(function() {
+		if ($("#styleType").val() == "戒指") {
+			$("#ringSize").css({
+				display : "block"
+			});
+		} else {
+			$("#ringSize").css({
+				display : "none"
+			});
+		}
+	});
+	
+	// 客主石显示和隐藏
+	var mainGemCost = "${customEdit['nmainGemCost']}";
+	if(mainGemCost != ""){
+		$(".kzsGem").show();
+	}
+	$(".kzsGem_btn").click(function() {
+		if ($(".kzsGem").css("display") == 'none') {
+			$(".kzsGem").show();
+			//var text = $(this).text();
+			//$(this).text(text.replace('+', '-'));
+		} else {
+			h("kzsGem");
+		}
+	})
+	// 客配石显示和隐藏
+	var partsGemNum = "${customEdit['ipartsGemNum']}";
+	if(partsGemNum != ""){
+		$(".kpsGem").show();
+	}
+	$(".kpsGem_btn").click(function() {
+		if ($(".kpsGem").css("display") == 'none') {
+			$(".kpsGem").show();
+			//var text = $(this).text();
+			//$(this).text(text.replace('+', '-'));
+		} else {
+			h("kpsGem");
+		}
+	})
+	// 显示参考图片 
+	var id = "${customEdit['id']}";
+	if(id != null){
+		PicShow_Hidden(pic);
+	}
+	// 初始化标签
+	var str = "";
+	if("${customEdit['vcraftTag']}" != ""){
+		str = "${customEdit['vcraftTag']}"
+	}
+	$("#vcraftTag").val(str);
+	var WS = function(opt) {
 
+		var regexp = opt.regexp || /\S/, el = $(opt.el), list = el.val().split(','), holder = $('<span class="words-split"></span>')
+
+		for (var i = 0; i < list.length; i++) {
+			if(list[i] != ""){
+				holder.append($('<a href="javascript:void(0)" class="fm-button">'
+						+ list[i] + '<em> </em></a>'));
+			}
+		}
+		el.hide().after(holder);
+
+		holder.on('click', 'a>em', function() { // 刪除
+			$(this).parent().remove();
+			el.val(holder.text().match(/\S+/g).join(','))
+		});
+
+		$(".gongyi1").change(function() { // 添加
+			var t = $(this).find("option:selected").val();
+			var str = $(".custom_engrave").val();
+			if(str.indexOf(t) < 0){
+				if (t) {
+					holder.append($('<a href="javascript:void(0)" class="fm-button">'
+									+ t + '<em> </em></a>'));
+					el.val(holder.text().match(/\S+/g).join(','));
+				} 
+			}
+		});
+	}
+
+	WS({
+		el : '#vcraftTag',
+		regexp : /\w+\.\w+/
+	});
+	//刻字字体样式
+	initFont();
+	$(".ziti").change(function(){
+		initFont();
+	})
+	//增加后缀
+	initFieldSuffix();
+})
+</script>
 </head>
 
 <body>
@@ -93,10 +211,6 @@
 		value="${customEdit['orderId'] }" />
 	<input type="hidden" id='customerId' name='customerId'
 		value="${customEdit['customerId'] }" />
-	<input type="hidden" id='gemSignId' name='gemSignId'
-		value="${customEdit['iprimaryGemID'] }" />
-	<input type="hidden" id='gemSignBId' name='gemSignBId'
-		value="${customEdit['iforeignGemID'] }" />
 	<input type="hidden" id='vengraveVh' name='vengraveVh'
 		value="${customEdit['vengraveVh'] }" />
 	<input type="hidden" id='vcadFile' name='vcadFile'
@@ -244,9 +358,17 @@
 								<a href="">客主石</a>
 							</h3>
 							<ul>
-								<li><input type="text" 
-								id="mainGemPrice" name="nprimaryGem" class="kzs_price"
-								placeholder="元"/>
+								<li>
+									<input type="text" 
+									id="mainGemPrice" name="nmainGemCost" class="kzs_price"
+									value="${customEdit['nmainGemCost'] }"
+									placeholder="元"/>
+									<input type="hidden"
+									id="mainGemName" name="vmainGemName" class="main_gem_name"
+									value="${customEdit['vmainGemName'] }"/>
+									<input type="hidden"
+									id="mainGemPic" name="vmainGemPic" class="main_gem_pic"
+									value="${customEdit['vmainGemPic'] }"/>
 								</li>
 								<li class="kzs_gl"><input type='button' name="guanlian" class="kzs_guanlian"
 									value="+ 关联" /></li>
@@ -262,10 +384,20 @@
 								<a href="">客配石</a>
 							</h3>
 							<ul>
-								<li><input type="text" id="inlayPrice" name="iforeignGem" class="kps_count"
-										placeholder="颗"/>
+								<li>
+									<input type="text"
+									id="inlayPrice" name="ipartsGemNum" class="kps_count"
+									value="${customEdit['ipartsGemNum'] }"
+									placeholder="颗"/>
+									<input type="hidden" 
+									id="partsGemName" name="vpartsGemName" class="parts_gem_name" 
+									value="${customEdit['vpartsGemName'] }"/>
+									<input type="hidden" 
+									id="partsGemPic" name="vpartsGemPic" class="parts_gem_pic" 
+									value="${customEdit['vpartsGemPic'] }"/>
 								</li>
-								<li class="kzs_gl"><input type='button' name="guanlian" class="kps_guanlian"
+								<li class="kzs_gl">
+									<input type='button' name="guanlian" class="kps_guanlian"
 									value="+ 关联" /></a></li>
 								<li class="kps_img"></li>
 								<%-- <li class="kps"><img src="${ctx}/resources/images/zb_09.png" width="42"
@@ -310,7 +442,7 @@
 				<br />
 	
 				<div class="zhanwei">
-				<input type="text" class="custom_engrave" name="vcraftTag" value="工艺标签：" id="vcraftTag" />
+				<input type="text" class="custom_engrave" name="vcraftTag" value="" id="vcraftTag" />
 				<select class="gongyi1">
 					<option value="">表面工艺</option>
 					<option value="喷砂">喷砂</option>
