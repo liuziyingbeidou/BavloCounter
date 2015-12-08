@@ -327,13 +327,44 @@ public class AdvancedUtil {
 		return ticket;
 	}
 
+	
+	/**
+	 * 创建永久带参二维码
+	 * 
+	 * @param accessToken 接口访问凭证
+	 * @param sceneId 场景ID
+	 * @return ticket
+	 */
+	public static String createPermanentQRCode(String accessToken, String sceneStr) {
+		String ticket = null;
+		// 拼接请求地址
+		String requestUrl = "https://api.weixin.qq.com/cgi-bin/qrcode/create?access_token=ACCESS_TOKEN";
+		requestUrl = requestUrl.replace("ACCESS_TOKEN", accessToken);
+		// 需要提交的json数据
+		String jsonMsg = "{\"action_name\": \"QR_LIMIT_SCENE\", \"action_info\": {\"scene\": {\"scene_str\": %s}}}";
+		// 创建永久带参二维码
+		JSONObject jsonObject = CommonUtil.httpsRequest(requestUrl, "POST", String.format(jsonMsg, sceneStr));
+
+		if (null != jsonObject) {
+			try {
+				ticket = jsonObject.getString("ticket");
+				log.info("创建永久带参二维码成功 ticket:{}", ticket);
+			} catch (Exception e) {
+				int errorCode = jsonObject.getInt("errcode");
+				String errorMsg = jsonObject.getString("errmsg");
+				log.error("创建永久带参二维码失败 errcode:{} errmsg:{}", errorCode, errorMsg);
+			}
+		}
+		return ticket;
+	}
+	
 	/**
 	 * 根据ticket换取二维码
 	 * 
 	 * @param ticket 二维码ticket
 	 * @param savePath 保存路径
 	 */
-	public static String getQRCode(String ticket, String savePath) {
+	public static String getQRCode(String ticket, String savePath,String vname) {
 		String filePath = null;
 		// 拼接请求地址
 		String requestUrl = "https://mp.weixin.qq.com/cgi-bin/showqrcode?ticket=TICKET";
@@ -348,7 +379,7 @@ public class AdvancedUtil {
 				savePath += "/";
 			}
 			// 将ticket作为文件名
-			filePath = savePath + ticket + ".jpg";
+			filePath = savePath + vname + ".jpg";
 
 			// 将微信服务器返回的输入流写入文件
 			BufferedInputStream bis = new BufferedInputStream(conn.getInputStream());
@@ -366,7 +397,7 @@ public class AdvancedUtil {
 			filePath = null;
 			log.error("根据ticket换取二维码失败：{}", e);
 		}
-		return filePath;
+		return vname + ".jpg";
 	}
 
 	/**
@@ -760,7 +791,7 @@ public class AdvancedUtil {
 		String ticket = "gQEg7zoAAAAAAAAAASxodHRwOi8vd2VpeGluLnFxLmNvbS9xL2lIVVJ3VmJsTzFsQ0ZuQ0Y1bG5WAAIEW35+UgMEAAAAAA==";
 		String savePath = "G:/download";
 		// 根据ticket换取二维码
-		getQRCode(ticket, savePath);
+		getQRCode(ticket, savePath,ticket);
 
 		/**
 		 * 获取用户信息

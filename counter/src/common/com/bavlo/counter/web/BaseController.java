@@ -1,6 +1,5 @@
 package com.bavlo.counter.web;
 
-import java.awt.Image;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.FileInputStream;
@@ -24,6 +23,7 @@ import net.sf.json.JSONObject;
 import net.sf.json.JsonConfig;
 
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.bavlo.counter.commonbeans.Page;
@@ -33,8 +33,6 @@ import com.bavlo.counter.utils.ScaleImage;
 import com.bavlo.counter.utils.StringHelper;
 import com.bavlo.counter.utils.StringUtil;
 import com.bavlo.counter.utils.WebUtils;
-import com.sun.image.codec.jpeg.JPEGCodec;
-import com.sun.image.codec.jpeg.JPEGImageEncoder;
 
 
 /**
@@ -44,10 +42,10 @@ import com.sun.image.codec.jpeg.JPEGImageEncoder;
  * @author liuzy
  * @date 2015-9-20 下午04:05:13
  */
-public class BaseController {
+public class BaseController{
 	
 	//分页-start
-	protected Integer dgpage=30;
+	protected Integer dgpage=1;
 	protected Integer rows;
 	//分页-end
 	
@@ -61,6 +59,12 @@ public class BaseController {
         this.response = response;  
         this.session = request.getSession();  
     }  
+    
+    @ModelAttribute
+    public void setDgpageAndRows(Integer dgpage,Integer rows){
+    	this.dgpage = dgpage;
+    	this.rows = rows;
+    }
     
 	protected void renderJson(Object object, JsonConfig config) {
 		JSONObject jsonObject = JSONObject.fromObject(object, config);
@@ -206,19 +210,6 @@ public class BaseController {
 			jsonMap.put(i1, i2);
 		}
 		this.renderJson(jsonMap);
-	}
-	
-	public Integer getDgpage() {
-		return dgpage;
-	}
-	public void setDgpage(Integer dgpage) {
-		this.dgpage = dgpage;
-	}
-	public Integer getRows() {
-		return rows;
-	}
-	public void setRows(Integer rows) {
-		this.rows = rows;
 	}
 	
 	/***********************文件上传***********************/
@@ -474,5 +465,4 @@ public class BaseController {
 				}
 		    	
 		    }
-		    
 }
