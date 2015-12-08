@@ -2,68 +2,14 @@
  * @author shijf
  * 定制单js
  */
-//本地webservice
-var nativeUrl = "/counter/webservice/http.do";
+
 //计算价格webservice
 var calculatorUrl = "/counter/webservice/httpcalculator.do";
 //宝石图片class名 
 var gemSignClass = "";
-//初始基础数据
+//弹框页面
 $(function() {
-
-	// 款式类型下拉框值
-	var typeUrl = "http://www.bavlo.com/getAllStyleType";
-	loadSelDataStr(nativeUrl, typeUrl, "styleType", "data[i].id",
-			"data[i].type_name_cn", function() {
-				$("#styleType").val("${customEdit['srcstyleType']}");
-			},"款式");
-	// 金属材质下拉框值
-	var typeUrl = "http://www.bavlo.com/getAllMetalMaterialType";
-	loadSelDataStr(nativeUrl, typeUrl, "metalType", "data[i].id",
-			"data[i].metal_type_cn", function() {
-				$("#metalType").val("${customEdit['srcmetal']}");
-			},"金属");
-	// 款式类型下拉框值
-	var typeUrl = "http://www.bavlo.com/getAllRingSize";
-	loadRingSizeData(nativeUrl, typeUrl, "ringSize", "data[i].id",
-			"data[i].china", "data[i].diameter", "data[i].circumference",
-			function() {
-				$("#ringSize").val("${customEdit['srcringSize']}");
-			},"手寸");
-	// 当款式类型不是戒指时，隐藏戒指手寸选项
-	$("#styleType").change(function() {
-		if ($("#styleType").val() == "戒指") {
-			$("#ringSize").css({
-				display : "block"
-			});
-		} else {
-			$("#ringSize").css({
-				display : "none"
-			});
-		}
-	});
 	
-	// 客主石显示和隐藏
-	$(".kzsGem_btn").click(function() {
-		if ($(".kzsGem").css("display") == 'none') {
-			$(".kzsGem").show();
-			//var text = $(this).text();
-			//$(this).text(text.replace('+', '-'));
-		} else {
-			h("kzsGem");
-		}
-	})
-	// 客配石显示和隐藏
-	$(".kpsGem_btn").click(function() {
-		if ($(".kpsGem").css("display") == 'none') {
-			$(".kpsGem").show();
-			//var text = $(this).text();
-			//$(this).text(text.replace('+', '-'));
-		} else {
-			h("kpsGem");
-		}
-	})
-	 
 	//宝石签收单列表
 	$(".kzs_guanlian").bind("click",function(){
 		openURL("/counter/gem-sign/list.do","宝石签收单列表");
@@ -83,39 +29,6 @@ $(function() {
 		openURL("/counter/common/getChainInfo.do","链子");
 	});
 	
-	//初始化刻字
-	var WS = function(opt) {
-
-		var regexp = opt.regexp || /\S/, el = $(opt.el), list = el.val().split(','), holder = $('<span class="words-split"></span>')
-
-		for (var i = 0; i < list.length; i++) {
-			holder.append($('<a href="javascript:void(0)" class="fm-button">'
-					+ list[i] + '<em> </em></a>'));
-		}
-		el.hide().after(holder);
-
-		holder.on('click', 'a>em', function() { // 刪除
-			$(this).parent().remove();
-			el.val(holder.text().match(/\S+/g).join(','))
-		});
-
-		$(".gongyi1").change(function() { // 添加
-			var t = $(this).find("option:selected").val();
-			var str = $(".custom_engrave").val();
-			if(str.indexOf(t) < 0){
-				if (t) {
-					holder.append($('<a href="javascript:void(0)" class="fm-button">'
-									+ t + '<em> </em></a>'));
-					el.val(holder.text().match(/\S+/g).join(','));
-				} 
-			}
-		});
-	}
-
-	WS({
-		el : '#vcraftTag',
-		regexp : /\w+\.\w+/
-	});
 	
 	 //上传图片
 	 $(".cankaotu").bind("click",function(){
@@ -132,6 +45,7 @@ $(function() {
 	 		openURL("/counter/upload/uppage.do","上传CAD文件"); 
 	 		$("#filevalue").val("vcadFile");
 	 });
+	 
 	 //图片显示
 	 $(".customPicShow").bind("click",function(){
 	 	var mid = $("#customid").val();
@@ -142,29 +56,6 @@ $(function() {
 	 	}
 	 });
 	 
-	 //刻字字体样式
-	 initFont();
-	 $(".ziti").change(function(){
-		 initFont();
-	 })
-	 
-	//加载子表数据
-	function loadSubData(mid){
-		var url = "/counter/upload/showpicJson.do";
-		$.get(url,{cpath:"com.bavlo.counter.model.custom.CustomBVO",fkey:"customId",id:mid},function(row){
-			var data = row;
-			if(data != "" && data != null){
-				for(var i = 0; i < data.length; i++){
-					if(data[i].biscover == "Y"){
-						$("#FILE_0").val(data[i].vname);
-					}else{
-						$("#FILE_"+i).val(data[i].vname);
-					}
-				}
-			}
-		});
-	}
-	initFieldSuffix();
 });
 
 // 计算价格
@@ -389,37 +280,11 @@ function stockGemJson(){
 function setValueByFrame(type,id,callback,json,v){
 	var url;
 	if(type == "chain"){
-		var i=1;
-		for(var c=1;c<100;c++){
-			if($(".chain"+c).length==0){
-				i=c;
-				break;
-			}
-		}
-		var html="";
-		var data = JSON.parse(json);
-		
-		html+= "<dd class='chainList chain"+i+"'>"+
-			   "<div class='lianzi'>"+
-			   "<h3>链子</h3><a href='javascript:removeChain("+i+")' class='close_c'><font>X</font></a>"+
-			   "<div class='clear'></div>"+
-			   "<input class='chain_item' id='chainItem' name='ichainItem' type='text' price='"+data.sprice+"' value='' placeholder='条'>"+
-			   "<strong class='chain_name'>"+data.sname+"</strong>" +
-			   "</div>" +
-			   "<input type='hidden' class='cPrice'/>"+
-			   "</dd>";
-		
-		$(".chain").append(html);
-		$("input[id='chainItem']").blur(function(){
-			 checkNum(this);
-			 var qutity=$(this).val();
-			 var price=$(this).attr("price");
-			 $(this).parent().nextAll(".cPrice").val((price*qutity).toFixed(2));
-		 })
+		addChain(json);
 		closeMultiDlg();
 	}else if(type == "signGem"){
-		var gemSign = $("#gemSignId").val();
-		var gemSignB = $("#gemSignBId").val();
+		var mainGemPic = $("#mainGemPic").val();
+		var partsGemPic = $("#partsGemPic").val();
 		var url = "/counter/custom/getGem.do";
 		$.post(url,{id:id},function(row){
 			var data = row;
@@ -432,61 +297,27 @@ function setValueByFrame(type,id,callback,json,v){
 				}
 			}
 			if(gemSignClass == "kzs_img"){
-				if(gemSign == ""){
-					$("#gemSignId").val(id);
+				if(mainGemPic == ""){
 					$("."+gemSignClass).append("<img class='gem_img' style='width:38px;height:38px;' src="+pic+" >");
 				}else {
-					$("#gemSignId").val(id);
 					$(".gem_img").attr("src",pic);
 				}
+				$("#mainGemPic").val(pic);
 			}
 			if(gemSignClass == "kps_img"){
-				if(gemSignB == ""){
-					$("#gemSignBId").val(id);
+				if(partsGemPic == ""){
 					$("."+gemSignClass).append("<img class='gem_img' style='width:38px;height:38px;' src="+pic+" >");
 				}else {
-					$("#gemSignBId").val(id);
 					$(".gem_img").attr("src",pic);
 				}
+				$("#partsGemPic").val(pic);
 			}
 		});
 		
 		closeMultiDlg();
 	}else if(type == "gem"){
-		 var i=1;
-		 for(var g=1;g<100;g++){
-			 if($(".stockGem"+g).length==0){
-				 i=g;
-				 break;
-			 }
-		 }
-		 var html="";
-		 var data = JSON.parse(json);
-		 var type=v.attr("type");
-		 var shape=v.attr("shape");
-		 var calibrated=v.attr("calibrated");
-		 var weight=v.attr("weight");
-		 var costPrice=v.attr("costPrice");
-		 var pic=v.find("img").attr("src");
-			
-	     html+= "<dd class='stockGemList stockGem"+i+"'>"+
-	    	 	"<div div class='lianzi'>"+	
-			    "<h3>库选宝石</h3>"+
-			    "<a href='javascript:removeStockGem("+i+")' class='close_c'><font>X</font></a><div class='clear'></div>"+
-			    "<input class='stockGem_num' id='stockGem' name='istockGemNum' type='text' value='' price='"+costPrice+"' placeholder='颗'>"+
-				"<img class='stockGem_img_path' src='"+pic+"'/><strong class='stockGem_name'>"+type+" "+weight+"ct</strong>"+
-				"</div>" +
-				"<input type='hidden' class='sgPrice'/>"+
-				"</dd>";
-				
-		 $(".chain").append(html);
-		 $("input[id='stockGem']").blur(function(){
-		 	  checkNum(this);
-			  var qutity=$(this).val();
-			  var price=$(this).attr("price");
-			  $(this).parent().nextAll(".sgPrice").val((price*qutity+qutity*2).toFixed(2));
-		 })
-		 closeMultiDlg();
+		addStockGem(v);
+		closeMultiDlg();
 	}else if(type == "customer"){
 		url = "/counter/customer/infoJson.do";
 		$.get(url,{id:id},function(data){
@@ -529,22 +360,88 @@ function rlist(className){
 function h(str) {
 	if ("kzsGem" == str) {
 		params.mainGemPrice = 0;
+		$("#mainGemPrice").val('');
 	} else if ("kpsGem" == str) {
 		params.inlayPrice = 0;
+		$("#inlayPrice").val('');
 	}
 	var text = $("." + str + "_btn").text();
 	//$("." + str + "_btn").text(text.replace('-', '+'));
 	$("." + str).hide();
 }
-
-//删除库选石
-function removeStockGem(id) {
-	$(".stockGem" + id).remove();
+//增加链子
+function addChain(json){
+	var i=1;
+	for(var c=1;c<100;c++){
+		if($(".chain"+c).length==0){
+			i=c;
+			break;
+		}
+	}
+	var html="";
+	var data = JSON.parse(json);
+	
+	html+= "<dd class='chainList chain"+i+"'>"+
+		   "<div class='lianzi'>"+
+		   "<h3>链子</h3><a href='javascript:removeChain("+i+")' class='close_c'><font>X</font></a>"+
+		   "<div class='clear'></div>"+
+		   "<input class='chain_item' id='chainItem' name='ichainItem' type='text' price='"+data.sprice+"' value='' placeholder='条'>"+
+		   "<strong class='chain_name'>"+data.sname+"</strong>" +
+		   "</div>" +
+		   "<input type='hidden' class='cPrice'/>"+
+		   "</dd>";
+	
+	$(".chain").append(html);
+	$("input[id='chainItem']").blur(function(){
+		 checkNum(this);
+		 var qutity=$(this).val();
+		 var price=$(this).attr("price");
+		 $(this).parent().nextAll(".cPrice").val((price*qutity).toFixed(2));
+	})
 }
-
 //删除链子
 function removeChain(id) {
 	$(".chain" + id).remove();
+}
+
+//增加库选宝石
+function addStockGem(json){
+	var i=1;
+	 for(var g=1;g<100;g++){
+		 if($(".stockGem"+g).length==0){
+			 i=g;
+			 break;
+		 }
+	 }
+	 var html="";
+	 var type=json.attr("type");
+	 var shape=json.attr("shape");
+	 var calibrated=json.attr("calibrated");
+	 var weight=json.attr("weight");
+	 var costPrice=json.attr("costPrice");
+	 var pic=json.find("img").attr("src");
+		
+    html+= "<dd class='stockGemList stockGem"+i+"'>"+
+   	 	"<div div class='lianzi'>"+	
+		    "<h3>库选宝石</h3>"+
+		    "<a href='javascript:removeStockGem("+i+")' class='close_c'><font>X</font></a><div class='clear'></div>"+
+		    "<input class='stockGem_num' id='stockGem' name='istockGemNum' type='text' value='' price='"+costPrice+"' placeholder='颗'>"+
+			"<img class='stockGem_img_path' src='"+pic+"'/><strong class='stockGem_name'>"+type+" "+weight+"ct</strong>"+
+			"</div>" +
+			"<input type='hidden' class='sgPrice'/>"+
+			"</dd>";
+			
+	 $(".chain").append(html);
+	 $("input[id='stockGem']").blur(function(){
+	 	  checkNum(this);
+		  var qutity=$(this).val();
+		  var price=$(this).attr("price");
+		  $(this).parent().nextAll(".sgPrice").val((price*qutity+qutity*2).toFixed(2));
+	 })
+}
+//删除库选石
+function removeStockGem(id) {
+	$(".stockGem" + id).remove();
 }
 
 //检查数值
