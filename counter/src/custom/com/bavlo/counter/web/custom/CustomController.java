@@ -58,8 +58,16 @@ public class CustomController extends BaseController implements IConstant {
 	public ModelAndView edit(Map<String, Object> map, Integer id, Integer orderId, Integer customerId) {
 
 		CustomVO customEdit = customService.findCustomById(id);
+		
+		List<CustomBVO> customBVO = customService.findListCustomB(id);
+		List<CustomCVO> customCVO = customService.findListCustomC(id);
+		List<CustomDVO> customDVO = customService.findListCustomD(id);
+		
+		JSONArray imgJson = JSONArray.fromObject(customBVO);
+		JSONArray chainJson = JSONArray.fromObject(customCVO);
+		JSONArray stockGemJson = JSONArray.fromObject(customDVO);
+		
 		ModelAndView model = new ModelAndView(PATH_CUSTOM + "customEdit");
-		model.addObject("pageCustomType", IConstant.PAGE_TYPE_EDIT);
 		if(customEdit == null){
 			customEdit = new CustomVO();
 			model.addObject("pageCustomType", IConstant.PAGE_TYPE_ADD);
@@ -70,7 +78,11 @@ public class CustomController extends BaseController implements IConstant {
 		if(customerId != null){
 			customEdit.setCustomerId(customerId);
 		}
+		model.addObject("pageCustomType", IConstant.PAGE_TYPE_EDIT);
 		model.addObject("customEdit", customEdit);
+		model.addObject("imgJson", imgJson);
+		model.addObject("chainJson", chainJson);
+		model.addObject("stockGemJson", stockGemJson);
 		model.addObject("number", CommonUtils.getBillCode("CM"));
 		return model;
 	}
@@ -141,11 +153,12 @@ public class CustomController extends BaseController implements IConstant {
 		//保存或更新主表
 		//customService.saveOrUpdateCustom(customVO);
 		Integer id = customVO.getId();
-		
+		boolean cms = true;
 		if(id == null){
 			id = customService.saveCustomRelID(customVO);
 		}else{
 			customService.updateCustom(customVO);
+			cms = false;
 		}
 		
 		//图片子表保存
@@ -223,6 +236,10 @@ public class CustomController extends BaseController implements IConstant {
 			bvo_8.setVpath(filemodel);
 			listbvo.add(bvo_8);
 		}
+		if(listbvo != null){
+			customService.deleteCustomB(customVO.id);
+			customService.saveCustomB(listbvo);
+		}
 		
 		// 链子子表保存
 		if(!CommonUtils.isNull(jsonCVO)){
@@ -240,6 +257,10 @@ public class CustomController extends BaseController implements IConstant {
 				cvo_.setNchainCost(nchainCost);
 				listcvo.add(cvo_);
 			}
+		}
+		if(listcvo != null){
+			customService.deleteCustomC(customVO.id);
+			customService.saveCustomC(listcvo);
 		}
 		
 		// 库存宝石子表保存
@@ -261,14 +282,15 @@ public class CustomController extends BaseController implements IConstant {
 				listdvo.add(dvo_);
 			}
 		}
+		if(listdvo != null){
+			customService.deleteCustomD(customVO.id);
+			customService.saveCustomD(listdvo);
+		}
 		
-		customService.deleteCustomB(customVO.id);
-		customService.saveCustomB(listbvo);
-		customService.deleteCustomC(customVO.id);
-		customService.saveCustomC(listcvo);
-		customService.deleteCustomD(customVO.id);
-		customService.saveCustomD(listdvo);
-		orderService.backWriteByCum(customVO.getOrderId(), customVO.getId());
+		//回写定制单ID
+		if(cms){
+			orderService.backWriteByCum(customVO.getOrderId(), customVO.getId());
+		}
 		renderJson("{\"id\":"+customVO.id+"}");
 	}
 	
