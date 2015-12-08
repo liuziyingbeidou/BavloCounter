@@ -15,19 +15,50 @@
 	<meta http-equiv="description" content="This is my page">
 	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
     <meta name="renderer" content="webkit">
-    <!-- amazeui 1.4.4 -->
-  	<link rel="stylesheet" href="${ctx }/page/counter/assets/css/amazeui.min.css"/>
-  	<link rel="stylesheet" href="${ctx }/page/counter/assets/css/admin.css">
-  	
+  	<script type="text/javascript" src="${ctx }/resources/js/jquery-1.8.3.min.js"></script>
   	<!-- easyui 1.4.1 -->
     <script type="text/javascript" src="${ctx }/resources/jquery-easyui-1.4.1/jquery.min.js"></script>
 	<link rel="stylesheet" type="text/css" href="${ctx }/resources/jquery-easyui-1.4.1/themes/icon.css">
 	<link rel="stylesheet" type="text/css" href="${ctx }/resources/jquery-easyui-1.4.1/themes/gray/easyui.css">
 	<script type="text/javascript" src="${ctx }/resources/jquery-easyui-1.4.1/jquery.easyui.min.js"></script>
 	<script type="text/javascript" src="${ctx }/resources/jquery-easyui-1.4.1/locale/easyui-lang-zh_CN.js"></script>
+	
+	<!-- amazeui 1.4.4 -->
+  	<link rel="stylesheet" href="${ctx }/page/counter/assets/css/amazeui.min.css"/>
+  	<link rel="stylesheet" href="${ctx }/page/counter/assets/css/admin.css">
+  	<script type="text/javascript" src="${ctx }/page/counter/assets/js/amazeui.min.js"></script>
+  	
+  	<!-- 弹框 -->
+	<!-- jQuery & jQuery UI files (needed)--> 
+	<link rel="stylesheet" href="/counter/resources/jquery.multiDialog/css/jquery-ui-1.10.3.custom.css">
+	<script src="/counter/resources/jquery.multiDialog/js/jquery/jquery-ui-1.10.3.custom.js"></script> 
+	<!-- MultiDialog files (needed) --> 
+	<link rel="stylesheet" href="/counter/resources/jquery.multiDialog/css/jquery.multiDialog.css"> 
+	<script src="/counter/resources/jquery.multiDialog/js/jquery.ui.dialog.extended-1.0.2.js"></script> 
+	<script src="/counter/resources/jquery.multiDialog/js/jquery.multiDialog.js"></script> 
+  	<script type="text/javascript" src="${ctx }/resources/js/bavlo-dialog.js"></script>
     
     	<script type="text/javascript">
 		$(function(){
+			$("#condition").keyup(function(){
+				 delay(function(){
+					 gridload('pttg');
+				 }, 500 );
+			});
+			
+			var delay = (function(){
+				 var timer = 0;
+				 return function(callback, ms){
+					 clearTimeout (timer);
+					 timer = setTimeout(callback, ms);
+				 };
+			})();
+			function gridload(emid){
+				var condition = $("input[name='condition']").val().trim();
+				$('#'+emid).datagrid('load',{
+					condition:condition
+				});
+			}
 			// 数据表格
 			$('#pttg').datagrid({
 				rownumbers:true,
@@ -37,15 +68,14 @@
 				singleSelect:true,
 				collapsible:true,
 				remoteSort:false,
-				url:'${ctx }/resources/jquery-easyui-1.4.4/datagrid_data1.json',
+				url:'${ctx }/tools/getListQrcode.do',
 				method:'get',
 				pagination:true,
 				onDblClickRow:
-			           function () {
-			               //单击行的时候，将单选按钮设置为选中
-			               var selectRow = $('#pttg').datagrid("getSelected");
-			               //window.open("./customer/visit_regist/visit_regist!add.do?type=update&way=sel&seloppid="+selectRow.id+"&selcustid="+selectRow.customerid,"_blank");
-			           }
+		           function () {
+		               //单击行的时候，将单选按钮设置为选中
+		               var selectRow = $('#pttg').datagrid("getSelected");
+		           }
 			});  
 			
 			var table = $('#pttg').datagrid('getPager'); 
@@ -55,46 +85,47 @@
 			
 			$(window).resize(function () {
 		        $('#pttg').datagrid('resize', {
-		            /* width: $(window).width(), */
 		        	width: function(){return document.body.clientWidth;}
 		        }).datagrid('resize', {
-		            /* width: $(window).width(), */
 		        	width: function(){return document.body.clientWidth;}
 		        });
 		 
 			});
+			
+			$(".am-btn").click(function(){
+				openWin();
+			});
 		});
 		function  htgl(val,row){
 			var tocss = ' <div style="text-align:center;margin:0 auto;" > '
-						+'<a class="col0070c0" href="#" onclick="selectOneOpp('+row.id+','+row.customerid+')">选择</a>'
+						+'<a class="col0070c0" href="#" onclick="openWin('+row.id+')">选择</a>'
 					+'</div>';
 		
 			return tocss ;
-		}	
+		}
+		
+		function openWin(id){
+			//openURL("${ctx}/page/counter/tools/qrcode/qrcode-create.jsp","创建客服二维码",null,310);
+			openURL("${ctx}/tools/goEditeQrcode.do?id="+id,"创建客服二维码",null,310);
+			
+		}
 	</script>
    
   </head>
   
   <body>
     <div class="am-cf am-padding">
-      <div class="am-fl am-cf"><strong class="am-text-primary am-text-md">二维码管理</strong> / <small>Qrcode manage</small></div>
+      <div class="am-fl am-cf"><strong class="am-text-primary am-text-md">客服二维码管理</strong> / <small>Qrcode manage</small></div>
     </div>
     <hr/>
 	<div id="tb" class="fy_ldList clearfix">
 	  	<dl style="margin:10px 0;">
-	      <dt class="yahei">二维码列表
+	      <dt class="yahei">客服二维码列表
 		      	&nbsp;
 		      	&nbsp;
-		      	<input type="text" id="searchinput" placeholder="工号" value="" class="newAddFy_input01 search_myopp" name="search_myopp" style="width: 150px"/> 
-				<a href="#" class="fy_li07"  onclick="searchopp();"><em></em>增加二维码</a>
+		      	<input type="text" id="condition" placeholder="工号" value="" class="newAddFy_input01 search_myopp" name="condition" style="width: 150px"/> 
+				<button type="button"  class="am-btn am-btn-default am-btn-xs">增加二维码</button>
 	      </dt>
-	      <dd>
-	        <!--
-	        <ul>
-	          <li class="fy_search"><a href="#" onclick="onImport();" ><em style="background:url(${pageContext.request.contextPath}/images/basebticons/import.png) no-repeat;"></em>导入客户</a></li>
-	        </ul>
-	      -->
-	      </dd>
 	    </dl>
 	</div>
 	<!-- 表格界面 -->
@@ -102,14 +133,13 @@
 			<thead>
 				<tr>
 					<th data-options="field:'id',hidden:'true'">id</th>
-					<th data-options="field:'customerid',hidden:'true'">customerid</th>
-					<th data-options="field:'ck',checkbox:true" width='5%'></th>
-					<th data-options="field:'vtel',width:120,align:'center'" width='15%'>工号</th>
-					<th data-options="field:'vsex',width:120,align:'center'" width='15%'>门店</th>
-					<th data-options="field:'vyxcd',width:120,align:'center'" width='20%'>二维码</th>
+					<th data-options="field:'vkfcode',width:120,align:'center'" width='15%'>工号</th>
+					<th data-options="field:'vshop',width:120,align:'center'" width='15%'>门店</th>
+					<th data-options="field:'vqrcodeUrl',width:120,align:'center'" width='20%'>二维码</th>
 					<th data-options="field:'action',formatter:htgl,width:100,align:'center'" width='10%'>操作</th>
 				</tr>
 			</thead>
 	</table>
+	
   </body>
 </html>

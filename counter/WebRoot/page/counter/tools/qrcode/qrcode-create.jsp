@@ -6,7 +6,7 @@
 <html>
   <head>
     
-    <title>客服二维码管理</title>
+    <title>新增客服二维码</title>
     
 	<meta http-equiv="pragma" content="no-cache">
 	<meta http-equiv="cache-control" content="no-cache">
@@ -17,71 +17,74 @@
     <meta name="renderer" content="webkit">
   	<link rel="stylesheet" href="${ctx }/page/counter/assets/css/amazeui.min.css"/>
   	<link rel="stylesheet" href="${ctx }/page/counter/assets/css/admin.css">
+  	<script type="text/javascript" src="${ctx }/resources/js/jquery-1.8.3.min.js"></script>
+  	<script type="text/javascript" src="${ctx }/resources/js/bavlo-dialog.js"></script>
+  	
+  	<script type="text/javascript">
+  	$(function(){
+  		
+  		$("#btn-submit").click(function(){
+  			create();
+  		});
+  		
+  		if("${qrcodevo['vqrcodeUrl'] }" != null && "${qrcodevo['vqrcodeUrl'] }" != ""){
+  			$(".am-radius").prop("src","${ctx}/resources/qrcode/${qrcodevo['vqrcodeUrl'] }");
+  		}
+  		
+  	});
+  	
+  	//创建二维码
+	function create(){
+		$.ajax({
+		     type : "POST",
+		     url : "${ctx}/tools/createQrcode.do",
+		     data:$('#qrcodeFrmId').serialize(),// formid
+		     async:false,
+		     cache:false,
+		     success : function(data) {
+		     	if(data != null && data != ""){
+			     	if(data.vqrcodeUrl != null && data.vqrcodeUrl != ""){
+			     		$(".am-radius").prop("src","${ctx}/resources/qrcode/"+data.vqrcodeUrl);
+			     	}else{
+			     		alert("创建失败!");
+			     	}
+		     	}
+		     },
+		     error : function(e) {
+		     	alert("创建失败!");
+		     }
+	    });
+	}
+  	</script>
   </head>
   
   <body>
-    <div class="am-cf am-padding">
-      <div class="am-fl am-cf"><strong class="am-text-primary am-text-lg">个人资料</strong> / <small>Personal information</small></div>
-    </div>
-
-    <hr/>
-
-    <div class="am-g">
-
-      <div class="am-u-sm-12 am-u-md-8 am-u-md-pull-4">
-        <form class="am-form am-form-horizontal">
-          <div class="am-form-group">
-            <label for="user-name" class="am-u-sm-3 am-form-label">姓名 / Name</label>
-            <div class="am-u-sm-9">
-              <input type="text" id="user-name" placeholder="姓名 / Name">
-              <small>输入你的名字，让我们记住你。</small>
-            </div>
-          </div>
-
-          <div class="am-form-group">
-            <label for="user-email" class="am-u-sm-3 am-form-label">电子邮件 / Email</label>
-            <div class="am-u-sm-9">
-              <input type="email" id="user-email" placeholder="输入你的电子邮件 / Email">
-              <small>邮箱你懂得...</small>
-            </div>
-          </div>
-
-          <div class="am-form-group">
-            <label for="user-phone" class="am-u-sm-3 am-form-label">电话 / Telephone</label>
-            <div class="am-u-sm-9">
-              <input type="email" id="user-phone" placeholder="输入你的电话号码 / Telephone">
-            </div>
-          </div>
-
-          <div class="am-form-group">
-            <label for="user-QQ" class="am-u-sm-3 am-form-label">QQ</label>
-            <div class="am-u-sm-9">
-              <input type="email" id="user-QQ" placeholder="输入你的QQ号码">
-            </div>
-          </div>
-
-          <div class="am-form-group">
-            <label for="user-weibo" class="am-u-sm-3 am-form-label">微博 / Twitter</label>
-            <div class="am-u-sm-9">
-              <input type="email" id="user-weibo" placeholder="输入你的微博 / Twitter">
-            </div>
-          </div>
-
-          <div class="am-form-group">
-            <label for="user-intro" class="am-u-sm-3 am-form-label">简介 / Intro</label>
-            <div class="am-u-sm-9">
-              <textarea class="" rows="5" id="user-intro" placeholder="输入个人简介"></textarea>
-              <small>250字以内写出你的一生...</small>
-            </div>
-          </div>
-
-          <div class="am-form-group">
-            <div class="am-u-sm-9 am-u-sm-push-3">
-              <button type="button" class="am-btn am-btn-primary">保存修改</button>
-            </div>
-          </div>
-        </form>
-      </div>
-    </div>
+    <form id="qrcodeFrmId" class="am-form am-form-horizontal">
+      <input type="hidden" name="id" value="${qrcodevo['id'] }">
+	  <div class="am-form-group am-form-group-sm">
+	    <label for="doc-ipt-3-1" class="am-u-sm-2 am-form-label">工号</label>
+	    <div class="am-u-sm-10">
+	      <input type="number" name="vkfcode" value="${qrcodevo['vkfcode'] }" id="doc-ipt-3-1" class="am-form-field" placeholder="输入工号">
+	    </div>
+	  </div>
+	
+	  <div class="am-form-group am-form-group-sm">
+	    <label for="doc-ipt-3-2" class="am-u-sm-2 am-form-label">门店</label>
+	    <div class="am-u-sm-10">
+	      <input type="text" name="vshop" value="${qrcodevo['vshop'] }" id="doc-ipt-3-2" class="am-form-field" placeholder="所属门店">
+	    </div>
+	  </div>
+	  <div class="am-form-group am-form-group-sm bv-qrcode">
+	  	<label for="doc-ipt-3-2" class="am-u-sm-2 am-form-label">二维码</label>
+	    <div class="am-u-sm-10">
+	      <img class="am-radius" alt="140*140" src="" width="140" height="140" />
+	    </div>
+	  </div>
+	  <div class="am-form-group">
+	    <div class="am-u-sm-10 am-u-sm-offset-2">
+	      <button type="button" id="btn-submit" class="am-btn am-btn-default">生成二维码</button>&nbsp;
+	    </div>
+	  </div>
+	</form>
   </body>
 </html>
