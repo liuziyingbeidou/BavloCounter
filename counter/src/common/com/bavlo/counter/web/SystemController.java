@@ -9,12 +9,13 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.bavlo.counter.model.LoginVO;
 import com.bavlo.counter.utils.JsonUtils;
+import com.bavlo.weixin.qiye.interceptor.OAuthRequired;
 
 @Controller(value="systemController")
 public class SystemController extends BaseController {
 
 	@RequestMapping(value={"/index.do"})
-	//@OAuthRequired
+	@OAuthRequired
 	public ModelAndView index(HttpServletRequest request){
 		ModelAndView model = new ModelAndView("index");
 		HttpSession session = request.getSession();

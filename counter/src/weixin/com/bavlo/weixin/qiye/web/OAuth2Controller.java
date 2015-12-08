@@ -1,14 +1,19 @@
 package com.bavlo.weixin.qiye.web;
 
 import java.io.UnsupportedEncodingException;
+import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+
+import net.sf.json.JSONArray;
+import net.sf.json.JSONObject;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.bavlo.counter.model.LoginVO;
 import com.bavlo.weixin.qiye.pojo.AccessToken;
 import com.bavlo.weixin.qiye.util.Constants;
 import com.bavlo.weixin.qiye.util.QiYeUtil;
@@ -59,10 +64,30 @@ public class OAuth2Controller {
 		if (accessToken != null && accessToken.getToken() != null) {
 			String Userid = getMemberGuidByCode(accessToken.getToken(), code, Constants.AGENTID);
 			if (Userid != null) {
-				session.setAttribute("UserId", Userid);
-				session.setAttribute("Tagname", QiYeUtil.getUserTag(Userid).get("roleTag"));
-				System.out.println(session.getAttribute("Tagname"));
-//				WechatDepart.getUserInfo(Userid);
+				LoginVO lvo = new LoginVO();
+				List<String> listRoleTag = QiYeUtil.getUserTag(Userid).get("roleTag");
+				JSONObject  obj = WechatDepart.getUserInfo(Userid);
+				JSONObject  extattrObj = obj.getJSONObject("extattr");
+				if(extattrObj != null){
+					JSONArray jsonAry = extattrObj.getJSONArray("attrs");
+					if(jsonAry != null){
+						for(int i = 0; i < jsonAry.size(); i++){
+							JSONObject fileObj = jsonAry.getJSONObject(i);
+							String name = fileObj.getString("name");
+							if("所属主账号".equals(name)){
+								lvo.setMuserId(fileObj.getString("value"));
+							}
+						}
+					}
+				}
+				lvo.setUserId(Userid);
+				lvo.setRole(listRoleTag);
+				session.removeAttribute("loginInfo");
+				session.setAttribute("loginInfo",lvo);
+				
+//				session.setAttribute("UserId", Userid);
+//				session.setAttribute("Tagname", listRoleTag);
+//				System.out.println(session.getAttribute("Tagname"));
 				
 				System.out.println("标签是"+session.getAttribute("Tagname"));
 			}
