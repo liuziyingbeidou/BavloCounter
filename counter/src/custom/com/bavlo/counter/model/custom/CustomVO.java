@@ -55,19 +55,27 @@ public class CustomVO extends IdEntity {
 	/**
 	 * 主石（元）
 	 */
-	private BigDecimal nprimaryGemCost;
+	private BigDecimal nmainGemCost;
 	/**
-	 * 主石（ID）
+	 * 主石（名字）
 	 */
-	private Integer iprimaryGemID;
+	private String vmainGemName;
+	/**
+	 * 主石（图片地址）
+	 */
+	private String vmainGemPic;
 	/**
 	 * 配石（颗）
 	 */
-	private Integer iforeignGemNum;
+	private Integer ipartsGemNum;
 	/**
-	 * 配石（ID）
+	 * 配石（名字）
 	 */
-	private Integer iforeignGemID;
+	private String vpartsGemName;
+	/**
+	 * 配石（图片地址）
+	 */
+	private String vpartsGemPic;
 	/**
 	 * 其他款项
 	 */
@@ -193,44 +201,60 @@ public class CustomVO extends IdEntity {
 		this.nweight = nweight;
 	}
 
-	public BigDecimal getNprimaryGemCost() {
-		return nprimaryGemCost;
+	public BigDecimal getNmainGemCost() {
+		return nmainGemCost;
 	}
 
-	public void setNprimaryGemCost(BigDecimal nprimaryGemCost) {
-		this.nprimaryGemCost = nprimaryGemCost;
+	public void setNmainGemCost(BigDecimal nmainGemCost) {
+		this.nmainGemCost = nmainGemCost;
 	}
 
-	public Integer getIprimaryGemID() {
-		return iprimaryGemID;
+	public String getVmainGemName() {
+		return vmainGemName;
 	}
 
-	public void setIprimaryGemID(Integer iprimaryGemID) {
-		this.iprimaryGemID = iprimaryGemID;
+	public void setVmainGemName(String vmainGemName) {
+		this.vmainGemName = vmainGemName;
 	}
 
-	public Integer getIforeignGemNum() {
-		return iforeignGemNum;
+	public String getVmainGemPic() {
+		return vmainGemPic;
 	}
 
-	public void setIforeignGemNum(Integer iforeignGemNum) {
-		this.iforeignGemNum = iforeignGemNum;
+	public void setVmainGemPic(String vmainGemPic) {
+		this.vmainGemPic = vmainGemPic;
 	}
 
-	public Integer getIforeignGemID() {
-		return iforeignGemID;
+	public Integer getIpartsGemNum() {
+		return ipartsGemNum;
 	}
 
-	public void setIforeignGemID(Integer iforeignGemID) {
-		this.iforeignGemID = iforeignGemID;
+	public void setIpartsGemNum(Integer ipartsGemNum) {
+		this.ipartsGemNum = ipartsGemNum;
 	}
 
-	public BigDecimal getNprice() {
-		return nprice;
+	public String getVpartsGemName() {
+		return vpartsGemName;
 	}
 
-	public void setNprice(BigDecimal nprice) {
-		this.nprice = nprice;
+	public void setVpartsGemName(String vpartsGemName) {
+		this.vpartsGemName = vpartsGemName;
+	}
+
+	public String getVpartsGemPic() {
+		return vpartsGemPic;
+	}
+
+	public void setVpartsGemPic(String vpartsGemPic) {
+		this.vpartsGemPic = vpartsGemPic;
+	}
+
+	public BigDecimal getNpmPrice() {
+		return npmPrice;
+	}
+
+	public void setNpmPrice(BigDecimal npmPrice) {
+		this.npmPrice = npmPrice;
 	}
 
 	public BigDecimal getNotherPrice() {
@@ -239,6 +263,14 @@ public class CustomVO extends IdEntity {
 
 	public void setNotherPrice(BigDecimal notherPrice) {
 		this.notherPrice = notherPrice;
+	}
+
+	public BigDecimal getNprice() {
+		return nprice;
+	}
+
+	public void setNprice(BigDecimal nprice) {
+		this.nprice = nprice;
 	}
 
 	public String getVengrave() {
@@ -339,14 +371,6 @@ public class CustomVO extends IdEntity {
 
 	public static long getSerialversionuid() {
 		return serialVersionUID;
-	}
-
-	public BigDecimal getNpmPrice() {
-		return npmPrice;
-	}
-
-	public void setNpmPrice(BigDecimal npmPrice) {
-		this.npmPrice = npmPrice;
 	}
 
 }
