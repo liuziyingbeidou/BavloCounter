@@ -50,17 +50,23 @@
 		//确定 
 		$(".ok").click(function(){
 			var v=$(".gem_img_sel");
-			 if(v.length==0){
+			if(v.length==0){
 				alert("请选择宝石!");
 				return ;
 			}
 			if(isExitsFunction(window.parent.setValueByFrame)){
-				var sname = $("gemTypeId").find("option:selected").text()+" "+ $("#gemShapeId").find("option:selected").text()+" "+$("#gemSpecId").find("option:selected").text();
-				var sid = $("#gemTypeId").find("option:selected").val()+ $("#gemShapeId").find("option:selected").val()+$("#gemSpecId").find("option:selected").val();
-				var json = "{\"sname\":\""+sname+"\",\"sid\":\""+sid+"\"}";
-				window.parent.setValueByFrame("gem","",callbackMuilt(),json,v);
+				var type=v.attr("type");
+				var shape=v.attr("shape");
+				var calibrated=v.attr("calibrated");
+				var weight=v.attr("weight");
+				var stockGemNum="";
+				var stockGemImgPath=v.find("img").attr("src");
+				var stockGemName = type+" "+weight+"ct";
+				var stockGemCost=v.attr("costPrice");
+				var json = "{\"vstockGemName\":\""+stockGemName+"\",\"vstockGemImgPath\":\""+stockGemImgPath+"\",\"nstockGemCost\":\""+stockGemCost+"\",\"istockGemNum\":\""+stockGemNum+"\"}";
+				window.parent.setValueByFrame("stockGem","",callbackMuilt(),json);
 			}else{
-				alert("请在父窗口添加setValueByFrame(type,id,json){处理逻辑}type='gem']");
+				alert("请在父窗口添加setValueByFrame(type,id,json){处理逻辑}type='stockGem']");
 			}
 		
 		});
