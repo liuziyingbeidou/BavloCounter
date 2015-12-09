@@ -20,21 +20,22 @@
 
 <link href="${ctx}/resources/css/orderlist.css" rel="stylesheet" type="text/css" />
 <script src="${ctx}/resources/js/showList.js" type="text/javascript"></script>
-		<script src="${ctx}/resources/js/area.js"></script>
-		<script src="${ctx}/resources/js/location.js"></script>
-		<script src="${ctx}/resources/js/bavlo-initdata.js"></script>
-		<!-- 自定义event	 -->
-		<script src="${ctx}/resources/js/bavlo-event.js"></script>
-		<!-- 弹框 -->
-		<!-- jQuery & jQuery UI files (needed)--> 
-		<link rel="stylesheet" href="${ctx}/resources/jquery.multiDialog/css/jquery-ui-1.10.3.custom.css" />
-		<script src="${ctx}/resources/jquery.multiDialog/js/jquery/jquery-ui-1.10.3.custom.js"></script> 
-		<!-- MultiDialog files (needed) --> 
-		<link rel="stylesheet" href="${ctx}/resources/jquery.multiDialog/css/jquery.multiDialog.css" /> 
-		<script src="${ctx}/resources/jquery.multiDialog/js/jquery.ui.dialog.extended-1.0.2.js"></script> 
-		<script src="${ctx}/resources/jquery.multiDialog/js/jquery.multiDialog.js"></script> 
-		<script src="${ctx}/resources/js/bavlo-dialog.js"></script>
+<script src="${ctx}/resources/cityselect/area_cus.js"></script>
+<script src="${ctx}/resources/js/bavlo-initdata.js"></script>
+<!-- 自定义event	 -->
+<script src="${ctx}/resources/js/bavlo-event.js"></script>
+<!-- 弹框 -->
+<!-- jQuery & jQuery UI files (needed)--> 
+<link rel="stylesheet" href="${ctx}/resources/jquery.multiDialog/css/jquery-ui-1.10.3.custom.css" />
+<script src="${ctx}/resources/jquery.multiDialog/js/jquery/jquery-ui-1.10.3.custom.js"></script> 
+<!-- MultiDialog files (needed) --> 
+<link rel="stylesheet" href="${ctx}/resources/jquery.multiDialog/css/jquery.multiDialog.css" /> 
+<script src="${ctx}/resources/jquery.multiDialog/js/jquery.ui.dialog.extended-1.0.2.js"></script> 
+<script src="${ctx}/resources/jquery.multiDialog/js/jquery.multiDialog.js"></script> 
+<script src="${ctx}/resources/js/bavlo-dialog.js"></script>
 		<script type="text/javascript">
+		var s=["vprovince","vcity","vdistrict"];//三个select的name
+		var opt0 = ["省份","城市","区县"];//初始值
 			$(function initVal() {
 				var customerId = "${customerDetail.id}";
 				var customerName = "${customerDetail.vname}";
@@ -59,12 +60,27 @@
 				if (customerPhone == "") {
 					$("#vphoneCode").val("手机");
 				}*/
-				showLocation();
+				//城市联动
+				change(0);
+				$("#vprovince").bind("change",function(){
+					change(1);
+				});
+				$("#vcity").bind("change",function(){
+					change(2);
+				});
 				if (customerId != "") {
+					/*$("#vprovince").val(customerProvince);
+					$("#vprovince").change();
+					$("#vcity").val(customerCity);
+					$("#vcity").change();
+					$("#vdistrict").val(customerDistricte);*/
+					debugger
 					$("#vprovince").val(customerProvince);
 					$("#vprovince").change();
 					$("#vcity").val(customerCity);
 					$("#vcity").change();
+					$("#vprovince").val(customerProvince);
+					$("#vcity").val(customerCity);
 					$("#vdistrict").val(customerDistricte);
 					$("#vsex").val(customerSex);
 					$("#vlanguage").val(customerLanguage);

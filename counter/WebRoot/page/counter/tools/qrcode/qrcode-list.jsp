@@ -92,10 +92,15 @@
 		 
 			});
 			
-			$(".am-btn").click(function(){
+			$(".bv-btn-add").click(function(){
 				openWin();
 			});
 		});
+		
+		function reloadGrid(){
+			$('#pttg').datagrid('reload');
+		}
+		
 		function  htgl(val,row){
 			var tocss = ' <div style="text-align:center;margin:0 auto;" > '
 						+'<a class="col0070c0" href="#" onclick="openWin('+row.id+')">选择</a>'
@@ -106,7 +111,11 @@
 		
 		function openWin(id){
 			//openURL("${ctx}/page/counter/tools/qrcode/qrcode-create.jsp","创建客服二维码",null,310);
-			openURL("${ctx}/tools/goEditeQrcode.do?id="+id,"创建客服二维码",null,310);
+			if(id == null || id == undefined){
+				openURL("${ctx}/tools/goEditeQrcode.do","创建客服二维码",null,310);
+			}else{
+				openURL("${ctx}/tools/goEditeQrcode.do?id="+id,"创建客服二维码",null,310);
+			}
 			
 		}
 	</script>
@@ -118,13 +127,14 @@
       <div class="am-fl am-cf"><strong class="am-text-primary am-text-md">客服二维码管理</strong> / <small>Qrcode manage</small></div>
     </div>
     <hr/>
+    <div class="am-cf am-padding">
 	<div id="tb" class="fy_ldList clearfix">
 	  	<dl style="margin:10px 0;">
 	      <dt class="yahei">客服二维码列表
 		      	&nbsp;
 		      	&nbsp;
 		      	<input type="text" id="condition" placeholder="工号" value="" class="newAddFy_input01 search_myopp" name="condition" style="width: 150px"/> 
-				<button type="button"  class="am-btn am-btn-default am-btn-xs">增加二维码</button>
+				<button type="button"  class="am-btn am-btn-default am-btn-xs bv-btn-add">增加二维码</button>
 	      </dt>
 	    </dl>
 	</div>
@@ -140,6 +150,6 @@
 				</tr>
 			</thead>
 	</table>
-	
+	</div>
   </body>
 </html>
