@@ -112,9 +112,9 @@
 		function openWin(id){
 			//openURL("${ctx}/page/counter/tools/qrcode/qrcode-create.jsp","创建客服二维码",null,310);
 			if(id == null || id == undefined){
-				openURL("${ctx}/tools/goEditeQrcode.do","创建客服二维码",null,310);
+				openURL("${ctx}/tools/goEditeQrcode.do","创建客服二维码",550,490);
 			}else{
-				openURL("${ctx}/tools/goEditeQrcode.do?id="+id,"创建客服二维码",null,310);
+				openURL("${ctx}/tools/goEditeQrcode.do?id="+id,"创建客服二维码",550,490);
 			}
 			
 		}
@@ -133,7 +133,7 @@
 	      <dt class="yahei">客服二维码列表
 		      	&nbsp;
 		      	&nbsp;
-		      	<input type="text" id="condition" placeholder="工号" value="" class="newAddFy_input01 search_myopp" name="condition" style="width: 150px"/> 
+		      	<input type="text" id="condition" placeholder="门店+工号编号" value="" class="newAddFy_input01 search_myopp" name="condition" style="width: 150px"/> 
 				<button type="button"  class="am-btn am-btn-default am-btn-xs bv-btn-add">增加二维码</button>
 	      </dt>
 	    </dl>
@@ -143,8 +143,9 @@
 			<thead>
 				<tr>
 					<th data-options="field:'id',hidden:'true'">id</th>
-					<th data-options="field:'vkfcode',width:120,align:'center'" width='15%'>工号</th>
 					<th data-options="field:'vshop',width:120,align:'center'" width='15%'>门店</th>
+					<th data-options="field:'vkfcode',width:120,align:'center'" width='15%'>工号编号</th>
+					<th data-options="field:'userid',width:120,align:'center'" width='15%'>帐号</th>
 					<th data-options="field:'vqrcodeUrl',width:120,align:'center'" width='20%'>二维码</th>
 					<th data-options="field:'action',formatter:htgl,width:100,align:'center'" width='10%'>操作</th>
 				</tr>
