@@ -341,7 +341,7 @@ public class AdvancedUtil {
 		String requestUrl = "https://api.weixin.qq.com/cgi-bin/qrcode/create?access_token=ACCESS_TOKEN";
 		requestUrl = requestUrl.replace("ACCESS_TOKEN", accessToken);
 		// 需要提交的json数据
-		String jsonMsg = "{\"action_name\": \"QR_LIMIT_SCENE\", \"action_info\": {\"scene\": {\"scene_str\": %s}}}";
+		String jsonMsg = "{\"action_name\": \"QR_LIMIT_STR_SCENE\", \"action_info\": {\"scene\": {\"scene_str\": %s}}}";
 		// 创建永久带参二维码
 		JSONObject jsonObject = CommonUtil.httpsRequest(requestUrl, "POST", String.format(jsonMsg, sceneStr));
 
@@ -438,6 +438,8 @@ public class AdvancedUtil {
 				weixinUserInfo.setLanguage(jsonObject.getString("language"));
 				// 用户头像
 				weixinUserInfo.setHeadImgUrl(jsonObject.getString("headimgurl"));
+				//分组
+				weixinUserInfo.setGroupid(jsonObject.getString("groupid"));
 			} catch (Exception e) {
 				if (0 == weixinUserInfo.getSubscribe()) {
 					log.error("用户{}已取消关注", weixinUserInfo.getOpenId());

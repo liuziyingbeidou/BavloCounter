@@ -9,6 +9,7 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.context.ServletContextAware;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -58,11 +59,13 @@ public class ToolsController extends BaseController implements ServletContextAwa
 		if(CommonUtils.isNull(accessToken)){
 			accessToken = CommonUtil.getToken(IContant.appId, IContant.appSecret).getAccessToken();
 		}
-		String vname = qrcodeVO.getVshop()+"@"+qrcodeVO.getVkfcode();
-		String ticketStr = AdvancedUtil.createPermanentQRCode(accessToken, vname);
+		String sceneStr = qrcodeVO.getVshop()+qrcodeVO.getVkfcode();
+		String vfname = qrcodeVO.getVshop()+"@"+qrcodeVO.getVkfcode();
+		String ticketStr = AdvancedUtil.createPermanentQRCode(accessToken, sceneStr);
+		//String ticketStr = AdvancedUtil.createPermanentQRCode(accessToken, Integer.valueOf(qrcodeVO.getVkfcode()));
 		String basePath = servletContext.getRealPath("/"); 
 		String qrPath = basePath+"/resources/qrcode";
-		qrcodeVO.setVqrcodeUrl(AdvancedUtil.getQRCode(ticketStr,qrPath,vname));
+		qrcodeVO.setVqrcodeUrl(AdvancedUtil.getQRCode(ticketStr,qrPath,vfname));
 		
 		QrcodeVO vo = toolsService.saveQrcode(qrcodeVO);
 		renderJson(vo);

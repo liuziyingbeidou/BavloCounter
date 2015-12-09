@@ -2,6 +2,8 @@ package com.bavlo.counter.service.customer.itf;
 
 import java.util.List;
 
+import javax.servlet.http.HttpSession;
+
 import com.bavlo.counter.model.customer.CustomerVO;
 
 /**
@@ -61,5 +63,16 @@ public interface ICustomerService {
 	 * @return List<CustomerVO>
 	 */
 	public List<CustomerVO> findCustomerList(String wh);
+	
+	//***以下是外围接口----开始****/
+	/**
+	 * 根据条件查找，结果集是否存在
+	 */
+	public boolean isExistByCondition(String condition);
 
+	public String addCustomerByScan(String openId,HttpSession session,String scene_str);
+	
+	public CustomerVO findCustomerByWhere(String condition);
+	
+	//***以下是外围接口----结束****/
 }

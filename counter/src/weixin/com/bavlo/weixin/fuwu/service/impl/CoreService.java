@@ -1,15 +1,22 @@
-package com.bavlo.weixin.fuwu.service;
+package com.bavlo.weixin.fuwu.service.impl;
 
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
+import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
+import org.springframework.stereotype.Service;
+
+import com.bavlo.counter.service.customer.itf.ICustomerService;
+import com.bavlo.counter.service.impl.CommonService;
 import com.bavlo.weixin.fuwu.message.resp.Article;
 import com.bavlo.weixin.fuwu.message.resp.ForwardMessage;
 import com.bavlo.weixin.fuwu.message.resp.NewsMessage;
+import com.bavlo.weixin.fuwu.service.itf.ICoreService;
 import com.bavlo.weixin.fuwu.util.MessageUtil;
 
 /**
@@ -17,14 +24,20 @@ import com.bavlo.weixin.fuwu.util.MessageUtil;
  * 
  * @author shijf
  */
-public class CoreService {
+@Service("fwcoreService")
+public class CoreService extends CommonService implements ICoreService{
+	
+	@Resource
+	ICustomerService customerService;
+	
 	/**
 	 * 处理微信发来的请求，转发到指定客服
 	 * 
 	 * @param request
 	 * @return xml
 	 */
-	public static String processRequest(HttpServletRequest request) {
+	@Override
+	public String processRequest(HttpServletRequest request,HttpSession session) {
 		// xml格式的消息数据
 		String respXml = null;
 		try {
@@ -46,9 +59,24 @@ public class CoreService {
 			if (msgType.equals(MessageUtil.REQ_MESSAGE_TYPE_EVENT)) {
 				// 事件类型
 				String eventType = requestMap.get("Event");
-				// 订阅
+				// 订阅{用户未关注时，进行关注后的事件推送}
 				if (eventType.equals(MessageUtil.EVENT_TYPE_SUBSCRIBE)) {
-					forwardMessage.setContent("您好，欢迎关注网址导航！我们致力于打造精品网址聚合应用，为用户提供便捷的上网导航服务。体验生活，从这里开始！");
+					/**扫描二维码信息--本地库不存在该openId用户---开始**/
+					String eventKey = requestMap.get("EventKey");
+					customerService.addCustomerByScan(fromUserName, session, eventKey);
+					/**扫描二维码信息---结束**/
+					
+					forwardMessage.setContent("您好，欢迎关注宝珑网！");
+					// 将消息对象转换成xml
+					respXml = MessageUtil.messageToXml(forwardMessage);
+				}
+				//用户已关注时的事件推送
+				else if(eventType.equals(MessageUtil.EVENT_TYPE_SCAN)){
+					/**扫描二维码信息--本地库不存在该openId用户---开始**/
+					String eventKey = requestMap.get("EventKey");
+					String vcode = customerService.addCustomerByScan(fromUserName, session, eventKey);
+					/**扫描二维码信息---结束**/
+					forwardMessage.setContent("这是您的编号:"+vcode);
 					// 将消息对象转换成xml
 					respXml = MessageUtil.messageToXml(forwardMessage);
 				}
@@ -96,4 +124,5 @@ public class CoreService {
 		}
 		return respXml;
 	}
+
 }
