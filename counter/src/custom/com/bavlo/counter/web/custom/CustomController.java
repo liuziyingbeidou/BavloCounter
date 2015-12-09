@@ -59,11 +59,9 @@ public class CustomController extends BaseController implements IConstant {
 
 		CustomVO customEdit = customService.findCustomById(id);
 		
-		List<CustomBVO> customBVO = customService.findListCustomB(id);
 		List<CustomCVO> customCVO = customService.findListCustomC(id);
 		List<CustomDVO> customDVO = customService.findListCustomD(id);
 		
-		JSONArray imgJson = JSONArray.fromObject(customBVO);
 		JSONArray chainJson = JSONArray.fromObject(customCVO);
 		JSONArray stockGemJson = JSONArray.fromObject(customDVO);
 		
@@ -80,7 +78,6 @@ public class CustomController extends BaseController implements IConstant {
 		}
 		model.addObject("pageCustomType", IConstant.PAGE_TYPE_EDIT);
 		model.addObject("customEdit", customEdit);
-		model.addObject("imgJson", imgJson);
 		model.addObject("chainJson", chainJson);
 		model.addObject("stockGemJson", stockGemJson);
 		model.addObject("number", CommonUtils.getBillCode("CM"));
