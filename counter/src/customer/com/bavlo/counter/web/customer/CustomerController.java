@@ -109,7 +109,7 @@ public class CustomerController extends BaseController implements IConstant {
 		String content = request.getParameter("content");
 		String wh = "";
 		if(StringUtil.isNotEmpty(content)){
-			wh = " vname like '%"+content+"%' or vphoneCode like '%"+content+"%'";
+			wh = " vcustomerCode like '%"+content+"%' or vname like '%"+content+"%' or vphoneCode like '%"+content+"%'";
 		}
 		List<CustomerVO> customerList = customerService.findCustomerList(wh);
 		renderJson(customerList);

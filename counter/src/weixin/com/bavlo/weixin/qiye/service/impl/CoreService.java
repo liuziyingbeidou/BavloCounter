@@ -1,9 +1,15 @@
-package com.bavlo.weixin.qiye.service;
+package com.bavlo.weixin.qiye.service.impl;
 
 import java.util.Date;
 import java.util.Map;
 
+import javax.servlet.http.HttpSession;
+
+import org.springframework.stereotype.Service;
+
+import com.bavlo.counter.service.impl.CommonService;
 import com.bavlo.weixin.qiye.pojo.resp.TextMessage;
+import com.bavlo.weixin.qiye.service.itf.ICoreService;
 import com.bavlo.weixin.qiye.util.MessageUtil;
 
 /**
@@ -11,9 +17,11 @@ import com.bavlo.weixin.qiye.util.MessageUtil;
  * @author shijf
  *
  */
-public class CoreService {
+@Service("qycoreService")
+public class CoreService extends CommonService implements ICoreService{
 
-	public static String processRequest(String msg) {
+	@Override
+	public String processRequest(String msg,HttpSession session) {
 		String respMessage = null;
 		try {
 			// 默认返回的文本消息内容

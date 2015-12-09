@@ -72,7 +72,7 @@ public class CustomerVO extends IdEntity {
 	/** 
 	 * 地址：街道
 	 */ 
-	@Column(length=50)
+	@Column(length=150)
 	private String vstreet;
 	/** 
 	 * 地址：邮编 
@@ -91,7 +91,7 @@ public class CustomerVO extends IdEntity {
 	/** 
 	 * 客户的openid
 	 */ 
-	@Column(length=50)
+	@Column(length=100)
 	private String vopenid;
 	/** 
 	 * 客户语言 
@@ -106,13 +106,15 @@ public class CustomerVO extends IdEntity {
 	/** 
 	 * 客户头像地址 
 	 */ 
-	@Column(length=50)
+	@Column(length=255)
 	private String vhendimgurl;
 	/** 
 	 * 客户关注时间
 	 */ 
 	@Column(length=50)
 	private String vsubscribeTime;
+	//关注状态
+	private Integer vsubscribeState;
 
 	public String getAgentId() {
 		return agentId;
@@ -272,6 +274,14 @@ public class CustomerVO extends IdEntity {
 
 	public String getVgroup() {
 		return vgroup;
+	}
+
+	public Integer getVsubscribeState() {
+		return vsubscribeState;
+	}
+
+	public void setVsubscribeState(Integer vsubscribeState) {
+		this.vsubscribeState = vsubscribeState;
 	}
 
 }

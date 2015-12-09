@@ -4,17 +4,19 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.PrintWriter;
 
+import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
+import org.apache.commons.io.IOUtils;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.apache.commons.io.IOUtils;
 
 import com.bavlo.weixin.qiye.aes.AesException;
 import com.bavlo.weixin.qiye.aes.WXBizMsgCrypt;
-import com.bavlo.weixin.qiye.service.CoreService;
+import com.bavlo.weixin.qiye.service.itf.ICoreService;
 import com.bavlo.weixin.qiye.util.Constants;
 
 /**
@@ -23,8 +25,12 @@ import com.bavlo.weixin.qiye.util.Constants;
  * @author shijf
  *
  */
-@Controller
+@Controller("qycoreController")
 public class CoreController {
+	
+	@Resource
+	ICoreService qycoreService;
+	
 	private String token = Constants.TOKEN;
 	private String encodingAESKey =Constants.encodingAESKey;
 	private String corpId = Constants.CORPID;
@@ -63,7 +69,7 @@ public class CoreController {
 
 	@RequestMapping(value = { "/coreJoin.do" }, method = RequestMethod.POST)
 	public void coreJoinPost(HttpServletRequest request,
-			HttpServletResponse response) throws IOException {
+			HttpServletResponse response,HttpSession session) throws IOException {
 		// 将请求、响应的编码均设置为UTF-8（防止中文乱码）
 		request.setCharacterEncoding("UTF-8");
 		response.setCharacterEncoding("UTF-8");
@@ -92,7 +98,7 @@ public class CoreController {
 		System.out.println("msg=" + msg);
 		
 		// 调用核心业务类接收消息、处理消息
-		String respMessage = CoreService.processRequest(msg);
+		String respMessage = qycoreService.processRequest(msg,session);
 		
 		String encryptMsg = "";
 		try {

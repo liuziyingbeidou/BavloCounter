@@ -26,6 +26,8 @@ public class WeixinUserInfo {
 	private String language;
 	// 用户头像
 	private String headImgUrl;
+	//分组
+	private String groupid;
 
 	public String getOpenId() {
 		return openId;
@@ -105,5 +107,13 @@ public class WeixinUserInfo {
 
 	public void setHeadImgUrl(String headImgUrl) {
 		this.headImgUrl = headImgUrl;
+	}
+
+	public String getGroupid() {
+		return groupid;
+	}
+
+	public void setGroupid(String groupid) {
+		this.groupid = groupid;
 	}
 }

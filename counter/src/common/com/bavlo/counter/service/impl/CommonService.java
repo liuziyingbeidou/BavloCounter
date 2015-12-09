@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
 import com.bavlo.counter.commonbeans.Page;
+import com.bavlo.counter.dao.HibernateDAO;
 import com.bavlo.counter.dao.IHibernateDAO;
 import com.bavlo.counter.service.ICommonService;
 
