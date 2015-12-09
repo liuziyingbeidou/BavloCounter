@@ -70,6 +70,31 @@ public class QiYeUtil {
 	}
 	
 	/**
+	 * @Description: 获取RD-标签下的所有部门列表
+	 * @param @return
+	 * @return Map<Integer,String>
+	 */
+	public static Map<Integer,String> getDepartMap(){
+		
+		//遍历标签并放入map
+		Map<Integer,String> tag = new HashMap<Integer,String>();
+		
+		Map<Integer,String> tagMap = getTagMap();
+		if(tagMap != null){
+			//1、遍历标签找到RD-门店标签ID;
+			for (Map.Entry<Integer,String> tagEntry : tagMap.entrySet()) {
+				String tagName = tagEntry.getValue();
+				//RD-前缀标签，门店
+				if(Constants.LB_DEPART.equals(tagName.subSequence(0, 3))){
+					tag.put(tagEntry.getKey(), tagEntry.getValue().substring(3));
+				}
+			}
+		}
+		
+		return tag;
+	}
+	
+	/**
 	 * @Description: 获取标签键值对
 	 * @param @return
 	 * @return Map<Integer,String>
@@ -138,13 +163,15 @@ public class QiYeUtil {
 	 * @param UserId
 	 * @return
 	 */
-	public static Map<String,List<String>> getUserTag(String UserId) {
+	public static Map<String,Object> getUserTag(String UserId) {
 		//角色标签
 		List<String> userRLTag = new ArrayList<String>();
 		//店标签
 		List<String> userRDTag = new ArrayList<String>();
+		//所属门店
+		String userShop = null;
 		
-		Map<Integer,String> tagMap = QiYeUtil.getTagMap();
+		Map<Integer,String> tagMap = getTagMap();
 		if(tagMap != null){
 			//遍历标签
 			for (Map.Entry<Integer,String> tagEntry : tagMap.entrySet()) {
@@ -163,9 +190,10 @@ public class QiYeUtil {
 									if(Constants.LB_ROLE.equals(tagName.substring(0, 3))){
 										userRLTag.add(tagEntry.getValue().substring(3));
 									}
-									//店名
+									//店名(key-value)
 									else if(Constants.LB_DEPART.equals(tagName.substring(0, 3))){
-										userRDTag.add(tagEntry.getValue().substring(3));
+										userRDTag.add(tagEntry.getKey()+"-"+tagEntry.getValue().substring(3));
+										userShop = tagEntry.getKey()+"-"+tagEntry.getValue().substring(3);
 									}
 								}
 							}
@@ -196,9 +224,10 @@ public class QiYeUtil {
 				}
 			}
 		}*/
-		Map<String,List<String>> userTag = new HashMap<String,List<String>>();
+		Map<String,Object> userTag = new HashMap<String,Object>();
 		userTag.put("roleTag", userRLTag);
 		userTag.put("departTag", userRDTag);
+		userTag.put("userShop", userShop);
 		return userTag;
 	}
 	

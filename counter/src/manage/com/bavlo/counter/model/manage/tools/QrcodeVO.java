@@ -17,10 +17,15 @@ import com.bavlo.counter.model.IdEntity;
 public class QrcodeVO extends IdEntity {
 
 	private static final long serialVersionUID = 1L;
-	
+	//客服工号
 	private String vkfcode;
+	//对应userid
+	private String userid;
+	//门店
 	private String vshop;
+	//头像Url
 	private String vqrcodeUrl;
+	
 	public String getVkfcode() {
 		return vkfcode;
 	}
@@ -38,6 +43,12 @@ public class QrcodeVO extends IdEntity {
 	}
 	public void setVqrcodeUrl(String vqrcodeUrl) {
 		this.vqrcodeUrl = vqrcodeUrl;
+	}
+	public String getUserid() {
+		return userid;
+	}
+	public void setUserid(String userid) {
+		this.userid = userid;
 	}
 	
 }

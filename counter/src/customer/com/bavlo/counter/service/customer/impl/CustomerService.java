@@ -116,7 +116,7 @@ public class CustomerService extends CommonService implements ICustomerService {
 			vcode = CommonUtils.getBillCode(IConstant.CODE_CUSTER);
 			cvo.setVcustomerCode(vcode);
 			cvo.setAgentId(agentId);
-			cvo.setVserviceCode(serviceCode);
+			cvo.setVserviceCode(scene_str);
 			
 			saveOrUpdateCustomer(cvo);
 		}else{

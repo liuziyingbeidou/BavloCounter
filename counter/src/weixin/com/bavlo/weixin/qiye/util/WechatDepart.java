@@ -14,9 +14,10 @@ import net.sf.json.JSONObject;
  */
 public class WechatDepart {
 	
-	
+	//获取部门成员
 	private static final String get_DepartUser_url = "https://qyapi.weixin.qq.com/cgi-bin/user/get?access_token=ACCESS_TOKEN&userid=USERID";
-	
+	//获取部门列表
+	private static final String get_DepartById_url = "https://qyapi.weixin.qq.com/cgi-bin/department/list?access_token=ACCESS_TOKEN&id=ID";
 	
 	/**
 	 * 根据userId获取成员详细信息
@@ -30,5 +31,16 @@ public class WechatDepart {
 		JSONObject jo = HttpRequestUtil.httpRequest(TegUserUrl, EnumMethod.GET.name(), null);
 		return jo;
 	}
-	
+	/**
+	 * 根据id获取指定部门及其下的子部门
+	 * 管理组须拥有指定部门的查看权限。
+	 * @param userId
+	 * @return
+	 */
+	public static JSONObject getDepartInfo(String id) {
+		AccessToken accessToken = QiYeUtil.getAccessToken(Constants.CORPID, Constants.SECRET);
+		String TegDepartUrl = get_DepartById_url.replace("ACCESS_TOKEN", accessToken.getToken()).replace("ID", id + "");
+		JSONObject jo = HttpRequestUtil.httpRequest(TegDepartUrl, EnumMethod.GET.name(), null);
+		return jo;
+	}
 }

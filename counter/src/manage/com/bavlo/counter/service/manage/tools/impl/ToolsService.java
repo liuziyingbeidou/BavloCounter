@@ -44,7 +44,14 @@ public class ToolsService extends CommonService implements IToolsService {
 			Integer rows) {
 		String conditions = null;
 		if(StringUtil.isNotEmpty(condition)){
-			conditions = " vkfcode like '"+condition+"%' ";
+			if(condition.length() < 4){
+				conditions = " vshop like '"+condition+"%' ";
+			}else if(condition.length() == 4){
+				conditions = " vkfcode ='"+condition+"' ";
+			}else if(condition.length() > 4){
+				conditions = "  concat(vshop,vkfcode) like '%"+condition+"%'";
+			}
+			
 		}
 		Integer total = getCountByHQL(QrcodeVO.class, conditions);
 		List<QrcodeVO> listVO = findPage(QrcodeVO.class, dgpage, rows, conditions, "id", "desc");

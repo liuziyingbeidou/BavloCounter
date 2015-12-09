@@ -2,6 +2,7 @@ package com.bavlo.weixin.qiye.web;
 
 import java.io.UnsupportedEncodingException;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -61,11 +62,14 @@ public class OAuth2Controller {
 	public String Oauth2MeUrl(HttpServletRequest request, @RequestParam String code, @RequestParam String oauth2url) {
 		AccessToken accessToken = QiYeUtil.getAccessToken(Constants.CORPID, Constants.SECRET);
 		HttpSession session = request.getSession();
+		
 		if (accessToken != null && accessToken.getToken() != null) {
 			String Userid = getMemberGuidByCode(accessToken.getToken(), code, Constants.AGENTID);
 			if (Userid != null) {
 				LoginVO lvo = new LoginVO();
-				List<String> listRoleTag = QiYeUtil.getUserTag(Userid).get("roleTag");
+				Map<String,Object> mapRoleTag = QiYeUtil.getUserTag(Userid);
+				List<String> listRoleTag = mapRoleTag.get("roleTag") != null ? (List<String>)mapRoleTag.get("roleTag") : null;
+				String uDepartTag = mapRoleTag.get("userShop")+"";
 				JSONObject  obj = WechatDepart.getUserInfo(Userid);
 				JSONObject  extattrObj = obj.getJSONObject("extattr");
 				if(extattrObj != null){
@@ -82,6 +86,7 @@ public class OAuth2Controller {
 				}
 				lvo.setUserId(Userid);
 				lvo.setRole(listRoleTag);
+				lvo.setShop(uDepartTag);
 				session.removeAttribute("loginInfo");
 				session.setAttribute("loginInfo",lvo);
 				
