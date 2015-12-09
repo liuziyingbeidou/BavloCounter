@@ -216,7 +216,7 @@
 						<li class="focus">
 							最后关注
 							<br />
-							2015-09-22
+							${customerDetail.vsubscribeTime }
 						</li>
 						<div class="clear"></div>
 					</ul>

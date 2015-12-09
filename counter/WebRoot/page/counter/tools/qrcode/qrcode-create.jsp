@@ -73,17 +73,25 @@
   <body>
     <form id="qrcodeFrmId" class="am-form am-form-horizontal" data-am-validator>
       <input type="hidden" name="id" value="${qrcodevo['id'] }">
-	  <div class="am-form-group am-form-group-sm">
-	    <label for="doc-ipt-3-1" class="am-u-sm-2 am-form-label">工号</label>
-	    <div class="am-u-sm-10">
-	      <input type="number" pattern="^\d{4}$" required  name="vkfcode" value="${qrcodevo['vkfcode'] }" id="doc-ipt-3-1" class="am-form-field" placeholder="输入4位工号">
-	    </div>
-	  </div>
-	
+      <fieldset>
+      <legend>工号(门店+工号编号)</legend>
 	  <div class="am-form-group am-form-group-sm">
 	    <label for="doc-ipt-3-2" class="am-u-sm-2 am-form-label">门店</label>
 	    <div class="am-u-sm-10">
-	      <input type="number" name="vshop" value="${qrcodevo['vshop'] }" id="doc-ipt-3-2" class="am-form-field" placeholder="所属门店">
+	      <input type="number" name="vshop" required value="${qrcodevo['vshop'] }" id="doc-ipt-3-2" class="am-form-field" data-validation-message="请输入所属门店" placeholder="所属门店">
+	    </div>
+	  </div>
+	  <div class="am-form-group am-form-group-sm">
+	    <label for="doc-ipt-3-1" class="am-u-sm-2 am-form-label">工号编号</label>
+	    <div class="am-u-sm-10">
+	      <input type="number" pattern="^\d{4}$" required  name="vkfcode" value="${qrcodevo['vkfcode'] }" id="doc-ipt-3-1" class="am-form-field" data-validation-message="输入4位工号" placeholder="输入4位工号">
+	    </div>
+	  </div>
+	  </fieldset>
+	  <div class="am-form-group am-form-group-sm">
+	    <label for="doc-ipt-3-2" class="am-u-sm-2 am-form-label">帐号</label>
+	    <div class="am-u-sm-10">
+	      <input type="text" name="userid" required value="${qrcodevo['userid'] }" id="doc-ipt-3-2" class="am-form-field" data-validation-message="请输入客服人员帐号" placeholder="输入客服人员帐号">
 	    </div>
 	  </div>
 	  <div class="am-form-group am-form-group-sm bv-qrcode">
