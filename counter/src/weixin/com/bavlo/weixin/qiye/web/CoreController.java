@@ -37,7 +37,7 @@ public class CoreController {
 
 	@RequestMapping(value = { "/coreJoin.do" }, method = RequestMethod.GET)
 	public void coreJoinGet(HttpServletRequest request,
-			HttpServletResponse response) throws IOException {
+		HttpServletResponse response) throws IOException {
 		// 微信加密签名
 		String msg_signature = request.getParameter("msg_signature");
 		// 时间戳
