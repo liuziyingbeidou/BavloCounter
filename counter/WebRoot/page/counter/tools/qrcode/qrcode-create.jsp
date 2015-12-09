@@ -18,6 +18,7 @@
   	<link rel="stylesheet" href="${ctx }/page/counter/assets/css/amazeui.min.css"/>
   	<link rel="stylesheet" href="${ctx }/page/counter/assets/css/admin.css">
   	<script type="text/javascript" src="${ctx }/resources/js/jquery-1.8.3.min.js"></script>
+  	<script type="text/javascript" src="${ctx }/page/counter/assets/js/amazeui.min.js"></script>
   	<script type="text/javascript" src="${ctx }/resources/js/bavlo-dialog.js"></script>
   	
   	<script type="text/javascript">
@@ -35,43 +36,54 @@
   	
   	//创建二维码
 	function create(){
-		$.ajax({
-		     type : "POST",
-		     url : "${ctx}/tools/createQrcode.do",
-		     data:$('#qrcodeFrmId').serialize(),// formid
-		     async:false,
-		     cache:false,
-		     success : function(data) {
-		     	if(data != null && data != ""){
-			     	if(data.vqrcodeUrl != null && data.vqrcodeUrl != ""){
-			     		$(".am-radius").prop("src","${ctx}/resources/qrcode/"+data.vqrcodeUrl);
-			     	}else{
-			     		alert("创建失败!");
-			     	}
-		     	}
-		     },
-		     error : function(e) {
-		     	alert("创建失败!");
-		     }
-	    });
+	
+		// 处理异步验证结果
+		$.when($('#qrcodeFrmId').validator('isFormValid')).then(function(jqXHR) {
+			if(jqXHR){
+				$.ajax({
+				     type : "POST",
+				     url : "${ctx}/tools/createQrcode.do",
+				     data:$('#qrcodeFrmId').serialize(),// formid
+				     async:false,
+				     cache:false,
+				     success : function(data) {
+				     	if(data != null && data != ""){
+					     	if(data.vqrcodeUrl != null && data.vqrcodeUrl != ""){
+					     		$(".am-radius").prop("src","");
+					     		$(".am-radius").prop("src","${ctx}/resources/qrcode/"+data.vqrcodeUrl);
+					     		alert("创建成功!");
+					     		window.parent.reloadGrid();
+					     	}else{
+					     		alert("创建失败!");
+					     	}
+				     	}
+				     },
+				     error : function(e) {
+				     	alert("创建失败!");
+				     }
+			    });
+			}
+		}, function() {
+		// 验证失败的逻辑
+		});
 	}
   	</script>
   </head>
   
   <body>
-    <form id="qrcodeFrmId" class="am-form am-form-horizontal">
+    <form id="qrcodeFrmId" class="am-form am-form-horizontal" data-am-validator>
       <input type="hidden" name="id" value="${qrcodevo['id'] }">
 	  <div class="am-form-group am-form-group-sm">
 	    <label for="doc-ipt-3-1" class="am-u-sm-2 am-form-label">工号</label>
 	    <div class="am-u-sm-10">
-	      <input type="number" name="vkfcode" value="${qrcodevo['vkfcode'] }" id="doc-ipt-3-1" class="am-form-field" placeholder="输入工号">
+	      <input type="number" pattern="^\d{4}$" required  name="vkfcode" value="${qrcodevo['vkfcode'] }" id="doc-ipt-3-1" class="am-form-field" placeholder="输入4位工号">
 	    </div>
 	  </div>
 	
 	  <div class="am-form-group am-form-group-sm">
 	    <label for="doc-ipt-3-2" class="am-u-sm-2 am-form-label">门店</label>
 	    <div class="am-u-sm-10">
-	      <input type="text" name="vshop" value="${qrcodevo['vshop'] }" id="doc-ipt-3-2" class="am-form-field" placeholder="所属门店">
+	      <input type="number" name="vshop" value="${qrcodevo['vshop'] }" id="doc-ipt-3-2" class="am-form-field" placeholder="所属门店">
 	    </div>
 	  </div>
 	  <div class="am-form-group am-form-group-sm bv-qrcode">
@@ -82,7 +94,7 @@
 	  </div>
 	  <div class="am-form-group">
 	    <div class="am-u-sm-10 am-u-sm-offset-2">
-	      <button type="button" id="btn-submit" class="am-btn am-btn-default">生成二维码</button>&nbsp;
+	      <button type="button" id="btn-submit" class="am-btn am-btn-default">创建二维码</button>&nbsp;
 	    </div>
 	  </div>
 	</form>
