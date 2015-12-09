@@ -38,129 +38,30 @@
 <script src="/counter/resources/jquery.multiDialog/js/jquery.ui.dialog.extended-1.0.2.js"></script> 
 <script src="/counter/resources/jquery.multiDialog/js/jquery.multiDialog.js"></script> 
 <script src="/counter/resources/js/bavlo-dialog.js"></script>
-<script>
-//本地webservice
-var nativeUrl = "/counter/webservice/http.do";
-//初始基础数据
-$(function(){
-	// 款式类型下拉框值
-	var typeUrl = "http://www.bavlo.com/getAllStyleType";
-	loadSelDataStr(nativeUrl, typeUrl, "styleType", "data[i].id",
-			"data[i].type_name_cn", function() {
-				$("#styleType").val("${customEdit['srcstyleType']}");
-			},"款式");
-	// 金属材质下拉框值
-	var typeUrl = "http://www.bavlo.com/getAllMetalMaterialType";
-	loadSelDataStr(nativeUrl, typeUrl, "metalType", "data[i].id",
-			"data[i].metal_type_cn", function() {
-				$("#metalType").val("${customEdit['srcmetal']}");
-			},"金属");
-	// 款式类型下拉框值
-	var typeUrl = "http://www.bavlo.com/getAllRingSize";
-	loadRingSizeData(nativeUrl, typeUrl, "ringSize", "data[i].id",
-			"data[i].china", "data[i].diameter", "data[i].circumference",
-			function() {
-				$("#ringSize").val("${customEdit['srcringSize']}");
-			},"手寸");
-	// 当款式类型不是戒指时，隐藏戒指手寸选项
-	$("#styleType").change(function() {
-		if ($("#styleType").val() == "戒指") {
-			$("#ringSize").css({
-				display : "block"
-			});
-		} else {
-			$("#ringSize").css({
-				display : "none"
-			});
-		}
-	});
-	
-	// 客主石显示和隐藏
-	var mainGemCost = "${customEdit['nmainGemCost']}";
-	if(mainGemCost != ""){
-		$(".kzsGem").show();
-	}
-	$(".kzsGem_btn").click(function() {
-		if ($(".kzsGem").css("display") == 'none') {
-			$(".kzsGem").show();
-			//var text = $(this).text();
-			//$(this).text(text.replace('+', '-'));
-		} else {
-			h("kzsGem");
-		}
-	})
-	// 客配石显示和隐藏
-	var partsGemNum = "${customEdit['ipartsGemNum']}";
-	if(partsGemNum != ""){
-		$(".kpsGem").show();
-	}
-	$(".kpsGem_btn").click(function() {
-		if ($(".kpsGem").css("display") == 'none') {
-			$(".kpsGem").show();
-			//var text = $(this).text();
-			//$(this).text(text.replace('+', '-'));
-		} else {
-			h("kpsGem");
-		}
-	})
-	// 显示参考图片 
-	var id = "${customEdit['id']}";
-	if(id != null){
-		PicShow_Hidden(pic);
-	}
-	// 初始化标签
-	var str = "";
-	if("${customEdit['vcraftTag']}" != ""){
-		str = "${customEdit['vcraftTag']}"
-	}
-	$("#vcraftTag").val(str);
-	var WS = function(opt) {
-
-		var regexp = opt.regexp || /\S/, el = $(opt.el), list = el.val().split(','), holder = $('<span class="words-split"></span>')
-
-		for (var i = 0; i < list.length; i++) {
-			if(list[i] != ""){
-				holder.append($('<a href="javascript:void(0)" class="fm-button">'
-						+ list[i] + '<em> </em></a>'));
-			}
-		}
-		el.hide().after(holder);
-
-		holder.on('click', 'a>em', function() { // 刪除
-			$(this).parent().remove();
-			el.val(holder.text().match(/\S+/g).join(','))
-		});
-
-		$(".gongyi1").change(function() { // 添加
-			var t = $(this).find("option:selected").val();
-			var str = $(".custom_engrave").val();
-			if(str.indexOf(t) < 0){
-				if (t) {
-					holder.append($('<a href="javascript:void(0)" class="fm-button">'
-									+ t + '<em> </em></a>'));
-					el.val(holder.text().match(/\S+/g).join(','));
-				} 
-			}
-		});
-	}
-
-	WS({
-		el : '#vcraftTag',
-		regexp : /\w+\.\w+/
-	});
-	//刻字字体样式
-	initFont();
-	$(".ziti").change(function(){
-		initFont();
-	})
-	//增加后缀
-	initFieldSuffix();
-})
-</script>
 </head>
 
 <body>
 	<form id="custom">
+	
+	<input type="hidden" id='customId' name='id' value="${customEdit['id'] }" />
+	<input type="hidden" id='orderId' name='orderId' value="${customEdit['orderId'] }" />
+	<input type="hidden" id='customerId' name='customerId' value="${customEdit['customerId'] }" />
+	<input type="hidden" id='vengraveVh' name='vengraveVh' value="${customEdit['vengraveVh'] }" />
+	<input type="hidden" id='vcadFile' name='vcadFile' value="${customEdit['vcadFile'] }" />
+	
+	<input type="hidden" id='srcstyleType' value="${customEdit['srcstyleType']}" />
+	<input type="hidden" id='srcmetal' value="${customEdit['srcmetal']}" />
+	<input type="hidden" id='srcringSize' value="${customEdit['srcringSize']}" />
+	<input type="hidden" id='nmainGemCost' value="${customEdit['nmainGemCost']}" />
+	<input type="hidden" id='vmainGemName' value="${customEdit['vmainGemName']}" />
+	<input type="hidden" id='vmainGemPic' value="${customEdit['vmainGemPic']}" />
+	<input type="hidden" id='ipartsGemNum' value="${customEdit['ipartsGemNum']}" />
+	<input type="hidden" id='vpartsGemName' value="${customEdit['vpartsGemName']}" />
+	<input type="hidden" id='vpartsGemPic' value="${customEdit['vpartsGemPic']}" />
+	
+	<input type="hidden" id='chainJson' value='${chainJson}' />
+	<input type="hidden" id='stockGemJson' value='${stockGemJson}' />
+	
 	<div class="header">
 		<div class="head1">
 			<div class="top">
@@ -205,16 +106,6 @@ $(function(){
 	<!--<input type="hidden" id='vcustomCode' name='vcustomCode'
 		value="${number }" />
 	-->
-	<input type="hidden" id='id' name='id'
-		value="${customEdit['id'] }" />
-	<input type="hidden" id='orderId' name='orderId'
-		value="${customEdit['orderId'] }" />
-	<input type="hidden" id='customerId' name='customerId'
-		value="${customEdit['customerId'] }" />
-	<input type="hidden" id='vengraveVh' name='vengraveVh'
-		value="${customEdit['vengraveVh'] }" />
-	<input type="hidden" id='vcadFile' name='vcadFile'
-		value="${customEdit['vcadFile'] }" />
 	<div class="all">
 		<div class="main">
 			<div class="mainleft">
@@ -325,8 +216,8 @@ $(function(){
 						<option>选择款式</option>
 					</select>
 					<select name="vsex" class="nvkuan">
-						<option value="0" <c:if test="${customEdit['vsex']=='0'}">selected</c:if>>女款</option>
-						<option value="1" <c:if test="${customEdit['vsex']=='1'}">selected</c:if>>男款</option>
+						<option value="女款" <c:if test="${customEdit['vsex']=='女款'}">selected</c:if>>女款</option>
+						<option value="男款" <c:if test="${customEdit['vsex']=='男款'}">selected</c:if>>男款</option>
 					</select>
 				</div>
 				<div class="changdu">
@@ -442,7 +333,7 @@ $(function(){
 				<br />
 	
 				<div class="zhanwei">
-				<input type="text" class="custom_engrave" name="vcraftTag" value="" id="vcraftTag" />
+				<input type="text" class="custom_engrave" name="vcraftTag" value="${customEdit['vcraftTag'] }" id="vcraftTag" />
 				<select class="gongyi1">
 					<option value="">表面工艺</option>
 					<option value="喷砂">喷砂</option>
@@ -455,7 +346,7 @@ $(function(){
 				<br />
 				<select id="certificate" name="icertificate" class="jianding1">
 					<option value="0" <c:if test="${customEdit['icertificate']=='0'}">selected</c:if>>鉴定证书 -无</option>
-					<option value="1" <c:if test="${customEdit['icertificate']=='1'}">selected</c:if>>鉴定证书 -有</option>
+					<option value="25" <c:if test="${customEdit['icertificate']=='25'}">selected</c:if>>鉴定证书 -有</option>
 				</select>
 				</div>
 				<div class="tu">
