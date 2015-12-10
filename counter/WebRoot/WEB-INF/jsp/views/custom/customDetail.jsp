@@ -21,7 +21,8 @@
 		<!--必要样式-->
 		<link rel="stylesheet" href="${ctx}/resources/css/photoswipe.css">
 		<link rel="stylesheet" href="${ctx}/resources/css/default-skin.css">
-
+		<link rel="stylesheet" href="/counter/resources/jquery.multiDialog/css/jquery-ui-1.10.3.custom.css">
+		<script src="/counter/resources/jquery.multiDialog/js/jquery/jquery-ui-1.10.3.custom.js"></script> 
 		<script src="${ctx}/resources/js/photoswipe.min.js"></script>
 		<script src="${ctx}/resources/js/photoswipe-ui-default.min.js"></script>
 		<script src="${ctx}/resources/js/photoswipefromdom.js"></script>
@@ -178,17 +179,13 @@
 							<dd>
 								金属：${customDetail.nprice }
 							</dd>
-							<dd>
-								链子：
+							<dd class="chain">
 							</dd>
-							<dd>
-								客主石：${customDetail.iprimaryGemID } ${customDetail.iprimaryGemID }元
+							<dd class="mainGem">
 							</dd>
-							<dd>
-								客配石：${customDetail.iforeignGemID } ${customDetail.iforeignGemNum }颗
+							<dd class="partGem">
 							</dd>
-							<dd>
-								库选石：颗
+							<dd class="stockGem">
 							</dd>
 							<dd>
 								刻字：${customDetail.vengrave }
