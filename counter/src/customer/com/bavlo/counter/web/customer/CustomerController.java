@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.bavlo.counter.constant.IConstant;
+import com.bavlo.counter.model.LoginVO;
 import com.bavlo.counter.model.customer.CustomerVO;
 import com.bavlo.counter.service.customer.itf.ICustomerService;
 import com.bavlo.counter.utils.CommonUtils;
@@ -111,6 +112,25 @@ public class CustomerController extends BaseController implements IConstant {
 		if(StringUtil.isNotEmpty(content)){
 			wh = " vcustomerCode like '%"+content+"%' or vname like '%"+content+"%' or vphoneCode like '%"+content+"%'";
 		}
+		/**角色权限控制--开始**/
+		Object lgObj = request.getSession().getAttribute("loginInfo");
+		if(lgObj != null){
+			//当前登录人信息
+			LoginVO lgInfo = (LoginVO)lgObj;
+			List<String> roleList = lgInfo.getRole();
+			if(roleList != null){
+				//非PM
+				if(!roleList.contains(IConstant.ROLE_PM)){
+					//当前登录定制顾问下的客户
+					wh += " and vserviceCode ='"+lgInfo.getKfcode()+"'";
+				}
+			}else{
+				wh = " 1=2";
+			}
+		}else{
+			wh = " 1=2";
+		}
+		/**角色权限控制--结束**/
 		List<CustomerVO> customerList = customerService.findCustomerList(wh);
 		renderJson(customerList);
 	}

@@ -17,10 +17,12 @@ public class LoginVO {
 	private String muserId;
 	//角色
 	private List<String> role;
-	//店名
+	//店名{key-value}
 	private String shop;
 	//主微信号
 	private String mwxcode;
+	//客服工号
+	private String kfcode;
 	
 	public String getUserId() {
 		return userId;
@@ -51,6 +53,12 @@ public class LoginVO {
 	}
 	public void setMuserId(String muserId) {
 		this.muserId = muserId;
+	}
+	public String getKfcode() {
+		return kfcode;
+	}
+	public void setKfcode(String kfcode) {
+		this.kfcode = kfcode;
 	}
 	
 }
