@@ -23,6 +23,44 @@ public interface IConstant {
 	public static final Integer ORDER_QUALITY = 3;
 	public static final Integer ORDER_EXPRESS = 4;
 	public static final Integer ORDER_PAYMENT = 5;
+	
+	/**角色**/
+	/**
+	 * 客户{实体店客户}
+	 * 查看:订单、款式单、宝石签收单、实物签收单
+	 */
+	public static final String ROLE_CUST = "CUST";
+	/**
+	 * 定制顾问{实体店店员}
+	 * 查看、编辑:订单、款式单、宝石签收单、实物签收单、客户资料
+	 */
+	public static final String ROLE_CC = "CC";
+	/**
+	 * 产品经理{产品、设计总协调}
+	 * 查看、编辑：款式单
+	 */
+	public static final String ROLE_PM = "PM";
+	/**
+	 * CAD起版师{3D起版、工艺设计}
+	 * 编辑、查看：款式单（上传CAD文件、缩略图）
+	 */
+	public static final String ROLE_CAD = "CAD";
+	/**
+	 * 生产主管{生产、物料管理}
+	 * 编辑、查看：订单、定制单（上传金重、CAD及缩略图）
+	 */
+	public static final String ROLE_PMC = "PMC";
+	/**
+	 * 配石员{配石采购}
+	 * 编辑、查看：配石单（回填配石单结果）
+	 */
+	public static final String ROLE_GB = "GB";
+	/**
+	 * 工厂跟单员{工厂的生产计划及管控负责人}
+	 * 查看：定制单（加工单）（回填进度结果）
+	 */
+	public static final String ROLE_PPS = "PPS";
+	
 	/**
 	 * 编码前缀
 	 */

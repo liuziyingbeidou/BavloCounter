@@ -81,5 +81,14 @@ public class ToolsService extends CommonService implements IToolsService {
 		}
 		return (List<QrcodeVO>) findListBySQL(condition, null, start,limit);
 	}
+
+	@Override
+	public QrcodeVO getQrcodeVOByWh(String condition) {
+		String conditions = null;
+		if(StringUtil.isNotEmpty(condition)){
+			conditions = condition;
+		}
+		return findFirst(QrcodeVO.class, conditions);
+	}
 	
 }

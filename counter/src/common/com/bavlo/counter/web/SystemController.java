@@ -22,6 +22,7 @@ public class SystemController extends BaseController {
 		Object loginInfo = session.getAttribute("loginInfo");
 		if(loginInfo != null){
 			LoginVO loginVO = (LoginVO)loginInfo;
+			model.addObject("uvo", loginVO);
 			System.out.println(JsonUtils.getJsonString4JavaPOJO(loginVO));
 		}
 		return model;

@@ -38,4 +38,12 @@ public interface IToolsService {
 	 */
 	public QrcodeVO getQrcodeVOById(Integer id);
 	
+	/**
+	 * @Description: condition对应二维码数据
+	 * @param @param id
+	 * @param @return
+	 * @return QrcodeVO
+	 */
+	public QrcodeVO getQrcodeVOByWh(String condition);
+	
 }

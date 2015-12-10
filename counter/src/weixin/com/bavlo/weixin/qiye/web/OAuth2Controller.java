@@ -4,6 +4,7 @@ import java.io.UnsupportedEncodingException;
 import java.util.List;
 import java.util.Map;
 
+import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
@@ -15,6 +16,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.bavlo.counter.model.LoginVO;
+import com.bavlo.counter.model.manage.tools.QrcodeVO;
+import com.bavlo.counter.service.manage.tools.itf.IToolsService;
 import com.bavlo.weixin.qiye.pojo.AccessToken;
 import com.bavlo.weixin.qiye.util.Constants;
 import com.bavlo.weixin.qiye.util.QiYeUtil;
@@ -28,6 +31,10 @@ import com.bavlo.weixin.qiye.util.WechatDepart;
  */
 @Controller
 public class OAuth2Controller {
+	
+	@Resource
+	IToolsService toolsService;
+	
 	/**
 	 * 构造参数并将请求重定向到微信API获取登录信息
 	 * 
@@ -69,7 +76,7 @@ public class OAuth2Controller {
 				LoginVO lvo = new LoginVO();
 				Map<String,Object> mapRoleTag = QiYeUtil.getUserTag(Userid);
 				List<String> listRoleTag = mapRoleTag.get("roleTag") != null ? (List<String>)mapRoleTag.get("roleTag") : null;
-				String uDepartTag = mapRoleTag.get("userShop")+"";
+				String userShop = mapRoleTag.get("userShop")+"";
 				JSONObject  obj = WechatDepart.getUserInfo(Userid);
 				JSONObject  extattrObj = obj.getJSONObject("extattr");
 				if(extattrObj != null){
@@ -84,9 +91,13 @@ public class OAuth2Controller {
 						}
 					}
 				}
+				QrcodeVO vo = toolsService.getQrcodeVOByWh(" userid='"+Userid+"'");
+				if(vo != null){
+					lvo.setKfcode(vo.getVshop()+vo.getVkfcode());
+				}
 				lvo.setUserId(Userid);
 				lvo.setRole(listRoleTag);
-				lvo.setShop(uDepartTag);
+				lvo.setShop(userShop);
 				session.removeAttribute("loginInfo");
 				session.setAttribute("loginInfo",lvo);
 				
