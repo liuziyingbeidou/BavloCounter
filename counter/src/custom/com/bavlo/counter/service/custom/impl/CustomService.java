@@ -67,7 +67,14 @@ public class CustomService extends CommonService implements ICustomService {
 	@Override
 	public CustomVO findCustomById(Integer id) {
 		String wh = " id ="+id;
-		return findFirst(CustomVO.class, wh);
+		CustomVO vo = findFirst(CustomVO.class, wh);
+		String bwh = " customId="+id +" and biscover='Y'";
+		CustomBVO bvo = findFirst(CustomBVO.class, bwh);
+		if(bvo != null){
+			vo.setFILE_0(bvo.getVpath()+"/min/"+CommonUtils.getMinPicName(bvo.getVname()));//∑‚√Ê
+		}
+		
+		return vo;
 	}
 
 	@Override

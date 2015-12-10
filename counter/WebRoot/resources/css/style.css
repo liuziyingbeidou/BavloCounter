@@ -144,7 +144,7 @@ font-family:"Microsoft yahei";
 	margin-top: 8;
 }
 .lianzi img { margin-left: 30px;}
-.lianzi b {	font-family: "Microsoft yahei";	font-size: 16px;color: #555;background: #ddd;padding: 9px 25px;}
+.lianzi b { font-family: "Microsoft yahei";font-size: 16px;color: #ddd;float: left;margin-top: 8;margin-left: 10;}
 .kzs{ width: 310px; margin: 0px auto; border-top: 1px solid #777; padding-bottom: 25px;}
 .kzs h3 { font-size: 16px; font-weight: normal;}
 .kzs h3 a { color: #ddd; line-height: 50px;}
