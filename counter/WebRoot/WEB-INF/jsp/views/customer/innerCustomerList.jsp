@@ -24,66 +24,46 @@
 <!-- Loading -->
 <script src="${ctx}/resources/showLoading/showLoading.js"></script>
 <link type="text/css" rel="stylesheet" href="${ctx}/resources/showLoading/showLoading.css">
+
 <!-- 弹框 -->
 <!-- jQuery & jQuery UI files (needed)--> 
 <script src="/counter/resources/jquery.multiDialog/js/jquery/jquery-ui-1.10.3.custom.js"></script> 
 <!-- MultiDialog files (needed) --> 
 <script src="/counter/resources/jquery.multiDialog/js/jquery.ui.dialog.extended-1.0.2.js"></script> 
 <script src="/counter/resources/jquery.multiDialog/js/jquery.multiDialog.js"></script> 
-	
-	<script type="text/javascript">
+<script type="text/javascript">
 	$(function(){
-		$(".search").keyup(function(){
-			 delay(function(){
-				 initData();
-			 }, 500 );
-		});
-		
-		var delay = (function(){
-			 var timer = 0;
-			 return function(callback, ms){
-				 clearTimeout (timer);
-				 timer = setTimeout(callback, ms);
-			 };
-		})();
 		initData();
-		$("#add-customer").click(function(){
-			url = "${ctx}/customer/info.do";//客户新增页
-			window.parent.location = url;
-			window.parent.closeMultiDlg();
-		});
 	});
 	
 	function initData(){
 		startMask();
 		$("#juheweb").empty();
-		var url = "${ctx}/customer/listJson.do";
-		$.post(url,{content:$(".search").val()},function(row){
+		var url = "${ctx}/qy/getUserByTagName.do";
+		$.post(url,{tagName:"${role}"},function(row){
 			var data = row;
 			for(var i = 0; i < data.length; i++){
 				var ht = "<li><h4><img style='width:60px;height:60px;' ";
 				var img = "src='${ctx}/resources/images/customer_01.png'";
-				if(data[i].vhendimgurl != ""){
-					img = "src='"+data[i].vhendimgurl+"'";
+				if(data[i].avatar != ""){
+					img = "src='"+data[i].avatar+"'";
 				}
-				var ml = "><b>"+data[i].vname+"</b><a href='#'>"+data[i].vcustomerCode+"</a><span><a href='#' onclick='selHander("+data[i].id+")'>选择</a></span></h4><div class='clear'></div></li>";
+				var ml = "><b>"+data[i].name+"</b><a href='#'>"+data[i].mobile+"</a><span><a href='#' onclick='selHander("+data[i].userid+")'>选择</a></span></h4><div class='clear'></div></li>";
 				$("#juheweb").append(ht+img+ml);
 				endMask();
 			}
 		});
 	}
+	
 	//调用父窗体方法
 	function selHander(id){
 		if(isExitsFunction(window.parent.setValueByFrame)){
 			if("${listType}" == "menu"){
-				window.parent.setValueByFrame("customer-menu",id,callbackMuilt());
-				window.parent.closeMultiDlg();
-			}else{
-				window.parent.setValueByFrame("customer",id,callbackMuilt());
+				window.parent.setValueByFrame("role-menu",id,callbackMuilt());
 				window.parent.closeMultiDlg();
 			}
 		}else{
-			alert("请在父窗口添加setValueByFrame(type,id,callback){处理逻辑}type='customer'");
+			alert("请在父窗口添加setValueByFrame(type,id,callback){处理逻辑}type='role-menu'");
 		}
 	}
 	</script>
@@ -102,12 +82,10 @@
 </head>
 
 <body>
-	<!--客户列表弹窗-->
+	<!--企业内部列表弹窗-->
 	<div class="orderlist" id='pic2'>
 		<div class="order-main">
 			<div class="search-1">
-				<input type='text' name='search' class="search" placeholder="编号/输入姓名/手机号" />
-				<span id="add-customer" style="color:#FFFFFF;cursor: pointer;">&nbsp;+</span>
 			</div>
 			<div class="">
 				<div class="main1 content">
@@ -150,6 +128,6 @@
 			</div>
 		</div>
 	</div>
-	<!--客户列表弹窗END-->
+	<!--企业内部列表弹窗END-->
 </body>
 </html>

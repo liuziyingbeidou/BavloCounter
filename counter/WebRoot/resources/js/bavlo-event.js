@@ -22,7 +22,7 @@
 	        });
 	        return serializeObj;
 	    };
-    	
+	    
     	/***************宝石签收单-开始******************/
     	//价值
     	setSuffix("gem-worth","元");
@@ -121,6 +121,7 @@
     
 })( jQuery );
 
+
 function setBorderRed(em){
 	if(typeof(em) == "object"){
 		$(em).css({"border-color":"red","border-style":"solid","border-width":"2px"});
@@ -205,3 +206,4 @@ function isExitsFunction(funcName) {
 function callbackMuilt(){
 	//$(".ui-dialog-titlebar-close",window.parent.document).trigger('click');
 }
+
