@@ -20,7 +20,7 @@ public class TestTag {
 	@Test
 	public void getTagList() {
 		//获取所有标签信息
-		JSONObject jo = WechatTag.getTagList();
+		JSONObject jo = WechatTag.getTagList(null);
 		System.out.println(jo);
 	}
 	
@@ -30,7 +30,7 @@ public class TestTag {
 	@Test
 	public void getTagId() {
 		//接收到微信返回结果
-		JSONObject jo = WechatTag.getTagList();
+		JSONObject jo = WechatTag.getTagList(null);
 		//把标签列表转为JSONArray
 		JSONArray ja = (JSONArray) jo.get("taglist");
 		//遍历标签
@@ -48,11 +48,11 @@ public class TestTag {
 	@Test
 	public void getUserId() {
 		//获取所有标签ID，放入list
-		List<Integer> tagids = QiYeUtil.getTagIdList();
+		List<Integer> tagids = QiYeUtil.getTagIdList(null);
 		//遍历list里面的标签
 		for(int i = 0; i < tagids.size(); i++){
 			int tagid = tagids.get(i);
-			JSONObject jo = WechatTag.getUserList(tagid);//查找所有标签里的所有用户
+			JSONObject jo = WechatTag.getUserList(null,tagid);//查找所有标签里的所有用户
 			JSONArray ja = (JSONArray) jo.get("userlist");
 			for(int j=0; j< ja.size(); j++){
 				try {
@@ -67,7 +67,7 @@ public class TestTag {
 	
 	@Test
 	public void getUserTag() {
-		QiYeUtil.getUserTag("shijianfeng");
+		QiYeUtil.getUserTag(null,"shijianfeng");
 	}
 	
 	

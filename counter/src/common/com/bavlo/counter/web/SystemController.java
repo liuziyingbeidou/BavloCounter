@@ -15,7 +15,7 @@ import com.bavlo.weixin.qiye.interceptor.OAuthRequired;
 public class SystemController extends BaseController {
 	
 	@RequestMapping(value={"/index.do"})
-	//@OAuthRequired
+	@OAuthRequired
 	public ModelAndView index(HttpServletRequest request,HttpSession session){
 		
 		ModelAndView model = new ModelAndView("index");
@@ -23,9 +23,8 @@ public class SystemController extends BaseController {
 		if(loginInfo != null){
 			LoginVO loginVO = (LoginVO)loginInfo;
 			model.addObject("uvo", loginVO);
-			System.out.println(JsonUtils.getJsonString4JavaPOJO(loginVO));
 		}else{
-			
+			model.setViewName("redirect:/index.do");
 		}
 		System.out.println("µÇÂ¼ÈËÐÅÏ¢:"+JsonUtils.getJsonString4JavaPOJO(loginInfo));
 		return model;

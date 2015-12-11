@@ -10,7 +10,9 @@
   <cache name="myCache"
        maxElementsOnDisk="20000"
        maxElementsInMemory="2000"
-       eternal="true"
+       eternal="false"
+       timeToIdleSeconds="60"
+       timeToLiveSeconds="60"
        overflowToDisk="true"
        diskPersistent="true"/>
 </ehcache>

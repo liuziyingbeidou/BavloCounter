@@ -70,8 +70,22 @@ public interface ICustomerService {
 	 */
 	public boolean isExistByCondition(String condition);
 
+	/**
+	 * @Description: 扫描新增客户
+	 * @param @param openId
+	 * @param @param session
+	 * @param @param scene_str
+	 * @param @return
+	 * @return String
+	 */
 	public String addCustomerByScan(String openId,HttpSession session,String scene_str);
 	
+	/**
+	 * @Description: 查询客户信息
+	 * @param @param condition
+	 * @param @return
+	 * @return CustomerVO
+	 */
 	public CustomerVO findCustomerByWhere(String condition);
 	
 	//***以下是外围接口----结束****/

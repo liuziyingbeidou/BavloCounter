@@ -1,6 +1,11 @@
 package com.bavlo.weixin.qiye.service.itf;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+
+import com.bavlo.weixin.qiye.pojo.AccessToken;
+
+import net.sf.json.JSONArray;
 
 /**
  * @Title: 宝珑Counter
@@ -12,4 +17,12 @@ import javax.servlet.http.HttpSession;
 public interface ICoreService {
 
 	public String processRequest(String msg,HttpSession session);
+	/**
+	 * @Description: 通过角色标签获取成员列表
+	 * @param @param tagName
+	 * @param @return
+	 * @return JSONArray
+	 */
+	public JSONArray getRoleListByTagName(HttpServletRequest request,String tagName);
+	
 }

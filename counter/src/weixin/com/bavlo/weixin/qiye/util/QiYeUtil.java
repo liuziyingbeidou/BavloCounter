@@ -11,6 +11,9 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+
 import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
 
@@ -31,9 +34,20 @@ public class QiYeUtil {
 	 * @param CorpSecret
 	 * @return
 	 */
-	public static AccessToken getAccessToken(String CorpID, String CorpSecret) {
-		AccessToken accessToken = WechatAccessToken.getAccessToken(CorpID,
-				CorpSecret, 1);
+	public static AccessToken getAccessToken(HttpServletRequest request,String CorpID, String CorpSecret) {
+		AccessToken accessToken = null;
+		if(request != null){
+			HttpSession session = request.getSession();
+			Object at = session.getAttribute(Constants.AccessToken);
+			if(at == null){
+				accessToken = WechatAccessToken.getAccessToken(CorpID,CorpSecret,1);
+				session.setAttribute(Constants.AccessToken, accessToken);
+			}else{
+				accessToken = (AccessToken)at;
+			}
+		}else{
+			accessToken = WechatAccessToken.getAccessToken(CorpID,CorpSecret,1);
+		}
 		return accessToken;
 	}
 
@@ -74,12 +88,12 @@ public class QiYeUtil {
 	 * @param @return
 	 * @return Map<Integer,String>
 	 */
-	public static Map<Integer,String> getDepartMap(){
+	public static Map<Integer,String> getDepartMap(HttpServletRequest request){
 		
 		//遍历标签并放入map
 		Map<Integer,String> tag = new HashMap<Integer,String>();
 		
-		Map<Integer,String> tagMap = getTagMap();
+		Map<Integer,String> tagMap = getTagMap(request);
 		if(tagMap != null){
 			//1、遍历标签找到RD-门店标签ID;
 			for (Map.Entry<Integer,String> tagEntry : tagMap.entrySet()) {
@@ -95,13 +109,53 @@ public class QiYeUtil {
 	}
 	
 	/**
+	 * 根据标签名称获取成员列表（角色）
+	 * @param tagid
+	 * @return
+	 */
+	public static JSONArray getUserList(HttpServletRequest request,String tagName){
+		
+		JSONArray roleArray = new JSONArray();
+		
+		//接收到微信返回结果
+		JSONObject jo = WechatTag.getTagList(request);
+		//把标签列表转为JSONArray
+		JSONArray tagList = (JSONArray) jo.get("taglist");
+		for(int i=0; i< tagList.size(); i++){
+			try {
+				Integer tagid = Integer.valueOf(tagList.getJSONObject(i).getString("tagid")).intValue();
+				String tagname = tagList.getJSONObject(i).getString("tagname");
+				if(tagName.contains(tagname.substring(3))){
+					//存在该角色组
+					JSONObject tagObj = WechatTag.getUserList(request,tagid);
+					if(tagObj != null){
+						JSONArray tagArray = tagObj.getJSONArray("userlist");
+						if(tagArray != null){
+							for(int j = 0; j < tagArray.size(); j++){
+								String userid = tagArray.getJSONObject(j).getString("userid");
+								//*角色成员详细信息
+								JSONObject jobj = WechatDepart.getUserInfo(request,userid);
+								roleArray.add(jobj);
+							}
+						}
+					}
+					break;
+				}
+			} catch (NumberFormatException e) {
+			    e.printStackTrace();
+			}
+		}
+		return roleArray;
+	}
+	
+	/**
 	 * @Description: 获取标签键值对
 	 * @param @return
 	 * @return Map<Integer,String>
 	 */
-	public static Map<Integer,String> getTagMap(){
+	public static Map<Integer,String> getTagMap(HttpServletRequest request){
 		//接收到微信返回结果
-		JSONObject jo = WechatTag.getTagList();
+		JSONObject jo = WechatTag.getTagList(request);
 		//把标签列表转为JSONArray
 		JSONArray tagList = (JSONArray) jo.get("taglist");
 		//遍历标签并放入map
@@ -120,9 +174,9 @@ public class QiYeUtil {
 	 * 获取所有标签ID
 	 * @return
 	 */
-	public static List<Integer> getTagIdList() {
+	public static List<Integer> getTagIdList(HttpServletRequest request) {
 		//接收到微信返回结果
-		JSONObject jo = WechatTag.getTagList();
+		JSONObject jo = WechatTag.getTagList(request);
 		//把标签列表转为JSONArray
 		JSONArray tagList = (JSONArray) jo.get("taglist");
 		//遍历标签并放入list
@@ -141,9 +195,9 @@ public class QiYeUtil {
 	 * 获取所有标签名称
 	 * @return
 	 */
-	public static List<String> getTagNameList() {
+	public static List<String> getTagNameList(HttpServletRequest request) {
 		//接收到微信返回结果
-		JSONObject jo = WechatTag.getTagList();
+		JSONObject jo = WechatTag.getTagList(request);
 		//把标签列表转为JSONArray
 		JSONArray tagList = (JSONArray) jo.get("taglist");
 		//遍历标签并放入list
@@ -163,7 +217,7 @@ public class QiYeUtil {
 	 * @param UserId
 	 * @return
 	 */
-	public static Map<String,Object> getUserTag(String UserId) {
+	public static Map<String,Object> getUserTag(HttpServletRequest request,String UserId) {
 		//角色标签
 		List<String> userRLTag = new ArrayList<String>();
 		//店标签
@@ -171,12 +225,12 @@ public class QiYeUtil {
 		//所属门店
 		String userShop = null;
 		
-		Map<Integer,String> tagMap = getTagMap();
+		Map<Integer,String> tagMap = getTagMap(request);
 		if(tagMap != null){
 			//遍历标签
 			for (Map.Entry<Integer,String> tagEntry : tagMap.entrySet()) {
 				//查找当前标签下的用户{返回列表仅包含管理组管辖范围的成员}
-				JSONObject userList = WechatTag.getUserList(tagEntry.getKey());
+				JSONObject userList = WechatTag.getUserList(request,tagEntry.getKey());
 				if(userList != null){
 					//标签对应该管理组下的成员列表
 					JSONArray userAry = userList.getJSONArray("userlist");

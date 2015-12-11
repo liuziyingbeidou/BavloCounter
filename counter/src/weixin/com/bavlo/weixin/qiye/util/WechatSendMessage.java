@@ -1,5 +1,7 @@
 package com.bavlo.weixin.qiye.util;
 
+import javax.servlet.http.HttpServletRequest;
+
 import com.bavlo.weixin.qiye.pojo.AccessToken;
 import com.bavlo.weixin.qiye.pojo.resp.TextMessage;
 import com.bavlo.weixin.qiye.util.Constants;
@@ -37,10 +39,10 @@ public class WechatSendMessage {
 	}
 
 	// 发送消息测试
-	public static int sendMassage(String touser, String toparty, String totag,
+	public static int sendMassage(HttpServletRequest request,String touser, String toparty, String totag,
 			String agentid, String text) {
 		// 调取凭证
-		AccessToken access_token = QiYeUtil.getAccessToken(Constants.CORPID,
+		AccessToken access_token = QiYeUtil.getAccessToken(request,Constants.CORPID,
 				Constants.SECRET);
 
 		/**

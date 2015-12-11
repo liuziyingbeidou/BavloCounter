@@ -13,7 +13,7 @@ import com.bavlo.weixin.qiye.util.WechatUpload;
 public class TestFile {
 	private static AccessToken accessToken = null;
 	static {
-		accessToken = QiYeUtil.getAccessToken("wx92143a3fe231706b", "zEvl_oOeAzqVHMy0Fh8Pxx1R2huAHoKG3gfD5JEikfY");
+		accessToken = QiYeUtil.getAccessToken(null,"wx92143a3fe231706b", "zEvl_oOeAzqVHMy0Fh8Pxx1R2huAHoKG3gfD5JEikfY");
 	}
 
 	@Test
