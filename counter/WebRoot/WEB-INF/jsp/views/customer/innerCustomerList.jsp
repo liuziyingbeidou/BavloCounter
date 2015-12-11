@@ -48,7 +48,7 @@
 				if(data[i].avatar != ""){
 					img = "src='"+data[i].avatar+"'";
 				}
-				var ml = "><b>"+data[i].name+"</b><a href='#'>"+data[i].mobile+"</a><span><a href='#' onclick='selHander("+data[i].userid+")'>选择</a></span></h4><div class='clear'></div></li>";
+				var ml = "><b>"+data[i].name+"</b><a href='#'>"+data[i].mobile+"</a><span><a href='#' onclick='selHander(\""+data[i].userid+"\")'>选择</a></span></h4><div class='clear'></div></li>";
 				$("#juheweb").append(ht+img+ml);
 				endMask();
 			}
