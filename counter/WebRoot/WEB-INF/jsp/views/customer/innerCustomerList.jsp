@@ -59,6 +59,7 @@
 	function selHander(id){
 		if(isExitsFunction(window.parent.setValueByFrame)){
 			if("${listType}" == "menu"){
+				alert("userid:"+id);
 				window.parent.setValueByFrame("role-menu",id,callbackMuilt());
 				window.parent.closeMultiDlg();
 			}
