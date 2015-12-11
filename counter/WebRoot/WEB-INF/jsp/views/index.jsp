@@ -1,10 +1,6 @@
-<%@ page language="java" import="java.util.*" pageEncoding="utf-8"%>
+<%@ page language="java" import="java.util.*,com.bavlo.counter.model.LoginVO" pageEncoding="utf-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <c:set var="ctx" value="${pageContext.request.contextPath }"></c:set>
-<%
-String path = request.getContextPath();
-String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
-%>
 
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html>
@@ -21,6 +17,10 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
    	<script language="javascript" type="text/javascript" src="${ctx}/resources/js/jquery-1.9.1.min.js"></script>
 	<script type="text/javascript" src="${ctx }/resources/bootstrap/js/bootstrap.min.js"></script>
 	<link type="text/css" rel="stylesheet" href="${ctx }/resources/bootstrap/css/bootstrap.min.css">
+	
+	<!-- Loading -->
+	<script src="${ctx}/resources/showLoading/showLoading.js"></script>
+	<link type="text/css" rel="stylesheet" href="${ctx}/resources/showLoading/showLoading.css">
     
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -54,36 +54,14 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			url = "${ctx}/entity-sign/add.do";//实物签收单新增页
 			window.location = url;
 		});
+		$(".mgr-old-counter").click(function(){
+			startMask();
+			url = "#";//电子柜台后台
+			window.location = url;
+		});
     });
-    /**  
-*  页面加载等待页面
-*/  
-var height = window.screen.height-180;   
-var width = window.screen.width;   
- var leftW = 300;   
- if(width>1200){   
-    leftW = 500;   
- }else if(width>1000){   
-    leftW = 350;   
- }else {   
-    leftW = 100;   
- }   
     
- var _html = "<div id='loading' style=\"position:absolute;left:0;width:100%;height:" + height 
- + "px;top:0;background:#E0ECFF;opacity:0.3;filter:alpha(opacity=30);\"><div style=\"position:absolute;  cursor1:wait;left:"+leftW+"px;top:200px;width:auto;height:auto;padding:12px 5px 10px 40px;background:#fff url('${ctx }/resources/images/loading.gif') no-repeat scroll 5px 5px;border:2px solid #ccc;color:#000;\">正在加载，请等待...</div></div>";    
-  
- function startMask(){
-	$("#ss").html(_html);
- }
- 
- function endMask(){
-	var _mask = document.getElementById('loading');
-    if(_mask!=null){
-    	_mask.parentNode.removeChild(_mask);
-    }   
- }
-    
-    </script>
+</script>
     <style type="text/css">
     body{background:#000000;}
     @media (min-width: 650px){
@@ -131,7 +109,6 @@ var width = window.screen.width;
     </style>
   </head>
   <body>
-  <div id="ss">
     <div class="container">
 
       <div class="container header text-align">
@@ -145,9 +122,11 @@ var width = window.screen.width;
             <button type="button" class="btn btn-default .btn-lg add-gemsign">宝石签收单</button>
             <button type="button" class="btn btn-default .btn-lg add-entysign">实物签收单</button>
             <!--<button type="button" class="btn btn-default .btn-lg">配&nbsp;&nbsp;石&nbsp;&nbsp;单</button>-->
+			<c:if test="${empty uvo['muserId']}">
+			<button type="button" class="btn btn-default .btn-lg mgr-old-counter">电子柜台后台</button>
+			</c:if>
       </div><!--/.nav-collapse -->
 
     </div> <!-- /container -->
-  </div>
   </body>
 </html>
