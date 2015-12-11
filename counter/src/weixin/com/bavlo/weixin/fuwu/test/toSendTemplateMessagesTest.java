@@ -8,7 +8,7 @@ public class toSendTemplateMessagesTest {
 	
 	@Test
 	public void sendTemplateMessages(){
-		TemplateMessagesUtil.toSendTemplateMessages();
+		//TemplateMessagesUtil.toSendTemplateMessages();
 	}
 
 }

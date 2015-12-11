@@ -111,6 +111,7 @@ public class CommonUtil {
 				token = new Token();
 				token.setAccessToken(jsonObject.getString("access_token"));
 				token.setExpiresIn(jsonObject.getInt("expires_in"));
+				System.out.println("token："+token.getAccessToken());
 			} catch (JSONException e) {
 				token = null;
 				// 获取token失败
