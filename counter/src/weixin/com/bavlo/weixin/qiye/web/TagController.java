@@ -7,16 +7,13 @@ import javax.servlet.http.HttpServletRequest;
 
 import net.sf.json.JSONArray;
 
-import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.bavlo.counter.constant.IConstant;
-import com.bavlo.counter.utils.StringUtil;
 import com.bavlo.counter.web.BaseController;
 import com.bavlo.weixin.qiye.service.itf.ICoreService;
-import com.bavlo.weixin.qiye.util.QiYeUtil;
 
 @Controller("qytagController")
 @RequestMapping("/qy")
