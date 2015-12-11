@@ -6,6 +6,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.bavlo.weixin.fuwu.pojo.Token;
+import com.bavlo.weixin.fuwu.templateMessages.Data;
 import com.bavlo.weixin.fuwu.templateMessages.First;
 import com.bavlo.weixin.fuwu.templateMessages.Keynote1;
 import com.bavlo.weixin.fuwu.templateMessages.Keynote2;
@@ -52,7 +53,7 @@ public class TemplateMessagesUtil {
 	 * 
 	 * @return
 	 */
-	private static TemplateMessages getTemplateMassgaes() {
+	private static TemplateMessages getTemplateMassgaes(TemplateMessages templateMessages) {
 		
 		First first = new First();
 		first.setValue("恭喜你购买成功！");
@@ -74,42 +75,41 @@ public class TemplateMessagesUtil {
 		remark.setValue("欢迎再次购买！");
 		remark.setColor("#173177");
 		
-//		Data data = new Data();
-//		data.setFirst(first);
-//		data.setKeynote1(keynote1);
-//		data.setKeynote2(keynote2);
-//		data.setKeynote3(keynote3);
-//		data.setRemark(remark);
+		Data data = new Data();
+		data.setFirst(first);
+		data.setKeynote1(keynote1);
+		data.setKeynote2(keynote2);
+		data.setKeynote3(keynote3);
+		data.setRemark(remark);
 		
-		TemplateMessages templateMessages = new TemplateMessages();
-		
-		templateMessages.setTouser("oqpcYvxO4z5tcCp4YYvkPGh2snhE");
-		templateMessages.setTemplate_id("ZPLX3G8iRl-Xg4sj5wUr_HB6z1DIKbANKKbYjjoVurU");
-		templateMessages.setUrl("http://m.baidu.com");
-//		templateMessages.setData(data);
+		templateMessages.setData(data);
 
 		return templateMessages;
 	}
 
-	public static void toSendTemplateMessages() {
+	public static String toSendTemplateMessages(TemplateMessages templateMessages) {
 		// 第三方用户唯一凭证
-		String appId = "wx131f914729afa196";
+		String appId = IContant.appId;
 		// 第三方用户唯一凭证密钥
-		String appSecret = "3c40c5e22c78bc57d3b2d9d0938e3ce2";
+		String appSecret = IContant.appSecret;
 
 		// 调用接口获取凭证
 		Token token = CommonUtil.getToken(appId, appSecret);
 
+		String str = "";
 		if (null != token) {
 			// 创建菜单
-			boolean result = TemplateMessagesUtil.sendTemplateMessages(getTemplateMassgaes(), token.getAccessToken());
-
+			boolean result = TemplateMessagesUtil.sendTemplateMessages(getTemplateMassgaes(templateMessages), token.getAccessToken());
 			// 判断菜单创建结果
-			if (result)
+			if (result){
+				str = "消息发送成功";
 				log.info("模板消息发送成功！");
-			else
+			} else {
+				str = "消息发送失败";
 				log.info("模板消息发送失败！");
+			}
 		}
+		return str;
 	}
 
 }

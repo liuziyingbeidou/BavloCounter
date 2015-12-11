@@ -10,5 +10,5 @@
 -->
 <li><a href="#">发起版师</a></li>
 <li><a href="#">发供应链</a></li>
-<li><a href="#">发客户</a></li>
+<li><a class="sendCM" href="#">发客户</a></li>
 	
