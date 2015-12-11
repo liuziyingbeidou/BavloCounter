@@ -63,10 +63,9 @@ public class CoreService extends CommonService implements ICoreService{
 				if (eventType.equals(MessageUtil.EVENT_TYPE_SUBSCRIBE)) {
 					/**扫描二维码信息--本地库不存在该openId用户---开始**/
 					String eventKey = requestMap.get("EventKey");
-					customerService.addCustomerByScan(fromUserName, session, eventKey);
+					String vcode = customerService.addCustomerByScan(fromUserName, session, eventKey);
 					/**扫描二维码信息---结束**/
-					
-					forwardMessage.setContent("您好，欢迎关注宝珑网！");
+					forwardMessage.setContent("您好，欢迎关注宝珑网！<br>这是您的编号:"+vcode);
 					// 将消息对象转换成xml
 					respXml = MessageUtil.messageToXml(forwardMessage);
 				}
