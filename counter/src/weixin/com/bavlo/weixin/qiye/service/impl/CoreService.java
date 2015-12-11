@@ -3,14 +3,22 @@ package com.bavlo.weixin.qiye.service.impl;
 import java.util.Date;
 import java.util.Map;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+import net.sf.json.JSONArray;
+
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
 import com.bavlo.counter.service.impl.CommonService;
+import com.bavlo.counter.utils.StringUtil;
+import com.bavlo.weixin.qiye.pojo.AccessToken;
 import com.bavlo.weixin.qiye.pojo.resp.TextMessage;
 import com.bavlo.weixin.qiye.service.itf.ICoreService;
+import com.bavlo.weixin.qiye.util.Constants;
 import com.bavlo.weixin.qiye.util.MessageUtil;
+import com.bavlo.weixin.qiye.util.QiYeUtil;
 
 /**
  * 处理微信发来的信息
@@ -93,6 +101,19 @@ public class CoreService extends CommonService implements ICoreService{
 			respMessage="有异常了。。。";
 		}
 		return respMessage;
+	}
+
+	@Override
+	@Cacheable(value="myCache", key="'getRoleListByTagName'+#tagName") 
+	public JSONArray getRoleListByTagName(HttpServletRequest request,String tagName) {
+		JSONArray  jsobj = null;
+		if(StringUtil.isNotEmpty(tagName)){
+			jsobj = QiYeUtil.getUserList(request,tagName);
+			if(jsobj != null){
+				 return jsobj;
+			}
+		}
+		return null;
 	}
 
 }

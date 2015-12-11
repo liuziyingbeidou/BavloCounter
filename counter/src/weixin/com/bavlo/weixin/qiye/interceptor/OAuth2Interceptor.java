@@ -69,7 +69,6 @@ public class OAuth2Interceptor implements HandlerInterceptor {
 				response.sendRedirect(contextPath + "/oauth2.do?resultUrl=" + resultUrl);
 				return false;
 			}
-
 		}
 		return true;
 	}

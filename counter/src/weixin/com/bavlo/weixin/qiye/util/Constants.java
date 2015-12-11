@@ -22,4 +22,7 @@ public class Constants {
 	public static final String LB_ROLE = "RL-";
 	//店名
 	public static final String LB_DEPART = "RD-";
+	
+	//企业号AccessToken
+	public static final String AccessToken = "AccessToken";
 }

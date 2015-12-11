@@ -4,6 +4,7 @@ import java.util.List;
 
 import javax.servlet.http.HttpSession;
 
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
 import com.bavlo.counter.constant.IConstant;
@@ -64,6 +65,7 @@ public class CustomerService extends CommonService implements ICustomerService {
 	}
 
 	@Override
+	@Cacheable(value="myCache", key="'findCustomerList'+#wh") 
 	public List<CustomerVO> findCustomerList(String wh) {
 	
 		return findAll(CustomerVO.class, wh,null,"id","desc");

@@ -50,7 +50,7 @@ public class SimpleOAuth2Controller {
 	 */
 	@RequestMapping(value = { "/oauth2me.do" })
 	public String oAuth2Url(HttpServletRequest request, @RequestParam String code){
-		AccessToken accessToken = QiYeUtil.getAccessToken(Constants.CORPID, Constants.SECRET);
+		AccessToken accessToken = QiYeUtil.getAccessToken(request,Constants.CORPID, Constants.SECRET);
 		HttpSession session = request.getSession();
 		if (accessToken != null && accessToken.getToken() != null) {
 			String Userid = getMemberGuidByCode(accessToken.getToken(), code, Constants.AGENTID);

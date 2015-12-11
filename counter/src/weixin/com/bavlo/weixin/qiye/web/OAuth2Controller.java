@@ -67,19 +67,19 @@ public class OAuth2Controller {
 	 */
 	@RequestMapping(value = { "/oauth2url.do" })
 	public String Oauth2MeUrl(HttpServletRequest request, @RequestParam String code, @RequestParam String oauth2url) {
-		AccessToken accessToken = QiYeUtil.getAccessToken(Constants.CORPID, Constants.SECRET);
+		AccessToken accessToken = QiYeUtil.getAccessToken(request,Constants.CORPID, Constants.SECRET);
 		HttpSession session = request.getSession();
 		
 		if (accessToken != null && accessToken.getToken() != null) {
 			String Userid = getMemberGuidByCode(accessToken.getToken(), code, Constants.AGENTID);
 			if (Userid != null) {
 				LoginVO lvo = new LoginVO();
-				Map<String,Object> mapRoleTag = QiYeUtil.getUserTag(Userid);
+				Map<String,Object> mapRoleTag = QiYeUtil.getUserTag(request,Userid);
 				List<String> listRoleTag = mapRoleTag.get("roleTag") != null ? (List<String>)mapRoleTag.get("roleTag") : null;
 				String userShop = mapRoleTag.get("userShop")+"";
-				JSONObject  obj = WechatDepart.getUserInfo(Userid);
+				JSONObject  obj = WechatDepart.getUserInfo(request,Userid);
 				JSONObject  extattrObj = obj.getJSONObject("extattr");
-				if(extattrObj != null){
+				if(!extattrObj.isNullObject()){
 					JSONArray jsonAry = extattrObj.getJSONArray("attrs");
 					if(jsonAry != null){
 						for(int i = 0; i < jsonAry.size(); i++){
@@ -101,11 +101,6 @@ public class OAuth2Controller {
 				session.removeAttribute("loginInfo");
 				session.setAttribute("loginInfo",lvo);
 				
-//				session.setAttribute("UserId", Userid);
-//				session.setAttribute("Tagname", listRoleTag);
-//				System.out.println(session.getAttribute("Tagname"));
-				
-				System.out.println("标签是"+session.getAttribute("Tagname"));
 			}
 		}
 		// 这里简单处理,存储到session中
