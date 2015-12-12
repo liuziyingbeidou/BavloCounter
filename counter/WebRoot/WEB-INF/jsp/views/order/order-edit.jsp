@@ -28,6 +28,7 @@
 <!-- 自定义 -->
 <script src="${ctx}/resources/js/bavlo-event.js"></script>
 <script src="${ctx}/resources/js/bavlo-order.js"></script>
+
 <!-- 弹框 -->
 <!-- jQuery & jQuery UI files (needed)--> 
 <link rel="stylesheet" href="${ctx}/resources/jquery.multiDialog/css/jquery-ui-1.10.3.custom.css">
@@ -46,7 +47,7 @@ var opt0 = ["省份","城市","区县"];//初始值
 $(function(){
 	//选择客户
 	$(".file").bind("click",function(){
-		openURL("${ctx}/customer/list.do","客户列表");
+		openURL("${ctx}/customer/list.do","客户列表",470,535);
 	});
 	setValueByFrame("customer","${ordervo['id']}");
 	
@@ -596,13 +597,13 @@ text-overflow:ellipsis;
 			<dd class="st-jf"></dd>
 		</dl>
 		<!--<dt><i class="status" style=" width:182px; position:absolute; top:180px; left:105px;"></i></dt>-->
-        <ul>
-          <li>提交</li>
-          <li>制版</li>
-          <li>生产</li>
-          <li>质检</li>
-          <li>快递</li>
-          <li>交付</li>
+        <ul class="fbarbox">
+          <li class="fst-tj">提交</li>
+          <li class="fst-zb">制版</li>
+          <li class="fst-sc">生产</li>
+          <li class="fst-zj">质检</li>
+          <li class="fst-kd">快递</li>
+          <li class="fst-jf">交付</li>
           <div class="clear"></div>
         </ul>
       </div>
@@ -666,9 +667,9 @@ text-overflow:ellipsis;
             </select>
             <select name="vcity" id="vcity" class="add area2 city lose-addr">
             </select>
-            </p>
-            <select name="vdistrict" id="vdistrict" class="district lose-addr">
+            <select name="vdistrict" id="vdistrict" class="add area3 district lose-addr">
             </select>
+            </p>
             <p>
             <div class="save1"><input type='text' name='vstreet' class="add dizhi street bl-ck-null lose-addr" value='' placeholder="如街道名称，门牌号码，楼层和房间号等信息"></div>
             <p><input type='text' name='vphoneCode' class="add tel phoneCode bl-ck-null lose-addr" value="" placeholder="手机电话"><input type='text' class="add email" name='vemail' value="" placeholder="邮箱"></p>

@@ -94,9 +94,9 @@
 	.orderlist{left:0;width:470px;text-align: center;}
 	.order-main{width:480px;}
 	.operate ul li{width:425px;}
-	.main1 .left-sider{width:485px;}
+	.main1 .left-sider{width:487px;}
 	.list-item dt{font-size:14px;}
-	.search-1{width:500px;}
+	.search-1{width:470px;}
 	.operate ul li h4 span{float:none;margin-right:0px;}
 	</style>
 </head>

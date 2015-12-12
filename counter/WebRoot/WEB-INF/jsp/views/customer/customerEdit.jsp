@@ -88,7 +88,7 @@
 				}
 				
 				$(".customer-edit").click(function(){
-					openURL("${ctx}/customer/list.do?listType=menu","客户列表");
+					openURL("${ctx}/customer/list.do?listType=menu","客户列表",470,535);
 				});
 			});
 			// 保存

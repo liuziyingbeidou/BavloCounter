@@ -40,18 +40,24 @@
 		startMask();
 		$("#juheweb").empty();
 		var url = "${ctx}/qy/getUserByTagName.do";
-		$.post(url,{tagName:"${role}"},function(row){
-			var data = row;
-			for(var i = 0; i < data.length; i++){
-				var ht = "<li><h4><img style='width:60px;height:60px;' ";
-				var img = "src='${ctx}/resources/images/customer_01.png'";
-				if(data[i].avatar != ""){
-					img = "src='"+data[i].avatar+"'";
+		$.post(url,{tagName:"${role}"},function(row){debugger
+			if(row.length > 0){
+				var data = row;
+				for(var i = 0; i < data.length; i++){
+					var ht = "<li><h4><img style='width:60px;height:60px;' ";
+					var img = "src='${ctx}/resources/images/customer_01.png'";
+					if(data[i].avatar != ""){
+						img = "src='"+data[i].avatar+"'";
+					}
+					var ml = "><b>"+data[i].name+"</b><a href='#'>"+data[i].mobile+"</a><span><a href='#' onclick='selHander(\""+data[i].userid+"\")'>选择</a></span></h4><div class='clear'></div></li>";
+					$("#juheweb").append(ht+img+ml);
+					endMask();
 				}
-				var ml = "><b>"+data[i].name+"</b><a href='#'>"+data[i].mobile+"</a><span><a href='#' onclick='selHander(\""+data[i].userid+"\")'>选择</a></span></h4><div class='clear'></div></li>";
-				$("#juheweb").append(ht+img+ml);
+			}else{
+				$("#juheweb").append("<span style='color:#FFF;'>不存在！</span>");
 				endMask();
 			}
+			
 		});
 	}
 	
