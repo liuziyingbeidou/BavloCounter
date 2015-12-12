@@ -30,7 +30,7 @@
 <script src="${ctx}/resources/js/photoswipefromdom.js"></script>
 <script type="text/javascript">
 $(function(){
-	var toUser = "ofdgCj5bTUATSahOtG3_zYvad4wI";
+	var toUser = "${customerId}";
 	$(".dzd_close").click(function() {
 		sendTMessage(toUser);
 	})
@@ -43,7 +43,6 @@ $(function(){
 					'toUser' : toUser,
 					'url': url
 				},
-				dataType:'text',
 				success : function(data) {		
 					alert("发送成功");
 				},

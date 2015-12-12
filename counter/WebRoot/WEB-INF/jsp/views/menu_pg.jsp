@@ -17,11 +17,11 @@ if(info != null){
 <c:set var="roleList" value="<%=roleList %>"/>
 <script type="text/javascript">
 $(function(){
-	if("${isLogin}"){
+	/* if("${isLogin}"){
 		alert("登录超时...随即推出");
 		window.close();
 		//window.location = "${ctx}/index.do";
-	}
+	} */
 	//首页
 	$(".menu-index").bind("click",function(){
 		EditShow_Hidden(ed1);
