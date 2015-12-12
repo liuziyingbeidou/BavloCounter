@@ -117,6 +117,7 @@
 .add_dizhi .add { font-size:26px;line-height:60px; height:60px;}
 .add_dizhi .area1 {width:47%;}
 .add_dizhi .area2 {width:47%;}
+.add_dizhi .area3 {width:47%;}
 .main h2 {}
 .add_dizhi .dizhi {width:100%;text-align:center;padding:0;}
 .add_dizhi .tel {width:44%;	font-size:26px;}
@@ -534,8 +535,13 @@ font-size:23px;
 
 #container { margin-top:29px !important; width:100%;}
 #uploader .filelist li { width:30% !important;}
+/**订单状态栏**/
+.gylc .barbox{width:510px;}
+.barbox  .st-tj,.barbox .st-zb,.barbox .st-sc,.barbox .st-zj,.barbox .st-kd{width:95px;}
 }
 
 .zhezhaodiv1{width: 100%;}
 .login_reg_div1{width:96%;}
 .fenxiang{width:90%;margin:0px auto;overflow:hidden;}
+
+

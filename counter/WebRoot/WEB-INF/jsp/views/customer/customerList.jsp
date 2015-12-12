@@ -59,15 +59,20 @@
 		$("#juheweb").empty();
 		var url = "${ctx}/customer/listJson.do";
 		$.post(url,{content:$(".search").val()},function(row){
-			var data = row;
-			for(var i = 0; i < data.length; i++){
-				var ht = "<li><h4><img style='width:60px;height:60px;' ";
-				var img = "src='${ctx}/resources/images/customer_01.png'";
-				if(data[i].vhendimgurl != ""){
-					img = "src='"+data[i].vhendimgurl+"'";
+			if(row.length > 0){
+				var data = row;
+				for(var i = 0; i < data.length; i++){
+					var ht = "<li><h4><img style='width:60px;height:60px;' ";
+					var img = "src='${ctx}/resources/images/customer_01.png'";
+					if(data[i].vhendimgurl != ""){
+						img = "src='"+data[i].vhendimgurl+"'";
+					}
+					var ml = "><b>"+data[i].vname+"</b><a href='#'>"+data[i].vcustomerCode+"</a><span><a href='#' onclick='selHander("+data[i].id+")'>选择</a></span></h4><div class='clear'></div></li>";
+					$("#juheweb").append(ht+img+ml);
+					endMask();
 				}
-				var ml = "><b>"+data[i].vname+"</b><a href='#'>"+data[i].vcustomerCode+"</a><span><a href='#' onclick='selHander("+data[i].id+")'>选择</a></span></h4><div class='clear'></div></li>";
-				$("#juheweb").append(ht+img+ml);
+			}else{
+				$("#juheweb").append("<span style='color:#FFF;'>无客户信息!</span>");
 				endMask();
 			}
 		});

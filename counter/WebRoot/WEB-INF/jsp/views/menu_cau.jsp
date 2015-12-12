@@ -21,6 +21,6 @@ function closeMenu(){
 <li><a href="">Save as</a></li>
 <li><a href="">Print</a></li>
 -->
-<li class="role-list" bv-role="PM" bv-title="起版师"><a href="#">发起版师</a></li>
+<li class="role-list" bv-role="CAD" bv-title="起版师"><a href="#">发起版师</a></li>
 <li class="role-list" bv-role="PPS" bv-title="供应链"><a href="#">发供应链</a></li>
 <li><a class="sendCM" href="#">发客户</a></li>
