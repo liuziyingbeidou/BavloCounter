@@ -49,6 +49,8 @@ public class CoreService extends CommonService implements ICoreService{
 			String toUserName = requestMap.get("ToUserName");
 			// 消息类型
 			String msgType = requestMap.get("MsgType");
+			// 消息内容
+			String content = requestMap.get("Content");
 
 			ForwardMessage forwardMessage = new ForwardMessage();
 			forwardMessage.setToUserName(fromUserName);
@@ -87,8 +89,9 @@ public class CoreService extends CommonService implements ICoreService{
 				else if (eventType.equals(MessageUtil.EVENT_TYPE_CLICK)) {
 					// 事件KEY值，与创建菜单时的key值对应
 					String eventKey = requestMap.get("EventKey");
+					// TODO 暂不做处理
 					// 根据key值判断用户点击的按钮
-					if (eventKey.equals("oschina")) {
+					/*if (eventKey.equals("oschina")) {
 						Article article = new Article();
 						article.setTitle("开源中国");
 						article.setDescription("开源中国社区成立于2008年8月，是目前中国最大的开源技术社区。\n\n开源中国的目的是为中国的IT技术人员提供一个全面的、快捷更新的用来检索开源软件以及交流开源经验的平台。\n\n经过不断的改进,目前开源中国社区已经形成了由开源软件库、代码分享、资讯、讨论区和博客等几大频道内容。");
@@ -108,13 +111,15 @@ public class CoreService extends CommonService implements ICoreService{
 					} else if (eventKey.equals("iteye")) {
 						forwardMessage.setContent("ITeye即创办于2003年9月的JavaEye,从最初的以讨论Java技术为主的技术论坛，已经逐渐发展成为涵盖整个软件开发领域的综合性网站。\n\nhttp://www.iteye.com");
 						respXml = MessageUtil.messageToXml(forwardMessage);
-					}
+					}*/
 				}
 			}
 			// 当用户发消息时
 			else {
-				forwardMessage.setContent("=================");
-				forwardMessage.setKfAccount("ceshi@bavlo001");
+				String service = customerService.findCustomerByWhere(" vopenid = '"+fromUserName+"'").getVserviceCode();
+				service += "@bavlo001";
+				forwardMessage.setContent(content);
+				forwardMessage.setKfAccount(service);
 				forwardMessage.setMsgType("transfer_customer_service");
 				respXml = MessageUtil.messageToXml(forwardMessage);
 			}

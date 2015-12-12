@@ -44,9 +44,10 @@ public class CoreControllerFuwu {
 
 		PrintWriter out = response.getWriter();
 		// 请求校验，若校验成功则原样返回echostr，表示接入成功，否则接入失败
-		if (SignUtil.checkSignature(signature, timestamp, nonce)) {
-			out.print(echostr);
-		}
+		/*if (SignUtil.checkSignature(signature, timestamp, nonce)) {
+		}*/
+		out.print(echostr);
+		System.out.println(echostr);
 		out.close();
 		out = null;
 	}
@@ -67,6 +68,7 @@ public class CoreControllerFuwu {
 		// 响应消息
 		PrintWriter out = response.getWriter();
 		out.print(respXml);
+		System.out.println(respXml);
 		out.close();
 	}
 }
