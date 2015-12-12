@@ -22,8 +22,10 @@ import com.bavlo.counter.model.custom.CustomBVO;
 import com.bavlo.counter.model.custom.CustomCVO;
 import com.bavlo.counter.model.custom.CustomDVO;
 import com.bavlo.counter.model.custom.CustomVO;
+import com.bavlo.counter.model.customer.CustomerVO;
 import com.bavlo.counter.model.sign.GemSignVO;
 import com.bavlo.counter.service.custom.itf.ICustomService;
+import com.bavlo.counter.service.customer.itf.ICustomerService;
 import com.bavlo.counter.service.order.itf.IOrderService;
 import com.bavlo.counter.service.sign.itf.IGemSignService;
 import com.bavlo.counter.utils.CommonUtils;
@@ -42,6 +44,8 @@ import com.bavlo.counter.web.BaseController;
 public class CustomController extends BaseController implements IConstant {
 
 	@Resource
+	private ICustomerService customerService;
+	@Resource
 	private ICustomService customService;
 	@Resource
 	private IGemSignService gemSignService;
@@ -55,7 +59,7 @@ public class CustomController extends BaseController implements IConstant {
 	 * orderId=1&customerId=1
 	 */
 	@RequestMapping("edit")
-	public ModelAndView edit(Map<String, Object> map, Integer id, Integer orderId, Integer customerId) {
+	public ModelAndView edit(Integer id, Integer orderId, Integer customerId) {
 
 		CustomVO customEdit = customService.findCustomById(id);
 		
@@ -90,11 +94,23 @@ public class CustomController extends BaseController implements IConstant {
 	 * @return ModelAndView
 	 */
 	@RequestMapping("detail")
-	public ModelAndView detail(Map<String, Object> map, Integer id) {
+	public ModelAndView detail(Integer id) {
 		
 		CustomVO customDetail = customService.findCustomById(id);
-		map.put("customDetail", customDetail);
-		return new ModelAndView(PATH_CUSTOM + "customDetail");
+		String customerId = customerService.findCustomerById(customDetail.getCustomerId()).getVopenid();
+		
+		List<CustomCVO> customCVO = customService.findListCustomC(id);
+		List<CustomDVO> customDVO = customService.findListCustomD(id);
+		
+		JSONArray chainJson = JSONArray.fromObject(customCVO);
+		JSONArray stockGemJson = JSONArray.fromObject(customDVO);
+		
+		ModelAndView model = new ModelAndView(PATH_CUSTOM + "customDetail");
+		model.addObject("customDetail", customDetail);
+		model.addObject("customerId", customerId);
+		model.addObject("chainJson", chainJson);
+		model.addObject("stockGemJson", stockGemJson);
+		return model;
 	}
 	
 	/**
