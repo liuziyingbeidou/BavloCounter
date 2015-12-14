@@ -12,6 +12,7 @@ import com.bavlo.counter.model.customer.CustomerVO;
 import com.bavlo.counter.service.customer.itf.ICustomerService;
 import com.bavlo.counter.service.impl.CommonService;
 import com.bavlo.counter.utils.CommonUtils;
+import com.bavlo.counter.utils.DateUtil;
 import com.bavlo.counter.utils.StringUtil;
 import com.bavlo.weixin.fuwu.pojo.WeixinUserInfo;
 import com.bavlo.weixin.fuwu.util.AdvancedUtil;
@@ -86,9 +87,11 @@ public class CustomerService extends CommonService implements ICustomerService {
 	public String addCustomerByScan(String openId,HttpSession session,String scene_str) {
 		String vcode = null;
 		if(!isExistByCondition(" vopenid = '"+openId+"'")){
-			
-			String serviceCode = scene_str.substring(scene_str.length()-4);
-			String agentId = scene_str.substring(0,scene_str.length()-4);
+			String agentId = "bavlo";
+			if(StringUtil.isNotEmpty(scene_str)){
+				//String serviceCode = scene_str.substring(scene_str.length()-4);
+				agentId = scene_str.substring(0,scene_str.length()-4);
+			}
 			
 			String accessToken = session.getAttribute("fw-accessToken")+"";
 			if(CommonUtils.isNull(accessToken)){
@@ -98,7 +101,7 @@ public class CustomerService extends CommonService implements ICustomerService {
 			CustomerVO cvo = new CustomerVO();
 			cvo.setVopenid(userInfo.getOpenId());
 			cvo.setVsubscribeState(userInfo.getSubscribe());
-			cvo.setVsubscribeTime(userInfo.getSubscribeTime());
+			cvo.setVsubscribeTime(DateUtil.formatTime(userInfo.getSubscribeTime()));
 			cvo.setVname(userInfo.getNickname());
 			cvo.setVnickname(userInfo.getNickname());
 			
@@ -113,7 +116,11 @@ public class CustomerService extends CommonService implements ICustomerService {
 			cvo.setVprovince(userInfo.getProvince());
 			cvo.setVcity(userInfo.getCity());
 			cvo.setVlanguage(userInfo.getLanguage());
-			cvo.setVhendimgurl(userInfo.getHeadImgUrl());
+			String imgUrl = userInfo.getHeadImgUrl();
+			if(StringUtil.isNotEmpty(imgUrl)){
+				imgUrl = imgUrl.substring(0, imgUrl.lastIndexOf("/")) + "/64" ;
+			}
+			cvo.setVhendimgurl(imgUrl);
 			cvo.setVgroup(userInfo.getGroupid());
 			vcode = CommonUtils.getBillCode(IConstant.CODE_CUSTER);
 			cvo.setVcustomerCode(vcode);
