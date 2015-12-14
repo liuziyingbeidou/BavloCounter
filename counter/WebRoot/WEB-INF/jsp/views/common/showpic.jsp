@@ -103,9 +103,7 @@
       <img src="${ctx}/staticRes/${bean.vpath}/${bean.vname}" width="960" height="639" />
       </a></div>
       </c:forEach>
-        <!--<div class="f_out"><a href="javascript:void(0);" target="_blank"><img src="${ctx}/staticRes/gemsign/20151102171220543e5gtyv.jpg" width="960" height="639" /></a></div>
-        <div class="f_out"><a href="javascript:void(0);" target="_blank"><img src="${ctx}/staticRes/gemsign/20151102171220543e5gtyv.jpg" width="960" height="639" /></a></div>
-      --></div>
+      </div>
       <div class="flash_tab">
         <div class="tabs f_tabs" style="width:258px;">
           <ul class="hander">
