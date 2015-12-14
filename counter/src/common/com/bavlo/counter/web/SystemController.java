@@ -17,7 +17,6 @@ public class SystemController extends BaseController {
 	@RequestMapping(value={"/index.do"})
 	@OAuthRequired
 	public ModelAndView index(HttpServletRequest request,HttpSession session){
-		
 		ModelAndView model = new ModelAndView("index");
 		Object loginInfo = session.getAttribute("loginInfo");
 		if(loginInfo != null){

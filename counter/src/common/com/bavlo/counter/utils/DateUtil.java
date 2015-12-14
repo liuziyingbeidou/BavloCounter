@@ -11,6 +11,8 @@ import java.util.TimeZone;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import org.junit.Test;
+
 /**
  * @Title: 宝珑Counter
  * @ClassName: DateUtil 
@@ -22,9 +24,9 @@ public class DateUtil
 {      
 	public static void main(String[] args){
 		
-		System.out.println(getCurDate("yyyyMMdd").substring(2));
+		System.out.println(formatTime("1449560043"));
+		
 	}
-	
     //默认显示日期的格式      
     public static final String DATAFORMAT_STR = "yyyy-MM-dd";      
           
@@ -95,6 +97,23 @@ public class DateUtil
     {      
         return getDate(dateTimeStr, DATATIMEF_STR);      
     }      
+    
+    /** 
+     * 将微信消息中的CreateTime转换成标准格式的时间（yyyy-MM-dd HH:mm:ss） 
+     * @param createTime 消息创建时间 
+     * @return 
+     */  
+    public static String formatTime(String createTime) {  
+
+        // 将微信传入的CreateTime转换成long类型，再乘以1000  
+
+        long msgCreateTime = Long.parseLong(createTime) * 1000L;  
+
+        DateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");  
+
+        return format.format(new Date(msgCreateTime));  
+
+    }  
     
     /**
      * 字符串转换成时间戳
