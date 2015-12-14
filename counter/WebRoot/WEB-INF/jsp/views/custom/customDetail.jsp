@@ -51,6 +51,10 @@ $(function(){
 				}
 		 })	 	
 	}
+	
+	if("${customDetail.icertificate }" != 0){
+		
+	}
 });
 </script>
 </head>
@@ -179,11 +183,9 @@ $(function(){
 							</dd>
 							<dd>类型：${customDetail.srcstyleType }</dd>
 							<dd>手寸：${customDetail.srcringSize }</dd>
-							<dd>金属：${customDetail.nprice }</dd>
-							<dd class="chain"></dd>
+							<dd>金属：${customDetail.srcmetal }</dd>
 							<dd class="mainGem"></dd>
 							<dd class="partGem"></dd>
-							<dd class="stockGem"></dd>
 							<dd>刻字：${customDetail.vengrave }</dd>
 							<dd>表面工艺：${customDetail.vrequirementB }</dd>
 							<dd>鉴定证书：${customDetail.icertificate }</dd>
@@ -193,10 +195,12 @@ $(function(){
 				</div>
 				<div class="mainrig">
           <div class="dzd_right">
-            <h3>客主石</h3>
-	            <dt>
-	              <!-- <img src="images/kzs.png"> -->托帕石(AA)x1颗，0.05ct 2.50x2.50x1.50
-	            </dt>
+         		<h3>链子</h3>
+	            <dl class="chain">
+	            </dl>
+        		<h3>客主石</h3>
+	            <dl class="stockGem">
+	            </dl>
 	            <div class="clear"></div>
 	            <div class="dzd_right_btm d1">
 	              <span class="gf" ><a href="">下载CAD</a> </span>
@@ -204,7 +208,7 @@ $(function(){
 	              <div class="clear"></div>
 	            </div>
 	            <div class="dzd_right_btm">
-	              <input type='text' class="gf" value='工费258元'>
+	              <input type='text' class="gf" value=''>
 	              <b><a href="">通知QC</a></b>
 	              <div class="clear"></div>
 							<input type="button" value="发送给客户" class="dzd_close" />
