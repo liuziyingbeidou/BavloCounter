@@ -11,12 +11,16 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Service;
 
+import com.bavlo.counter.model.customer.CustomerVO;
 import com.bavlo.counter.service.customer.itf.ICustomerService;
 import com.bavlo.counter.service.impl.CommonService;
+import com.bavlo.counter.utils.StringUtil;
 import com.bavlo.weixin.fuwu.message.resp.Article;
 import com.bavlo.weixin.fuwu.message.resp.ForwardMessage;
+import com.bavlo.weixin.fuwu.message.resp.KfAccountInfo;
 import com.bavlo.weixin.fuwu.message.resp.NewsMessage;
 import com.bavlo.weixin.fuwu.service.itf.ICoreService;
+import com.bavlo.weixin.fuwu.util.IContant;
 import com.bavlo.weixin.fuwu.util.MessageUtil;
 
 /**
@@ -71,6 +75,22 @@ public class CoreService extends CommonService implements ICoreService{
 					// 将消息对象转换成xml
 					respXml = MessageUtil.messageToXml(forwardMessage);
 				}
+				// 转接客服会话
+				else if (eventType.equals(MessageUtil.EVENT_TYPE_SWITCH_SESSION)) {
+					/*forwardMessage.setMsgType(msgType);
+					forwardMessage.setEvent(eventType);
+					forwardMessage.setFromKfAccount(fromUserName);
+					forwardMessage.setToKfAccount(fromUserName);
+					respXml = MessageUtil.messageToXml(forwardMessage);
+					System.out.println(respXml);*/
+				}
+				// 关闭客服会话
+				else if (eventType.equals(MessageUtil.EVENT_TYPE_CLOSE_SESSION)) {
+					
+					forwardMessage.setContent("客服已经下线！");
+					// 将消息对象转换成xml
+					respXml = MessageUtil.messageToXml(forwardMessage);
+				}
 				//用户已关注时的事件推送
 				else if(eventType.equals(MessageUtil.EVENT_TYPE_SCAN)){
 					/**扫描二维码信息--本地库不存在该openId用户---开始**/
@@ -116,12 +136,21 @@ public class CoreService extends CommonService implements ICoreService{
 			}
 			// 当用户发消息时
 			else {
-				String service = customerService.findCustomerByWhere(" vopenid = '"+fromUserName+"'").getVserviceCode();
-				service += "@bavlo001";
-				forwardMessage.setContent(content);
-				forwardMessage.setKfAccount(service);
+				CustomerVO service = customerService.findCustomerByWhere(" vopenid = '"+fromUserName+"'");
+				String serviceCode = IContant.serviceCode;
+				if(service != null){
+					String temCode = service.getVserviceCode();
+					if(StringUtil.isNotEmpty(temCode)){
+						serviceCode = temCode;
+					}
+				}
+				serviceCode += "@bavlo001";
+				KfAccountInfo kfAccount = new KfAccountInfo();
+				kfAccount.setKfAccount(serviceCode);
 				forwardMessage.setMsgType("transfer_customer_service");
+				forwardMessage.setTransInfo(kfAccount);
 				respXml = MessageUtil.messageToXml(forwardMessage);
+
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
