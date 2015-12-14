@@ -23,21 +23,21 @@
 		
 	  <li class="am-panel">
 	    <a data-am-collapse="{parent: '#collapase-nav-1', target: '#user-nav'}">
-	        <i class="am-icon-users am-margin-left-sm"></i> 人员管理 <i class="am-icon-angle-right am-fr am-margin-right"></i>
+	        <i class="am-icon-users am-margin-left-sm"></i> 客户管理 <i class="am-icon-angle-right am-fr am-margin-right"></i>
 	    </a>
 	    <ul class="am-list am-collapse admin-sidebar-sub" id="user-nav">
-	        <li><a href="#/userAdd"><i class="am-icon-user am-margin-left-sm"></i> 添加人员 </a></li>
-	        <li><a href="#/userList/0"><i class="am-icon-user am-margin-left-sm"></i> 人员列表 </a></li>
+	        <li><a href="#/userAdd"><i class="am-icon-user am-margin-left-sm"></i> 添加客户 </a></li>
+	        <li><a href="#/userList/0"><i class="am-icon-user am-margin-left-sm"></i> 客户列表 </a></li>
 	    </ul>
 	  </li>
 	
 	  <li class="am-panel">
 	    <a data-am-collapse="{parent: '#collapase-nav-1', target: '#company-nav'}">
-	        <i class="am-icon-table am-margin-left-sm"></i> 部门管理 <i class="am-icon-angle-right am-fr am-margin-right"></i>
+	        <i class="am-icon-table am-margin-left-sm"></i> 门店管理 <i class="am-icon-angle-right am-fr am-margin-right"></i>
 	    </a>
 	    <ul class="am-list am-collapse admin-sidebar-sub" id="company-nav">
-	        <li><a href="#/companyAdd"><span class="am-icon-table am-margin-left-sm"></span> 添加部门 </a></li>
-	        <li><a href="#/companyList/0"><span class="am-icon-table am-margin-left-sm"></span> 部门列表 </a></li>
+	        <li><a href="#/companyAdd"><span class="am-icon-table am-margin-left-sm"></span> 添加门店 </a></li>
+	        <li><a href="#/companyList/0"><span class="am-icon-table am-margin-left-sm"></span> 门店列表 </a></li>
 	    </ul>
 	  </li>
 	
