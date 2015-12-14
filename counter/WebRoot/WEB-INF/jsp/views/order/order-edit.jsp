@@ -581,7 +581,7 @@ text-overflow:ellipsis;
     <div class="mainleft">
       <div class="customer">
         <ul>
-          <li class="header-loc"><a href="#"><img class="cusheader" src="${ctx}/resources/images/customer_01.png"></a></li>
+          <li class="header-loc"><a href="#"><img class="cusheader" style="width:60px;height:60px;" src="${ctx}/resources/images/customer_01.png"></a></li>
 		  <!--<li class="file"><a href="javascript:;"><input type="file" name="file" id="file"></a></li>-->
 		  <li class="file"><a href="#"><img src="${ctx}/resources/images/customer_02.png"></a></li>
           <div class="clear"></div>
