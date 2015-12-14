@@ -96,21 +96,26 @@ public class CustomController extends BaseController implements IConstant {
 	@RequestMapping("detail")
 	public ModelAndView detail(Integer id) {
 		
-		CustomVO customDetail = customService.findCustomById(id);
-		String customerId = customerService.findCustomerById(customDetail.getCustomerId()).getVopenid();
-		
-		List<CustomCVO> customCVO = customService.findListCustomC(id);
-		List<CustomDVO> customDVO = customService.findListCustomD(id);
-		
-		JSONArray chainJson = JSONArray.fromObject(customCVO);
-		JSONArray stockGemJson = JSONArray.fromObject(customDVO);
-		
 		ModelAndView model = new ModelAndView(PATH_CUSTOM + "customDetail");
-		model.addObject("customDetail", customDetail);
-		model.addObject("customerId", customerId);
-		model.addObject("chainJson", chainJson);
-		model.addObject("stockGemJson", stockGemJson);
+		
+		if(id != null){
+			CustomVO customDetail = customService.findCustomById(id);
+			String customerId = customerService.findCustomerById(customDetail.getCustomerId()).getVopenid();
+			
+			List<CustomCVO> customCVO = customService.findListCustomC(id);
+			List<CustomDVO> customDVO = customService.findListCustomD(id);
+			
+			JSONArray chainJson = JSONArray.fromObject(customCVO);
+			JSONArray stockGemJson = JSONArray.fromObject(customDVO);
+			
+			model.addObject("customDetail", customDetail);
+			model.addObject("customerId", customerId);
+			model.addObject("chainJson", chainJson);
+			model.addObject("stockGemJson", stockGemJson);
+		}
+		
 		return model;
+		
 	}
 	
 	/**
