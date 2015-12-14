@@ -11,6 +11,12 @@ public class ForwardMessage extends BaseMessage {
 	private String KfAccount;
 	// 回复的消息内容
 	private String Content;
+	// 发送容器
+	private KfAccountInfo TransInfo;
+	// 转接来源
+	private String FromKfAccount;
+	// 转接对象
+	private String ToKfAccount;
 	
 	public String getKfAccount() {
 		return KfAccount;
@@ -26,5 +32,29 @@ public class ForwardMessage extends BaseMessage {
 
 	public void setContent(String content) {
 		Content = content;
+	}
+
+	public KfAccountInfo getTransInfo() {
+		return TransInfo;
+	}
+
+	public void setTransInfo(KfAccountInfo transInfo) {
+		TransInfo = transInfo;
+	}
+
+	public String getToKfAccount() {
+		return ToKfAccount;
+	}
+
+	public void setToKfAccount(String toKfAccount) {
+		ToKfAccount = toKfAccount;
+	}
+
+	public String getFromKfAccount() {
+		return FromKfAccount;
+	}
+
+	public void setFromKfAccount(String fromKfAccount) {
+		FromKfAccount = fromKfAccount;
 	}
 }

@@ -54,6 +54,12 @@ public class MessageUtil {
 	public static final String EVENT_TYPE_UNSUBSCRIBE = "unsubscribe";
 	// 事件类型：scan(用户已关注时的扫描带参数二维码)
 	public static final String EVENT_TYPE_SCAN = "SCAN";
+	//创建会话
+	public static final String EVENT_TYPE_CREATE_SESSION =  "kf_create_session";
+	//转接客服会话
+	public static final String EVENT_TYPE_SWITCH_SESSION = "kf_switch_session";
+	//关闭客服会话
+	public static final String EVENT_TYPE_CLOSE_SESSION = "kf_close_session";
 	// 事件类型：LOCATION(上报地理位置)
 	public static final String EVENT_TYPE_LOCATION = "LOCATION";
 	// 事件类型：CLICK(自定义菜单)

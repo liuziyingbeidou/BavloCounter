@@ -14,6 +14,8 @@ public class BaseMessage {
 	private long CreateTime;
 	// 消息类型
 	private String MsgType;
+	// 事件类型
+	private String Event;
 
 	public String getToUserName() {
 		return ToUserName;
@@ -45,5 +47,13 @@ public class BaseMessage {
 
 	public void setMsgType(String msgType) {
 		MsgType = msgType;
+	}
+
+	public String getEvent() {
+		return Event;
+	}
+
+	public void setEvent(String event) {
+		Event = event;
 	}
 }
