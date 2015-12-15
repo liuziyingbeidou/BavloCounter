@@ -1,6 +1,6 @@
 <%@ page language="java" import="java.util.*,com.bavlo.counter.model.LoginVO" pageEncoding="utf-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <c:set var="ctx" value="${pageContext.request.contextPath}"/>
 <%
 Object info = request.getSession().getAttribute("loginInfo");
@@ -79,25 +79,25 @@ function closeMenu(){
 </script>
 <li class="menu-index"><a href="#">首页</a></li>
 <c:forEach var="role" items="${roleList}">
-     <c:if test="${fn:contains('[CC][PM][PMC][CAD][GB][PPS]',role)}">
+     <c:if test="${fn:contains('[N]',role)}">
      <li class="menu-custom-list"><a href="#">定制单</a></li>
      </c:if>
-     <c:if test="${fn:contains('[CUST]',role)}">
-     <li class="menu-custom-list-view"><a href="#">查看定制单</a></li>
+     <c:if test="${fn:contains('[CC][PM][CAD][PMC][PPS]',role)}">
+     <li class="menu-custom-list-view"><a href="#">款式单</a></li>
      </c:if>
-     <c:if test="${fn:contains('[CC][PM][PMC][CAD][GB][PPS]',role)}">
+     <c:if test="${fn:contains('[CC]',role)}">
      <li class="menu-entity-list"><a href="#">实物签收单</a></li>
      </c:if>
-     <c:if test="${fn:contains('[CC][PM][PMC][CAD][GB][PPS]',role)}">
+     <c:if test="${fn:contains('[CC]',role)}">
      <li class="menu-gem-list"><a href="#">宝石签收单</a></li>
      </c:if>
-     <c:if test="${fn:contains('[CC][PM][PMC][CAD][GB][PPS]',role)}">
+     <c:if test="${fn:contains('[N]',role)}">
      <li class="menu-order-list"><a href="#">订单</a></li>
      </c:if>
-     <c:if test="${fn:contains('[CC][CAD][GB][PPS]',role)}">
+     <c:if test="${fn:contains('[CC][PMC]',role)}">
      <li class="menu-order-list-view"><a href="#">查看订单</a></li>
      </c:if>
-     <c:if test="${fn:contains('[CC][PM][PMC][CAD][GB][PPS]',role)}">
+     <c:if test="${fn:contains('[CC]',role)}">
      <li class="menu-customer-list"><a href="#">客户</a></li>
      </c:if>
 </c:forEach>

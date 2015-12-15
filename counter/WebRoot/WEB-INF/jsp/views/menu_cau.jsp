@@ -1,6 +1,16 @@
-<%@ page language="java" import="java.util.*" pageEncoding="utf-8"%>
+<%@ page language="java" import="java.util.*,com.bavlo.counter.model.LoginVO" pageEncoding="utf-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <c:set var="ctx" value="${pageContext.request.contextPath}"/>
+<%
+Object info = request.getSession().getAttribute("loginInfo");
+List<String> roleList = null;
+if(info != null){
+	LoginVO loginVO = (LoginVO)info;
+	roleList = loginVO.getRole();
+}
+%>
+<c:set var="roleList" value="<%=roleList %>"/>
 <script type="text/javascript">
 $(function(){
 	//选择角色列表
@@ -21,6 +31,27 @@ function closeMenu(){
 <li><a href="">Save as</a></li>
 <li><a href="">Print</a></li>
 -->
-<li class="role-list" bv-role="CAD" bv-title="起版师"><a href="#">发起版师</a></li>
-<li class="role-list" bv-role="PPS" bv-title="供应链"><a href="#">发供应链</a></li>
-<li><a class="sendCM" href="#">发客户</a></li>
+<c:forEach var="role" items="${roleList}">
+     <c:if test="${fn:contains('[CUST][PM][PMC]',role)}">
+     <li class="role-list" bv-role="CC" bv-title="定制顾问"><a href="#">发定制顾问</a></li>
+     </c:if>
+     <c:if test="${fn:contains('[PM]',role)}">
+     <li class="role-list" bv-role="CAD" bv-title="起版师"><a href="#">发起版师</a></li>
+     </c:if>
+     <c:if test="${fn:contains('[CC][CAD]',role)}">
+     <li class="role-list" bv-role="PM" bv-title="产品经理"><a href="#">发产品经理</a></li>
+     </c:if>
+     <c:if test="${fn:contains('[PMC]',role)}">
+     <li class="role-list" bv-role="GB" bv-title="配石员"><a href="#">发配石员</a></li>
+     </c:if>
+     <c:if test="${fn:contains('[PMC]',role)}">
+     <li class="role-list" bv-role="PPS" bv-title="工厂跟单员"><a href="#">发工厂跟单员</a></li>
+     </c:if>
+     <c:if test="${fn:contains('[GB][PPS]',role)}">
+     <li class="role-list" bv-role="PMC" bv-title="生产主管"><a href="#">发生产主管</a></li>
+     </c:if>
+     <c:if test="${fn:contains('[CC]',role)}">
+     <li><a class="sendCM" href="#">发客户</a></li>
+     </c:if>
+</c:forEach>
+
