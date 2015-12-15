@@ -21,7 +21,7 @@ import com.bavlo.weixin.qiye.util.WechatTicket;
 public class JSController extends BaseController{
 	private static AccessToken accessToken = null;
 	static{
-		accessToken = QiYeUtil.getAccessToken(null,"wx24f6f768b6dd72fe", "albkD_XkbILSc25BGYw6PaYpyWL7ileFjxI0WYKZ5dQfZpYnuLXR-ejFm_uvrLLh");
+		accessToken = QiYeUtil.getAccessToken(null,Constants.CORPID, Constants.SECRET );
 	}
 	
 	@RequestMapping(value="/jsapi")

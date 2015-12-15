@@ -37,10 +37,28 @@ public class WechatSendMessage {
 		String PostData = "{\"touser\": \"%s\",\"toparty\": \"%s\",\"totag\": \"%s\",\"msgtype\": \"text\",\"agentid\": \"%s\",\"text\": {\"content\": \"%s\"},\"safe\":\"0\"}";
 		return String.format(PostData, touser, toparty, totag, agentid, text);
 	}
+	
+	/**
+	 * @Description: News 消息
+	 * @param @param touser
+	 * @param @param toparty
+	 * @param @param totag
+	 * @param @param agentid
+	 * @param @param text
+	 * @param @param dsp
+	 * @param @param url
+	 * @param @return
+	 * @return String
+	 */
+	public static String SNewstMsg(String touser, String toparty, String totag,
+			String agentid, String text,String dsp,String url) {
+		String PostData = "{\"touser\": \"%s\",\"toparty\": \"%s\",\"totag\": \"%s\",\"msgtype\": \"news\",\"agentid\": \"%s\",\"news\":{\"articles\":[{\"title\":\"%s\",\"description\":\"%s\",\"url\":\"%s\"}]}}";
+		return String.format(PostData, touser, toparty, totag, agentid, text,dsp,url);
+	}
 
 	// 发送消息测试
 	public static int sendMassage(HttpServletRequest request,String touser, String toparty, String totag,
-			String agentid, String text) {
+			String agentid, String text,String dsp,String url) {
 		// 调取凭证
 		AccessToken access_token = QiYeUtil.getAccessToken(request,Constants.CORPID,
 				Constants.SECRET);
@@ -56,7 +74,8 @@ public class WechatSendMessage {
 		// String agentid = "13";
 		// TextMessage text = new TextMessage();
 		// text.setContent("你好，你有新的任务，请点击\n m.bavlo.com \n查看");
-		String PostData = STextMsg(touser, toparty, totag, agentid, text);
+		//String PostData = STextMsg(touser, toparty, totag, agentid, text);
+		String PostData = SNewstMsg(touser, toparty, totag, agentid, text,dsp,url);
 		System.out.println(access_token.getToken());
 		System.out.println(PostData);
 		int result = QiYeUtil.PostMessage(access_token, "POST", POST_URL,
