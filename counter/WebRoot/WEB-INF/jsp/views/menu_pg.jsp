@@ -75,13 +75,13 @@ $(function(){
 	//选择定制单
 	$(".menu-custom-list").bind("click",function(){
 		EditShow_Hidden(ed1);
-		openURL("${ctx}/custom/getList.do?listType=menu","定制单列表",490,550);
+		openURL("${ctx}/custom/getList.do?listType=menu","款式单列表",490,550);
 		closeMenu();
 	});
 	//选择定制单(查看)
 	$(".menu-custom-list-view").bind("click",function(){
 		EditShow_Hidden(ed1);
-		openURL("${ctx}/custom/getList.do?listType=view","定制单列表",490,550);
+		openURL("${ctx}/custom/getList.do?listType=view","款式单列表",490,550);
 		closeMenu();
 	});
 });
