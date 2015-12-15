@@ -107,7 +107,7 @@ public interface IConstant {
 	public static final String PAGE_TYPE_ADD = "新增";
 	//编辑
 	public static final String PAGE_TYPE_EDIT = "编辑";
-	//编辑
+	//查看
 	public static final String PAGE_TYPE_VIEW = "查看";
 	
 
@@ -127,4 +127,18 @@ public interface IConstant {
 //	public static final String FILE_DIR_ENTSIGN = "entsign";//实物签收单
 //	public static final String FILE_DIR_GEMSIGN = "gemsign";//宝石签收单
 //	public static final String FILE_DIR_CUSTOMER = "customer";//客户
+	
+	/*****************************页面属性************************/
+	//客户(cust)
+	public static final String PAGE_ATTR_CUST = "CUST";
+	//定制单(style)
+	public static final String PAGE_ATTR_STYLE = "STYLE";
+	//订单(order)
+	public static final String PAGE_ATTR_ORDER = "ORDER";
+	//宝石签收单(gem)
+	public static final String PAGE_ATTR_GEM = "GEM";
+	//实物签收单(entity)
+	public static final String PAGE_ATTR_ENTITY = "ENTITY";
+	//配石单(deploy)
+	public static final String PAGE_ATTR_DEPLOY = "DEPLOY";
 }
