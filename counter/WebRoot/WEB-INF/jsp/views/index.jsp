@@ -1,7 +1,17 @@
 <%@ page language="java" import="java.util.*,com.bavlo.counter.model.LoginVO" pageEncoding="utf-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <c:set var="ctx" value="${pageContext.request.contextPath }"></c:set>
-
+<%
+Object info = request.getSession().getAttribute("loginInfo");
+List<String> roleList = null;
+boolean lgSt = false;
+if(info != null){
+	LoginVO loginVO = (LoginVO)info;
+	roleList = loginVO.getRole();
+}
+ %>
+<c:set var="roleList" value="<%=roleList %>"/>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html>
   <head>
@@ -116,11 +126,21 @@
       </div>
       
       <div class="container text-align" role="main">
-            <button type="button" class="btn btn-default .btn-lg add-order">订&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;单</button>
+      		<c:forEach var="role" items="${roleList}">
+		     <c:if test="${fn:contains('[CC-R][PM-R]',role)}">
+		     <button type="button" class="btn btn-default .btn-lg add-order">订&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;单</button>
+		     </c:if>
+		     <c:if test="${fn:contains('[CC-R]',role)}">
+		     <button type="button" class="btn btn-default .btn-lg add-customer">客&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;户</button>
+		     </c:if>
+		     <c:if test="${fn:contains('[CC-R]',role)}">
+		      <button type="button" class="btn btn-default .btn-lg add-gemsign">宝石签收单</button>
+		     </c:if>
+		     <c:if test="${fn:contains('[CC-R]',role)}">
+		     <button type="button" class="btn btn-default .btn-lg add-entysign">实物签收单</button>
+		     </c:if>
+		     </c:forEach>
             <!--<button type="button" class="btn btn-default .btn-lg add-custom">定&nbsp;&nbsp;制&nbsp;&nbsp;单</button>-->
-            <button type="button" class="btn btn-default .btn-lg add-customer">客&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;户</button>
-            <button type="button" class="btn btn-default .btn-lg add-gemsign">宝石签收单</button>
-            <button type="button" class="btn btn-default .btn-lg add-entysign">实物签收单</button>
             <!--<button type="button" class="btn btn-default .btn-lg">配&nbsp;&nbsp;石&nbsp;&nbsp;单</button>-->
 			<c:if test="${empty uvo['muserId']}">
 			<button type="button" class="btn btn-default .btn-lg mgr-old-counter">电子柜台后台</button>
