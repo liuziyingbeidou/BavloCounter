@@ -81,6 +81,11 @@ $(function(){
 			location.reload();
 		});
 	});
+	//进入编辑页
+	$(".editOrder").bind("click",function(){
+		var url = "${ctx}/order/edit.do?id="+$("#orderId").val();
+		window.location = url;
+	});
 });
 
 //加载清单列表
@@ -170,7 +175,8 @@ function loadOrderList(){
 </head>
 
 <body>
-<input type="hidden" name="id" id="orderId" value="${ordervo['id']}">
+<input type="hidden" id="pageAttr" value="ORDER"/>
+<input type="hidden" name="id" id="orderId" class="tableId" value="${ordervo['id']}">
 <input type="hidden" name="iorderState" id="orderState" value="${ordervo['iorderState']}">
 <input type="hidden" name="customerId" id="customerId" value="${ordervo['customerId']}">
 <div class="header">
@@ -283,6 +289,9 @@ function loadOrderList(){
 				<p/>
           <div class="close">
             <input type="button" class="psave" name="button" value="保存">
+          </div>
+          <div class="oedit">
+            <input type="button" class="editOrder" name="button" value="进入编辑页">
           </div>
       </div>
         <div class="clear"></div>

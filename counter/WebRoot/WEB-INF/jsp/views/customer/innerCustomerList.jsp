@@ -31,6 +31,10 @@
 <!-- MultiDialog files (needed) --> 
 <script src="/counter/resources/jquery.multiDialog/js/jquery.ui.dialog.extended-1.0.2.js"></script> 
 <script src="/counter/resources/jquery.multiDialog/js/jquery.multiDialog.js"></script> 
+
+<link rel="stylesheet" href="${ctx }/page/counter/assets/css/amazeui.min.css"/>
+<link rel="stylesheet" href="${ctx }/page/counter/assets/css/admin.css">
+<script type="text/javascript" src="${ctx }/page/counter/assets/js/amazeui.min.js"></script>
 <script type="text/javascript">
 	$(function(){
 		initData();
@@ -62,17 +66,64 @@
 	}
 	
 	//调用父窗体方法
-	function selHander(id){
-		if(isExitsFunction(window.parent.setValueByFrame)){
-			if("${listType}" == "menu"){
-				alert("userid:"+id);
-				window.parent.setValueByFrame("role-menu",id,callbackMuilt());
-				window.parent.closeMultiDlg();
+	function selHander(userid){
+		if("${listType}" == "menu"){
+			//alert("userid:"+userid+"  url："+window.parent.document.location.href);
+			var $pageAttr = $("#pageAttr",window.parent.document);
+			var pageAttr = null;
+			if($pageAttr.length > 0){
+				pageAttr = $pageAttr.val();
+			}else{
+				alert("该页面为设置页面属性");return ;
 			}
-		}else{
-			alert("请在父窗口添加setValueByFrame(type,id,callback){处理逻辑}type='role-menu'");
+			var $id = $(".tableId",window.parent.document);
+			var id = null;
+			if($id.length > 0){alert($id.val()+"  "+$pageAttr.val());
+				if($id.val() != null && $id.val() != ""){
+					id = $id.val();
+				}else{
+					alert("完善信息后再转发...");return ;
+				}
+			}else{
+				alert("该页面不允许转发...");return ;
+			}
+			$('#my-prompt').modal({
+		      relatedTarget: this,
+		      onConfirm: function(e) {
+		        toRoleObj(pageAttr,userid,e.data,pageAttr,id);
+		      },
+		      onCancel: function(e) {
+		      	toRoleObj(pageAttr,userid,"",pageAttr,id);
+		      }
+		    });
+			//window.parent.setValueByFrame("role-menu",id,callbackMuilt());
 		}
 	}
+	//转发页面
+	function toRoleObj(pageAttr,userid,memo,pageAttr,id){
+		window.parent.closeMultiDlg();
+		var url = "${ctx}/sendMassage.do";
+		$.post(url,{pageAttr:pageAttr,touser:userid,memo:memo,pageAttr:pageAttr,rootPath:getRootPath(),id:id},function(data){
+			if(data == 0){
+				alert("转发成功!");
+			}else{
+				alert("转发失败!");
+			}
+		});
+	}
+	//js获取项目根路径
+	function getRootPath(){
+    //获取当前网址
+    var curWwwPath=window.document.location.href;
+    //获取主机地址之后的目录
+    var pathName=window.document.location.pathname;
+    var pos=curWwwPath.indexOf(pathName);
+    //获取主机地址
+    var localhostPaht=curWwwPath.substring(0,pos);
+    //获取带"/"的项目名
+    var projectName=pathName.substring(0,pathName.substr(1).indexOf('/')+1);
+    return(localhostPaht+projectName);
+}
 	</script>
 	<style type="text/css">
 	@media screen and (max-width: 1280px) and (min-width: 320px){
@@ -136,5 +187,18 @@
 		</div>
 	</div>
 	<!--企业内部列表弹窗END-->
+	<div class="am-modal am-modal-prompt" tabindex="-1" id="my-prompt">
+	  <div class="am-modal-dialog">
+	    <div class="am-modal-hd">Bavlo Counter</div>
+	    <div class="am-modal-bd">
+	      简单描述:
+	      <input type="text" class="am-modal-prompt-input">
+	    </div>
+	    <div class="am-modal-footer">
+	      <span class="am-modal-btn" data-am-modal-cancel>取消</span>
+	      <span class="am-modal-btn" data-am-modal-confirm>提交</span>
+	    </div>
+	  </div>
+	</div>
 </body>
 </html>

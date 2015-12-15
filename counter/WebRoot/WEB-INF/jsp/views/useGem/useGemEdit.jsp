@@ -136,8 +136,9 @@
 
 <body>
 	<form id="useGem">
+		<input type="hidden" id="pageAttr" value="DEPLOY"/>
 		<jsp:include page="../header.jsp"></jsp:include>
-		<input id="gemid" type="hidden" name="id"
+		<input id="gemid" type="hidden" name="id" class="tableId"
 			value="${useGemDetail['id']}">
 		<div class="qsd">
 			<div class="qsd_main">

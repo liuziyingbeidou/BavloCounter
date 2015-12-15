@@ -194,7 +194,8 @@
 	</head>
 <body>
 <form id="entityfrmId" method="post">
-<input id="entityid" class="mid" type="hidden" name="id" value="${entityvo['id']}">
+<input type="hidden" id="pageAttr" value="ENTITY"/>
+<input id="entityid" class="mid tableId"  type="hidden" name="id" value="${entityvo['id']}">
 <input id="customerId" type="hidden" name="customerId" value="${entityvo['customerId']}">
 <div class="header">
 	<div class="head">
