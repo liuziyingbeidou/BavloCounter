@@ -52,6 +52,13 @@ function test(data){
     <button class="remote">远程接口测试</button>
     <br>
     <fieldset>
+    	<legend>数据权限控制</legend>
+    	客户（CUST）、定制顾问（CC）、产品经理（PM）、起版师（CAD）、生产主管（PMC）、配石员（GB）、工厂跟单员（PPS）<br>
+    	当前角色下，页面中的元素需要控制不显示的方式：定制顾问（CC）举例:<br>
+    	①单个元素：添加class="CC-R"<br>
+    	②多个元素一起（块域）：可适当添加< span class="CC-R" >< /span>包围
+    </fieldset>
+    <fieldset>
     	<legend>下载文件Controller</legend>
     	http://127.0.0.1:8080/counter/file/download.do<br>
 		参数：  模块filePath   文件名fileName <br>

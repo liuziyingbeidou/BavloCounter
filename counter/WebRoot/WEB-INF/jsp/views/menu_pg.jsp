@@ -17,7 +17,19 @@ if(info != null){
 <c:set var="roleList" value="<%=roleList %>"/>
 <script type="text/javascript">
 $(function(){
-
+	//角色控制标签
+	<%
+	if(roleList != null){
+		for(int i = 0; i < roleList.size(); i++){
+			String role = roleList.get(i);
+			if(role != null){
+			%>
+			$(".<%=role%>").hide();
+			<%
+			}
+		}
+	}
+	%>
 	/* if("${isLogin}"){
 		alert("登录超时...随即推出");
 		window.close();
@@ -68,6 +80,7 @@ $(function(){
 	});
 	//选择定制单(查看)
 	$(".menu-custom-list-view").bind("click",function(){
+		EditShow_Hidden(ed1);
 		openURL("${ctx}/custom/getList.do?listType=view","定制单列表",490,550);
 		closeMenu();
 	});
@@ -82,22 +95,22 @@ function closeMenu(){
      <c:if test="${fn:contains('[N]',role)}">
      <li class="menu-custom-list"><a href="#">定制单</a></li>
      </c:if>
-     <c:if test="${fn:contains('[CC][PM][CAD][PMC][PPS]',role)}">
+     <c:if test="${fn:contains('[CC-R][PM-R][CAD-R][PMC-R][PPS-R]',role)}">
      <li class="menu-custom-list-view"><a href="#">款式单</a></li>
      </c:if>
-     <c:if test="${fn:contains('[CC]',role)}">
+     <c:if test="${fn:contains('[CC-R]',role)}">
      <li class="menu-entity-list"><a href="#">实物签收单</a></li>
      </c:if>
-     <c:if test="${fn:contains('[CC]',role)}">
+     <c:if test="${fn:contains('[CC-R]',role)}">
      <li class="menu-gem-list"><a href="#">宝石签收单</a></li>
      </c:if>
      <c:if test="${fn:contains('[N]',role)}">
      <li class="menu-order-list"><a href="#">订单</a></li>
      </c:if>
-     <c:if test="${fn:contains('[CC][PMC]',role)}">
-     <li class="menu-order-list-view"><a href="#">查看订单</a></li>
+     <c:if test="${fn:contains('[CC-R][PMC-R]',role)}">
+     <li class="menu-order-list-view"><a href="#">订单</a></li>
      </c:if>
-     <c:if test="${fn:contains('[CC]',role)}">
+     <c:if test="${fn:contains('[CC-R]',role)}">
      <li class="menu-customer-list"><a href="#">客户</a></li>
      </c:if>
 </c:forEach>
