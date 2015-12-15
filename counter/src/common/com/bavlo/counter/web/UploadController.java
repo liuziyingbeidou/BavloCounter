@@ -72,14 +72,15 @@ public class UploadController extends BaseController {
 		String id = request.getParameter("id");//外键值
 		String table = request.getParameter("cpath");//表
 		String fkey = request.getParameter("fkey");//外键
-		String type = request.getParameter("ptype");//类别
+		String ptype = request.getParameter("ptype");//类别字段
+		String vtype = request.getParameter("vtype");//类别字段值
 		ModelAndView model = new ModelAndView(IConstant.PATH_COMMON + IConstant.COMMON_SHOWPIC);
 		
 		String wh = null;
 		if(id != null){
 			wh = fkey+"="+id;
-			if(StringUtil.isNotEmpty(type)){
-				wh += " and ptype='"+type+"'";
+			if(StringUtil.isNotEmpty(ptype) && StringUtil.isNotEmpty(vtype)){
+				wh += " and "+ptype+"='"+vtype+"'";
 			}
 		}else{
 			wh = "1=2";
