@@ -616,7 +616,7 @@ text-overflow:ellipsis;
       </div>
       <div class="list1">
         <dl>
-          <dd><a href="#" class="custom_btn">+定制单</a></dd>
+          <dd><a href="#" class="custom_btn">+款式单</a></dd>
 		  <div class="clear"></div>
         </dl>
       </div>
