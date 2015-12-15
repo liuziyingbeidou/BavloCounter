@@ -162,6 +162,7 @@
 
 	<body>
 		<form id="customer">
+		<input type="hidden" id="pageAttr" value="CUST"/>
 			<div class="header">
 	<div class="head2">
 		<div class="top2">
@@ -222,7 +223,7 @@
 					</ul>
 					<div class="edit_btn">
 						<div class="edit_1">
-							<input type="hidden" id='customerid' name='id'
+							<input type="hidden" id='customerid' class="tableId" name='id'
 								value="${customerDetail.id }" />
 							<input type='text' id='vname' name='vname'
 								value="${customerDetail.vname }"
