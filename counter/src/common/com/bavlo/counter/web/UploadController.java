@@ -72,12 +72,23 @@ public class UploadController extends BaseController {
 		String id = request.getParameter("id");//外键值
 		String table = request.getParameter("cpath");//表
 		String fkey = request.getParameter("fkey");//外键
+		String type = request.getParameter("ptype");//类别
 		ModelAndView model = new ModelAndView(IConstant.PATH_COMMON + IConstant.COMMON_SHOWPIC);
+		
+		String wh = null;
+		if(id != null){
+			wh = fkey+"="+id;
+			if(StringUtil.isNotEmpty(type)){
+				wh += " and vpath='"+type+"'";
+			}
+		}else{
+			wh = "1=2";
+		}
 		
 		try {
 			Class cls = Class.forName(table);
 			if(StringUtil.isNotEmpty(id)){
-				List list = commonService.findAll(cls, fkey+"="+id);
+				List list = commonService.findAll(cls, wh);
 				model.addObject("listbvo", list);
 			}
 		} catch (ClassNotFoundException e) {
