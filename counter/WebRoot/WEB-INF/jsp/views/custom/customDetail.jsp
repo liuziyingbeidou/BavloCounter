@@ -61,6 +61,7 @@ $(function(){
 
 <body>
 	<form id="custom">
+	<input type="hidden" id="pageAttr" value="STYLE"/>
 		<div class="header">
 			<div class="head1">
 				<div class="top">
