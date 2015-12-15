@@ -79,7 +79,7 @@ public class UploadController extends BaseController {
 		if(id != null){
 			wh = fkey+"="+id;
 			if(StringUtil.isNotEmpty(type)){
-				wh += " and vpath='"+type+"'";
+				wh += " and ptype='"+type+"'";
 			}
 		}else{
 			wh = "1=2";
