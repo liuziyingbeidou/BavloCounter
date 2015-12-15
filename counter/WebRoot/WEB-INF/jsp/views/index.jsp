@@ -127,7 +127,7 @@ if(info != null){
       
       <div class="container text-align" role="main">
       		<c:forEach var="role" items="${roleList}">
-		     <c:if test="${fn:contains('[CC-R][PM-R]',role)}">
+		     <c:if test="${fn:contains('[CC-R]',role)}">
 		     <button type="button" class="btn btn-default .btn-lg add-order">订&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;单</button>
 		     </c:if>
 		     <c:if test="${fn:contains('[CC-R]',role)}">
