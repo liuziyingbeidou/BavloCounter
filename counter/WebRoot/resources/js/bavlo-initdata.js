@@ -128,7 +128,7 @@ function loadGemImg(nativeUrl,remoteUrl){
 		function(data){
 			var html = "";
 			for (var i = 0; i < data.length; i++) {
-				html += "<dl class='gem_img' type='"+type_cn+"' shape='"+shape_cn+"' calibrated='"+calibrated_cn+"' weight='"+data[i].weight+"' costPrice='"+data[i].costPrice+"'>"
+				html += "<dl class='gem_img' type='"+type_cn+"' shape='"+shape_cn+"' calibrated='"+calibrated_cn+"' weight='"+data[i].weight+"' color='"+data[i].color.name_cn+"' clarity='"+data[i].clarity.name_en+"' costPrice='"+data[i].costPrice+"'>"
 						+ "<dd><img src='http://img.bavlo.com/GemPics/"+data[i].shape.id+"_"+data[i].color.id+".png'/><div class='kxs_weight'>"
 						+ data[i].weight
 						+ "CT</div></dd></dl>"
