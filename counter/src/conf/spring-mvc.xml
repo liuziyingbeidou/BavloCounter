@@ -37,15 +37,6 @@ xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.sprin
     <bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">  
         <property name="maxUploadSize" value="5000000"></property>  
     </bean> 
-    <!-- 避免IE执行AJAX时,返回JSON出现下载文件 -->
-	<bean id="mappingJacksonHttpMessageConverter"
-		class="org.springframework.http.converter.json.MappingJacksonHttpMessageConverter">
-		<property name="supportedMediaTypes">
-			<list>
-				<value>text/html;charset=UTF-8</value>
-			</list>
-		</property>
-	</bean>
 	
 	<!-- 微信***************开始 -->
 	<!-- OAuth2拦截器 -->
