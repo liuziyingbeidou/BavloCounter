@@ -101,13 +101,14 @@
 	}
 	//转发页面
 	function toRoleObj(pageAttr,userid,memo,pageAttr,id){
-		window.parent.closeMultiDlg();
 		var url = "${ctx}/sendMassage.do";
 		$.post(url,{pageAttr:pageAttr,touser:userid,memo:memo,pageAttr:pageAttr,rootPath:getRootPath(),id:id},function(data){
 			if(data == 0){
 				alert("转发成功!");
+				window.parent.closeMultiDlg();
 			}else{
 				alert("转发失败!");
+				window.parent.closeMultiDlg();
 			}
 		});
 	}
