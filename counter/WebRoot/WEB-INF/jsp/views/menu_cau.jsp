@@ -20,9 +20,43 @@ $(function(){
 		openURL("${ctx}/qy/list.do?listType=menu&role="+role,title+"列表",465,510);
 		closeMenu();
 	});
+	
+	//发送客户 
+	var toUser = $("#toUser").val();
+	var customId = $("#customId").val();
+	$(".sendCM").click(function() {
+		sendTMessage(toUser);
+	})
+	function sendTMessage(toUser){
+		 var url = getRootPath()+"/detail.do?id="+customId;
+		 $.ajax({
+			 url : '../sendTM.do',
+				type : 'POST',
+				data :{
+					'toUser' : toUser,
+					'url': url
+				},
+				datatype:'text',
+				error : function(data) {		
+					alert("发送成功");
+				}
+		 })	 	
+	}
 });
 function closeMenu(){
 	EditShow_Hidden(ed1);
+}
+function getRootPath(){
+    //获取当前网址，如： http://localhost:8083/uimcardprj/share/meun.jsp
+    var curWwwPath=window.document.location.href;
+    //获取主机地址之后的目录，如： uimcardprj/share/meun.jsp
+    var pathName=window.document.location.pathname;
+    var pos=curWwwPath.indexOf(pathName);
+    //获取主机地址，如： http://localhost:8083
+    var localhostPaht=curWwwPath.substring(0,pos);
+    //获取带"/"的项目名，如：/uimcardprj
+    var projectName=pathName.substring(0,pathName.substr(1).indexOf('/')+1);
+    return(localhostPaht+projectName);
 }
 </script>
 <!--

@@ -13,7 +13,7 @@
 		<div class="top2">
 			<b><a href="javascript:;" onclick="EditShow_Hidden(ed1)"><img
 						src="${ctx}/resources/images/plus.png" />
-			</a> 定制单 81812560 </b>
+			</a> 款式单 81812560 </b>
 			<font><a href="javascript:;" onclick="Show_Hidden(tr1)"><img
 						src="${ctx}/resources/images/plus.png" />
 			</a> </font>
@@ -24,7 +24,7 @@
 					<a href="javascript:;" onclick="Show_Hidden(tr1)">一</a>
 				</li>
 				<li>
-					<a href="">定制单</a>
+					<a href="">款式单</a>
 				</li>
 				<li>
 					<a href="">宝石签收单</a>

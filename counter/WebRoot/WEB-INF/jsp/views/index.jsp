@@ -46,7 +46,7 @@ if(info != null){
 			window.location = url;
 		});
 		/*$(".add-custom").click(function(){
-			url = "${ctx}/order/view.do?id="+id;//定制单新增页
+			url = "${ctx}/order/view.do?id="+id;//款式单新增页
 			window.location = url;
 		});*/
 		$(".add-customer").click(function(){
