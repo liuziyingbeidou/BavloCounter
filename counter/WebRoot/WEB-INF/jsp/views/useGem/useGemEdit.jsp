@@ -62,7 +62,7 @@
 		 **/
 		 //宝石签收单列表
 		 $(".custom_list").bind("click",function(){
-		 	openURL("${ctx}/custom/listJson.do","定制单列表");
+		 	openURL("${ctx}/custom/listJson.do","款式单列表");
 		 });
 
 	});
@@ -157,7 +157,7 @@
 							<div class="clear"></div>
 						</ul>
 						<dt>
-							定制单号： <a href="javascript:;" class="custom_list">2015121031454646</a>
+							款式单号： <a href="javascript:;" class="custom_list">2015121031454646</a>
 						</dt>
 					</div>
 				</div>
