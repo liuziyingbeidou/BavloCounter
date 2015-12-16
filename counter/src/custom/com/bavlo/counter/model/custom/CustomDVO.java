@@ -37,6 +37,10 @@ public class CustomDVO extends IdEntity implements Serializable {
 	 */
 	private Double nstockGemWeight;
 	/**
+	 * 库选石形状
+	 */
+	private String vstockGemShape;
+	/**
 	 * 库选石颜色
 	 */
 	private String vstockGemColor;
@@ -131,6 +135,14 @@ public class CustomDVO extends IdEntity implements Serializable {
 
 	public static long getSerialversionuid() {
 		return serialVersionUID;
+	}
+
+	public String getVstockGemShape() {
+		return vstockGemShape;
+	}
+
+	public void setVstockGemShape(String vstockGemShape) {
+		this.vstockGemShape = vstockGemShape;
 	}
 
 }
