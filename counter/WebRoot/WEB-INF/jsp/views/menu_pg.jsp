@@ -84,6 +84,12 @@ $(function(){
 		openURL("${ctx}/custom/getList.do?listType=view","款式单列表",490,550);
 		closeMenu();
 	});
+	//配石单列表menu-useGem-list
+	$(".menu-useGem-list").bind("click",function(){
+		EditShow_Hidden(ed1);
+		openURL("${ctx}/useGem/list.do?listType=menu","配石单列表",490,550);
+		closeMenu();
+	});
 });
 
 function closeMenu(){
@@ -98,17 +104,20 @@ function closeMenu(){
      <c:if test="${fn:contains('[CC-RL][PM-RL][CAD-RL][PMC-RL][PPS-RL]',role)}">
      <li class="menu-custom-list-view"><a href="#">款式单</a></li>
      </c:if>
+     <c:if test="${fn:contains('[CC-RL][PMC-RL]',role)}">
+     <li class="menu-order-list-view"><a href="#">订单</a></li>
+     </c:if>
      <c:if test="${fn:contains('[CC-RL]',role)}">
      <li class="menu-entity-list"><a href="#">实物签收单</a></li>
      </c:if>
      <c:if test="${fn:contains('[CC-RL]',role)}">
      <li class="menu-gem-list"><a href="#">宝石签收单</a></li>
      </c:if>
+     <c:if test="${fn:contains('[GB]',role)}">
+     <li class="menu-useGem-list"><a href="#">配石单</a></li>
+     </c:if>
      <c:if test="${fn:contains('[N]',role)}">
      <li class="menu-order-list"><a href="#">订单</a></li>
-     </c:if>
-     <c:if test="${fn:contains('[CC-RL][PMC-RL]',role)}">
-     <li class="menu-order-list-view"><a href="#">订单</a></li>
      </c:if>
      <c:if test="${fn:contains('[CC-RL]',role)}">
      <li class="menu-customer-list"><a href="#">客户</a></li>
