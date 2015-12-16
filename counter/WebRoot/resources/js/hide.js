@@ -1,4 +1,4 @@
-/*定制单 隐藏*/
+/*款式单 隐藏*/
 
 $(document).ready(function(){
   $(".demo .hide").click(function(){

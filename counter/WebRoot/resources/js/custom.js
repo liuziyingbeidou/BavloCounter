@@ -1,6 +1,6 @@
 /**
  * @author shijf
- * 定制单js
+ * 款式单js
  */
 
 /**
@@ -11,7 +11,7 @@ var nativeUrl = "/counter/webservice/http.do";
 
 $(function(){
 	
-	//定制单ID
+	//款式单ID
 	var customId = $("#customId").val();
 	//客户ID
 	var customerId = $("#customerId").val();
@@ -79,6 +79,8 @@ $(function(){
 	// 客主石
 	if(nmainGemCost != ""){
 		$(".kzsGem").show();
+		var pic = $("#vmainGemPic").val();
+		$(".kzs_img").append("<img class='mainGem_img' style='width:38px;height:38px;' src="+pic+" >");
 	}
 	$(".kzsGem_btn").click(function() {
 		if ($(".kzsGem").css("display") == 'none') {
@@ -92,6 +94,8 @@ $(function(){
 	// 客配石
 	if(ipartsGemNum != ""){
 		$(".kpsGem").show();
+		var pic = $("#vpartsGemPic").val();
+		$(".kps_img").append("<img class='partsGem_img' style='width:38px;height:38px;' src="+pic+" >");
 	}
 	$(".kpsGem_btn").click(function() {
 		if ($(".kpsGem").css("display") == 'none') {
@@ -235,9 +239,11 @@ $(function() {
 	
 	 //上传图片
 	 $(".cankaotu").bind("click",function(){
+		 	$("#vtype").val("customCankao");
 	 		openURL("/counter/upload/uppage.do","上传参考图"); 
 	 });
 	 $(".qibantu").bind("click",function(){
+		 	$("#vtype").val("customSheji");
 	 		openURL("/counter/upload/uppage.do","上传起版图"); 
 	 });
 	 $(".vectorgraph").bind("click",function(){
@@ -249,14 +255,24 @@ $(function() {
 	 		$("#filevalue").val("vcadFile");
 	 });
 	 
-	 //图片显示
-	 $(".customPicShow").bind("click",function(){
-		//定制单ID
-		var customId = $("#customId").val();
+	 //图片展示
+	 var customId = $("#customId").val();
+	 //参考图片显示
+	 $(".customCankaoShow").bind("click",function(){
+		//款式单ID
 	 	if(customId == "" || customId == undefined){
 	 		alert("请保存后查看!");
 	 	}else{
-	 		openURL("/counter/upload/showpic.do?cpath=com.bavlo.counter.model.custom.CustomBVO&fkey=customId&id="+customId,"图片展示");
+	 		openURL("/counter/upload/showpic.do?cpath=com.bavlo.counter.model.custom.CustomBVO&fkey=customId&ptype=vtype&vtype=customCankao&id="+customId,"图片展示");
+	 	}
+	 });
+	 //设计图片显示
+	 $(".customShejiShow").bind("click",function(){
+		//款式单ID
+	 	if(customId == "" || customId == undefined){
+	 		alert("请保存后查看!");
+	 	}else{
+	 		openURL("/counter/upload/showpic.do?cpath=com.bavlo.counter.model.custom.CustomBVO&fkey=customId&ptype=vtype&vtype=customSheji&id="+customId,"图片展示");
 	 	}
 	 });
 	 
@@ -374,12 +390,12 @@ function calculator(str) {
 	});
 }
 
-// 定制单保存
+// 款式单保存
 function saveOrUpdate() {
 	//通过计算后保存
 	calculator("savePrice");
 }
-// 定制单保存方法
+// 款式单保存方法
 function save(){
 	cleanFieldSuffix();
 	var bvo = JSON.stringify($('#customBId').serializeJson());
@@ -473,8 +489,8 @@ function setValueByFrame(type,id,callback,json){
 		addChain(data);
 		closeMultiDlg();
 	}else if(type == "signGem"){
-		var mainGemPic = $("#mainGemPic").val();
-		var partsGemPic = $("#partsGemPic").val();
+		var mainGem_img = $(".mainGem_img").attr("src");
+		var partsGem_img = $(".partsGem_img").attr("src");
 		var url = "/counter/custom/getGem.do";
 		$.post(url,{id:id},function(row){
 			var data = row;
@@ -487,18 +503,18 @@ function setValueByFrame(type,id,callback,json){
 				}
 			}
 			if(gemSignClass == "kzs_img"){
-				if(mainGemPic == ""){
-					$("."+gemSignClass).append("<img class='gem_img' style='width:38px;height:38px;' src="+pic+" >");
+				if(mainGem_img == undefined){
+					$(".kzs_img").append("<img class='mainGem_img' style='width:38px;height:38px;' src="+pic+" >");
 				}else {
-					$(".gem_img").attr("src",pic);
+					$(".mainGem_img").attr("src",pic);
 				}
 				$("#mainGemPic").val(pic);
 			}
 			if(gemSignClass == "kps_img"){
-				if(partsGemPic == ""){
-					$("."+gemSignClass).append("<img class='gem_img' style='width:38px;height:38px;' src="+pic+" >");
+				if(partsGem_img == undefined){
+					$(".kps_img").append("<img class='partsGem_img' style='width:38px;height:38px;' src="+pic+" >");
 				}else {
-					$(".gem_img").attr("src",pic);
+					$(".partsGem_img").attr("src",pic);
 				}
 				$("#partsGemPic").val(pic);
 			}
@@ -533,10 +549,10 @@ function setValueByFrame(type,id,callback,json){
 		url = "/counter/customer/info.do?id="+id;//根据id查询客户信息
 		window.location = url;
 	}else if(type == "custom"){
-		url = "/counter/custom/edit.do?id="+id;//根据id定制单信息
+		url = "/counter/custom/edit.do?id="+id;//根据id款式单信息
 		window.location = url;
 	}else if(type == "custom-view"){
-		url = "/counter/custom/detail.do?id="+id;//根据id显示定制单信息
+		url = "/counter/custom/detail.do?id="+id;//根据id显示款式单信息
 		window.location = url;
 	}
 	
