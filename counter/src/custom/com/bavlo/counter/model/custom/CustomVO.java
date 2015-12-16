@@ -11,7 +11,7 @@ import com.bavlo.counter.model.IdEntity;
 /**
  * @Title: 宝珑Counter
  * @ClassName: CustomVO
- * @Description: 定制单实体类
+ * @Description: 款式单实体类
  * @author shijf
  * @date 2015-10-28 下午06:43:28
  */
@@ -25,7 +25,7 @@ public class CustomVO extends IdEntity {
 	 */
 	private Integer customerId;
 	/**
-	 * 定制单编号
+	 * 款式单编号
 	 */
 	private String vcustomCode;
 	/**
@@ -105,7 +105,7 @@ public class CustomVO extends IdEntity {
 	 */
 	private String vcadFile;
 	/**
-	 * 定制单创建时间
+	 * 款式单创建时间
 	 */
 	private Date vcreatedate;
 	/**

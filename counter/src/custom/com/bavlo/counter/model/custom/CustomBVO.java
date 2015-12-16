@@ -36,6 +36,11 @@ public class CustomBVO extends IdEntity implements Serializable{
 	 * 是否封面		char(1)	Y、N
 	 */
 	private String biscover;
+	
+	/**
+	 * 图片类型
+	 */
+	private String vtype;
 
 	public Integer getCustomId() {
 		return customId;
@@ -71,6 +76,14 @@ public class CustomBVO extends IdEntity implements Serializable{
 
 	public static long getSerialversionuid() {
 		return serialVersionUID;
+	}
+
+	public String getVtype() {
+		return vtype;
+	}
+
+	public void setVtype(String vtype) {
+		this.vtype = vtype;
 	}
 	
 }
