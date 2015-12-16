@@ -310,6 +310,8 @@ params.reportPrice = 0;
 params.chainPrice = "";
 // 库选宝石费
 params.stockGemPrice = "";
+// 利润率
+params.agentProfit = 0;
 
 //计算价格
 function calculator(str) {
@@ -375,7 +377,7 @@ function calculator(str) {
 
 	var requestUrl = 'http://www.bavlo.com/calculate';
 	var requestMethod = "POST";//GET
-	var outputStr = 'typeId='+params.typeId+'&metalId='+params.metalId+'&metalWeight='+params.metalWeight+'&pmPrice='+params.pmPrice+'&mainGemPrice='+params.mainGemPrice+'&inlayPrice='+params.inlayPrice+'&otherPrice='+params.otherPrice+'&reportPrice='+params.reportPrice+'&expressPrice='+params.expressPrice+'&insuranceRate='+params.insuranceRate+'&chainPrice='+params.chainPrice+'&stockGemPrice='+params.stockGemPrice+'';
+	var outputStr = 'typeId='+params.typeId+'&metalId='+params.metalId+'&metalWeight='+params.metalWeight+'&pmPrice='+params.pmPrice+'&mainGemPrice='+params.mainGemPrice+'&inlayPrice='+params.inlayPrice+'&otherPrice='+params.otherPrice+'&reportPrice='+params.reportPrice+'&expressPrice='+params.expressPrice+'&insuranceRate='+params.insuranceRate+'&chainPrice='+params.chainPrice+'&stockGemPrice='+params.stockGemPrice+'&agentProfit='params.agentProfit+'';
 	
 	httpRequest(calculatorUrl,requestUrl,requestMethod,outputStr,function(data) {
 		 	var jsonStr = JSON.parse(data);
