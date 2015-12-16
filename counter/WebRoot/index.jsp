@@ -21,7 +21,6 @@ $(function(){
 		var outputStr = "typeId=3&shapeId=4";
 		var info = httpRequest(nativeUrl,requestUrl,requestMethod,outputStr,test);
 	});
-});
 function test(data){
 	alert(data);
 }
@@ -45,9 +44,9 @@ function test(data){
        <a href="${ctx}/order/list.do">订单列表</a>
        <a href="${ctx}/order/view.do?id=1">订单查看</a>
     <br>   
-    6、<a href="${ctx}/custom/edit.do">定制单</a>
-       <a href="${ctx}/custom/getList.do">定制单列表</a>
-       <a href="${ctx}/custom/detail.do">定制单详细</a>
+    6、<a href="${ctx}/custom/edit.do">款式单</a>
+       <a href="${ctx}/custom/getList.do">款式单列表</a>
+       <a href="${ctx}/custom/detail.do">款式单详细</a>
     <br>
     <button class="remote">远程接口测试</button>
     <br>
@@ -68,9 +67,9 @@ function test(data){
 		orderService.updateOrderState(订单id,2);
     </fieldset>
     <fieldset>
-    	<legend>订单→定制单→订单</legend>
-    	1、订单中添加定制单时调用url=info.do?orderId="+data.id+"&customerId="+customerId{orderId:订单ID,customerId:客户ID}<br>
-    	2、定制单保存后需要回写订单中的子表信息；回写条件：订单ID+定制单ID
+    	<legend>订单→款式单→订单</legend>
+    	1、订单中添加款式单时调用url=info.do?orderId="+data.id+"&customerId="+customerId{orderId:订单ID,customerId:客户ID}<br>
+    	2、款式单保存后需要回写订单中的子表信息；回写条件：订单ID+款式单ID
     </fieldset>
     <fieldset>
     	<legend>弹框Demo</legend>
@@ -98,9 +97,9 @@ function test(data){
     <fieldset>
     	<legend>回写接口（IOrderService）</legend>
     	/**
-		 * 定制单保存回写订单数量、价格
+		 * 款式单保存回写订单数量、价格
 		 * @param orderId 订单ID
-		 * @param customId 定制单ID
+		 * @param customId 款式单ID
 		 */<br>
 		public void backWriteByCum(Integer orderId,Integer customId);<br>
 		/**
