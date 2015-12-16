@@ -350,6 +350,7 @@ font-family:"Microsoft yahei";
 .dzd_right_btm { width: 325px; margin-top: 10px;}
 .d1 {border-bottom: 1px solid #a2a2a2; padding-bottom: 30px; margin-bottom: 30px;}
 .dzd_right_btm a { width: 155px; float: left;color: #f4f4f4; background: #999; text-align: center; height:37px; line-height: 37px;}
+.dzd_right_btm2 a { width: 155px; color: #f4f4f4;text-align: center; height:37px;}
 .dzd_right_btm .gf { width: 155px; font-size: 16px; float: left; margin: 0 3px; color: #787878; background: #ddd; text-align: center; height:37px; line-height: 37px;}
 .dzd_right_btm input { margin-left: 3px; margin-top: 50px;}
 .dzd_close { width: 316px; border:none; font-size: 16px; margin: 0 auto;height: 37px; line-height: 37px; background: #999; color: #f4f4f4;}
