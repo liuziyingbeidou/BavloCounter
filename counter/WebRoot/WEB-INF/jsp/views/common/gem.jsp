@@ -59,11 +59,13 @@
 				var shape=v.attr("shape");
 				var calibrated=v.attr("calibrated");
 				var weight=v.attr("weight");
+				var calibrated=v.attr("calibrated");
+				var color=v.attr("color");
+				var clarity=v.attr("clarity");
 				var stockGemNum="";
 				var stockGemImgPath=v.find("img").attr("src");
-				var stockGemName = type+" "+weight+"ct";
 				var stockGemCost=v.attr("costPrice");
-				var json = "{\"vstockGemName\":\""+stockGemName+"\",\"vstockGemImgPath\":\""+stockGemImgPath+"\",\"nstockGemCost\":\""+stockGemCost+"\",\"istockGemNum\":\""+stockGemNum+"\"}";
+				var json = "{\"vstockGemName\":\""+type+"\",\"nstockGemWeight\":\""+weight+"\",\"vstockGemShape\":\""+shape+"\",\"vstockGemSize\":\""+calibrated+"\",\"vstockGemColor\":\""+color+"\",\"vstockGemClarity\":\""+clarity+"\",\"vstockGemImgPath\":\""+stockGemImgPath+"\",\"nstockGemCost\":\""+stockGemCost+"\",\"istockGemNum\":\""+stockGemNum+"\"}";
 				window.parent.setValueByFrame("stockGem","",callbackMuilt(),json);
 			}else{
 				alert("请在父窗口添加setValueByFrame(type,id,json){处理逻辑}type='stockGem']");

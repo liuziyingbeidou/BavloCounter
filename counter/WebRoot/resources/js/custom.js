@@ -377,7 +377,7 @@ function calculator(str) {
 
 	var requestUrl = 'http://www.bavlo.com/calculate';
 	var requestMethod = "POST";//GET
-	var outputStr = 'typeId='+params.typeId+'&metalId='+params.metalId+'&metalWeight='+params.metalWeight+'&pmPrice='+params.pmPrice+'&mainGemPrice='+params.mainGemPrice+'&inlayPrice='+params.inlayPrice+'&otherPrice='+params.otherPrice+'&reportPrice='+params.reportPrice+'&expressPrice='+params.expressPrice+'&insuranceRate='+params.insuranceRate+'&chainPrice='+params.chainPrice+'&stockGemPrice='+params.stockGemPrice+'&agentProfit='params.agentProfit+'';
+	var outputStr = 'typeId='+params.typeId+'&metalId='+params.metalId+'&metalWeight='+params.metalWeight+'&pmPrice='+params.pmPrice+'&mainGemPrice='+params.mainGemPrice+'&inlayPrice='+params.inlayPrice+'&otherPrice='+params.otherPrice+'&reportPrice='+params.reportPrice+'&expressPrice='+params.expressPrice+'&insuranceRate='+params.insuranceRate+'&chainPrice='+params.chainPrice+'&stockGemPrice='+params.stockGemPrice+'&agentProfit='+params.agentProfit+'';
 	
 	httpRequest(calculatorUrl,requestUrl,requestMethod,outputStr,function(data) {
 		 	var jsonStr = JSON.parse(data);
@@ -437,6 +437,11 @@ function chainJson(){
 	$(".chainList").each(function(){
 		var chain_name = $(this).find(".chain_name").text();
 		var chain_item = $(this).find(".chain_item").val();
+		/*if(chain_item == ""){
+			$(this).find(".chain_item").val("");
+			$(this).find(".chain_item").focus();
+			break;
+		}*/
 		var chain_cost = $(this).find(".chain_item").attr("price");
 		//var cPrice = $(this).find(".cPrice").val();
 		jsonStr+="{";
@@ -461,15 +466,31 @@ function stockGemJson(){
 	var jsonStr = "[";
 	
 	$(".stockGemList").each(function(){
-		var stockGem_name = $(this).find(".stockGem_name").text();
+		var stockGem_name = $(this).find(".stockGem_num").attr("stockGemName");
 		var stockGem_num = $(this).find(".stockGem_num").val();
+		/*if(stockGem_num == ""){
+			alert("请填写库选宝石颗数");
+			$(this).find(".stockGem_num").val("");
+			$(this).find(".stockGem_num").focus();
+			break;
+		}*/
 		var stockGem_img_path = $(this).find(".stockGem_img_path").attr("src");
+		var stockGem_weight = $(this).find(".stockGem_num").attr("weight");
+		var stockGem_shape = $(this).find(".stockGem_num").attr("shape");
+		var stockGem_size = $(this).find(".stockGem_num").attr("size");
+		var stockGem_color = $(this).find(".stockGem_num").attr("color");
+		var stockGem_clarity = $(this).find(".stockGem_num").attr("clarity");
 		var stockGem_cost = $(this).find(".stockGem_num").attr("price");
 		//var sgPrice = $(this).find(".sgPrice").val();
 		jsonStr+="{";
 		jsonStr+="\"vstockGemName\":\""+stockGem_name+"\",";
 		jsonStr+="\"istockGemNum\":\""+stockGem_num+"\",";
 		jsonStr+="\"vstockGemImgPath\":\""+stockGem_img_path+"\",";
+		jsonStr+="\"nstockGemWeight\":\""+stockGem_weight+"\",";
+		jsonStr+="\"vstockGemShape\":\""+stockGem_shape+"\",";
+		jsonStr+="\"vstockGemSize\":\""+stockGem_size+"\",";
+		jsonStr+="\"vstockGemColor\":\""+stockGem_color+"\",";
+		jsonStr+="\"vstockGemClarity\":\""+stockGem_clarity+"\",";
 		jsonStr+="\"nstockGemCost\":\""+stockGem_cost+"\"";
 		jsonStr+="},";
 	});
@@ -629,9 +650,9 @@ function addStockGem(data){
 			"<div div class='lianzi'>"+	
 			"<h3>库选宝石</h3>"+
 			"<a href='javascript:removeStockGem("+i+")' class='close_c'><font>X</font></a><div class='clear'></div>"+
-			"<input class='stockGem_num' id='stockGemNum' name='istockGemNum' type='text' value='"+data.istockGemNum+"' price='"+data.nstockGemCost+"'>"+
+			"<input class='stockGem_num' id='stockGemNum' name='istockGemNum' type='text' value='"+data.istockGemNum+"' size='"+data.vstockGemSize+"' shape='"+data.vstockGemShape+"' weight='"+data.nstockGemWeight+"' stockGemName='"+data.vstockGemName+"' color='"+data.vstockGemColor+"' clarity='"+data.vstockGemClarity+"' price='"+data.nstockGemCost+"'>"+
 			"<b>颗</b>"+
-			"<img class='stockGem_img_path' src='"+data.vstockGemImgPath+"'/><strong class='stockGem_name'>"+data.vstockGemName+"</strong>"+
+			"<img class='stockGem_img_path' src='"+data.vstockGemImgPath+"'/><strong class='stockGem_name'>"+data.vstockGemName+" "+data.nstockGemWeight+"ct</strong>"+
 			"</div>" +
 			"<input type='hidden' class='sgPrice'/>"+
 			"</dd>";
