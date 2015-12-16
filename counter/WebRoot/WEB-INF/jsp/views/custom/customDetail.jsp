@@ -72,14 +72,13 @@ $(function(){
 			type : 'POST',
 			data :{
 				'filePath' : "custom",
-				'fileName': vengraveVh
+				'fileName': vcadFile
 			},
-			datatype:'json',
 			success : function(data) {		
-				alert("下载成功");
+				alert(data);
 			},
 			error : function(data) {		
-				alert("下载失败");
+				alert(data);
 			}
 		})	
 	});
@@ -94,12 +93,29 @@ $(function(){
 					'filePath' : "custom",
 					'fileName': vengraveVh
 				},
-				datatype:'json',
 				success : function(data) {		
-					alert("下载成功");
+					alert(data);
 				},
 				error : function(data) {		
-					alert("下载失败");
+					alert(data);
+				}
+		 })	
+	});
+	//发送给生产主管 
+	$(".sendPMC").click(function(){
+		var text = getRootPath()+"/detail.do?id="+customId;
+		var url = "${ctx}/sendMassage.do";
+		 $.ajax({
+			 	url : url,
+				data :{
+				 	'touser' : 'shijianfeng',
+					'text': text
+				},
+				success : function(data) {		
+					alert("发送成功");
+				},
+				error : function(data) {		
+					alert("发送失败");
 				}
 		 })	
 	});
@@ -370,7 +386,7 @@ $(function(){
 	            </div>
 	            <div class="dzd_right_btm CUST-RL PPS-RL">
 	              <input type='text' class="gf" value=''>
-	              <b><a href="">通知QC</a></b>
+	              <b><a href="" class="sendPMC">通知QC</a></b>
 	              <div class="clear"></div>
 							<input type="button" value="进入编辑页" class="dzd_close" />
 						</div>
