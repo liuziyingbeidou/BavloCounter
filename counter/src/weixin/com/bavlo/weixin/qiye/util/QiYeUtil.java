@@ -242,7 +242,7 @@ public class QiYeUtil {
 								if(tagName!=null && tagName.length()>3){
 									//角色
 									if(Constants.LB_ROLE.equals(tagName.substring(0, 3))){
-										userRLTag.add(tagEntry.getValue().substring(3)+"-R");
+										userRLTag.add(tagEntry.getValue().substring(3)+"-RL");
 									}
 									//店名(key-value)
 									else if(Constants.LB_DEPART.equals(tagName.substring(0, 3))){
