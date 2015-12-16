@@ -10,14 +10,14 @@ import com.bavlo.counter.model.custom.CustomVO;
 /**
  * @Title: 宝珑Counter
  * @ClassName: ICustomService
- * @Description: 定制单接口
+ * @Description: 款式单接口
  * @author shijf
  * @date 2015-10-20 下午04:12:56
  */
 public interface ICustomService {
 
 	/**
-	 * @Description: 保存定制单
+	 * @Description: 保存款式单
 	 * @param
 	 * @return void
 	 */
@@ -25,49 +25,49 @@ public interface ICustomService {
 	
 	
 	/** 
-	 * @Description: 保存定制单并返回ID 
+	 * @Description: 保存款式单并返回ID 
 	 * @param customVO
 	 * @return Integer
 	 */
 	public Integer saveCustomRelID(CustomVO customVO);
 
 	/**
-	 * @Description: 删除定制单
+	 * @Description: 删除款式单
 	 * @param
 	 * @return void
 	 */
 	public void deleteCustom(CustomVO customVO);
 
 	/**
-	 * @Description: 更新定制单
+	 * @Description: 更新款式单
 	 * @param
 	 * @return void
 	 */
 	public void updateCustom(CustomVO customVO);
 	
 	/**
-	 * @Description: 更新定制单
+	 * @Description: 更新款式单
 	 * @param
 	 * @return void
 	 */
 	public void saveOrUpdateCustom(CustomVO customVO);
 
 	/**
-	 * @Description: 通过ID查找定制单
+	 * @Description: 通过ID查找款式单
 	 * @param @return
 	 * @return CustomVO
 	 */
 	public CustomVO findCustomById(Integer id);
 
 	/**
-	 * @Description: 通过条件查找定制单
+	 * @Description: 通过条件查找款式单
 	 * @param @return
 	 * @return List<CustomVO>
 	 */
 	public List<CustomVO> findCustomByWh(String content);
 
 	/**
-	 * @Description: 通过条件查找定制单列表
+	 * @Description: 通过条件查找款式单列表
 	 * @param @return
 	 * @return List<CustomVO>
 	 */
@@ -81,11 +81,11 @@ public interface ICustomService {
 	public void saveCustomB(List<CustomBVO> listBVO);
 	
 	/** 
-	 * @Description: 根据主表主键删除子表数据
-	 * @param @param mid
+	 * @Description: 根据主表主键和类型删除子表数据
+	 * @param @param mid type
 	 * @return void
 	*/
-	public void deleteCustomB(Integer mid);
+	public void deleteCustomB(Integer mid,String type);
 	
 	/**
 	 * @Description: 保存子表
@@ -121,7 +121,7 @@ public interface ICustomService {
 	 * @param @return
 	 * @return List<CustomBVO>
 	 */
-	public List<CustomBVO> findListCustomB(Integer id);
+	public List<CustomBVO> findListCustomB(Integer id,String type);
 	
 	/**
 	 * @Description: 根据主表主键查询子表数据

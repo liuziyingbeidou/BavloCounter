@@ -21,7 +21,7 @@ import com.bavlo.counter.utils.StringUtil;
 /** 
  * @Title: 宝珑Counter
  * @ClassName: CustomService 
- * @Description: 定制单service
+ * @Description: 款式单service
  * @author shijf
  * @date 2015-10-20 下午04:12:30  
  */
@@ -68,10 +68,15 @@ public class CustomService extends CommonService implements ICustomService {
 	public CustomVO findCustomById(Integer id) {
 		String wh = " id ="+id;
 		CustomVO vo = findFirst(CustomVO.class, wh);
-		String bwh = " customId="+id +" and biscover='Y'";
-		CustomBVO bvo = findFirst(CustomBVO.class, bwh);
-		if(bvo != null){
-			vo.setFILE_0(bvo.getVpath()+"/min/"+CommonUtils.getMinPicName(bvo.getVname()));//封面
+		String ckwh = " customId="+id +" and biscover='Y'"+ "and vtype='customCankao'";
+		String sjwh = " customId="+id +" and biscover='Y'"+ "and vtype='customSheji'";
+		CustomBVO customCankao = findFirst(CustomBVO.class, ckwh);
+		CustomBVO customSheji = findFirst(CustomBVO.class, sjwh);
+		if(customCankao != null){
+			vo.setFILE_0(customCankao.getVpath()+"/min/"+CommonUtils.getMinPicName(customCankao.getVname()));//参考图封面
+		}
+		if(customSheji != null){
+			vo.setFILE_1(customSheji.getVpath()+"/min/"+CommonUtils.getMinPicName(customSheji.getVname()));//设计图封面
 		}
 		
 		return vo;
@@ -129,8 +134,8 @@ public class CustomService extends CommonService implements ICustomService {
 	}
 	
 	@Override
-	public void deleteCustomB(Integer mid) {
-		List<CustomBVO>  list = findListCustomB(mid);
+	public void deleteCustomB(Integer mid,String type) {
+		List<CustomBVO>  list = findListCustomB(mid,type);
 		if(list != null){
 			for (CustomBVO customBVO : list) {
 				delete(customBVO);
@@ -139,8 +144,8 @@ public class CustomService extends CommonService implements ICustomService {
 	}
 	
 	@Override
-	public List<CustomBVO> findListCustomB(Integer mid) {
-		List<CustomBVO>  list = findAll(CustomBVO.class, " customId="+mid);
+	public List<CustomBVO> findListCustomB(Integer mid,String type) {
+		List<CustomBVO>  list = findAll(CustomBVO.class, " customId="+mid+ "and vtype='"+type+"'");
 		return list;
 	}
 	

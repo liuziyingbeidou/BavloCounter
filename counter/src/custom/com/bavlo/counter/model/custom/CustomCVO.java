@@ -11,7 +11,7 @@ import com.bavlo.counter.model.IdEntity;
 /**
  * @Title: 宝珑Counter
  * @ClassName: CustomCVO
- * @Description: 定制单子表（链子）
+ * @Description: 款式单子表（链子）
  * @author shijf
  * @date 2015-11-9 下午07:21:21
  */

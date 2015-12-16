@@ -11,7 +11,7 @@ import com.bavlo.counter.model.IdEntity;
 /**
  * @Title: 宝珑Counter
  * @ClassName: CustomDVO
- * @Description: 定制单子表（库选石）
+ * @Description: 款式单子表（库选石）
  * @author shijf
  * @date 2015-11-9 下午07:21:21
  */
@@ -32,6 +32,22 @@ public class CustomDVO extends IdEntity implements Serializable {
 	 * 库选石数量
 	 */
 	private Integer istockGemNum;
+	/**
+	 * 库选石重量
+	 */
+	private Double nstockGemWeight;
+	/**
+	 * 库选石颜色
+	 */
+	private String vstockGemColor;
+	/**
+	 * 库选石净度
+	 */
+	private String vstockGemClarity;
+	/**
+	 * 库选石规格
+	 */
+	private String vstockGemSize;
 	/**
 	 * 库选石图片路径
 	 */
@@ -63,6 +79,38 @@ public class CustomDVO extends IdEntity implements Serializable {
 
 	public void setIstockGemNum(Integer istockGemNum) {
 		this.istockGemNum = istockGemNum;
+	}
+
+	public Double getNstockGemWeight() {
+		return nstockGemWeight;
+	}
+
+	public void setNstockGemWeight(Double nstockGemWeight) {
+		this.nstockGemWeight = nstockGemWeight;
+	}
+
+	public String getVstockGemColor() {
+		return vstockGemColor;
+	}
+
+	public void setVstockGemColor(String vstockGemColor) {
+		this.vstockGemColor = vstockGemColor;
+	}
+
+	public String getVstockGemClarity() {
+		return vstockGemClarity;
+	}
+
+	public void setVstockGemClarity(String vstockGemClarity) {
+		this.vstockGemClarity = vstockGemClarity;
+	}
+
+	public String getVstockGemSize() {
+		return vstockGemSize;
+	}
+
+	public void setVstockGemSize(String vstockGemSize) {
+		this.vstockGemSize = vstockGemSize;
 	}
 
 	public String getVstockGemImgPath() {
