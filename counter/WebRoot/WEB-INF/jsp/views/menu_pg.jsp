@@ -95,22 +95,22 @@ function closeMenu(){
      <c:if test="${fn:contains('[N]',role)}">
      <li class="menu-custom-list"><a href="#">定制单</a></li>
      </c:if>
-     <c:if test="${fn:contains('[CC-R][PM-R][CAD-R][PMC-R][PPS-R]',role)}">
+     <c:if test="${fn:contains('[CC-RL][PM-RL][CAD-RL][PMC-RL][PPS-RL]',role)}">
      <li class="menu-custom-list-view"><a href="#">款式单</a></li>
      </c:if>
-     <c:if test="${fn:contains('[CC-R]',role)}">
+     <c:if test="${fn:contains('[CC-RL]',role)}">
      <li class="menu-entity-list"><a href="#">实物签收单</a></li>
      </c:if>
-     <c:if test="${fn:contains('[CC-R]',role)}">
+     <c:if test="${fn:contains('[CC-RL]',role)}">
      <li class="menu-gem-list"><a href="#">宝石签收单</a></li>
      </c:if>
      <c:if test="${fn:contains('[N]',role)}">
      <li class="menu-order-list"><a href="#">订单</a></li>
      </c:if>
-     <c:if test="${fn:contains('[CC-R][PMC-R]',role)}">
+     <c:if test="${fn:contains('[CC-RL][PMC-RL]',role)}">
      <li class="menu-order-list-view"><a href="#">订单</a></li>
      </c:if>
-     <c:if test="${fn:contains('[CC-R]',role)}">
+     <c:if test="${fn:contains('[CC-RL]',role)}">
      <li class="menu-customer-list"><a href="#">客户</a></li>
      </c:if>
 </c:forEach>

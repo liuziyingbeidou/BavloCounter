@@ -290,7 +290,7 @@ function loadOrderList(){
           <div class="close">
             <input type="button" class="psave" name="button" value="保存">
           </div>
-          <div class="oedit">
+          <div class="oedit CUST-RL CAD-RL PMC-RL GB-RL PPS-RL ">
             <input type="button" class="editOrder" name="button" value="进入编辑页">
           </div>
       </div>
