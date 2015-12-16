@@ -127,16 +127,16 @@ if(info != null){
       
       <div class="container text-align" role="main">
       		<c:forEach var="role" items="${roleList}">
-		     <c:if test="${fn:contains('[CC-R]',role)}">
+		     <c:if test="${fn:contains('[CC-RL]',role)}">
 		     <button type="button" class="btn btn-default .btn-lg add-order">订&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;单</button>
 		     </c:if>
-		     <c:if test="${fn:contains('[CC-R]',role)}">
+		     <c:if test="${fn:contains('[CC-RL]',role)}">
 		     <button type="button" class="btn btn-default .btn-lg add-customer">客&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;户</button>
 		     </c:if>
-		     <c:if test="${fn:contains('[CC-R]',role)}">
+		     <c:if test="${fn:contains('[CC-RL]',role)}">
 		      <button type="button" class="btn btn-default .btn-lg add-gemsign">宝石签收单</button>
 		     </c:if>
-		     <c:if test="${fn:contains('[CC-R]',role)}">
+		     <c:if test="${fn:contains('[CC-RL]',role)}">
 		     <button type="button" class="btn btn-default .btn-lg add-entysign">实物签收单</button>
 		     </c:if>
 		     </c:forEach>
