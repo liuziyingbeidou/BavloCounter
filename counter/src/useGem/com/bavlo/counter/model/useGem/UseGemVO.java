@@ -24,7 +24,7 @@ public class UseGemVO extends IdEntity {
 	 */
 	private Long customerId;
 	/**
-	 * 定制单ID
+	 * 款式单ID
 	 */
 	private Long customId;
 	/**
