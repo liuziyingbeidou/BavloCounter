@@ -32,25 +32,25 @@ function closeMenu(){
 <li><a href="">Print</a></li>
 -->
 <c:forEach var="role" items="${roleList}">
-     <c:if test="${fn:contains('[CUST-R][PM-R][PMC-R]',role)}">
+     <c:if test="${fn:contains('[CUST-RL][PM-RL][PMC-RL]',role)}">
      <li class="role-list" bv-role="CC" bv-title="定制顾问"><a href="#">发定制顾问</a></li>
      </c:if>
-     <c:if test="${fn:contains('[PM-R]',role)}">
+     <c:if test="${fn:contains('[PM-RL]',role)}">
      <li class="role-list" bv-role="CAD" bv-title="起版师"><a href="#">发起版师</a></li>
      </c:if>
-     <c:if test="${fn:contains('[CC-R][CAD-R]',role)}">
+     <c:if test="${fn:contains('[CC-RL][CAD-RL]',role)}">
      <li class="role-list" bv-role="PM" bv-title="产品经理"><a href="#">发产品经理</a></li>
      </c:if>
-     <c:if test="${fn:contains('[PMC-R]',role)}">
+     <c:if test="${fn:contains('[PMC-RL]',role)}">
      <li class="role-list" bv-role="GB" bv-title="配石员"><a href="#">发配石员</a></li>
      </c:if>
-     <c:if test="${fn:contains('[PMC-R]',role)}">
+     <c:if test="${fn:contains('[PMC-RL]',role)}">
      <li class="role-list" bv-role="PPS" bv-title="工厂跟单员"><a href="#">发工厂跟单员</a></li>
      </c:if>
-     <c:if test="${fn:contains('[GB-R][PPS-R]',role)}">
+     <c:if test="${fn:contains('[CC-RL][GB-RL][PPS-RL]',role)}">
      <li class="role-list" bv-role="PMC" bv-title="生产主管"><a href="#">发生产主管</a></li>
      </c:if>
-     <c:if test="${fn:contains('[CC-R]',role)}">
+     <c:if test="${fn:contains('[CC-RL]',role)}">
      <li><a class="sendCM" href="#">发客户</a></li>
      </c:if>
 </c:forEach>
