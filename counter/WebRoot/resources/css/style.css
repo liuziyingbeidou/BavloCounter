@@ -145,6 +145,11 @@ font-family:"Microsoft yahei";
 }
 .lianzi img { margin-left: 30px;}
 .lianzi b { font-family: "Microsoft yahei";font-size: 16px;color: #ddd;float: left;margin-top: 8;margin-left: 10;}
+
+.sgdetail img { margin-left: 10px;margin-right: 10px;margin-bottom: -10;}
+.sgdetail b {font-size: 16px;color: #ddd;margin-top: 8;}
+.cdetail b {font-size: 16px;color: #ddd;float: right;}
+
 .kzs{ width: 310px; margin: 0px auto; border-top: 1px solid #777; padding-bottom: 25px;}
 .kzs h3 { font-size: 16px; font-weight: normal;}
 .kzs h3 a { color: #ddd; line-height: 50px;}
@@ -330,7 +335,7 @@ font-family:"Microsoft yahei";
 .baocun1 { margin-top: 100px;}
 .baocun1 input { width: 325px; text-align: center; font-size: 14px; background: #777; color: #fff; border: none; height: 40px; line-height: 40px;}
 
-/*定制单*/
+/*款式单*/
 .dzd { width: 310px; margin-top: 55px;}
 .dzd dl dd { line-height: 50px;}
 .dzd dl dd b { color: #f5c503;}
@@ -350,7 +355,7 @@ font-family:"Microsoft yahei";
 .dzd_close { width: 316px; border:none; font-size: 16px; margin: 0 auto;height: 37px; line-height: 37px; background: #999; color: #f4f4f4;}
 .dzd_close1 { width: 316px; border:none; font-size: 16px; margin: 0 auto;height: 37px; line-height: 37px; background: #999; color: #f4f4f4;}
 
-/*定制单2*/
+/*款式单2*/
 .dzd2 { width: 310px; margin-top: 60px;}
 .dzd2 ul { margin-bottom: 40px;}
 .dzd2 ul li { line-height: 35px;}
