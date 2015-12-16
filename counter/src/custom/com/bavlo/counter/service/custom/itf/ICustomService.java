@@ -138,5 +138,13 @@ public interface ICustomService {
 	 * @return List<CustomDVO>
 	 */
 	public List<CustomDVO> findListCustomD(Integer id);
+	
+	/**
+	 * @Description: 根据库选石id查询
+	 * @param @param did
+	 * @param @return
+	 * @return CustomDVO
+	 */
+	public CustomDVO findCustomDVOBySql(Integer did);
 
 }
