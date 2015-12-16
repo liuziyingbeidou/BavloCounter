@@ -146,10 +146,10 @@
 				url = "${ctx}/customer/info.do?id="+id;//根据id查询客户信息
 				window.location = url;
 			}else if(type == "custom"){
-				url = "${ctx}/custom/edit.do?id="+id;//根据id定制单信息
+				url = "${ctx}/custom/edit.do?id="+id;//根据id款式单信息
 				window.location = url;
 			}else if(type == "custom-view"){
-				url = "${ctx}/custom/detail.do?id="+id;//根据id显示定制单信息
+				url = "${ctx}/custom/detail.do?id="+id;//根据id显示款式单信息
 				window.location = url;
 			}
 		}

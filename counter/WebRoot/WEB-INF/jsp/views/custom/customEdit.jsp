@@ -4,7 +4,7 @@
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html>
 <head>
-<title>${pageCustomType}定制单</title>
+<title>${pageCustomType}款式单</title>
 
 <meta http-equiv="pragma" content="no-cache" />
 <meta http-equiv="cache-control" content="no-cache" />
@@ -67,7 +67,7 @@
 			<div class="top">
 				<b><a href="javascript:;" onclick="EditShow_Hidden(ed1)"><img
 							src="${ctx}/resources/images/plus.png" />
-				</a> ${pageCustomType}定制单
+				</a> ${pageCustomType}款式单
 				 <c:choose>
 					 <c:when test="${empty customEdit['vcustomCode']}">   
 					 ${number }
@@ -118,7 +118,7 @@
 							<!--<b class="hide">隐藏</b>-->
 							<div class="my-gallery">
 								<volist name="list" id="list"> <figure> 
-								<a class="customPicShow" href="javascript:void();">
+								<a class="customCankaoShow" href="javascript:void();">
 									<c:choose>
 										<c:when test="${empty customEdit['FILE_0']}">   
 											<img src="${ctx}/resources/images/zb_03.png">
@@ -134,23 +134,23 @@
 						</div>
 					</div>
 				</div>
-				<div class="sheji" style="display: none;">
+				<div class="sheji">
 					<h2><a href="javascript:;" style="color:#fff" class="qibantu">+ 起版设计图</a></h2>
 					<div class="pro">
 						<!--<img src="images/zb_06.png" />-->
 						<b><a href="javascript:;" onclick="Pic1Show_Hidden(pic1)">显示</a></b>
-						<div class="demo" id='pic1' style='display: none;'>
+						<div class="demo" id='pic1' >
 							<b><a href="javascript:;" onclick="Pic1Show_Hidden(pic1)">隐藏</a></b>
 							<!--<b class="hide">隐藏</b>-->
 							<div class="my-gallery">
 								<volist name="list" id="list"> <figure>
-								<a class="customPicShow" href="javascript:void();">
+								<a class="customShejiShow" href="javascript:void();">
 									<c:choose>
-										<c:when test="${empty customEdit['FILE_0']}">   
+										<c:when test="${empty customEdit['FILE_1']}">   
 											<img src="${ctx}/resources/images/zb_03.png">
 										</c:when>
 										<c:otherwise>
-											<img src="${ctx}/staticRes/${customEdit['FILE_0']}">
+											<img src="${ctx}/staticRes/${customEdit['FILE_1']}">
 										</c:otherwise>
 									</c:choose> 
 								</a>
@@ -246,7 +246,7 @@
 					<dd class="kzsGem" style="display: none">
 						<div class="kzs">
 							<h3>
-								<a href="">客主石</a>
+								客主石
 							</h3>
 							<ul>
 								<li>
@@ -272,7 +272,7 @@
 					<dd class="kpsGem" style="display: none">
 						<div class="kzs">
 							<h3>
-								<a href="">客配石</a>
+								客配石
 							</h3>
 							<ul>
 								<li>
@@ -405,6 +405,7 @@
 	<input type="hidden" name="FILE_7" id="FILE_7"></input>
 	<input type="hidden" name="FILE_8" id="FILE_8"></input>
 	<input type="hidden" name="filevalue" id="filevalue" value=""></input>
+	<input type="hidden" name="vtype" id="vtype" value=""></input>
 	</form>
 </body>
 </html>

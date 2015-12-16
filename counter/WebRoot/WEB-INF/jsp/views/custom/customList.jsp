@@ -7,7 +7,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <meta name="viewport"
 	content="width=device-width,target-densitydpi=high-dpi,initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no" />
-<title>定制单列表</title>
+<title>款式单列表</title>
 <script language="javascript" type="text/javascript"
 	src="${ctx}/resources/js/jquery-1.8.3.min.js"></script>
 <script src="${ctx}/resources/js/top.js"></script>
@@ -89,11 +89,11 @@
 </head>
 
 <body>
-	<!--定制单列表弹窗-->
+	<!--款式单列表弹窗-->
 	<div class="orderlist" id='pic2'>
 		<div class="order-main">
 			<div class="search-1">
-				<input type='text' name='search' class="search" placeholder="定制单编号/客户名称/手机号" />
+				<input type='text' name='search' class="search" placeholder="款式单编号/客户名称/手机号" />
 			</div>
 			<div class="">
 				<div class="main1 content">
@@ -136,6 +136,6 @@
 			</div>
 		</div>
 	</div>
-	<!--定制单列表弹窗END-->
+	<!--款式单列表弹窗END-->
 </body>
 </html>

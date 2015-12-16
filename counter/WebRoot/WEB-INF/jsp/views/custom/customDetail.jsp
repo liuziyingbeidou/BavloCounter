@@ -50,8 +50,10 @@ $(function(){
 	
 	var customId = $("#customId").val();
 	
-	if("${customDetail.icertificate }" != 0){
-		
+	if("${customDetail.icertificate }" == 0){
+		$(".certificate-has").hide();
+	}else if("${customDetail.icertificate }" == 25){
+		$(".certificate-not").hide();
 	}
 	
 	$(".dzd_close").click(function(){
@@ -334,7 +336,8 @@ $(function(){
 							</dd>
 							<dd>刻字：${customDetail.vengrave }</dd>
 							<dd>表面工艺：${customDetail.vrequirementB }</dd>
-							<dd>鉴定证书：${customDetail.icertificate }</dd>
+							<dd class="certificate-has" >鉴定证书：有</dd>
+							<dd class="certificate-not" >鉴定证书：无</dd>
 							<dd>定制说明：${customDetail.vrequirement }</dd>
 						</dl>
 					</div>
