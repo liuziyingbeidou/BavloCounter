@@ -35,7 +35,7 @@ public class CustomDVO extends IdEntity implements Serializable {
 	/**
 	 * 库选石重量
 	 */
-	private Double nstockGemWeight;
+	private BigDecimal nstockGemWeight;
 	/**
 	 * 库选石形状
 	 */
@@ -85,11 +85,11 @@ public class CustomDVO extends IdEntity implements Serializable {
 		this.istockGemNum = istockGemNum;
 	}
 
-	public Double getNstockGemWeight() {
+	public BigDecimal getNstockGemWeight() {
 		return nstockGemWeight;
 	}
 
-	public void setNstockGemWeight(Double nstockGemWeight) {
+	public void setNstockGemWeight(BigDecimal nstockGemWeight) {
 		this.nstockGemWeight = nstockGemWeight;
 	}
 

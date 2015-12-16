@@ -314,12 +314,22 @@ public class CustomController extends BaseController implements IConstant {
 				String vstockGemName = sjson.getString("vstockGemName");
 				Integer istockGemNum = sjson.getInt("istockGemNum");
 				String vstockGemImgPath = sjson.getString("vstockGemImgPath");
+				BigDecimal nstockGemWeight = new BigDecimal(sjson.getString("nstockGemWeight"));
+				String vstockGemShape = sjson.getString("vstockGemShape");
+				String vstockGemSize = sjson.getString("vstockGemSize");
+				String vstockGemColor = sjson.getString("vstockGemColor");
+				String vstockGemClarity = sjson.getString("vstockGemClarity");
 				BigDecimal nstockGemCost = new BigDecimal(sjson.getString("nstockGemCost"));
 				CustomDVO dvo_ = new CustomDVO();
 				dvo_.setCustomId(customVO.id);
 				dvo_.setVstockGemName(vstockGemName);
 				dvo_.setIstockGemNum(istockGemNum);
 				dvo_.setVstockGemImgPath(vstockGemImgPath);
+				dvo_.setNstockGemWeight(nstockGemWeight);
+				dvo_.setVstockGemShape(vstockGemShape);
+				dvo_.setVstockGemSize(vstockGemSize);
+				dvo_.setVstockGemColor(vstockGemColor);
+				dvo_.setVstockGemClarity(vstockGemClarity);
 				dvo_.setNstockGemCost(nstockGemCost);
 				listdvo.add(dvo_);
 			}
