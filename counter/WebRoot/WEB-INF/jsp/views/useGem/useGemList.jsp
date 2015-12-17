@@ -57,14 +57,14 @@
 								var ht = "<li><h4><img style='width:60px;height:60px;' ";
 								var img = "src='${ctx}/resources/images/useGem_01.png'";
 								if (data[i].vhendimgurl != "") {
-									img = "src='" + data[i].vhendimgurl + "'";
+									img = "src='" + data[i].vstock_gem_img_path + "'";
 								}
 								var ml = "><b>"
-										+ data[i].vtype
+										+ data[i].vnumber
 										+ "</b><a href='javascript:void();'>"
-										+ data[i].vshape
+										+ data[i].vspec+"X"+data[i].vspec2+"X"+data[i].vspec3
 										+ "</a><span><a href='javascript:void();' onclick='selHander("
-										+ data[i].id
+										+ data[i].customdId
 										+ ")'>选择</a></span></h4><div class='clear'></div></li>";
 								$("#juheweb").append(ht + img + ml);
 							}
@@ -73,19 +73,19 @@
 	//调用父窗体方法
 	function selHander(id) {
 		if (isExitsFunction(window.parent.setValueByFrame)) {
-			window.parent.setValueByFrame("useGem", id);
+			window.parent.setValueByFrame("useGem", id,callbackMuilt());
 		} else {
 			alert("请在父窗口添加setValueByFrame(type,id){处理逻辑}type='useGem'");
 		}
 	}
 </script>
+
 </head>
 
 <body>
 	<!--配石单列表弹窗-->
 	<div class="orderlist" id='pic2'>
 		<div class="order-main">
-			<div class="order-list">配石单列表</div>
 			<div class="search-1">
 				<input type='text' name='search' class="search" placeholder="输入姓名/手机号"/>
 			</div>

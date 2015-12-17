@@ -123,6 +123,6 @@ function closeMenu(){
      <li class="menu-customer-list"><a href="#">客户</a></li>
      </c:if>
 </c:forEach>
-
+<li class="menu-useGem-list"><a href="#">配石单</a></li>
 
 

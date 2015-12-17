@@ -53,7 +53,14 @@
     	//尾款实收
     	setSuffix("order-tailPaid","元");
     	/***************订单-结束*******************/
-    	
+    	/***************配石单-开始*******************/
+    	//数量
+    	setSuffix("useGem-count","颗");
+    	//重量
+    	setSuffix("useGem-weight","ct");
+    	//价值
+    	setSuffix("useGem-worth","元");
+    	/***************配石单-结束*******************/
     	/***************款式单-开始*******************/
     	//金属重量
     	//setSuffix("custom_weight","克");
@@ -136,7 +143,6 @@ function cancelBorderRed(em){
 	}else{
 		$("."+em).css({"border-color":"","border-style":"none","border":"0"});
 	}
-	
 }
 
 //必输项校验

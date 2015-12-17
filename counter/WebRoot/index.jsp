@@ -21,6 +21,7 @@ $(function(){
 		var outputStr = "typeId=3&shapeId=4";
 		var info = httpRequest(nativeUrl,requestUrl,requestMethod,outputStr,test);
 	});
+	});
 function test(data){
 	alert(data);
 }

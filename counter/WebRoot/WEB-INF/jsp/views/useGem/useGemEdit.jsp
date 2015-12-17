@@ -13,7 +13,10 @@
 <meta http-equiv="keywords" content="keyword1,keyword2,keyword3">
 <meta http-equiv="description" content="This is my page">
 <script src="${ctx}/resources/js/jquery-1.8.3.min.js"></script>
-
+<script src="${ctx}/resources/js/top.js"></script>
+<script src="${ctx}/resources/js/hide.js"></script>
+<link href="${ctx}/resources/css/orderlist.css" rel="stylesheet" type="text/css" />
+<script src="${ctx}/resources/js/showList.js" type="text/javascript"></script>
 <!--必要样式-->
 <link rel='stylesheet' href='${ctx}/resources/css/style.css' media='all' />
 <link rel='stylesheet' href='${ctx}/resources/css/bootstrap.css' media='all' />
@@ -44,7 +47,7 @@
 				"data[i].type_cn", function() {
 					$("#gemTypeId").val("${useGemDetail['vtype']}");
 				}, "宝石类型");
-
+		
 		//形状下拉框
 		initShapeByType();
 		//规格下拉框
@@ -60,27 +63,37 @@
 		/**
 		 *$(document).ajaxStop(function () {setNowSelData(); });
 		 **/
-		 //宝石签收单列表
+		/* //宝石签收单列表
 		 $(".custom_list").bind("click",function(){
 		 	openURL("${ctx}/custom/listJson.do","款式单列表");
-		 });
+		 });*/
+		 
+		 //有值后加后缀
+		 initFieldSuffix();
 
 	});
+
+	function initFieldSuffix(){
+		if($(".useGem-count").val() != ""){
+    		//数量
+	    	initSuffix("useGem-count","颗");
+   		}
+	  	if($(".useGem-weight").val() != ""){
+    		//重量
+    		initSuffix("useGem-weight","ct");
+   		}
+    	if($(".useGem-worth").val() != ""){
+    		//价值
+    		initSuffix("useGem-worth","元");
+   		}
+	}
 
 	//初始化input
 	$(function initVal() {
 		var useGemWorth = "${useGemDetail['nworth']}";
 		var useGemWeigth = "${useGemDetail['nweight']}";
 		var useGemCount = "${useGemDetail['icount']}";
-		if (useGemWorth == "") {
-			$("#nworth").val("价值（元）");
-		}
-		if (useGemWeigth == "") {
-			$("#nweight").val("重量（克拉）");
-		}
-		if (useGemCount == "") {
-			$("#icount").val("数量（颗）");
-		}
+		
 	});
 
 	//初始化形状下拉框值
@@ -116,9 +129,19 @@
 
 	//宝石签收单保存
 	function saveOrUpdate() {
+			if(!ckLose("edit_btn","lose-entity")){
+				return;
+			}
+			
+			//数量
+	    	clearSuffix("useGem-count","颗");
+	    	//重量
+	    	clearSuffix("useGem-weight","ct");
+	    	//价值
+	    	clearSuffix("useGem-worth","元");
 		$.ajax({
 			type : "POST",
-			url : "useGem/saveOrUpdate.do",
+			url : "${ctx}/useGem/saveOrUpdate.do",
 			data : $('#useGem').serialize(),// formid
 			async : false,
 			cache : false,
@@ -131,78 +154,194 @@
 			}
 		});
 	}
+	//子窗体调用
+	function setValueByFrame(type,id,callback,json){
+		var url;
+		if(type == "customer"){
+			url = "${ctx}/customer/infoJson.do";
+			$.get(url,{id:id},function(data){
+				if(data != null){
+					if(data.vhendimgurl != ""){
+						$(".cusheader").prop("src",data.vhendimgurl);
+					}
+					$("#customerId").val(data.id);
+					//选客户后初始化交付地址
+					$("#addressId").val("");
+					$("#tbl").empty();
+					initAddr();
+				}
+				if($("#customerId").val()){
+					$(".header-loc").show();
+				}else{
+					$(".header-loc").hide();
+				}
+				closeMultiDlg();
+			});
+		}/*else if(type == "chain"){
+			var data = JSON.parse(json);
+			$("#order-list").append("<dd type='ch' sid='"+data.sid+"' class='"+data.sid+" bill'><span class='list_name bill-name'>"+data.sname+"</span><input class='list_num bill-num' style='width:40px;margin-left:10px;' type='text' value='1' placeholder='条'><b class='list_price bill-price'>"+data.sprice+"</b><a href='javascript:rlist("+data.sid+")' class='close_c'><img src='${ctx}/resources/images/close.png'></a></dd>");
+			closeMultiDlg();
+		}*/else if(type == "order"){
+			url = "${ctx}/order/edit.do?id="+id;//根据id查询订单信息
+			window.location = url;
+		}else if(type == "order-view"){
+			url = "${ctx}/order/view.do?id="+id;//根据id查询订单信息
+			window.location = url;
+		}else if(type == "signGem"){
+			url = "${ctx}/gem-sign/view.do?id="+id;//根据id查询宝石签收单信息
+			window.location = url;
+		}else if(type == "entity"){
+			url = "${ctx}/entity-sign/view.do?id="+id;//根据id查询实物签收单信息
+			window.location = url;
+		}else if(type == "customer-menu"){
+			url = "${ctx}/customer/info.do?id="+id;//根据id查询客户信息
+			window.location = url;
+		}else if(type == "custom"){
+			url = "${ctx}/custom/edit.do?id="+id;//根据id定制单信息
+			window.location = url;
+		}else if(type == "custom-view"){
+			url = "${ctx}/custom/detail.do?id="+id;//根据id显示定制单信息
+			window.location = url;
+		}else if(type == "useGem"){
+			url = "${ctx}/useGem/info.do?did="+id;//根据id显示配石单信息
+			window.location = url;
+		}
+		/*if(typeof(callback)!=='undefined'){
+			callback&&callback;
+		}*/
+	}
 </script>
+<style type="text/css">
+.qsdr3 {
+    height: 40px;
+    line-height: 40px;
+    width: 90px;
+    padding-left: 10px;
+    background: #ddd;
+    color: #616161;
+    font-size: 16px;
+}
+.muiltx{
+	color:#FFF;
+	padding:4px;
+}
+.qsd_right_2 {
+    width: 315px;
+}
+</style>
 </head>
 
 <body>
 	<form id="useGem">
 		<input type="hidden" id="pageAttr" value="DEPLOY"/>
-		<jsp:include page="../header.jsp"></jsp:include>
+		<div class="header">
+	<div class="head2">
+		<div class="top2">
+			<b><a href="javascript:;" onclick="EditShow_Hidden(ed1)"><img
+						src="${ctx}/resources/images/plus.png" />
+			</a>${pageOrderType}配石单
+			<c:choose>
+				 <c:when test="${empty useGemDetail['vnumber']}">   
+				 ${number }
+				 <input type="hidden" id="vnumber" name="vnumber" value="${number }">
+				 </c:when>
+				 <c:otherwise>
+				 ${ordervo['vnumber']}
+				 <input type="hidden" id="vnumber" name="vnumber" value="${useGemDetail['vnumber']}">
+				 </c:otherwise>	
+			</c:choose> 
+			</b>
+			<font><a href="javascript:;" onclick="Show_Hidden(tr1)"><img
+						src="${ctx}/resources/images/plus.png" />
+			</a> </font>
+		</div>
+		<div class="hidden_enent2" id="tr1" style="display: none;">
+			<ul>
+				<li class="jian">
+					<a href="javascript:;" onclick="Show_Hidden(tr1)">一</a>
+				</li>
+				<jsp:include page="../menu_pg.jsp"></jsp:include>
+			</ul>
+		</div>
+		<div class="edit_hidden2" id="ed1" style="display: none;">
+			<ul>
+				<li class="jian2">
+					<a href="javascript:;" onclick="EditShow_Hidden(ed1)">一</a>
+				</li>
+				<jsp:include page="../menu_cau.jsp"></jsp:include>
+			</ul>
+		</div>
+		<div class="clear"></div>
+	</div>
+</div>
 		<input id="gemid" type="hidden" name="id" class="tableId"
 			value="${useGemDetail['id']}">
+		<input id="customdId" type="hidden" name="customdId" class="customdId"
+			value="
+			<c:choose>
+					 <c:when test="${empty useGemDetail['customdId']}">   
+					 ${customDVO['id'] }
+					 </c:when>
+					 <c:otherwise>
+					 ${useGemDetail['customdId']}
+					 </c:otherwise>	
+			</c:choose> 
+			">
 		<div class="qsd">
 			<div class="qsd_main">
 				<div class="qsd_left">
 					<div class="peishi">
-						<img src="${ctx}/resources/images/zb_09.png">
+						<img src="${customDVO['vstockGemImgPath'] }">
 						<ul>
-							<li>名称：钻石</li>
-							<li>形状：垫形</li>
-							<li>重量：3.35</li>
-							<li>颜色：H</li>
-							<li>净度：IF</li>
-							<li>规格：6.51x6.48x4.69</li>
-							<li>参考价：70元/ct</li>
-							<li>数量：1</li>
+							<li>名称：${customDVO['vstockGemName'] }</li>
+							<li>形状：${customDVO['vstockGemShape'] }</li>
+							<li>重量：${customDVO['nstockGemWeight'] }</li>
+							<li>颜色：${customDVO['vstockGemColor'] }</li>
+							<li>净度：${customDVO['vstockGemClarity'] }</li>
+							<li>规格：${customDVO['vstockGemSize'] }</li>
+							<li>参考价：${customDVO['nstockGemCost'] }</li>
+							<li>数量：${customDVO['istockGemNum'] }</li>
 							<div class="clear"></div>
 						</ul>
 						<dt>
-							款式单号： <a href="javascript:;" class="custom_list">2015121031454646</a>
+							款式单号： <a href="javascript:;" class="custom_list">${customDVO['vdef1']}</a>
 						</dt>
 					</div>
 				</div>
-				<div class="qsd_right">
-					<div class="qsd_right_1">
-						<select name="vtype" class="qsdr r1" id="gemTypeId">
+				<div class="qsd_right edit_btn">
+					<div class="qsd_right_1 qsd_right_2">
+						<select name="vtype" class="qsdr r1 bl-ck-null lose-entity" id="gemTypeId">
 							<option value="-1">请选择</option>
 						</select>
 						<dt>
-							<input type='text' id='nworth' name='nworth' class="qsdr r2"
-								value="${useGemDetail['nworth']}"
-								onfocus="if(value=='价值（元）'){value=''}"
-								onblur="if(value==''){value='价值（元）'}">
+							<input type='text' id='nworth' name='nworth' class="qsdr r2 useGem-worth bl-ck-null lose-entity"
+								value="${useGemDetail['nworth']}" placeholder="价值（元）">
 						</dt>
 						<div class="clear"></div>
 					</div>
-					<div class="qsd_right_1">
-						<select name="vshape" class="qsdr r1" id="gemShapeId">
+					<div class="qsd_right_1 qsd_right_2">
+						<select name="vshape" class="qsdr r1 bl-ck-null lose-entity" id="gemShapeId">
 							<option value="-1">请选择</option>
 						</select>
 						<dt>
-							<input type='text' id='nweight' name='nweight' class="qsdr r2"
-								value="${useGemDetail['nweight']}"
-								onfocus="if(value=='重量（克拉）'){value=''}"
-								onblur="if(value==''){value='重量（克拉）'}">
+							<input type='text' id='nweight' name='nweight' class="qsdr r2 useGem-weight bl-ck-null lose-entity"
+								value="${useGemDetail['nweight']}" placeholder="重量（ct）">
 						</dt>
 						<div class="clear"></div>
 					</div>
 					<div class="qsdtt">
-						<select name="vspec" class="qsdt" id="gemSpecId">
-							<option value="-1">请选择</option>
-						</select>
+						<input type='text' id='vspec' name='vspec' value="${useGemDetail['vspec']}" placeholder="规格x" class="qsdr3 r1 useGem-spec bl-ck-null lose-entity"><span class="muiltx">X</span>
+						<input type='text' id='vspec2' name='vspec2' value="${useGemDetail['vspec2']}" placeholder="规格y" class="qsdr3 r3 useGem-spec2 bl-ck-null lose-entity"><span class="muiltx">X</span>
+						<input type='text' id='vspec3' name='vspec3' value="${useGemDetail['vspec3']}" placeholder="规格z" class="qsdr3 useGem-spec3 bl-ck-null lose-entity">
 					</div>
 					<div class="clear"></div>
 					<div class="qsdtt">
 						<input type='text' id='icount' name='icount'
-							value="${useGemDetail['icount']}"
-							onfocus="if(value=='数量（颗）'){value=''}"
-							onblur="if(value==''){value='数量（颗）'}" class="qsdn t3">
+							value="${useGemDetail['icount']}" placeholder="数量（颗）" class="qsdn t3 useGem-count bl-ck-null lose-entity">
 					</div>
 					<div class="qssm-l">
 						<textarea name="vmemo" cols="" rows="" class="qssm"
-							value="${useGemDetail['vmemo']}"
-							onfocus="if(value=='说明：'){value=''}"
-							onblur="if(value==''){value='说明：'}">说明：</textarea>
+							value="${useGemDetail['vmemo']}" placeholder="说明"></textarea>
 					</div>
 					<div class="qs_save">
 						<input type="button" name="button"
