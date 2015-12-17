@@ -21,6 +21,7 @@ function loadSelData(nativeUrl,remoteUrl,emName,selId,selName,callback,explain){
 	}
 	$('#'+emName).empty();
 	$('#'+emName).append("<option value='-1'>"+explain+"</option>");
+	$('#'+emName).append("<option value='-2'>其他</option>");
 	
 	/*$.ajax({
 		type:"get",
