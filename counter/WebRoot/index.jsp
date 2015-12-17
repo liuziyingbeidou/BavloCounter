@@ -8,6 +8,13 @@
 <title>Insert title here</title>
 <script src="${ctx }/resources/jquery.multiDialog/js/jquery/jquery-1.9.1.js"></script>
 <script src="${ctx }/resources/js/bavlo-initdata.js"></script>
+<!-- Downloadr -->
+<link href="${ctx }/resources/Downloadr/facebox/facebox.css" media="screen" rel="stylesheet" type="text/css"/>	
+<script src="${ctx }/resources/Downloadr/facebox/facebox.js" type="text/javascript"></script>
+<link href="${ctx }/resources/Downloadr/downloadr/downloadr.css" media="screen" rel="stylesheet" type="text/css"/>
+<script src="${ctx }/resources/Downloadr/downloadr/jqbrowser.js" type="text/javascript"></script>
+<script src="${ctx }/resources/Downloadr/downloadr/downloadr.js" type="text/javascript"></script>
+
 <script type="text/javascript">
 $(function(){
 	$(".multidialog").click(function(){
@@ -21,6 +28,7 @@ $(function(){
 		var outputStr = "typeId=3&shapeId=4";
 		var info = httpRequest(nativeUrl,requestUrl,requestMethod,outputStr,test);
 	});
+	 $('a[rel*=downloadr]').downloadr();
 	});
 function test(data){
 	alert(data);
@@ -59,13 +67,17 @@ function test(data){
     	②多个元素一起（块域）：可适当添加< span class="CC-R" >< /span>包围
     </fieldset>
     <fieldset>
-    	<legend>下载文件Controller</legend>
-    	http://127.0.0.1:8080/counter/file/download.do<br>
-		参数：  模块filePath   文件名fileName <br>
-		调用下载文件controller回写订单状态<br>
-		@Resource<br>
-		IOrderService orderService;<br>
-		orderService.updateOrderState(订单id,2);
+    	<legend>下载文件</legend>
+    		<pre><xmp>
+<link href="${ctx }/resources/Downloadr/facebox/facebox.css" media="screen" rel="stylesheet" type="text/css"/>	
+<script src="${ctx }/resources/Downloadr/facebox/facebox.js" type="text/javascript"></script>
+<link href="${ctx }/resources/Downloadr/downloadr/downloadr.css" media="screen" rel="stylesheet" type="text/css"/>
+<script src="${ctx }/resources/Downloadr/downloadr/jqbrowser.js" type="text/javascript"></script>
+<script src="${ctx }/resources/Downloadr/downloadr/downloadr.js" type="text/javascript"></script>
+			</xmp></pre>
+			<p>To call simply add this function call:</p>
+			<pre><xmp>$('a[rel*=downloadr]').downloadr();</xmp></pre>
+    	<p><a href="http://192.168.1.121:8080/counter/staticRes/custom/Downloadr-master.zip" rel="downloadr" title="下载CAD文件">Download</a></p>
     </fieldset>
     <fieldset>
     	<legend>订单→款式单→订单</legend>
