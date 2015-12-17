@@ -94,10 +94,10 @@ $(function(){
 				'ista': "2"
 			},
 			success : function(data) {		
-				alert(data);
+				alert("订单状态已更新");
 			},
 			error : function(data) {		
-				alert(data);
+				alert("订单状态更新失败");
 			}
 		})	
 		var vcadFile = $("#vcadFile").val();
