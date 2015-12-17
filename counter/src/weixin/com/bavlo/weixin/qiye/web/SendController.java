@@ -1,6 +1,10 @@
 package com.bavlo.weixin.qiye.web;
 
 
+import java.util.List;
+import java.util.Map;
+
+import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.stereotype.Controller;
@@ -8,9 +12,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.bavlo.counter.constant.IConstant;
 import com.bavlo.counter.model.LoginVO;
+import com.bavlo.counter.service.order.itf.IOrderService;
 import com.bavlo.counter.utils.DateUtil;
 import com.bavlo.counter.web.BaseController;
 import com.bavlo.weixin.qiye.util.Constants;
+import com.bavlo.weixin.qiye.util.QiYeUtil;
 import com.bavlo.weixin.qiye.util.WechatSendMessage;
 
 /**
@@ -19,6 +25,8 @@ import com.bavlo.weixin.qiye.util.WechatSendMessage;
  */
 @Controller
 public class SendController extends BaseController{
+	@Resource
+	IOrderService orderService;
 
 	/**
 	 * @Description: 转发页面 
@@ -39,13 +47,17 @@ public class SendController extends BaseController{
 			String agentid, String text,String memo,String pageAttr,String rootPath,Integer id) {
 		boolean isTurn = true;
 		String url = "http://lzy348860554.imwork.net/counter/index.do";
-		String actionName = "";
-		String actionPsn = "SYSTEM";
+		String actionName = "";//转发URL
+		String actionPsn = "SYSTEM";//当前人员
 		Object info = request.getSession().getAttribute("loginInfo");
+		LoginVO loginVO = null;
 		if(info != null){
-			LoginVO loginVO = (LoginVO)info;
+			loginVO = (LoginVO)info;
 			actionPsn = loginVO.getUserId();
+		}else{
+			renderText("-1");
 		}
+		
 		//客户(cust)
 		if(IConstant.PAGE_ATTR_CUST.equals(pageAttr)){
 			text = "客户资料-" + actionPsn + "(" + DateUtil.getCurDateTime()+")";
@@ -60,6 +72,27 @@ public class SendController extends BaseController{
 		if(IConstant.PAGE_ATTR_ORDER.equals(pageAttr)){
 			text = "订单-" + actionPsn + "(" + DateUtil.getCurDateTime()+")";
 			actionName = "order/view.do?id="+id;
+			
+			//PMC发给PPS订单进入制版态
+			List<String> actionRole = loginVO.getRole();//当前人员角色
+			if(actionRole != null){
+				for (String string : actionRole) {
+					//当前角色PMC
+					if(IConstant.ROLE_PMC.equals(string)){
+						Map<String,Object> mapRoleTag = QiYeUtil.getUserTag(request,touser);
+						List<String> listRoleTag = mapRoleTag.get("roleTag") != null ? (List<String>)mapRoleTag.get("roleTag") : null;
+						if(listRoleTag != null){
+							for (String string2 : listRoleTag) {
+								//接收方角色PPS
+								if(IConstant.ROLE_PPS.equals(string2)){
+									//改变订单状态为"制版"
+									orderService.updateOrderState(id,IConstant.ORDER_PLATE);
+								}
+							}
+						}
+					}
+				}
+			}
 		}else
 		//宝石签收单(gem)
 		if(IConstant.PAGE_ATTR_GEM.equals(pageAttr)){
