@@ -437,13 +437,12 @@ function chainJson(){
 	$(".chainList").each(function(){
 		var chain_name = $(this).find(".chain_name").text();
 		var chain_item = $(this).find(".chain_item").val();
-		/*if(chain_item == ""){
+		if(chain_item == ""){
 			$(this).find(".chain_item").val("");
 			$(this).find(".chain_item").focus();
-			break;
-		}*/
+			return;
+		}
 		var chain_cost = $(this).find(".chain_item").attr("price");
-		//var cPrice = $(this).find(".cPrice").val();
 		jsonStr+="{";
 		jsonStr+="\"vchainName\":\""+chain_name+"\",";
 		jsonStr+="\"ichainItem\":\""+chain_item+"\",";
@@ -468,12 +467,12 @@ function stockGemJson(){
 	$(".stockGemList").each(function(){
 		var stockGem_name = $(this).find(".stockGem_num").attr("stockGemName");
 		var stockGem_num = $(this).find(".stockGem_num").val();
-		/*if(stockGem_num == ""){
+		if(stockGem_num == ""){
 			alert("请填写库选宝石颗数");
 			$(this).find(".stockGem_num").val("");
 			$(this).find(".stockGem_num").focus();
-			break;
-		}*/
+			return;
+		}
 		var stockGem_img_path = $(this).find(".stockGem_img_path").attr("src");
 		var stockGem_weight = $(this).find(".stockGem_num").attr("weight");
 		var stockGem_shape = $(this).find(".stockGem_num").attr("shape");
@@ -481,7 +480,6 @@ function stockGemJson(){
 		var stockGem_color = $(this).find(".stockGem_num").attr("color");
 		var stockGem_clarity = $(this).find(".stockGem_num").attr("clarity");
 		var stockGem_cost = $(this).find(".stockGem_num").attr("price");
-		//var sgPrice = $(this).find(".sgPrice").val();
 		jsonStr+="{";
 		jsonStr+="\"vstockGemName\":\""+stockGem_name+"\",";
 		jsonStr+="\"istockGemNum\":\""+stockGem_num+"\",";
