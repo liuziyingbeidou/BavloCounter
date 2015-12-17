@@ -51,10 +51,23 @@ $(function(){
 	var customId = $("#customId").val();
 	var orderId = $("#orderId").val();
 	
-	if("${customDetail.icertificate }" == 0){
+	var certificate = "${customDetail.icertificate }";
+	if(certificate == 0){
 		$(".certificate-has").hide();
-	}else if("${customDetail.icertificate }" == 25){
+	}else if(certificate == 25){
 		$(".certificate-not").hide();
+	}
+	var ringSize = "${customDetail.srcringSize }";
+	if(ringSize == -1){
+		$(".ringSize").hide();
+	}
+	var styleType = "${customDetail.srcstyleType }";
+	if(styleType == -1){
+		$(".styleType").hide();
+	}
+	var metalType = "${customDetail.srcmetal }";
+	if(metalType == -1){
+		$(".metalType").hide();
 	}
 	
 	$(".dzd_close").click(function(){
@@ -64,7 +77,7 @@ $(function(){
 			window.location = url;
 		}
 	});
-	$(".orderCode").click(function(){
+	$("#orderCode").click(function(){
 		//跳转到订单页面 
 		if(orderId != ""){
 			url = "/counter/order/edit.do?id="+orderId;
@@ -73,8 +86,22 @@ $(function(){
 	});
 	//下载CAD文件
 	$(".dlcad").click(function(){
+		$.ajax({
+			url : "../order/updateState.do",
+			type : 'POST',
+			data :{
+				'orderId' : orderId,
+				'ista': "2"
+			},
+			success : function(data) {		
+				alert(data);
+			},
+			error : function(data) {		
+				alert(data);
+			}
+		})	
 		var vcadFile = $("#vcadFile").val();
-		var url = "${ctx}/file/download.do";
+		var url = getRootPath()+"/staticRes/custom/"+vcadFile;
 		$.ajax({
 			url : url,
 			type : 'POST',
@@ -93,8 +120,8 @@ $(function(){
 	//下载矢量图文件
 	$(".dlvh").click(function(){
 		var vengraveVh = $("#vengraveVh").val();
-		var url = "${ctx}/file/download.do";
-		 $.ajax({
+		var url = getRootPath()+"/staticRes/custom/"+vengraveVh;
+		$.ajax({
 			 	url : url,
 				type : 'POST',
 				data :{
@@ -107,7 +134,7 @@ $(function(){
 				error : function(data) {		
 					alert(data);
 				}
-		 })	
+		 })
 	});
 	//发送给生产主管 
 	$(".sendPMC").click(function(){
@@ -204,10 +231,9 @@ $(function(){
 		 html+= "<dd class='stockGemList stockGem"+i+"'>"+
 				"<div class='sgdetail'>"+
 				"<span>库选石： </span>"+
-				"<a class='stockDetail' href='javascript:useGem("+data.id+")' style='color: #CC0000'>"+
 				"<img class='stockGem_img' src='"+data.vstockGemImgPath+"' style='border:50px'/><span>"+data.vstockGemName+"</span>"+
 				""+"  "+data.istockGemNum+"颗"+
-				"</a>"+
+				"<input type='button' value='配' onclick='useGem("+data.id+")' class='ugem CUST-RL CC-RL PM-RL CAD-RL PMC-RL PPS-RL' />"+
 				"</div>" +
 				"</dd>";
 			
@@ -233,7 +259,7 @@ function useGem(stockGemId){
 		<input type="hidden" id='orderId' value="${customDetail['orderId'] }" />
 		<input type="hidden" id='vengraveVh' value="${customDetail['vengraveVh'] }" />
 		<input type="hidden" id='vcadFile' value="${customDetail['vcadFile'] }" />
-	<input type="hidden" id="pageAttr" value="STYLE"/>
+		<input type="hidden" id="pageAttr" value="STYLE"/>
 		<div class="header">
 			<div class="head1">
 				<div class="top">
@@ -357,14 +383,15 @@ function useGem(stockGemId){
 					<div class="dzd">
 						<dl>
 							<dd>
-								订单号 <a class="orderCode" href="#" style="color: #CC0000">${orderVO.vorderCode }</a>
+								订单号 : ${orderVO.vorderCode }
+ 								<input type="button" value="进" id="orderCode" class="ugem CUST-RL CAD-RL PPS-RL GB-RL PMC-RL PPS-RL" />
 							</dd> 
 							<dd>
 								报价： <b>${customDetail.nprice }元</b>
 							</dd>
-							<dd>类型：${customDetail.srcstyleType }</dd>
-							<dd>手寸：${customDetail.srcringSize }</dd>
-							<dd>金属：${customDetail.srcmetal }</dd>
+							<dd class="styleType">类型：${customDetail.srcstyleType }</dd>
+							<dd class="ringSize">手寸：${customDetail.srcringSize }</dd>
+							<dd class="metalType">金属：${customDetail.srcmetal }</dd>
 							<dd class="StockGem"></dd>
 							<dd>
 								<div class="kzs"></div>
@@ -398,12 +425,12 @@ function useGem(stockGemId){
 	        		</dd>
 	            </dl>
 	            <div class="clear"></div>
-	            <div class="dzd_right_btm d1 CUST-RL CUST-RL">
+	            <div class="dzd_right_btm d1 CUST-RL CC-RL PM-RL PPS-RL GB-RL PMC-RL PMC-RL">
 	              <span class="gf" ><a class="dlcad" href="#">下载CAD</a> </span>
 	              <b><a class="dlvh" href="#">下载矢量图</a></b>
 	              <div class="clear"></div>
 	            </div>
-	            <div class="dzd_right_btm CUST-RL PPS-RL">
+	            <div class="dzd_right_btm CUST-RL PPS-RL GB-RL PMC-RL CAD-RL PMC-RL">
 	              <input type='text' class="gf" value=''>
 	              <b><a href="" class="sendPMC">通知QC</a></b>
 	              <div class="clear"></div>
