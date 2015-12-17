@@ -13,6 +13,7 @@ import com.bavlo.counter.model.IdEntity;
  * @Description: 订单VO
  * @author liuzy
  * @date 2015-10-26 下午04:22:50
+ * vdef1 页面用于存储头像
  */
 @Entity
 @Table(name="blct_order")
