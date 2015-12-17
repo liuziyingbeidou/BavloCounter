@@ -237,8 +237,15 @@
 		
 		.hidden_enent { width:110px; position:relative; top:10px; right:-690px;}
 		.edit_hidden { width:110px; position:relative; top:10px; left:-15;}
-		.qsdn,.qssm{width:328px}
+		/*.qsdn,.qssm{width:328px}*/
 		#file{cursor:pointer;}
+		@media screen and (max-width: 1280px) and (min-width: 320px){
+		.qsd_left ul li {
+			height:auto;
+		}
+		.hidden_enent { width:110px; position:relative; top:10px; right:-400px;}
+		.edit_hidden { width:120px; position:relative; top:10px; left:0;}
+		}
 		</style>
 	</head>
 	<body>

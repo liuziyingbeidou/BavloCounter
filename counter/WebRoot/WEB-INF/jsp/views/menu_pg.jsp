@@ -87,7 +87,7 @@ $(function(){
 	//配石单列表menu-useGem-list
 	$(".menu-useGem-list").bind("click",function(){
 		EditShow_Hidden(ed1);
-		openURL("${ctx}/useGem/list.do?listType=menu","配石单列表",490,550);
+		openURL("${ctx}/useGem/list.do?listType=menu","配石单列表",470,550);
 		closeMenu();
 	});
 });
