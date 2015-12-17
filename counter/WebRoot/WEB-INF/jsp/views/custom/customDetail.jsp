@@ -49,6 +49,7 @@
 $(function(){
 	
 	var customId = $("#customId").val();
+	var orderId = $("#orderId").val();
 	
 	if("${customDetail.icertificate }" == 0){
 		$(".certificate-has").hide();
@@ -60,6 +61,13 @@ $(function(){
 		//跳转到款式单页面 
 		if(customId != ""){
 			url = "/counter/custom/edit.do?id="+customId;
+			window.location = url;
+		}
+	});
+	$(".orderCode").click(function(){
+		//跳转到订单页面 
+		if(orderId != ""){
+			url = "/counter/order/edit.do?id="+orderId;
 			window.location = url;
 		}
 	});
@@ -125,7 +133,7 @@ $(function(){
 	 $(".customCankaoShow").bind("click",function(){
 		//款式单ID
 	 	if(customId == "" || customId == undefined){
-	 		alert("请保存后查看!");
+	 		alert("没有图片!");
 	 	}else{
 	 		openURL("/counter/upload/showpic.do?cpath=com.bavlo.counter.model.custom.CustomBVO&fkey=customId&ptype=vtype&vtype=customCankao&id="+customId,"图片展示");
 	 	}
@@ -134,7 +142,7 @@ $(function(){
 	 $(".customShejiShow").bind("click",function(){
 		//款式单ID
 	 	if(customId == "" || customId == undefined){
-	 		alert("请保存后查看!");
+	 		alert("没有图片!");
 	 	}else{
 	 		openURL("/counter/upload/showpic.do?cpath=com.bavlo.counter.model.custom.CustomBVO&fkey=customId&ptype=vtype&vtype=customSheji&id="+customId,"图片展示");
 	 	}
@@ -194,9 +202,12 @@ $(function(){
 		 var html="";
 			
 		 html+= "<dd class='stockGemList stockGem"+i+"'>"+
-				"<div class='sgdetail'>"+	
-				"<span>库选石： </span><img class='stockGem_img' src='"+data.vstockGemImgPath+"' style='border:50px'/><span>"+data.vstockGemName+"</span>"+
+				"<div class='sgdetail'>"+
+				"<span>库选石： </span>"+
+				"<a class='stockDetail' href='javascript:useGem("+data.id+")' style='color: #CC0000'>"+
+				"<img class='stockGem_img' src='"+data.vstockGemImgPath+"' style='border:50px'/><span>"+data.vstockGemName+"</span>"+
 				""+"  "+data.istockGemNum+"颗"+
+				"</a>"+
 				"</div>" +
 				"</dd>";
 			
@@ -205,6 +216,13 @@ $(function(){
 	}
 	
 });
+function useGem(stockGemId){
+	//跳转到配石单页面 
+	if(stockGemId != "" && stockGemId != undefined){
+		url = "/counter/useGem/info.do?did="+stockGemId; 
+		window.location = url;
+	}
+}
 </script>
 </head>
 
@@ -212,8 +230,9 @@ $(function(){
 	<form id="custom">
 		<input type="hidden" id='toUser' value='${openid}' />
 		<input type="hidden" id='customId' value='${customDetail.id}' />
-		<input type="hidden" id='vengraveVh' name='vengraveVh' value="${customDetail['vengraveVh'] }" />
-		<input type="hidden" id='vcadFile' name='vcadFile' value="${customDetail['vcadFile'] }" />
+		<input type="hidden" id='orderId' value="${customDetail['orderId'] }" />
+		<input type="hidden" id='vengraveVh' value="${customDetail['vengraveVh'] }" />
+		<input type="hidden" id='vcadFile' value="${customDetail['vcadFile'] }" />
 	<input type="hidden" id="pageAttr" value="STYLE"/>
 		<div class="header">
 			<div class="head1">
@@ -338,8 +357,8 @@ $(function(){
 					<div class="dzd">
 						<dl>
 							<dd>
-								订单号 <a class="orderCode" href="#" style="color: #ccc">${orderVO.vorderCode }</a>
-							</dd>
+								订单号 <a class="orderCode" href="#" style="color: #CC0000">${orderVO.vorderCode }</a>
+							</dd> 
 							<dd>
 								报价： <b>${customDetail.nprice }元</b>
 							</dd>
