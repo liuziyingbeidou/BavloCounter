@@ -138,13 +138,14 @@ $(function(){
 	});
 	//发送给生产主管 
 	$(".sendPMC").click(function(){
-		var text = getRootPath()+"/detail.do?id="+customId;
+		var text_company = '<%=session.getAttribute("loginInfo.userShop")%>';
+		var text_url = getRootPath()+"/detail.do?id="+customId;
 		var url = "${ctx}/sendMassage.do";
 		 $.ajax({
 			 	url : url,
 				data :{
 				 	'touser' : 'shijianfeng',
-					'text': text
+					'text': text_company+"/n"+text
 				},
 				success : function(data) {		
 					alert("发送成功");
