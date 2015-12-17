@@ -7,6 +7,7 @@ import java.util.Map;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
@@ -18,6 +19,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.bavlo.counter.constant.IConstant;
+import com.bavlo.counter.model.LoginVO;
 import com.bavlo.counter.model.custom.CustomBVO;
 import com.bavlo.counter.model.custom.CustomCVO;
 import com.bavlo.counter.model.custom.CustomDVO;
@@ -95,7 +97,7 @@ public class CustomController extends BaseController implements IConstant {
 	 * @return ModelAndView
 	 */
 	@RequestMapping("detail")
-	public ModelAndView detail(Integer id) {
+	public ModelAndView detail(HttpSession session,Integer id) {
 		
 		ModelAndView model = new ModelAndView(PATH_CUSTOM + "customDetail");
 		
@@ -115,6 +117,12 @@ public class CustomController extends BaseController implements IConstant {
 				openid = customer.getVopenid();
 			}
 			
+			LoginVO loginInfo = (LoginVO) session.getAttribute("loginInfo");
+			String shop = null;
+			if(loginInfo != null){
+				shop = loginInfo.getShop();
+			}
+			
 			List<CustomCVO> customCVO = customService.findListCustomC(id);
 			List<CustomDVO> customDVO = customService.findListCustomD(id);
 			
@@ -122,6 +130,7 @@ public class CustomController extends BaseController implements IConstant {
 			JSONArray stockGemJson = JSONArray.fromObject(customDVO);
 			
 			model.addObject("customDetail", customDetail);
+			model.addObject("shop", shop);
 			model.addObject("orderVO", orderVO);
 			model.addObject("openid", openid);
 			model.addObject("chainJson", chainJson);
