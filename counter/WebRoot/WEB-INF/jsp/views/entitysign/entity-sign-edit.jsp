@@ -189,7 +189,14 @@
 		.hidden_enent { width:110px; position:relative; top:10px; right:-690px;}
 		.edit_hidden { width:110px; position:relative; top:10px; left:-15;}
 		.e-customer-add{cursor:pointer;}
-		.swqsd,.swqsd1,.qssm,.qsdn1{width:328px;}
+		/*.swqsd,.swqsd1,.qssm,.qsdn1{width:328px;}*/
+		@media screen and (max-width: 1280px) and (min-width: 320px){
+		.qsd_left ul li {
+			height:auto;
+		}
+		.hidden_enent { width:110px; position:relative; top:10px; right:-400px;}
+		.edit_hidden { width:120px; position:relative; top:10px; left:0;}
+		}
 		</style>
 	</head>
 <body>

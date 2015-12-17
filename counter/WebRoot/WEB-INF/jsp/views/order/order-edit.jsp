@@ -533,6 +533,9 @@ text-overflow:ellipsis;
 .st-jf{width:16px;height:15px;background:url('/counter/resources/images/Arrow4.png') no-repeat}
 
 .hidden_enent1 a:hover,.edit_hidden1 a:hover{text-decoration:none;}
+@media screen and (max-width: 1280px) and (min-width: 320px){
+	
+}
 </style>
 </head>
 

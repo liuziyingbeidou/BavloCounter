@@ -21,8 +21,12 @@ function loadSelData(nativeUrl,remoteUrl,emName,selId,selName,callback,explain){
 	}
 	$('#'+emName).empty();
 	$('#'+emName).append("<option value='-1'>"+explain+"</option>");
-	$('#'+emName).append("<option value='-2'>其他</option>");
-	
+	//下拉框-形状
+	if(emName == "gemShapeId"){
+		if(!isExistOption("gemShapeId","-2")){
+			$('#'+emName).append("<option class='mytipclass' value='-2'>自定义</option>");
+		}
+	}
 	/*$.ajax({
 		type:"get",
 		async: false,
@@ -47,9 +51,9 @@ function loadSelData(nativeUrl,remoteUrl,emName,selId,selName,callback,explain){
 			callback&&callback();
 		}
 	});
-	
-
 }
+
+
 
 /**
  * 远程数据
@@ -210,4 +214,39 @@ function httpRequest(nativeurl,requestUrl,requestMethod,outputStr,callback){
 			callback&&callback(JSON.stringify(data));
 		}
 	});
+}
+
+//设置下拉框自定义
+function setCustomV(em){
+	
+	$("#"+em).customComboBox({
+        tipText : "自定义",
+        tipClass : "mytipclass",
+        allowed : /[A-Za-z0-9\$\.\s]/,
+        notallowed : /[\<\>]/,
+        index : 'last',
+        isEditing : function(el, status, value) {
+            if (typeof window.console!='object') { return; }
+            console.info('Editing status changed to (', status, ') on ', el, ' combo box and the selected value is "', value, '"');
+        },
+        onKeyDown : function(el, character, fulltext) {
+            if (typeof window.console!='object') { return; }
+            console.info('The character (', character, ') was just typed into ', el, ' combo box and the complete text is now "', fulltext, '"');
+        },
+        onDelete : function(el, fulltext) {
+            if (typeof window.console!='object') { return; }
+            console.info('A character was deleted from ', el, ' combo box and the complete text is now "', fulltext, '"');
+        }
+    });
+}
+//判断select中是否存在值为value的项 
+function isExistOption(id,value) { 
+	var isExist = false; 
+	var count = $('#'+id).find('option').length; 
+	for(var i=0;i<count;i++) { 
+		if($('#'+id).get(0).options[i].value == value) { 
+			isExist = true; break; 
+		} 
+	} 
+	return isExist; 
 }

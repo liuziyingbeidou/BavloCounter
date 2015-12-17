@@ -5,7 +5,7 @@
 <html>
 <head>
 
-<title>编辑配石单</title>
+<title>${pageOrderType}配石单</title>
 
 <meta http-equiv="pragma" content="no-cache">
 <meta http-equiv="cache-control" content="no-cache">
@@ -37,6 +37,9 @@
 <script src="/counter/resources/jquery.multiDialog/js/jquery.multiDialog.js"></script> 
 <script src="/counter/resources/js/bavlo-dialog.js"></script>
 
+<link rel="stylesheet" href="${ctx }/page/counter/assets/css/amazeui.min.css"/>
+<link rel="stylesheet" href="${ctx }/page/counter/assets/css/admin.css">
+<script type="text/javascript" src="${ctx }/page/counter/assets/js/amazeui.min.js"></script>
 <script type="text/javascript">
 	//本地webservice
 	var nativeUrl = "${pageScope.basePath}/counter/webservice/http.do";
@@ -51,14 +54,19 @@
 		//形状下拉框
 		initShapeByType();
 		//规格下拉框
-		initSpecByTypeShape();
+	    //initSpecByTypeShape();
 
 		//类型和形状改变
 		$("#gemTypeId").change(function() {
 			initShapeByType();
 		});
 		$("#gemShapeId").change(function() {
-			initSpecByTypeShape();
+			//initSpecByTypeShape();
+			//支持手动输入
+			var gemShapeId = $("#gemShapeId").val();
+			if (gemShapeId == "-2") {
+				onchangeShape();
+			}
 		});
 		/**
 		 *$(document).ajaxStop(function () {setNowSelData(); });
@@ -70,8 +78,43 @@
 		 
 		 //有值后加后缀
 		 initFieldSuffix();
-
+		 
+		 setSelValue();
 	});
+	
+	//选择下拉框值
+	function setSelValue(){
+		//宝石类型
+		$("#gemTypeId").val("${useGemDetail['vtype']}");
+		//宝石形状
+		if(isExistOption("gemShapeId","${useGemDetail['vshape']}")){
+			$("#gemShapeId").val("${useGemDetail['vshape']}");
+		}else{
+			if("${useGemDetail['vshape']}" != "" && "${useGemDetail['vshape']}" != null){
+				$("#gemShapeId").append("<option selected myem='self' value='${useGemDetail['vshape']}'>${useGemDetail['vshape']}</option>");
+			}
+		}
+	}
+	
+	//选择自定义时
+	function onchangeShape(){
+		$('#my-prompt').modal({
+	      relatedTarget: this,
+	      onConfirm: function(e) {
+	      	var $selectSp = $("#gemShapeId");
+	      	for(var i = 0; i < $selectSp.find('option').length; i++){
+	      		var myem = $("#gemShapeId option:eq("+i+")").attr("myem");
+	      		if(myem == "self"){
+	      			$("#gemShapeId option:eq("+i+")").remove();
+	      		}
+	      	}
+	      	
+	      	$("#gemShapeId").append("<option selected myem='self' value='"+e.data+"'>"+e.data+"</option>");
+	      },
+	      onCancel: function(e) {
+	      }
+	    });
+	}
 
 	function initFieldSuffix(){
 		if($(".useGem-count").val() != ""){
@@ -110,7 +153,7 @@
 	}
 
 	//初始化规格下拉框值
-	function initSpecByTypeShape() {
+	/*function initSpecByTypeShape() {
 		var gemTypeId = $("#gemTypeId").val();
 		var gemShapeId = $("#gemShapeId").val();
 		if (gemTypeId == "-1") {
@@ -125,20 +168,20 @@
 				"data[i].size", function() {
 					$("#gemSpecId").val("${useGemDetail['vspec']}");
 				}, "宝石规格");
-	}
+	}*/
 
 	//宝石签收单保存
 	function saveOrUpdate() {
-			if(!ckLose("edit_btn","lose-entity")){
-				return;
-			}
-			
-			//数量
-	    	clearSuffix("useGem-count","颗");
-	    	//重量
-	    	clearSuffix("useGem-weight","ct");
-	    	//价值
-	    	clearSuffix("useGem-worth","元");
+		if(!ckLose("edit_btn","lose-useGem")){
+			return;
+		}
+		
+		//数量
+    	clearSuffix("useGem-count","颗");
+    	//重量
+    	clearSuffix("useGem-weight","ct");
+    	//价值
+    	clearSuffix("useGem-worth","元");
 		$.ajax({
 			type : "POST",
 			url : "${ctx}/useGem/saveOrUpdate.do",
@@ -228,6 +271,10 @@
 .qsd_right_2 {
     width: 315px;
 }
+.mytipclass {
+    font-style:italic;
+    color:red;
+}
 </style>
 </head>
 
@@ -310,34 +357,35 @@
 				</div>
 				<div class="qsd_right edit_btn">
 					<div class="qsd_right_1 qsd_right_2">
-						<select name="vtype" class="qsdr r1 bl-ck-null lose-entity" id="gemTypeId">
+						<select name="vtype" class="qsdr r1 bl-ck-null useGem" id="gemTypeId">
 							<option value="-1">请选择</option>
 						</select>
 						<dt>
-							<input type='text' id='nworth' name='nworth' class="qsdr r2 useGem-worth bl-ck-null lose-entity"
+							<input type='text' id='nworth' name='nworth' class="qsdr r2 useGem-worth bl-ck-null useGem"
 								value="${useGemDetail['nworth']}" placeholder="价值（元）">
 						</dt>
 						<div class="clear"></div>
 					</div>
 					<div class="qsd_right_1 qsd_right_2">
-						<select name="vshape" class="qsdr r1 bl-ck-null lose-entity" id="gemShapeId">
+						<select name="vshape" class="qsdr r1 bl-ck-null useGem" id="gemShapeId">
 							<option value="-1">请选择</option>
 						</select>
+						
 						<dt>
-							<input type='text' id='nweight' name='nweight' class="qsdr r2 useGem-weight bl-ck-null lose-entity"
+							<input type='text' id='nweight' name='nweight' class="qsdr r2 useGem-weight bl-ck-null useGem"
 								value="${useGemDetail['nweight']}" placeholder="重量（ct）">
 						</dt>
 						<div class="clear"></div>
 					</div>
 					<div class="qsdtt">
-						<input type='text' id='vspec' name='vspec' value="${useGemDetail['vspec']}" placeholder="规格x" class="qsdr3 r1 useGem-spec bl-ck-null lose-entity"><span class="muiltx">X</span>
-						<input type='text' id='vspec2' name='vspec2' value="${useGemDetail['vspec2']}" placeholder="规格y" class="qsdr3 r3 useGem-spec2 bl-ck-null lose-entity"><span class="muiltx">X</span>
-						<input type='text' id='vspec3' name='vspec3' value="${useGemDetail['vspec3']}" placeholder="规格z" class="qsdr3 useGem-spec3 bl-ck-null lose-entity">
+						<input type='text' id='vspec' name='vspec' value="${useGemDetail['vspec']}" placeholder="规格x" class="qsdr3 r1 useGem-spec bl-ck-null useGem"><span class="muiltx">X</span>
+						<input type='text' id='vspec2' name='vspec2' value="${useGemDetail['vspec2']}" placeholder="规格y" class="qsdr3 r3 useGem-spec2 bl-ck-null useGem"><span class="muiltx">X</span>
+						<input type='text' id='vspec3' name='vspec3' value="${useGemDetail['vspec3']}" placeholder="规格z" class="qsdr3 useGem-spec3 bl-ck-null useGem">
 					</div>
 					<div class="clear"></div>
 					<div class="qsdtt">
 						<input type='text' id='icount' name='icount'
-							value="${useGemDetail['icount']}" placeholder="数量（颗）" class="qsdn t3 useGem-count bl-ck-null lose-entity">
+							value="${useGemDetail['icount']}" placeholder="数量（颗）" class="qsdn t3 useGem-count bl-ck-null useGem">
 					</div>
 					<div class="qssm-l">
 						<textarea name="vmemo" cols="" rows="" class="qssm"
@@ -352,5 +400,23 @@
 			</div>
 		</div>
 	</form>
+	<div class="am-modal am-modal-prompt" tabindex="-1" id="my-prompt">
+	  <div class="am-modal-dialog">
+	    <div class="am-modal-hd">Bavlo Counter</div>
+	    <div class="am-modal-bd">
+	     请输入:
+	      <input type="text" class="am-modal-prompt-input">
+	    </div>
+	    <div class="am-modal-footer">
+	      <span class="am-modal-btn" data-am-modal-cancel>取消</span>
+	      <span class="am-modal-btn" data-am-modal-confirm>提交</span>
+	    </div>
+	  </div>
+	</div>
+	<script type="text/javascript">
+	$(function(){
+		
+	});
+	</script>
 </body>
 </html>
