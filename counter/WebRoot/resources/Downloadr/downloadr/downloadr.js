@@ -39,7 +39,7 @@
 				
 				var element = this;
 			  
-			  	$(element).addClass("download_link");
+			  	//$(element).addClass("download_link"); add liuzy 注释
 			  	
 			  	var theTitle = $(element).attr('title');
 			  				  	
