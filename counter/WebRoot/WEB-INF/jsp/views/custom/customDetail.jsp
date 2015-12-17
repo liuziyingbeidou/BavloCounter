@@ -56,23 +56,28 @@ $(function(){
 	
 	var customId = $("#customId").val();
 	var orderId = $("#orderId").val();
-	
+	if(orderId == ''){
+		$(".orderClass").hide();
+	}
 	var certificate = "${customDetail.icertificate }";
 	if(certificate == 0){
 		$(".certificate-has").hide();
 	}else if(certificate == 25){
 		$(".certificate-not").hide();
+	}else if(certificate == ''){
+		$(".certificate-has").hide();
+		$(".certificate-not").hide();
 	}
 	var ringSize = "${customDetail.srcringSize }";
-	if(ringSize == -1){
+	if(ringSize == -1 || ringSize == ''){
 		$(".ringSize").hide();
 	}
 	var styleType = "${customDetail.srcstyleType }";
-	if(styleType == -1){
+	if(styleType == -1 || styleType == ''){
 		$(".styleType").hide();
 	}
 	var metalType = "${customDetail.srcmetal }";
-	if(metalType == -1){
+	if(metalType == -1 || metalType == ''){
 		$(".metalType").hide();
 	}
 	
@@ -354,7 +359,7 @@ function useGem(stockGemId){
 				<div class="mainmid">
 					<div class="dzd">
 						<dl>
-							<dd>
+							<dd class='orderClass'>
 								订单号 : ${orderVO.vorderCode }
  								<input type="button" value="进" id="orderCode" class="ugem CUST-RL CAD-RL PPS-RL GB-RL PMC-RL PPS-RL" />
 							</dd> 
