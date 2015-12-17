@@ -57,7 +57,7 @@
 			 **/
 			 //选择客户
 			 $("#file").bind("click",function(){
-			 		openURL("${ctx}/customer/list.do","客户列表");
+			 		openURL("${ctx}/customer/list.do","客户列表",470,550);
 			 });
 			 setValueByFrame("customer","${gemvo['id']}");
 			 //上传图片
