@@ -92,8 +92,12 @@ $(function(){
 	});*/
 	//订单清单
 	loadOrderList();
+	
 	//控制头像显示
 	if($("#customerId").val()){
+		if("${ordervo['vdef1']}" != "" && "${ordervo['vdef1']}" != null){
+			$(".cusheader").prop("src","${ordervo['vdef1']}");
+		}
 		$(".header-loc").show();
 	}else{
 		$(".header-loc").hide();
@@ -588,7 +592,10 @@ text-overflow:ellipsis;
     <div class="mainleft">
       <div class="customer">
         <ul>
-          <li class="header-loc"><a href="#"><img class="cusheader" style="width:60px;height:60px;" src="${ctx}/resources/images/customer_01.png"></a></li>
+          <li class="header-loc">
+          <a href="#">
+          <img class="cusheader" style="width:60px;height:60px;" src="${ctx}/resources/images/customer_01.png">
+          </a></li>
 		  <!--<li class="file"><a href="javascript:;"><input type="file" name="file" id="file"></a></li>-->
 		  <li class="file"><a href="#"><img src="${ctx}/resources/images/customer_02.png"></a></li>
           <div class="clear"></div>
@@ -637,10 +644,10 @@ text-overflow:ellipsis;
 			 function insert_row(id,val){
 			  i ++;
 			  R = tbl.insertRow();
+			  C = R.insertCell();
 			  C.innerHTML = "<input class='addrlist' value='"+val+"' id='"+id+"' onclick='clickSelAddr("+id+")' readonly>";
 			  D = R.insertCell();
 			  D.innerHTML = "<a onclick='deleteRow(this,"+id+")' class='address-close'>X</a>";
-			  C = R.insertCell();
 			 }
 			 function deleteRow(obj,aid){
 			  if(confirm('确定要删除吗')){
