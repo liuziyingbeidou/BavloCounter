@@ -239,18 +239,22 @@ $(function() {
 	
 	 //上传图片
 	 $(".cankaotu").bind("click",function(){
+		 	$("#filetype").val("pic");
 		 	$("#vtype").val("customCankao");
 	 		openURL("/counter/upload/uppage.do","上传参考图"); 
 	 });
 	 $(".qibantu").bind("click",function(){
+		 	$("#filetype").val("pic");
 		 	$("#vtype").val("customSheji");
 	 		openURL("/counter/upload/uppage.do","上传起版图"); 
 	 });
 	 $(".vectorgraph").bind("click",function(){
+		 	$("#filetype").val("file");
 	 		openURL("/counter/upload/uppage.do","上传刻字矢量图"); 
 	 		$("#filevalue").val("vengraveVh");
 	 });
 	 $(".cad_file").bind("click",function(){
+			$("#filetype").val("file");
 	 		openURL("/counter/upload/uppage.do","上传CAD文件"); 
 	 		$("#filevalue").val("vcadFile");
 	 });
