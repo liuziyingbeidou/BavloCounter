@@ -76,7 +76,10 @@ function test(data){
 <script src="${ctx }/resources/Downloadr/downloadr/downloadr.js" type="text/javascript"></script>
 			</xmp></pre>
 			<p>To call simply add this function call:</p>
-			<pre><xmp>$('a[rel*=downloadr]').downloadr();</xmp></pre>
+			<pre><xmp>
+$('a[rel*=downloadr]').downloadr();
+<a href="http://192.168.1.121:8080/counter/staticRes/custom/Downloadr-master.zip" rel="downloadr" title="下载CAD文件">Download</a>
+			</xmp></pre>
     	<p><a href="http://192.168.1.121:8080/counter/staticRes/custom/Downloadr-master.zip" rel="downloadr" title="下载CAD文件">Download</a></p>
     </fieldset>
     <fieldset>
