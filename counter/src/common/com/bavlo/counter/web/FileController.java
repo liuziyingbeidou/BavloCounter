@@ -91,7 +91,9 @@ public class FileController extends BaseController implements ServletContextAwar
     public void download_T(String filePath,String fileName, HttpServletRequest request,
             HttpServletResponse response) {
         response.setCharacterEncoding("utf-8");
-        response.setContentType("application/octet-stream");
+        //response.setContentType("application/octet-stream");
+        //设置文件MIME类型  
+        response.setContentType(servletContext.getMimeType(fileName));  
         response.setHeader("Content-Disposition", "attachment;fileName="
                 + fileName);
         
