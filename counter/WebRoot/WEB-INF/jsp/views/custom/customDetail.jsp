@@ -45,6 +45,12 @@
 <script src="/counter/resources/jquery.multiDialog/js/jquery.ui.dialog.extended-1.0.2.js"></script> 
 <script src="/counter/resources/jquery.multiDialog/js/jquery.multiDialog.js"></script> 
 <script src="/counter/resources/js/bavlo-dialog.js"></script>
+
+<link href="/counter/resources/Downloadr/facebox/facebox.css" media="screen" rel="stylesheet" type="text/css"/>	
+<script src="/counter/resources/Downloadr/facebox/facebox.js" type="text/javascript"></script>
+<link href="/counter/resources/Downloadr/downloadr/downloadr.css" media="screen" rel="stylesheet" type="text/css"/>
+<script src="/counter/resources/Downloadr/downloadr/jqbrowser.js" type="text/javascript"></script>
+<script src="/counter/resources/Downloadr/downloadr/downloadr.js" type="text/javascript"></script>
 <script type="text/javascript">
 $(function(){
 	
@@ -94,51 +100,15 @@ $(function(){
 				'ista': "2"
 			},
 			success : function(data) {		
-				alert("订单状态已更新");
 			},
 			error : function(data) {		
-				alert("订单状态更新失败");
-			}
-		})	
-		var vcadFile = $("#vcadFile").val();
-		var url = getRootPath()+"/staticRes/custom/"+vcadFile;
-		$.ajax({
-			url : url,
-			type : 'POST',
-			data :{
-				'filePath' : "custom",
-				'fileName': vcadFile
-			},
-			success : function(data) {		
-				alert(data);
-			},
-			error : function(data) {		
-				alert(data);
 			}
 		})	
 	});
-	//下载矢量图文件
-	$(".dlvh").click(function(){
-		var vengraveVh = $("#vengraveVh").val();
-		var url = getRootPath()+"/staticRes/custom/"+vengraveVh;
-		$.ajax({
-			 	url : url,
-				type : 'POST',
-				data :{
-					'filePath' : "custom",
-					'fileName': vengraveVh
-				},
-				success : function(data) {		
-					alert(data);
-				},
-				error : function(data) {		
-					alert(data);
-				}
-		 })
-	});
+
 	//发送给生产主管 
 	$(".sendPMC").click(function(){
-		var text_company = '<%=session.getAttribute("loginInfo.userShop")%>';
+		var text_company = '${shop}';
 		var text_url = getRootPath()+"/detail.do?id="+customId;
 		var url = "${ctx}/sendMassage.do";
 		 $.ajax({
@@ -186,63 +156,64 @@ $(function(){
 	if(stockGemJson != ""){
 		add("stockGem",stockGemJson)
 	}
-	//增加
-	function add(type,value){
-		var data = JSON.parse(value);
-		$.each(data, function (n, v) {
-			if(type == "chain"){
-				addChain(v);
-			} else if(type == "stockGem"){
-				addStockGem(v);
-			}
-		});
-	}
-	//增加链子
-	function addChain(data){
-		var i=1;
-		for(var c=1;c<100;c++){
-			if($(".chain"+c).length==0){
-				i=c;
-				break;
-			}
-		}
-		var html="";
-		
-		html+= "<dd class='chainList chain"+i+"'>"+
-			   "<div class='cdetail'>"+
-			   "<div class='clear'></div>"+
-			   "<strong class='chain_name'>"+data.vchainName+"</strong>" +
-			   "<b>"+data.ichainItem+"条</b>"+
-			   "</div>" +
-			   "</dd>";
-		
-		$(".chain").append(html);
-	}
-	//增加库选石
-	function addStockGem(data){
-		var i=1;
-		 for(var g=1;g<100;g++){
-			 if($(".stockGem"+g).length==0){
-				 i=g;
-				 break;
-			 }
-		 }
-		 var html="";
-			
-		 html+= "<dd class='stockGemList stockGem"+i+"'>"+
-				"<div class='sgdetail'>"+
-				"<span>库选石： </span>"+
-				"<img class='stockGem_img' src='"+data.vstockGemImgPath+"' style='border:50px'/><span>"+data.vstockGemName+"</span>"+
-				""+"  "+data.istockGemNum+"颗"+
-				"<input type='button' value='配' onclick='useGem("+data.id+")' class='ugem CUST-RL CC-RL PM-RL CAD-RL PMC-RL PPS-RL' />"+
-				"</div>" +
-				"</dd>";
-			
-		$(".StockGem").append(html);
-
-	}
+	$('a[rel*=downloadr]').downloadr();
 	
 });
+//增加
+function add(type,value){
+	var data = JSON.parse(value);
+	$.each(data, function (n, v) {
+		if(type == "chain"){
+			addChain(v);
+		} else if(type == "stockGem"){
+			addStockGem(v);
+		}
+	});
+}
+//增加链子
+function addChain(data){
+	var i=1;
+	for(var c=1;c<100;c++){
+		if($(".chain"+c).length==0){
+			i=c;
+			break;
+		}
+	}
+	var html="";
+	
+	html+= "<dd class='chainList chain"+i+"'>"+
+		   "<div class='cdetail'>"+
+		   "<div class='clear'></div>"+
+		   "<strong class='chain_name'>"+data.vchainName+"</strong>" +
+		   "<b>"+data.ichainItem+"条</b>"+
+		   "</div>" +
+		   "</dd>";
+	
+	$(".chain").append(html);
+}
+//增加库选石
+function addStockGem(data){
+	var i=1;
+	 for(var g=1;g<100;g++){
+		 if($(".stockGem"+g).length==0){
+			 i=g;
+			 break;
+		 }
+	 }
+	 var html="";
+		
+	 html+= "<dd class='stockGemList stockGem"+i+"'>"+
+			"<div class='sgdetail'>"+
+			"<span>库选石： </span>"+
+			"<img class='stockGem_img' src='"+data.vstockGemImgPath+"' style='border:50px'/><span>"+data.vstockGemName+"</span>"+
+			""+"  "+data.istockGemNum+"颗"+
+			"<input type='button' value='配' onclick='useGem("+data.id+")' class='ugem CUST-RL CC-RL PM-RL CAD-RL PMC-RL PPS-RL' />"+
+			"</div>" +
+			"</dd>";
+		
+	$(".StockGem").append(html);
+
+}
 function useGem(stockGemId){
 	//跳转到配石单页面 
 	if(stockGemId != "" && stockGemId != undefined){
@@ -427,13 +398,13 @@ function useGem(stockGemId){
 	            </dl>
 	            <div class="clear"></div>
 	            <div class="dzd_right_btm d1 CUST-RL CC-RL PM-RL PPS-RL GB-RL PMC-RL PMC-RL">
-	              <span class="gf" ><a class="dlcad" href="#">下载CAD</a> </span>
-	              <b><a class="dlvh" href="#">下载矢量图</a></b>
+	              <span class="gf" ><a class="dlcad" href="${ctx}/staticRes/custom/${customDetail['vcadFile'] }" rel="downloadr" title="下载CAD文件">下载CAD</a> </span>
+	              <b><a class="dlvh" href="${ctx}/staticRes/custom/${customDetail['vengraveVh'] }" rel="downloadr" title="下载矢量图">下载矢量图</a></b>
 	              <div class="clear"></div>
 	            </div>
 	            <div class="dzd_right_btm CUST-RL PPS-RL GB-RL PMC-RL CAD-RL PMC-RL">
 	              <input type='text' class="gf" value=''>
-	              <b><a href="" class="sendPMC">通知QC</a></b>
+	              <b><a href="#" class="sendPMC">通知QC</a></b>
 	              <div class="clear"></div>
 							<input type="button" value="进入编辑页" class="dzd_close" />
 						</div>
