@@ -17,11 +17,13 @@ import org.springframework.web.servlet.ModelAndView;
 import com.bavlo.counter.constant.IConstant;
 import com.bavlo.counter.model.custom.CustomBVO;
 import com.bavlo.counter.model.custom.CustomVO;
+import com.bavlo.counter.model.customer.CustomerVO;
 import com.bavlo.counter.model.order.AddressVO;
 import com.bavlo.counter.model.order.OrderBVO;
 import com.bavlo.counter.model.order.OrderCVO;
 import com.bavlo.counter.model.order.OrderVO;
 import com.bavlo.counter.service.custom.itf.ICustomService;
+import com.bavlo.counter.service.customer.itf.ICustomerService;
 import com.bavlo.counter.service.order.itf.IOrderService;
 import com.bavlo.counter.utils.CommonUtils;
 import com.bavlo.counter.utils.JsonUtils;
@@ -43,6 +45,8 @@ public class OrderController extends BaseController {
 	IOrderService orderService;
 	@Resource
 	ICustomService customService;
+	@Resource
+	private ICustomerService customerService;
 
 	@RequestMapping(value="/list")
 	public ModelAndView orderList(String listType){
@@ -213,6 +217,12 @@ public class OrderController extends BaseController {
 	public ModelAndView orderEdit(@RequestParam(value="id",required=true) Integer id){
 		
 		OrderVO orderVO = orderService.findSigleOrder(id);
+		if(orderVO != null){
+			CustomerVO vo =	customerService.findCustomerById(orderVO.getCustomerId());
+			if(vo != null){
+				orderVO.setVdef1(vo.getVhendimgurl());
+			}
+		}
 		
 		ModelAndView model = new ModelAndView(IConstant.PATH_ORDER + IConstant.ORDER_EDIT);
 		model.addObject("pageOrderType", IConstant.PAGE_TYPE_EDIT);
@@ -224,6 +234,12 @@ public class OrderController extends BaseController {
 	public ModelAndView orderView(@RequestParam(value="id",required=true) Integer id){
 		
 		OrderVO orderVO = orderService.findOrderInfoBySql(id);
+		if(orderVO != null){
+			CustomerVO vo =	customerService.findCustomerById(orderVO.getCustomerId());
+			if(vo != null){
+				orderVO.setVdef1(vo.getVhendimgurl());
+			}
+		}
 		
 		ModelAndView model = new ModelAndView(IConstant.PATH_ORDER + IConstant.ORDER_VIEW);
 		model.addObject("pageOrderType", IConstant.PAGE_TYPE_VIEW);

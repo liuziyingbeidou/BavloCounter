@@ -191,7 +191,7 @@ public class OrderService extends CommonService implements IOrderService {
 		StringBuilder sql = new StringBuilder();
 		sql.append("select ");
 		sql.append(" a.id,a.vdelivery_way,a.ddeliverdate,a.vinvoice_title,a.vinvoice_content,a.vordermemo,a.iorder_state,a.vorder_code,a.vcourier_number");
-		sql.append(",c.vreceiver_name as vrname,c.vprovince vdef1,c.vcity as vdef2,c.vdistrict as vdef3,c.vstreet as vdef4,c.vphone_code as vtel,c.vemail as vmail");
+		sql.append(",c.vreceiver_name as vrname,c.vprovince vdef1,c.vcity as vdef2,c.vdistrict as vdef3,c.vstreet as vdef4,c.vphone_code as vtel,c.vemail as vmail,a.customer_id");
 		sql.append(" from blct_order a");
 		sql.append(" left join blct_address c");
 		sql.append(" on a.address_id=c.id");
@@ -240,6 +240,7 @@ public class OrderService extends CommonService implements IOrderService {
 				dto.setVaddress(vdef1+ " " + vdef2 + " " + vdef3 + " " +  vdef4);
 				dto.setVtel(CommonUtils.isNull(arry[14]) ? "" :arry[14]+"");
 				dto.setVmail(CommonUtils.isNull(arry[15]) ? "" :arry[15]+"");
+				dto.setCustomerId(CommonUtils.isNull(arry[16]) ? null :Integer.valueOf(arry[16]+""));
 				nList.add(dto);
 			}
 		}
