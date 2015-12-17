@@ -29,6 +29,9 @@
 $(function(){
 	//客户
 	setValueByFrame("customer","${ordervo['id']}");
+	if("${ordervo['vdef1']}" != "" && "${ordervo['vdef1']}" != null){
+		$(".cusheader").prop("src","${ordervo['vdef1']}");
+	}
 	//订单清单
 	loadOrderList();
 	//订单列表
@@ -171,6 +174,17 @@ function loadOrderList(){
 .hidden_enent1 { width:110px; position:absolute; top:10px; right:365px; z-index:9999}
 .edit_hidden1 { width:110px; position:absolute; top:10px; left:350px; z-index:9999}
 .resave{cursor:pointer;}
+.oedit input {
+    width: 325px;
+    text-align: center;
+    font-size: 14px;
+    background: #777;
+    color: #fff;
+    border: none;
+    height: 40px;
+    line-height: 40px;
+    margin-top:4px;
+}
 </style>
 </head>
 
@@ -203,7 +217,7 @@ function loadOrderList(){
 	<div class="main">
     <div class="mainleft">
       <div class="customer">
-		<div class="cu_pic"><img src="${ctx}/resources/images/customer_01.png"></div>
+		<div class="cu_pic"><img class="cusheader" src="${ctx}/resources/images/customer_01.png"></div>
       </div>
       <div class="gylc">
 		<dl class="barbox">
