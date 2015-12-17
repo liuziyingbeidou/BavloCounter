@@ -258,7 +258,7 @@
 						<div class="edit_1">
 							<select id="vcity" name="vcity" class="edit_2 edit_1_area lose-cus"></select>
 							<select id="vdistrict" name="vdistrict"
-								class="edit_2 edit_1_area_son lose-cus"></select>
+								class="edit_2 edit_1_area_son"></select>
 							<div class="clear"></div>
 						</div>
 						<div class="edit_1">
