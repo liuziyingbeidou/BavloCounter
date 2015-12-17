@@ -201,9 +201,15 @@ public class CustomService extends CommonService implements ICustomService {
 
 	@Override
 	public CustomDVO findCustomDVOBySql(Integer did) {
-		CustomDVO dvo = findFirstByDr(CustomDVO.class, " id ="+did);
-		CustomVO vo = findFirstByDr(CustomVO.class," id="+dvo.getId());
-		dvo.setVdef1(vo.getVcustomCode());
+		CustomDVO dvo = null;
+		if(did != null){
+			dvo = findFirstByDr(CustomDVO.class, " id ="+did);
+			if(dvo != null){
+				CustomVO vo = findFirstByDr(CustomVO.class," id="+dvo.getId());
+				dvo.setVdef1(vo.getVcustomCode());
+			}
+		}
+		
 		return dvo;
 	}
 

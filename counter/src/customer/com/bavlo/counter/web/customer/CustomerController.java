@@ -111,6 +111,8 @@ public class CustomerController extends BaseController implements IConstant {
 		String wh = "";
 		if(StringUtil.isNotEmpty(content)){
 			wh = " vcustomerCode like '%"+content+"%' or vname like '%"+content+"%' or vphoneCode like '%"+content+"%'";
+		}else{
+			wh = " 1=1 ";
 		}
 		/**角色权限控制--开始**/
 		Object lgObj = request.getSession().getAttribute("loginInfo");

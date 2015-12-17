@@ -32,6 +32,10 @@ public class UseGemVO extends IdEntity {
 	 */
 	private Long gemId;
 	/**
+	 * 库选石id
+	 */
+	private Integer customdId;
+	/**
 	 * 编号	
 	 */
 	@Column(length=50)
@@ -64,9 +68,17 @@ public class UseGemVO extends IdEntity {
 	 */
 	private String vspec;
 	/**
+	 * 规格2
+	 */
+	private String vspec2;
+	/**
+	 * 规格3
+	 */
+	private String vspec3;
+	/**
 	 * 创建时间	
 	 */
-	private String vcreateTime;	
+	private String vcreateTime;
 
 	public Long getCustomerId() {
 		return customerId;
@@ -134,5 +146,22 @@ public class UseGemVO extends IdEntity {
 	public Double getNworth() {
 		return nworth;
 	}
-
+	public Integer getCustomdId() {
+		return customdId;
+	}
+	public void setCustomdId(Integer customdId) {
+		this.customdId = customdId;
+	}
+	public String getVspec2() {
+		return vspec2;
+	}
+	public void setVspec2(String vspec2) {
+		this.vspec2 = vspec2;
+	}
+	public String getVspec3() {
+		return vspec3;
+	}
+	public void setVspec3(String vspec3) {
+		this.vspec3 = vspec3;
+	}
 }
