@@ -12,9 +12,11 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.bavlo.counter.constant.IConstant;
-import com.bavlo.counter.model.customer.CustomerVO;
+import com.bavlo.counter.model.custom.CustomDVO;
 import com.bavlo.counter.model.useGem.UseGemVO;
+import com.bavlo.counter.service.custom.itf.ICustomService;
 import com.bavlo.counter.service.useGem.itf.IUseGemService;
+import com.bavlo.counter.utils.CommonUtils;
 import com.bavlo.counter.utils.StringUtil;
 import com.bavlo.counter.web.BaseController;
 
@@ -31,6 +33,9 @@ public class UseGemController extends BaseController implements IConstant {
 	
 	@Resource
 	private IUseGemService useGemService;
+	
+	@Resource 
+	private ICustomService customService;
 
 	/**
 	 * @Description: 配石单详情
@@ -38,11 +43,20 @@ public class UseGemController extends BaseController implements IConstant {
 	 * @return ModelAndView
 	 */
 	@RequestMapping("info")
-	public ModelAndView info(Map<String, Object> map, Integer id) {
-
-		UseGemVO useGemDetail = useGemService.findUseGemById(id);
+	public ModelAndView info(Map<String, Object> map, Integer id,Integer did) {
 		
+		UseGemVO useGemDetail = null;
+		if(did == null){
+			if(id != null){
+				useGemDetail = useGemService.findUseGemById(id);
+				did = useGemDetail.getCustomdId();
+			}
+		}
+		CustomDVO dvo = customService.findCustomDVOBySql(did);
 		map.put("useGemDetail", useGemDetail);
+		map.put("customDVO", dvo);
+		//编号
+		map.put("number", CommonUtils.getBillCode(IConstant.CODE_ORDER));
 		return new ModelAndView(PATH_USE_GEM + "useGemEdit");
 	}
 
@@ -72,7 +86,7 @@ public class UseGemController extends BaseController implements IConstant {
 	}
 	
 	/**
-	 * @Description: 获取客户列表JSON
+	 * @Description: 获取配石单列表JSON
 	 * @param @param map
 	 * @param @return
 	 * @return ModelAndView
@@ -82,7 +96,7 @@ public class UseGemController extends BaseController implements IConstant {
 		String content = request.getParameter("content");
 		String wh = "";
 		if(StringUtil.isNotEmpty(content)){
-			wh = " vtype like '%"+content+"%' or vshape like '%"+content+"%'";
+			wh = " c.vcustom_code like '%"+content+"%' or a.vnumber like '%"+content+"%'";
 		}
 		List<UseGemVO> useGemList = useGemService.findUseGemList(wh);
 		renderJson(useGemList);
