@@ -45,6 +45,8 @@ public class UseGemVO extends IdEntity {
 	 */
 	@Column(length=50)
 	private String vtype;
+	@Column(length=50)
+	private String vtypeName;
 	/**
 	 * 声明价值		decimal(20,8)
 	 */
@@ -63,6 +65,10 @@ public class UseGemVO extends IdEntity {
 	 * 形状
 	 */
 	private String vshape;
+	/**
+	 * 形状
+	 */
+	private String vshapeName;
 	/**
 	 * 规格
 	 */
@@ -163,5 +169,17 @@ public class UseGemVO extends IdEntity {
 	}
 	public void setVspec3(String vspec3) {
 		this.vspec3 = vspec3;
+	}
+	public String getVtypeName() {
+		return vtypeName;
+	}
+	public void setVtypeName(String vtypeName) {
+		this.vtypeName = vtypeName;
+	}
+	public String getVshapeName() {
+		return vshapeName;
+	}
+	public void setVshapeName(String vshapeName) {
+		this.vshapeName = vshapeName;
 	}
 }

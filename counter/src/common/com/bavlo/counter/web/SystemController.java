@@ -28,4 +28,10 @@ public class SystemController extends BaseController {
 		System.out.println("µÇÂ¼ÈËÐÅÏ¢:"+JsonUtils.getJsonString4JavaPOJO(loginInfo));
 		return model;
 	}
+	
+	@RequestMapping(value={"/exit.do"})
+	public void exit(){
+		session.removeAttribute("loginInfo");
+		renderText("0");
+	}
 }

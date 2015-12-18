@@ -3,13 +3,14 @@ package com.bavlo.counter.service.useGem.impl;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.annotation.Resource;
+
 import net.sf.json.JSONArray;
 
 import org.springframework.stereotype.Service;
 
-import com.bavlo.counter.constant.IConstant;
-import com.bavlo.counter.model.sign.EntitySignVO;
 import com.bavlo.counter.model.useGem.UseGemVO;
+import com.bavlo.counter.service.custom.itf.ICustomService;
 import com.bavlo.counter.service.impl.CommonService;
 import com.bavlo.counter.service.useGem.itf.IUseGemService;
 import com.bavlo.counter.utils.CommonUtils;
@@ -27,6 +28,9 @@ import com.bavlo.counter.utils.StringUtil;
 @Service("UseGemService")
 public class UseGemService extends CommonService implements IUseGemService {
 
+	@Resource
+	private ICustomService customService;
+	
 	@Override
 	public void saveUseGem(UseGemVO useGemVO) {
 
@@ -46,6 +50,7 @@ public class UseGemService extends CommonService implements IUseGemService {
 	public void saveOrUpdateUseGem(UseGemVO useGemVO) {
 		try {
 			saveOrUpdate(useGemVO);
+			customService.backCustomByUseGem(useGemVO.getCustomdId(), useGemVO);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

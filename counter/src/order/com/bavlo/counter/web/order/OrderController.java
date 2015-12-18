@@ -62,11 +62,16 @@ public class OrderController extends BaseController {
 	@RequestMapping(value="/listJson",method = RequestMethod.POST)
 	public void orderListJson(HttpServletRequest request){
 		String content = request.getParameter("content");
-		/*String wh = " 1=1";
+		String wh = "";
 		if(StringUtil.isNotEmpty(content)){
-			wh = " vorderCode like '%"+content+"%'";
-		}*/
-		List<OrderVO> orderList = orderService.findListOrderBySql(content);
+			wh = " a.vorder_code like '%"+content+"%'";
+		}
+		
+		/**角色权限控制----开始**/
+		wh = getAuthSQL(wh, "b.vservice_code");
+		/**角色权限控制----结束**/
+		
+		List<OrderVO> orderList = orderService.findListOrderBySql(wh);
 		
 		renderJson(orderList);
 	}

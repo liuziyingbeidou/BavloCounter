@@ -115,7 +115,8 @@ public class CustomerController extends BaseController implements IConstant {
 			wh = " 1=1 ";
 		}
 		/**角色权限控制--开始**/
-		Object lgObj = request.getSession().getAttribute("loginInfo");
+		wh = getAuthSQL(wh,"vserviceCode");
+		/*Object lgObj = request.getSession().getAttribute("loginInfo");
 		if(lgObj != null){
 			//当前登录人信息
 			LoginVO lgInfo = (LoginVO)lgObj;
@@ -131,7 +132,7 @@ public class CustomerController extends BaseController implements IConstant {
 			}
 		}else{
 			wh = " 1=2";
-		}
+		}*/
 		/**角色权限控制--结束**/
 		List<CustomerVO> customerList = customerService.findCustomerList(wh);
 		renderJson(customerList);
