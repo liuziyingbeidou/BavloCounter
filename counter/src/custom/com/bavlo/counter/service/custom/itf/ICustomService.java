@@ -6,6 +6,7 @@ import com.bavlo.counter.model.custom.CustomBVO;
 import com.bavlo.counter.model.custom.CustomCVO;
 import com.bavlo.counter.model.custom.CustomDVO;
 import com.bavlo.counter.model.custom.CustomVO;
+import com.bavlo.counter.model.useGem.UseGemVO;
 
 /**
  * @Title: 宝珑Counter
@@ -146,5 +147,13 @@ public interface ICustomService {
 	 * @return CustomDVO
 	 */
 	public CustomDVO findCustomDVOBySql(Integer did);
+	
+	/**
+	 * @Description: 配石单回写库选石
+	 * @param @param did
+	 * @param @param useGemVO
+	 * @return void
+	 */
+	public void backCustomByUseGem(Integer did,UseGemVO useGemVO);
 
 }

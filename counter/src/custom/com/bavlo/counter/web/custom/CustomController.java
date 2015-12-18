@@ -381,6 +381,11 @@ public class CustomController extends BaseController implements IConstant {
 		if(StringUtil.isNotEmpty(content)){
 			wh = " and a.vcustom_code like '%"+content+"%' or c.vname like '%"+content+"%' or c.vphone_code like '%"+content+"%'";
 		}
+		
+		/**角色权限控制--开始**/
+		wh = getAuthSQL(wh,"c.vservice_code");
+		/**角色权限控制--结束**/
+		
 		List<CustomVO> customList = customService.findCustomByWh(wh);
 		renderJson(customList);
 	}

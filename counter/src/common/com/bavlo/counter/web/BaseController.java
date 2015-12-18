@@ -28,6 +28,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.bavlo.counter.commonbeans.Page;
 import com.bavlo.counter.constant.IConstant;
+import com.bavlo.counter.model.LoginVO;
 import com.bavlo.counter.utils.JsonUtils;
 import com.bavlo.counter.utils.ScaleImage;
 import com.bavlo.counter.utils.StringHelper;
@@ -464,5 +465,29 @@ public class BaseController{
 					ImageIO.write(scaledImage, "jpeg", out);
 				}
 		    	
+		    }
+		    
+		    public String getAuthSQL(String baseSQL,String codeFile){
+		    	String wh = baseSQL == null ? "" : baseSQL;
+		    	/**角色权限控制--开始**/
+				Object lgObj = request.getSession().getAttribute("loginInfo");
+				if(lgObj != null){
+					//当前登录人信息
+					LoginVO lgInfo = (LoginVO)lgObj;
+					List<String> roleList = lgInfo.getRole();
+					if(roleList != null){
+						//非PM
+						if(!roleList.contains(IConstant.ROLE_PM)){
+							//当前登录定制顾问下的客户
+							wh += " and "+codeFile+" ='"+lgInfo.getKfcode()+"'";
+						}
+					}else{
+						wh = " 1=2";
+					}
+				}else{
+					wh = " 1=2";
+				}
+				/**角色权限控制--结束**/
+				return wh;
 		    }
 }

@@ -1,5 +1,6 @@
 package com.bavlo.counter.service.custom.impl;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -11,6 +12,7 @@ import com.bavlo.counter.model.custom.CustomBVO;
 import com.bavlo.counter.model.custom.CustomCVO;
 import com.bavlo.counter.model.custom.CustomDVO;
 import com.bavlo.counter.model.custom.CustomVO;
+import com.bavlo.counter.model.useGem.UseGemVO;
 import com.bavlo.counter.service.custom.itf.ICustomService;
 import com.bavlo.counter.service.impl.CommonService;
 import com.bavlo.counter.utils.CommonUtils;
@@ -213,6 +215,49 @@ public class CustomService extends CommonService implements ICustomService {
 		}
 		
 		return dvo;
+	}
+
+	@Override
+	public void backCustomByUseGem(Integer did, UseGemVO useGemVO) {
+		if(StringUtil.isNotEmpty(did+"")){
+			CustomDVO dvo = findFirst(CustomDVO.class, " id="+did);
+			if(useGemVO != null){
+				boolean isupdate = false;
+				//类型
+				if(StringUtil.isNotEmpty(useGemVO.getVtypeName())){
+					dvo.setVstockGemName(useGemVO.getVtypeName());
+					isupdate = true;
+				}
+				//价值
+				if(StringUtil.isNotEmpty(useGemVO.getNworth()+"")){
+					dvo.setNstockGemCost(BigDecimal.valueOf(useGemVO.getNworth()));
+					isupdate = true;
+				}
+				//形状
+				if(StringUtil.isNotEmpty(useGemVO.getVshapeName())){
+					dvo.setVstockGemShape(useGemVO.getVshapeName());
+					isupdate = true;
+				}
+				//重量
+				if(StringUtil.isNotEmpty(useGemVO.getNweight()+"")){
+					dvo.setNstockGemWeight(BigDecimal.valueOf(useGemVO.getNweight()));
+					isupdate = true;
+				}
+				//数量
+				if(StringUtil.isNotEmpty(useGemVO.getIcount()+"")){
+					dvo.setIstockGemNum(useGemVO.getIcount());
+					isupdate = true;
+				}
+				//规格
+				if(StringUtil.isNotEmpty(useGemVO.getVspec()) && StringUtil.isNotEmpty(useGemVO.getVspec2()) && StringUtil.isNotEmpty(useGemVO.getVspec3())){
+					dvo.setVstockGemSize(useGemVO.getVspec()+","+useGemVO.getVspec2()+","+useGemVO.getVspec3());
+					isupdate = true;
+				}
+				if(isupdate){
+					update(dvo);
+				}
+			}
+		}
 	}
 
 }

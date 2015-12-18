@@ -90,8 +90,9 @@ public class OrderService extends CommonService implements IOrderService {
 		sql.append(" from blct_order a");
 		sql.append(" left join blct_customer b");
 		sql.append(" on a.customer_id=b.id");
+		sql.append(" where ifnull(a.dr,0)=0");
 		if(StringUtil.isNotEmpty(wh)){
-			sql.append(" where a.vorder_code like '%"+wh+"%'");
+			sql.append(wh);
 		}
 		sql.append(" order by a.id desc");
 		
