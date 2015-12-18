@@ -26,10 +26,11 @@ $(function(){
 	var customId = $("#customId").val();
 	$(".sendCM").click(function() {
 		sendTMessage(toUser);
-	})
+	});
 	function sendTMessage(toUser){
-		 var url = getRootPath()+"/detail.do?id="+customId;
-		 $.ajax({
+		 var url = getRootPath()+"/custom/detail.do?id="+customId;
+		 $.post("${ctx}/sendTM.do",{toUser:toUser,url:url},function(data){if(data == ""){data = "发送失败!";}alert(data);});
+		/* $.ajax({
 			 url : '../sendTM.do',
 				type : 'POST',
 				data :{
@@ -40,7 +41,7 @@ $(function(){
 				error : function(data) {		
 					alert("发送成功");
 				}
-		 })	 	
+		 })*/	 	
 	}
 });
 function closeMenu(){
@@ -85,7 +86,7 @@ function getRootPath(){
      <li class="role-list" bv-role="PMC" bv-title="生产主管"><a href="#">发生产主管</a></li>
      </c:if>
      <c:if test="${fn:contains('[CC-RL]',role)}">
-     <li><a class="sendCM" href="#">发客户</a></li>
+     <li style="display: none;" class="menu-send-cust"><a class="sendCM" href="#">发客户</a></li>
      </c:if>
 </c:forEach>
 
