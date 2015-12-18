@@ -176,6 +176,10 @@
 			return;
 		}
 		
+		//重置下拉框到隐藏域
+		$("#typeName").val($("#gemTypeId  option:selected").text());
+		$("#shapeName").val($("#gemShapeId  option:selected").text());
+		
 		//数量
     	clearSuffix("useGem-count","颗");
     	//重量
@@ -360,6 +364,7 @@
 						<select name="vtype" class="qsdr r1 bl-ck-null useGem" id="gemTypeId">
 							<option value="-1">请选择</option>
 						</select>
+						<input type="hidden" name="vtypeName" id="typeName" value="${useGemDetail['vtypeName'] }">
 						<dt>
 							<input type='text' id='nworth' name='nworth' class="qsdr r2 useGem-worth bl-ck-null useGem"
 								value="${useGemDetail['nworth']}" placeholder="价值（元）">
@@ -370,7 +375,7 @@
 						<select name="vshape" class="qsdr r1 bl-ck-null useGem" id="gemShapeId">
 							<option value="-1">请选择</option>
 						</select>
-						
+						<input type="hidden" name="vshapeName" id="shapeName" value="${useGemDetail['vshapeName'] }">
 						<dt>
 							<input type='text' id='nweight' name='nweight' class="qsdr r2 useGem-weight bl-ck-null useGem"
 								value="${useGemDetail['nweight']}" placeholder="重量（ct）">

@@ -53,6 +53,8 @@
 <script src="/counter/resources/Downloadr/downloadr/downloadr.js" type="text/javascript"></script>
 <script type="text/javascript">
 $(function(){
+	//发送客户显示
+	$(".menu-send-cust").show();
 	
 	var customId = $("#customId").val();
 	var orderId = $("#orderId").val();
@@ -108,13 +110,13 @@ $(function(){
 			},
 			error : function(data) {		
 			}
-		})	
+		});
 	});
 
 	//发送给生产主管 
 	$(".sendPMC").click(function(){
 		var text_company = '${shop}';
-		var text_url = getRootPath()+"/detail.do?id="+customId;
+		var text_url = getRootPath()+"/custom/detail.do?id="+customId;
 		var url = "${ctx}/sendMassage.do";
 		 $.ajax({
 			 	url : url,
@@ -227,6 +229,17 @@ function useGem(stockGemId){
 	}
 }
 </script>
+<style type="text/css">
+.edit_hidden2 { width:110px; position:relative; top:10px; left:-15px; z-index:9999}
+.hidden_enent2 { width:110px; position:relative; top:10px; right:-243px; z-index:9999}
+@media screen and (max-width: 1280px) and (min-width: 320px){
+.qsd_left ul li {
+	height:auto;
+}
+.edit_hidden2 { width:110px; position:relative; top:10px; left:-15px; z-index:9999}
+.hidden_enent2 { width:120px; position:relative; top:10px; right:-243px; z-index:9999}
+}
+</style>
 </head>
 
 <body>

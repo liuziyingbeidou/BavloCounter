@@ -90,6 +90,14 @@ $(function(){
 		openURL("${ctx}/useGem/list.do?listType=menu","配石单列表",470,550);
 		closeMenu();
 	});
+	//退出系统
+	$(".menu-system-close").bind("click",function(){
+		$.post("${ctx}/exit.do",function(data){
+			if(data == "0"){
+				window.close();
+			}
+		});
+	});
 });
 
 function closeMenu(){
@@ -123,6 +131,6 @@ function closeMenu(){
      <li class="menu-customer-list"><a href="#">客户</a></li>
      </c:if>
 </c:forEach>
-<li class="menu-useGem-list"><a href="#">配石单</a></li>
+<li class="menu-system-close"><a href="#">退出</a></li>
 
 

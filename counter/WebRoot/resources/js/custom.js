@@ -10,6 +10,8 @@
 var nativeUrl = "/counter/webservice/http.do";
 
 $(function(){
+	//发送客户显示
+	$(".menu-send-cust").show();
 	
 	//款式单ID
 	var customId = $("#customId").val();
@@ -219,12 +221,12 @@ $(function() {
 	
 	//宝石签收单列表
 	$(".kzs_guanlian").bind("click",function(){
-		openURL("/counter/gem-sign/list.do","宝石签收单列表");
+		openURL("/counter/gem-sign/list.do","宝石签收单列表",470,550);
 		gemSignClass = "kzs_img";
 	});
 	//宝石签收单列表
 	$(".kps_guanlian").bind("click",function(){
-		openURL("/counter/gem-sign/list.do","宝石签收单列表");
+		openURL("/counter/gem-sign/list.do","宝石签收单列表",470,550);
 		gemSignClass = "kps_img";
 	});
 	//宝石弹框
