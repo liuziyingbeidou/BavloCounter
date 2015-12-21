@@ -73,7 +73,15 @@ public class CustomerController extends BaseController implements IConstant {
 	 */
 	@RequestMapping("saveOrUpdate")
 	public String saveOrUpdate(CustomerVO customerVO) {
-
+		if(StringUtil.isEmpty(customerVO.getVserviceCode())){
+			//非微信扫码添加
+			Object lgObj = request.getSession().getAttribute("loginInfo");
+			if(lgObj != null){
+				//当前登录人信息
+				LoginVO lgInfo = (LoginVO)lgObj;
+				customerVO.setVserviceCode(lgInfo.getKfcode());
+			}
+		}
 		customerService.saveOrUpdateCustomer(customerVO);
 		return REDIRECT + "customer/info.do";
 	}
@@ -115,7 +123,7 @@ public class CustomerController extends BaseController implements IConstant {
 			wh = " 1=1 ";
 		}
 		/**角色权限控制--开始**/
-		wh = getAuthSQL(wh,"vserviceCode");
+		wh = getAuthSQL(wh,"vserviceCode","to_userids");
 		/*Object lgObj = request.getSession().getAttribute("loginInfo");
 		if(lgObj != null){
 			//当前登录人信息

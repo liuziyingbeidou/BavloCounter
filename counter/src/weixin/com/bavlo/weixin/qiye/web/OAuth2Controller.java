@@ -1,6 +1,7 @@
 package com.bavlo.weixin.qiye.web;
 
 import java.io.UnsupportedEncodingException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -15,6 +16,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.bavlo.counter.constant.IConstant;
 import com.bavlo.counter.model.LoginVO;
 import com.bavlo.counter.model.manage.tools.QrcodeVO;
 import com.bavlo.counter.service.manage.tools.itf.IToolsService;

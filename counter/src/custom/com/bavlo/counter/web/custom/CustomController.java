@@ -34,6 +34,7 @@ import com.bavlo.counter.service.sign.itf.IGemSignService;
 import com.bavlo.counter.utils.CommonUtils;
 import com.bavlo.counter.utils.StringUtil;
 import com.bavlo.counter.web.BaseController;
+import com.bavlo.weixin.qiye.interceptor.OAuthRequired;
 
 /**
  * @Title: 宝珑Counter
@@ -97,6 +98,7 @@ public class CustomController extends BaseController implements IConstant {
 	 * @return ModelAndView
 	 */
 	@RequestMapping("detail")
+	@OAuthRequired
 	public ModelAndView detail(HttpSession session,Integer id) {
 		
 		ModelAndView model = new ModelAndView(PATH_CUSTOM + "customDetail");
@@ -383,7 +385,7 @@ public class CustomController extends BaseController implements IConstant {
 		}
 		
 		/**角色权限控制--开始**/
-		wh = getAuthSQL(wh,"c.vservice_code");
+		wh = getAuthSQL(wh,"c.vservice_code","c.to_userids");
 		/**角色权限控制--结束**/
 		
 		List<CustomVO> customList = customService.findCustomByWh(wh);

@@ -467,7 +467,7 @@ public class BaseController{
 		    	
 		    }
 		    
-		    public String getAuthSQL(String baseSQL,String codeFile){
+		    public String getAuthSQL(String baseSQL,String codeFiled,String toUseridFiled){
 		    	String wh = baseSQL == null ? "" : baseSQL;
 		    	/**角色权限控制--开始**/
 				Object lgObj = request.getSession().getAttribute("loginInfo");
@@ -478,8 +478,13 @@ public class BaseController{
 					if(roleList != null){
 						//非PM
 						if(!roleList.contains(IConstant.ROLE_PM)){
-							//当前登录定制顾问下的客户
-							wh += " and "+codeFile+" ='"+lgInfo.getKfcode()+"'";
+							//客服以及转发与
+							if(StringUtil.isNotEmpty(lgInfo.getUserId())){
+								wh += " and ("+codeFiled+" ='"+lgInfo.getKfcode()+"' or "+toUseridFiled +" like '%"+lgInfo.getUserId()+"%')";
+							}else{
+								//当前登录定制顾问下的客户
+								wh += " and "+codeFiled+" ='"+lgInfo.getKfcode()+"'";
+							}
 						}
 					}else{
 						wh = " 1=2";

@@ -25,4 +25,7 @@ public class Constants {
 	
 	//企业号AccessToken
 	public static final String AccessToken = "AccessToken";
+	
+	//生产主管
+	public static final String PMC_USERID = "dingli";
 }

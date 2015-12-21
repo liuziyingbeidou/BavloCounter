@@ -19,6 +19,7 @@ public class CustomerVO extends IdEntity {
 	/** 
 	 * 加盟店ID 
 	 */ 
+	@Column(length=200)
 	private String agentId;
 	/** 
 	 * 客服编号
@@ -115,6 +116,11 @@ public class CustomerVO extends IdEntity {
 	private String vsubscribeTime;
 	//关注状态
 	private Integer vsubscribeState;
+	
+	/**
+	 * 转发与过的userid
+	 */
+	private String toUserids;
 
 	public String getAgentId() {
 		return agentId;
@@ -282,6 +288,14 @@ public class CustomerVO extends IdEntity {
 
 	public void setVsubscribeState(Integer vsubscribeState) {
 		this.vsubscribeState = vsubscribeState;
+	}
+
+	public String getToUserids() {
+		return toUserids;
+	}
+
+	public void setToUserids(String toUserids) {
+		this.toUserids = toUserids;
 	}
 
 }

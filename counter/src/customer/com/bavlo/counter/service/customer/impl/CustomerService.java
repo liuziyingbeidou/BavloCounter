@@ -6,9 +6,11 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.bavlo.counter.constant.IConstant;
 import com.bavlo.counter.model.customer.CustomerVO;
+import com.bavlo.counter.model.order.OrderBVO;
 import com.bavlo.counter.service.customer.itf.ICustomerService;
 import com.bavlo.counter.service.impl.CommonService;
 import com.bavlo.counter.utils.CommonUtils;
@@ -84,6 +86,7 @@ public class CustomerService extends CommonService implements ICustomerService {
 	}
 
 	@Override
+	@Transactional
 	public String addCustomerByScan(String openId,HttpSession session,String scene_str) {
 		String vcode = null;
 		if(!isExistByCondition(" vopenid = '"+openId+"'")){
@@ -141,6 +144,12 @@ public class CustomerService extends CommonService implements ICustomerService {
 			conditions = condition;
 		}
 		return findFirst(CustomerVO.class, conditions);
+	}
+
+	@Override
+	public void updateCustomerByCondition(String conditions, String[] attrFiled,
+			String[] attrValue) {
+		updateAttrs(CustomerVO.class, attrFiled, attrValue, conditions);
 	}
 
 }
