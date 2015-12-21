@@ -114,6 +114,7 @@ $(function(){
 			freshOrderState("0");
 		});
 	});
+	
 });
 
 
@@ -129,9 +130,9 @@ function loadOrderList(){
 				if(type == "dz"){
 					var pic = "";
 					if(data[i].vpic != "" && data[i].vpic != null){
-						pic = "<img style='width:60px;height:60px;' class='bill-pic' src='${ctx}/staticRes/"+data[i].vpic+"'>";
+						pic = "<img style='width:60px;height:60px;' class='bill-pic' onclick='toCustom(\""+data[i].vsourceId+"\")' src='${ctx}/staticRes/"+data[i].vpic+"'>";
 					}else{
-						pic = "<img class='bill-pic' src='${ctx}/resources/images/good_01.png'>";
+						pic = "<img class='bill-pic' onclick='toCustom(\""+data[i].vsourceId+"\")' src='${ctx}/resources/images/good_01.png'>";
 					}
 					$("#order-list").append("<dd type='dz' sid='"+data[i].vsourceId+"' class='dz-"+data[i].vsourceId+" bill'>"+pic+"<input class='bill-num' onchange='calPrice("+data[i].vsourceId+")' type='text' placehoder='对' onum='"+data[i].nnumber+"'  value='"+data[i].nnumber+"'><b class='bill-price'>"+data[i].nprice+"元</b><a href='javascript:rlist("+data[i].vsourceId+")' class='close_c order_list_close'><img src='${ctx}/resources/images/close.png'></a></dd>");
 				}/*else if(type == "ch"){
@@ -334,7 +335,7 @@ function loadCumById(cumId){
 	var url = "${ctx}/order/getCumById.do";
 	$.get(url,{id:cumId},function(data){
 		//data = JSON.parse("{\"id\":\"1\",\"nprice\":\"23\"}");
-		$("#order-list").append("<dd type='dz' sid='"+data.id+"' class='dz-"+data.id+" bill'><img class='bill-pic' src='${ctx}/resources/images/good_01.png'><input class='bill-num' type='text' placehoder='对' value='1'><b class='bill-price'>"+data.nprice+"元</b><a href='javascript:rlist("+data.id+")' class='close_c'><img src='${ctx}/resources/images/close.png'></a></dd>");
+		$("#order-list").append("<dd type='dz' sid='"+data.id+"' class='dz-"+data.id+" bill'><img class='bill-pic' onclick='toCustom(\""+data[i].id+"\")' src='${ctx}/resources/images/good_01.png'><input class='bill-num' type='text' placehoder='对' value='1'><b class='bill-price'>"+data.nprice+"元</b><a href='javascript:rlist("+data.id+")' class='close_c'><img src='${ctx}/resources/images/close.png'></a></dd>");
 	});
 }
 
@@ -535,7 +536,7 @@ text-overflow:ellipsis;
 .barbox{width:315px;}
 .st-tj,.st-zb,.st-sc,.st-zj,.st-kd{width:56px;height:15px;background:url('/counter/resources/images/Arrow2.png') no-repeat;}
 .st-jf{width:16px;height:15px;background:url('/counter/resources/images/Arrow4.png') no-repeat}
-
+.bill-pic{cursor: pointer;}
 .hidden_enent1 a:hover,.edit_hidden1 a:hover{text-decoration:none;}
 @media screen and (max-width: 1280px) and (min-width: 320px){
 	
@@ -744,6 +745,13 @@ text-overflow:ellipsis;
 			}
 		});
 	});
+	//清单→款式单
+	function toCustom(customId){
+		if(confirm("确认是否已保存订单信息!")){
+			var url = "${ctx}/custom/detail.do?id="+customId;//根据id显示定制单信息
+			window.location = url;
+		}
+	}
 </script>
 	</body>
 </html>
