@@ -128,7 +128,7 @@
 					<select name="gemShapeId" id="gemShapeId">
 						<option value="-1">请选择</option>
 					</select>
-				</div>
+				</div> 
 				<div id="choose">
 					<select name="gemSpecId" id="gemSpecId">
 						<option value="-1">请选择</option>
