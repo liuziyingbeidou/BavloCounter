@@ -69,6 +69,16 @@ if(info != null){
 			url = "#";//电子柜台后台
 			window.location = url;
 		});
+		//重置
+		$(".menu-system-close").bind("click",function(){
+			startMask();
+			$.post("${ctx}/exit.do",function(data){
+				if(data == "0"){
+					var url = "${ctx}/index.do";
+					window.location = url;
+				}
+			});
+		});
     });
     
 </script>
@@ -145,6 +155,7 @@ if(info != null){
 			<c:if test="${empty uvo['muserId']}">
 			<button type="button" class="btn btn-default .btn-lg mgr-old-counter">电子柜台后台</button>
 			</c:if>
+			<button type="button" class="btn btn-default .btn-lg menu-system-close">重置</button>
       </div><!--/.nav-collapse -->
 
     </div> <!-- /container -->

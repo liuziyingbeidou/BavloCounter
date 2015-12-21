@@ -203,7 +203,7 @@
 <form id="entityfrmId" method="post">
 <input type="hidden" id="pageAttr" value="ENTITY"/>
 <input id="entityid" class="mid tableId"  type="hidden" name="id" value="${entityvo['id']}">
-<input id="customerId" type="hidden" name="customerId" value="${entityvo['customerId']}">
+<input id="customerId" class="tocustomerId" type="hidden" name="customerId" value="${entityvo['customerId']}">
 <div class="header">
 	<div class="head">
 		<div class="top1">

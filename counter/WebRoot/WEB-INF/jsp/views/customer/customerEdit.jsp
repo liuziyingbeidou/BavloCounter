@@ -6,7 +6,9 @@
 	<head>
 		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 		<meta name="viewport" content="width=device-width,target-densitydpi=high-dpi,initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no" />
-
+		<META HTTP-EQUIV="pragma" CONTENT="no-cache"> 
+		<META HTTP-EQUIV="Cache-Control" CONTENT="no-cache, must-revalidate"> 
+		<META HTTP-EQUIV="expires" CONTENT="0">
 		<title>编辑客户</title>
 <!--必要样式-->
 <link rel='stylesheet' href='${ctx}/resources/css/style.css' media='all' />
@@ -74,7 +76,6 @@
 					$("#vcity").val(customerCity);
 					$("#vcity").change();
 					$("#vdistrict").val(customerDistricte);*/
-					debugger
 					$("#vprovince").val(customerProvince);
 					$("#vprovince").change();
 					$("#vcity").val(customerCity);
@@ -163,6 +164,7 @@
 	<body>
 		<form id="customer">
 		<input type="hidden" id="pageAttr" value="CUST"/>
+		<input type="hidden" name='vserviceCode' value="${customerDetail.vserviceCode }" />
 			<div class="header">
 	<div class="head2">
 		<div class="top2">
@@ -223,7 +225,7 @@
 					</ul>
 					<div class="edit_btn">
 						<div class="edit_1">
-							<input type="hidden" id='customerid' class="tableId" name='id'
+							<input type="hidden" id='customerid' class="tableId tocustomerId" name='id'
 								value="${customerDetail.id }" />
 							<input type='text' id='vname' name='vname'
 								value="${customerDetail.vname }"

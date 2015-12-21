@@ -252,7 +252,7 @@
 	<form id="gemfrmId">
 	<input type="hidden" id="pageAttr" value="GEM"/>
 	<input id="gemid" class="mid tableId" type="hidden" name="id" value="${gemvo['id']}">
-	<input id="customerId" type="hidden" name="customerId" value="${gemvo['customerId']}">
+	<input id="customerId" class="tocustomerId" type="hidden" name="customerId" value="${gemvo['customerId']}">
 <div class="header">
 	<div class="head">
 		<div class="top1">

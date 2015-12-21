@@ -555,7 +555,7 @@ text-overflow:ellipsis;
 						 ${ordervo['iorderState']}
 						 </c:otherwise>	
 					</c:choose> ">
-<input type="hidden" name="customerId" id="customerId" value="${ordervo['customerId']}">
+<input type="hidden" name="customerId" class="tocustomerId" id="customerId" value="${ordervo['customerId']}">
 <div class="header">
 	<div class="head1">
 		<div class="top">
