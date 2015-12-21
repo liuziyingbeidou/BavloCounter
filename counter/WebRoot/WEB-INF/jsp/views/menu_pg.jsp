@@ -20,14 +20,24 @@ $(function(){
 	//角色控制标签
 	<%
 	if(roleList != null){
-		for(int i = 0; i < roleList.size(); i++){
-			String role = roleList.get(i);
-			if(role != null){
-			%>
-			$(".<%=role%>").hide();
-			<%
+		if(roleList.size() > 0){
+			for(int i = 0; i < roleList.size(); i++){
+				String role = roleList.get(i);
+				if(role != null){
+				%>
+				$(".<%=role%>").hide();
+				<%
+				}
 			}
+		}else{
+			%>
+			$(".CUST-RL").hide();
+			<%
 		}
+	}else{
+		%>
+		$(".CUST-RL").hide();
+		<%
 	}
 	%>
 	/* if("${isLogin}"){
@@ -90,11 +100,12 @@ $(function(){
 		openURL("${ctx}/useGem/list.do?listType=menu","配石单列表",470,550);
 		closeMenu();
 	});
-	//退出系统
+	//重置
 	$(".menu-system-close").bind("click",function(){
 		$.post("${ctx}/exit.do",function(data){
 			if(data == "0"){
-				window.close();
+				var url = "${ctx}/index.do";
+				window.location = url;
 			}
 		});
 	});
@@ -131,6 +142,6 @@ function closeMenu(){
      <li class="menu-customer-list"><a href="#">客户</a></li>
      </c:if>
 </c:forEach>
-<li class="menu-system-close"><a href="#">退出</a></li>
+<li class="menu-system-close"><a href="#">重置</a></li>
 
 

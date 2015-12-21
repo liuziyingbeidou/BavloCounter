@@ -1,4 +1,4 @@
-<%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
+<%@ page language="java" import="java.util.*,com.bavlo.weixin.qiye.util.Constants" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <c:set var="ctx" value="${pageContext.request.contextPath}" />
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
@@ -115,22 +115,11 @@ $(function(){
 
 	//发送给生产主管 
 	$(".sendPMC").click(function(){
-		var text_company = '${shop}';
-		var text_url = getRootPath()+"/custom/detail.do?id="+customId;
-		var url = "${ctx}/sendMassage.do";
-		 $.ajax({
-			 	url : url,
-				data :{
-				 	'touser' : 'shijianfeng',
-					'text': text_company+"/n"+text
-				},
-				success : function(data) {		
-					alert("发送成功");
-				},
-				error : function(data) {		
-					alert("发送失败");
-				}
-		 })	
+		//var text_company = '${shop}';
+		//var text_url = getRootPath()+"/custom/detail.do?id="+customId;
+		//var url = "${ctx}/sendMassage.do";
+		toRoleObj($("#pageAttr").val(),'<%=Constants.PMC_USERID%>',"",$(".tableId").val(),$(".tocustomerId").val());
+		
 	});
 	
 	//图片展示
@@ -166,6 +155,18 @@ $(function(){
 	$('a[rel*=downloadr]').downloadr();
 	
 });
+
+//转发页面
+	function toRoleObj(pageAttr,userid,memo,id,customerId){
+		var url = "${ctx}/sendMassage.do";
+		$.post(url,{pageAttr:pageAttr,touser:userid,memo:memo,rootPath:getRootPath(),id:id,customerId:customerId},function(data){
+			if(data == 0){
+				alert("转发成功!");
+			}else{
+				alert("转发失败!");
+			}
+		});
+	}
 //增加
 function add(type,value){
 	var data = JSON.parse(value);
@@ -245,11 +246,12 @@ function useGem(stockGemId){
 <body>
 	<form id="custom">
 		<input type="hidden" id='toUser' value='${openid}' />
-		<input type="hidden" id='customId' value='${customDetail.id}' />
+		<input type="hidden" class="tableId" id='customId' value='${customDetail.id}' />
 		<input type="hidden" id='orderId' value="${customDetail['orderId'] }" />
 		<input type="hidden" id='vengraveVh' value="${customDetail['vengraveVh'] }" />
 		<input type="hidden" id='vcadFile' value="${customDetail['vcadFile'] }" />
 		<input type="hidden" id="pageAttr" value="STYLE"/>
+		<input type="hidden" class="tocustomerId" value="${customDetail['customerId'] }" />
 		<div class="header">
 			<div class="head1">
 				<div class="top">
@@ -422,7 +424,7 @@ function useGem(stockGemId){
 	            </div>
 	            <div class="dzd_right_btm CUST-RL PPS-RL GB-RL PMC-RL CAD-RL PMC-RL">
 	              <input type='text' class="gf" value=''>
-	              <b><a href="#" class="sendPMC">通知QC</a></b>
+	              <b><a href="#" class="sendPMC">通知PMC</a></b>
 	              <div class="clear"></div>
 							<input type="button" value="进入编辑页" class="dzd_close" />
 						</div>

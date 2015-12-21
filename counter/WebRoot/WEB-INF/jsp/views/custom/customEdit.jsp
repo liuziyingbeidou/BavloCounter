@@ -45,7 +45,7 @@
 	<input type="hidden" id="pageAttr" value="STYLE"/>
 	<input type="hidden" id='customId' class="tableId" name='id' value="${customEdit['id'] }" />
 	<input type="hidden" id='orderId' name='orderId' value="${customEdit['orderId'] }" />
-	<input type="hidden" id='customerId' name='customerId' value="${customEdit['customerId'] }" />
+	<input type="hidden" id='customerId' class="tocustomerId" name='customerId' value="${customEdit['customerId'] }" />
 	<input type="hidden" id='vengraveVh' name='vengraveVh' value="${customEdit['vengraveVh'] }" />
 	<input type="hidden" id='vcadFile' name='vcadFile' value="${customEdit['vcadFile'] }" />
 	

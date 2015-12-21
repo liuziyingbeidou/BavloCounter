@@ -355,7 +355,7 @@
 							<div class="clear"></div>
 						</ul>
 						<dt>
-							款式单号： <a href="javascript:;" class="custom_list">${customDVO['vdef1']}</a>
+							款式单号： <a href="${ctx }/custom/detail.do?id=${customDVO['vdef2']}" class="custom_list">${customDVO['vdef1']}</a>
 						</dt>
 					</div>
 				</div>

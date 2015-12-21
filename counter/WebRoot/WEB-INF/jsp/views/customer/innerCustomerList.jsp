@@ -7,7 +7,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <meta name="viewport"
 	content="width=device-width,target-densitydpi=high-dpi,initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no" />
-<title>客户列表</title>
+<title>成员列表</title>
 <script language="javascript" type="text/javascript"
 	src="${ctx}/resources/js/jquery-1.8.3.min.js"></script>
 <script src="${ctx}/resources/js/top.js"></script>
@@ -77,8 +77,9 @@
 				alert("该页面为设置页面属性");return ;
 			}
 			var $id = $(".tableId",window.parent.document);
+			var customerId = $(".tocustomerId",window.parent.document);
 			var id = null;
-			if($id.length > 0){alert($id.val()+"  "+$pageAttr.val());
+			if($id.length > 0){
 				if($id.val() != null && $id.val() != ""){
 					id = $id.val();
 				}else{
@@ -90,19 +91,19 @@
 			$('#my-prompt').modal({
 		      relatedTarget: this,
 		      onConfirm: function(e) {
-		        toRoleObj(pageAttr,userid,e.data,pageAttr,id);
+		        toRoleObj(pageAttr,userid,e.data,id,customerId);
 		      },
 		      onCancel: function(e) {
-		      	toRoleObj(pageAttr,userid,"",pageAttr,id);
+		      	toRoleObj(pageAttr,userid,"",id,customerId);
 		      }
 		    });
 			//window.parent.setValueByFrame("role-menu",id,callbackMuilt());
 		}
 	}
 	//转发页面
-	function toRoleObj(pageAttr,userid,memo,pageAttr,id){
+	function toRoleObj(pageAttr,userid,memo,id,customerId){
 		var url = "${ctx}/sendMassage.do";
-		$.post(url,{pageAttr:pageAttr,touser:userid,memo:memo,pageAttr:pageAttr,rootPath:getRootPath(),id:id},function(data){
+		$.post(url,{pageAttr:pageAttr,touser:userid,memo:memo,rootPath:getRootPath(),id:id,customerId:customerId},function(data){
 			if(data == 0){
 				alert("转发成功!");
 				window.parent.closeMultiDlg();
