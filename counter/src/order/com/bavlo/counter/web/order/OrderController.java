@@ -29,6 +29,7 @@ import com.bavlo.counter.utils.CommonUtils;
 import com.bavlo.counter.utils.JsonUtils;
 import com.bavlo.counter.utils.StringUtil;
 import com.bavlo.counter.web.BaseController;
+import com.bavlo.weixin.qiye.interceptor.OAuthRequired;
 
 /**
  * @Title: 宝珑Counter
@@ -68,7 +69,7 @@ public class OrderController extends BaseController {
 		}
 		
 		/**角色权限控制----开始**/
-		wh = getAuthSQL(wh, "b.vservice_code");
+		wh = getAuthSQL(wh, "b.vservice_code","b.to_userids");
 		/**角色权限控制----结束**/
 		
 		List<OrderVO> orderList = orderService.findListOrderBySql(wh);
@@ -236,6 +237,7 @@ public class OrderController extends BaseController {
 	}
 	
 	@RequestMapping(value="/view")
+	@OAuthRequired
 	public ModelAndView orderView(@RequestParam(value="id",required=true) Integer id){
 		
 		OrderVO orderVO = orderService.findOrderInfoBySql(id);

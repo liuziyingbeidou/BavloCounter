@@ -88,5 +88,13 @@ public interface ICustomerService {
 	 */
 	public CustomerVO findCustomerByWhere(String condition);
 	
+	/**
+	 * @Description: 根据id更新某些值
+	 * @param @param id
+	 * @param @param attrFiled
+	 * @param @param attrValue
+	 * @return void
+	 */
+	public void updateCustomerByCondition(String conditions,String[] attrFiled,String[] attrValue);
 	//***以下是外围接口----结束****/
 }

@@ -3,6 +3,7 @@ package com.bavlo.weixin.fuwu.web;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.bavlo.counter.web.BaseController;
 import com.bavlo.weixin.fuwu.templateMessages.TemplateMessages;
 import com.bavlo.weixin.fuwu.util.TemplateMessagesUtil;
 
@@ -11,10 +12,10 @@ import com.bavlo.weixin.fuwu.util.TemplateMessagesUtil;
  *
  */
 @Controller
-public class SendTemplateMessagesController {
+public class SendTemplateMessagesController extends BaseController{
 	
 	@RequestMapping("/sendTM.do")
-	public String sendMassage(String toUser,String url) {
+	public void sendMassage(String toUser,String url) {
 		TemplateMessages templateMessages = new TemplateMessages();
 		
 		templateMessages.setTouser(toUser);
@@ -22,7 +23,7 @@ public class SendTemplateMessagesController {
 		templateMessages.setUrl(url);
 		
 		String str = TemplateMessagesUtil.toSendTemplateMessages(templateMessages);
-		return str;
+		renderText(str);
 	}
 
 }

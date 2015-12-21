@@ -207,9 +207,10 @@ public class CustomService extends CommonService implements ICustomService {
 		if(did != null){
 			dvo = findFirstByDr(CustomDVO.class, " id ="+did);
 			if(dvo != null){
-				CustomVO vo = findFirstByDr(CustomVO.class," id="+dvo.getId());
+				CustomVO vo = findFirstByDr(CustomVO.class," id="+dvo.getCustomId());
 				if(vo != null){
 					dvo.setVdef1(vo.getVcustomCode());
+					dvo.setVdef2(vo.getId()+"");
 				}
 			}
 		}

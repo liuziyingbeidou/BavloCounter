@@ -12,6 +12,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.bavlo.counter.constant.IConstant;
 import com.bavlo.counter.model.LoginVO;
+import com.bavlo.counter.model.customer.CustomerVO;
+import com.bavlo.counter.service.customer.itf.ICustomerService;
 import com.bavlo.counter.service.order.itf.IOrderService;
 import com.bavlo.counter.utils.DateUtil;
 import com.bavlo.counter.web.BaseController;
@@ -25,8 +27,12 @@ import com.bavlo.weixin.qiye.util.WechatSendMessage;
  */
 @Controller
 public class SendController extends BaseController{
+	
 	@Resource
 	IOrderService orderService;
+	
+	@Resource
+	private ICustomerService customerService;
 
 	/**
 	 * @Description: 转发页面 
@@ -44,9 +50,9 @@ public class SendController extends BaseController{
 	 */
 	@RequestMapping("/sendMassage.do")
 	public void sendMassage(HttpServletRequest request,String touser, String toparty, String totag,
-			String agentid, String text,String memo,String pageAttr,String rootPath,Integer id) {
+			String agentid, String text,String memo,String pageAttr,String rootPath,Integer id,Integer customerId) {
 		boolean isTurn = true;
-		String url = "http://lzy348860554.imwork.net/counter/index.do";
+		String url = "http://"+Constants.REQURL +"/index.do";
 		String actionName = "";//转发URL
 		String actionPsn = "SYSTEM";//当前人员
 		Object info = request.getSession().getAttribute("loginInfo");
@@ -113,6 +119,15 @@ public class SendController extends BaseController{
 		url = rootPath + "/" + actionName;
 		Integer result = -1;
 		if(isTurn){
+			//将转发对象userid追加到客户表toUserids中
+			String condition = " toUserids like '%"+customerId+"%'";
+			if(!customerService.isExistByCondition(condition)){
+				CustomerVO vo = customerService.findCustomerById(customerId);
+				if(vo != null){
+					String vl = vo.getToUserids() + "["+loginVO.getUserId()+"]";
+					customerService.updateCustomerByCondition(" id="+customerId, new String[]{"toUserids"}, new String[]{vl});
+				}
+			}
 			result = WechatSendMessage.sendMassage(request,touser, "@all", "@all", Constants.AGENTID+"", text,memo,url);
 		}
 		renderText(result+"");
