@@ -103,9 +103,9 @@ function loadOrderList(){
 				if(type == "dz"){
 					var pic = "";
 					if(data[i].vpic != "" && data[i].vpic != null){
-						pic = "<img style='width:60px;height:60px;' class='bill-pic' src='${ctx}/staticRes/"+data[i].vpic+"'>";
+						pic = "<img style='width:60px;height:60px;' class='bill-pic' onclick='toCustom(\""+data[i].vsourceId+"\")' src='${ctx}/staticRes/"+data[i].vpic+"'>";
 					}else{
-						pic = "<img class='bill-pic' src='${ctx}/resources/images/good_01.png'>";
+						pic = "<img class='bill-pic' onclick='toCustom(\""+data[i].vsourceId+"\")' src='${ctx}/resources/images/good_01.png'>";
 					}
 					$("#olist").append("<dd type='dz' sid='"+data[i].vsourceId+"' class='"+data[i].vsourceId+" bill'>"+pic+"<b class=''></b><a href='#' style='color:#FFF' class='bill-num close_c order_list_close'>"+data[i].nnumber+"对</a></dd>");
 				}/*else if(type == "ch"){
@@ -164,7 +164,11 @@ function loadOrderList(){
 				callback&&callback;
 			}*/
 		}
-		
+	//清单→款式单
+	function toCustom(customId){
+		var url = "${ctx}/custom/detail.do?id="+customId;//根据id显示定制单信息
+		window.location = url;
+	}
 </script>
 <style type="text/css">
 .check{background:#444;text-align: left;}
@@ -185,6 +189,7 @@ function loadOrderList(){
     line-height: 40px;
     margin-top:4px;
 }
+.bill-pic{cursor: pointer;}
 </style>
 </head>
 
