@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.bavlo.counter.constant.IConstant;
+import com.bavlo.counter.model.LoginVO;
 import com.bavlo.counter.model.custom.CustomBVO;
 import com.bavlo.counter.model.custom.CustomVO;
 import com.bavlo.counter.model.customer.CustomerVO;
@@ -238,7 +239,7 @@ public class OrderController extends BaseController {
 	
 	@RequestMapping(value="/view")
 	@OAuthRequired
-	public ModelAndView orderView(@RequestParam(value="id",required=true) Integer id){
+	public ModelAndView orderView(HttpServletRequest request,@RequestParam(value="id",required=true) Integer id){
 		
 		OrderVO orderVO = orderService.findOrderInfoBySql(id);
 		if(orderVO != null){
@@ -251,6 +252,14 @@ public class OrderController extends BaseController {
 		ModelAndView model = new ModelAndView(IConstant.PATH_ORDER + IConstant.ORDER_VIEW);
 		model.addObject("pageOrderType", IConstant.PAGE_TYPE_VIEW);
 		model.addObject("ordervo",orderVO);
+		Object loginInfo = request.getSession().getAttribute("loginInfo");
+		if(loginInfo == null){
+			model.setViewName("common/confirm");
+		}else{
+			if(StringUtil.isEmpty(((LoginVO)loginInfo).getUserId())){
+				model.setViewName("common/confirm");
+			}
+		}
 		return model;
 	}
 	
