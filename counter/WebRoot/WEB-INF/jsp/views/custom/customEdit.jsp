@@ -77,7 +77,7 @@
 		</h1>
 	</header>
 	<jsp:include page="../header.jsp"></jsp:include>
-	<div class="header" style="display:none;">
+	<%-- <div class="header" style="display:none;">
 		<div class="head1">
 			<div class="top">
 				<b><a href="javascript:;" onclick="EditShow_Hidden(ed1)"><img
@@ -117,10 +117,8 @@
 			</div>
 			<div class="clear"></div>
 		</div>
-	</div>
-	<!--<input type="hidden" id='vcustomCode' name='vcustomCode'
-		value="${number }" />
-	-->
+	</div> --%>
+
 	<div class="all">
 		<div class="main">
 			<div class="mainleft">
