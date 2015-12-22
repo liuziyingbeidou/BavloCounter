@@ -355,6 +355,8 @@ font-family:"Microsoft yahei";
 .dzd_right_btm input { margin-left: 3px; margin-top: 50px;}
 .dzd_close { width: 316px; border:none; font-size: 16px; margin: 0 auto;height: 37px; line-height: 37px; background: #999; color: #f4f4f4;}
 .dzd_close1 { width: 316px; border:none; font-size: 16px; margin: 0 auto;height: 37px; line-height: 37px; background: #999; color: #f4f4f4;}
+.dzd_left_btm input { margin-left: 3px; margin-top: 50px;}
+.dzd_save { width: 316px; border:none; font-size: 16px; margin: 0 auto;height: 37px; line-height: 37px; background: #999; color: #f4f4f4;}
 .uGem { width: 50px; border:none; float:right; font-size: 16px; margin: 0 auto;height: 37px; line-height: 37px; background: #999; color: #f4f4f4;}
 
 /*款式单2*/
