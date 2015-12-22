@@ -23,7 +23,6 @@ import net.sf.json.JSONObject;
 import net.sf.json.JsonConfig;
 
 import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.bavlo.counter.commonbeans.Page;
@@ -487,10 +486,10 @@ public class BaseController{
 							}
 						}
 					}else{
-						wh = " 1=2";
+						wh = " and 1=2";
 					}
 				}else{
-					wh = " 1=2";
+					wh = " and 1=2";
 				}
 				/**角色权限控制--结束**/
 				return wh;
