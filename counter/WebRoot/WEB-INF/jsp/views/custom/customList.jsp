@@ -21,7 +21,9 @@
 
 	<!-- 自定义 -->
 	<script src="${ctx}/resources/js/bavlo-event.js"></script>
-	
+	<!-- Loading -->
+	<script src="${ctx}/resources/showLoading/showLoading.js"></script>
+	<link type="text/css" rel="stylesheet" href="${ctx}/resources/showLoading/showLoading.css">
 	<script type="text/javascript">
 	$(function(){
 		$(".search").keyup(function(){
@@ -42,18 +44,25 @@
 	});
 	
 	function initData(){
+		startMask();
 		$("#juheweb").empty();
 		var url = "${ctx}/custom/listJson.do";
 		$.post(url,{content:$(".search").val()},function(row){
-			var data = row;
-			for(var i = 0; i < data.length; i++){
-				var ht = "<li><h4><img style='width:60px;height:60px;' ";
-				var img = "src='${ctx}/resources/images/customer_01.png'";
-				if(data[i].vdef1 != ""){
-					img = "src='"+data[i].vdef1+"'";
+			if(row.length > 0){
+				var data = row;
+				for(var i = 0; i < data.length; i++){
+					var ht = "<li><h4><img style='width:60px;height:60px;' ";
+					var img = "src='${ctx}/resources/images/customer_01.png'";
+					if(data[i].vdef1 != ""){
+						img = "src='"+data[i].vdef1+"'";
+					}
+					var ml = "><b>"+data[i].vdef2+"</b><a href='#'>"+data[i].vcustomCode+"</a><span><a href='#' onclick='selHander("+data[i].id+")'>选择</a></span></h4><div class='clear'></div></li>";
+					$("#juheweb").append(ht+img+ml);
 				}
-				var ml = "><b>"+data[i].vdef2+"</b><a href='#'>"+data[i].vcustomCode+"</a><span><a href='#' onclick='selHander("+data[i].id+")'>选择</a></span></h4><div class='clear'></div></li>";
-				$("#juheweb").append(ht+img+ml);
+				endMask();
+			}else{
+				$("#juheweb").append("<span style='color:#FFF;'>无款式单信息!</span>");
+				endMask();
 			}
 		});
 	}

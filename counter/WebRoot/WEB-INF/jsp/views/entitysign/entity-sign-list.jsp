@@ -19,6 +19,9 @@
 	<script src="${ctx}/resources/js/showList.js" type="text/javascript"></script>
 	<!-- 自定义 -->
 	<script src="${ctx}/resources/js/bavlo-event.js"></script>
+	<!-- Loading -->
+	<script src="${ctx}/resources/showLoading/showLoading.js"></script>
+	<link type="text/css" rel="stylesheet" href="${ctx}/resources/showLoading/showLoading.css">
 	<script type="text/javascript">
 	$(function(){
 		$(".search").keyup(function(){
@@ -43,18 +46,25 @@
 	});
 	
 	function initData(){
+		startMask();
 		$("#juheweb").empty();
 		var url = "${ctx}/entity-sign/listJson.do";
 		$.post(url,{content:$(".search").val()},function(row){
-			var data = row;
-			for(var i = 0; i < data.length; i++){
-				var pic = "";
-				if(data[i].vdef3 != "" && data[i].vdef3 != null){
-					pic = "src='${ctx}/staticRes/"+data[i].vdef2+"/min/"+data[i].vdef3+"'";
-				}else{
-					pic = "src='${ctx}/resources/images/good_01.png'";
+			if(row.length > 0){
+				var data = row;
+				for(var i = 0; i < data.length; i++){
+					var pic = "";
+					if(data[i].vdef3 != "" && data[i].vdef3 != null){
+						pic = "src='${ctx}/staticRes/"+data[i].vdef2+"/min/"+data[i].vdef3+"'";
+					}else{
+						pic = "src='${ctx}/resources/images/good_01.png'";
+					}
+					$("#juheweb").append("<li><h4><img style='width:60px;height:60px;' "+pic+"><b>"+data[i].vnumber+"</b><span><a href='#' onclick='selHander("+data[i].id+")'>选择</a></span></h4><div class='clear'></div></li>");
 				}
-				$("#juheweb").append("<li><h4><img style='width:60px;height:60px;' "+pic+"><b>"+data[i].vnumber+"</b><span><a href='#' onclick='selHander("+data[i].id+")'>选择</a></span></h4><div class='clear'></div></li>");
+				endMask();
+			}else{
+				$("#juheweb").append("<span style='color:#FFF;'>无实物签收单信息!</span>");
+				endMask();
 			}
 		});
 	}
