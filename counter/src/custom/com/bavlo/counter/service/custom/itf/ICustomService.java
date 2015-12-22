@@ -79,7 +79,7 @@ public interface ICustomService {
 	 * @param @param listBVO
 	 * @return void
 	 */
-	public void saveCustomB(List<CustomBVO> listBVO);
+	public void saveCustomB(Integer id, String json);
 	
 	/** 
 	 * @Description: 根据主表主键和类型删除子表数据
@@ -155,5 +155,23 @@ public interface ICustomService {
 	 * @return void
 	 */
 	public void backCustomByUseGem(Integer did,UseGemVO useGemVO);
+	
+	
+	/** 
+	 * @Description: 更新定制单矢量图
+	 * @param @param id
+	 * @param @param vh
+	 * @return void
+	*/
+	public void updateCustomVh(Integer id,String vh);
+	
+	
+	/** 
+	 * @Description: 更新定制单cad
+	 * @param @param id
+	 * @param @param cad
+	 * @return void
+	 */
+	public void updateCustomCad(Integer id,String cad);
 
 }

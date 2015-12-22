@@ -25,6 +25,7 @@ import com.bavlo.counter.model.custom.CustomCVO;
 import com.bavlo.counter.model.custom.CustomDVO;
 import com.bavlo.counter.model.custom.CustomVO;
 import com.bavlo.counter.model.customer.CustomerVO;
+import com.bavlo.counter.model.order.OrderBVO;
 import com.bavlo.counter.model.order.OrderVO;
 import com.bavlo.counter.model.sign.GemSignVO;
 import com.bavlo.counter.service.custom.itf.ICustomService;
@@ -112,7 +113,6 @@ public class CustomController extends BaseController implements IConstant {
 				Integer orderId = customDetail.getOrderId();
 				if(orderId != null){
 					orderVO = orderService.findSigleOrder(customDetail.getOrderId());
-					System.out.println(orderVO.getNquotedPrice());
 				}
 				customer = customerService.findCustomerById(customDetail.getCustomerId());
 			}
@@ -161,11 +161,25 @@ public class CustomController extends BaseController implements IConstant {
 	 * @param @param customVO
 	 * @return ModelAndView
 	 */
-	@RequestMapping("saveOrUpdate")
-	public String saveOrUpdate(CustomVO customVO) {
+	@RequestMapping("update")
+	public void customUpdate(HttpServletRequest request) {
 
-		customService.saveOrUpdateCustom(customVO);
-		return REDIRECT + "custom/edit.do";
+		Integer id = Integer.valueOf(request.getParameter("id"));
+		String bvo = request.getParameter("bvo");
+		String vh = request.getParameter("vh");
+		String cad = request.getParameter("cad");
+		
+		if(bvo != null){
+			customService.saveCustomB(id,bvo);
+		}
+		if(vh != null){
+			customService.updateCustomVh(id, vh);
+		}
+		if(cad != null){
+			customService.updateCustomCad(id, cad);
+		}
+		
+		renderJson("{\"id\":"+id+"}");
 	}
 	
 	
@@ -182,117 +196,29 @@ public class CustomController extends BaseController implements IConstant {
 		String cvo = request.getParameter("cvo");
 		String dvo = request.getParameter("dvo");
 		
-		ArrayList<CustomBVO> listbvo = new ArrayList<CustomBVO>();
 		ArrayList<CustomCVO> listcvo = new ArrayList<CustomCVO>();
 		ArrayList<CustomDVO> listdvo = new ArrayList<CustomDVO>();
 		
-		//图片
-		JSONObject jsonBVO = JSONObject.fromObject(bvo);
 		//链子
 		JSONArray jsonCVO = JSONArray.fromObject(cvo);
 		//宝石
 		JSONArray jsonDVO = JSONArray.fromObject(dvo);
 		
 		//保存或更新主表
-		//customService.saveOrUpdateCustom(customVO);
-		Integer id = customVO.getId();
 		boolean cms = true;
-		if(id == null){
-			id = customService.saveCustomRelID(customVO);
-		}else{
-			customService.updateCustom(customVO);
-			cms = false;
+		Integer id = null;
+		if(customVO != null){
+			id = customVO.getId();
+			if(id == null){
+				id = customService.saveCustomRelID(customVO);
+			}else{
+				customService.updateCustom(customVO);
+				cms = false;
+			}
 		}
 		
-		//图片子表保存
-		String filemodel = jsonBVO.get("filemodel") + "";
-		String vtype = jsonBVO.get("vtype") + "";
-		String FILE_0 = jsonBVO.get("FILE_0") + "";
-		if(StringUtil.isNotEmpty(FILE_0)){
-			CustomBVO bvo_0 = new CustomBVO();
-			bvo_0.setCustomId(customVO.id);
-			bvo_0.setVname(FILE_0);
-			bvo_0.setVpath(filemodel);
-			bvo_0.setVtype(vtype);
-			bvo_0.setBiscover(IConstant.YES);
-			listbvo.add(bvo_0);
-		}
-		String FILE_1 = jsonBVO.get("FILE_1") + "";
-		if(StringUtil.isNotEmpty(FILE_1)){
-			CustomBVO bvo_1 = new CustomBVO();
-			bvo_1.setCustomId(customVO.id);
-			bvo_1.setVname(FILE_1);
-			bvo_1.setVtype(vtype);
-			bvo_1.setVpath(filemodel);
-			listbvo.add(bvo_1);
-		}
-		String FILE_2 = jsonBVO.get("FILE_2") + "";
-		if(StringUtil.isNotEmpty(FILE_2)){
-			CustomBVO bvo_2 = new CustomBVO();
-			bvo_2.setCustomId(customVO.id);
-			bvo_2.setVname(FILE_2);
-			bvo_2.setVtype(vtype);
-			bvo_2.setVpath(filemodel);
-			listbvo.add(bvo_2);
-		}
-		String FILE_3 = jsonBVO.get("FILE_3") + "";
-		if(StringUtil.isNotEmpty(FILE_3)){
-			CustomBVO bvo_3 = new CustomBVO();
-			bvo_3.setCustomId(customVO.id);
-			bvo_3.setVname(FILE_3);
-			bvo_3.setVtype(vtype);
-			bvo_3.setVpath(filemodel);
-			listbvo.add(bvo_3);
-		}
-		String FILE_4 = jsonBVO.get("FILE_4") + "";
-		if(StringUtil.isNotEmpty(FILE_4)){
-			CustomBVO bvo_4 = new CustomBVO();
-			bvo_4.setCustomId(customVO.id);
-			bvo_4.setVname(FILE_4);
-			bvo_4.setVtype(vtype);
-			bvo_4.setVpath(filemodel);
-			listbvo.add(bvo_4);
-		}
-		String FILE_5 = jsonBVO.get("FILE_5") + "";
-		if(StringUtil.isNotEmpty(FILE_5)){
-			CustomBVO bvo_5 = new CustomBVO();
-			bvo_5.setCustomId(customVO.id);
-			bvo_5.setVname(FILE_5);
-			bvo_5.setVtype(vtype);
-			bvo_5.setVpath(filemodel);
-			listbvo.add(bvo_5);
-		}
-		String FILE_6 = jsonBVO.get("FILE_6") + "";
-		if(StringUtil.isNotEmpty(FILE_6)){
-			CustomBVO bvo_6 = new CustomBVO();
-			bvo_6.setCustomId(customVO.id);
-			bvo_6.setVname(FILE_6);
-			bvo_6.setVtype(vtype);
-			bvo_6.setVpath(filemodel);
-			listbvo.add(bvo_6);
-		}
-		String FILE_7 = jsonBVO.get("FILE_7") + "";
-		if(StringUtil.isNotEmpty(FILE_7)){
-			CustomBVO bvo_7 = new CustomBVO();
-			bvo_7.setCustomId(customVO.id);
-			bvo_7.setVname(FILE_7);
-			bvo_7.setVtype(vtype);
-			bvo_7.setVpath(filemodel);
-			listbvo.add(bvo_7);
-		}
-		String FILE_8 = jsonBVO.get("FILE_8") + "";
-		if(StringUtil.isNotEmpty(FILE_8)){
-			CustomBVO bvo_8 = new CustomBVO();
-			bvo_8.setCustomId(customVO.id);
-			bvo_8.setVname(FILE_8);
-			bvo_8.setVtype(vtype);
-			bvo_8.setVpath(filemodel);
-			listbvo.add(bvo_8);
-		}
-		String type = jsonBVO.get("vtype") + "";
-		if(listbvo != null && StringUtil.isNotEmpty(type)){
-			customService.deleteCustomB(id,type);
-			customService.saveCustomB(listbvo);
+		if(bvo != null){
+			customService.saveCustomB(id,bvo);
 		}
 		
 		// 链子子表保存
