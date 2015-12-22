@@ -111,7 +111,8 @@ public class CustomController extends BaseController implements IConstant {
 			if(customDetail != null){
 				Integer orderId = customDetail.getOrderId();
 				if(orderId != null){
-					orderVO = orderService.findOrderInfoBySql(customDetail.getOrderId());
+					orderVO = orderService.findSigleOrder(customDetail.getOrderId());
+					System.out.println(orderVO.getNquotedPrice());
 				}
 				customer = customerService.findCustomerById(customDetail.getCustomerId());
 			}
