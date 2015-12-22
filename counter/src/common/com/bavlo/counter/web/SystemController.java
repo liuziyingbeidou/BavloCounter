@@ -9,6 +9,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.bavlo.counter.model.LoginVO;
 import com.bavlo.counter.utils.JsonUtils;
+import com.bavlo.counter.utils.StringUtil;
 import com.bavlo.weixin.qiye.interceptor.OAuthRequired;
 
 @Controller(value="systemController")
@@ -20,6 +21,9 @@ public class SystemController extends BaseController {
 		ModelAndView model = new ModelAndView("index");
 		Object loginInfo = session.getAttribute("loginInfo");
 		if(loginInfo != null){
+			if(StringUtil.isEmpty(((LoginVO)loginInfo).getUserId())){
+				model.setViewName("redirect:/index.do");
+			}
 			LoginVO loginVO = (LoginVO)loginInfo;
 			model.addObject("uvo", loginVO);
 		}else{
