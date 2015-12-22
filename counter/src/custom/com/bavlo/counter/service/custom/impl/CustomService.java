@@ -5,9 +5,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 import net.sf.json.JSONArray;
+import net.sf.json.JSONObject;
 
 import org.springframework.stereotype.Service;
 
+import com.bavlo.counter.constant.IConstant;
 import com.bavlo.counter.model.custom.CustomBVO;
 import com.bavlo.counter.model.custom.CustomCVO;
 import com.bavlo.counter.model.custom.CustomDVO;
@@ -127,9 +129,102 @@ public class CustomService extends CommonService implements ICustomService {
 	}
 	
 	@Override
-	public void saveCustomB(List<CustomBVO> listBVO) {
+	public void saveCustomB(Integer id, String json) {
 		try {
-			save(listBVO);
+			
+			ArrayList<CustomBVO> listbvo = new ArrayList<CustomBVO>();
+
+			JSONObject jsonBVO = JSONObject.fromObject(json);
+			
+			String filemodel = jsonBVO.get("filemodel") + "";
+			String vtype = jsonBVO.get("vtype") + "";
+			String FILE_0 = jsonBVO.get("FILE_0") + "";
+			if(StringUtil.isNotEmpty(FILE_0)){
+				CustomBVO bvo_0 = new CustomBVO();
+				bvo_0.setCustomId(id);
+				bvo_0.setVname(FILE_0);
+				bvo_0.setVpath(filemodel);
+				bvo_0.setVtype(vtype);
+				bvo_0.setBiscover(IConstant.YES);
+				listbvo.add(bvo_0);
+			}
+			String FILE_1 = jsonBVO.get("FILE_1") + "";
+			if(StringUtil.isNotEmpty(FILE_1)){
+				CustomBVO bvo_1 = new CustomBVO();
+				bvo_1.setCustomId(id);
+				bvo_1.setVname(FILE_1);
+				bvo_1.setVtype(vtype);
+				bvo_1.setVpath(filemodel);
+				listbvo.add(bvo_1);
+			}
+			String FILE_2 = jsonBVO.get("FILE_2") + "";
+			if(StringUtil.isNotEmpty(FILE_2)){
+				CustomBVO bvo_2 = new CustomBVO();
+				bvo_2.setCustomId(id);
+				bvo_2.setVname(FILE_2);
+				bvo_2.setVtype(vtype);
+				bvo_2.setVpath(filemodel);
+				listbvo.add(bvo_2);
+			}
+			String FILE_3 = jsonBVO.get("FILE_3") + "";
+			if(StringUtil.isNotEmpty(FILE_3)){
+				CustomBVO bvo_3 = new CustomBVO();
+				bvo_3.setCustomId(id);
+				bvo_3.setVname(FILE_3);
+				bvo_3.setVtype(vtype);
+				bvo_3.setVpath(filemodel);
+				listbvo.add(bvo_3);
+			}
+			String FILE_4 = jsonBVO.get("FILE_4") + "";
+			if(StringUtil.isNotEmpty(FILE_4)){
+				CustomBVO bvo_4 = new CustomBVO();
+				bvo_4.setCustomId(id);
+				bvo_4.setVname(FILE_4);
+				bvo_4.setVtype(vtype);
+				bvo_4.setVpath(filemodel);
+				listbvo.add(bvo_4);
+			}
+			String FILE_5 = jsonBVO.get("FILE_5") + "";
+			if(StringUtil.isNotEmpty(FILE_5)){
+				CustomBVO bvo_5 = new CustomBVO();
+				bvo_5.setCustomId(id);
+				bvo_5.setVname(FILE_5);
+				bvo_5.setVtype(vtype);
+				bvo_5.setVpath(filemodel);
+				listbvo.add(bvo_5);
+			}
+			String FILE_6 = jsonBVO.get("FILE_6") + "";
+			if(StringUtil.isNotEmpty(FILE_6)){
+				CustomBVO bvo_6 = new CustomBVO();
+				bvo_6.setCustomId(id);
+				bvo_6.setVname(FILE_6);
+				bvo_6.setVtype(vtype);
+				bvo_6.setVpath(filemodel);
+				listbvo.add(bvo_6);
+			}
+			String FILE_7 = jsonBVO.get("FILE_7") + "";
+			if(StringUtil.isNotEmpty(FILE_7)){
+				CustomBVO bvo_7 = new CustomBVO();
+				bvo_7.setCustomId(id);
+				bvo_7.setVname(FILE_7);
+				bvo_7.setVtype(vtype);
+				bvo_7.setVpath(filemodel);
+				listbvo.add(bvo_7);
+			}
+			String FILE_8 = jsonBVO.get("FILE_8") + "";
+			if(StringUtil.isNotEmpty(FILE_8)){
+				CustomBVO bvo_8 = new CustomBVO();
+				bvo_8.setCustomId(id);
+				bvo_8.setVname(FILE_8);
+				bvo_8.setVtype(vtype);
+				bvo_8.setVpath(filemodel);
+				listbvo.add(bvo_8);
+			}
+			String type = jsonBVO.get("vtype") + "";
+			if(listbvo != null && id != null && type != null && StringUtil.isNotEmpty(type)){
+				deleteCustomB(id,type);
+				save(listbvo);
+			}
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -259,6 +354,22 @@ public class CustomService extends CommonService implements ICustomService {
 				}
 			}
 		}
+	}
+
+	@Override
+	public void updateCustomVh(Integer id,String vh){
+		String[] attrname = new String[]{"vengraveVh"};
+		Object[] attrval = new Object[]{vh};
+		Integer[] IDs = new Integer[]{id};
+		updateAttrsByIDs(CustomVO.class, attrname, attrval, IDs);
+	}
+
+	@Override
+	public void updateCustomCad(Integer id, String cad) {
+		String[] attrname = new String[]{"vengraveVh"};
+		Object[] attrval = new Object[]{cad};
+		Integer[] IDs = new Integer[]{id};
+		updateAttrsByIDs(CustomVO.class, attrname, attrval, IDs);
 	}
 
 }
