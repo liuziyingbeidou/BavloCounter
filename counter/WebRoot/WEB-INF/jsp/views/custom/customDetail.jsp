@@ -355,7 +355,13 @@ function save(){
 		<input type="hidden" class="tocustomerId" value="${customDetail['customerId'] }" />
 		<input type="hidden" id='vengraveVh' name='vengraveVh' value="${customEdit['vengraveVh'] }" />
 		<input type="hidden" id='vcadFile' name='vcadFile' value="${customEdit['vcadFile'] }" />
-		<div class="header">
+		<header class="demo-bar">
+			<h1>
+				款式单${customDetail.vcustomCode }
+			</h1>
+		</header>
+		<jsp:include page="../header.jsp"></jsp:include>
+		<div class="header" style="display:none;">
 			<div class="head1">
 				<div class="top">
 					<b><a href="#" onclick="EditShow_Hidden(ed1)"><img
