@@ -101,11 +101,6 @@ $(function(){
 		}
 	});
 	
-	//保存 
-	$(".dzd_save").click(function(){
-		save();
-	});
-	
 	//上传起版图片 
 	$(".qibantu").bind("click",function(){
 	 	$("#filetype").val("pic");
@@ -311,14 +306,18 @@ function setValueByFrame(type,id,callback,json){
 		window.location = url;
 	}
 
+}
+
 //保存 
-function save(){
+function CADsave(){
+	var id = $('#customId').val();
 	var bvo = JSON.stringify($('#customBId').serializeJson());
-	
+	var vh = $('#vengraveVh').val();
+	var cad = $('#vengraveVh').val();
 	$.ajax({
 		type : "POST",
-		url : "save.do",
-		data : $('#custom').serialize()+"&bvo="+bvo,
+		url : "update.do",
+		data : "id="+id+"&bvo="+bvo+"&vh="+vh+"&cad="+cad,
 		async : false,
 		cache : false,
 		success : function(data) {
@@ -328,7 +327,6 @@ function save(){
 			alert("保存失败!");
 		}
 	});
-}
 }
 </script>
 <style type="text/css">
@@ -557,7 +555,7 @@ function save(){
 						
 						<div
 							class="dzd_left_btm CUST-RL CC-RL PM-RL PPS-RL GB-RL PMC-RL PMC-RL">
-							<input type="button" value="保存" class="dzd_save" />
+							<input type="button" onclick="javascript:CADsave()" value="保存" class="dzd_save" />
 						</div>
 					</div>
 				</div>
@@ -580,5 +578,6 @@ function save(){
 	<input type="hidden" name="filevalue" id="filevalue" value=""></input>
 	<input type="hidden" name="vtype" id="vtype" value=""></input>
 	</form>
+	客户（CUST）、定制顾问（CC）、产品经理（PM）、起版师（CAD）、生产主管（PMC）、配石员（GB）、工厂跟单员（PPS）
 </body>
 </html>
