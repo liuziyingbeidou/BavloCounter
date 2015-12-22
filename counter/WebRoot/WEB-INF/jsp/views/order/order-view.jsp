@@ -190,6 +190,13 @@ function loadOrderList(){
     margin-top:4px;
 }
 .bill-pic{cursor: pointer;}
+@media screen and (max-width: 1280px) and (min-width: 320px){
+.oedit input {
+    width: 100%;
+    height: 40px;
+    line-height: 40px;
+    }
+}
 </style>
 </head>
 
@@ -198,7 +205,13 @@ function loadOrderList(){
 <input type="hidden" name="id" id="orderId" class="tableId" value="${ordervo['id']}">
 <input type="hidden" name="iorderState" id="orderState" value="${ordervo['iorderState']}">
 <input type="hidden" name="customerId" class="tocustomerId" id="customerId" value="${ordervo['customerId']}">
-<div class="header">
+<header class="demo-bar">
+	<h1>
+		${pageOrderType}订单 ${ordervo['vorderCode']}
+	</h1>
+</header>
+<jsp:include page="../header.jsp"></jsp:include>
+<div class="header" style="display:none;">
 	<div class="head1">
 		<div class="top">
 			<b><a href="#" onclick="EditShow_Hidden(ed1)"><img src="${ctx}/resources/images/plus.png"></a> ${pageOrderType }订单 ${ordervo['vorderCode']}</b>

@@ -12753,7 +12753,7 @@ tbody.am-collapse.am-in {
 .am-menu-dropdown1 .am-menu-toggle {
 	position: absolute;
 	right: 5px;
-	top: -40px;
+	top: -35px;
 	display: block;
 	width: 44px;
 	height: 44px;
@@ -12835,8 +12835,8 @@ tbody.am-collapse.am-in {
 	color: #fff;
 	height: 49px;
 	line-height: 49px;
-	padding: 0;
-	text-indent: 10px
+	padding: 0 15px 0;
+	text-indent: 0px
 }
 
 .am-menu-dropdown1 .am-menu-sub {
@@ -15608,7 +15608,7 @@ tbody.am-collapse.am-in {
 .am-menu-dropdown3 .am-menu-toggle {
 	position: absolute;
 	/*right: 5px;*/
-	top: -40px;
+	top: -35px;
 	display: block;
 	width: 44px;
 	height: 44px;
@@ -15690,8 +15690,8 @@ tbody.am-collapse.am-in {
 	color: #fff;
 	height: 49px;
 	line-height: 49px;
-	padding: 0;
-	text-indent: 10px
+	padding: 0 15px 0;
+	text-indent: 0px
 }
 
 .am-menu-dropdown3 .am-menu-sub {

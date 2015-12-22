@@ -285,7 +285,23 @@
 <body>
 	<form id="useGem">
 		<input type="hidden" id="pageAttr" value="DEPLOY"/>
-		<div class="header">
+<header class="demo-bar">
+	<h1>
+		${pageOrderType}配石单
+			<c:choose>
+				 <c:when test="${empty useGemDetail['vnumber']}">   
+				 ${number }
+				 <input type="hidden" id="vnumber" name="vnumber" value="${number }">
+				 </c:when>
+				 <c:otherwise>
+				 ${ordervo['vnumber']}
+				 <input type="hidden" id="vnumber" name="vnumber" value="${useGemDetail['vnumber']}">
+				 </c:otherwise>	
+			</c:choose> 
+	</h1>
+</header>
+<jsp:include page="../header.jsp"></jsp:include>
+<div class="header" style="display:none;">
 	<div class="head2">
 		<div class="top2">
 			<b><a href="javascript:;" onclick="EditShow_Hidden(ed1)"><img

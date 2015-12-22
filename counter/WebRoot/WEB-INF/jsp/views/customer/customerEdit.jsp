@@ -165,7 +165,23 @@
 		<form id="customer">
 		<input type="hidden" id="pageAttr" value="CUST"/>
 		<input type="hidden" name='vserviceCode' value="${customerDetail.vserviceCode }" />
-			<div class="header">
+<header class="demo-bar">
+	<h1>
+		${pageOrderType}客户
+			<c:choose>
+						 <c:when test="${empty customerDetail['vcustomerCode']}">   
+						 ${number }
+						 <input type="hidden" id="orderCode" name="vcustomerCode" value="${number }" />
+						 </c:when>
+						 <c:otherwise>
+						 ${customerDetail['vcustomerCode']}
+						 <input type="hidden" id="orderCode" name="vcustomerCode" value="${customerDetail['vcustomerCode']}" />
+						 </c:otherwise>	
+			</c:choose> 
+	</h1>
+</header>
+<jsp:include page="../header.jsp"></jsp:include>
+<div class="header" style="display:none;">
 	<div class="head2">
 		<div class="top2">
 			<b><a href="#" onclick="EditShow_Hidden(ed1)"><img

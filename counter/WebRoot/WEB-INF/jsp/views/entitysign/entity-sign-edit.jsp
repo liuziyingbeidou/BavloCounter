@@ -204,7 +204,23 @@
 <input type="hidden" id="pageAttr" value="ENTITY"/>
 <input id="entityid" class="mid tableId"  type="hidden" name="id" value="${entityvo['id']}">
 <input id="customerId" class="tocustomerId" type="hidden" name="customerId" value="${entityvo['customerId']}">
-<div class="header">
+<header class="demo-bar">
+	<h1>
+		${pageOrderType}实物签收单
+			<c:choose>
+				 <c:when test="${empty entityvo['vnumber']}">
+				 ${number }
+				 <input type="hidden" name="vnumber" value="${number }">
+				 </c:when>
+				 <c:otherwise>
+				 ${entityvo['vnumber']}
+				 <input type="hidden" name="vnumber" value="${entityvo['vnumber']}">
+				 </c:otherwise>	
+			</c:choose>  
+	</h1>
+</header>
+<jsp:include page="../header.jsp"></jsp:include>
+<div class="header" style="display:none;">
 	<div class="head">
 		<div class="top1">
 			<b><a href="#" onclick="EditShow_Hidden(ed1)"><img src="${ctx}/resources/images/plus.png"></a>${pageEntityType }实物签收单

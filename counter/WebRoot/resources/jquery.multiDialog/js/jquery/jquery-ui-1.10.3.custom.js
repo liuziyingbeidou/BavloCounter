@@ -1158,7 +1158,7 @@ $.fn.position = function( options ) {
 	if ( options.at[ 1 ] === "bottom" ) {
 		basePosition.top += targetHeight;
 	} else if ( options.at[ 1 ] === "center" ) {
-		basePosition.top += 20;//targetHeight / 2;
+		basePosition.top += 350;// add by liuzy targetHeight / 2;
 	}
 
 	atOffset = getOffsets( offsets.at, targetWidth, targetHeight );

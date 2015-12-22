@@ -63,10 +63,10 @@ $(function(){
 	});
 	//城市联动
 	change(0);
-	$("#vprovince").bind("change",function(){
+	$("#vprovince").change(function(){
 		change(1);
 	});
-	$("#vcity").bind("change",function(){
+	$("#vcity").change(function(){
 		change(2);
 	});
 	$("#addrSave").click(function(){
@@ -557,10 +557,9 @@ text-overflow:ellipsis;
 						 </c:otherwise>	
 					</c:choose> ">
 <input type="hidden" name="customerId" class="tocustomerId" id="customerId" value="${ordervo['customerId']}">
-<div class="header">
-	<div class="head1">
-		<div class="top">
-			<b><a href="#" onclick="EditShow_Hidden(ed1)"><img src="${ctx}/resources/images/plus.png"></a> ${pageOrderType}订单
+<header class="demo-bar">
+	<h1>
+		${pageOrderType}订单
 			<c:choose>
 						 <c:when test="${empty ordervo['vorderCode']}">   
 						 ${number }
@@ -571,23 +570,10 @@ text-overflow:ellipsis;
 						 <input type="hidden" id="orderCode" name="vorderCode" value="${ordervo['vorderCode']}">
 						 </c:otherwise>	
 			</c:choose> 
-			</b>
-			<font><a href="#" onclick="Show_Hidden(tr1)"><img src="${ctx}/resources/images/plus.png"></a></font>
-		</div>
-		<div class="hidden_enent1" id="tr1" style="display:none;">
-			<ul>
-				<li class="jian"><a href="#" onclick="Show_Hidden(tr1)">—</a></li>
-				<jsp:include page="../menu_pg.jsp"></jsp:include>
-			</ul>
-		</div>
-		<div class="edit_hidden1" id="ed1" style="display:none;">
-			<ul>
-				<li class="jian2"><a href="#" onclick="EditShow_Hidden(ed1)">—</a></li>
-				<jsp:include page="../menu_cau.jsp"></jsp:include>
-			</ul>
-		</div>
-	</div>
-</div>
+	</h1>
+</header>
+<jsp:include page="../header.jsp"></jsp:include>
+<!-- 以下正文体 -->
 <div class="all">
 	<div class="main">
     <div class="mainleft">

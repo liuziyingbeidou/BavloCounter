@@ -47,61 +47,53 @@ $(function(){
 	}*/
 
 	//首页
-	$(".menu-index").bind("click",function(){
-		//EditShow_Hidden(ed1);
+	$(".menu-index").click(function(){
 		var url = "${ctx}/index.do";
 		window.location = url;
+		closeMenu();
 	});
 	//实物签收单列表
-	$(".menu-entity-list").bind("click",function(){
-		EditShow_Hidden(ed1);
+	$(".menu-entity-list").click(function(){
 		openURL("${ctx}/entity-sign/list.do","实物签收单列表",470,550);
 		closeMenu();
 	});
 	//宝石签收单列表
-	$(".menu-gem-list").bind("click",function(){
-		EditShow_Hidden(ed1);
+	$(".menu-gem-list").click(function(){
 		openURL("${ctx}/gem-sign/list.do","宝石签收单列表",470,550);
 		closeMenu();
 	});
 	//订单列表
-	$(".menu-order-list").bind("click",function(){
-		EditShow_Hidden(ed1);
+	$(".menu-order-list").click(function(){
 		openURL("${ctx}/order/list.do","订单列表",500,550);
 		closeMenu();
 	});
 	//订单列表(查看)
-	$(".menu-order-list-view").bind("click",function(){
-		EditShow_Hidden(ed1);
+	$(".menu-order-list-view").click(function(){
 		openURL("${ctx}/order/list.do?listType=view","订单列表",500,550);
 		closeMenu();
 	});
 	//选择客户
-	$(".menu-customer-list").bind("click",function(){
-		EditShow_Hidden(ed1);
+	$(".menu-customer-list").click(function(){
 		openURL("${ctx}/customer/list.do?listType=menu","客户列表",470,550);
 		closeMenu();
 	});
 	//选择定制单
 	$(".menu-custom-list").bind("click",function(){
-		EditShow_Hidden(ed1);
 		openURL("${ctx}/custom/getList.do?listType=menu","款式单列表",490,550);
 		closeMenu();
 	});
 	//选择定制单(查看)
-	$(".menu-custom-list-view").bind("click",function(){
-		EditShow_Hidden(ed1);
+	$(".menu-custom-list-view").click(function(){
 		openURL("${ctx}/custom/getList.do?listType=view","款式单列表",490,550);
 		closeMenu();
 	});
 	//配石单列表menu-useGem-list
-	$(".menu-useGem-list").bind("click",function(){
-		EditShow_Hidden(ed1);
+	$(".menu-useGem-list").click(function(){
 		openURL("${ctx}/useGem/list.do?listType=menu","配石单列表",470,550);
 		closeMenu();
 	});
 	//重置
-	$(".menu-system-close").bind("click",function(){
+	$(".menu-system-close").click(function(){
 		$.post("${ctx}/exit.do",function(data){
 			if(data == "0"){
 				var url = "${ctx}/index.do";
@@ -112,10 +104,10 @@ $(function(){
 });
 
 function closeMenu(){
-	Show_Hidden(tr1);
+	$(".bavlo-memu-page").trigger("click");
 }
 </script>
-<li class="menu-index"><a href="#">首页</a></li>
+<li class="menu-index"><a href="#">首&nbsp;&nbsp;页</a></li>
 <c:forEach var="role" items="${roleList}">
      <c:if test="${fn:contains('[N]',role)}">
      <li class="menu-custom-list"><a href="#">定制单</a></li>
@@ -124,7 +116,7 @@ function closeMenu(){
      <li class="menu-custom-list-view"><a href="#">款式单</a></li>
      </c:if>
      <c:if test="${fn:contains('[CC-RL][PMC-RL]',role)}">
-     <li class="menu-order-list-view"><a href="#">订单</a></li>
+     <li class="menu-order-list-view"><a href="#">订&nbsp;&nbsp;单</a></li>
      </c:if>
      <c:if test="${fn:contains('[CC-RL]',role)}">
      <li class="menu-entity-list"><a href="#">实物签收单</a></li>
@@ -136,12 +128,12 @@ function closeMenu(){
      <li class="menu-useGem-list"><a href="#">配石单</a></li>
      </c:if>
      <c:if test="${fn:contains('[N]',role)}">
-     <li class="menu-order-list"><a href="#">订单</a></li>
+     <li class="menu-order-list"><a href="#">订&nbsp;&nbsp;单</a></li>
      </c:if>
      <c:if test="${fn:contains('[CC-RL]',role)}">
-     <li class="menu-customer-list"><a href="#">客户</a></li>
+     <li class="menu-customer-list"><a href="#">客&nbsp;&nbsp;户</a></li>
      </c:if>
 </c:forEach>
-<li class="menu-system-close"><a href="#">重置</a></li>
+<li class="menu-system-close"><a href="#">重&nbsp;&nbsp;置</a></li>
 
 
