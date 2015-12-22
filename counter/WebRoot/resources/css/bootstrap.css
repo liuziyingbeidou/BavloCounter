@@ -80,7 +80,7 @@
 .barbox dd.barline { width:100%;}
 .barbox dd.barline img { width:100%;}
 /*.gylc dt { width:90% !important; height:30px !important; margin:10px 0px 10px 15px !important;}*/
-.gylc ul li {width:16%;font-size:26px;}
+.gylc ul li {width:80px;font-size:26px;}
 .status { width:90% !important; position:absolute !important; height:20px !important; background-size:94% !important; top:33% !important; left:41px !important;}
 .list {	width:90%;	padding-left:5%;}
 .list1 {	width:95%;	padding-left:5%;}
@@ -536,8 +536,8 @@ font-size:23px;
 #container { margin-top:29px !important; width:100%;}
 #uploader .filelist li { width:30% !important;}
 /**订单状态栏**/
-.gylc .barbox{width:510px;}
-.barbox  .st-tj,.barbox .st-zb,.barbox .st-sc,.barbox .st-zj,.barbox .st-kd{width:95px;}
+.gylc .barbox{width:500px;}
+.barbox  .st-tj,.barbox .st-zb,.barbox .st-sc,.barbox .st-zj,.barbox .st-kd{width:80px;}
 }
 
 .zhezhaodiv1{width: 100%;}

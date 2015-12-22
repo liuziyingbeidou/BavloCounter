@@ -14,11 +14,11 @@ if(info != null){
 <script type="text/javascript">
 $(function(){
 	//选择角色列表
-	$(".role-list").bind("click",function(){
+	$(".role-list").click(function(){
 		var role = $(this).attr("bv-role");
 		var title = $(this).attr("bv-title");
 		openURL("${ctx}/qy/list.do?listType=menu&role="+role,title+"列表",465,510);
-		closeMenu();
+		closeMenu_();
 	});
 	
 	//发送客户 
@@ -34,7 +34,7 @@ $(function(){
 		 		data = "发送失败!";
 		 	}
 		 	alert(data);
-		 	closeMenu();
+		 	closeMenu_();
 		 });
 		/* $.ajax({
 			 url : '../sendTM.do',
@@ -50,8 +50,8 @@ $(function(){
 		 })*/	 	
 	}
 });
-function closeMenu(){
-	EditShow_Hidden(ed1);
+function closeMenu_(){
+	$(".bavlo-memu-turn").trigger("click");
 }
 function getRootPath(){
     //获取当前网址，如： http://localhost:8083/uimcardprj/share/meun.jsp

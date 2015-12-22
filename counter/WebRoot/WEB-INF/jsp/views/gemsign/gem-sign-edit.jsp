@@ -253,7 +253,23 @@
 	<input type="hidden" id="pageAttr" value="GEM"/>
 	<input id="gemid" class="mid tableId" type="hidden" name="id" value="${gemvo['id']}">
 	<input id="customerId" class="tocustomerId" type="hidden" name="customerId" value="${gemvo['customerId']}">
-<div class="header">
+<header class="demo-bar">
+	<h1>
+		${pageOrderType}宝石签收单
+			<c:choose>
+				 <c:when test="${empty gemvo['vnumber']}">   
+				 ${number }
+				 <input type="hidden" name="vnumber" value="${number }">
+				 </c:when>
+				 <c:otherwise>
+				 ${gemvo['vnumber']}
+				 <input type="hidden" name="vnumber" value="${gemvo['vnumber']}">
+				 </c:otherwise>	
+			</c:choose>
+	</h1>
+</header>
+<jsp:include page="../header.jsp"></jsp:include>
+<div class="header" style="display:none;">
 	<div class="head">
 		<div class="top1">
 			<b><a href="#" onclick="EditShow_Hidden(ed1)"><img src="${ctx}/resources/images/plus.png"></a> ${pageGemType }宝石签收单
