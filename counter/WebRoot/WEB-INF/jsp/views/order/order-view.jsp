@@ -255,12 +255,12 @@ function loadOrderList(){
 				<dd class="st-jf"></dd>
 		</dl>
         <ul>
-          <li>提交</li>
-          <li>模具</li>
-          <li>工艺</li>
-          <li>质检</li>
-          <li>快递</li>
-          <li>交付</li>
+          <li class="fst-tj">提交</li>
+          <li class="fst-zb">制版</li>
+          <li class="fst-sc">生产</li>
+          <li class="fst-zj">质检</li>
+          <li class="fst-kd">快递</li>
+          <li class="fst-jf">交付</li>
           <div class="clear"></div>
         </ul>
       </div>
