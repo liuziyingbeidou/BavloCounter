@@ -9,6 +9,9 @@
 <meta http-equiv="expires" content="0">
 <meta http-equiv="keywords" content="keyword1,keyword2,keyword3">
 <meta http-equiv="description" content="This is my page">
+<meta name="viewport"
+	content="width=device-width,target-densitydpi=high-dpi,initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+
 <title>款式单</title>
 <script language="javascript" type="text/javascript"
 	src="${ctx}/resources/js/jquery-1.8.3.min.js"></script>
@@ -19,15 +22,17 @@
 <script src="${ctx}/resources/js/top.js"></script>
 <script src="${ctx}/resources/js/hide.js"></script>
 <!--必要样式-->
-<link rel="stylesheet" href="${ctx}/resources/css/photoswipe.css">
+<!--<link rel="stylesheet" href="${ctx}/resources/css/photoswipe.css">-->
 <link rel="stylesheet" href="${ctx}/resources/css/default-skin.css">
 <link rel="stylesheet"
 	href="/counter/resources/jquery.multiDialog/css/jquery-ui-1.10.3.custom.css">
 <script
 	src="/counter/resources/jquery.multiDialog/js/jquery/jquery-ui-1.10.3.custom.js"></script>
+<!--	
 <script src="${ctx}/resources/js/photoswipe.min.js"></script>
 <script src="${ctx}/resources/js/photoswipe-ui-default.min.js"></script>
 <script src="${ctx}/resources/js/photoswipefromdom.js"></script>
+-->
 <script src="/counter/resources/js/bavlo-dialog.js"></script>
 <script src="${ctx}/resources/js/bavlo-initdata.js"></script>
 <script src="${ctx}/resources/js/bavlo-event.js"></script>
@@ -45,12 +50,13 @@
 <script src="/counter/resources/jquery.multiDialog/js/jquery.ui.dialog.extended-1.0.2.js"></script> 
 <script src="/counter/resources/jquery.multiDialog/js/jquery.multiDialog.js"></script> 
 <script src="/counter/resources/js/bavlo-dialog.js"></script>
-
+  
 <link href="/counter/resources/Downloadr/facebox/facebox.css" media="screen" rel="stylesheet" type="text/css"/>	
 <script src="/counter/resources/Downloadr/facebox/facebox.js" type="text/javascript"></script>
 <link href="/counter/resources/Downloadr/downloadr/downloadr.css" media="screen" rel="stylesheet" type="text/css"/>
 <script src="/counter/resources/Downloadr/downloadr/jqbrowser.js" type="text/javascript"></script>
 <script src="/counter/resources/Downloadr/downloadr/downloadr.js" type="text/javascript"></script>
+
 <script type="text/javascript">
 $(function(){
 	//发送客户显示
