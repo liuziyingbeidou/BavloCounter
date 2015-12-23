@@ -269,38 +269,6 @@
 	</h1>
 </header>
 <jsp:include page="../header.jsp"></jsp:include>
-<div class="header" style="display:none;">
-	<div class="head">
-		<div class="top1">
-			<b><a href="#" onclick="EditShow_Hidden(ed1)"><img src="${ctx}/resources/images/plus.png"></a> ${pageGemType }宝石签收单
-					<c:choose>
-						 <c:when test="${empty gemvo['vnumber']}">   
-						 ${number }
-						 <input type="hidden" name="vnumber" value="${number }">
-						 </c:when>
-						 <c:otherwise>
-						 ${gemvo['vnumber']}
-						 <input type="hidden" name="vnumber" value="${gemvo['vnumber']}">
-						 </c:otherwise>	
-					</c:choose> </b>
-			<font>
-			<a href="#" onclick="Show_Hidden(tr1)"><img src="${ctx}/resources/images/plus.png"></a></font>
-		</div>
-		<div class="hidden_enent" id="tr1" style="display:none;">
-			<ul>
-				<li class="jian"><a href="#" onclick="Show_Hidden(tr1)">—</a></li>
-				<jsp:include page="../menu_pg.jsp"></jsp:include>
-			</ul>
-		</div>
-		<div class="edit_hidden" id="ed1" style="display:none;">
-			<ul>
-				<li class="jian2"><a href="#" onclick="EditShow_Hidden(ed1)">—</a></li>
-				<jsp:include page="../menu_cau.jsp"></jsp:include>	
-			</ul>
-		</div>
-		<div class="clear"></div>
-	</div>
-</div>
 
 <div class="qsd">
   <div class="qsd_main">

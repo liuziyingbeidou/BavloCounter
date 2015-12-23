@@ -35,16 +35,16 @@ $(function(){
 	//订单清单
 	loadOrderList();
 	//订单列表
-	$(".menu-order").bind("click",function(){
+	$(".menu-order").click(function(){
 		openURL("${ctx}/order/list.do","订单列表",500,600);
 	});
 	
 	//上传图片
-	$(".cptu").bind("click",function(){
+	$(".cptu").click(function(){
 		openURL("${ctx}/upload/uppage.do","上传图片");
 	});
 	//图片显示
-	$(".gem-pic-show").bind("click",function(){
+	$(".gem-pic-show").click(function(){
 		var mid = $("#orderId").val();
 		if(mid == ""){
 			alert("请保存后查看!");
@@ -55,7 +55,7 @@ $(function(){
 	//订单状态条
 	freshOrderState("${ordervo['iorderState']}");
 	//更新状态
-	$("#ssave").bind("click",function(){
+	$("#ssave").click(function(){
 		var orderId = $("#orderId").val();
 		var ista = $(".ista").val();
 		var url = "${ctx}/order/updateState.do";
@@ -65,7 +65,7 @@ $(function(){
 		});
 	});
 	//更新顺丰单号
-	$("#csave").bind("click",function(){
+	$("#csave").click(function(){
 		var orderId = $("#orderId").val();
 		var cnum = $(".cnum").val();
 		var url = "${ctx}/order/updateOrderCNumber.do";
@@ -75,7 +75,7 @@ $(function(){
 		});
 	});
 	//保存上传图片
-	$(".psave").bind("click",function(){
+	$(".psave").click(function(){
 		var url = "${ctx}/order/saveOrderCVO.do";
 		var orderId = $("#orderId").val();
 		var bvo = JSON.stringify($('#orderCId').serializeJson());
@@ -85,7 +85,7 @@ $(function(){
 		});
 	});
 	//进入编辑页
-	$(".editOrder").bind("click",function(){
+	$(".editOrder").click(function(){
 		var url = "${ctx}/order/edit.do?id="+$("#orderId").val();
 		window.location = url;
 	});
@@ -163,6 +163,7 @@ function loadOrderList(){
 			/*if(typeof(callback)!=='undefined'){
 				callback&&callback;
 			}*/
+			closeMultiDlg();
 		}
 	//清单→款式单
 	function toCustom(customId){
@@ -219,26 +220,7 @@ function loadOrderList(){
 	</h1>
 </header>
 <jsp:include page="../header.jsp"></jsp:include>
-<div class="header" style="display:none;">
-	<div class="head1">
-		<div class="top">
-			<b><a href="#" onclick="EditShow_Hidden(ed1)"><img src="${ctx}/resources/images/plus.png"></a> ${pageOrderType }订单 ${ordervo['vorderCode']}</b>
-			<font><a href="#" onclick="Show_Hidden(tr1)"><img src="${ctx}/resources/images/plus.png"></a></font>
-		</div>
-		<div class="hidden_enent1" id="tr1" style="display:none;">
-			<ul>
-				<li class="jian"><a href="#" onclick="Show_Hidden(tr1)">—</a></li>
-				<jsp:include page="../menu_pg.jsp"></jsp:include>
-			</ul>
-		</div>
-		<div class="edit_hidden1" id="ed1" style="display:none;">
-			<ul>
-				<li class="jian2"><a href="#" onclick="EditShow_Hidden(ed1)">—</a></li>
-				<jsp:include page="../menu_cau.jsp"></jsp:include>		
-			</ul>
-		</div>
-	</div>
-</div>
+
 <div class="all">
 	<div class="main">
     <div class="mainleft">

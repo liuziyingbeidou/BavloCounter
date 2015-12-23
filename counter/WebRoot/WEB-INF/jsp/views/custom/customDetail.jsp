@@ -359,32 +359,7 @@ function CADsave(){
 			</h1>
 		</header>
 		<jsp:include page="../header.jsp"></jsp:include>
-		<div class="header" style="display:none;">
-			<div class="head1">
-				<div class="top">
-					<b><a href="#" onclick="EditShow_Hidden(ed1)"><img
-							src="${ctx}/resources/images/plus.png" /> </a>
-						款式单${customDetail.vcustomCode }</b> <font><a
-						href="javascript:;" onclick="Show_Hidden(tr1)"><img
-							src="${ctx}/resources/images/plus.png" /> </a> </font>
-				</div>
-				<div class="hidden_enent2" id="tr1" style="display: none;">
-					<ul>
-						<li class="jian"><a href="#" onclick="Show_Hidden(tr1)">一</a>
-						</li>
-						<jsp:include page="../menu_pg.jsp"></jsp:include>
-					</ul>
-				</div>
-				<div class="edit_hidden1" id="ed1" style="display: none;">
-					<ul>
-						<li class="jian2"><a href="#" onclick="EditShow_Hidden(ed1)">一</a>
-						</li>
-						<jsp:include page="../menu_cau.jsp"></jsp:include>
-					</ul>
-				</div>
-				<div class="clear"></div>
-			</div>
-		</div>
+
 		<div class="all">
 			<div class="main">
 				<div class="mainleft">

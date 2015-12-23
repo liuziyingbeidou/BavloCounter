@@ -46,7 +46,7 @@ var s=["vprovince","vcity","vdistrict"];//三个select的name
 var opt0 = ["省份","城市","区县"];//初始值
 $(function(){
 	//选择客户
-	$(".file").bind("click",function(){
+	$(".file").click(function(){
 		openURL("${ctx}/customer/list.do","客户列表",470,535);
 	});
 	setValueByFrame("customer","${ordervo['id']}");
@@ -105,7 +105,7 @@ $(function(){
 	//订单状态条
 	freshOrderState("${ordervo['iorderState']}");
 	//更新状态
-	$("#orderSubmit").bind("click",function(){
+	$("#orderSubmit").click(function(){
 		var orderId = $("#orderId").val();
 		var ista = "0";
 		var url = "${ctx}/order/updateState.do";
@@ -503,6 +503,7 @@ function getOrderListInfo(){
 			/*if(typeof(callback)!=='undefined'){
 				callback&&callback;
 			}*/
+			closeMultiDlg();
 		}
 		
 		//删除清单
