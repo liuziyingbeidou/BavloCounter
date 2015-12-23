@@ -163,7 +163,6 @@ function loadOrderList(){
 			/*if(typeof(callback)!=='undefined'){
 				callback&&callback;
 			}*/
-			closeMultiDlg();
 		}
 	//清单→款式单
 	function toCustom(customId){
