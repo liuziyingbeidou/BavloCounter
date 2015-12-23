@@ -69,6 +69,11 @@ if(info != null){
 			url = "#";//电子柜台后台
 			window.location = url;
 		});
+		$(".old-counter").click(function(){
+			startMask();
+			url = "#";//电子柜台
+			window.location = url;
+		});
 		//重置
 		$(".menu-system-close").bind("click",function(){
 			startMask();
@@ -148,6 +153,9 @@ if(info != null){
 		     </c:if>
 		     <c:if test="${fn:contains('[CC-RL]',role)}">
 		     <button type="button" class="btn btn-default .btn-lg add-entysign">实物签收单</button>
+		     </c:if>
+		     <c:if test="${fn:contains('[CC-RL]',role)}">
+		     <button type="button" class="btn btn-default .btn-lg old-counter">电子柜台</button>
 		     </c:if>
 		     </c:forEach>
             <!--<button type="button" class="btn btn-default .btn-lg add-custom">定&nbsp;&nbsp;制&nbsp;&nbsp;单</button>-->
