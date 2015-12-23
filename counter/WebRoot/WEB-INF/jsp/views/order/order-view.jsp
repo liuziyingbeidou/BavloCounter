@@ -191,10 +191,18 @@ function loadOrderList(){
 }
 .bill-pic{cursor: pointer;}
 @media screen and (max-width: 1280px) and (min-width: 320px){
+.close input{
+	height: 40px;
+    line-height: 40px;
+}
 .oedit input {
     width: 100%;
     height: 40px;
     line-height: 40px;
+    font-size: 26px;
+    }
+    .gylc ul li{
+    	text-align:left;
     }
 }
 </style>
