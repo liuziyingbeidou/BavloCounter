@@ -503,7 +503,6 @@ function getOrderListInfo(){
 			/*if(typeof(callback)!=='undefined'){
 				callback&&callback;
 			}*/
-			closeMultiDlg();
 		}
 		
 		//删除清单
