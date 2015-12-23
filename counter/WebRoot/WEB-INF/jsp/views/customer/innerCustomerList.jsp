@@ -44,7 +44,7 @@
 		startMask();
 		$("#juheweb").empty();
 		var url = "${ctx}/qy/getUserByTagName.do";
-		$.post(url,{tagName:"${role}"},function(row){debugger
+		$.post(url,{tagName:"${role}"},function(row){
 			if(row.length > 0){
 				var data = row;
 				for(var i = 0; i < data.length; i++){
