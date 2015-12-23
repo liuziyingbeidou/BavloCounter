@@ -125,7 +125,7 @@ public class QiYeUtil {
 			try {
 				Integer tagid = Integer.valueOf(tagList.getJSONObject(i).getString("tagid")).intValue();
 				String tagname = tagList.getJSONObject(i).getString("tagname");
-				if(tagName.contains(tagname.substring(3))){
+				if(tagName.equals(tagname.substring(3))){
 					//存在该角色组
 					JSONObject tagObj = WechatTag.getUserList(request,tagid);
 					if(tagObj != null){
