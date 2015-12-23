@@ -632,7 +632,7 @@ text-overflow:ellipsis;
 			  i ++;
 			  R = tbl.insertRow();
 			  C = R.insertCell();
-			  C.innerHTML = "<input class='addrlist' value='"+val+"' id='"+id+"' onclick='clickSelAddr("+id+")' readonly>";
+			  C.innerHTML = "<input class='addrlist' title='"+val+"' value='"+val+"' id='"+id+"' onclick='clickSelAddr("+id+")' readonly>";
 			  D = R.insertCell();
 			  D.innerHTML = "<a onclick='deleteRow(this,"+id+")' class='address-close'>X</a>";
 			 }

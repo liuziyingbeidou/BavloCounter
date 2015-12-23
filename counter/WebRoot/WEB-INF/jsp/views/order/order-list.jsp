@@ -40,6 +40,8 @@
 			window.parent.location = url;
 			window.parent.closeMultiDlg();
 		});
+		
+		$(".search").focus();;
 	});
 	
 	function initData(){
