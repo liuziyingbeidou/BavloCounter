@@ -63,20 +63,20 @@ public class SendController extends BaseController{
 		}else{
 			renderText("-1");
 		}
-		
+		CustomerVO vo = customerService.findCustomerById(customerId);
 		//客户(cust)
 		if(IConstant.PAGE_ATTR_CUST.equals(pageAttr)){
-			text = "客户资料-" + actionPsn + "(" + DateUtil.getCurDateTime()+")";
+			text = vo.getVname()+" 的资料(转发人-" + actionPsn + ")";
 			actionName = "customer/info.do?id="+id;
 		}else
 		//定制单(style)
 		if(IConstant.PAGE_ATTR_STYLE.equals(pageAttr)){
-			text = "定制单-" + actionPsn + "(" + DateUtil.getCurDateTime()+")";
+			text = vo.getVname()+"的定制单(转发人-" + actionPsn + ")";// + DateUtil.getCurDateTime()+")";
 			actionName = "custom/detail.do?id="+id;
 		}else
 		//订单(order)
 		if(IConstant.PAGE_ATTR_ORDER.equals(pageAttr)){
-			text = "订单-" + actionPsn + "(" + DateUtil.getCurDateTime()+")";
+			text = vo.getVname()+"的订单(转发人-" + actionPsn + ")";// + DateUtil.getCurDateTime()+")";
 			actionName = "order/view.do?id="+id;
 			
 			//PMC发给PPS订单进入制版态
@@ -102,17 +102,17 @@ public class SendController extends BaseController{
 		}else
 		//宝石签收单(gem)
 		if(IConstant.PAGE_ATTR_GEM.equals(pageAttr)){
-			text = "宝石签收单-" + actionPsn + "(" + DateUtil.getCurDateTime()+")";
+			text = vo.getVname()+"的宝石签收单(转发人-" + actionPsn + ")";// + DateUtil.getCurDateTime()+")";
 			actionName = "gem-sign/view.do?id="+id;
 		}else
 		//实物签收单(entity)
 		if(IConstant.PAGE_ATTR_ENTITY.equals(pageAttr)){
-			text = "实物签收单-" + actionPsn + "(" + DateUtil.getCurDateTime()+")";
+			text = vo.getVname()+"的实物签收单(转发人-" + actionPsn + ")";// + DateUtil.getCurDateTime()+")";
 			actionName = "entity-sign/view.do.id="+id;
 		}else
 		//配石单(deploy)
 		if(IConstant.PAGE_ATTR_DEPLOY.equals(pageAttr)){
-			text = "配石单-" + actionPsn + "(" + DateUtil.getCurDateTime()+")";
+			text = vo.getVname()+"的配石单-" + actionPsn + ")";// + DateUtil.getCurDateTime()+")";
 		}else{
 			isTurn = false;
 		}
@@ -122,7 +122,7 @@ public class SendController extends BaseController{
 			//将转发对象userid追加到客户表toUserids中
 			String condition = " toUserids like '%"+customerId+"%'";
 			if(!customerService.isExistByCondition(condition)){
-				CustomerVO vo = customerService.findCustomerById(customerId);
+				//CustomerVO vo = customerService.findCustomerById(customerId);
 				if(vo != null){
 					String vl = vo.getToUserids() + "["+loginVO.getUserId()+"]";
 					customerService.updateCustomerByCondition(" id="+customerId, new String[]{"toUserids"}, new String[]{vl});
