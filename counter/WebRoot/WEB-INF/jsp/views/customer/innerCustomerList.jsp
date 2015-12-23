@@ -77,7 +77,7 @@
 				alert("该页面为设置页面属性");return ;
 			}
 			var $id = $(".tableId",window.parent.document);
-			var customerId = $(".tocustomerId",window.parent.document);
+			var customerId = $(".tocustomerId",window.parent.document).val();
 			var id = null;
 			if($id.length > 0){
 				if($id.val() != null && $id.val() != ""){
@@ -102,7 +102,7 @@
 	}
 	//转发页面
 	function toRoleObj(pageAttr,userid,memo,id,customerId){
-		var url = "${ctx}/sendMassage.do";
+		var url = "${ctx}/sendMassage.do";debugger
 		$.post(url,{pageAttr:pageAttr,touser:userid,memo:memo,rootPath:getRootPath(),id:id,customerId:customerId},function(data){
 			if(data == 0){
 				alert("转发成功!");
