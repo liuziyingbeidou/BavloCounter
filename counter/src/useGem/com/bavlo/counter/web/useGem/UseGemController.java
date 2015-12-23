@@ -46,17 +46,19 @@ public class UseGemController extends BaseController implements IConstant {
 	public ModelAndView info(Map<String, Object> map, Integer id,Integer did) {
 		
 		UseGemVO useGemDetail = null;
+		//±àºÅ
+		map.put("number", CommonUtils.getBillCode(IConstant.CODE_USEGEM));
+		map.put("pageOrderType", IConstant.PAGE_TYPE_ADD);
 		if(did == null){
 			if(id != null){
 				useGemDetail = useGemService.findUseGemById(id);
 				did = useGemDetail.getCustomdId();
+				map.put("pageOrderType", IConstant.PAGE_TYPE_EDIT);
 			}
 		}
 		CustomDVO dvo = customService.findCustomDVOBySql(did);
 		map.put("useGemDetail", useGemDetail);
 		map.put("customDVO", dvo);
-		//±àºÅ
-		map.put("number", CommonUtils.getBillCode(IConstant.CODE_ORDER));
 		return new ModelAndView(PATH_USE_GEM + "useGemEdit");
 	}
 
@@ -67,10 +69,12 @@ public class UseGemController extends BaseController implements IConstant {
 	 * @return ModelAndView
 	 */
 	@RequestMapping("saveOrUpdate")
-	public String saveOrUpdate(UseGemVO useGemVO) {
+	public void saveOrUpdate(UseGemVO useGemVO) {
 
-		useGemService.saveOrUpdateUseGem(useGemVO);
-		return REDIRECT + "useGem/info.do";
+		Integer id = useGemService.saveOrUpdateUseGem(useGemVO);
+		
+		renderJson("{\"id\":"+id+"}");
+		
 	}
 
 	/**
