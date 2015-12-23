@@ -74,6 +74,12 @@ public class CustomController extends BaseController implements IConstant {
 		JSONArray chainJson = JSONArray.fromObject(customCVO);
 		JSONArray stockGemJson = JSONArray.fromObject(customDVO);
 		
+		LoginVO loginInfo = (LoginVO) session.getAttribute("loginInfo");
+		String weChat = null;
+		if(loginInfo != null){
+			weChat = loginInfo.getMuserId();
+		}
+		
 		ModelAndView model = new ModelAndView(PATH_CUSTOM + "customEdit");
 		if(customEdit == null){
 			customEdit = new CustomVO();
@@ -89,6 +95,7 @@ public class CustomController extends BaseController implements IConstant {
 		model.addObject("customEdit", customEdit);
 		model.addObject("chainJson", chainJson);
 		model.addObject("stockGemJson", stockGemJson);
+		model.addObject("weChat", weChat);
 		model.addObject("number", CommonUtils.getBillCode("CM"));
 		return model;
 	}
