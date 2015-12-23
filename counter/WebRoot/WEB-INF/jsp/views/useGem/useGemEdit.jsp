@@ -37,9 +37,9 @@
 <script src="/counter/resources/jquery.multiDialog/js/jquery.multiDialog.js"></script> 
 <script src="/counter/resources/js/bavlo-dialog.js"></script>
 
-<link rel="stylesheet" href="${ctx }/page/counter/assets/css/amazeui.min.css"/>
-<link rel="stylesheet" href="${ctx }/page/counter/assets/css/admin.css">
-<script type="text/javascript" src="${ctx }/page/counter/assets/js/amazeui.min.js"></script>
+<link rel="stylesheet" href="${ctx }/resources/amazeui/css/amazeui.min.css"/>
+<link rel="stylesheet" href="${ctx }/resources/amazeui/css/amaze.min.css">
+<script type="text/javascript" src="${ctx }/resources/amazeui/js/amazeui.min.js"></script>
 <script type="text/javascript">
 	//本地webservice
 	var nativeUrl = "${pageScope.basePath}/counter/webservice/http.do";
@@ -195,6 +195,7 @@
 			success : function(data) {
 				$("#gemid").val(data.id);
 				alert("保存成功!");
+				window.location = "${ctx}/useGem/info.do?id="+data.id;//根据id显示配石单信息
 			},
 			error : function(e) {
 				alert("保存失败!");
@@ -250,7 +251,7 @@
 			url = "${ctx}/custom/detail.do?id="+id;//根据id显示定制单信息
 			window.location = url;
 		}else if(type == "useGem"){
-			url = "${ctx}/useGem/info.do?did="+id;//根据id显示配石单信息
+			url = "${ctx}/useGem/info.do?id="+id;//根据id显示配石单信息
 			window.location = url;
 		}
 		/*if(typeof(callback)!=='undefined'){
@@ -278,6 +279,9 @@
 .mytipclass {
     font-style:italic;
     color:red;
+}
+.qsd_left ul{
+	margin-top:0px;
 }
 </style>
 </head>
@@ -377,36 +381,36 @@
 				</div>
 				<div class="qsd_right edit_btn">
 					<div class="qsd_right_1 qsd_right_2">
-						<select name="vtype" class="qsdr r1 bl-ck-null useGem" id="gemTypeId">
+						<select name="vtype" class="qsdr r1 bl-ck-null lose-useGem" id="gemTypeId">
 							<option value="-1">请选择</option>
 						</select>
 						<input type="hidden" name="vtypeName" id="typeName" value="${useGemDetail['vtypeName'] }">
 						<dt>
-							<input type='text' id='nworth' name='nworth' class="qsdr r2 useGem-worth bl-ck-null useGem"
+							<input type='text' id='nworth' name='nworth' class="qsdr r2 useGem-worth bl-ck-null lose-useGem"
 								value="${useGemDetail['nworth']}" placeholder="价值（元）">
 						</dt>
 						<div class="clear"></div>
 					</div>
 					<div class="qsd_right_1 qsd_right_2">
-						<select name="vshape" class="qsdr r1 bl-ck-null useGem" id="gemShapeId">
+						<select name="vshape" class="qsdr r1 bl-ck-null lose-useGem" id="gemShapeId">
 							<option value="-1">请选择</option>
 						</select>
 						<input type="hidden" name="vshapeName" id="shapeName" value="${useGemDetail['vshapeName'] }">
 						<dt>
-							<input type='text' id='nweight' name='nweight' class="qsdr r2 useGem-weight bl-ck-null useGem"
+							<input type='text' id='nweight' name='nweight' class="qsdr r2 useGem-weight bl-ck-null lose-useGem"
 								value="${useGemDetail['nweight']}" placeholder="重量（ct）">
 						</dt>
 						<div class="clear"></div>
 					</div>
 					<div class="qsdtt">
-						<input type='text' id='vspec' name='vspec' value="${useGemDetail['vspec']}" placeholder="规格x" class="qsdr3 r1 useGem-spec bl-ck-null useGem"><span class="muiltx">X</span>
-						<input type='text' id='vspec2' name='vspec2' value="${useGemDetail['vspec2']}" placeholder="规格y" class="qsdr3 r3 useGem-spec2 bl-ck-null useGem"><span class="muiltx">X</span>
-						<input type='text' id='vspec3' name='vspec3' value="${useGemDetail['vspec3']}" placeholder="规格z" class="qsdr3 useGem-spec3 bl-ck-null useGem">
+						<input type='text' id='vspec' name='vspec' value="${useGemDetail['vspec']}" placeholder="规格x" class="qsdr3 r1 useGem-spec bl-ck-null lose-useGem"><span class="muiltx">X</span>
+						<input type='text' id='vspec2' name='vspec2' value="${useGemDetail['vspec2']}" placeholder="规格y" class="qsdr3 r3 useGem-spec2 bl-ck-null lose-useGem"><span class="muiltx">X</span>
+						<input type='text' id='vspec3' name='vspec3' value="${useGemDetail['vspec3']}" placeholder="规格z" class="qsdr3 useGem-spec3 bl-ck-null lose-useGem">
 					</div>
 					<div class="clear"></div>
 					<div class="qsdtt">
 						<input type='text' id='icount' name='icount'
-							value="${useGemDetail['icount']}" placeholder="数量（颗）" class="qsdn t3 useGem-count bl-ck-null useGem">
+							value="${useGemDetail['icount']}" placeholder="数量（颗）" class="qsdn t3 useGem-count bl-ck-null lose-useGem">
 					</div>
 					<div class="qssm-l">
 						<textarea name="vmemo" cols="" rows="" class="qssm"

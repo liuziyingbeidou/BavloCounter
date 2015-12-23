@@ -52,7 +52,7 @@
 					}else{
 						pic = "src='${ctx}/resources/images/useGem_01.png'";
 					}
-					$("#juheweb").append("<li><h4><img style='width:60px;height:60px;' "+pic+"><b>"+data[i].vnumber+"</b><a href='#'>"+data[i].vspec+"X"+data[i].vspec2+"X"+data[i].vspec3+"</a><span><a href='#' onclick='selHander("+data[i].customdId+")'>选择</a></span></h4><div class='clear'></div></li>");
+					$("#juheweb").append("<li><h4><img style='width:60px;height:60px;' "+pic+"><b>"+data[i].vnumber+"</b><a href='#'>"+data[i].vspec+"X"+data[i].vspec2+"X"+data[i].vspec3+"</a><span><a href='#' onclick='selHander("+data[i].id+")'>选择</a></span></h4><div class='clear'></div></li>");
 				}
 				endMask();
 			}else{

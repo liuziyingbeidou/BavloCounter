@@ -253,9 +253,8 @@ h2 {
 
 /*ol,ul {
 	padding-left: 2em
-}
+}*/
 
-*/
 ol>li>ol,ol>li>ul,ul>li>ol,ul>li>ul {
 	margin: 1em 0
 }
