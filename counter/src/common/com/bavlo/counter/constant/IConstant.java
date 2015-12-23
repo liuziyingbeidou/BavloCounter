@@ -72,6 +72,8 @@ public interface IConstant {
 	public static final String CODE_ORDER = "OD";
 	//客户
 	public static final String CODE_CUSTER = "CR";
+	//配石单
+	public static final String CODE_USEGEM = "UG";
 	/*****************************View模块和ViewName***************************/
 	
 	public static final String PATH_COMMON = "common/";

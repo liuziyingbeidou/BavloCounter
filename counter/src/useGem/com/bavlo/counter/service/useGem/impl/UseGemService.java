@@ -47,13 +47,19 @@ public class UseGemService extends CommonService implements IUseGemService {
 	}
 	
 	@Override
-	public void saveOrUpdateUseGem(UseGemVO useGemVO) {
+	public Integer saveOrUpdateUseGem(UseGemVO useGemVO) {
+		Integer id = useGemVO.getId();
 		try {
-			saveOrUpdate(useGemVO);
+			if(id == null){
+				id = saveReID(useGemVO);
+			}else{
+				update(useGemVO);
+			}
 			customService.backCustomByUseGem(useGemVO.getCustomdId(), useGemVO);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+		return id;
 	}
 
 	@Override

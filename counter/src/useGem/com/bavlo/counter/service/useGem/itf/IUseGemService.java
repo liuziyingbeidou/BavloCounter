@@ -39,7 +39,7 @@ public interface IUseGemService {
 	 * @param
 	 * @return void
 	 */
-	public void saveOrUpdateUseGem(UseGemVO useGemVO);
+	public Integer saveOrUpdateUseGem(UseGemVO useGemVO);
 
 	/**
 	 * @Description: 通过ID查找配石单
