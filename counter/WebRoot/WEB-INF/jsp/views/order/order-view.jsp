@@ -49,7 +49,7 @@ $(function(){
 		if(mid == ""){
 			alert("请保存后查看!");
 		}else{
-			openURL("${ctx}/upload/showpic.do?cpath=com.bavlo.counter.model.order.OrderCVO&fkey=orderId&id="+mid,"图片展示",'','',true);
+			openURL("${ctx}/upload/showpic.do?cpath=com.bavlo.counter.model.order.OrderCVO&fkey=orderId&id="+mid,"图片展示",'','',false);
 		}
 	});
 	//订单状态条
