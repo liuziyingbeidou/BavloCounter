@@ -325,7 +325,7 @@ public class CustomService extends CommonService implements ICustomService {
 					isupdate = true;
 				}
 				//价值
-				if(StringUtil.isNotEmpty(useGemVO.getNworth()+"")){
+				if(!CommonUtils.isNull(useGemVO.getNworth()+"")){
 					dvo.setNstockGemCost(BigDecimal.valueOf(useGemVO.getNworth()));
 					isupdate = true;
 				}
@@ -335,12 +335,12 @@ public class CustomService extends CommonService implements ICustomService {
 					isupdate = true;
 				}
 				//重量
-				if(StringUtil.isNotEmpty(useGemVO.getNweight()+"")){
+				if(!CommonUtils.isNull(useGemVO.getNweight()+"")){
 					dvo.setNstockGemWeight(BigDecimal.valueOf(useGemVO.getNweight()));
 					isupdate = true;
 				}
 				//数量
-				if(StringUtil.isNotEmpty(useGemVO.getIcount()+"")){
+				if(!CommonUtils.isNull(useGemVO.getIcount()+"")){
 					dvo.setIstockGemNum(useGemVO.getIcount());
 					isupdate = true;
 				}
