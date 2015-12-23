@@ -255,11 +255,11 @@ $(function() {
 	 		openURL("/counter/upload/uppage.do","上传刻字矢量图"); 
 	 		$("#filevalue").val("vengraveVh");
 	 });
-	 $(".cad_file").bind("click",function(){
+	 /*$(".cad_file").bind("click",function(){
 			$("#filetype").val("file");
 	 		openURL("/counter/upload/uppage.do","上传CAD文件"); 
 	 		$("#filevalue").val("vcadFile");
-	 });
+	 });*/
 	 
 	 //图片展示
 	 var customId = $("#customId").val();
