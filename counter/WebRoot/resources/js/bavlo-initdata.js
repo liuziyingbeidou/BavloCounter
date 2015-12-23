@@ -216,6 +216,19 @@ function httpRequest(nativeurl,requestUrl,requestMethod,outputStr,callback){
 	});
 }
 
+/**
+ * 获取利润率
+ * @param nativeUrl
+ * @param remoteUrl
+ */
+function loadProfit(nativeUrl,remoteUrl){
+	$.get(nativeUrl,
+			{url:remoteUrl},
+			function(data){
+	
+			});
+}
+
 //设置下拉框自定义
 function setCustomV(em){
 	
