@@ -96,7 +96,7 @@ $(function(){
 	$("#orderCode").click(function(){
 		//跳转到订单页面 
 		if(orderId != ""){
-			url = "/counter/order/edit.do?id="+orderId;
+			url = "/counter/order/view.do?id="+orderId;
 			window.location = url;
 		}
 	});
@@ -116,8 +116,8 @@ $(function(){
 	//上传CAD
 	$(".upcad").bind("click",function(){
 		$("#filetype").val("file");
-		openURL("/counter/upload/uppage.do","上传CAD文件"); 
-		$("#filevalue").val("vcadFile");
+ 		openURL("/counter/upload/uppage.do","上传CAD文件"); 
+ 		$("#filevalue").val("vcadFile");
 	});
 	
 	//下载CAD文件回写订单状态
@@ -313,7 +313,7 @@ function CADsave(){
 	var id = $('#customId').val();
 	var bvo = JSON.stringify($('#customBId').serializeJson());
 	var vh = $('#vengraveVh').val();
-	var cad = $('#vengraveVh').val();
+	var cad = $('#vcadFile').val();
 	$.ajax({
 		type : "POST",
 		url : "update.do",
@@ -387,7 +387,7 @@ function CADsave(){
 		</div>
 		<div class="all">
 			<div class="main">
-				<div class="mainleft CUST-RL CC-RL PM-RL PPS-RL GB-RL PMC-RL PMC-RL">
+				<div class="mainleft">
 					<div class="cankao">
 						<h2>
 							<a href="javascript:;" style="color: #fff" class="cankaotu">+
@@ -416,7 +416,9 @@ function CADsave(){
 					</div>
 					<div class="sheji">
 						<h2>
-							<a href="javascript:;" style="color: #fff" class="qibantu">+
+							<a href="javascript:;" style="color: #fff" class="qibantu  CUST-RL CC-RL PM-RL PMC-RL GB-RL PPS-RL">+
+								起版设计图</a>
+							<a href="javascript:;" style="color: #fff">+
 								起版设计图</a>
 						</h2>
 						<div class="pro">
@@ -480,12 +482,15 @@ function CADsave(){
 					<div class="clear"></div>
 				</div>
 				<div class="mainmid">
-					<div class="dzd CUST-RL CC-RL PM-RL PPS-RL GB-RL PMC-RL PMC-RL">
+					<div class="dzd">
 						<dl>
 							<dd class='orderClass'>
-								订单号 : ${orderVO.vorderCode } <input type="button" value="进"
+								订单号 : ${orderVO.vorderCode } 
+							</dd>
+							<dd>
+								<input type="button" value="查看订单"
 									id="orderCode"
-									class="ugem CUST-RL CAD-RL PPS-RL GB-RL PMC-RL PPS-RL" />
+									class="lookOrder CUST-RL CC-RL PMC-RL PPS-RL" />
 							</dd>
 							<dd>
 								报价： <b>${orderVO.nquotedPrice } 元</b>
@@ -508,7 +513,7 @@ function CADsave(){
 				</div>
 				<div class="mainrig">
 					<div class="dzd_right">
-						<div class="CUST-RL CC-RL PM-RL PPS-RL GB-RL PMC-RL PMC-RL">
+						<div>
 						<dl class="chain">
 							<dd>
 								<h3>链子</h3>
@@ -530,7 +535,7 @@ function CADsave(){
 						</div>
 						<div class="clear"></div>
 						<div
-							class="dzd_right_btm d1 CUST-RL CC-RL PM-RL PPS-RL GB-RL PMC-RL PMC-RL">
+							class="dzd_right_btm d1 CUST-RL CC-RL PM-RL CAD-RL PMC-RL GB-RL">
 							<span class="gf"><a class="dlcad"
 								href="${ctx}/staticRes/custom/${customDetail['vcadFile'] }"
 								rel="downloadr" title="下载CAD文件">下载CAD</a> </span> <b><a
@@ -540,21 +545,25 @@ function CADsave(){
 							<div class="clear"></div>
 						</div>
 						<div
-							class="dzd_right_btm d1 CUST-RL CC-RL PM-RL PPS-RL GB-RL PMC-RL PMC-RL">
+							class="dzd_right_btm d1 CUST-RL CC-RL PM-RL PMC-RL GB-RL PPS-RL">
 							<span class="gf"><a class="upcad" href="#">上传CAD</a>
 							</span> <b><a class="upvh" href="#">上传矢量图</a></b>
 							<div class="clear"></div>
 						</div>
 						<div
-							class="dzd_right_btm CUST-RL PPS-RL GB-RL PMC-RL CAD-RL PMC-RL">
+							class="dzd_right_btm CUST-RL CC-RL PM-RL CAD-RL PMC-RL GB-RL">
 							<input type='text' class="gf" value=''> <b><a
 								href="#" class="sendPMC">通知PMC</a></b>
 							<div class="clear"></div>
+						</div>
+						<div
+							class="dzd_right_btm CUST-RL CAD-RL PMC-RL GB-RL PPS-RL">
 							<input type="button" value="进入编辑页" class="dzd_close" />
+							<div class="clear"></div>
 						</div>
 						
 						<div
-							class="dzd_left_btm CUST-RL CC-RL PM-RL PPS-RL GB-RL PMC-RL PMC-RL">
+							class="dzd_left_btm CUST-RL CC-RL PM-RL PMC-RL GB-RL PPS-RL">
 							<input type="button" onclick="javascript:CADsave()" value="保存" class="dzd_save" />
 						</div>
 					</div>
@@ -578,6 +587,5 @@ function CADsave(){
 	<input type="hidden" name="filevalue" id="filevalue" value=""></input>
 	<input type="hidden" name="vtype" id="vtype" value=""></input>
 	</form>
-	客户（CUST）、定制顾问（CC）、产品经理（PM）、起版师（CAD）、生产主管（PMC）、配石员（GB）、工厂跟单员（PPS）
 </body>
 </html>
