@@ -11,6 +11,9 @@ import org.springframework.web.method.HandlerMethod;
 import org.springframework.web.servlet.HandlerInterceptor;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.bavlo.counter.model.LoginVO;
+import com.bavlo.counter.utils.StringUtil;
+
 public class OAuth2Interceptor implements HandlerInterceptor {
 
 	/**
@@ -51,7 +54,7 @@ public class OAuth2Interceptor implements HandlerInterceptor {
 		if (annotation != null) {
 			System.out.println("OAuthRequired：你的访问需要获取登录信息！");
 			Object objUid = session.getAttribute("loginInfo");
-			if (objUid == null) {
+			if (isAuto(objUid)) {
 				String resultUrl = request.getRequestURL().toString();
 				String param=request.getQueryString();
 				if(param!=null){
@@ -73,4 +76,16 @@ public class OAuth2Interceptor implements HandlerInterceptor {
 		return true;
 	}
 
+	public boolean isAuto(Object objUid){
+		boolean flg = false;
+		if (objUid == null) {
+			flg = true;
+		}else{
+			if(StringUtil.isEmpty(((LoginVO)objUid).getUserId())){
+				flg = true;
+			}
+		}
+		return flg;
+	}
+	
 }

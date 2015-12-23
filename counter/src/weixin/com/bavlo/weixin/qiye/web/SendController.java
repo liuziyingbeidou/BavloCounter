@@ -71,7 +71,7 @@ public class SendController extends BaseController{
 		}else
 		//定制单(style)
 		if(IConstant.PAGE_ATTR_STYLE.equals(pageAttr)){
-			text = vo.getVname()+"的定制单(转发人-" + actionPsn + ")";// + DateUtil.getCurDateTime()+")";
+			text = vo.getVname()+"的款式单(转发人-" + actionPsn + ")";// + DateUtil.getCurDateTime()+")";
 			actionName = "custom/detail.do?id="+id;
 		}else
 		//订单(order)
