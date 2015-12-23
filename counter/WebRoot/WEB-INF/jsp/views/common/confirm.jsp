@@ -1,5 +1,6 @@
 <%@ page language="java" import="java.util.*,com.bavlo.counter.model.LoginVO" pageEncoding="utf-8"%>
-
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<c:set var="ctx" value="${pageContext.request.contextPath}"/>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html>
   <head>
@@ -39,6 +40,7 @@
     }
     .text-align{
     	text-align:center;
+    	color:#FFF;
     }
     .btn-default{
     	color:#F0F0F0;
@@ -59,6 +61,7 @@
     }
     .text-align{
     	text-align:center;
+    	color:#FFF;
     }
     .btn-default{
     	color:#F0F0F0;
@@ -80,9 +83,8 @@
       </div>
       
       <div class="container text-align" role="main">
+    	  抱歉,您没有权限访问!
       </div>
-		<div class="radius-circle">
-	        抱歉,您没有权限查看!</div>
     </div>
   </body>
 </html>
