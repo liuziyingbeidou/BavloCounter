@@ -13,10 +13,8 @@ import org.springframework.stereotype.Service;
 
 import com.bavlo.counter.service.impl.CommonService;
 import com.bavlo.counter.utils.StringUtil;
-import com.bavlo.weixin.qiye.pojo.AccessToken;
 import com.bavlo.weixin.qiye.pojo.resp.TextMessage;
 import com.bavlo.weixin.qiye.service.itf.ICoreService;
-import com.bavlo.weixin.qiye.util.Constants;
 import com.bavlo.weixin.qiye.util.MessageUtil;
 import com.bavlo.weixin.qiye.util.QiYeUtil;
 
