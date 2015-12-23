@@ -48,6 +48,7 @@ function openURL(url, title,width, height,isFull) {
 	});
 }
 
+//关闭列表框框
 function closeMultiDlg(){
 	
 	$(".ui-dialog-titlebar-close").trigger('click');
