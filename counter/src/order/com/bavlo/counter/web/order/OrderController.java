@@ -66,7 +66,7 @@ public class OrderController extends BaseController {
 		String content = request.getParameter("content");
 		String wh = "";
 		if(StringUtil.isNotEmpty(content)){
-			wh = " a.vorder_code like '%"+content+"%'";
+			wh = " and a.vorder_code like '%"+content+"%'";
 		}
 		
 		/**角色权限控制----开始**/
