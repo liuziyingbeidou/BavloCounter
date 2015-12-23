@@ -536,7 +536,7 @@ font-size:23px;
 #container { margin-top:29px !important; width:100%;}
 #uploader .filelist li { width:30% !important;}
 /**订单状态栏**/
-.gylc .barbox{width:500px;}
+.gylc .barbox{width:495px;}
 .barbox  .st-tj,.barbox .st-zb,.barbox .st-sc,.barbox .st-zj,.barbox .st-kd{width:80px;}
 }
 
