@@ -355,15 +355,11 @@ function calculator(str) {
 		params.reportPrice = $("#certificate").find("option:selected").val();
 	}
 	//利润率
-	function loadProfit(nativeUrl,remoteUrl){
-		var weChat = $("#weChat").val();
-		var remoteUrl = "http://www.bavlo.com/getAgentFromWeChat?weChat=" + weChat;
-		$.get(nativeUrl,
-				{url:remoteUrl},
-				function(data){
-					params.agentProfit = data.customizeRate;
-				});
-	}
+	var weChat = $("#weChat").val()
+	var remoteUrl = "http://www.bavlo.com/getAgentFromWeChat?weChat=" + weChat;
+	loadProfit(nativeUrl,remoteUrl,function(data){
+			params.agentProfit = data.customizeRate;
+	});
 	
 	if (params.metalWeight == "" || params.metalWeight == 0 || isNaN(params.metalWeight)) {
 		alert("请输入正确的金属重量");
