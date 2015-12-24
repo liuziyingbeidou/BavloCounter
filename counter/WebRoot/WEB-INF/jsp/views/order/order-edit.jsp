@@ -114,7 +114,7 @@ $(function(){
 			freshOrderState("0");
 		});
 	});
-	
+	setTimeout("changeDivStyle();", 100); // 0.1秒后展示结果，因为HTML加载顺序，先加载脚本+样式，再加载body内容。所以加个延时
 });
 
 
@@ -514,6 +514,27 @@ function getOrderListInfo(){
 				  });
 			}
 		}
+		
+		function changeDivStyle(){
+		//		var o_status = $("#o_status").val();	//获取隐藏框值
+			var o_status = 4;
+			if(o_status==0){
+				$('#create').css('background', '#DD0000');
+				$('#createText').css('color', '#DD0000');
+			}else if(o_status==1||o_status==2){
+				$('#check').css('background', '#DD0000');
+				$('#checkText').css('color', '#DD0000');
+			}else if(o_status==3){
+				$('#produce').css('background', '#DD0000');
+				$('#produceText').css('color', '#DD0000');
+			}else if(o_status==4){
+				$('#delivery').css('background', '#DD0000');
+				$('#deliveryText').css('color', '#DD0000');
+			}else if(o_status>=5){
+				$('#received').css('background', '#DD0000');
+				$('#receivedText').css('color', '#DD0000');
+			}
+		}
 </script>
 <style>
 .address .addrlist {background:#444444;}
@@ -541,6 +562,27 @@ text-overflow:ellipsis;
 @media screen and (max-width: 1280px) and (min-width: 320px){
 	
 }
+
+/* stepInfo 
+	border-radius：0为正方形，0~N，由正方形向圆形转化，N越大越圆。
+	padding：图形的内边距
+	background：图形背景色
+	text-align：文本对齐
+	line-height：行高
+	color：文字颜色
+	position：定位
+	width：宽度
+	height：高度
+*/
+.stepInfo{position:relative;background:#f2f2f2;margin:20px auto 0 auto;width:500px;}
+.stepInfo li{float:left;width:48%;height:0.15em;background:#bbb;}
+.stepIco{border-radius:1em;padding:0.03em;background:#bbb;text-align:center;line-height:1.5em;color:#fff; position:absolute;width:1.4em;height:1.4em;}
+.stepIco1{top:-0.7em;left:-1%;}
+.stepIco2{top:-0.7em;left:21%;}
+.stepIco3{top:-0.7em;left:46%;}
+.stepIco4{top:-0.7em;left:71%;}
+.stepIco5{top:-0.7em;left:95%;}
+.stepText{color:#666;margin-top:0.2em;width:4em;text-align:center;margin-left:-1.4em;}
 </style>
 </head>
 
@@ -597,7 +639,6 @@ text-overflow:ellipsis;
 			<dd class="st-kd"></dd>
 			<dd class="st-jf"></dd>
 		</dl>
-		<!--<dt><i class="status" style=" width:182px; position:absolute; top:180px; left:105px;"></i></dt>-->
         <ul class="fbarbox">
           <li class="fst-tj">提交</li>
           <li class="fst-zb">制版</li>
@@ -608,6 +649,7 @@ text-overflow:ellipsis;
           <div class="clear"></div>
         </ul>
       </div>
+      
       <div class="list">
         <h3>清单</h3>
         <dl id="order-list">
