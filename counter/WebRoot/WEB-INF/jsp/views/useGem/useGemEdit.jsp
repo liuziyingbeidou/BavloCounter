@@ -262,8 +262,8 @@
 <style type="text/css">
 @media screen and (max-width: 1280px) and (min-width: 320px){
 	.qsdr3 {
-	    height: 40px;
-	    line-height: 40px;
+	    height: 60px;
+	    line-height: 60px;
 	    width: 30%;
 	    padding-left: 10px;
 	    background: #ddd;
