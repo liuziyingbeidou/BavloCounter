@@ -33,6 +33,14 @@ $(function(){
 function test(data){
 	alert(data);
 }
+
+function mainPage(e){
+	window.location= "http://192.168.1.115:8888/bavlo/agentWeb/weChatLogin?UserId=" + e;
+}
+
+function manage(e){
+	window.location= "http://192.168.1.115:8888/bavlo/agentWeb/manage?UserId=" + e; 
+}
 </script>
 </head>
 <body>
@@ -56,6 +64,9 @@ function test(data){
     6、<a href="${ctx}/custom/edit.do">款式单</a>
        <a href="${ctx}/custom/getList.do">款式单列表</a>
        <a href="${ctx}/custom/detail.do">款式单详细</a>
+    <br>
+    7、<a href="javascript:mainPage('shijianfeng');">PC电子柜台</a>
+       <a href="javascript:manage('shijianfeng');">PC电子柜台后台</a>
     <br>
     <button class="remote">远程接口测试</button>
     <br>
