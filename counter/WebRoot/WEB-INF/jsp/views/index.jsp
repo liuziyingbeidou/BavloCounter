@@ -76,16 +76,18 @@ if(info != null){
 				var url = uri+"/agentWeb/manage?UserId="+userid;
 				window.location = url;
 			}
+			endMask();
 		});
 		$(".old-counter").click(function(){//电子柜台
 			startMask();
-			var userid = "${uvo['userId']}";userid="shijianfeng";
+			var userid = "${uvo['userId']}";
 			if(userid == null || userid == "" || userid == undefined){
 				alert("对不起,您没有权限访问!");
 			}else{
-				var url = uri+"/agentWeb/weChatLogin?UserId="+userid;alert(url);
+				var url = uri+"/agentWeb/weChatLogin?UserId="+userid;
 				window.location = url;
 			}
+			endMask();
 		});
 		//重置
 		$(".menu-system-close").bind("click",function(){
@@ -95,6 +97,7 @@ if(info != null){
 					var url = "${ctx}/index.do";
 					window.location = url;
 				}
+				endMask();
 			});
 		});
     });
@@ -172,7 +175,7 @@ if(info != null){
 		     </c:forEach>
             <!--<button type="button" class="btn btn-default .btn-lg add-custom">定&nbsp;&nbsp;制&nbsp;&nbsp;单</button>-->
             <!--<button type="button" class="btn btn-default .btn-lg">配&nbsp;&nbsp;石&nbsp;&nbsp;单</button>-->
-			<c:if test="${empty uvo['muserId'] && uvo['userId'] == uvo['muserId']}">
+			<c:if test="${empty uvo['muserId'] && fn:contains('[CC-RL]',role)}">
 			<button type="button" class="btn btn-default .btn-lg mgr-old-counter">电子柜台后台</button>
 			</c:if>
 			<button type="button" class="btn btn-default .btn-lg menu-system-close">重置</button>
