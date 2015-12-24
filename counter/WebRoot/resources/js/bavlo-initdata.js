@@ -217,6 +217,18 @@ function httpRequest(nativeurl,requestUrl,requestMethod,outputStr,callback){
 }
 
 /**
+ * http远程请求
+ * var nativeUrl = "${pageScope.basePath}/counter/webservice/httprequest.do";
+ */
+function httpRequestStr(nativeurl,remoteUrl,callback){
+	$.get(nativeUrl,{url:remoteUrl},function(data){
+		if(typeof(callback)!=='undefined'){
+			callback&&callback(data);
+		}
+	});
+}
+
+/**
  * 获取利润率
  * @param nativeUrl
  * @param remoteUrl
