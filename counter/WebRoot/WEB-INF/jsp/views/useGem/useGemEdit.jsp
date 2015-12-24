@@ -12,6 +12,9 @@
 <meta http-equiv="expires" content="0">
 <meta http-equiv="keywords" content="keyword1,keyword2,keyword3">
 <meta http-equiv="description" content="This is my page">
+<meta name="viewport"
+	content="width=device-width,target-densitydpi=high-dpi,initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+
 <script src="${ctx}/resources/js/jquery-1.8.3.min.js"></script>
 <script src="${ctx}/resources/js/top.js"></script>
 <script src="${ctx}/resources/js/hide.js"></script>
@@ -37,9 +40,6 @@
 <script src="/counter/resources/jquery.multiDialog/js/jquery.multiDialog.js"></script> 
 <script src="/counter/resources/js/bavlo-dialog.js"></script>
 
-<link rel="stylesheet" href="${ctx }/resources/amazeui/css/amazeui.min.css"/>
-<link rel="stylesheet" href="${ctx }/resources/amazeui/css/amaze.min.css">
-<script type="text/javascript" src="${ctx }/resources/amazeui/js/amazeui.min.js"></script>
 <script type="text/javascript">
 	//本地webservice
 	var nativeUrl = "${pageScope.basePath}/counter/webservice/http.do";
@@ -260,10 +260,22 @@
 	}
 </script>
 <style type="text/css">
+@media screen and (max-width: 1280px) and (min-width: 320px){
+	.qsdr3 {
+	    height: 40px;
+	    line-height: 40px;
+	    width: 30%;
+	    padding-left: 10px;
+	    background: #ddd;
+	    color: #616161;
+	    font-size: 16px;
+	}
+}
+
 .qsdr3 {
     height: 40px;
     line-height: 40px;
-    width: 90px;
+    width: 28%;
     padding-left: 10px;
     background: #ddd;
     color: #616161;
@@ -380,7 +392,7 @@
 					</div>
 				</div>
 				<div class="qsd_right edit_btn">
-					<div class="qsd_right_1 qsd_right_2">
+					<div class="qsd_right_1">
 						<select name="vtype" class="qsdr r1 bl-ck-null lose-useGem" id="gemTypeId">
 							<option value="-1">请选择</option>
 						</select>
@@ -391,7 +403,7 @@
 						</dt>
 						<div class="clear"></div>
 					</div>
-					<div class="qsd_right_1 qsd_right_2">
+					<div class="qsd_right_1">
 						<select name="vshape" class="qsdr r1 bl-ck-null lose-useGem" id="gemShapeId">
 							<option value="-1">请选择</option>
 						</select>
