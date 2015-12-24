@@ -35,7 +35,10 @@ public class SystemController extends BaseController {
 	
 	@RequestMapping(value={"/exit.do"})
 	public void exit(){
-		session.removeAttribute("loginInfo");
+		Object loginInfo = session.getAttribute("loginInfo");
+		if(loginInfo != null){
+			session.removeAttribute("loginInfo");
+		}
 		renderText("0");
 	}
 }
