@@ -66,7 +66,7 @@ public class SendController extends BaseController{
 		CustomerVO vo = customerService.findCustomerById(customerId);
 		//客户(cust)
 		if(IConstant.PAGE_ATTR_CUST.equals(pageAttr)){
-			text = vo.getVname()+" 的资料(转发人-" + actionPsn + ")";
+			text = vo.getVname()+" 的基本信息(转发人-" + actionPsn + ")";
 			actionName = "customer/info.do?id="+id;
 		}else
 		//定制单(style)
@@ -112,7 +112,7 @@ public class SendController extends BaseController{
 		}else
 		//配石单(deploy)
 		if(IConstant.PAGE_ATTR_DEPLOY.equals(pageAttr)){
-			text = vo.getVname()+"的配石单-" + actionPsn + ")";// + DateUtil.getCurDateTime()+")";
+			text = vo.getVname()+"的配石单(转发人-" + actionPsn + ")";// + DateUtil.getCurDateTime()+")";
 		}else{
 			isTurn = false;
 		}
