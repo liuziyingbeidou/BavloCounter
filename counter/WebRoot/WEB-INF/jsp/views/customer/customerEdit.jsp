@@ -88,6 +88,16 @@
 					$("#vgroup").val(customerGroup);
 				}
 				
+				//控制头像显示
+				if($("#customerid").val()){
+					if("${customerDetail['vhendimgurl']}" != "" && "${customerDetail['vhendimgurl']}" != null){
+						$(".cusheader").prop("src","${customerDetail['vhendimgurl']}");
+					}
+					$(".header-loc").show();
+				}else{
+					$(".header-loc").hide();
+				}
+				
 				$(".customer-edit").click(function(){
 					openURL("${ctx}/customer/list.do?listType=menu","客户列表",470,535);
 				});
@@ -106,6 +116,11 @@
 					success : function(data) {
 						$("#customerid").val(data.id);
 						alert("保存成功!");
+						if($("#customerid").val()){
+							$(".header-loc").show();
+						}else{
+							$(".header-loc").hide();
+						}
 					},
 					error : function(e) {
 						alert("保存失败!");
@@ -123,7 +138,12 @@
 						if(data.vhendimgurl != ""){
 							$(".cusheader").prop("src",data.vhendimgurl);
 						}
-						$("#customerId").val(data.id);
+						$("#customerid").val(data.id);
+					}
+					if($("#customerid").val()){
+						$(".header-loc").show();
+					}else{
+						$(".header-loc").hide();
 					}
 					closeMultiDlg();
 				});
@@ -152,12 +172,23 @@
 			}else if(type == "custom-view"){
 				url = "${ctx}/custom/detail.do?id="+id;//根据id显示款式单信息
 				window.location = url;
+			}else if(type == "useGem"){
+				url = "${ctx}/useGem/info.do?id="+id;//根据id显示配石单信息
+				window.location = url;
 			}
 		}
 		</script>
 		<style type="text/css">
-		.edit_hidden2 { width:110px; position:relative; top:10px; left:-15px; z-index:9999}
-		.hidden_enent2 { width:110px; position:relative; top:10px; right:-243px; z-index:9999}
+		.cusheader{
+			width:60px;
+			height:60px;
+		}
+		@media screen and (max-width: 1280px) and (min-width: 320px){
+			.cusheader{
+				width:100%;
+				height:100%;
+			}
+		}
 		</style>
 	</head>
 
@@ -185,9 +216,10 @@
 			<div class="edit_main">
 				<div class="edit_left">
 					<ul>
-						<li>
-							<a href="#"><img
-									src="${ctx}/resources/images/customer_01.png" /> </a>
+						<li class="header-loc">
+							<a href="#">
+							<img class="cusheader" src="${ctx}/resources/images/customer_01.png">
+							</a>
 						</li>
 						<li class="customer-edit">
 							<a href="#"><img

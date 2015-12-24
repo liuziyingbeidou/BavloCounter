@@ -587,6 +587,9 @@ function setValueByFrame(type,id,callback,json){
 	}else if(type == "custom-view"){
 		url = "/counter/custom/detail.do?id="+id;//根据id显示款式单信息
 		window.location = url;
+	}else if(type == "useGem"){
+		url = "${ctx}/useGem/info.do?id="+id;//根据id显示配石单信息
+		window.location = url;
 	}
 	
 }

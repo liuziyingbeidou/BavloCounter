@@ -178,6 +178,9 @@
 			}else if(type == "custom-view"){
 				url = "${ctx}/custom/detail.do?id="+id;//根据id显示定制单信息
 				window.location = url;
+			}else if(type == "useGem"){
+				url = "${ctx}/useGem/info.do?id="+id;//根据id显示配石单信息
+				window.location = url;
 			}
 		}
 		</script>
