@@ -27,7 +27,7 @@ if(info != null){
    	<script language="javascript" type="text/javascript" src="${ctx}/resources/js/jquery-1.9.1.min.js"></script>
 	<script type="text/javascript" src="${ctx }/resources/bootstrap/js/bootstrap.min.js"></script>
 	<link type="text/css" rel="stylesheet" href="${ctx }/resources/bootstrap/css/bootstrap.min.css">
-	
+	<script type="text/javascript" src="${ctx }/resources/js/bavlo-initdata.js"></script>
 	<!-- Loading -->
 	<script src="${ctx}/resources/showLoading/showLoading.js"></script>
 	<link type="text/css" rel="stylesheet" href="${ctx}/resources/showLoading/showLoading.css">
@@ -39,6 +39,9 @@ if(info != null){
         <script src="http://cdn.bootcss.com/respond.js/1.3.0/respond.min.js"></script>
     <![endif]-->
     <script type="text/javascript">
+    var uri = "http://192.168.1.115:8888/bavlo";
+    //本地webservice
+	var nativeUrl = "${pageScope.basePath}/counter/webservice/http.do";
     $(function(){
 		$(".add-order").click(function(){
 			startMask();
@@ -64,15 +67,25 @@ if(info != null){
 			url = "${ctx}/entity-sign/add.do";//实物签收单新增页
 			window.location = url;
 		});
-		$(".mgr-old-counter").click(function(){
+		$(".mgr-old-counter").click(function(){//电子柜台后台
 			startMask();
-			url = "#";//电子柜台后台
-			window.location = url;
+			var userid = "${uvo['muserId']}";
+			if(userid == null || userid == "" || userid == undefined){
+				alert("对不起,您没有权限访问!");
+			}else{
+				var url = uri+"/agentWeb/manage?UserId="+userid;
+				window.location = url;
+			}
 		});
-		$(".old-counter").click(function(){
+		$(".old-counter").click(function(){//电子柜台
 			startMask();
-			url = "#";//电子柜台
-			window.location = url;
+			var userid = "${uvo['userId']}";userid="shijianfeng";
+			if(userid == null || userid == "" || userid == undefined){
+				alert("对不起,您没有权限访问!");
+			}else{
+				var url = uri+"/agentWeb/weChatLogin?UserId="+userid;alert(url);
+				window.location = url;
+			}
 		});
 		//重置
 		$(".menu-system-close").bind("click",function(){
@@ -85,7 +98,6 @@ if(info != null){
 			});
 		});
     });
-    
 </script>
     <style type="text/css">
     body{background:#000000;}
@@ -160,7 +172,7 @@ if(info != null){
 		     </c:forEach>
             <!--<button type="button" class="btn btn-default .btn-lg add-custom">定&nbsp;&nbsp;制&nbsp;&nbsp;单</button>-->
             <!--<button type="button" class="btn btn-default .btn-lg">配&nbsp;&nbsp;石&nbsp;&nbsp;单</button>-->
-			<c:if test="${empty uvo['muserId']}">
+			<c:if test="${empty uvo['muserId'] && uvo['userId'] == uvo['muserId']}">
 			<button type="button" class="btn btn-default .btn-lg mgr-old-counter">电子柜台后台</button>
 			</c:if>
 			<button type="button" class="btn btn-default .btn-lg menu-system-close">重置</button>
