@@ -69,7 +69,7 @@ if(info != null){
 		});
 		$(".mgr-old-counter").click(function(){//电子柜台后台
 			startMask();
-			var userid = "${uvo['muserId']}";
+			var userid = "${uvo['userId']}";
 			if(userid == null || userid == "" || userid == undefined){
 				alert("对不起,您没有权限访问!");
 			}else{
@@ -80,7 +80,7 @@ if(info != null){
 		});
 		$(".old-counter").click(function(){//电子柜台
 			startMask();
-			var userid = "${uvo['userId']}";
+			var userid = "${uvo['muserId']}";
 			if(userid == null || userid == "" || userid == undefined){
 				alert("对不起,您没有权限访问!");
 			}else{
