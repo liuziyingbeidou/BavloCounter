@@ -15,7 +15,7 @@ public class Constants {
 	public static final String encodingAESKey = "tw8ColhrtDzU6XTHJ2shUeTyuaPQkSzdvD8jYtnTIYf";
 	
 	/*项目配置常量*/
-	public static final String REQURL = "lzy348860554.imwork.net/counter";
+	public static final String REQURL = "lv.2050day.com/counter";
 	
 	/****标签定义*****/
 	//角色
