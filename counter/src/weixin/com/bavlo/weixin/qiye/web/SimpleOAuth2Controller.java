@@ -34,6 +34,7 @@ public class SimpleOAuth2Controller {
 		//TODO 此处测试上面的方法，把参数：“reqUrl” 拼接你自己的 URL
 		String backUrl ="http://" +reqUrl + "/oauth2me.do";
 		String redirect_uri = "";
+		System.out.println("网页授权链接:"+backUrl);
 		try {
 			redirect_uri = java.net.URLEncoder.encode(backUrl, "utf-8");
 		} catch (UnsupportedEncodingException e) {
@@ -41,6 +42,7 @@ public class SimpleOAuth2Controller {
 		}
 		String oauth2Url = "https://open.weixin.qq.com/connect/oauth2/authorize?appid=" + Constants.CORPID + "&redirect_uri=" + redirect_uri
 				+ "&response_type=code&scope=snsapi_base&state=shijf#wechat_redirect";
+		
 		return "redirect:" + oauth2Url;
 	}
 	

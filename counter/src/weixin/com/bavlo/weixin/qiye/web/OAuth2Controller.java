@@ -123,11 +123,13 @@ public class OAuth2Controller {
 	private String oAuth2Url(String corpid, String redirect_uri) {
 		try {
 			redirect_uri = java.net.URLEncoder.encode(redirect_uri, "utf-8");
+			System.out.println("网页授权1:"+redirect_uri);
 		} catch (UnsupportedEncodingException e) {
 			e.printStackTrace();
 		}
 		String oauth2Url = "https://open.weixin.qq.com/connect/oauth2/authorize?appid=" + corpid + "&redirect_uri=" + redirect_uri
 				+ "&response_type=code&scope=snsapi_base&state=bavlo#wechat_redirect";
+		System.out.println("网页授权:"+redirect_uri);
 		return oauth2Url;
 	}
 
