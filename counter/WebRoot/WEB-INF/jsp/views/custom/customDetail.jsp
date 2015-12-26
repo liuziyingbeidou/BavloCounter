@@ -383,7 +383,6 @@ function CADsave(){
 									<volist name="list" id="list"> <figure> <a
 										class="customCankaoShow" href="javascript:void();"> <c:choose>
 											<c:when test="${empty customDetail['FILE_0']}">
-												<img src="${ctx}/resources/images/zb_03.png">
 											</c:when>
 											<c:otherwise>
 												<img src="${ctx}/staticRes/${customDetail['FILE_0']}">
@@ -412,7 +411,6 @@ function CADsave(){
 									<volist name="list" id="list"> <figure> <a
 										class="customShejiShow" href="javascript:void();"> <c:choose>
 											<c:when test="${empty customDetail['FILE_1']}">
-												<img src="${ctx}/resources/images/zb_03.png">
 											</c:when>
 											<c:otherwise>
 												<img src="${ctx}/staticRes/${customDetail['FILE_1']}">

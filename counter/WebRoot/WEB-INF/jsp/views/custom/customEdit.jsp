@@ -136,7 +136,6 @@
 								<a class="customCankaoShow" href="javascript:void();">
 									<c:choose>
 										<c:when test="${empty customEdit['FILE_0']}">   
-											<img src="${ctx}/resources/images/zb_03.png">
 										</c:when>
 										<c:otherwise>
 											<img src="${ctx}/staticRes/${customEdit['FILE_0']}">
@@ -162,7 +161,6 @@
 								<a class="customShejiShow" href="javascript:void();">
 									<c:choose>
 										<c:when test="${empty customEdit['FILE_1']}">   
-											<img src="${ctx}/resources/images/zb_03.png">
 										</c:when>
 										<c:otherwise>
 											<img src="${ctx}/staticRes/${customEdit['FILE_1']}">
