@@ -54,6 +54,9 @@ $(function(){
 	});
 	//订单状态条
 	freshOrderState("${ordervo['iorderState']}");
+	if("${ordervo['FILE_0']}" == null || "${ordervo['FILE_0']}" == ""){
+		$(".cp-pic").hide();
+	}
 	//更新状态
 	$("#ssave").click(function(){
 		var orderId = $("#orderId").val();
@@ -293,7 +296,7 @@ function loadOrderList(){
 		  </p>
 		  		<div class="cankao">
 					<h2><a href="#" style="color:#fff" class="cankaotu cptu">+ 成品图 </a></h2>
-					<div class="pro">
+					<div class="pro cp-pic">
 						<div class="demo" id='pic' style='display: ;'>
 							<div class="my-gallery">
 								<a class="gem-pic-show" href="#">
@@ -312,7 +315,7 @@ function loadOrderList(){
 				</div>
 				<p/>
           <div class="close">
-            <input type="button" class="psave" name="button" value="保存">
+            <input type="button" class="psave" name="button" value="保存图片">
           </div>
           <div class="oedit CUST-RL CAD-RL PMC-RL GB-RL PPS-RL ">
             <input type="button" class="editOrder" name="button" value="进入编辑页">
