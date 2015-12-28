@@ -28,7 +28,7 @@ $(function(){
 		sendTMessage(toUser);
 	});
 	function sendTMessage(toUser){
-		 var url = getRootPath()+"/custom/detail.do?id="+customId;
+		 var url = getRootPath()+"/custom/customByCmr.do?id="+customId;
 		 $.post("${ctx}/sendTM.do",{toUser:toUser,url:url},function(data){
 		 	if(data == "" || data == null){
 		 		data = "发送失败!";
