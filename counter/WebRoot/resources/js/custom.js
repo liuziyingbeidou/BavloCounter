@@ -108,11 +108,7 @@ $(function(){
 			h("kpsGem");
 		}
 	})
-	
-	// 显示参考图片 
-	if(customId != null){
-		PicShow_Hidden(pic);
-	}
+
 	// 初始化标签
 	var WS = function(opt) {
 
