@@ -132,7 +132,6 @@
 							<b><a href="javascript:;" onclick="PicShow_Hidden(pic)">隐藏</a></b>
 							<!--<b class="hide">隐藏</b>-->
 							<div class="my-gallery">
-								<volist name="list" id="list"> <figure> 
 								<a class="customCankaoShow" href="javascript:void();">
 									<c:choose>
 										<c:when test="${empty customEdit['FILE_0']}">   
@@ -142,8 +141,6 @@
 										</c:otherwise>
 									</c:choose> 
 								</a>
-								</figcaption> </figure> </volist>
-
 							</div>
 						</div>
 					</div>
