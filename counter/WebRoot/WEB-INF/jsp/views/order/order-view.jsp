@@ -313,7 +313,7 @@ function loadOrderList(){
 						</div>
 					</div>
 				</div>
-				<p/>
+			<p/>
           <div class="close">
             <input type="button" class="psave" name="button" value="保存图片">
           </div>
