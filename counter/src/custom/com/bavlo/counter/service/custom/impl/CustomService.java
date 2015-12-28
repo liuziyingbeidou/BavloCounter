@@ -366,7 +366,7 @@ public class CustomService extends CommonService implements ICustomService {
 
 	@Override
 	public void updateCustomCad(Integer id, String cad) {
-		String[] attrname = new String[]{"vengraveVh"};
+		String[] attrname = new String[]{"vcadFile"};
 		Object[] attrval = new Object[]{cad};
 		Integer[] IDs = new Integer[]{id};
 		updateAttrsByIDs(CustomVO.class, attrname, attrval, IDs);
