@@ -152,26 +152,26 @@ $(function(){
 	});
 	
 	//图片展示
-	 //参考图片显示
-	 $(".customCankaoShow").bind("click",function(){
-		//款式单ID
-	 	if("${customDetail['FILE_0']}" == ""){
-	 		alert("没有图片!");
-	 	}else{
-	 		openURL("/counter/upload/showpic.do?cpath=com.bavlo.counter.model.custom.CustomBVO&fkey=customId&ptype=vtype&vtype=customCankao&id="+customId,"图片展示");
-	 	}
-	 });
-	 //设计图片显示
-	 $(".customShejiShow").bind("click",function(){
-		//款式单ID
-	 	if("${customDetail['FILE_1']}" == ""){
-	 		alert("没有图片!");
-	 	}else{
-	 		openURL("/counter/upload/showpic.do?cpath=com.bavlo.counter.model.custom.CustomBVO&fkey=customId&ptype=vtype&vtype=customSheji&id="+customId,"图片展示");
-	 	}
-	 });
+	//参考图片显示
+	$(".customCankaoShow").bind("click",function(){
+	//款式单ID
+		if("${customDetail['FILE_0']}" == ""){
+			alert("没有图片!");
+		}else{
+			openURL("/counter/upload/showpic.do?cpath=com.bavlo.counter.model.custom.CustomBVO&fkey=customId&ptype=vtype&vtype=customCankao&id="+customId,"图片展示");
+		}
+	});
+	//设计图片显示
+	$(".customShejiShow").bind("click",function(){
+	//款式单ID
+		if("${customDetail['FILE_1']}" == ""){
+			alert("没有图片!");
+		}else{
+			openURL("/counter/upload/showpic.do?cpath=com.bavlo.counter.model.custom.CustomBVO&fkey=customId&ptype=vtype&vtype=customSheji&id="+customId,"图片展示");
+		}
+	});
 	 
-	 var chainJson = '${chainJson}';
+	var chainJson = '${chainJson}';
 	//链子
 	if(chainJson != ""){
 		add("chain",chainJson);
@@ -353,12 +353,10 @@ function CADsave(){
 		<input type="hidden" id='toUser' value='${openid}' /> 
 		<input type="hidden" class="tableId" id='customId' value='${customDetail.id}' /> 
 		<input type="hidden" id='orderId' value="${customDetail['orderId'] }" /> 
-		<input type="hidden" id='vengraveVh' value="${customDetail['vengraveVh'] }" /> 
-		<input type="hidden" id='vcadFile' value="${customDetail['vcadFile'] }" />
 		<input type="hidden" id="pageAttr" value="STYLE" /> 
 		<input type="hidden" class="tocustomerId" value="${customDetail['customerId'] }" />
-		<input type="hidden" id='vengraveVh' name='vengraveVh' value="${customEdit['vengraveVh'] }" />
-		<input type="hidden" id='vcadFile' name='vcadFile' value="${customEdit['vcadFile'] }" />
+		<input type="hidden" id='vengraveVh' name='vengraveVh' value="${customDetail['vengraveVh'] }" />
+		<input type="hidden" id='vcadFile' name='vcadFile' value="${customDetail['vcadFile'] }" />
 		<header class="demo-bar">
 			<h1>
 				款式单${customDetail.vcustomCode }
@@ -486,7 +484,7 @@ function CADsave(){
 						<div
 							class="dzd_right_btm d1 CUST-RL CC-RL PM-RL PMC-RL GB-RL PPS-RL">
 							<span class="gf"><a class="upcad" href="#">上传CAD</a>
-							</span> <b><a class="upvh" href="#">上传矢量图</a></b>
+							</span><!--  <b><a class="upvh" href="#">上传矢量图</a></b> -->
 							<div class="clear"></div>
 						</div>
 						<div

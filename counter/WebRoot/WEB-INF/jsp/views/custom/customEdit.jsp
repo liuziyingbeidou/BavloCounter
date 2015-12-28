@@ -320,7 +320,7 @@
 				<div class="tu">
 					<div class="dzd_right_btm2">
 						<a href="javascript:;" class="vectorgraph">+ 刻字矢量图</a>
-						<a href="javascript:;" class="cad_file"> + CAD文件   </a>
+						<!-- <a href="javascript:;" class="cad_file"> + CAD文件   </a> -->
 					</div>
 				</div>
 				<div class="qita">
