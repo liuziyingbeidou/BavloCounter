@@ -172,12 +172,10 @@ if(info != null){
 		     <c:if test="${fn:contains('[CC-RL]',role)}">
 		     <button type="button" class="btn btn-default .btn-lg old-counter">电子柜台</button>
 		     </c:if>
+		     <c:if test="${(empty uvo['muserId']) && fn:contains('[CC-RL]',role)}">
+			 <button type="button" class="btn btn-default .btn-lg mgr-old-counter">电子柜台后台</button>
+			 </c:if>
 		     </c:forEach>
-            <!--<button type="button" class="btn btn-default .btn-lg add-custom">定&nbsp;&nbsp;制&nbsp;&nbsp;单</button>-->
-            <!--<button type="button" class="btn btn-default .btn-lg">配&nbsp;&nbsp;石&nbsp;&nbsp;单</button>-->
-			<c:if test="${empty uvo['muserId'] && fn:contains('[CC-RL]',role)}">
-			<button type="button" class="btn btn-default .btn-lg mgr-old-counter">电子柜台后台</button>
-			</c:if>
 			<button type="button" class="btn btn-default .btn-lg menu-system-close">重置</button>
       </div><!--/.nav-collapse -->
 
