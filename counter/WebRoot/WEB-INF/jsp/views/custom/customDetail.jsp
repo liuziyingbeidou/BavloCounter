@@ -395,7 +395,7 @@ function CADsave(){
 						</div>
 					</div>
 					<div class="sheji">
-						<h2 class=" CUST-RL CC-RL PM-RL PMC-RL GB-RL PPS-RL">
+						<h2 class="CUST-RL CC-RL PM-RL PMC-RL GB-RL PPS-RL">
 							<a href="javascript:;" style="color: #fff" class="qibantu">+
 								起版设计图</a>
 						</h2>
