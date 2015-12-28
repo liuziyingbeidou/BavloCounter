@@ -101,6 +101,18 @@ public class CustomController extends BaseController implements IConstant {
 	}
 	
 	/**
+	 * @Description: 客户所属
+	 * @param @param session
+	 * @param @param id
+	 * @param @return
+	 * @return ModelAndView
+	 */
+	@RequestMapping("customByCmr")
+	public ModelAndView customerToCum(HttpSession session,Integer id){
+		return detail(session,id);
+	}
+	
+	/**
 	 * @Description: 款式单详情
 	 * @param @return
 	 * @return ModelAndView
@@ -130,7 +142,12 @@ public class CustomController extends BaseController implements IConstant {
 			LoginVO loginInfo = (LoginVO) session.getAttribute("loginInfo");
 			String shop = null;
 			if(loginInfo != null){
+				if(StringUtil.isEmpty(((LoginVO)loginInfo).getUserId())){
+					model.setViewName("common/confirm");
+				}
 				shop = loginInfo.getShop();
+			}else{
+				model.setViewName("common/confirm");
 			}
 			
 			List<CustomCVO> customCVO = customService.findListCustomC(id);
