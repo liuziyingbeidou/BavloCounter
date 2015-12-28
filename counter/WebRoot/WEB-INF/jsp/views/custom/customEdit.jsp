@@ -128,7 +128,7 @@
 					<h2><a href="javascript:;" style="color:#fff" class="cankaotu">+ 参考图</a></h2>
 					<div class="pro">
 						<b><a href="javascript:;" onclick="PicShow_Hidden(pic)">显示</a></b>
-						<div class="demo" id='pic' style='display: none;'>
+						<div class="demo" id='pic'>
 							<b><a href="javascript:;" onclick="PicShow_Hidden(pic)">隐藏</a></b>
 							<div class="my-gallery">
 								<a class="customCankaoShow" href="javascript:void();">
@@ -136,7 +136,7 @@
 										<c:when test="${empty customEdit['FILE_0']}">   
 										</c:when>
 										<c:otherwise>
-											<img src="${ctx}/staticRes/${customEdit['FILE_0']}">
+											<img style="width: 98%;" src="${ctx}/staticRes/${customEdit['FILE_0']}">
 										</c:otherwise>
 									</c:choose> 
 								</a>
@@ -148,16 +148,15 @@
 					<h2><a href="javascript:;" style="color:#fff" class="qibantu">+ 起版设计图</a></h2>
 					<div class="pro">
 						<b><a href="javascript:;" onclick="Pic1Show_Hidden(pic1)">显示</a></b>
-						<div class="demo" id='pic1' >
+						<div class="demo" id='pic1'>
 							<b><a href="javascript:;" onclick="Pic1Show_Hidden(pic1)">隐藏</a></b>
-							<!--<b class="hide">隐藏</b>-->
 							<div class="my-gallery">
 								<a class="customShejiShow" href="javascript:void();">
 									<c:choose>
 										<c:when test="${empty customEdit['FILE_1']}">   
 										</c:when>
 										<c:otherwise>
-											<img src="${ctx}/staticRes/${customEdit['FILE_1']}">
+											<img style="width: 98%;" src="${ctx}/staticRes/${customEdit['FILE_1']}">
 										</c:otherwise>
 									</c:choose> 
 								</a>

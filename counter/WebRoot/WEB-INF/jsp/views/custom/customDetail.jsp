@@ -384,7 +384,7 @@ function CADsave(){
 											<c:when test="${empty customDetail['FILE_0']}">
 											</c:when>
 											<c:otherwise>
-												<img src="${ctx}/staticRes/${customDetail['FILE_0']}">
+												<img style="width: 98%;" src="${ctx}/staticRes/${customDetail['FILE_0']}">
 											</c:otherwise>
 										</c:choose>
 									</a>
@@ -402,17 +402,15 @@ function CADsave(){
 								起版设计图</a>
 						</h2>
 						<div class="pro">
-							<!--<img src="images/zb_06.png" />-->
 							<b><a href="javascript:;" onclick="Pic1Show_Hidden(pic1)">显示</a></b>
 							<div class="demo" id='pic1'>
 								<b><a href="javascript:;" onclick="Pic1Show_Hidden(pic1)">隐藏</a></b>
-								<!--<b class="hide">隐藏</b>-->
 								<div class="my-gallery">
 									 <a class="customShejiShow" href="javascript:void();"> <c:choose>
 											<c:when test="${empty customDetail['FILE_1']}">
 											</c:when>
 											<c:otherwise>
-												<img src="${ctx}/staticRes/${customDetail['FILE_1']}">
+												<img style="width: 98%;" src="${ctx}/staticRes/${customDetail['FILE_1']}">
 											</c:otherwise>
 										</c:choose>
 									</a>
