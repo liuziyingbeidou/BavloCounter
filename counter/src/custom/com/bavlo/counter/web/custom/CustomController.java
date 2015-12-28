@@ -106,6 +106,7 @@ public class CustomController extends BaseController implements IConstant {
 	 * @return ModelAndView
 	 */
 	@RequestMapping("detail")
+	@OAuthRequired
 	public ModelAndView detail(HttpSession session,Integer id) {
 		
 		ModelAndView model = new ModelAndView(PATH_CUSTOM + "customDetail");
