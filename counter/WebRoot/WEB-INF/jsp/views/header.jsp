@@ -5,9 +5,13 @@
 <!-- amazeui -->
 <link rel="stylesheet" href="${ctx }/resources/amazeui/css/amazeui.min.css"/>
 <link rel="stylesheet" href="${ctx }/resources/amazeui/css/amaze.min.css">
-<!--<script language="javascript" type="text/javascript" src="${ctx}/resources/js/jquery-1.9.1.min.js"></script>
---><script type="text/javascript" src="${ctx }/resources/amazeui/js/handlebars.min.js"></script>	
+<!--<script language="javascript" type="text/javascript" src="${ctx}/resources/js/jquery-1.9.1.min.js"></script>-->
+<script type="text/javascript" src="${ctx }/resources/amazeui/js/handlebars.min.js"></script>	
 <script type="text/javascript" src="${ctx }/resources/amazeui/js/amazeui.min.js"></script>	
+
+<style type="text/css">
+	.am-menu-dropdown3{display:none;}
+</style>
 
 <nav data-am-widget="menu" class="am-menu am-menu-dropdown3"
 	data-am-menu-collapse>
@@ -29,3 +33,14 @@
 		<jsp:include page="./menu_pg.jsp"></jsp:include>
 	</ul>
 </nav>
+
+<script type="text/javascript">
+$(function(){
+	var $pageAttr = $("#pageAttr");
+	var pageType = $pageAttr.val();
+	if("ORDER" == pageType){
+		$(".am-menu-dropdown3").show();
+	}
+});
+
+</script>
