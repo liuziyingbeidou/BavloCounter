@@ -106,11 +106,11 @@ function loadOrderList(){
 				if(type == "dz"){
 					var pic = "";
 					if(data[i].vpic != "" && data[i].vpic != null){
-						pic = "<img style='width:60px;height:60px;' class='bill-pic' onclick='toCustom(\""+data[i].vsourceId+"\")' src='${ctx}/staticRes/"+data[i].vpic+"'>";
+						pic = "<img style='width:60px;height:60px;' class='bill-pic' src='${ctx}/staticRes/"+data[i].vpic+"'>";
 					}else{
-						pic = "<img class='bill-pic' onclick='toCustom(\""+data[i].vsourceId+"\")' src='${ctx}/resources/images/good_01.png'>";
+						pic = "<img class='bill-pic' src='${ctx}/resources/images/good_01.png'>";
 					}
-					$("#olist").append("<dd type='dz' sid='"+data[i].vsourceId+"' class='"+data[i].vsourceId+" bill'>"+pic+"<b class=''></b><a href='#' style='color:#FFF' class='bill-num close_c order_list_close'>"+data[i].nnumber+"对</a></dd>");
+					$("#olist").append("<dd type='dz' onclick='toCustom(\""+data[i].vsourceId+"\")' sid='"+data[i].vsourceId+"' class='"+data[i].vsourceId+" bill'>"+pic+"<b class=''>进入款式单</b><a href='#' style='color:#FFF' class='bill-num close_c order_list_close'>"+data[i].nnumber+"对</a></dd>");
 				}/*else if(type == "ch"){
 					$("#olist").append("<dd type='ch' sid='"+data[i].vsourceId+"' class='"+data[i].vsourceId+" bill'><span class='list_name bill-name'>"+data[i].vname+"</span><b class='list_price bill-num'>"+data[i].nnumber+"条</b><a href='javascript:rlist("+data[i].vsourceId+")' class='close_c'><img src='${ctx}/resources/images/close.png'></a></dd>");
 				}*/
@@ -261,7 +261,7 @@ function loadOrderList(){
         </dl>
       </div>
     </div>
-        <div class="mainmid">
+        <div class="mainmid PPS-RL CAD-RL GB-RL">
           <div class="ocheck">            
             <ul>
               <li>交付时间：${ordervo['ddeliverdate']}</li>
@@ -280,8 +280,8 @@ function loadOrderList(){
             </ul>
           </div>
         </div>
-        <div class="mainrig">
-          <div class="repair o-ssave">
+        <div class="mainrig order-stats-bwrite">
+          <div class="repair o-ssave CUST-RL PM-RL PPS-RL PMC-RL CC-RL CAD-RL GB-RL">
             <select name="" class="repair1 ista">
               <option value="3">质检</option>
               <option value="5">完成</option>
@@ -291,11 +291,14 @@ function loadOrderList(){
           </div>
           <p class="o-csave">
 			  <input type="text" name="vcourierNumber" class="repair1 cnum" value="${ordervo['vcourierNumber']}" placeholder="顺丰单号">
-			  <input id="csave" type='text' class="resave" value="保存">
+			  <input id="csave" type='text' class="resave CUST-RL PM-RL PPS-RL CC-RL CAD-RL GB-RL" value="保存">
 			  <div class="clear"></div>
 		  </p>
-		  		<div class="cankao">
-					<h2><a href="#" style="color:#fff" class="cankaotu cptu">+ 成品图 </a></h2>
+		  		<div class="cankao CAD-RL GB-RL PPS-RL">
+					<h2>
+					<a href="#" style="color:#fff" class="cankaotu cptu CUST-RL PM-RL PPS-RL CC-RL CAD-RL GB-RL">+ 成品图 </a>
+					<a href="#" style="color:#fff" class="cankaotu PMC-RL">+ 成品图 </a>
+					</h2>
 					<div class="pro cp-pic">
 						<div class="demo" id='pic' style='display: ;'>
 							<div class="my-gallery">
@@ -314,7 +317,7 @@ function loadOrderList(){
 					</div>
 				</div>
 			<p/>
-          <div class="close">
+          <div class="close CUST-RL PM-RL PPS-RL CC-RL CAD-RL GB-RL">
             <input type="button" class="psave" name="button" value="保存图片">
           </div>
           <div class="oedit CUST-RL CAD-RL PMC-RL GB-RL PPS-RL ">
