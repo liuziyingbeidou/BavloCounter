@@ -24,7 +24,7 @@
 		<script type="text/javascript">
 		$(function(){
 			$(".gem-upload").bind("click",function(){
-				openURL("${ctx}/upload/uppage.do","上传图片");
+				openURL("${ctx}/upload/uppage.do","上传图片",null,370);
 			});
 		});
 		</script>
