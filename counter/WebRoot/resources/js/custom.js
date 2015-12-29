@@ -248,7 +248,7 @@ $(function() {
 	 });
 	 $(".vectorgraph").bind("click",function(){
 		 	$("#filetype").val("file");
-	 		openURL("/counter/upload/uppage.do","上传刻字矢量图"); 
+	 		openURL("/counter/upload/uppage.do","上传刻字矢量图",null,370);
 	 		$("#filevalue").val("vengraveVh");
 	 });
 	 /*$(".cad_file").bind("click",function(){
@@ -527,8 +527,6 @@ function setValueByFrame(type,id,callback,json){
 				var pic = "";
 				if(data.FILE_0 != "" && data.FILE_0 != null){
 					pic = "'/counter/staticRes/"+data.FILE_0+"'";
-				}else{
-					pic = "'/counter/resources/images/good_01.png'";
 				}
 			}
 			if(gemSignClass == "kzs_img"){
@@ -538,6 +536,7 @@ function setValueByFrame(type,id,callback,json){
 					$(".mainGem_img").attr("src",pic);
 				}
 				$("#mainGemPic").val(pic);
+				$("#mainGemId").val(data.id);
 			}
 			if(gemSignClass == "kps_img"){
 				if(partsGem_img == undefined){
@@ -546,6 +545,7 @@ function setValueByFrame(type,id,callback,json){
 					$(".partsGem_img").attr("src",pic);
 				}
 				$("#partsGemPic").val(pic);
+				$("#partsGemId").val(data.id);
 			}
 		});
 		
