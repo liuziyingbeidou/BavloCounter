@@ -120,11 +120,11 @@ public class SendController extends BaseController{
 		Integer result = -1;
 		if(isTurn){
 			//将转发对象userid追加到客户表toUserids中
-			String condition = " toUserids like '%"+customerId+"%'";
+			String condition = " toUserids like '%"+touser+"%'";
 			if(!customerService.isExistByCondition(condition)){
 				//CustomerVO vo = customerService.findCustomerById(customerId);
 				if(vo != null){
-					String vl = vo.getToUserids() + "["+loginVO.getUserId()+"]";
+					String vl = vo.getToUserids() + "["+touser+"]";
 					customerService.updateCustomerByCondition(" id="+customerId, new String[]{"toUserids"}, new String[]{vl});
 				}
 			}
