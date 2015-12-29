@@ -23,12 +23,12 @@ $(function(){
 	
 	//发送客户 
 	var toUser = $("#toUser").val();
-	var customId = $("#customId").val();
+	var customId = $("#orderId").val();
 	$(".sendCM").click(function() {
 		sendTMessage(toUser);
 	});
 	function sendTMessage(toUser){
-		 var url = getRootPath()+"/custom/customByCmr.do?id="+customId;
+		 var url = getRootPath()+"/order/onlyview.do?id="+customId;
 		 $.post("${ctx}/sendTM.do",{toUser:toUser,url:url},function(data){
 		 	if(data == "" || data == null){
 		 		data = "发送失败!";
@@ -88,7 +88,7 @@ function getRootPath(){
      <c:if test="${fn:contains('[PMC-RL]',role)}">
      <li class="bv-role-list" bv-role="PPS" bv-title="工厂跟单员"><a href="#">发工厂跟单员</a></li>
      </c:if>
-     <c:if test="${fn:contains('[CC-RL][GB-RL][PPS-RL]',role)}">
+     <c:if test="${fn:contains('[PM-RL][GB-RL][PPS-RL]',role)}">
      <li class="bv-role-list" bv-role="PMC" bv-title="生产主管"><a href="#">发生产主管</a></li>
      </c:if>
      <c:if test="${fn:contains('[CC-RL]',role)}">

@@ -12,18 +12,25 @@
 <link type='text/css' rel='stylesheet' href='${ctx }/resources/css/style.css' media='all' />
 <link type='text/css' rel='stylesheet' href='${ctx }/resources/css/bootstrap.css' media='all' />
 <script src="${ctx }/resources/js/top.js"></script>
-	<!-- 上传图片 -->
-	<link rel="stylesheet" type="text/css" href="${ctx }/resources/webuploader/css/webuploader.css" />
-    <link rel="stylesheet" type="text/css" href="${ctx }/resources/webuploader/css/upload.css" />    
-    <script type="text/javascript" src="${ctx }/resources/js/jquery.js"></script>
-    <script type="text/javascript" src="${ctx }/resources/webuploader/js/webuploader.js"></script>
-    <script type="text/javascript" src="${ctx }/resources/webuploader/js/upload.js"></script>
+<!-- 上传图片 -->
+<link rel="stylesheet" type="text/css" href="${ctx }/resources/webuploader/css/webuploader.css" />
+<link rel="stylesheet" type="text/css" href="${ctx }/resources/webuploader/css/upload.css" />    
+<script type="text/javascript" src="${ctx }/resources/js/jquery.js"></script>
+<script type="text/javascript" src="${ctx }/resources/webuploader/js/webuploader.js"></script>
+<script type="text/javascript" src="${ctx }/resources/webuploader/js/upload.js"></script>
     
     <script type="text/javascript">
     $(function(){
     	$("#filevalue").val($("#filevalue",window.parent.document).val());
 	    $("#filemodel").val($("#filemodel",window.parent.document).val());
 	    $("#filetype").val($("#filetype",window.parent.document).val());
+	    if($("#filetype").val() == "file"){
+	    	$(".file-upload").show();
+	    	$(".pic-upload").hide();
+	    }else{
+	    	$(".pic-upload").show();
+	    	$(".file-upload").hide();
+	    }
     	$(".signlefile").bind("click",function(){
     		/*var filemodel = $("#filemodel",window.parent.document).val();
 	    	var filetype = $("#filetype",window.parent.document).val();
@@ -65,46 +72,46 @@
 <body>
 
 <div id="upload">
-  <div class="upload">
-    <p>上传文件</p>
+  <div class="upload pic-upload">
     <p>限9张图片</p>
     <form>
 	<div id="wrapper">
-			        <div id="container">
-			            <!--头部，相册选择和格式选择-->
-			            <div id="uploader">
-			                <div class="queueList">
-			                    <div id="dndArea" class="placeholder">
-			                        <div id="filePicker"></div>
-			                        <p>或将照片拖到这里</p>
-			                    </div>
-			                </div>
-			                <div class="statusBar" style="display:none;">
-			                    <div class="progress">
-			                        <span class="text">0%</span>
-			                        <span class="percentage"></span>
-			                    </div><div class="info"></div>
-			                    <div class="btns">
-			                        <div id="filePicker2"></div><div class="uploadBtn">开始上传</div>
-			                    </div>
-			                </div>
-			            </div>
-			        </div>
-			    </div>
-			    </form>
-	<form id="sgform" action="" method="post" enctype="multipart/form-data">		    
-	<div class="upload-cad">
+        <div id="container">
+            <!--头部，相册选择和格式选择-->
+            <div id="uploader">
+                <div class="queueList">
+                    <div id="dndArea" class="placeholder">
+                        <div id="filePicker"></div>
+                        <p>或将照片拖到这里</p>
+                    </div>
+                </div>
+                <div class="statusBar" style="display:none;">
+                    <div class="progress">
+                        <span class="text">0%</span>
+                        <span class="percentage"></span>
+                    </div><div class="info"></div>
+                    <div class="btns">
+                        <div id="filePicker2"></div><div class="uploadBtn">开始上传</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+  </form>
+  </div>
+  	
+	<div class="upload-cad file-upload">
+	<p>&nbsp;</p>
+	<form id="sgform" action="" method="post" enctype="multipart/form-data">	
       <a href="#" class="file2"><input type="file" onchange="setFileName()" name="sfile" id="sfile"></a>
       <font id="d9" style="display:block; margin-bottom:10px;">&nbsp;<span class="sfile-name"></span><a href="javascript:;"  onclick="shwoOrHidden8()">X</a></font>
 	  <input type="hidden" name="filevalue" id="filevalue"></input>
 	  <input type="hidden" name="filemodel" id="filemodel" value="temp">
 	  <input type="hidden" name="filetype" id="filetype" value="file">
 	  <div class="clear"></div>
+	  </form>
     </div>
-    <div class="upload_btn"><input type='button' class="signlefile" name='button' value='Upload'></div>
-    </form>
-  </div>
+    <div class="upload_btn file-upload"><input type='button' class="signlefile" name='button' value='Upload'></div>
 </div>
-
 </body>
 </html>
