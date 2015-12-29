@@ -91,6 +91,12 @@ $(function(){
 		$(".metalType").hide();
 	}
 	
+	//判断订单状态
+	var orderStatus = "${orderStatus}";
+	if(orderStatus >= 2){
+		$(".goEdit").hide();
+	}
+	
 	//页面跳转 
 	$(".dzd_close").click(function(){
 		//跳转到款式单页面 
@@ -122,7 +128,7 @@ $(function(){
 	//上传CAD
 	$(".upcad").bind("click",function(){
 		$("#filetype").val("file");
- 		openURL("/counter/upload/uppage.do","上传CAD文件"); 
+ 		openURL("/counter/upload/uppage.do","上传CAD文件",null,370); 
  		$("#filevalue").val("vcadFile");
 	});
 	
@@ -176,11 +182,55 @@ $(function(){
 	if(chainJson != ""){
 		add("chain",chainJson);
 	}
-	 var stockGemJson = '${stockGemJson}';
+	var stockGemJson = '${stockGemJson}';
 	//库选石
 	if(stockGemJson != ""){
 		add("stockGem",stockGemJson)
 	}
+	var mainGemId = "${customDetail.mainGemId }";
+	//客主石 
+	if(mainGemId != ""){
+		var url = "/counter/custom/getGem.do";
+		$.post(url,{id:mainGemId},function(row){
+			var data = row;
+			if(data!=null){
+				var pic = "";
+				if(data.FILE_0 != "" && data.FILE_0 != null){
+					pic = "'/counter/staticRes/"+data.FILE_0+"'";
+				}
+			}
+			var html = '';
+			html+= '<dd>'+
+				   '<h3>客主石</h3>'+
+				   '<img class="mainGem_img" style="width:38px;height:38px;" src='+pic+' >'+
+				   '保价： <b>${customDetail.nmainGemCost }元</b>'+
+				   '</dd>';
+			$(".mianGem").append(html);
+		});
+	}
+	var partsGemId = "${customDetail.partsGemId }";
+	//客配石
+	if(partsGemId != ""){
+		var url = "/counter/custom/getGem.do";
+		$.post(url,{id:partsGemId},function(row){
+			var data = row;
+			if(data!=null){
+				var pic = "";
+				if(data.FILE_0 != "" && data.FILE_0 != null){
+					pic = "'/counter/staticRes/"+data.FILE_0+"'";
+				}
+			}
+			var html = '';
+			html+= '<dd>'+
+				   '<h3>客配石</h3>'+
+				   '<img class="partsGem_img" style="width:38px;height:38px;" src='+pic+' >'+
+				   '数量： <b>${customDetail.ipartsGemNum }颗</b>'+
+				   '</dd>';
+			$(".partGem").append(html);
+		});
+	}
+	
+	
 	$('a[rel*=downloadr]').downloadr();
 	
 });
@@ -366,7 +416,7 @@ function CADsave(){
 
 		<div class="all">
 			<div class="main">
-				<div class="mainleft">
+				<div class="mainleft GB-RL">
 					<div class="cankao">
 						<h2>
 							<a href="javascript:;" style="color: #fff" class="cankaotu">+
@@ -421,30 +471,29 @@ function CADsave(){
 				<div class="mainmid">
 					<div class="dzd">
 						<dl>
-							<dd class='orderClass'>
+							<dd class='orderClass GB-RL'>
 								订单号 : ${orderVO.vorderCode } 
 							</dd>
-							<dd>
+							<dd class="lookOrder GB-RL">
 								<input type="button" value="查看订单"
-									id="orderCode"
-									class="lookOrder CUST-RL CC-RL PMC-RL PPS-RL" />
+									id="orderCode"/>
 							</dd>
-							<dd>
+							<dd class="quotedPrice CAD-RL PMC-RL GB-RL PPS-RL">
 								报价： <b>${orderVO.nquotedPrice } 元</b>
 							</dd>
-							<dd class="styleType">类型：${customDetail.srcstyleType }</dd>
-							<dd class="ringSize">手寸：${customDetail.srcringSize }</dd>
-							<dd class="metalType">金属：${customDetail.srcmetal }</dd>
+							<dd class="styleType GB-RL">类型：${customDetail.srcstyleType }</dd>
+							<dd class="ringSize GB-RL">手寸：${customDetail.srcringSize }</dd>
+							<dd class="metalType GB-RL">金属：${customDetail.srcmetal }</dd>
 							<dd class="StockGem"></dd>
-							<dd>
+							<dd class="GB-RL">
 								<div class="kzs"></div>
 							</dd>
-							<dd>刻字：${customDetail.vengrave }</dd>
-							<dd>工艺标签：${customDetail.vcraftTag }</dd>
-							<dd>表面工艺：${customDetail.vrequirementB }</dd>
-							<dd class="certificate-has">鉴定证书：有</dd>
-							<dd class="certificate-not">鉴定证书：无</dd>
-							<dd>定制说明：${customDetail.vrequirement }</dd>
+							<dd class="GB-RL">刻字：${customDetail.vengrave }</dd>
+							<dd class="GB-RL">工艺标签：${customDetail.vcraftTag }</dd>
+							<dd class="GB-RL">表面工艺：${customDetail.vrequirementB }</dd>
+							<dd class="certificate-has GB-RL">鉴定证书：有</dd>
+							<dd class="certificate-not GB-RL">鉴定证书：无</dd>
+							<dd class="GB-RL">定制说明：${customDetail.vrequirement }</dd>
 						</dl>
 					</div>
 				</div>
@@ -458,16 +507,16 @@ function CADsave(){
 						</dl>
 
 						<dl class="mianGem">
-							<dd>
+							<%-- <dd>
 								<h3>客主石</h3>
 								保价： <b>${customDetail.nmainGemCost }元</b>
-							</dd>
+							</dd> --%>
 						</dl>
 						<dl class="partGem">
-							<dd>
+							<%-- <dd>
 								<h3>客配石</h3>
 								数量： <b>${customDetail.ipartsGemNum }颗</b>
-							</dd>
+							</dd> --%>
 						</dl>
 						</div>
 						<div class="clear"></div>
@@ -494,7 +543,7 @@ function CADsave(){
 							<div class="clear"></div>
 						</div>
 						<div
-							class="dzd_right_btm CUST-RL CAD-RL PMC-RL GB-RL PPS-RL">
+							class="dzd_right_btm goEdit CUST-RL CAD-RL PMC-RL GB-RL PPS-RL">
 							<input type="button" value="进入编辑页" class="dzd_close" />
 							<div class="clear"></div>
 						</div>
