@@ -173,6 +173,7 @@ public class CustomController extends BaseController implements IConstant {
 				Integer orderId = customDetail.getOrderId();
 				if(orderId != null){
 					orderVO = orderService.findSigleOrder(orderId);
+					//µ±Ç°¶©µ¥×´Ì¬
 					model.addObject("orderStatus", orderService.getOrderStatusById(orderId));
 				}
 				customer = customerService.findCustomerById(customDetail.getCustomerId());
