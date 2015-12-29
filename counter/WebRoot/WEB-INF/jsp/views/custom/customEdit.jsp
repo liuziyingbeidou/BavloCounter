@@ -228,6 +228,9 @@
 									<input type="hidden"
 									id="mainGemPic" name="vmainGemPic" class="main_gem_pic"
 									value="${customEdit['vmainGemPic'] }"/>
+									<input type="hidden" 
+									id='mainGemId' name="mainGemId" class="main_gem_id"
+									value="${customEdit['mainGemId']}" />
 								</li>
 								<li class="kzs_gl"><input type='button' name="guanlian" class="kzs_guanlian"
 									value="+ 关联" /></li>
@@ -254,6 +257,9 @@
 									<input type="hidden" 
 									id="partsGemPic" name="vpartsGemPic" class="parts_gem_pic" 
 									value="${customEdit['vpartsGemPic'] }"/>
+									<input type="hidden" 
+									id='partsGemId' name="partsGemId" class="parts_gem_id"
+									value="${customEdit['partsGemId']}" />
 								</li>
 								<li class="kzs_gl">
 									<input type='button' name="guanlian" class="kps_guanlian"
