@@ -38,7 +38,7 @@ function freshOrderState(iorderState){
 		$(".st-zb").css({"background":"url('/counter/resources/images/Arrow1.png') no-repeat"});
 		$(".st-sc").css({"background":"url('/counter/resources/images/Arrow3.png') no-repeat"});
 		$(".o-csave").hide();
-		$(".o-ssave").show();
+		$(".order-stats-bwrite .PMC-RL").show();
 		$(".ista option[value='5']").remove(); 
 		$(".custom_btn").hide();
 		break;
@@ -61,7 +61,7 @@ function freshOrderState(iorderState){
 		$(".st-kd").css({"background":"url('/counter/resources/images/Arrow3.png') no-repeat"});
 		$("#csave").hide();
 		$(".ista").val(5); 
-		$(".o-ssave").show();
+		$(".order-stats-bwrite .CC-RL").show();
 		$(".o-csave").show();
 		$(".o-csave").css("padding-top","");
 		$(".ista option[value='3']").remove(); 
