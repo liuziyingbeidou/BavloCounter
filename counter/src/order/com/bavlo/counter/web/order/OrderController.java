@@ -263,6 +263,24 @@ public class OrderController extends BaseController {
 		return model;
 	}
 	
+	@RequestMapping(value="/onlyview")
+	public ModelAndView orderOnlyView(HttpServletRequest request,@RequestParam(value="id",required=true) Integer id){
+		
+		OrderVO orderVO = orderService.findOrderInfoBySql(id);
+		if(orderVO != null){
+			CustomerVO vo =	customerService.findCustomerById(orderVO.getCustomerId());
+			if(vo != null){
+				orderVO.setVdef1(vo.getVhendimgurl());
+			}
+		}
+		
+		ModelAndView model = new ModelAndView(IConstant.PATH_ORDER + IConstant.ORDER_VIEW);
+		model.addObject("pageOrderType", IConstant.PAGE_TYPE_VIEW);
+		model.addObject("ordervo",orderVO);
+	
+		return model;
+	}
+	
 	@RequestMapping(value="/getCumById")
 	public void getCumById(Integer id){
 		CustomVO cvo = customService.findCustomById(id);

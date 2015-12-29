@@ -401,4 +401,14 @@ public class OrderService extends CommonService implements IOrderService {
 		
 		updateAttrs(OrderBVO.class, attrname, attrval, wh);
 	}
+
+	@Override
+	public Integer getOrderStatusById(Integer orderId) {
+		Integer sta = null;
+		if(orderId != null){
+			OrderVO  vo = findFirstByDr(OrderVO.class, " id="+orderId);
+			sta = vo != null ? vo.getIorderState() : null;
+		}
+		return sta;
+	}
 }
