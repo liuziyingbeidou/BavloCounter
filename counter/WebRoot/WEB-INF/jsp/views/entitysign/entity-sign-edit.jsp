@@ -37,7 +37,7 @@
 			 setValueByFrame("customer","${entityvo['id']}");
 			 //上传图片
 			 $(".entity-upload").bind("click",function(){
-			 		openURL("${ctx}/upload/uppage.do","上传图片");
+			 		openURL("${ctx}/upload/uppage.do","上传图片",null,370);
 			 });
 			 //图片显示
 			 $(".entity-pic-show").bind("click",function(){

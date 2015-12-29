@@ -62,7 +62,7 @@
 			 setValueByFrame("customer","${gemvo['id']}");
 			 //上传图片
 			 $(".gem-upload").bind("click",function(){
-			 		openURL("${ctx}/upload/uppage.do","上传图片");
+			 		openURL("${ctx}/upload/uppage.do","上传图片",null,370);
 			 });
 			 //图片显示
 			 $(".gem-pic-show").bind("click",function(){

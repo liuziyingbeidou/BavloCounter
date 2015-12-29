@@ -41,7 +41,7 @@ $(function(){
 	
 	//上传图片
 	$(".cptu").click(function(){
-		openURL("${ctx}/upload/uppage.do","上传图片");
+		openURL("${ctx}/upload/uppage.do","上传图片",null,370);
 	});
 	//图片显示
 	$(".gem-pic-show").click(function(){
