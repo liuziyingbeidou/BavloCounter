@@ -53,6 +53,10 @@ public class CustomVO extends IdEntity {
 	 */
 	private Double nweight;
 	/**
+	 * 主石主键
+	 */
+	private Integer mainGemId;
+	/**
 	 * 主石（元）
 	 */
 	private BigDecimal nmainGemCost;
@@ -64,6 +68,10 @@ public class CustomVO extends IdEntity {
 	 * 主石（图片地址）
 	 */
 	private String vmainGemPic;
+	/**
+	 * 配石主键
+	 */
+	private Integer partsGemId;
 	/**
 	 * 配石（颗）
 	 */
@@ -201,6 +209,14 @@ public class CustomVO extends IdEntity {
 		this.nweight = nweight;
 	}
 
+	public Integer getMainGemId() {
+		return mainGemId;
+	}
+
+	public void setMainGemId(Integer mainGemId) {
+		this.mainGemId = mainGemId;
+	}
+
 	public BigDecimal getNmainGemCost() {
 		return nmainGemCost;
 	}
@@ -223,6 +239,14 @@ public class CustomVO extends IdEntity {
 
 	public void setVmainGemPic(String vmainGemPic) {
 		this.vmainGemPic = vmainGemPic;
+	}
+
+	public Integer getPartsGemId() {
+		return partsGemId;
+	}
+
+	public void setPartsGemId(Integer partsGemId) {
+		this.partsGemId = partsGemId;
 	}
 
 	public Integer getIpartsGemNum() {
