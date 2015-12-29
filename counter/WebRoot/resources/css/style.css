@@ -535,7 +535,7 @@ font-family:"Microsoft yahei";
 .ok { height: 40px; line-height: 40px; font-size: 16px;  background: #aaa; color: #555; width: 330px; margin: 0 auto;}
 
 /*上传CAD*/
-#upload { background: url(../images/upload_page_bg.png) repeat-y; padding-bottom: 30px; background-size: 100% 100%; min-height: 667px;}
+#upload { background: url(../images/upload_page_bg.png) repeat-y; padding-bottom: 30px; background-size: 100% 100%; min-height: 330px;}
 .upload { width: 350px; margin:0 auto; padding-top: 100px;}
 .upload p { width: 320px; margin: 0 auto; color: #aaa; text-align: center; line-height: 30px; font-size: 16px;}
 .upload ul { margin: 20px auto;}
