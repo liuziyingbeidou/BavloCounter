@@ -443,7 +443,7 @@ font-size:23px;
 .dzd_right dt img { vertical-align:middle;}
 .dzd_right_btm .gf {width:49%; float:left;font-size:26px;height:60px; line-height:60px;}
 .dzd_right_btm .gf  a { width:100%; padding:0; margin:0;}
-.dzd_close,.dzd_close1,.dzd_save,.lookOrder{width:100%;font-size:26px; height:60px; line-height:60px;}
+.dzd_close,.dzd_close1,.dzd_save,.lookOrder input{width:100%;font-size:26px; height:60px; line-height:60px;}
 .dzd2_kxs {
 	width:100%;
 }
