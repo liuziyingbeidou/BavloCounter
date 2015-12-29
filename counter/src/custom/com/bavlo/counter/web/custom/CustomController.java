@@ -109,7 +109,45 @@ public class CustomController extends BaseController implements IConstant {
 	 */
 	@RequestMapping("customByCmr")
 	public ModelAndView customerToCum(HttpSession session,Integer id){
-		return detail(session,id);
+		ModelAndView model = new ModelAndView(PATH_CUSTOM + "customDetail");
+		
+		if(id != null){
+			CustomVO customDetail = customService.findCustomById(id);
+			CustomerVO customer = null;
+			String openid = null;
+			OrderVO orderVO = null;
+			if(customDetail != null){
+				Integer orderId = customDetail.getOrderId();
+				if(orderId != null){
+					orderVO = orderService.findSigleOrder(customDetail.getOrderId());
+				}
+				customer = customerService.findCustomerById(customDetail.getCustomerId());
+			}
+			if(customer != null){
+				openid = customer.getVopenid();
+			}
+			
+			LoginVO loginInfo = (LoginVO) session.getAttribute("loginInfo");
+			String shop = null;
+			if(loginInfo != null){
+				shop = loginInfo.getShop();
+			}
+			
+			List<CustomCVO> customCVO = customService.findListCustomC(id);
+			List<CustomDVO> customDVO = customService.findListCustomD(id);
+			
+			JSONArray chainJson = JSONArray.fromObject(customCVO);
+			JSONArray stockGemJson = JSONArray.fromObject(customDVO);
+			
+			model.addObject("customDetail", customDetail);
+			model.addObject("shop", shop);
+			model.addObject("orderVO", orderVO);
+			model.addObject("openid", openid);
+			model.addObject("chainJson", chainJson);
+			model.addObject("stockGemJson", stockGemJson);
+		}
+		
+		return model;
 	}
 	
 	/**
