@@ -93,4 +93,12 @@ public interface IOrderService {
 	 * @return void
 	 */
 	public void updateNumByCumId(Integer orderId,String cumId,Integer num);
+	
+	/**
+	 * @Description: 根据订单id获取该订单状态
+	 * @param @param orderId
+	 * @param @return
+	 * @return Integer
+	 */
+	public Integer getOrderStatusById(Integer orderId);
 }
