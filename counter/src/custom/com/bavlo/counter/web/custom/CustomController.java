@@ -145,6 +145,9 @@ public class CustomController extends BaseController implements IConstant {
 			model.addObject("openid", openid);
 			model.addObject("chainJson", chainJson);
 			model.addObject("stockGemJson", stockGemJson);
+			
+			//liuzy add by 20151229  订单进入生产后不可编辑
+			
 		}
 		
 		return model;
@@ -169,7 +172,8 @@ public class CustomController extends BaseController implements IConstant {
 			if(customDetail != null){
 				Integer orderId = customDetail.getOrderId();
 				if(orderId != null){
-					orderVO = orderService.findSigleOrder(customDetail.getOrderId());
+					orderVO = orderService.findSigleOrder(orderId);
+					model.addObject("orderStatus", orderService.getOrderStatusById(orderId));
 				}
 				customer = customerService.findCustomerById(customDetail.getCustomerId());
 			}
