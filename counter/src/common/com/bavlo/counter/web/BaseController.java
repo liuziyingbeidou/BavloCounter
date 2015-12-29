@@ -486,10 +486,10 @@ public class BaseController{
 							}
 						}
 					}else{
-						wh = " and 1=2";
+						wh = " 1=2";
 					}
 				}else{
-					wh = " and 1=2";
+					wh = " 1=2";
 				}
 				/**角色权限控制--结束**/
 				return wh;
