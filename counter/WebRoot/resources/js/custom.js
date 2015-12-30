@@ -526,7 +526,7 @@ function setValueByFrame(type,id,callback,json){
 			if(data!=null){
 				var pic = "";
 				if(data.FILE_0 != "" && data.FILE_0 != null){
-					pic = "'/counter/staticRes/"+data.FILE_0+"'";
+					pic = "/counter/staticRes/"+data.FILE_0+"";
 				}
 			}
 			if(gemSignClass == "kzs_img"){
