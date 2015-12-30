@@ -693,7 +693,7 @@ function add(type,value){
 
 //检查数值
 function checkNum(obj) {
-	var reg = new RegExp("^[0-9].*$");
+	var reg = new RegExp("^[0-9]+(\.[0-9]+)?$");
 	if ($(obj).val() == "") {
 		return;
 	} else if (!reg.test($(obj).val())) {
