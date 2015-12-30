@@ -82,7 +82,7 @@ $(function(){
 	if(nmainGemCost != ""){
 		$(".kzsGem").show();
 		var pic = $("#vmainGemPic").val();
-		$(".kzs_img").append("<img class='mainGem_img' style='width:38px;height:38px;' src="+pic+" >");
+		$(".kzs_img").append("<img class='mainGem_img' src="+pic+" >");
 	}
 	$(".kzsGem_btn").click(function() {
 		if ($(".kzsGem").css("display") == 'none') {
@@ -97,7 +97,7 @@ $(function(){
 	if(ipartsGemNum != ""){
 		$(".kpsGem").show();
 		var pic = $("#vpartsGemPic").val();
-		$(".kps_img").append("<img class='partsGem_img' style='width:38px;height:38px;' src="+pic+" >");
+		$(".kps_img").append("<img class='partsGem_img' src="+pic+" >");
 	}
 	$(".kpsGem_btn").click(function() {
 		if ($(".kpsGem").css("display") == 'none') {
@@ -531,7 +531,7 @@ function setValueByFrame(type,id,callback,json){
 			}
 			if(gemSignClass == "kzs_img"){
 				if(mainGem_img == undefined){
-					$(".kzs_img").append("<img class='mainGem_img' style='width:38px;height:38px;' src="+pic+" >");
+					$(".kzs_img").append("<img class='mainGem_img' src="+pic+" >");
 				}else {
 					$(".mainGem_img").attr("src",pic);
 				}
@@ -540,7 +540,7 @@ function setValueByFrame(type,id,callback,json){
 			}
 			if(gemSignClass == "kps_img"){
 				if(partsGem_img == undefined){
-					$(".kps_img").append("<img class='partsGem_img' style='width:38px;height:38px;' src="+pic+" >");
+					$(".kps_img").append("<img class='partsGem_img' src="+pic+" >");
 				}else {
 					$(".partsGem_img").attr("src",pic);
 				}
