@@ -185,6 +185,7 @@
 		}
 		</script>
 		<style type="text/css">
+		.entity-pic-show img{width:330px;height:330px;}
 		.camera a{
 			background:none;
 		}

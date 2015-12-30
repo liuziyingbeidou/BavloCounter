@@ -233,6 +233,7 @@
 		}
 		</script>
 		<style type="text/css">
+		.gem-pic-show img{width:330px;height:330px;}
 		.camera a{
 			background:none;
 		}
@@ -277,7 +278,7 @@
   <div class="qsd_main">
     <div class="qsd_left">
       <ul>
-        <li class="header-loc"><a href="#"><img src="${ctx}/resources/images/customer_01.png"></a></li>
+        <li class="header-loc"><a href="#"><img class="cusheader" style="width:60px;height:60px;" src="${ctx}/resources/images/customer_01.png"></a></li>
         <li><div class="file3"><a href="#"><input type="text" name="file" id="file"></a></div></li>
         <li class="camera"><a class="gem-upload" href="#"><img src="${ctx}/resources/images/camera.png"></a></li>
         <div class="clear"></div>

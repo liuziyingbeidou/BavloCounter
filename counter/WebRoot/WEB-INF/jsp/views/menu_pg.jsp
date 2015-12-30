@@ -18,7 +18,7 @@ if(info != null){
 <script type="text/javascript">
 $(function(){
 	//角色控制标签
-	<%-- <%
+	 <%
 	if(roleList != null){
 		if(roleList.size() > 0){
 			for(int i = 0; i < roleList.size(); i++){
@@ -39,7 +39,7 @@ $(function(){
 		$(".CUST-RL").hide();
 		<%
 	}
-	%>  --%>
+	%>  
 	/* if("${isLogin}"){
 		alert("登录超时...随即推出");
 		window.close();
@@ -112,10 +112,10 @@ function closeMenu(){
      <c:if test="${fn:contains('[N]',role)}">
      <li class="menu-custom-list"><a href="#">定制单</a></li>
      </c:if>
-     <c:if test="${fn:contains('[CC-RL][PM-RL][CAD-RL][PMC-RL][PPS-RL]',role)}">
+     <c:if test="${fn:contains('[CC-RL][PM-RL][PMC-RL]',role)}">
      <li class="menu-custom-list-view"><a href="#">款式单</a></li>
      </c:if>
-     <c:if test="${fn:contains('[CC-RL][PMC-RL]',role)}">
+     <c:if test="${fn:contains('[CC-RL][PM-RL][PMC-RL]',role)}">
      <li class="menu-order-list-view"><a href="#">订&nbsp;&nbsp;单</a></li>
      </c:if>
      <c:if test="${fn:contains('[CC-RL]',role)}">
