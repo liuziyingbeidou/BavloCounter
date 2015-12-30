@@ -120,11 +120,11 @@ $(function(){
 	 	$("#vtype").val("customSheji");
 	 });
 	//上传矢量图
-	$(".upvh").bind("click",function(){
+	/* $(".upvh").bind("click",function(){
 	 	$("#filetype").val("file");
 		openURL("/counter/upload/uppage.do","上传刻字矢量图"); 
 		$("#filevalue").val("vengraveVh");
-	});
+	}); */
 	//上传CAD
 	$(".upcad").bind("click",function(){
 		$("#filetype").val("file");
@@ -148,6 +148,19 @@ $(function(){
 		});
 	});
 
+	//工费校验 
+	$("#productionCost").blur(function(){
+		var reg = new RegExp("^[0-9]+(\.[0-9]+)?$");
+		var cost = $("#productionCost").val();
+		if (cost == "") {
+			return;
+		} else if (!reg.test(cost)) {
+			$("#productionCost").val("");
+			return;
+		} else {
+			$('#pCost').val(cost);
+		}
+	});
 	//发送给生产主管 
 	$(".sendPMC").click(function(){
 		//var text_company = '${shop}';
@@ -197,7 +210,7 @@ $(function(){
 			if(data!=null && data!=""){
 				var pic = "";
 				if(data.FILE_0 != "" && data.FILE_0 != null){
-					pic = "'/counter/staticRes/"+data.FILE_0+"'";
+					pic = "/counter/staticRes/"+data.FILE_0+"";
 				}
 			}
 			var html = '';
@@ -234,7 +247,14 @@ $(function(){
 		});
 	}
 	
-	
+	$(".cost_save").click(function(){
+		var productionCost = $('#productionCost').val();
+		if(productionCost != ""){
+			save();
+		} else {
+			alert("请填写工费 ！");
+		}
+	});
 	
 	$('a[rel*=downloadr]').downloadr();
 	
@@ -370,15 +390,19 @@ function setValueByFrame(type,id,callback,json){
 }
 
 //保存 
-function CADsave(){
+function save(){
 	var id = $('#customId').val();
-	var bvo = JSON.stringify($('#customBId').serializeJson());
-	var vh = $('#vengraveVh').val();
+	var productionCost = $('#pCost').val();
+	var bvo = ""
+	if($('#FILE_0').val() != ""){
+		bvo = JSON.stringify($('#customBId').serializeJson());
+	}
+	/* var vh = $('#vengraveVh').val(); */
 	var cad = $('#vcadFile').val();
 	$.ajax({
 		type : "POST",
 		url : "update.do",
-		data : "id="+id+"&bvo="+bvo+"&vh="+vh+"&cad="+cad,
+		data : "id="+id+"&bvo="+bvo+"&cad="+cad+"&productionCost="+productionCost,
 		async : false,
 		cache : false,
 		success : function(data) {
@@ -389,6 +413,7 @@ function CADsave(){
 		}
 	});
 }
+
 </script>
 <style type="text/css">
 .edit_hidden2 { width:110px; position:relative; top:10px; left:-15px; z-index:9999}
@@ -410,8 +435,9 @@ function CADsave(){
 		<input type="hidden" id='orderId' value="${customDetail['orderId'] }" /> 
 		<input type="hidden" id="pageAttr" value="STYLE" /> 
 		<input type="hidden" class="tocustomerId" value="${customDetail['customerId'] }" />
-		<input type="hidden" id='vengraveVh' name='vengraveVh' value="${customDetail['vengraveVh'] }" />
-		<input type="hidden" id='vcadFile' name='vcadFile' value="${customDetail['vcadFile'] }" />
+		<%-- <input type="hidden" id='vengraveVh' name='vengraveVh' value="${customDetail['vengraveVh'] }" /> --%>
+		<input type="hidden" id='vcadFile' value="" />
+		<input type="hidden" id='pCost' value="" />
 		<header class="demo-bar">
 			<h1>
 				款式单${customDetail.vcustomCode }
@@ -543,8 +569,13 @@ function CADsave(){
 						</div>
 						<div
 							class="dzd_right_btm CUST-RL CC-RL PM-RL CAD-RL PMC-RL GB-RL">
-							<input type='text' class="gf" value='' placeholder="工费"> <b><a
-								href="#" class="sendPMC">通知PMC</a></b>
+							<input type='text' class="gf" id="productionCost" value="${customDetail['nproductionCost'] }" placeholder="工费">
+							<b><a href="javascript:void()" class="cost_save">保存</a></b>
+							<div class="clear"></div>
+						</div>
+						<div
+							class="dzd_right_btm CUST-RL CC-RL PM-RL CAD-RL PMC-RL GB-RL">
+							<input type="button" value="通知PMC" class="dzd_close sendPMC" />
 							<div class="clear"></div>
 						</div>
 						<div
@@ -555,7 +586,7 @@ function CADsave(){
 						
 						<div
 							class="dzd_left_btm CUST-RL CC-RL PM-RL PMC-RL GB-RL PPS-RL">
-							<input type="button" onclick="javascript:CADsave()" value="保存" class="dzd_save" />
+							<input type="button" onclick="javascript:save()" value="保存" class="dzd_save" />
 						</div>
 					</div>
 				</div>
