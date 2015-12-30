@@ -1,5 +1,6 @@
 package com.bavlo.counter.service.custom.itf;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 import com.bavlo.counter.model.custom.CustomBVO;
@@ -173,5 +174,15 @@ public interface ICustomService {
 	 * @return void
 	 */
 	public void updateCustomCad(Integer id,String cad);
+
+
+	
+	/** 
+	 * @Description: 更新定制单工费
+	 * @param @param id
+	 * @param @param productionCost
+	 * @return void
+	*/
+	public void updateCustomProductionCost(Integer id, BigDecimal productionCost);
 
 }

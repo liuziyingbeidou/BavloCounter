@@ -233,17 +233,22 @@ public class CustomController extends BaseController implements IConstant {
 
 		Integer id = Integer.valueOf(request.getParameter("id"));
 		String bvo = request.getParameter("bvo");
-		String vh = request.getParameter("vh");
+		/*String vh = request.getParameter("vh");*/
 		String cad = request.getParameter("cad");
+		String productionCost = request.getParameter("productionCost");
 		
-		if(bvo != null){
+		if(bvo != null && bvo != ""){
 			customService.saveCustomB(id,bvo);
 		}
-		if(vh != null){
+		/*if(vh != null){
 			customService.updateCustomVh(id, vh);
-		}
-		if(cad != null){
+		}*/
+		if(cad != null && cad != ""){
 			customService.updateCustomCad(id, cad);
+		}
+		if(productionCost != null && productionCost != ""){
+			BigDecimal pCost = new BigDecimal(productionCost);
+			customService.updateCustomProductionCost(id, pCost);
 		}
 		
 		renderJson("{\"id\":"+id+"}");
