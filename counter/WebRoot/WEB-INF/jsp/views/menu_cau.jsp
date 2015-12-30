@@ -36,20 +36,9 @@ $(function(){
 		 	alert(data);
 		 	closeMenu_();
 		 });
-		/* $.ajax({
-			 url : '../sendTM.do',
-				type : 'POST',
-				data :{
-					'toUser' : toUser,
-					'url': url
-				},
-				datatype:'text',
-				error : function(data) {		
-					alert("发送成功");
-				}
-		 })*/	 	
 	}
 });
+
 function closeMenu_(){
 	$(".bavlo-memu-turn").trigger("click");
 }
@@ -95,3 +84,4 @@ function getRootPath(){
      <li style="display: none;" class="menu-send-cust"><a class="sendCM" href="#">发客户</a></li>
      </c:if>
 </c:forEach>
+
