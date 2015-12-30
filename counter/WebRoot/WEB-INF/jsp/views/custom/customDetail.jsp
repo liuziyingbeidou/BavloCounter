@@ -180,6 +180,7 @@ $(function(){
 	var chainJson = '${chainJson}';
 	//链子
 	if(chainJson != ""){
+		$(".chain").append("<dd><h3>链子</h3></dd>");
 		add("chain",chainJson);
 	}
 	var stockGemJson = '${stockGemJson}';
@@ -193,7 +194,7 @@ $(function(){
 		var url = "/counter/custom/getGem.do";
 		$.post(url,{id:mainGemId},function(row){
 			var data = row;
-			if(data!=null){
+			if(data!=null && data!=""){
 				var pic = "";
 				if(data.FILE_0 != "" && data.FILE_0 != null){
 					pic = "'/counter/staticRes/"+data.FILE_0+"'";
@@ -202,33 +203,37 @@ $(function(){
 			var html = '';
 			html+= '<dd>'+
 				   '<h3>客主石</h3>'+
-				   '<img class="mainGem_img" style="width:38px;height:38px;" src='+pic+' >'+
-				   '保价： <b>${customDetail.nmainGemCost }元</b>'+
+				   '<img style="width:98%;" src='+pic+' ><br>'+
+				   '详情： '+data.vtype+' '+data.vshape+' '+data.vspec+' '+data.nweight+'ct<br>'+ 
+				   '保价：<b> ${customDetail.nmainGemCost }元</b>	'+
 				   '</dd>';
 			$(".mianGem").append(html);
-		});
-	}
-	var partsGemId = "${customDetail.partsGemId }";
-	//客配石
-	if(partsGemId != ""){
-		var url = "/counter/custom/getGem.do";
-		$.post(url,{id:partsGemId},function(row){
-			var data = row;
-			if(data!=null){
-				var pic = "";
-				if(data.FILE_0 != "" && data.FILE_0 != null){
-					pic = "'/counter/staticRes/"+data.FILE_0+"'";
-				}
+			
+			var partsGemId = "${customDetail.partsGemId }";
+			//客配石
+			if(partsGemId != ""){
+				var url = "/counter/custom/getGem.do";
+				$.post(url,{id:partsGemId},function(row){
+					var data = row;
+					if(data!=null && data!=""){
+						var pic = "";
+						if(data.FILE_0 != "" && data.FILE_0 != null){
+							pic = "'/counter/staticRes/"+data.FILE_0+"'";
+						}
+					}
+					var html = '';
+					html+= '<dd>'+
+						   '<h3>客配石</h3>'+
+						   '<img style="width:98%;" src='+pic+' ><br>'+
+						   '详情： '+data.vtype+' '+data.vshape+' '+data.vspec+' '+data.nweight+'ct<br>'+ 
+						   '数量： <b>${customDetail.ipartsGemNum }颗</b>'+
+						   '</dd>';
+					$(".partGem").append(html);
+				});
 			}
-			var html = '';
-			html+= '<dd>'+
-				   '<h3>客配石</h3>'+
-				   '<img class="partsGem_img" style="width:38px;height:38px;" src='+pic+' >'+
-				   '数量： <b>${customDetail.ipartsGemNum }颗</b>'+
-				   '</dd>';
-			$(".partGem").append(html);
 		});
 	}
+	
 	
 	
 	$('a[rel*=downloadr]').downloadr();
@@ -501,9 +506,9 @@ function CADsave(){
 					<div class="dzd_right">
 						<div>
 						<dl class="chain">
-							<dd>
+							<!-- <dd>
 								<h3>链子</h3>
-							</dd>
+							</dd> -->
 						</dl>
 
 						<dl class="mianGem">
@@ -538,7 +543,7 @@ function CADsave(){
 						</div>
 						<div
 							class="dzd_right_btm CUST-RL CC-RL PM-RL CAD-RL PMC-RL GB-RL">
-							<input type='text' class="gf" value=''> <b><a
+							<input type='text' class="gf" value='' placeholder="工费"> <b><a
 								href="#" class="sendPMC">通知PMC</a></b>
 							<div class="clear"></div>
 						</div>
