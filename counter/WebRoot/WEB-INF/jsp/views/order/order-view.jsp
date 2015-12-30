@@ -25,6 +25,7 @@
 <script src="/counter/resources/jquery.multiDialog/js/jquery.ui.dialog.extended-1.0.2.js"></script> 
 <script src="/counter/resources/jquery.multiDialog/js/jquery.multiDialog.js"></script> 
 <script src="/counter/resources/js/bavlo-dialog.js"></script>
+
 <script type="text/javascript">
 $(function(){
 	//客户
@@ -281,7 +282,7 @@ function loadOrderList(){
           </div>
         </div>
         <div class="mainrig order-stats-bwrite">
-          <div class="repair o-ssave CUST-RL PM-RL PPS-RL PMC-RL CC-RL CAD-RL GB-RL">
+          <div class="repair o-ssave CUST-RL PM-RL PPS-RL CAD-RL GB-RL">
             <select name="" class="repair1 ista">
               <option value="3">质检</option>
               <option value="5">完成</option>
@@ -289,7 +290,7 @@ function loadOrderList(){
             <input id="ssave" type='text' class="resave" value="保存">
             <div class="clear"></div>
           </div>
-          <p class="o-csave">
+          <p class="o-csave CAD-RL GB-RL PPS-RL">
 			  <input type="text" name="vcourierNumber" class="repair1 cnum" value="${ordervo['vcourierNumber']}" placeholder="顺丰单号">
 			  <input id="csave" type='text' class="resave CUST-RL PM-RL PPS-RL CC-RL CAD-RL GB-RL" value="保存">
 			  <div class="clear"></div>
