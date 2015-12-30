@@ -97,6 +97,10 @@ public class CustomVO extends IdEntity {
 	 */
 	private BigDecimal nprice;
 	/**
+	 * ×Ü¼Û¸ñ
+	 */
+	private BigDecimal nproductionCost;
+	/**
 	 * ¿Ì×Ö
 	 */
 	private String vengrave;
@@ -395,6 +399,14 @@ public class CustomVO extends IdEntity {
 
 	public static long getSerialversionuid() {
 		return serialVersionUID;
+	}
+
+	public BigDecimal getNproductionCost() {
+		return nproductionCost;
+	}
+
+	public void setNproductionCost(BigDecimal nproductionCost) {
+		this.nproductionCost = nproductionCost;
 	}
 
 }

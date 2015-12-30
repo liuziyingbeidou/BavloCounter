@@ -372,4 +372,12 @@ public class CustomService extends CommonService implements ICustomService {
 		updateAttrsByIDs(CustomVO.class, attrname, attrval, IDs);
 	}
 
+	@Override
+	public void updateCustomProductionCost(Integer id, BigDecimal productionCost) {
+		String[] attrname = new String[]{"nproductionCost"};
+		Object[] attrval = new Object[]{productionCost};
+		Integer[] IDs = new Integer[]{id};
+		updateAttrsByIDs(CustomVO.class, attrname, attrval, IDs);
+	}
+
 }
