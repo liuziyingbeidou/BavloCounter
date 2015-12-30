@@ -184,14 +184,14 @@ public class CustomController extends BaseController implements IConstant {
 			
 			LoginVO loginInfo = (LoginVO) session.getAttribute("loginInfo");
 			String shop = null;
-			if(loginInfo != null){
+			/*if(loginInfo != null){
 				if(StringUtil.isEmpty(((LoginVO)loginInfo).getUserId())){
 					model.setViewName("common/confirm");
 				}
 				shop = loginInfo.getShop();
 			}else{
 				model.setViewName("common/confirm");
-			}
+			}*/
 			
 			List<CustomCVO> customCVO = customService.findListCustomC(id);
 			List<CustomDVO> customDVO = customService.findListCustomD(id);
