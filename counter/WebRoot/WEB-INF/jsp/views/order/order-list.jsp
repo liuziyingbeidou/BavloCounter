@@ -58,26 +58,26 @@
 					$.get(purl,{id:data[i].id},function(msg){
 						if(msg != null){
 							for(var j = 0; j < msg.length; j++){
-							if(msg.vname != null && msg.vname != ""){
-								part += "<dd><img src='${ctx}/staticRes/"+msg.vpath+"/min/"+msg.vname+"'></dd>";
+								if(msg.vname != null && msg.vname != ""){
+									part += "<dd><img src='${ctx}/staticRes/"+msg.vpath+"/min/"+msg.vname+"'></dd>";
+								}
 							}
 						}
+						if(data[i].vdef1 == null || data[i].vdef1 == ""){
+							headp="src='${ctx}/resources/images/customer_01.png'";
+						}else{
+							headp="src='"+data[i].vdef1+"'";
 						}
+						$("#juheweb").append("<li><h4><img style='width:60px;height:60px;' "+
+						headp+
+						"><b>"+data[i].customerName+"</b><a href='#'>"+data[i].vorderCode+"</a><span><a href='#' onclick='selHander("+data[i].id+")'>选择</a></span></h4>"+
+						"<div class='list-item none'><dl>"+
+						part+
+						"</dl><div class='clear'></div>"+
+						"<dt>报价：<b>"+data[i].nquotedPrice+"元</b> 已付：<b>"+data[i].npayment+"元</b> 未付：<b>"+data[i].nnonPayment+"元</b> 实收："+data[i].ntailPaid+"</dt>"+
+						"</div>"+
+						"<div class='clear'></div></li>");
 					});
-					if(data[i].vdef1 == null || data[i].vdef1 == ""){
-						headp="src='${ctx}/resources/images/customer_01.png'";
-					}else{
-						headp="src='"+data[i].vdef1+"'";
-					}
-					$("#juheweb").append("<li><h4><img style='width:60px;height:60px;' "+
-					headp+
-					"><b>"+data[i].customerName+"</b><a href='#'>"+data[i].vorderCode+"</a><span><a href='#' onclick='selHander("+data[i].id+")'>选择</a></span></h4>"+
-					"<div class='list-item none'><dl>"+
-					part+
-					"</dl><div class='clear'></div>"+
-					"<dt>报价：<b>"+data[i].nquotedPrice+"元</b> 已付：<b>"+data[i].npayment+"元</b> 未付：<b>"+data[i].nnonPayment+"元</b> 实收："+data[i].ntailPaid+"</dt>"+
-					"</div>"+
-					"<div class='clear'></div></li>");
 				}
 				endMask();
 				navList(12);
