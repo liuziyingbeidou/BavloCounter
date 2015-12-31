@@ -134,18 +134,33 @@ $(function(){
 	
 	//下载CAD文件回写订单状态
 	$(".dlcad").click(function(){
-		$.ajax({
-			url : "../order/updateState.do",
-			type : 'POST',
-			data :{
-				'orderId' : orderId,
-				'ista': "2"
-			},
-			success : function(data) {		
-			},
-			error : function(data) {		
-			}
-		});
+		var cad = "${customDetail['vcadFile'] }";
+		if(cad != ""){
+			window.location="${ctx}/staticRes/custom/"+cad;
+			$.ajax({
+				url : "../order/updateState.do",
+				type : 'POST',
+				data :{
+					'orderId' : orderId,
+					'ista': "2"
+				},
+				success : function(data) {		
+				},
+				error : function(data) {		
+				}
+			});
+		}else{
+			alert("CAD文件未上传！");
+		}
+	});
+	//下载矢量图 
+	$(".dlvh").click(function(){
+		var vh = "${customDetail['vengraveVh'] }";
+		if(vh != ""){
+			window.location="${ctx}/staticRes/custom/"+vh;
+		} else {
+			alert("矢量图未上传！");
+		}
 	});
 
 	//工费校验 
@@ -195,6 +210,7 @@ $(function(){
 	if(chainJson != ""){
 		$(".chain").append("<dd><h3>链子</h3></dd>");
 		add("chain",chainJson);
+		$(".chain").append("<dl></dl>");
 	}
 	var stockGemJson = '${stockGemJson}';
 	//库选石
@@ -219,7 +235,7 @@ $(function(){
 				   '<img style="width:98%;" src='+pic+' ><br>'+
 				   '详情： '+data.vtype+' '+data.vshape+' '+data.vspec+' '+data.nweight+'ct<br>'+ 
 				   '保价：<b> ${customDetail.nmainGemCost }元</b>	'+
-				   '</dd>';
+				   '</dd><dl></dl>';
 			$(".mianGem").append(html);
 			
 			var partsGemId = "${customDetail.partsGemId }";
@@ -240,7 +256,7 @@ $(function(){
 						   '<img style="width:98%;" src='+pic+' ><br>'+
 						   '详情： '+data.vtype+' '+data.vshape+' '+data.vspec+' '+data.nweight+'ct<br>'+ 
 						   '数量： <b>${customDetail.ipartsGemNum }颗</b>'+
-						   '</dd>';
+						   '</dd><dl></dl>';
 					$(".partGem").append(html);
 				});
 			}
@@ -530,40 +546,38 @@ function save(){
 				</div>
 				<div class="mainrig">
 					<div class="dzd_right">
-						<div>
-						<dl class="chain">
+						<div class="chain">
 							<!-- <dd>
 								<h3>链子</h3>
 							</dd> -->
-						</dl>
+						</div>
 
-						<dl class="mianGem">
+						<div class="mianGem">
 							<%-- <dd>
 								<h3>客主石</h3>
 								保价： <b>${customDetail.nmainGemCost }元</b>
 							</dd> --%>
-						</dl>
-						<dl class="partGem">
+						</div>
+						<div class="partGem">
 							<%-- <dd>
 								<h3>客配石</h3>
 								数量： <b>${customDetail.ipartsGemNum }颗</b>
 							</dd> --%>
-						</dl>
 						</div>
 						<div class="clear"></div>
 						<div
 							class="dzd_right_btm d1 CUST-RL CC-RL PM-RL CAD-RL PMC-RL GB-RL">
 							<span class="gf"><a class="dlcad"
-								href="${ctx}/staticRes/custom/${customDetail['vcadFile'] }"
-								rel="downloadr" title="下载CAD文件">下载CAD</a> </span> <b><a
+								href="javascript:void(0)"
+								title="下载CAD文件">下载CAD</a> </span> <b><a
 								class="dlvh"
-								href="${ctx}/staticRes/custom/${customDetail['vengraveVh'] }"
-								rel="downloadr" title="下载矢量图">下载矢量图</a></b>
+								href="javascript:void(0)"
+								title="下载矢量图">下载矢量图</a></b>
 							<div class="clear"></div>
 						</div>
 						<div
 							class="dzd_right_btm d1 CUST-RL CC-RL PM-RL PMC-RL GB-RL PPS-RL">
-							<span class="gf"><a class="upcad" href="javascript:void()">上传CAD</a>
+							<span class="gf"><a class="upcad" href="javascript:void(0)">上传CAD</a>
 							</span><!--  <b><a class="upvh" href="javascript:void(0);">上传矢量图</a></b> -->
 							<div class="clear"></div>
 						</div>
