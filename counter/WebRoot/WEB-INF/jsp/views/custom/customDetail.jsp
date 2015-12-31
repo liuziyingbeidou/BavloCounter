@@ -563,14 +563,14 @@ function save(){
 						</div>
 						<div
 							class="dzd_right_btm d1 CUST-RL CC-RL PM-RL PMC-RL GB-RL PPS-RL">
-							<span class="gf"><a class="upcad" href="#">上传CAD</a>
-							</span><!--  <b><a class="upvh" href="#">上传矢量图</a></b> -->
+							<span class="gf"><a class="upcad" href="javascript:void()">上传CAD</a>
+							</span><!--  <b><a class="upvh" href="javascript:void(0);">上传矢量图</a></b> -->
 							<div class="clear"></div>
 						</div>
 						<div
 							class="dzd_right_btm CUST-RL CC-RL PM-RL CAD-RL PMC-RL GB-RL">
 							<input type='text' class="gf" id="productionCost" value="${customDetail['nproductionCost'] }" placeholder="工费">
-							<b><a href="javascript:void()" class="cost_save">保存</a></b>
+							<b><a href="javascript:void(0);" class="cost_save">保存</a></b>
 							<div class="clear"></div>
 						</div>
 						<div
