@@ -103,7 +103,7 @@
 		
 		function  htgl(val,row){
 			var tocss = ' <div style="text-align:center;margin:0 auto;" > '
-						+'<a class="col0070c0" href="#" onclick="openWin('+row.id+')">选择</a>'
+						+'<a class="col0070c0" href="javascript:void(0);" onclick="openWin('+row.id+')">选择</a>'
 					+'</div>';
 		
 			return tocss ;
