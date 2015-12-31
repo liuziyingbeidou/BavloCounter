@@ -78,7 +78,7 @@ $(document).ready(function(){
 <div class="main_visual">
 	<div class="flicking_con">
 		<c:forEach items="${listbvo}" var="bean" varStatus="status">
-	      <a href="#">${status.index + 1 }</a>
+	      <a href="javascript:void(0);">${status.index + 1 }</a>
 	    </c:forEach>
 	</div>
 	<div class="main_image">

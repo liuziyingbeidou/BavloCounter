@@ -217,12 +217,12 @@
 				<div class="edit_left">
 					<ul>
 						<li class="header-loc">
-							<a href="#">
+							<a href="javascript:void(0);">
 							<img class="cusheader" src="${ctx}/resources/images/customer_01.png">
 							</a>
 						</li>
 						<li class="customer-edit">
-							<a href="#"><img
+							<a href="javascript:void(0);"><img
 									src="${ctx}/resources/images/customer_02.png" /> </a>
 						</li>
 						<li class="focus">
