@@ -107,33 +107,33 @@ function closeMenu(){
 	$(".bavlo-memu-page").trigger("click");
 }
 </script>
-<li class="menu-index"><a href="#">首&nbsp;&nbsp;页</a></li>
+<li class="menu-index"><a href="javascript:void(0);">首&nbsp;&nbsp;页</a></li>
 <c:forEach var="role" items="${roleList}">
      <c:if test="${fn:contains('[N]',role)}">
-     <li class="menu-custom-list"><a href="#">定制单</a></li>
+     <li class="menu-custom-list"><a href="javascript:void(0);">定制单</a></li>
      </c:if>
      <c:if test="${fn:contains('[CC-RL][PM-RL][PMC-RL]',role)}">
-     <li class="menu-custom-list-view"><a href="#">款式单</a></li>
+     <li class="menu-custom-list-view"><a href="javascript:void(0);">款式单</a></li>
      </c:if>
      <c:if test="${fn:contains('[CC-RL][PM-RL][PMC-RL]',role)}">
-     <li class="menu-order-list-view"><a href="#">订&nbsp;&nbsp;单</a></li>
+     <li class="menu-order-list-view"><a href="javascript:void(0);">订&nbsp;&nbsp;单</a></li>
      </c:if>
      <c:if test="${fn:contains('[CC-RL]',role)}">
-     <li class="menu-entity-list"><a href="#">实物签收单</a></li>
+     <li class="menu-entity-list"><a href="javascript:void(0);">实物签收单</a></li>
      </c:if>
      <c:if test="${fn:contains('[CC-RL]',role)}">
-     <li class="menu-gem-list"><a href="#">宝石签收单</a></li>
+     <li class="menu-gem-list"><a href="javascript:void(0);">宝石签收单</a></li>
      </c:if>
      <c:if test="${fn:contains('[GB]',role)}">
-     <li class="menu-useGem-list"><a href="#">配石单</a></li>
+     <li class="menu-useGem-list"><a href="javascript:void(0);">配石单</a></li>
      </c:if>
      <c:if test="${fn:contains('[N]',role)}">
-     <li class="menu-order-list"><a href="#">订&nbsp;&nbsp;单</a></li>
+     <li class="menu-order-list"><a href="javascript:void(0);">订&nbsp;&nbsp;单</a></li>
      </c:if>
      <c:if test="${fn:contains('[CC-RL]',role)}">
-     <li class="menu-customer-list"><a href="#">客&nbsp;&nbsp;户</a></li>
+     <li class="menu-customer-list"><a href="javascript:void(0);">客&nbsp;&nbsp;户</a></li>
      </c:if>
 </c:forEach>
-<li class="menu-system-close"><a href="#">重&nbsp;&nbsp;置</a></li>
+<li class="menu-system-close"><a href="javascript:void(0);">重&nbsp;&nbsp;置</a></li>
 
 

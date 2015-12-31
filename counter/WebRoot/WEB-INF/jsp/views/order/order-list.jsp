@@ -14,11 +14,11 @@
 <link href="${ctx}/resources/css/orderlist.css" rel="stylesheet" type="text/css" />
 <script src="${ctx}/resources/js/showList.js" type="text/javascript"></script>
 
-	<!-- 自定义 -->
-	<script src="${ctx}/resources/js/bavlo-event.js"></script>
-	<!-- Loading -->
-	<script src="${ctx}/resources/showLoading/showLoading.js"></script>
-	<link type="text/css" rel="stylesheet" href="${ctx}/resources/showLoading/showLoading.css">
+<!-- 自定义 -->
+<script src="${ctx}/resources/js/bavlo-event.js"></script>
+<!-- Loading -->
+<script src="${ctx}/resources/showLoading/showLoading.js"></script>
+<link type="text/css" rel="stylesheet" href="${ctx}/resources/showLoading/showLoading.css">
 	<script type="text/javascript">
 	$(function(){
 		$(".search").keyup(function(){
@@ -63,21 +63,21 @@
 								}
 							}
 						}
-						if(data[i].vdef1 == null || data[i].vdef1 == ""){
-							headp="src='${ctx}/resources/images/customer_01.png'";
-						}else{
-							headp="src='"+data[i].vdef1+"'";
-						}
-						$("#juheweb").append("<li><h4><img style='width:60px;height:60px;' "+
-						headp+
-						"><b>"+data[i].customerName+"</b><a href='#'>"+data[i].vorderCode+"</a><span><a href='#' onclick='selHander("+data[i].id+")'>选择</a></span></h4>"+
-						"<div class='list-item none'><dl>"+
-						part+
-						"</dl><div class='clear'></div>"+
-						"<dt>报价：<b>"+data[i].nquotedPrice+"元</b> 已付：<b>"+data[i].npayment+"元</b> 未付：<b>"+data[i].nnonPayment+"元</b> 实收："+data[i].ntailPaid+"</dt>"+
-						"</div>"+
-						"<div class='clear'></div></li>");
 					});
+					if(data[i].vdef1 == null || data[i].vdef1 == ""){
+						headp="src='${ctx}/resources/images/customer_01.png'";
+					}else{
+						headp="src='"+data[i].vdef1+"'";
+					}
+					$("#juheweb").append("<li><h4><img style='width:60px;height:60px;' "+
+					headp+
+					"><b>"+data[i].customerName+"</b><a href='javascript:void(0);'>"+data[i].vorderCode+"</a><span><a href='javascript:void(0);' onclick='selHander("+data[i].id+")'>选择</a></span></h4>"+
+					"<div class='list-item none'><dl>"+
+					part+
+					"</dl><div class='clear'></div>"+
+					"<dt>报价：<b>"+data[i].nquotedPrice+"元</b> 已付：<b>"+data[i].npayment+"元</b> 未付：<b>"+data[i].nnonPayment+"元</b> 实收："+data[i].ntailPaid+"</dt>"+
+					"</div>"+
+					"<div class='clear'></div></li>");
 				}
 				endMask();
 				navList(12);
@@ -130,7 +130,7 @@
 					<ul id="juheweb">
 					<c:forEach items="${orderList}" var="bean">
 					  <li >
-						<h4 ><img src="${ctx}/resources/images/customer_01.png"><b>${bean.customerId}</b><a href="">${bean.vorderCode}</a><span><a href="${ctx}/order/view.do?id=${bean.id}">选择</a></span></h4>
+						<h4 ><img src="${ctx}/resources/images/customer_01.png"><b>${bean.customerId}</b><a href="javascript:void(0);">${bean.vorderCode}</a><span><a href="${ctx}/order/view.do?id=${bean.id}">选择</a></span></h4>
 						<div class="list-item none">
 						  <dl>
 							<dd><img src="${ctx}/resources/images/good_01.png"></dd>

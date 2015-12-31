@@ -103,8 +103,8 @@
 	<div class="upload-cad file-upload">
 	<p>&nbsp;</p>
 	<form id="sgform" action="" method="post" enctype="multipart/form-data">	
-      <a href="#" class="file2"><input type="file" onchange="setFileName()" name="sfile" id="sfile"></a>
-      <font id="d9" style="display:block; margin-bottom:10px;">&nbsp;<span class="sfile-name"></span><a href="javascript:;"  onclick="shwoOrHidden8()">X</a></font>
+      <a href="javascript: void(0);" class="file2"><input type="file" onchange="setFileName()" name="sfile" id="sfile"></a>
+      <font id="d9" style="display:block; margin-bottom:10px;">&nbsp;<span class="sfile-name"></span><a href="javascript: void(0);"  onclick="shwoOrHidden8()">X</a></font>
 	  <input type="hidden" name="filevalue" id="filevalue"></input>
 	  <input type="hidden" name="filemodel" id="filemodel" value="temp">
 	  <input type="hidden" name="filetype" id="filetype" value="file">
