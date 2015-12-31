@@ -68,7 +68,7 @@ public class CustomerService extends CommonService implements ICustomerService {
 	}
 
 	@Override
-	@Cacheable(value="myCache", key="'findCustomerList'+#wh") 
+	//@Cacheable(value="myCache", key="'findCustomerList'+#wh") 
 	public List<CustomerVO> findCustomerList(String wh) {
 	
 		return findAll(CustomerVO.class, wh,null,"id","desc");
