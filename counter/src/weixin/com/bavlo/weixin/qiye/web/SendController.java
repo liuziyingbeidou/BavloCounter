@@ -15,6 +15,7 @@ import com.bavlo.counter.model.LoginVO;
 import com.bavlo.counter.model.customer.CustomerVO;
 import com.bavlo.counter.service.customer.itf.ICustomerService;
 import com.bavlo.counter.service.order.itf.IOrderService;
+import com.bavlo.counter.utils.CommonUtils;
 import com.bavlo.counter.utils.DateUtil;
 import com.bavlo.counter.web.BaseController;
 import com.bavlo.weixin.qiye.util.Constants;
@@ -128,7 +129,9 @@ public class SendController extends BaseController{
 					customerService.updateCustomerByCondition(" id="+customerId, new String[]{"toUserids"}, new String[]{vl});
 				}
 			}
-			result = WechatSendMessage.sendMassage(request,touser, "@all", "@all", Constants.AGENTID+"", text,memo,url);
+			if(!CommonUtils.isNull(touser)){
+				result = WechatSendMessage.sendMassage(request,touser, "@all", "@all", Constants.AGENTID+"", text,memo,url);
+			}
 		}
 		renderText(result+"");
 	}

@@ -27,5 +27,5 @@ public class Constants {
 	public static final String AccessToken = "AccessToken";
 	
 	//生产主管
-	public static final String PMC_USERID = "dingli";
+	public static final String PMC_USERID = "dongjinxia";
 }
