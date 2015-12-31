@@ -116,7 +116,7 @@ $(function(){
 	//上传起版图片 
 	$(".qibantu").bind("click",function(){
 	 	$("#filetype").val("pic");
- 		openURL("/counter/upload/uppage.do","上传起版图"); 
+ 		openURL("/counter/upload/uppage.do","上传起版图",null,370); 
 	 	$("#vtype").val("customSheji");
 	 });
 	//上传矢量图
