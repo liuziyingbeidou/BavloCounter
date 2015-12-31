@@ -576,7 +576,7 @@ function save(){
 							<div class="clear"></div>
 						</div>
 						<div
-							class="dzd_right_btm d1 CUST-RL CC-RL PM-RL PMC-RL GB-RL PPS-RL">
+							class="dzd_right_btm d1 CUST-RL CC-RL PM-RL GB-RL PPS-RL">
 							<span class="gf"><a class="upcad" href="javascript:void(0)">上传CAD</a>
 							</span><!--  <b><a class="upvh" href="javascript:void(0);">上传矢量图</a></b> -->
 							<div class="clear"></div>
@@ -599,7 +599,7 @@ function save(){
 						</div>
 						
 						<div
-							class="dzd_left_btm CUST-RL CC-RL PM-RL PMC-RL GB-RL PPS-RL">
+							class="dzd_left_btm CUST-RL CC-RL PM-RL GB-RL PPS-RL">
 							<input type="button" onclick="javascript:save()" value="保存" class="dzd_save" />
 						</div>
 					</div>
