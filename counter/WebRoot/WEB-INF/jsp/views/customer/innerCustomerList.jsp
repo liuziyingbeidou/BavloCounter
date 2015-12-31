@@ -98,7 +98,8 @@
 	//发送
 function BavloSendMessage(pageAttr,userid,id,customerId){
 	//closeMultiDlg();
-	$('#my-prompt').modal({
+	toRoleObj(pageAttr,userid,"",id,customerId);
+	/*$('#my-prompt').modal({
       relatedTarget: this,
       onConfirm: function(e) {
         toRoleObj(pageAttr,userid,e.data,id,customerId);
@@ -106,7 +107,7 @@ function BavloSendMessage(pageAttr,userid,id,customerId){
       onCancel: function(e) {
       	toRoleObj(pageAttr,userid,"",id,customerId);
       }
-    });
+    });*/
 }
 
 //转发页面

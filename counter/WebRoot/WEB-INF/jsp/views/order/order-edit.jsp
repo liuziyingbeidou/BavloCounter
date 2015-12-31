@@ -103,7 +103,7 @@ $(function(){
 		$(".header-loc").hide();
 	}
 	//订单状态条
-	freshOrderState("${ordervo['iorderState']}");
+	freshOrderState("${ordervo['iorderState']}","${ordervo['curRole']}");
 	//更新状态
 	$("#orderSubmit").click(function(){
 		var orderId = $("#orderId").val();
@@ -111,10 +111,10 @@ $(function(){
 		var url = "${ctx}/order/updateState.do";
 		$.post(url,{orderId:orderId,ista:ista},function(data){
 			alert(data);
-			freshOrderState("0");
+			freshOrderState("0","${ordervo['curRole']}");
 		});
 	});
-	setTimeout("changeDivStyle();", 100); // 0.1秒后展示结果，因为HTML加载顺序，先加载脚本+样式，再加载body内容。所以加个延时
+	//setTimeout("changeDivStyle();", 100); // 0.1秒后展示结果，因为HTML加载顺序，先加载脚本+样式，再加载body内容。所以加个延时
 });
 
 
@@ -588,6 +588,7 @@ text-overflow:ellipsis;
 
 <body>
 <form id="orderFrmId">
+<input type="hidden" id='toUser' value='${openid}' /> 
 <input type="hidden" id="pageAttr" value="ORDER"/>
 <input type="hidden" name="id" class="tableId" id="orderId" value="${ordervo['id']}">
 <input type="hidden" name="iorderState" id="orderState" value="<c:choose>

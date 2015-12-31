@@ -81,7 +81,7 @@ function getRootPath(){
      <li class="bv-role-list" bv-role="PMC" bv-title="生产主管"><a href="javascript:void(0);">发生产主管</a></li>
      </c:if>
      <c:if test="${fn:contains('[CC-RL]',role)}">
-     <li style="display: none;" class="menu-send-cust"><a class="sendCM" href="javascript:void(0);">发客户</a></li>
+     <li class="menu-send-cust"><a class="sendCM" href="javascript:void(0);">发客户</a></li>
      </c:if>
 </c:forEach>
 
