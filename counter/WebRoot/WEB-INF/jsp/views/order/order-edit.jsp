@@ -622,11 +622,11 @@ text-overflow:ellipsis;
       <div class="customer">
         <ul>
           <li class="header-loc">
-          <a href="#">
+          <a href="javascript:void(0);">
           <img class="cusheader" style="width:60px;height:60px;" src="${ctx}/resources/images/customer_01.png">
           </a></li>
 		  <!--<li class="file"><a href="javascript:;"><input type="file" name="file" id="file"></a></li>-->
-		  <li class="file"><a href="#"><img src="${ctx}/resources/images/customer_02.png"></a></li>
+		  <li class="file"><a href="javascript:void(0);"><img src="${ctx}/resources/images/customer_02.png"></a></li>
           <div class="clear"></div>
         </ul>
       </div>
@@ -658,7 +658,7 @@ text-overflow:ellipsis;
       </div>
       <div class="list1">
         <dl>
-          <dd><a href="#" class="custom_btn">+款式单</a></dd>
+          <dd><a href="javascript:void(0);" class="custom_btn">+款式单</a></dd>
 		  <div class="clear"></div>
         </dl>
       </div>
@@ -676,7 +676,7 @@ text-overflow:ellipsis;
 			  C = R.insertCell();
 			  C.innerHTML = "<input class='addrlist' title='"+val+"' value='"+val+"' id='"+id+"' onclick='clickSelAddr("+id+")' readonly>";
 			  D = R.insertCell();
-			  D.innerHTML = "<a onclick='deleteRow(this,"+id+")' class='address-close'>X</a>";
+			  D.innerHTML = "<a href='javascript:void(0);' onclick='deleteRow(this,"+id+")' class='address-close'>X</a>";
 			 }
 			 function deleteRow(obj,aid){
 			  if(confirm('确定要删除吗')){

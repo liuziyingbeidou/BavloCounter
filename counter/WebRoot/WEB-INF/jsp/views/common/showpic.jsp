@@ -84,11 +84,11 @@ $(document).ready(function(){
 	<div class="main_image">
 		<ul>
 		  <c:forEach items="${listbvo}" var="bean">
-	      <li><span class="img_"><img src="${ctx}/staticRes/${bean.vpath}/${bean.vname}" width="960" height="639" /></span></li>
+	      <li><span class="img_"><img  src="${ctx}/staticRes/${bean.vpath}/${bean.vname}" width="330" height="330" /></span></li>
 	      </c:forEach>
 		</ul>
-		<a href="javascript:;" id="btn_prev"></a>
-		<a href="javascript:;" id="btn_next"></a>
+		<a href="javascript:void(0);" id="btn_prev"></a>
+		<a href="javascript:void(0);" id="btn_next"></a>
 	</div>
 </div>
 <!--main_visual end-->

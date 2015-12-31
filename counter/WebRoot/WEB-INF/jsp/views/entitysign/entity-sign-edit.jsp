@@ -229,12 +229,12 @@
   <div class="qsd_main">
     <div class="qsd_left">
       <ul>
-        <li class="header-loc"><a href="#"><img class="cusheader" style="width:60px;height:60px;" src="${ctx}/resources/images/customer_01.png"></a></li>
-		<li><div class="file3"><a href="#"><input class="e-customer-add" type="text" name="file" id="file"></a></div></li>
-        <li class="camera"><a class="entity-upload" href="#"><img src="${ctx}/resources/images/camera.png"></a></li>
+        <li class="header-loc"><a href="javascript: void(0);"><img class="cusheader" style="width:60px;height:60px;" src="${ctx}/resources/images/customer_01.png"></a></li>
+		<li><div class="file3"><a href="javascript: void(0);"><input class="e-customer-add" type="text" name="file" id="file"></a></div></li>
+        <li class="camera"><a class="entity-upload" href="javascript: void(0);"><img src="${ctx}/resources/images/camera.png"></a></li>
         <div class="clear"></div>
       </ul>
-      <dt><a class="entity-pic-show" href="#">
+      <dt><a class="entity-pic-show" href="javascript: void(0);">
       <c:choose>
 		<c:when test="${empty entityvo['FILE_0']}">   
 		<img style="width:330px;height:330px;" src="${ctx}/resources/images/pic_03.png">

@@ -18,14 +18,16 @@
 <script src="${ctx}/resources/js/bavlo-order.js"></script>
 <!-- 弹框 -->
 <!-- jQuery & jQuery UI files (needed)--> 
-<link rel="stylesheet" href="/counter/resources/jquery.multiDialog/css/jquery-ui-1.10.3.custom.css">
-<script src="/counter/resources/jquery.multiDialog/js/jquery/jquery-ui-1.10.3.custom.js"></script> 
+<link rel="stylesheet" href="${ctx}/resources/jquery.multiDialog/css/jquery-ui-1.10.3.custom.css">
+<script src="${ctx}/resources/jquery.multiDialog/js/jquery/jquery-ui-1.10.3.custom.js"></script> 
 <!-- MultiDialog files (needed) --> 
-<link rel="stylesheet" href="/counter/resources/jquery.multiDialog/css/jquery.multiDialog.css"> 
-<script src="/counter/resources/jquery.multiDialog/js/jquery.ui.dialog.extended-1.0.2.js"></script> 
-<script src="/counter/resources/jquery.multiDialog/js/jquery.multiDialog.js"></script> 
-<script src="/counter/resources/js/bavlo-dialog.js"></script>
-
+<link rel="stylesheet" href="${ctx}/resources/jquery.multiDialog/css/jquery.multiDialog.css"> 
+<script src="${ctx}/resources/jquery.multiDialog/js/jquery.ui.dialog.extended-1.0.2.js"></script> 
+<script src="${ctx}/resources/jquery.multiDialog/js/jquery.multiDialog.js"></script> 
+<script src="${ctx}/resources/js/bavlo-dialog.js"></script>
+<!-- Loading -->
+<script src="${ctx}/resources/showLoading/showLoading.js"></script>
+<link type="text/css" rel="stylesheet" href="${ctx}/resources/showLoading/showLoading.css">
 <script type="text/javascript">
 $(function(){
 	//客户
@@ -111,7 +113,7 @@ function loadOrderList(){
 					}else{
 						pic = "<img class='bill-pic' src='${ctx}/resources/images/good_01.png'>";
 					}
-					$("#olist").append("<dd type='dz' onclick='toCustom(\""+data[i].vsourceId+"\")' sid='"+data[i].vsourceId+"' class='"+data[i].vsourceId+" bill'>"+pic+"<b class=''>进入款式单</b><a href='#' style='color:#FFF' class='bill-num close_c order_list_close'>"+data[i].nnumber+"对</a></dd>");
+					$("#olist").append("<dd type='dz' onclick='toCustom(\""+data[i].vsourceId+"\")' sid='"+data[i].vsourceId+"' class='"+data[i].vsourceId+" bill'>"+pic+"<b class=''>进入款式单</b><a href='javascript:void(0);' style='color:#FFF' class='bill-num close_c order_list_close'>"+data[i].nnumber+"对</a></dd>");
 				}/*else if(type == "ch"){
 					$("#olist").append("<dd type='ch' sid='"+data[i].vsourceId+"' class='"+data[i].vsourceId+" bill'><span class='list_name bill-name'>"+data[i].vname+"</span><b class='list_price bill-num'>"+data[i].nnumber+"条</b><a href='javascript:rlist("+data[i].vsourceId+")' class='close_c'><img src='${ctx}/resources/images/close.png'></a></dd>");
 				}*/
@@ -173,8 +175,10 @@ function loadOrderList(){
 		}
 	//清单→款式单
 	function toCustom(customId){
+		startMask();
 		var url = "${ctx}/custom/detail.do?id="+customId;//根据id显示定制单信息
 		window.location = url;
+		endMask();
 	}
 </script>
 <style type="text/css">
@@ -265,7 +269,7 @@ function loadOrderList(){
         <div class="mainmid PPS-RL CAD-RL GB-RL">
           <div class="ocheck">            
             <ul>
-              <li>交付时间：${ordervo['ddeliverdate']}</li>
+              <li>交付时间：${ordervo['ddeliverdate']} (还有${ordervo['vdef2']}天) </li>
               <li>交付方式：${ordervo['vdeliveryWay']}</li>
               <li>交付地址：${ordervo['vaddress']}</li>
               <li>收货人：${ordervo['vrname']}</li>
@@ -297,13 +301,13 @@ function loadOrderList(){
 		  </p>
 		  		<div class="cankao CAD-RL GB-RL PPS-RL">
 					<h2>
-					<a href="#" style="color:#fff" class="cankaotu cptu CUST-RL PM-RL PPS-RL CC-RL CAD-RL GB-RL">+ 成品图 </a>
-					<a href="#" style="color:#fff" class="cankaotu PMC-RL">+ 成品图 </a>
+					<a href="javascript:void(0);" style="color:#fff" class="cankaotu cptu CUST-RL PM-RL PPS-RL CC-RL CAD-RL GB-RL">+ 成品图 </a>
+					<a href="javascript:void(0);" style="color:#fff" class="cankaotu PMC-RL">+ 成品图 </a>
 					</h2>
 					<div class="pro cp-pic">
 						<div class="demo" id='pic' style='display: ;'>
 							<div class="my-gallery">
-								<a class="gem-pic-show" href="#">
+								<a class="gem-pic-show" href="javascript:void(0);">
 								<c:choose>
 								 <c:when test="${empty ordervo['FILE_0']}">   
 								 <img src="${ctx}/resources/images/pic_02.png">
