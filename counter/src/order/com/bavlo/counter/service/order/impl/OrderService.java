@@ -244,7 +244,7 @@ public class OrderService extends CommonService implements IOrderService {
 				dto.setVmail(CommonUtils.isNull(arry[15]) ? "" :arry[15]+"");
 				dto.setCustomerId(CommonUtils.isNull(arry[16]) ? null :Integer.valueOf(arry[16]+""));
 				if(!CommonUtils.isNull(dto.getDdeliverdate())){
-					dto.setVdef2(DateUtil.reductDate(dto.getDdeliverdate(),DateUtil.getCurDate())+"");
+					dto.setVdef2(DateUtil.reductDate(DateUtil.getCurDate(),dto.getDdeliverdate())+"");
 				}
 				nList.add(dto);
 			}

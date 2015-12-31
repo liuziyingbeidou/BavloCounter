@@ -223,15 +223,36 @@ public class OrderController extends BaseController {
 	@RequestMapping(value="/edit")
 	public ModelAndView orderEdit(@RequestParam(value="id",required=true) Integer id){
 		
+		ModelAndView model = new ModelAndView(IConstant.PATH_ORDER + IConstant.ORDER_EDIT);
 		OrderVO orderVO = orderService.findSigleOrder(id);
 		if(orderVO != null){
 			CustomerVO vo =	customerService.findCustomerById(orderVO.getCustomerId());
 			if(vo != null){
 				orderVO.setVdef1(vo.getVhendimgurl());
 			}
+			Object loginInfo = request.getSession().getAttribute("loginInfo");
+			if(loginInfo == null){
+				model.setViewName("common/confirm");
+			}else{
+				if(StringUtil.isEmpty(((LoginVO)loginInfo).getUserId())){
+					model.setViewName("common/confirm");
+				}else{
+					List<String> roleList =((LoginVO)loginInfo).getRole();
+					String roles = "[";
+					if(roleList != null){
+						for(int i = 0; i < roleList.size(); i++){
+							roles += "'" + roleList.get(i) + "',";
+						}
+					}
+					if(roles.length() > 2){
+						roles = roles.substring(0, roles.length() - 1);
+					}
+					roles +="]";
+					model.addObject("curRole", roles);
+				}
+			}
 		}
 		
-		ModelAndView model = new ModelAndView(IConstant.PATH_ORDER + IConstant.ORDER_EDIT);
 		model.addObject("pageOrderType", IConstant.PAGE_TYPE_EDIT);
 		model.addObject("ordervo",orderVO);
 		return model;
@@ -242,22 +263,38 @@ public class OrderController extends BaseController {
 	public ModelAndView orderView(HttpServletRequest request,@RequestParam(value="id",required=true) Integer id){
 		
 		OrderVO orderVO = orderService.findOrderInfoBySql(id);
+		String openid = null;
 		if(orderVO != null){
 			CustomerVO vo =	customerService.findCustomerById(orderVO.getCustomerId());
 			if(vo != null){
 				orderVO.setVdef1(vo.getVhendimgurl());
+				openid = vo.getVopenid();
 			}
 		}
 		
 		ModelAndView model = new ModelAndView(IConstant.PATH_ORDER + IConstant.ORDER_VIEW);
 		model.addObject("pageOrderType", IConstant.PAGE_TYPE_VIEW);
 		model.addObject("ordervo",orderVO);
+		model.addObject("openid", openid);
 		Object loginInfo = request.getSession().getAttribute("loginInfo");
 		if(loginInfo == null){
 			model.setViewName("common/confirm");
 		}else{
 			if(StringUtil.isEmpty(((LoginVO)loginInfo).getUserId())){
 				model.setViewName("common/confirm");
+			}else{
+				List<String> roleList =((LoginVO)loginInfo).getRole();
+				String roles = "[";
+				if(roleList != null){
+					for(int i = 0; i < roleList.size(); i++){
+						roles += "'" + roleList.get(i) + "',";
+					}
+				}
+				if(roles.length() > 2){
+					roles = roles.substring(0, roles.length() - 1);
+				}
+				roles +="]";
+				model.addObject("curRole", roles);
 			}
 		}
 		return model;
