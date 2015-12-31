@@ -56,7 +56,7 @@ $(function(){
 		}
 	});
 	//订单状态条
-	freshOrderState("${ordervo['iorderState']}");
+	freshOrderState("${ordervo['iorderState']}","${ordervo['curRole']}");
 	if("${ordervo['FILE_0']}" == null || "${ordervo['FILE_0']}" == ""){
 		$(".cp-pic").hide();
 	}
@@ -67,7 +67,7 @@ $(function(){
 		var url = "${ctx}/order/updateState.do";
 		$.post(url,{orderId:orderId,ista:ista},function(data){
 			alert(data);
-			freshOrderState(ista);
+			freshOrderState(ista,"${ordervo['curRole']}");
 		});
 	});
 	//更新顺丰单号
@@ -77,7 +77,7 @@ $(function(){
 		var url = "${ctx}/order/updateOrderCNumber.do";
 		$.post(url,{orderId:orderId,cnum:cnum},function(data){
 			alert(data);
-			freshOrderState("4");
+			freshOrderState("4","${ordervo['curRole']}");
 		});
 	});
 	//保存上传图片
@@ -113,7 +113,7 @@ function loadOrderList(){
 					}else{
 						pic = "<img class='bill-pic' src='${ctx}/resources/images/good_01.png'>";
 					}
-					$("#olist").append("<dd type='dz' onclick='toCustom(\""+data[i].vsourceId+"\")' sid='"+data[i].vsourceId+"' class='"+data[i].vsourceId+" bill'>"+pic+"<b class=''>进入款式单</b><a href='javascript:void(0);' style='color:#FFF' class='bill-num close_c order_list_close'>"+data[i].nnumber+"对</a></dd>");
+					$("#olist").append("<dd type='dz' onclick='toCustom(\""+data[i].vsourceId+"\")' sid='"+data[i].vsourceId+"' class='"+data[i].vsourceId+" bill'>"+pic+"<b class=''>进入款式单</b><a href='javascript:void(0);' style='color:#FFF' class='bill-num close_c order_list_close'>"+data[i].nnumber+"</a></dd>");
 				}/*else if(type == "ch"){
 					$("#olist").append("<dd type='ch' sid='"+data[i].vsourceId+"' class='"+data[i].vsourceId+" bill'><span class='list_name bill-name'>"+data[i].vname+"</span><b class='list_price bill-num'>"+data[i].nnumber+"条</b><a href='javascript:rlist("+data[i].vsourceId+")' class='close_c'><img src='${ctx}/resources/images/close.png'></a></dd>");
 				}*/
@@ -220,6 +220,7 @@ function loadOrderList(){
 </head>
 
 <body>
+<input type="hidden" id='toUser' value='${openid}' /> 
 <input type="hidden" id="pageAttr" value="ORDER"/>
 <input type="hidden" name="id" id="orderId" class="tableId" value="${ordervo['id']}">
 <input type="hidden" name="iorderState" id="orderState" value="${ordervo['iorderState']}">
@@ -269,7 +270,12 @@ function loadOrderList(){
         <div class="mainmid PPS-RL CAD-RL GB-RL">
           <div class="ocheck">            
             <ul>
-              <li>交付时间：${ordervo['ddeliverdate']} (还有${ordervo['vdef2']}天) </li>
+              <li>交付时间：${ordervo['ddeliverdate']} 
+              <c:if test="${not empty ordervo['vdef2']}">
+		      (还有${ordervo['vdef2']}天) 
+		      </c:if>
+              
+              </li>
               <li>交付方式：${ordervo['vdeliveryWay']}</li>
               <li>交付地址：${ordervo['vaddress']}</li>
               <li>收货人：${ordervo['vrname']}</li>

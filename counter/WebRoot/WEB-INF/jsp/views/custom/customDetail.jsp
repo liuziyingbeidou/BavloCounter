@@ -181,7 +181,7 @@ $(function(){
 		//var text_company = '${shop}';
 		//var text_url = getRootPath()+"/custom/detail.do?id="+customId;
 		//var url = "${ctx}/sendMassage.do";
-		toRoleObj($("#pageAttr").val(),'<%=Constants.PMC_USERID%>',"",$(".tableId").val(),$(".tocustomerId").val());
+		toRoleObj($("#pageAttr").val(),'<%=Constants.PMC_USERID%>',"请来我厂Q货!",$(".tableId").val(),$(".tocustomerId").val());
 		
 	});
 	

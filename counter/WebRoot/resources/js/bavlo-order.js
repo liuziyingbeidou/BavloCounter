@@ -10,7 +10,7 @@
 });
 
 //订单状态条 提交(0)、制版(1)、生产(2)、质检(3)、快递(4)、支付(5)
-function freshOrderState(iorderState){
+function freshOrderState(iorderState,roles){
 	if(iorderState != "-1"){
 		$("#orderSubmit").hide();
 		$(".custom_btn").show();
@@ -38,7 +38,12 @@ function freshOrderState(iorderState){
 		$(".st-zb").css({"background":"url('/counter/resources/images/Arrow1.png') no-repeat"});
 		$(".st-sc").css({"background":"url('/counter/resources/images/Arrow3.png') no-repeat"});
 		$(".o-csave").hide();
-		$(".order-stats-bwrite .PMC-RL").show();
+		//角色控制订单状态维护按钮
+		if(roles != null && roles != ""){
+			if(roles.indexOf("CC-RL")){
+				$(".o-ssave").hide();
+			}
+		}
 		$(".ista option[value='5']").remove(); 
 		$(".custom_btn").hide();
 		break;
@@ -61,7 +66,12 @@ function freshOrderState(iorderState){
 		$(".st-kd").css({"background":"url('/counter/resources/images/Arrow3.png') no-repeat"});
 		$("#csave").hide();
 		$(".ista").val(5); 
-		$(".order-stats-bwrite .CC-RL").show();
+		//角色控制订单状态维护按钮
+		if(roles != null && roles != ""){
+			if(roles.indexOf("PMC-RL")){
+				$(".o-ssave").hide();
+			}
+		}
 		$(".o-csave").show();
 		$(".o-csave").css("padding-top","");
 		$(".ista option[value='3']").remove(); 

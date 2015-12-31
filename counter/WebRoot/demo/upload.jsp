@@ -26,6 +26,9 @@
 			$(".gem-upload").bind("click",function(){
 				openURL("${ctx}/upload/uppage.do","上传图片",null,370);
 			});
+			$(".gem-upload2").bind("click",function(){
+				openURL("${ctx}/qy/list.do?listType=menu&role=PM","列表",465,510);
+			});
 		});
 		</script>
 </head>
@@ -47,6 +50,8 @@
 	<input type="hidden" name="filevalue" id="filevalue" value="filevalue"></input>
 <a class="gem-upload" href="javascript:;"><img src="${ctx}/resources/images/camera.png"></a>
 <br>
+ <a class="gem-upload2" href="javascript:;"><img src="${ctx}/resources/images/camera.png"></a>
+ <br>
 <xmp>
 1、引入JS和CSS文件
 	<!-- 弹框 -->
