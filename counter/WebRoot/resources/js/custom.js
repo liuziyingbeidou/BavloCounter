@@ -239,13 +239,13 @@ $(function() {
 	 $(".cankaotu").bind("click",function(){
 		 	$("#filetype").val("pic");
 		 	$("#vtype").val("customCankao");
-	 		openURL("/counter/upload/uppage.do","上传参考图"); 
+	 		openURL("/counter/upload/uppage.do","上传参考图",null,370); 
 	 });
-	 $(".qibantu").bind("click",function(){
+	 /*$(".qibantu").bind("click",function(){
 		 	$("#filetype").val("pic");
 		 	$("#vtype").val("customSheji");
 	 		openURL("/counter/upload/uppage.do","上传起版图"); 
-	 });
+	 });*/
 	 $(".vectorgraph").bind("click",function(){
 		 	$("#filetype").val("file");
 	 		openURL("/counter/upload/uppage.do","上传刻字矢量图",null,370);
@@ -402,6 +402,7 @@ function calculator(str) {
 
 // 款式单保存
 function saveOrUpdate() {
+	startMask();
 	//通过计算后保存
 	calculator("savePrice");
 }
@@ -419,6 +420,7 @@ function save(){
 		async : false,
 		cache : false,
 		success : function(data) {
+			endMask();
 			$("#customid").val(data.id);
 			alert("保存成功!");
 			initFieldSuffix();
@@ -426,7 +428,7 @@ function save(){
 			var orderId = $("#orderId").val();
 			//跳转到订单页面
 			if(orderId != ""){
-				url = "/counter/order/edit.do?id="+orderId;//根据id查询客户信息
+				url = "/counter/order/view.do?id="+orderId;//根据id查询客户信息
 				window.location = url;
 			}
 		},
