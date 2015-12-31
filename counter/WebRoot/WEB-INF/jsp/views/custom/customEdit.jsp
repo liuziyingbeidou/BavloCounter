@@ -38,6 +38,8 @@
 <script src="/counter/resources/jquery.multiDialog/js/jquery.ui.dialog.extended-1.0.2.js"></script> 
 <script src="/counter/resources/jquery.multiDialog/js/jquery.multiDialog.js"></script> 
 <script src="/counter/resources/js/bavlo-dialog.js"></script>
+<script src="/counter/resources/showLoading/showLoading.js"></script>
+<link type="text/css" rel="stylesheet" href="/counter/resources/showLoading/showLoading.css">
 </head>
 
 <body>
@@ -324,7 +326,7 @@
 				</select>
 				</div>
 				<div class="tu">
-					<div class="dzd_right_btm2">
+					<div class="dzd_right_btm2 CUST-RL CAD-RL CC-RL PMC-RL GB-RL PPS-RL">
 						<a href="javascript:;" class="vectorgraph">+ 刻字矢量图</a>
 						<!-- <a href="javascript:;" class="cad_file"> + CAD文件   </a> -->
 					</div>
