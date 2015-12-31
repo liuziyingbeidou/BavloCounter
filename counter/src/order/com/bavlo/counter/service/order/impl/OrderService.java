@@ -20,6 +20,7 @@ import com.bavlo.counter.service.custom.itf.ICustomService;
 import com.bavlo.counter.service.impl.CommonService;
 import com.bavlo.counter.service.order.itf.IOrderService;
 import com.bavlo.counter.utils.CommonUtils;
+import com.bavlo.counter.utils.DateUtil;
 import com.bavlo.counter.utils.ObjectToJSON;
 import com.bavlo.counter.utils.StringUtil;
 
@@ -242,6 +243,9 @@ public class OrderService extends CommonService implements IOrderService {
 				dto.setVtel(CommonUtils.isNull(arry[14]) ? "" :arry[14]+"");
 				dto.setVmail(CommonUtils.isNull(arry[15]) ? "" :arry[15]+"");
 				dto.setCustomerId(CommonUtils.isNull(arry[16]) ? null :Integer.valueOf(arry[16]+""));
+				if(!CommonUtils.isNull(dto.getDdeliverdate())){
+					dto.setVdef2(DateUtil.reductDate(dto.getDdeliverdate(),DateUtil.getCurDate())+"");
+				}
 				nList.add(dto);
 			}
 		}

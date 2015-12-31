@@ -102,7 +102,7 @@ public class CoreService extends CommonService implements ICoreService{
 	}
 
 	@Override
-	@Cacheable(value="myCache", key="'getRoleListByTagName'+#tagName") 
+	//@Cacheable(value="myCache", key="'getRoleListByTagName'+#tagName") 
 	public JSONArray getRoleListByTagName(HttpServletRequest request,String tagName) {
 		JSONArray  jsobj = null;
 		if(StringUtil.isNotEmpty(tagName)){

@@ -14,6 +14,7 @@ import com.bavlo.counter.model.IdEntity;
  * @author liuzy
  * @date 2015-10-26 下午04:22:50
  * vdef1 页面用于存储头像
+ * vdef 2用于记录距交付日期天数
  */
 @Entity
 @Table(name="blct_order")
