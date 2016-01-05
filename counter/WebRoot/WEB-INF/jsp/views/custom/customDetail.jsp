@@ -587,11 +587,11 @@ function save(){
 							<b><a href="javascript:void(0);" class="cost_save CUST-RL CC-RL PM-RL CAD-RL PMC-RL GB-RL">保存</a></b>
 							<div class="clear"></div>
 						</div>
-						<div
+						<!-- <div
 							class="dzd_right_btm CUST-RL CC-RL PM-RL CAD-RL PMC-RL GB-RL">
 							<input type="button" value="通知PMC" class="dzd_close sendPMC" />
 							<div class="clear"></div>
-						</div>
+						</div> -->
 						<div
 							class="dzd_right_btm goEdit CUST-RL CAD-RL PMC-RL GB-RL PPS-RL">
 							<input type="button" value="进入编辑页" class="dzd_close" />
