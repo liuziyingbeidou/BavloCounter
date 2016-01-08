@@ -39,7 +39,7 @@ if(info != null){
         <script src="http://cdn.bootcss.com/respond.js/1.3.0/respond.min.js"></script>
     <![endif]-->
     <script type="text/javascript">
-    var uri = "http://192.168.1.115:8888/bavlo";
+    var uri = "http://www.bavlo.com/bavlo";
     //本地webservice
 	var nativeUrl = "${pageScope.basePath}/counter/webservice/http.do";
     $(function(){
