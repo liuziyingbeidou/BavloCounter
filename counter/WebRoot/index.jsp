@@ -28,18 +28,18 @@ $(function(){
 		var outputStr = "typeId=3&shapeId=4";
 		var info = httpRequest(nativeUrl,requestUrl,requestMethod,outputStr,test);
 	});
-	 $('a[rel*=downloadr]').downloadr();
+	$('a[rel*=downloadr]').downloadr();
 	});
 function test(data){
 	alert(data);
 }
 
 function mainPage(e){
-	window.location= "http://192.168.1.115:8888/bavlo/agentWeb/weChatLogin?UserId=" + e;
+	window.location= "http://www.zbdzgt.com/agentWeb/weChatLogin?UserId=" + e;
 }
 
 function manage(e){
-	window.location= "http://192.168.1.115:8888/bavlo/agentWeb/manage?UserId=" + e; 
+	window.location= "http://www.zbdzgt.com/agentWeb/manage?UserId=" + e; 
 }
 </script>
 </head>
