@@ -35,17 +35,9 @@ public class SendRelationVO extends IdEntity {
 	 */
 	private String vpageCode;
 	/**
-	 * 发送日期
-	 */
-	private String vsendDate;
-	/**
 	 * 发送的链接
 	 */
 	private String vurl;
-	/**
-	 * 描述
-	 */
-	private String vdescription;
 	/**
 	 * 状态 0.未读 1.已读
 	 */
@@ -83,14 +75,6 @@ public class SendRelationVO extends IdEntity {
 		this.vpageCode = vpageCode;
 	}
 
-	public String getVsendDate() {
-		return vsendDate;
-	}
-
-	public void setVsendDate(String vsendDate) {
-		this.vsendDate = vsendDate;
-	}
-
 	public String getVurl() {
 		return vurl;
 	}
@@ -98,15 +82,7 @@ public class SendRelationVO extends IdEntity {
 	public void setVurl(String vurl) {
 		this.vurl = vurl;
 	}
-
-	public String getVdescription() {
-		return vdescription;
-	}
-
-	public void setVdescription(String vdescription) {
-		this.vdescription = vdescription;
-	}
-
+	
 	public Integer getIstatus() {
 		return istatus;
 	}

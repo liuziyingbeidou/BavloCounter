@@ -52,7 +52,23 @@ public interface ISendRelationService {
 	public SendRelationVO findSendRelationById(Integer id);
 	
 	/** 
-	 * @Description: 通过条件查找关系列表
+	 * @Description: 通过条件查找关系
+	 * @param @param wh
+	 * @param @return
+	 * @return SendRelationVO
+	*/
+	public SendRelationVO findSendRelationByWh(String wh);
+
+	/** 
+	 * @Description: 根据接收者查找列表
+	 * @param @param toUser
+	 * @param @return
+	 * @return List<SendRelationVO>
+	*/
+	public List<SendRelationVO> findSendRelationByToUser(String toUser);
+	
+	/** 
+	 * @Description: 通过条件查找列表
 	 * @param @param sendRelationVO
 	 * @param @return
 	 * @return List<SendRelationVO>
