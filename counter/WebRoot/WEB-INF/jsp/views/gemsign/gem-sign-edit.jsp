@@ -139,6 +139,9 @@
 				return;
 			}
 		
+			if($("#gem_sign_memo").val() == "签收说明"){
+				$("#gem_sign_memo").val("");
+			}
 			//价值
 	    	clearSuffix("gem-worth","元");
 	    	//重量
@@ -180,6 +183,9 @@
 	    		//数量
 				initSuffix("gem-count","颗");
     		}
+	    	if("${gemvo['vmemo']}" != ""){
+				$("#gem_sign_memo").val("${gemvo['vmemo']}");
+			}
 		}
 		
 		//子窗体调用
@@ -325,7 +331,10 @@
       </div>
       <div class="clear"></div>
       <div class="qsdtt"><input type='text' name='icount' placeholder="数量" value="${gemvo['icount']}" class="qsdn t3 gem-count bl-ck-null lose-gem"></div>
-      <div class="qssm-l"><textarea name="vmemo" cols="" rows="" class="qssm" placeholder="签收说明">${gemvo['vmemo']}</textarea></div>
+      <div class="qssm-l"><%-- <textarea name="vmemo" cols="" rows="" class="qssm" placeholder="签收说明">${gemvo['vmemo']}</textarea> --%>
+      	<textarea id="gem_sign_memo" name="vmemo" cols="" rows="" class="qssm" 
+		onfocus="if(value =='签收说明'){value =''}" onblur="if(value ==''){value='签收说明'}" >签收说明</textarea>
+      </div>
       <div class="qs_save">
         <input type="button" name="button" onclick="javascript:save()" value="保存">
       </div>

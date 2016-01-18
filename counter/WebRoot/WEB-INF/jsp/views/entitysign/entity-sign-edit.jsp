@@ -70,6 +70,10 @@
 				return;
 			}
 			
+			if($("#entity_sign_memo").val() == "签收说明"){
+				$("#entity_sign_memo").val("");
+			}
+			
 			//数量
 	    	clearSuffix("entity-count","件");
 	    	//重量
@@ -132,6 +136,9 @@
 	    		//回收价格
 	    		initSuffix("entity-recoveryPrice","元/克");
     		}
+	    	if("${entityvo['vmemo']}" != ""){
+				$("#entity_sign_memo").val("${entityvo['vmemo']}");
+			}
 		}
 		
 		//子窗体调用
@@ -256,7 +263,10 @@
         <div class="clear"></div>
       </div>
       <div class="save1"><input type='text' name='nworth' value="${entityvo['nworth']}"  placeholder='声明价值' class="swqsd1 entity-worth bl-ck-null lose-entity"></div>
-      <div class="save1"><textarea name="" cols="" rows="" class="qssm" placeholder="说明">${entityvo['vmemo']}</textarea></div>
+      <div class="save1"><%-- <textarea name="" cols="" rows="" class="qssm" placeholder="说明">${entityvo['vmemo']}</textarea> --%>
+      <textarea id="entity_sign_memo" name="vmemo" cols="" rows="" class="qssm" 
+		onfocus="if(value =='签收说明'){value =''}" onblur="if(value ==''){value='签收说明'}" >签收说明</textarea>
+      </div>
       <div class="save1"><input type='text' name='nrecoveryPrice' value="${entityvo['nrecoveryPrice']}" placeholder='回收价格' class="qsdn1 t3 entity-recoveryPrice"></div>
       <div class="qs_save1">
         <input type="button" onclick="save()" value="保存">
