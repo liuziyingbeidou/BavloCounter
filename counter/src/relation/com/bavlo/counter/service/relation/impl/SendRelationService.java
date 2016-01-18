@@ -3,11 +3,14 @@ package com.bavlo.counter.service.relation.impl;
 import java.sql.Timestamp;
 import java.util.List;
 
+import org.springframework.stereotype.Service;
+
 import com.bavlo.counter.model.relation.SendRelationVO;
 import com.bavlo.counter.service.impl.CommonService;
 import com.bavlo.counter.service.relation.itf.ISendRelationService;
 import com.bavlo.counter.utils.DateUtil;
 
+@Service("SendRelationService")
 public class SendRelationService extends CommonService implements ISendRelationService {
 
 	@Override
