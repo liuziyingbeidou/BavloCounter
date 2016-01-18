@@ -102,6 +102,11 @@ $(function(){
 	}else{
 		$(".header-loc").hide();
 	}
+	
+	//订单说明 
+	if("${ordervo['vordermemo'] }" != ""){
+ 		$("#ordermemo").val("${ordervo['vordermemo'] }");
+ 	}
 	//订单状态条
 	freshOrderState("${ordervo['iorderState']}","${ordervo['curRole']}");
 	//更新状态
@@ -382,6 +387,10 @@ function saveOrder(){
     clearSuffix("order-nonPayment","元");
     //尾款实收
     clearSuffix("order-tailPaid","元");
+    
+    if($("#ordermemo").val() == "订单说明"){
+ 		$("#ordermemo").val("");
+ 	}
     
     //清单数据
     var orderListJson = getOrderListInfo();
@@ -665,7 +674,10 @@ text-overflow:ellipsis;
       </div>
 	<script language="javascript" type="text/javascript" src="${ctx}/resources/js/add-input.js"></script>
 	
-    <div class="miaoshu2"><textarea name="vordermemo" cols="" rows="" class="miaoshu" placeholder="订单说明">${ordervo['vordermemo'] }</textarea></div>
+    <div class="miaoshu2"><%-- <textarea name="vordermemo" cols="" rows="" class="miaoshu" placeholder="订单说明">${ordervo['vordermemo'] }</textarea> --%>
+    <textarea id="ordermemo" name="vordermemo" cols="" rows="" class="miaoshu" 
+	onfocus="if(value =='订单说明'){value =''}" onblur="if(value ==''){value='订单说明'}">订单说明</textarea>
+    </div>
     </div>
         <div class="mainmid">
           <h2>交付地址</h2>

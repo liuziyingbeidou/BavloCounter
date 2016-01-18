@@ -76,6 +76,10 @@
 		 	openURL("${ctx}/custom/listJson.do","款式单列表");
 		 });*/
 		 
+		if("${useGemDetail['icount']}" != ""){
+	 		$("#memo").val("${useGemDetail['icount']}");
+	 	}
+		
 		 //有值后加后缀
 		 initFieldSuffix();
 		 
@@ -175,7 +179,10 @@
 		if(!ckLose("edit_btn","lose-useGem")){
 			return;
 		}
-		
+		 
+		if($("#memo").val() == "说明"){
+	 		$("#memo").val("");
+	 	}
 		//重置下拉框到隐藏域
 		$("#typeName").val($("#gemTypeId  option:selected").text());
 		$("#shapeName").val($("#gemShapeId  option:selected").text());
@@ -425,8 +432,8 @@
 							value="${useGemDetail['icount']}" placeholder="数量（颗）" class="qsdn t3 useGem-count bl-ck-null lose-useGem">
 					</div>
 					<div class="qssm-l">
-						<textarea name="vmemo" cols="" rows="" class="qssm"
-							value="${useGemDetail['vmemo']}" placeholder="说明"></textarea>
+						<textarea id="memo" name="vmemo" cols="" rows="" class="qssm"
+						onfocus="if(value =='说明'){value =''}" onblur="if(value ==''){value='说明'}" >说明</textarea>
 					</div>
 					<div class="qs_save">
 						<input type="button" name="button"

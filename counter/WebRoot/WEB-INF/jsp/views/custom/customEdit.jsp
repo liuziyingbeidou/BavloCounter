@@ -60,6 +60,8 @@
 	<input type="hidden" id='ipartsGemNum' value="${customEdit['ipartsGemNum']}" />
 	<input type="hidden" id='vpartsGemName' value="${customEdit['vpartsGemName']}" />
 	<input type="hidden" id='vpartsGemPic' value="${customEdit['vpartsGemPic']}" />
+	<input type="hidden" id='vrequirement' value="${customEdit['vrequirement']}" />
+	<input type="hidden" id='vrequirementB' value="${customEdit['vrequirementB']}" />
 	
 	<input type="hidden" id='chainJson' value='${chainJson}' />
 	<input type="hidden" id='stockGemJson' value='${stockGemJson}' />
@@ -175,8 +177,8 @@
 				</div>
 				<div class="xuqiu">
 					<textarea id="requirement" name="vrequirement" cols="" rows=""
-						placeholder="需求描述"
-						class="miaoshu1">${customEdit['vrequirement']}</textarea>
+						onfocus="if(value =='需求描述'){value =''}" onblur="if(value ==''){value='需求描述'}" 
+						class="miaoshu1">需求描述</textarea>
 				</div>
 			</div>
 			<div class="mainmid">
@@ -316,9 +318,9 @@
 					<option value="拉丝">拉丝</option>
 					<option value="珐琅">珐琅</option>
 				</select>
-				<textarea id="vrequirementB" name="vrequirementB" cols="" rows="" 
-				placeholder="表面工艺描述"			
-				class="miaoshu1">${customEdit['vrequirementB'] }</textarea>
+				<textarea id="requirementB" name="vrequirementB" cols="" rows="" 
+				onfocus="if(value =='表面工艺描述'){value =''}" onblur="if(value ==''){value='表面工艺描述'}" 
+				class="miaoshu1">表面工艺描述</textarea>
 				<br />
 				<select id="certificate" name="icertificate" class="jianding1">
 					<option value="0" <c:if test="${customEdit['icertificate']=='0'}">selected</c:if>>鉴定证书 -无</option>
