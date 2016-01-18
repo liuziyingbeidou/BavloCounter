@@ -109,13 +109,13 @@
 		   <value>com.mysql.jdbc.Driver</value>
 		  </property>
 		  <property name="url">
-		   <value>jdbc:mysql://192.168.1.116:3306/counter?zeroDateTimeBehavior=convertToNull&amp;useUnicode=true&amp;characterEncoding=utf-8</value>
+		   <value>jdbc:mysql://202.85.214.185:3306/counter?zeroDateTimeBehavior=convertToNull&amp;useUnicode=true&amp;characterEncoding=utf-8</value>
 		  </property>
 		  <property name="username">
 		   <value>root</value>
 		  </property>
 		  <property name="password">
-		   <value>123456</value>
+		   <value>2011Bavlo2011Bavlo</value>
 		  </property>
 		 </bean>
 	</beans>	
