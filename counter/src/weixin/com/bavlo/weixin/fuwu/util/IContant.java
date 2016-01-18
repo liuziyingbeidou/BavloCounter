@@ -14,5 +14,5 @@ public interface IContant {
 	//AppSecret(应用密钥)
 	public static String appSecret = "e08d3c4e863555e7a99c8a510b433052";
 	//默认客服
-	public static String serviceCode = "ceshi";
+	public static String serviceCode = "yuanyuan";
 }
