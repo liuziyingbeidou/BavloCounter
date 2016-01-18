@@ -4,13 +4,11 @@ import java.util.List;
 
 import javax.servlet.http.HttpSession;
 
-import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.bavlo.counter.constant.IConstant;
 import com.bavlo.counter.model.customer.CustomerVO;
-import com.bavlo.counter.model.order.OrderBVO;
 import com.bavlo.counter.service.customer.itf.ICustomerService;
 import com.bavlo.counter.service.impl.CommonService;
 import com.bavlo.counter.utils.CommonUtils;
@@ -29,12 +27,17 @@ import com.bavlo.weixin.fuwu.util.IContant;
  * @author shijf
  * @date 2015-10-20 ÏÂÎç04:12:30  
  */
-@Service("CustomerService")
+@Service("customerService")
 public class CustomerService extends CommonService implements ICustomerService {
 
 	@Override
-	public void saveCustomer(CustomerVO customerVO) {
-
+	public Integer saveCustomer(CustomerVO customerVO) {
+		try {
+			return saveReID(customerVO);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return null;
 	}
 
 	@Override

@@ -1,5 +1,7 @@
 package com.bavlo.counter.model.customer;
 
+import java.io.Serializable;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
@@ -13,9 +15,9 @@ import com.bavlo.counter.model.IdEntity;
  */
 @Entity
 @Table(name="blct_customer")
-public class CustomerVO extends IdEntity {
+public class CustomerVO extends IdEntity implements Serializable{
 
-	private static final long serialVersionUID = 1L;	
+	private static final long serialVersionUID = -8245498015501333348L;
 	/** 
 	 * º”√ÀµÍID 
 	 */ 
