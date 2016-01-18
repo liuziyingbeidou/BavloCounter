@@ -41,6 +41,16 @@ $(function(){
 	var vpartsGemPic = $("#vpartsGemPic").val();
 	// 工艺标签
 	var vcraftTag = $("#vcraftTag").val();
+	//需求描述
+	var vrequirement = $("#vrequirement").val();
+	if(vrequirement != ""){
+		$("#requirement").val(vrequirement);
+	}
+	//表面工艺描述
+	var vrequirementB = $("#vrequirementB").val();
+	if(vrequirementB != ""){
+		$("#requirementB").val(vrequirementB);
+	}
 	// 链子Json
 	var chainJson = $("#chainJson").val();
 	// 库选宝石Json
@@ -751,6 +761,13 @@ function cleanFieldSuffix(){
 		// 其他金额 
  		clearSuffix("other_price","元"); 
 	}
+ 	if($("#requirement").val() == "需求描述"){
+ 		$("#requirement").val("");
+ 	}
+ 	if($("#requirementB").val() == "表面工艺描述"){
+ 		$("#requirementB").val("");
+ 	}
+ 	
 }
 
 // 改变字体
