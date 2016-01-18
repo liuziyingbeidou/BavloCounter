@@ -108,7 +108,7 @@ $(function(){
  		$("#ordermemo").val("${ordervo['vordermemo'] }");
  	}
 	//订单状态条
-	freshOrderState("${ordervo['iorderState']}","${ordervo['curRole']}");
+	freshOrderState("${ordervo['iorderState']}","${'curRole'}");
 	//更新状态
 	$("#orderSubmit").click(function(){
 		var orderId = $("#orderId").val();
@@ -116,7 +116,7 @@ $(function(){
 		var url = "${ctx}/order/updateState.do";
 		$.post(url,{orderId:orderId,ista:ista},function(data){
 			alert(data);
-			freshOrderState("0","${ordervo['curRole']}");
+			freshOrderState("0","${'curRole'}");
 		});
 	});
 	//setTimeout("changeDivStyle();", 100); // 0.1秒后展示结果，因为HTML加载顺序，先加载脚本+样式，再加载body内容。所以加个延时
@@ -748,10 +748,10 @@ text-overflow:ellipsis;
         <div class="mainrig">
           <h2>支付与交付</h2>
           <select name="vbudget" class="jianding budget">
-            <option value="1">10001-20000元</option>
-            <option value="2">20001-30000元</option>
-            <option value="3">30001-40000元</option>
-            <option value="4">40001-50000元</option>
+            <option value="1">10000-19999元</option>
+            <option value="2">20000-29999元</option>
+            <option value="3">30000-39999元</option>
+            <option value="4">40000-50000元</option>
           </select>
           <p><input type='text' name="nquotedPrice" class="zf bj order-quotedPrice" value="${ordervo['nquotedPrice'] }" placeholder="报价"><input type='text' name="npayment" class="zf yf order-payment bl-suf-null" value="${ordervo['npayment'] }" placeholder="已付"></p>
           <p><input type='text' name="nnonPayment" class="zf bj order-nonPayment" value="${ordervo['nnonPayment'] }" placeholder="未付"><input type='text' name="ntailPaid" class="zf yf order-tailPaid" value="${ordervo['ntailPaid'] }" placeholder="尾款实收"></p>

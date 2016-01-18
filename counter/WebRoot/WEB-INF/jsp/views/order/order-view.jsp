@@ -56,7 +56,7 @@ $(function(){
 		}
 	});
 	//订单状态条
-	freshOrderState("${ordervo['iorderState']}","${ordervo['curRole']}");
+	freshOrderState("${ordervo['iorderState']}","${'curRole'}");
 	if("${ordervo['FILE_0']}" == null || "${ordervo['FILE_0']}" == ""){
 		$(".cp-pic").hide();
 	}
@@ -67,7 +67,7 @@ $(function(){
 		var url = "${ctx}/order/updateState.do";
 		$.post(url,{orderId:orderId,ista:ista},function(data){
 			alert(data);
-			freshOrderState(ista,"${ordervo['curRole']}");
+			freshOrderState(ista,"${'curRole'}");
 		});
 	});
 	//更新顺丰单号
@@ -77,7 +77,7 @@ $(function(){
 		var url = "${ctx}/order/updateOrderCNumber.do";
 		$.post(url,{orderId:orderId,cnum:cnum},function(data){
 			alert(data);
-			freshOrderState("4","${ordervo['curRole']}");
+			freshOrderState("4","${'curRole'}");
 		});
 	});
 	//保存上传图片
