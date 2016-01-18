@@ -18,6 +18,7 @@ import com.bavlo.counter.service.customer.itf.ICustomerService;
 import com.bavlo.counter.utils.CommonUtils;
 import com.bavlo.counter.utils.StringUtil;
 import com.bavlo.counter.web.BaseController;
+import com.bavlo.weixin.fuwu.util.IContant;
 
 /**
  * @Title: ±¦ççCounter
@@ -72,7 +73,7 @@ public class CustomerController extends BaseController implements IConstant {
 	 * @return ModelAndView
 	 */
 	@RequestMapping("saveOrUpdate")
-	public String saveOrUpdate(CustomerVO customerVO) {
+	public void saveOrUpdate(CustomerVO customerVO) {
 		if(StringUtil.isEmpty(customerVO.getVserviceCode())){
 			//·ÇÎ¢ÐÅÉ¨ÂëÌí¼Ó
 			Object lgObj = request.getSession().getAttribute("loginInfo");
@@ -82,8 +83,15 @@ public class CustomerController extends BaseController implements IConstant {
 				customerVO.setVserviceCode(lgInfo.getKfcode());
 			}
 		}
-		customerService.saveOrUpdateCustomer(customerVO);
-		return REDIRECT + "customer/info.do";
+		Integer id = customerVO.getId();
+		if(id == null){
+			id = customerService.saveCustomer(customerVO);
+		}else{
+			customerService.saveOrUpdateCustomer(customerVO);
+		}
+		
+		//return REDIRECT + "customer/info.do";
+		renderJson("{\"id\":"+id+"}");
 	}
 
 	/**

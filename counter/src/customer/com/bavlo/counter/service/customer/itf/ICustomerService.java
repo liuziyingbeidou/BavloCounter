@@ -20,7 +20,7 @@ public interface ICustomerService {
 	 * @param
 	 * @return void
 	 */
-	public void saveCustomer(CustomerVO customerVO);
+	public Integer saveCustomer(CustomerVO customerVO);
 
 	/**
 	 * @Description: É¾³ý¿Í»§
