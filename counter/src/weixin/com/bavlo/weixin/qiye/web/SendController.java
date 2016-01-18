@@ -18,7 +18,6 @@ import com.bavlo.counter.service.customer.itf.ICustomerService;
 import com.bavlo.counter.service.order.itf.IOrderService;
 import com.bavlo.counter.service.relation.itf.ISendRelationService;
 import com.bavlo.counter.utils.CommonUtils;
-import com.bavlo.counter.utils.DateUtil;
 import com.bavlo.counter.web.BaseController;
 import com.bavlo.weixin.qiye.util.Constants;
 import com.bavlo.weixin.qiye.util.QiYeUtil;
