@@ -433,6 +433,7 @@ function save(){
 			}
 		},
 		error : function(e) {
+			endMask();
 			alert("保存失败!");
 			initFieldSuffix();
 		}
