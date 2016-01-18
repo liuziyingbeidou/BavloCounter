@@ -49,4 +49,19 @@ xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.sprin
 		</mvc:interceptor>
 	</mvc:interceptors>
 	<!-- 微信*****************结束 -->
+	
+	<!-- 暴露远程服务 -->
+	<!--<bean id="customerService" class="com.bavlo.counter.service.customer.impl.CustomerService" />
+	<bean id="customerServiceExporter" class="org.springframework.remoting.httpinvoker.HttpInvokerServiceExporter" >
+		<property name="service" ref="customerService" />
+		<property name="serviceInterface" value="com.bavlo.counter.service.customer.itf.ICustomerService" />
+	</bean>
+	<bean id="simpleUrlHandlerMapping" class="org.springframework.web.servlet.handler.SimpleUrlHandlerMapping">
+	   	<property name="urlMap">
+			<map>
+			  <entry key="/remote/customerService.do" value-ref="customerServiceExporter" />
+			</map>
+		</property>
+	</bean>	
+	-->
 </beans>
