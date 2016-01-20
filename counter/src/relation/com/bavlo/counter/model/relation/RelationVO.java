@@ -7,14 +7,14 @@ import com.bavlo.counter.model.IdEntity;
 
 /**
  * @Title: 宝珑Counter
- * @ClassName: SendRelationVO
- * @Description: 发送消息关系实体类
+ * @ClassName: RelationVO
+ * @Description: 关联实体类
  * @author shijf
  * @date 2016年1月11日 上午11:19:23
  */
 @Entity
-@Table(name = "blct_sendRelation")
-public class SendRelationVO extends IdEntity {
+@Table(name = "blct_relation")
+public class RelationVO extends IdEntity {
 
 	private static final long serialVersionUID = 1L;
 
