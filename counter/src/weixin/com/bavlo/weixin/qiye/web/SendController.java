@@ -13,10 +13,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import com.bavlo.counter.constant.IConstant;
 import com.bavlo.counter.model.LoginVO;
 import com.bavlo.counter.model.customer.CustomerVO;
-import com.bavlo.counter.model.relation.SendRelationVO;
+import com.bavlo.counter.model.relation.RelationVO;
 import com.bavlo.counter.service.customer.itf.ICustomerService;
 import com.bavlo.counter.service.order.itf.IOrderService;
-import com.bavlo.counter.service.relation.itf.ISendRelationService;
+import com.bavlo.counter.service.relation.itf.IRelationService;
 import com.bavlo.counter.utils.CommonUtils;
 import com.bavlo.counter.web.BaseController;
 import com.bavlo.weixin.qiye.util.Constants;
@@ -37,7 +37,7 @@ public class SendController extends BaseController{
 	private ICustomerService customerService;
 	
 	@Resource
-	private ISendRelationService sendRelationService;
+	private IRelationService relationService;
 
 	/**
 	 * @Description: 转发页面 
@@ -138,14 +138,14 @@ public class SendController extends BaseController{
 				result = WechatSendMessage.sendMassage(request,touser, "@all", "@all", Constants.AGENTID+"", text,memo,url);
 			}
 		}
-		SendRelationVO sendRelationVO = new SendRelationVO();
-		sendRelationVO.setVfromUser(actionPsn);
-		sendRelationVO.setVtoUser(touser);
-		sendRelationVO.setVpageType(pageAttr);
-		sendRelationVO.setVurl(url);
-		sendRelationVO.setVmemo(memo);
-		sendRelationVO.setIstatus(0);
-		sendRelationService.saveOrUpdateSendRelation(sendRelationVO);
+		RelationVO relationVO = new RelationVO();
+		relationVO.setVfromUser(actionPsn);
+		relationVO.setVtoUser(touser);
+		relationVO.setVpageType(pageAttr);
+		relationVO.setVurl(url);
+		relationVO.setVmemo(memo);
+		relationVO.setIstatus(0);
+		relationService.saveOrUpdateRelation(relationVO);
 		renderText(result+"");
 	}
 
