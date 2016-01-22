@@ -148,5 +148,20 @@ public class SendController extends BaseController{
 		relationService.saveOrUpdateRelation(relationVO);
 		renderText(result+"");
 	}
+	
+	@RequestMapping("/save.do")
+	public void save(){
+		for(int i = 100;i > 0;i--){
+			RelationVO relationVO = new RelationVO();
+			relationVO.setVfromUser("xxx"+i);
+			relationVO.setVtoUser("shijianfeng");
+			relationVO.setVpageType("customDetail"+i);
+			relationVO.setVurl("www.baidu.com");
+			relationVO.setVpageCode("xxxxxx");
+			relationVO.setVmemo("xxxxx"+i);
+			relationVO.setIstatus(0);
+			relationService.saveOrUpdateRelation(relationVO);
+		}
+	}
 
 }
