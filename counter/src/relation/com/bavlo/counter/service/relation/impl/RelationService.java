@@ -47,7 +47,7 @@ public class RelationService extends CommonService implements IRelationService {
 		Integer id = null;
 		if(fromUser != null && toUser != null && url != null){
 			//²éÕÒ¼ÇÂ¼
-			String wh = " vfromUser ="+fromUser + "and vtoUser ="+toUser + "and vurl ="+url;
+			String wh = " vfromUser ="+"'"+fromUser+"'" + " and vtoUser ="+"'"+toUser+"'" + " and vurl ="+"'"+url+"'";
 			RelationVO vo = findFirst(RelationVO.class, wh);
 			Timestamp ts = DateUtil.getStrTimestamp(DateUtil.getCurDateTime());
 			if(vo != null){
@@ -81,7 +81,7 @@ public class RelationService extends CommonService implements IRelationService {
 	
 	@Override
 	public List<RelationVO> findRelationByToUser(String toUser) {
-		String wh = " vtoUser ="+toUser;
+		String wh = " vtoUser ="+"'"+toUser+"'";
 //		StringBuilder sql = new StringBuilder();
 //		sql.append("select ");
 //		sql.append("a.id,a.vfromUser,a.vtoUser,a.vpageType,a.vpageCode,a.vsendDate,a.vurl,a.vdescription,a.ts ");
