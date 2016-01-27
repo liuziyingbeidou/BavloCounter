@@ -68,6 +68,8 @@ function manage(e){
     7、<a href="javascript:mainPage('shijianfeng');">PC电子柜台</a>
        <a href="javascript:manage('shijianfeng');">PC电子柜台后台</a>
     <br>
+    8、<a href="${ctx}/relation/getList.do">历史记录</a>
+    <br>
     <button class="remote">远程接口测试</button>
     <br>
     <fieldset>
