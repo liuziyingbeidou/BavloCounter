@@ -34,9 +34,8 @@ public class RelationController extends BaseController {
 	public IRelationService relationService;
 	
 	@RequestMapping("getList")
-	public ModelAndView getList(String listType){
+	public ModelAndView getList(String toUser){
 		ModelAndView model = new ModelAndView("relation/relationList");
-		String toUser = "";
 		List<RelationVO> relationList = null;
 		LoginVO loginInfo = (LoginVO) session.getAttribute("loginInfo");
 		if(loginInfo != null){
@@ -45,7 +44,6 @@ public class RelationController extends BaseController {
 		if(!"".equals(toUser)){
 			relationList = relationService.findRelationByToUser(toUser);
 		}
-		relationList = relationService.findRelationByToUser("shijianfeng");
 		JSONArray relationJson = JSONArray.fromObject(relationList);
 		model.addObject("relationJson", relationJson);
 		return model;
