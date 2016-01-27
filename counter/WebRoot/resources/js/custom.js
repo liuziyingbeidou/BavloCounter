@@ -12,7 +12,6 @@ var nativeUrl = "/counter/webservice/http.do";
 $(function(){
 	// 发送客户显示
 	$(".menu-send-cust").show();
-	
 	// 款式单ID
 	var customId = $("#customId").val();
 	// 客户ID
