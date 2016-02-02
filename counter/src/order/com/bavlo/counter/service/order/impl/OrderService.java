@@ -251,11 +251,13 @@ public class OrderService extends CommonService implements IOrderService {
 		}
 		OrderVO vo = null;
 		if(nList != null){
-			vo = nList.get(0);
-			String bwh = " orderId="+id +" and biscover='Y'";
-			OrderCVO bvo = findFirst(OrderCVO.class, bwh);
-			if(bvo != null){
-				vo.setFILE_0(bvo.getVpath()+"/min/"+CommonUtils.getMinPicName(bvo.getVname()));//∑‚√Ê
+			if(nList.size() > 0){
+				vo = nList.get(0);
+				String bwh = " orderId="+id +" and biscover='Y'";
+				OrderCVO bvo = findFirst(OrderCVO.class, bwh);
+				if(bvo != null){
+					vo.setFILE_0(bvo.getVpath()+"/min/"+CommonUtils.getMinPicName(bvo.getVname()));//∑‚√Ê
+				}
 			}
 		}
 		
