@@ -193,7 +193,7 @@ public class OrderService extends CommonService implements IOrderService {
 		StringBuilder sql = new StringBuilder();
 		sql.append("select ");
 		sql.append(" a.id,a.vdelivery_way,a.ddeliverdate,a.vinvoice_title,a.vinvoice_content,a.vordermemo,a.iorder_state,a.vorder_code,a.vcourier_number");
-		sql.append(",c.vreceiver_name as vrname,c.vprovince vdef1,c.vcity as vdef2,c.vdistrict as vdef3,c.vstreet as vdef4,c.vphone_code as vtel,c.vemail as vmail,a.customer_id");
+		sql.append(",c.vreceiver_name as vrname,c.vprovince as vdef1,c.vcity as vdef2,c.vdistrict as vdef3,c.vstreet as vdef4,c.vphone_code as vtel,c.vemail as vmail,a.customer_id");
 		sql.append(" from blct_order a");
 		sql.append(" left join blct_address c");
 		sql.append(" on a.address_id=c.id");
