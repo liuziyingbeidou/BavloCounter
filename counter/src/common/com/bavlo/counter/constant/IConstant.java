@@ -79,6 +79,7 @@ public interface IConstant {
 	public static final String PATH_COMMON = "common/";
 	public static final String COMMON_UPLOAD = "upload";
 	public static final String COMMON_SHOWPIC = "showpic";
+	public static final String COMMON_SHOWNPIC = "shownpic";
 	public static final String COMMON_CHAIN = "chain";
 	public static final String COMMON_GEM = "gem";
 	/**实物签收单模块*/

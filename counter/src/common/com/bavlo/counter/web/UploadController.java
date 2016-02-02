@@ -99,6 +99,15 @@ public class UploadController extends BaseController {
 		return model;
 	}
 	
+	@RequestMapping("/shownpic")
+	public ModelAndView shownPic(HttpServletRequest request){
+		String frmId = request.getParameter("frmId");//form id
+		ModelAndView model = new ModelAndView(IConstant.PATH_COMMON + IConstant.COMMON_SHOWNPIC);
+		model.addObject("frmId", frmId);
+		
+		return model;
+	}
+	
 	@RequestMapping("/showpicJson")
 	public void showPicJson(HttpServletRequest request){
 		String id = request.getParameter("id");//Íâ¼üÖµ
