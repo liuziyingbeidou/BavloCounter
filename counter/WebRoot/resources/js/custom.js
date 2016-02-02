@@ -272,7 +272,11 @@ $(function() {
 	 $(".customCankaoShow").bind("click",function(){
 		// 款式单ID
 	 	if(customId == "" || customId == undefined){
-	 		alert("请保存后查看!");
+	 		if($("#FILE_0").val() == "" || $("#FILE_0").val() == null){
+	 			alert("暂未上传图片");
+	 		}else{
+	 			openURL("${ctx}/upload/shownpic.do?frmId=customBId","图片展示");
+	 		}
 	 	}else{
 	 		openURL("/counter/upload/showpic.do?cpath=com.bavlo.counter.model.custom.CustomBVO&fkey=customId&ptype=vtype&vtype=customCankao&id="+customId,"图片展示");
 	 	}
@@ -281,7 +285,11 @@ $(function() {
 	 $(".customShejiShow").bind("click",function(){
 		// 款式单ID
 	 	if(customId == "" || customId == undefined){
-	 		alert("请保存后查看!");
+	 		if($("#FILE_0").val() == "" || $("#FILE_0").val() == null){
+	 			alert("暂未上传图片");
+	 		}else{
+	 			openURL("${ctx}/upload/shownpic.do?frmId=customBId","图片展示");
+	 		}
 	 	}else{
 	 		openURL("/counter/upload/showpic.do?cpath=com.bavlo.counter.model.custom.CustomBVO&fkey=customId&ptype=vtype&vtype=customSheji&id="+customId,"图片展示");
 	 	}
@@ -773,4 +781,18 @@ function cleanFieldSuffix(){
 function initFont(){
 	var font=$('.ziti').find("option:selected").val();
 	$(".kezi").css({"font-family":font});
+}
+
+//上传后显示封面
+function showDefaultPic(){
+	var vtype = $("#vtype").val();
+	if(vtype == "customCankao"){
+		if($("#FILE_0").val() != null && $("#FILE_0").val() != ""){
+			$(".customCankaoShow img").attr("src","${ctx}/staticRes/"+$("#filemodel").val()+"/"+$("#FILE_0").val());
+		}
+	}else if(vtype == "customSheji"){
+		if($("#FILE_0").val() != null && $("#FILE_0").val() != ""){
+			$(".customShejiShow img").attr("src","${ctx}/staticRes/"+$("#filemodel").val()+"/"+$("#FILE_0").val());
+		}
+	}
 }
