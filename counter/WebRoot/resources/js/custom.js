@@ -40,7 +40,7 @@ $(function(){
 	var vpartsGemPic = $("#vpartsGemPic").val();
 	// 工艺标签
 	var vcraftTag = $("#vcraftTag").val();
-	//需求描述
+	// 需求描述
 	var vrequirement = $("#vrequirement").val();
 	if(vrequirement != ""){
 		$("#requirement").val(vrequirement);
