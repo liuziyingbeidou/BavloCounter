@@ -95,6 +95,8 @@ $(function(){
 		var url = "${ctx}/order/edit.do?id="+$("#orderId").val();
 		window.location = url;
 	});
+	
+	setTimeout("changeDivStyle();", 100); // 0.1秒后展示结果，因为HTML加载顺序，先加载脚本+样式，再加载body内容。所以加个延时
 });
 
 //加载清单列表
@@ -140,7 +142,7 @@ function loadOrderList(){
 						//选客户后初始化交付地址
 						$("#addressId").val("");
 						$("#tbl").empty();
-						initAddr();
+						//initAddr();
 					}
 					closeMultiDlg();
 				});
@@ -180,6 +182,31 @@ function loadOrderList(){
 		window.location = url;
 		endMask();
 	}
+	
+	//状态条
+	function changeDivStyle(){
+		    var o_status = $("#orderState").val();	//获取隐藏框值
+			//var o_status = 4;
+			if(o_status==0){
+				$('#create').css('background', '#7dae00');
+				$('#createText').css('color', '#DDDDDD');
+			}else if(o_status==1){
+				$('#check').css('background', '#7dae00');
+				$('#checkText').css('color', '#DDDDDD');
+			}else if(o_status==2){
+				$('#produce').css('background', '#7dae00');
+				$('#produceText').css('color', '#DDDDDD');
+			}else if(o_status==3){
+				$('#delivery').css('background', '#7dae00');
+				$('#deliveryText').css('color', '#DDDDDD');
+			}else if(o_status>=4){
+				$('#received').css('background', '#7dae00');
+				$('#receivedText').css('color', '#DDDDDD');
+			}else if(o_status>=5){
+				$('#fst-jf').css('background', '#7dae00');
+				$('#fst-jfText').css('color', '#DDDDDD');
+			}
+		}
 </script>
 <style type="text/css">
 .check{background:#444;text-align: left;}
@@ -201,6 +228,16 @@ function loadOrderList(){
     margin-top:4px;
 }
 .bill-pic{cursor: pointer;}
+.stepInfo{position:relative;background:#f2f2f2;margin:20px auto 70 auto;}
+.stepInfo li{float:left;width:48%;height:0.15em;background:#bbb;}
+.stepIco{border-radius:1em;padding:0.03em;background:#bbb;text-align:center;line-height:1.5em;color:#fff; position:absolute;width:1.4em;height:1.4em;}
+.stepIco1{top:-0.7em;left:-1%;}
+.stepIco2{top:-0.7em;left:19%;}
+.stepIco3{top:-0.7em;left:38%;}
+.stepIco4{top:-0.7em;left:58%;}
+.stepIco5{top:-0.7em;left:76%;}
+.stepIco6{top:-0.7em;left:95%;}
+.stepText{color:#DDDDDD;margin-top:0.2em;width:4em;text-align:center;margin-left:-1.4em;}
 @media screen and (max-width: 1280px) and (min-width: 320px){
 .close input{
 	height: 40px;
@@ -238,7 +275,31 @@ function loadOrderList(){
       <div class="customer">
 		<div class="cu_pic"><img class="cusheader" src="${ctx}/resources/images/customer_01.png"></div>
       </div>
-      <div class="gylc">
+      <div class="stepInfo">
+		<ul>
+			<li></li>
+			<li></li>
+		</ul>
+		<div class="stepIco stepIco1" id="create">1
+			<div class="stepText" id="createText">提交</div>
+		</div>
+		<div class="stepIco stepIco2" id="check">2
+			<div class="stepText" id="checkText">制版</div>
+		</div>
+		<div class="stepIco stepIco3" id="produce">3
+			<div class="stepText" id="produceText">生产</div>
+		</div>
+		<div class="stepIco stepIco4" id="delivery">4
+			<div class="stepText" id="deliveryText">质检</div>
+		</div>
+		<div class="stepIco stepIco5" id="received">5
+			<div class="stepText" id="receivedText">快递</div>
+		</div>
+		<div class="stepIco stepIco6" id="fst-jf">6
+			<div class="stepText" id="fst-jfText">交付</div>
+		</div>
+	  </div>
+      <div class="gylc" style="display:none;">
 		<dl class="barbox">
 				<dd class="st-tj"></dd>
 				<dd class="st-zb"></dd>

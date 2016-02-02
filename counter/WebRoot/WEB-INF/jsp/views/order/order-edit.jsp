@@ -119,7 +119,7 @@ $(function(){
 			freshOrderState("0","${'curRole'}");
 		});
 	});
-	//setTimeout("changeDivStyle();", 100); // 0.1秒后展示结果，因为HTML加载顺序，先加载脚本+样式，再加载body内容。所以加个延时
+	setTimeout("changeDivStyle();", 100); // 0.1秒后展示结果，因为HTML加载顺序，先加载脚本+样式，再加载body内容。所以加个延时
 });
 
 
@@ -525,23 +525,26 @@ function getOrderListInfo(){
 		}
 		
 		function changeDivStyle(){
-		//		var o_status = $("#o_status").val();	//获取隐藏框值
-			var o_status = 4;
+		    var o_status = $("#orderState").val();	//获取隐藏框值
+		//	var o_status = 4;
 			if(o_status==0){
-				$('#create').css('background', '#DD0000');
-				$('#createText').css('color', '#DD0000');
-			}else if(o_status==1||o_status==2){
-				$('#check').css('background', '#DD0000');
-				$('#checkText').css('color', '#DD0000');
+				$('#create').css('background', '#7dae00');
+				$('#createText').css('color', '#DDDDDD');
+			}else if(o_status==1){
+				$('#check').css('background', '#7dae00');
+				$('#checkText').css('color', '#DDDDDD');
+			}else if(o_status==2){
+				$('#produce').css('background', '#7dae00');
+				$('#produceText').css('color', '#DDDDDD');
 			}else if(o_status==3){
-				$('#produce').css('background', '#DD0000');
-				$('#produceText').css('color', '#DD0000');
-			}else if(o_status==4){
-				$('#delivery').css('background', '#DD0000');
-				$('#deliveryText').css('color', '#DD0000');
+				$('#delivery').css('background', '#7dae00');
+				$('#deliveryText').css('color', '#DDDDDD');
+			}else if(o_status>=4){
+				$('#received').css('background', '#7dae00');
+				$('#receivedText').css('color', '#DDDDDD');
 			}else if(o_status>=5){
-				$('#received').css('background', '#DD0000');
-				$('#receivedText').css('color', '#DD0000');
+				$('#fst-jf').css('background', '#7dae00');
+				$('#fst-jfText').css('color', '#DDDDDD');
 			}
 		}
 </script>
@@ -569,10 +572,7 @@ text-overflow:ellipsis;
 .bill-pic{cursor: pointer;}
 .hidden_enent1 a:hover,.edit_hidden1 a:hover{text-decoration:none;}
 @media screen and (max-width: 1280px) and (min-width: 320px){
-	
-}
-
-/* stepInfo 
+	/* stepInfo 
 	border-radius：0为正方形，0~N，由正方形向圆形转化，N越大越圆。
 	padding：图形的内边距
 	background：图形背景色
@@ -580,18 +580,30 @@ text-overflow:ellipsis;
 	line-height：行高
 	color：文字颜色
 	position：定位
-	width：宽度
+	width：宽度 width:500px;
 	height：高度
-*/
-.stepInfo{position:relative;background:#f2f2f2;margin:20px auto 0 auto;width:500px;}
+	*/
+.stepInfo{position:relative;background:#f2f2f2;margin:20px auto 70 auto;}
+.stepInfo li{float:right;width:47%;height:0.15em;background:#bbb;}
+.stepIco{border-radius:1em;padding:0.03em;background:#bbb;text-align:center;line-height:1.5em;color:#fff; position:absolute;width:1.4em;height:1.4em;}
+.stepIco1{top:-0.7em;left:-1%;}
+.stepIco2{top:-0.7em;left:19%;}
+.stepIco3{top:-0.7em;left:38%;}
+.stepIco4{top:-0.7em;left:58%;}
+.stepIco5{top:-0.7em;left:76%;}
+.stepIco6{top:-0.7em;left:95%;}
+.stepText{color:#DDDDDD;margin-top:0.2em;width:4em;text-align:center;margin-left:-1.4em;}
+}
+.stepInfo{position:relative;background:#f2f2f2;margin:20px auto 70 auto;}
 .stepInfo li{float:left;width:48%;height:0.15em;background:#bbb;}
 .stepIco{border-radius:1em;padding:0.03em;background:#bbb;text-align:center;line-height:1.5em;color:#fff; position:absolute;width:1.4em;height:1.4em;}
 .stepIco1{top:-0.7em;left:-1%;}
-.stepIco2{top:-0.7em;left:21%;}
-.stepIco3{top:-0.7em;left:46%;}
-.stepIco4{top:-0.7em;left:71%;}
-.stepIco5{top:-0.7em;left:95%;}
-.stepText{color:#666;margin-top:0.2em;width:4em;text-align:center;margin-left:-1.4em;}
+.stepIco2{top:-0.7em;left:19%;}
+.stepIco3{top:-0.7em;left:38%;}
+.stepIco4{top:-0.7em;left:58%;}
+.stepIco5{top:-0.7em;left:76%;}
+.stepIco6{top:-0.7em;left:95%;}
+.stepText{color:#DDDDDD;margin-top:0.2em;width:4em;text-align:center;margin-left:-1.4em;}
 </style>
 </head>
 
@@ -640,7 +652,31 @@ text-overflow:ellipsis;
           <div class="clear"></div>
         </ul>
       </div>
-      <div class="gylc">
+      <div class="stepInfo">
+		<ul>
+			<li></li>
+			<li></li>
+		</ul>
+		<div class="stepIco stepIco1" id="create">1
+			<div class="stepText" id="createText">提交</div>
+		</div>
+		<div class="stepIco stepIco2" id="check">2
+			<div class="stepText" id="checkText">制版</div>
+		</div>
+		<div class="stepIco stepIco3" id="produce">3
+			<div class="stepText" id="produceText">生产</div>
+		</div>
+		<div class="stepIco stepIco4" id="delivery">4
+			<div class="stepText" id="deliveryText">质检</div>
+		</div>
+		<div class="stepIco stepIco5" id="received">5
+			<div class="stepText" id="receivedText">快递</div>
+		</div>
+		<div class="stepIco stepIco6" id="fst-jf">6
+			<div class="stepText" id="fst-jfText">交付</div>
+		</div>
+	  </div>
+      <div class="gylc" style="display:none;">
 		<dl class="barbox">
 			<dd class="st-tj"></dd>
 			<dd class="st-zb"></dd>
