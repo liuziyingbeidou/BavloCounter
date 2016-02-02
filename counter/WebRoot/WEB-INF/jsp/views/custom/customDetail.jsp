@@ -114,11 +114,11 @@ $(function(){
 	});
 	
 	//上传起版图片 
-	$(".qibantu").bind("click",function(){
+	/* $(".qibantu").bind("click",function(){
 	 	$("#filetype").val("pic");
  		openURL("/counter/upload/uppage.do","上传起版图",null,370); 
 	 	$("#vtype").val("customSheji");
-	 });
+	 }); */
 	//上传矢量图
 	/* $(".upvh").bind("click",function(){
 	 	$("#filetype").val("file");
@@ -181,7 +181,7 @@ $(function(){
 		//var text_company = '${shop}';
 		//var text_url = getRootPath()+"/custom/detail.do?id="+customId;
 		//var url = "${ctx}/sendMassage.do";
-		toRoleObj($("#pageAttr").val(),'<%=Constants.PMC_USERID%>',"请来我厂Q货!",$(".tableId").val(),$(".tocustomerId").val());
+		toRoleObj($("#pageAttr").val(),'<%=Constants.PMC_USERID%>',"款式"+ $("#customCode").val() +"已经完成，请来我厂Q货!",$(".tableId").val(),$(".tocustomerId").val());
 		
 	});
 	
@@ -447,6 +447,7 @@ function save(){
 <body>
 	<form id="custom">
 		<input type="hidden" id='toUser' value='${openid}' /> 
+		<input type="hidden" id='customCode' value='${customDetail.vcustomCode }' /> 
 		<input type="hidden" class="tableId" id='customId' value='${customDetail.id}' /> 
 		<input type="hidden" id='orderId' value="${customDetail['orderId'] }" /> 
 		<input type="hidden" id="pageAttr" value="STYLE" /> 
