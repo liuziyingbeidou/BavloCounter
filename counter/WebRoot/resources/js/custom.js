@@ -253,7 +253,7 @@ $(function() {
 	 $(".qibantu").bind("click",function(){
 		 	$("#filetype").val("pic");
 		 	$("#vtype").val("customSheji");
-	 		openURL("/counter/upload/uppage.do","上传起版图"); 
+	 		openURL("/counter/upload/uppage.do","上传起版图",null,370); 
 	 });
 	 $(".vectorgraph").bind("click",function(){
 		 	$("#filetype").val("file");
