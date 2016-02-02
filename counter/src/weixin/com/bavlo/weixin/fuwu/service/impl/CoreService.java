@@ -83,7 +83,7 @@ public class CoreService extends CommonService implements ICoreService{
 					
 					/**扫描二维码信息---结束**/
 					//forwardMessage.setContent("这是您的编号:"+vcode);
-					forwardMessage.setContent("感谢关注！<br>我是宝珑珠宝定制顾问"+uname+"，您可以在此随时咨询我...");
+					forwardMessage.setContent("感谢关注！<br>我是宝珑珠宝定制顾问---"+uname+"，您有任何需求可在此与我沟通...随时.. :)");
 					// 将消息对象转换成xml
 					respXml = MessageUtil.messageToXml(forwardMessage);
 				}
@@ -121,7 +121,7 @@ public class CoreService extends CommonService implements ICoreService{
 					
 					/**扫描二维码信息---结束**/
 					//forwardMessage.setContent("这是您的编号:"+vcode);
-					forwardMessage.setContent("感谢关注！<br>我是宝珑珠宝定制顾问"+uname+"，您可以在此随时咨询我...");
+					forwardMessage.setContent("感谢关注！<br>我是宝珑珠宝定制顾问---"+uname+"，您有任何需求可在此与我沟通...随时.. :)");
 					// 将消息对象转换成xml
 					respXml = MessageUtil.messageToXml(forwardMessage);
 				}
