@@ -543,6 +543,7 @@
             switch(id){
             case 'WU_FILE_0':
             	$("#FILE_0",window.parent.document).val(val._raw);
+            	window.parent.showDefaultPic();
             	break;
             case 'WU_FILE_1':
             	$("#FILE_1",window.parent.document).val(val._raw);
