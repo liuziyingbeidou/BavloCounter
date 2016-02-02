@@ -149,7 +149,8 @@
 					</div>
 				</div>
 				<div class="sheji">
-					<h2><a href="javascript:;" style="color:#fff" class="qibantu">+ 起版设计图</a></h2>
+					<h2><a href="javascript:;" style="color:#fff" class="qibantu CUST-RL CAD-RL CC-RL PMC-RL GB-RL PPS-RL">+ 起版设计图</a></h2>
+					<h2><a href="javascript:;" style="color:#fff" class="qibantu PM-RL">+ 起版设计图</a></h2>
 					<div class="pro">
 						<b><a href="javascript:;" onclick="Pic1Show_Hidden(pic1)">显示</a></b>
 						<div class="demo" id='pic1'>
@@ -330,7 +331,7 @@
 				<div class="tu">
 					<div class="dzd_right_btm2 CUST-RL CAD-RL CC-RL PMC-RL GB-RL PPS-RL">
 						<a href="javascript:;" class="vectorgraph">+ 刻字矢量图</a>
-						<!-- <a href="javascript:;" class="cad_file"> + CAD文件   </a> -->
+						<a href="javascript:;" class="cad_file"> + CAD文件   </a>
 					</div>
 				</div>
 				<div class="qita">
