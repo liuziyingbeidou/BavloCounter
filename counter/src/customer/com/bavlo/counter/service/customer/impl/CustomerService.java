@@ -4,13 +4,16 @@ import java.util.List;
 
 import javax.servlet.http.HttpSession;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.bavlo.counter.constant.IConstant;
 import com.bavlo.counter.model.customer.CustomerVO;
+import com.bavlo.counter.model.manage.tools.QrcodeVO;
 import com.bavlo.counter.service.customer.itf.ICustomerService;
 import com.bavlo.counter.service.impl.CommonService;
+import com.bavlo.counter.service.manage.tools.itf.IToolsService;
 import com.bavlo.counter.utils.CommonUtils;
 import com.bavlo.counter.utils.DateUtil;
 import com.bavlo.counter.utils.StringUtil;
@@ -29,6 +32,9 @@ import com.bavlo.weixin.fuwu.util.IContant;
  */
 @Service("customerService")
 public class CustomerService extends CommonService implements ICustomerService {
+	
+	@Autowired
+	IToolsService toolsService;
 
 	@Override
 	public Integer saveCustomer(CustomerVO customerVO) {
@@ -153,6 +159,19 @@ public class CustomerService extends CommonService implements ICustomerService {
 	public void updateCustomerByCondition(String conditions, String[] attrFiled,
 			String[] attrValue) {
 		updateAttrs(CustomerVO.class, attrFiled, attrValue, conditions);
+	}
+
+	@Override
+	public String getQYUserIdByKfCode(String kfCode) {
+		String userId = null;
+		if(!CommonUtils.isNull(kfCode)){
+			String contions = " CONCAT(vshop,vkfcode)='" + kfCode + "'";
+			QrcodeVO qrcodeVO = toolsService.getQrcodeVOByWh(contions);
+			if(qrcodeVO != null){
+				userId = qrcodeVO.getUserid();
+			}
+		}
+		return userId;
 	}
 
 }

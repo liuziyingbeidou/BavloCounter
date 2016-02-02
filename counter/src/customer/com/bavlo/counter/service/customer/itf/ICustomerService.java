@@ -96,5 +96,12 @@ public interface ICustomerService {
 	 * @return void
 	 */
 	public void updateCustomerByCondition(String conditions,String[] attrFiled,String[] attrValue);
+	
+	/**
+	 * @Description: 根据客服获取绑定的企业成员信息
+	 * @param @param kfCode
+	 * @return void
+	 */
+	public String getQYUserIdByKfCode(String kfCode);
 	//***以下是外围接口----结束****/
 }
