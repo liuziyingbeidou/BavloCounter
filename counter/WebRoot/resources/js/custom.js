@@ -250,21 +250,21 @@ $(function() {
 		 	$("#vtype").val("customCankao");
 	 		openURL("/counter/upload/uppage.do","上传参考图",null,370); 
 	 });
-	 /*$(".qibantu").bind("click",function(){
+	 $(".qibantu").bind("click",function(){
 		 	$("#filetype").val("pic");
 		 	$("#vtype").val("customSheji");
 	 		openURL("/counter/upload/uppage.do","上传起版图"); 
-	 });*/
+	 });
 	 $(".vectorgraph").bind("click",function(){
 		 	$("#filetype").val("file");
 	 		openURL("/counter/upload/uppage.do","上传刻字矢量图",null,370);
 	 		$("#filevalue").val("vengraveVh");
 	 });
-	 /*$(".cad_file").bind("click",function(){
+	 $(".cad_file").bind("click",function(){
 			$("#filetype").val("file");
 	 		openURL("/counter/upload/uppage.do","上传CAD文件"); 
 	 		$("#filevalue").val("vcadFile");
-	 });*/
+	 });
 	 
 	 // 图片展示
 	 var customId = $("#customId").val();
