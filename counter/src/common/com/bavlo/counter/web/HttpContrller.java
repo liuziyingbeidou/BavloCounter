@@ -1,12 +1,7 @@
 package com.bavlo.counter.web;
 
-import java.math.BigDecimal;
-
-import net.sf.json.JSONObject;
-
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.bavlo.counter.httpclient.HttpTools;
 
@@ -22,18 +17,19 @@ import com.bavlo.counter.httpclient.HttpTools;
 public class HttpContrller extends BaseController {
 
 	@RequestMapping(value="/http",produces = "application/json; charset=utf-8")
-	@ResponseBody
-	public String request(String url){
+	//@ResponseBody
+	public void request(String url){
 		//url.replace("@", "&");
 		System.out.println("开始调用远程接口..."+url);
 		String info = HttpTools.getDataByURL(url);
 		System.out.println("返回数据:"+info);
-		return info;
+		renderJson(info);
+		//return info;
 	}
 	
 	@RequestMapping(value="/httprequest",produces = "application/json; charset=utf-8")
-	@ResponseBody
-	public String httprequest(String requestUrl, String requestMethod, String outputStr){
+	//@ResponseBody
+	public void httprequest(String requestUrl, String requestMethod, String outputStr){
 		
 		System.out.println("开始调用远程接口..."+requestUrl);
 		String info = null;
@@ -43,13 +39,14 @@ public class HttpContrller extends BaseController {
 			info = HttpTools.submitPost(requestUrl, outputStr)+"";
 		}
 		System.out.println("返回数据:"+info);
-		return info;
+		renderJson(info);
+		//return info;
 	}
 	
 	
 	@RequestMapping(value="/httpcalculator",produces = "application/json; charset=utf-8")
-	@ResponseBody
-	public String httpcalculator(String requestUrl, String outputStr){
+	//@ResponseBody
+	public void httpcalculator(String requestUrl, String outputStr){
 		
 		System.out.println("开始调用远程接口..."+requestUrl);
 		String info = null;
@@ -57,6 +54,7 @@ public class HttpContrller extends BaseController {
 		info = HttpTools.submitPost(requestUrl, outputStr)+"";
 		System.out.println("返回数据:"+info);
 		StringBuffer sb = new StringBuffer(info);
-		return sb.toString();
+		renderJson(sb);
+		//return sb.toString();
 	}
 }
