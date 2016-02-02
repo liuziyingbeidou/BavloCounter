@@ -68,7 +68,11 @@
 			 $(".gem-pic-show").bind("click",function(){
 			 	var mid = $(".mid").val();
 			 	if(mid == ""){
-			 		alert("请保存后查看!");
+			 		if($("#FILE_0").val() == "" || $("#FILE_0").val() == null){
+			 			alert("暂未上传图片");
+			 		}else{
+			 			openURL("${ctx}/upload/shownpic.do?frmId=gemfrmBId","图片展示");
+			 		}
 			 	}else{
 			 		openURL("${ctx}/upload/showpic.do?cpath=com.bavlo.counter.model.sign.GemSignBVO&fkey=gemsignId&id="+mid,"图片展示");
 			 	}
@@ -237,6 +241,13 @@
 				window.location = url;
 			}
 		}
+		//上传后显示封面
+		function showDefaultPic(){
+			if($("#FILE_0").val() != null && $("#FILE_0").val() != ""){
+				$("#gem-pic-show-id img").attr("src","${ctx}/staticRes/"+$("#filemodel").val()+"/"+$("#FILE_0").val());
+			}
+		}
+		
 		</script>
 		<style type="text/css">
 		.gem-pic-show img{width:330px;height:330px;}
@@ -290,7 +301,7 @@
         <div class="clear"></div>
       </ul>
 	  <div class="clear"></div>
-      <dt><a class="gem-pic-show" href="javascript: void(0);">
+      <dt><a id="gem-pic-show-id" class="gem-pic-show" href="javascript: void(0);">
 			<c:choose>
 				<c:when test="${empty gemvo['FILE_0']}">
 					<img src="${ctx}/resources/images/pic_02.png">
