@@ -43,7 +43,11 @@
 			 $(".entity-pic-show").bind("click",function(){
 			 	var mid = $(".mid").val();
 			 	if(mid == ""){
-			 		alert("请保存后查看!");
+			 		if($("#FILE_0").val() == "" || $("#FILE_0").val() == null){
+			 			alert("暂未上传图片");
+			 		}else{
+			 			openURL("${ctx}/upload/shownpic.do?frmId=entityfrmBId","图片展示");
+			 		}
 			 	}else{
 			 		openURL("${ctx}/upload/showpic.do?cpath=com.bavlo.counter.model.sign.EntitySignBVO&fkey=entitysignId&id="+mid,"图片展示",null,null,true);
 			 	}
@@ -190,6 +194,13 @@
 				window.location = url;
 			}
 		}
+		
+		//上传后显示封面
+		function showDefaultPic(){
+			if($("#FILE_0").val() != null && $("#FILE_0").val() != ""){
+				$("#entity-pic-show-id img").attr("src","${ctx}/staticRes/"+$("#filemodel").val()+"/"+$("#FILE_0").val());
+			}
+		}
 		</script>
 		<style type="text/css">
 		.entity-pic-show img{width:330px;height:330px;}
@@ -241,7 +252,7 @@
         <li class="camera"><a class="entity-upload" href="javascript: void(0);"><img src="${ctx}/resources/images/camera.png"></a></li>
         <div class="clear"></div>
       </ul>
-      <dt><a class="entity-pic-show" href="javascript: void(0);">
+      <dt><a id="entity-pic-show-id" class="entity-pic-show" href="javascript: void(0);">
       <c:choose>
 		<c:when test="${empty entityvo['FILE_0']}">   
 		<img style="width:330px;height:330px;" src="${ctx}/resources/images/pic_03.png">
@@ -276,7 +287,7 @@
   </div>
 </div>
 </form>
-<form id="entityfrmBId">
+<form id="entityfrmBId" >
 	<input type="hidden" name="filemodel" id="filemodel" value="entitysign">
 	<input type="hidden" name="filetype" id="filetype" value="pic">
 	<input type="hidden" name="FILE_0" id="FILE_0"></input>
