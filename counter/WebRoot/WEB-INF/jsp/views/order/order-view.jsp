@@ -50,7 +50,11 @@ $(function(){
 	$(".gem-pic-show").click(function(){
 		var mid = $("#orderId").val();
 		if(mid == ""){
-			alert("请保存后查看!");
+			if($("#FILE_0").val() == "" || $("#FILE_0").val() == null){
+	 			alert("暂未上传图片");
+	 		}else{
+	 			openURL("${ctx}/upload/shownpic.do?frmId=orderCId","图片展示");
+	 		}
 		}else{
 			openURL("${ctx}/upload/showpic.do?cpath=com.bavlo.counter.model.order.OrderCVO&fkey=orderId&id="+mid,"图片展示",'','',false);
 		}
@@ -205,6 +209,13 @@ function loadOrderList(){
 			}else if(o_status>=5){
 				$('#fst-jf').css('background', '#7dae00');
 				$('#fst-jfText').css('color', '#DDDDDD');
+			}
+		}
+		
+		//上传后显示封面
+		function showDefaultPic(){
+			if($("#FILE_0").val() != null && $("#FILE_0").val() != ""){
+				$("#gem-pic-show-id img").attr("src","${ctx}/staticRes/"+$("#filemodel").val()+"/"+$("#FILE_0").val());
 			}
 		}
 </script>
@@ -374,7 +385,7 @@ function loadOrderList(){
 					<div class="pro cp-pic">
 						<div class="demo" id='pic' style='display: ;'>
 							<div class="my-gallery">
-								<a class="gem-pic-show" href="javascript:void(0);">
+								<a id="gem-pic-show-id" class="gem-pic-show" href="javascript:void(0);">
 								<c:choose>
 								 <c:when test="${empty ordervo['FILE_0']}">   
 								 <img src="${ctx}/resources/images/pic_02.png">
