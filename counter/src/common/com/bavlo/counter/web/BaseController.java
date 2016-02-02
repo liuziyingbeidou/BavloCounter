@@ -156,6 +156,7 @@ public class BaseController{
 			response.setContentType(contentType);
 			response.getWriter().write(text);
 			response.getWriter().close();
+			response.getWriter().flush();
 		} catch (IOException e) {
 			e.printStackTrace();
 		}

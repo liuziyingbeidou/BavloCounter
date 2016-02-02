@@ -1,13 +1,13 @@
 package com.bavlo.weixin.fuwu.service.impl;
 
-import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;
 import java.util.Map;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+
+import net.sf.json.JSONObject;
 
 import org.springframework.stereotype.Service;
 
@@ -15,13 +15,12 @@ import com.bavlo.counter.model.customer.CustomerVO;
 import com.bavlo.counter.service.customer.itf.ICustomerService;
 import com.bavlo.counter.service.impl.CommonService;
 import com.bavlo.counter.utils.StringUtil;
-import com.bavlo.weixin.fuwu.message.resp.Article;
 import com.bavlo.weixin.fuwu.message.resp.ForwardMessage;
 import com.bavlo.weixin.fuwu.message.resp.KfAccountInfo;
-import com.bavlo.weixin.fuwu.message.resp.NewsMessage;
 import com.bavlo.weixin.fuwu.service.itf.ICoreService;
 import com.bavlo.weixin.fuwu.util.IContant;
 import com.bavlo.weixin.fuwu.util.MessageUtil;
+import com.bavlo.weixin.qiye.util.WechatDepart;
 
 /**
  * 核心服务类
@@ -71,7 +70,20 @@ public class CoreService extends CommonService implements ICoreService{
 					String eventKey = requestMap.get("EventKey");
 					String vcode = customerService.addCustomerByScan(fromUserName, session, eventKey);
 					/**扫描二维码信息---结束**/
-					forwardMessage.setContent("您好，欢迎关注宝珑网！<br>这是您的编号:"+vcode);
+					// 以下通过客服找绑定客服定制顾问名字
+					if(vcode != null){
+						CustomerVO customerVO = customerService.findCustomerByWhere(" vcustomerCode='"+vcode+"'");
+						if(customerVO != null){
+							eventKey = customerVO.getVserviceCode();
+						}
+					}
+					String userId = customerService.getQYUserIdByKfCode(eventKey);
+					JSONObject  obj = WechatDepart.getUserInfo(request,userId);
+					String uname = obj.getString("name");
+					
+					/**扫描二维码信息---结束**/
+					//forwardMessage.setContent("这是您的编号:"+vcode);
+					forwardMessage.setContent("感谢关注！<br>我是宝珑珠宝定制顾问"+uname+"，您可以在此随时咨询我...");
 					// 将消息对象转换成xml
 					respXml = MessageUtil.messageToXml(forwardMessage);
 				}
@@ -96,8 +108,20 @@ public class CoreService extends CommonService implements ICoreService{
 					/**扫描二维码信息--本地库不存在该openId用户---开始**/
 					String eventKey = requestMap.get("EventKey");
 					String vcode = customerService.addCustomerByScan(fromUserName, session, eventKey);
+					// 以下通过客服找绑定客服定制顾问名字
+					if(vcode != null){
+						CustomerVO customerVO = customerService.findCustomerByWhere(" vcustomerCode='"+vcode+"'");
+						if(customerVO != null){
+							eventKey = customerVO.getVserviceCode();
+						}
+					}
+					String userId = customerService.getQYUserIdByKfCode(eventKey);
+					JSONObject  obj = WechatDepart.getUserInfo(request,userId);
+					String uname = obj.getString("name");
+					
 					/**扫描二维码信息---结束**/
-					forwardMessage.setContent("这是您的编号:"+vcode);
+					//forwardMessage.setContent("这是您的编号:"+vcode);
+					forwardMessage.setContent("感谢关注！<br>我是宝珑珠宝定制顾问"+uname+"，您可以在此随时咨询我...");
 					// 将消息对象转换成xml
 					respXml = MessageUtil.messageToXml(forwardMessage);
 				}
