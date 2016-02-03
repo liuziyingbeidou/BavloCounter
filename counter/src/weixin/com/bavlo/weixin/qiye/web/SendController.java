@@ -7,6 +7,8 @@ import java.util.Map;
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 
+import net.sf.json.JSONObject;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
@@ -21,6 +23,7 @@ import com.bavlo.counter.utils.CommonUtils;
 import com.bavlo.counter.web.BaseController;
 import com.bavlo.weixin.qiye.util.Constants;
 import com.bavlo.weixin.qiye.util.QiYeUtil;
+import com.bavlo.weixin.qiye.util.WechatDepart;
 import com.bavlo.weixin.qiye.util.WechatSendMessage;
 
 /**
@@ -55,7 +58,7 @@ public class SendController extends BaseController{
 	 */
 	@RequestMapping("/sendMassage.do")
 	public void sendMassage(HttpServletRequest request,String touser, String toparty, String totag,
-			String agentid, String text,String memo,String pageAttr,String rootPath,Integer id,Integer customerId) {
+			String agentid, String text,String memo,String pageAttr,String pageCode,String rootPath,Integer id,Integer customerId) {
 		boolean isTurn = true;
 		String url = "http://"+Constants.REQURL +"/index.do";
 		String actionName = "";//转发URL
@@ -69,6 +72,9 @@ public class SendController extends BaseController{
 			renderText("-1");
 		}
 		CustomerVO vo = customerService.findCustomerById(customerId);
+		
+		JSONObject  obj = WechatDepart.getUserInfo(request,actionPsn);
+		String uname = obj.getString("name");
 		//客户(cust)
 		if(IConstant.PAGE_ATTR_CUST.equals(pageAttr)){
 			text = vo.getVname()+" 的基本信息(转发人-" + actionPsn + ")";
@@ -76,12 +82,12 @@ public class SendController extends BaseController{
 		}else
 		//定制单(style)
 		if(IConstant.PAGE_ATTR_STYLE.equals(pageAttr)){
-			text = vo.getVname()+"的款式单(转发人-" + actionPsn + ")";// + DateUtil.getCurDateTime()+")";
+			text = "Hi, 我是 "+uname+"("+loginVO.getRole()+")"+" 已上传款式单"+pageCode+"。";// + DateUtil.getCurDateTime()+")";
 			actionName = "custom/detail.do?id="+id;
 		}else
 		//订单(order)
 		if(IConstant.PAGE_ATTR_ORDER.equals(pageAttr)){
-			text = vo.getVname()+"的订单(转发人-" + actionPsn + ")";// + DateUtil.getCurDateTime()+")";
+			text = "Hi, 我是 "+uname+"("+loginVO.getRole()+")"+" 已上传订单"+pageCode+"。";// + DateUtil.getCurDateTime()+")";
 			actionName = "order/view.do?id="+id;
 			
 			//PMC发给PPS订单进入制版态
@@ -107,17 +113,17 @@ public class SendController extends BaseController{
 		}else
 		//宝石签收单(gem)
 		if(IConstant.PAGE_ATTR_GEM.equals(pageAttr)){
-			text = vo.getVname()+"的宝石签收单(转发人-" + actionPsn + ")";// + DateUtil.getCurDateTime()+")";
+			text = "Hi, 我是 "+uname+"("+loginVO.getRole()+")"+" 已上传宝石签收单"+pageCode+"。";// + DateUtil.getCurDateTime()+")";
 			actionName = "gem-sign/view.do?id="+id;
 		}else
 		//实物签收单(entity)
 		if(IConstant.PAGE_ATTR_ENTITY.equals(pageAttr)){
-			text = vo.getVname()+"的实物签收单(转发人-" + actionPsn + ")";// + DateUtil.getCurDateTime()+")";
+			text = "Hi, 我是 "+uname+"("+loginVO.getRole()+")"+" 已上传实物签收单"+pageCode+"。";// + DateUtil.getCurDateTime()+")";
 			actionName = "entity-sign/view.do.id="+id;
 		}else
 		//配石单(deploy)
 		if(IConstant.PAGE_ATTR_DEPLOY.equals(pageAttr)){
-			text = vo.getVname()+"的配石单(转发人-" + actionPsn + ")";// + DateUtil.getCurDateTime()+")";
+			text = "Hi, 我是 "+uname+"("+loginVO.getRole()+")"+" 已上传配石单"+pageCode+"。";// + DateUtil.getCurDateTime()+")";
 		}else{
 			isTurn = false;
 		}
