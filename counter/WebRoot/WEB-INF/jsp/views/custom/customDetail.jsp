@@ -279,7 +279,8 @@ $(function(){
 //转发页面
 function toRoleObj(pageAttr,userid,memo,id,customerId){
 	var url = "${ctx}/sendMassage.do";
-	$.post(url,{pageAttr:pageAttr,touser:userid,memo:memo,rootPath:getRootPath(),id:id,customerId:customerId},function(data){
+	var pageCode = $("#customCode").val();
+	$.post(url,{pageAttr:pageAttr,pageCode:pageCode,touser:userid,memo:memo,rootPath:getRootPath(),id:id,customerId:customerId},function(data){
 		if(data == 0){
 			alert("转发成功!");
 		}else{
