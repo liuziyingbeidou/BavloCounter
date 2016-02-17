@@ -156,7 +156,7 @@ function loadOrderList(){
 		}else{
 			$(".order_list_close").show();
 		}
-	});
+	},"json");
 }
 
 //计算价格
@@ -257,7 +257,7 @@ function initAddr(){
 		traversedSelAddr(iid);
 		//显示地址详细信息
 		showAddrInfo();
-	});
+	},"json");
 }
 
 //选择下拉框值
