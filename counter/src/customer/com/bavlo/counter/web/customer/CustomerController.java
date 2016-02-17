@@ -39,7 +39,7 @@ public class CustomerController extends BaseController implements IConstant {
 	 * @param @return
 	 * @return ModelAndView
 	 */
-	@RequestMapping("info")
+	@RequestMapping("/info.do")
 	public ModelAndView info(Map<String, Object> map, Integer id) {
 
 		CustomerVO customerDetail = customerService.findCustomerById(id);
@@ -59,7 +59,7 @@ public class CustomerController extends BaseController implements IConstant {
 	 * @param @return
 	 * @return ModelAndView
 	 */
-	@RequestMapping("infoJson")
+	@RequestMapping("/infoJson.do")
 	public void infoJson(Map<String, Object> map, Integer id) {
 
 		CustomerVO customerDetail = customerService.findCustomerById(id);
@@ -100,7 +100,7 @@ public class CustomerController extends BaseController implements IConstant {
 	 * @param @return
 	 * @return ModelAndView
 	 */
-	@RequestMapping(value="list")
+	@RequestMapping(value="/list.do")
 	public ModelAndView list(HttpServletRequest request,Map<String, Object> map) {
 		String listType = request.getParameter("listType");
 		/*String content = request.getParameter("content");
