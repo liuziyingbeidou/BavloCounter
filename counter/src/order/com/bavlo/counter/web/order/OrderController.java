@@ -93,14 +93,14 @@ public class OrderController extends BaseController {
 	 * @param @return
 	 * @return ModelAndView
 	 */
-	@RequestMapping(value="/add")
+	@RequestMapping(value="/add.do")
 	public ModelAndView orderAdd(){
 		
 		ModelAndView model = new ModelAndView(IConstant.PATH_ORDER + IConstant.ORDER_EDIT);
 		model.addObject("pageOrderType", IConstant.PAGE_TYPE_ADD);
 		//±àºÅ
 		model.addObject("number", CommonUtils.getBillCode(IConstant.CODE_ORDER));
-	
+		
 		return model;
 	}
 	
