@@ -390,8 +390,10 @@ function calculator(str) {
 	loadProfit(nativeUrl,remoteUrl,function(data){
 			params.agentProfit = data.customizeRate;
 	});*/
-	if($("#profit").val() != ""){
-		params.agentProfit = parseInt($("#agentProfit").val());
+	if($("#agentJson").val() != ""){
+		var agentInfo = $("#agentJson").val();
+		var agentJson = JSON.parse(agentInfo);
+		params.agentProfit = agentJson[0].customizeRate;
 	}
 	
 	if (params.metalWeight == "" || params.metalWeight == 0 || isNaN(params.metalWeight)) {
