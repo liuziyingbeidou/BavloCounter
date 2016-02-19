@@ -67,6 +67,24 @@ public class CustomerController extends BaseController implements IConstant {
 	}
 
 	/**
+	 * @Description: 该手机号是否已注册
+	 * @param @param vphone
+	 * @return void
+	 */
+	@RequestMapping("isExistByPhone")
+	public void isExistByPhone(String vphone){
+		boolean isg = true;
+		if(!CommonUtils.isNull(vphone)){
+			CustomerVO vo = customerService.findCustomerByWhere(" vphoneCode ='"+vphone+"'");
+			if(vo != null){
+				isg = false;
+			}
+		}
+		renderJson("{\"isExist\":"+isg+"}");
+	}
+	
+	
+	/**
 	 * @Description: 保存或更新客户信息
 	 * @param @param customerVO
 	 * @param @return
