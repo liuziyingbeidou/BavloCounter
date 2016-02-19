@@ -54,6 +54,6 @@ public class HttpContrller extends BaseController {
 		info = HttpTools.submitPost(requestUrl, outputStr)+"";
 		System.out.println("·µ»ØÊý¾Ý:"+info);
 		renderJson(info);
-		//return sb.toString();
+		//return info;
 	}
 }
