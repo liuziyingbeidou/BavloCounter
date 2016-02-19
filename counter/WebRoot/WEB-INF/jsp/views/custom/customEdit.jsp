@@ -67,6 +67,7 @@
 	<input type="hidden" id='stockGemJson' value='${stockGemJson}' />
 	
 	<input type="hidden" id='weChat' value="${weChat}" />
+	<input type="hidden" id='profit' value="${profit}" />
 	<header class="demo-bar">
 		<h1>
 			${pageOrderType}款式单
