@@ -385,11 +385,14 @@ function calculator(str) {
 		params.reportPrice = $("#certificate").find("option:selected").val();
 	}
 	// 利润率
-	var weChat = $("#weChat").val()
+	/*var weChat = $("#weChat").val()
 	var remoteUrl = "http://www.bavlo.com/getAgentFromWeChat?weChat=" + weChat;
 	loadProfit(nativeUrl,remoteUrl,function(data){
 			params.agentProfit = data.customizeRate;
-	});
+	});*/
+	if($("#profit").val() != ""){
+		params.agentProfit = parseInt($("#agentProfit").val());
+	}
 	
 	if (params.metalWeight == "" || params.metalWeight == 0 || isNaN(params.metalWeight)) {
 		alert("请输入正确的金属重量");

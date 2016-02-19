@@ -240,11 +240,13 @@ function httpRequestStr(nativeurl,remoteUrl,callback){
  * @param nativeUrl
  * @param remoteUrl
  */
-function loadProfit(nativeUrl,remoteUrl){
+function loadProfit(nativeUrl,remoteUrl,callback){
 	$.get(nativeUrl,
 			{url:remoteUrl},
 			function(data){
-	
+				if(typeof(callback)!=='undefined'){
+					callback&&callback();
+				}
 			},"json");
 }
 
