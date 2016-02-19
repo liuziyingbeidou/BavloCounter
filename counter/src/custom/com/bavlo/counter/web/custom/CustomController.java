@@ -21,12 +21,10 @@ import org.springframework.web.servlet.ModelAndView;
 import com.bavlo.counter.constant.IConstant;
 import com.bavlo.counter.httpclient.HttpTools;
 import com.bavlo.counter.model.LoginVO;
-import com.bavlo.counter.model.custom.CustomBVO;
 import com.bavlo.counter.model.custom.CustomCVO;
 import com.bavlo.counter.model.custom.CustomDVO;
 import com.bavlo.counter.model.custom.CustomVO;
 import com.bavlo.counter.model.customer.CustomerVO;
-import com.bavlo.counter.model.order.OrderBVO;
 import com.bavlo.counter.model.order.OrderVO;
 import com.bavlo.counter.model.sign.GemSignVO;
 import com.bavlo.counter.service.custom.itf.ICustomService;
@@ -74,13 +72,14 @@ public class CustomController extends BaseController implements IConstant {
 		
 		JSONArray chainJson = JSONArray.fromObject(customCVO);
 		JSONArray stockGemJson = JSONArray.fromObject(customDVO);
-		
+		//根据主微信帐号获取代理信息
 		LoginVO loginInfo = (LoginVO) session.getAttribute("loginInfo");
-		String weChat = null;
-		String profit = null;
+		String agentJson = null;
 		if(loginInfo != null){
-			weChat = loginInfo.getMuserId();
-			profit = HttpTools.submitPost("http://www.bavlo.com/getAgentFromWeChat", weChat)+"";
+			String weChat = loginInfo.getMuserId();
+			if(weChat != null){
+				agentJson = HttpTools.submitGet("http://www.bavlo.com/getAgentFromWeChat?weChat=" + weChat)+"";
+			}
 		}
 		
 		ModelAndView model = new ModelAndView(PATH_CUSTOM + "customEdit");
@@ -98,8 +97,7 @@ public class CustomController extends BaseController implements IConstant {
 		model.addObject("customEdit", customEdit);
 		model.addObject("chainJson", chainJson);
 		model.addObject("stockGemJson", stockGemJson);
-		model.addObject("weChat", weChat);
-		model.addObject("profit", profit);
+		model.addObject("agentJson", agentJson);
 		model.addObject("number", CommonUtils.getBillCode("CM"));
 		return model;
 	}
