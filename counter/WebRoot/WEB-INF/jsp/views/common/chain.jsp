@@ -20,7 +20,7 @@
 var nativeUrl = "${pageScope.basePath}/counter/webservice/http.do";
 $(function(){
 	//获取所有金属材质
-	initChainMaterial();
+	//initChainMaterial();
 	//获取所有链子类型
 	initChainStyle();
 	$("#chain-material-id").change(function(){
@@ -59,7 +59,7 @@ function initChainMaterial(){
 //填充所有链子类型于下拉框
 function initChainStyle(){
 	var styleUrl = "http://www.bavlo.com/getAllChainStyle";
-	loadSelData(nativeUrl, styleUrl, "chain-style-id", "data[i].id","data[i].name_cn", function() {});
+	loadSelData(nativeUrl, styleUrl, "chain-style-id", "data[i].id","data[i].name_cn", function() {initChainMaterial();});
 }
 
 //根据选择链子材质+类型选择链子(chain-spec-id)
