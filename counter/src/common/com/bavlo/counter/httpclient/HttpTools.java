@@ -300,7 +300,7 @@ public class HttpTools
 	   connection.setDoOutput(false);
 	   // 取得输入流，并使用Reader读取
 	   reader = new BufferedReader(new InputStreamReader(connection
-	     .getInputStream()));
+	     .getInputStream(),"utf-8"));
 	   System.out
 	     .println("============Contents of get request===============");
 	   String lines;
