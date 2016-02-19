@@ -55,25 +55,8 @@ $(function(){
 	// 库选宝石Json
 	var stockGemJson = $("#stockGemJson").val();
 	
-	// 款式类型下拉框值
-	var typeUrl = "http://www.bavlo.com/getAllStyleType";
-	loadSelDataStr(nativeUrl, typeUrl, "styleType", "data[i].id",
-			"data[i].type_name_cn", function() {
-				$("#styleType").val(srcstyleType);
-			},"款式");
-	// 金属材质下拉框值
-	var typeUrl = "http://www.bavlo.com/getAllMetalMaterialType";
-	loadSelDataStr(nativeUrl, typeUrl, "metalType", "data[i].id",
-			"data[i].metal_type_cn", function() {
-				$("#metalType").val(srcmetal);
-			},"金属");
-	// 款式类型下拉框值
-	var typeUrl = "http://www.bavlo.com/getAllRingSize";
-	loadRingSizeData(nativeUrl, typeUrl, "ringSize", "data[i].id",
-			"data[i].china", "data[i].diameter", "data[i].circumference",
-			function() {
-				$("#ringSize").val(srcringSize);
-			},"手寸");
+	loadBaseData();
+	
 	// 当款式类型不是戒指时，隐藏戒指手寸选项
 	$("#styleType").change(function() {
 		if ($("#styleType").val() == "戒指") {
@@ -216,6 +199,40 @@ $(function(){
 	// 增加后缀
 	initFieldSuffix();
 })
+
+// 加载基础数据
+function loadBaseData(){
+	loadStyleType();
+}
+// 款式类型下拉框值
+function loadStyleType(){
+	var typeUrl = "http://www.bavlo.com/getAllStyleType";
+	loadSelDataStr(nativeUrl, typeUrl, "styleType", "data[i].id",
+			"data[i].type_name_cn", function() {
+		$("#styleType").val(srcstyleType);
+		loadMetail();
+	},"款式");
+}
+
+// 金属材质下拉框值
+function loadMetail(){
+	var typeUrl = "http://www.bavlo.com/getAllMetalMaterialType";
+	loadSelDataStr(nativeUrl, typeUrl, "metalType", "data[i].id",
+			"data[i].metal_type_cn", function() {
+		$("#metalType").val(srcmetal);
+		loadRingSize();
+	},"金属");
+}
+
+// 链子手寸下拉框值
+function loadRingSize(){
+	var typeUrl = "http://www.bavlo.com/getAllRingSize";
+	loadRingSizeData(nativeUrl, typeUrl, "ringSize", "data[i].id",
+			"data[i].china", "data[i].diameter", "data[i].circumference",
+			function() {
+		$("#ringSize").val(srcringSize);
+	},"手寸");
+}
 
 /**
  * 弹框
