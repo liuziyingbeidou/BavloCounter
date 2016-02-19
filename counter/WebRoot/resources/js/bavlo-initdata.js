@@ -43,14 +43,16 @@ function loadSelData(nativeUrl,remoteUrl,emName,selId,selName,callback,explain){
 	});*/
 	
 	$.get(nativeUrl,{url:remoteUrl},function(row){
-		var data = row;
-		for(var i=0;i<data.length;i++){
-			$('#'+emName).append("<option value='"+eval(selId)+"'>"+eval(selName)+"</option>");
+		var data = row;debugger
+		if(data != null){
+			for(var i=0;i<data.length;i++){
+				$('#'+emName).append("<option value='"+eval(selId)+"'>"+eval(selName)+"</option>");
+			}
 		}
 		if(typeof(callback)!=='undefined'){
 			callback&&callback();
 		}
-	});
+	},"json");
 }
 
 
@@ -88,13 +90,15 @@ function loadSelDataStr(nativeUrl,remoteUrl,emName,selId,selName,callback,explai
 	
 	$.get(nativeUrl,{url:remoteUrl},function(row){
 		var data = row;
-		for(var i=0;i<data.length;i++){
-			$('#'+emName).append("<option sid='"+eval(selId)+"' value='"+eval(selName)+"'>"+eval(selName)+"</option>");
+		if(data != null){
+			for(var i=0;i<data.length;i++){
+				$('#'+emName).append("<option sid='"+eval(selId)+"' value='"+eval(selName)+"'>"+eval(selName)+"</option>");
+			}
 		}
 		if(typeof(callback)!=='undefined'){
 			callback&&callback();
 		}
-	});
+	},"json");
 	
 
 }
@@ -108,13 +112,16 @@ function loadRingSizeData(nativeUrl,remoteUrl,emName,selId,selName1,selName2,sel
 	
 	$.get(nativeUrl,{url:remoteUrl},function(row){
 		var data = row;
-		for(var i=0;i<data.length;i++){
-			$('#'+emName).append("<option value='"+eval(selName1)+"号 内径"+eval(selName2)+"mm 周长"+eval(selName3)+"mm'>"+eval(selName1)+"号 内径"+eval(selName2)+"mm 周长"+eval(selName3)+"mm</option>");
+		if(data != null){
+			for(var i=0;i<data.length;i++){
+				$('#'+emName).append("<option value='"+eval(selName1)+"号 内径"+eval(selName2)+"mm 周长"+eval(selName3)+"mm'>"+eval(selName1)+"号 内径"+eval(selName2)+"mm 周长"+eval(selName3)+"mm</option>");
+			}
 		}
+		
 		if(typeof(callback)!=='undefined'){
 			callback&&callback();
 		}
-	});
+	},"json");
 		
 
 }
@@ -149,7 +156,7 @@ function loadGemImg(nativeUrl,remoteUrl){
 				}
 			})
 		
-	});
+	},"json");
 }
 
 /**
@@ -238,7 +245,7 @@ function loadProfit(nativeUrl,remoteUrl){
 			{url:remoteUrl},
 			function(data){
 	
-			});
+			},"json");
 }
 
 //设置下拉框自定义
