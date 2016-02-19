@@ -27,7 +27,7 @@ public class SystemController extends BaseController {
 			LoginVO loginVO = (LoginVO)loginInfo;
 			model.addObject("uvo", loginVO);
 		}else{
-			model.setViewName("redirect:/index.do");
+			//model.setViewName("redirect:/index.do");
 		}
 		System.out.println("µÇÂ¼ÈËÐÅÏ¢:"+JsonUtils.getJsonString4JavaPOJO(loginInfo));
 		return model;
