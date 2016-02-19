@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.bavlo.counter.constant.IConstant;
+import com.bavlo.counter.httpclient.HttpTools;
 import com.bavlo.counter.model.LoginVO;
 import com.bavlo.counter.model.custom.CustomBVO;
 import com.bavlo.counter.model.custom.CustomCVO;
@@ -76,8 +77,10 @@ public class CustomController extends BaseController implements IConstant {
 		
 		LoginVO loginInfo = (LoginVO) session.getAttribute("loginInfo");
 		String weChat = null;
+		String profit = null;
 		if(loginInfo != null){
 			weChat = loginInfo.getMuserId();
+			profit = HttpTools.submitPost("http://www.bavlo.com/getAgentFromWeChat", weChat)+"";
 		}
 		
 		ModelAndView model = new ModelAndView(PATH_CUSTOM + "customEdit");
@@ -96,6 +99,7 @@ public class CustomController extends BaseController implements IConstant {
 		model.addObject("chainJson", chainJson);
 		model.addObject("stockGemJson", stockGemJson);
 		model.addObject("weChat", weChat);
+		model.addObject("profit", profit);
 		model.addObject("number", CommonUtils.getBillCode("CM"));
 		return model;
 	}
