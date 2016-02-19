@@ -28,12 +28,14 @@
 		loadSelData(nativeUrl, typeUrl, "gemTypeId", "data[i].id",
 				"data[i].type_cn", function() {
 					$("#gemTypeId").val("${useGemDetail['vtype']}");
+					//形状下拉框
+					initShapeByType();
 				}, "宝石类型");
 
 		//形状下拉框
-		initShapeByType();
+		//initShapeByType();
 		//规格下拉框
-		initSpecByTypeShape();
+		//initSpecByTypeShape();
 		
 		//类型和形状改变
 /* 		$("#gemTypeId").change(function() {
@@ -84,6 +86,8 @@
 		loadSelData(nativeUrl, shapeUrl, "gemShapeId", "data[i].id",
 				"data[i].shape_cn", function() {
 					$("#gemShapeId").val("${useGemDetail['vshape']}");
+					//规格下拉框
+		            initSpecByTypeShape();
 				}, "宝石形状");
 	}
 
