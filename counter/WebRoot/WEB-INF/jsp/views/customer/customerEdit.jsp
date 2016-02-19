@@ -107,26 +107,33 @@
 				if(!ckLose("edit_btn","lose-cus")){
 					return;
 				}
-				$.ajax({
-					type : "POST",
-					url : "saveOrUpdate.do",
-					data : $('#customer').serialize(),// formid
-					async : false,
-					cache : false,
-					success : function(data) {
-						$("#customerid").val(data.id);
-						alert("保存成功!");
-						if($("#customerid").val()){
-							$(".header-loc").show();
-						}else{
-							$(".header-loc").hide();
-						}
-					},
-					error : function(e) {
-						alert("保存失败!");
+				var urlCk = "isExistByPhone.do";
+				$.get(urlCk,{vphone:$("#vphoneCode").val()},function(data){
+					if(data.isExist){
+						$.ajax({
+							type : "POST",
+							url : "saveOrUpdate.do",
+							data : $('#customer').serialize(),// formid
+							async : false,
+							cache : false,
+							success : function(data) {
+								$("#customerid").val(data.id);
+								alert("保存成功!");
+								if($("#customerid").val()){
+									$(".header-loc").show();
+								}else{
+									$(".header-loc").hide();
+								}
+							},
+							error : function(e) {
+								alert("保存失败!");
+							}
+						});
+					}else{
+						alert("手机号："+$("#vphoneCode").val()+" 已使用!");
 					}
 				});
-			}
+		}
 			
 		//子窗体调用
 		function setValueByFrame(type,id,callback,json){
