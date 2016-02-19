@@ -20,20 +20,30 @@
 var nativeUrl = "${pageScope.basePath}/counter/webservice/http.do";
 $(function(){
 	//获取所有金属材质
-	//initChainMaterial();
+	initChainMaterial();
 	//获取所有链子类型
-	initChainStyle();
+	//initChainStyle();
 	$("#chain-material-id").change(function(){
-		initChainSpec("chain-spec-id");
+		initChainStyle();
 	});
 	$("#chain-style-id").change(function(){
 		initChainSpec("chain-spec-id");
 	});
 	//链子弹框
 	$(".ok").click(function(){
-		var spec =  $("#chain-spec-id").val();
+		var chainMetail = $("#chain-material-id").val();
+		var chainStyle = $("#chain-style-id").val();
+		var spec = $("#chain-spec-id").val();
+		if (chainMetail == "-1"){
+			alert("请选择链子材质!");
+			return ;
+		}
+		if (chainStyle == "-1"){
+			alert("请选择链子类型!");
+			return ;
+		}
 		if(spec == "-1"){
-			alert("请选择规格!");
+			alert("请选择链子规格!");
 			return ;
 		}
 		if(isExitsFunction(window.parent.setValueByFrame)){
@@ -58,8 +68,9 @@ function initChainMaterial(){
 
 //填充所有链子类型于下拉框
 function initChainStyle(){
-	var styleUrl = "http://www.bavlo.com/getAllChainStyle";
-	loadSelData(nativeUrl, styleUrl, "chain-style-id", "data[i].id","data[i].name_cn", function() {initChainMaterial();});
+	var metalId = $("#chain-material-id").val();
+	var styleUrl = "http://www.bavlo.com/web/loadChainStyleList?metalId="+metalId;
+	loadSelData(nativeUrl, styleUrl, "chain-style-id", "data[i].id","data[i].name_cn", function() {});
 }
 
 //根据选择链子材质+类型选择链子(chain-spec-id)

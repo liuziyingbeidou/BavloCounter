@@ -13,21 +13,21 @@
 <meta name="viewport"
 	content="width=device-width,target-densitydpi=high-dpi,initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no" />
 <!--必要样式-->
-<link rel='stylesheet' href='${ctx}/resources/css/style.css' media='all' />
-<link rel='stylesheet' href='${ctx}/resources/css/bootstrap.css' media='all' />
-<link rel="stylesheet" href="${ctx}/resources/css/photoswipe.css" />
-<link rel="stylesheet" href="${ctx}/resources/css/default-skin.css" />
+<link rel='stylesheet' href='/counter/resources/css/style.css' media='all' />
+<link rel='stylesheet' href='/counter/resources/css/bootstrap.css' media='all' />
+<link rel="stylesheet" href="/counter/resources/css/photoswipe.css" />
+<link rel="stylesheet" href="/counter/resources/css/default-skin.css" />
 
-<script src="${ctx}/resources/js/jquery-1.8.3.min.js"></script>
-<script src="${ctx}/resources/js/top.js"></script>
-<script src="${ctx}/resources/js/photoswipe.min.js"></script>
-<script src="${ctx}/resources/js/photoswipe-ui-default.min.js"></script>
-<script src="${ctx}/resources/js/photoswipefromdom.js"></script>
+<script src="/counter/resources/js/jquery-1.8.3.min.js"></script>
+<script src="/counter/resources/js/top.js"></script>
+<script src="/counter/resources/js/photoswipe.min.js"></script>
+<script src="/counter/resources/js/photoswipe-ui-default.min.js"></script>
+<script src="/counter/resources/js/photoswipefromdom.js"></script>
 
 <!-- 定义JS -->
-<script src="${ctx}/resources/js/bavlo-initdata.js"></script>
-<script src="${ctx}/resources/js/bavlo-event.js"></script>
-<script src="${ctx}/resources/js/custom.js"></script>
+<script src="/counter/resources/js/bavlo-initdata.js"></script>
+<script src="/counter/resources/js/bavlo-event.js"></script>
+<script src="/counter/resources/js/custom.js"></script>
 
 <!-- 弹框 -->
 <!-- jQuery & jQuery UI files (needed)--> 
@@ -87,7 +87,7 @@
 		<div class="head1">
 			<div class="top">
 				<b><a href="javascript:;" onclick="EditShow_Hidden(ed1)"><img
-							src="${ctx}/resources/images/plus.png" />
+							src="/counter/resources/images/plus.png" />
 				</a> ${pageCustomType}款式单
 				 <c:choose>
 					 <c:when test="${empty customEdit['vcustomCode']}">   
@@ -101,7 +101,7 @@
 				</c:choose>
 				</b>
 				<font><a href="javascript:;" onclick="Show_Hidden(tr1)"><img
-							src="${ctx}/resources/images/plus.png" />
+							src="/counter/resources/images/plus.png" />
 				</a> </font>
 			</div>
 			<div class="hidden_enent1" id="tr1" style="display: none;">
@@ -140,7 +140,7 @@
 										<c:when test="${empty customEdit['FILE_0']}">   
 										</c:when>
 										<c:otherwise>
-											<img style="width: 98%;" src="${ctx}/staticRes/${customEdit['FILE_0']}">
+											<img style="width: 98%;" src="/counter/staticRes/${customEdit['FILE_0']}">
 										</c:otherwise>
 									</c:choose> 
 								</a>
@@ -161,7 +161,7 @@
 										<c:when test="${empty customEdit['FILE_1']}">   
 										</c:when>
 										<c:otherwise>
-											<img style="width: 98%;" src="${ctx}/staticRes/${customEdit['FILE_1']}">
+											<img style="width: 98%;" src="/counter/staticRes/${customEdit['FILE_1']}">
 										</c:otherwise>
 									</c:choose> 
 								</a>
@@ -270,7 +270,7 @@
 									<input type='button' name="guanlian" class="kps_guanlian"
 									value="+ 关联" /></a></li>
 								<li class="kps_img"></li>
-								<%-- <li class="kps"><img src="${ctx}/resources/images/zb_09.png" width="42"
+								<%-- <li class="kps"><img src="/counter/resources/images/zb_09.png" width="42"
 									height="42" /></li> --%>
 								<li class="cha"><a href="javascript:h('kpsGem')"><font>X</font></a></li>
 							</ul>
