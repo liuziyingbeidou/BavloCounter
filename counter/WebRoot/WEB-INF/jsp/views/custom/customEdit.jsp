@@ -138,9 +138,10 @@
 								<a class="customCankaoShow" href="javascript:void();">
 									<c:choose>
 										<c:when test="${empty customEdit['FILE_0']}">   
+											<img src="">
 										</c:when>
 										<c:otherwise>
-											<img style="width: 98%;" src="/counter/staticRes/${customEdit['FILE_0']}">
+											<img style="width: 98%;height: 330px" src="/counter/staticRes/${customEdit['FILE_0']}">
 										</c:otherwise>
 									</c:choose> 
 								</a>
@@ -158,10 +159,11 @@
 							<div class="my-gallery">
 								<a class="customShejiShow" href="javascript:void();">
 									<c:choose>
-										<c:when test="${empty customEdit['FILE_1']}">   
+										<c:when test="${empty customEdit['FILE_1']}">
+											<img src="">   
 										</c:when>
 										<c:otherwise>
-											<img style="width: 98%;" src="/counter/staticRes/${customEdit['FILE_1']}">
+											<img style="width: 98%;height: 330px" src="/counter/staticRes/${customEdit['FILE_1']}">
 										</c:otherwise>
 									</c:choose> 
 								</a>
