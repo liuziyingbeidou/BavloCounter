@@ -292,7 +292,7 @@ $(function() {
 	 		if($("#FILE_0").val() == "" || $("#FILE_0").val() == null){
 	 			alert("暂未上传图片");
 	 		}else{
-	 			openURL("${ctx}/upload/shownpic.do?frmId=customBId","图片展示");
+	 			openURL("/counter/upload/shownpic.do?frmId=customBId","图片展示");
 	 		}
 	 	}else{
 	 		openURL("/counter/upload/showpic.do?cpath=com.bavlo.counter.model.custom.CustomBVO&fkey=customId&ptype=vtype&vtype=customCankao&id="+customId,"图片展示");
@@ -305,7 +305,7 @@ $(function() {
 	 		if($("#FILE_0").val() == "" || $("#FILE_0").val() == null){
 	 			alert("暂未上传图片");
 	 		}else{
-	 			openURL("${ctx}/upload/shownpic.do?frmId=customBId","图片展示");
+	 			openURL("/counter/upload/shownpic.do?frmId=customBId","图片展示");
 	 		}
 	 	}else{
 	 		openURL("/counter/upload/showpic.do?cpath=com.bavlo.counter.model.custom.CustomBVO&fkey=customId&ptype=vtype&vtype=customSheji&id="+customId,"图片展示");
@@ -329,7 +329,7 @@ params.expressPrice = 22;
 // 款式类型
 params.typeId = 1;
 // 金属材质
-params.metalId = 1;
+params.metalId = 0;
 // 金属重量
 params.metalWeight = 0;
 // 主石费
@@ -355,14 +355,24 @@ function calculator(str) {
 	// 款式类型
 	if($("#styleType").find("option:selected").attr("sid") != undefined){
 		params.typeId = $("#styleType").find("option:selected").attr("sid");
+	} else {
+		alert("请选择款式类型");
+		return;
 	}
 	// 金属材质
 	if($("#metalType").find("option:selected").attr("sid") != undefined){
 		params.metalId = $("#metalType").find("option:selected").attr("sid");
+	} else {
+		alert("请选择金属材质");
+		return;
 	}
 	// 金属重量
 	if($("#metalWeight").val() != ""){
 		params.metalWeight = parseInt($("#metalWeight").val());
+	} else {
+		alert("请输入正确的金属重量");
+		$("#metalWeight").focus();
+		return;
 	}
 	// 主石保价
 	if($("#mainGemPrice").val() != ""){
@@ -416,8 +426,8 @@ function calculator(str) {
 	}
 	// 库选宝石费
 	params.stockGemPrice = "";
-	if($(".cPrice").val() != ""){
-		$(".cPrice").each(function() {
+	if($(".sgPrice").val() != ""){
+		$(".sgPrice").each(function() {
 			params.stockGemPrice+=$(this).val()+";";
 		})
 	}
@@ -441,7 +451,6 @@ function calculator(str) {
 
 // 款式单保存
 function saveOrUpdate() {
-	startMask();
 	// 通过计算后保存
 	calculator("savePrice");
 }
@@ -472,7 +481,6 @@ function save(){
 			}
 		},
 		error : function(e) {
-			endMask();
 			alert("保存失败!");
 			initFieldSuffix();
 		}
@@ -626,7 +634,7 @@ function setValueByFrame(type,id,callback,json){
 		url = "/counter/custom/detail.do?id="+id;//根据id显示款式单信息
 		window.location = url;
 	}else if(type == "useGem"){
-		url = "${ctx}/useGem/info.do?id="+id;//根据id显示配石单信息
+		url = "/counter/useGem/info.do?id="+id;//根据id显示配石单信息
 		window.location = url;
 	}
 	
@@ -810,11 +818,13 @@ function showDefaultPic(){
 	var vtype = $("#vtype").val();
 	if(vtype == "customCankao"){
 		if($("#FILE_0").val() != null && $("#FILE_0").val() != ""){
-			$(".customCankaoShow img").attr("src","/staticRes/"+$("#filemodel").val()+"/"+$("#FILE_0").val());
+			$(".customCankaoShow img").attr("style","width: 98%;height: 330px");
+			$(".customCankaoShow img").attr("src","/counter/staticRes/"+$("#filemodel").val()+"/"+$("#FILE_0").val());
 		}
 	}else if(vtype == "customSheji"){
 		if($("#FILE_0").val() != null && $("#FILE_0").val() != ""){
-			$(".customShejiShow img").attr("src","/staticRes/"+$("#filemodel").val()+"/"+$("#FILE_0").val());
+			$(".customShejiShow img").attr("style","width: 98%;height: 330px");
+			$(".customShejiShow img").attr("src","/counter/staticRes/"+$("#filemodel").val()+"/"+$("#FILE_0").val());
 		}
 	}
 }
