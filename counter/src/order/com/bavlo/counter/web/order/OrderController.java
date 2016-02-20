@@ -228,7 +228,8 @@ public class OrderController extends BaseController {
 		if(orderVO != null){
 			CustomerVO vo =	customerService.findCustomerById(orderVO.getCustomerId());
 			if(vo != null){
-				orderVO.setVdef1(vo.getVhendimgurl());
+				orderVO.setVdef1(vo.getVhendimgurl());//头像
+				orderVO.setVdef3(vo.getVname());//客户姓名
 			}
 			Object loginInfo = request.getSession().getAttribute("loginInfo");
 			if(loginInfo == null){
