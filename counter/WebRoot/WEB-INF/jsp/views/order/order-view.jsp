@@ -34,6 +34,7 @@ $(function(){
 	setValueByFrame("customer","${ordervo['id']}");
 	if("${ordervo['vdef1']}" != "" && "${ordervo['vdef1']}" != null){
 		$(".cusheader").prop("src","${ordervo['vdef1']}");
+		
 	}
 	//订单清单
 	loadOrderList();
@@ -285,6 +286,7 @@ function loadOrderList(){
     <div class="mainleft">
       <div class="customer">
 		<div class="cu_pic"><img class="cusheader" src="${ctx}/resources/images/customer_01.png"></div>
+		<div class="cusheader-info">${ordervo['vdef3']}</div>
       </div>
       <div class="stepInfo">
 		<ul>

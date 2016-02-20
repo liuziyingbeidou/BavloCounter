@@ -97,6 +97,7 @@ $(function(){
 	if($("#customerId").val()){
 		if("${ordervo['vdef1']}" != "" && "${ordervo['vdef1']}" != null){
 			$(".cusheader").prop("src","${ordervo['vdef1']}");
+			$(".header-info").text("${ordervo['vdef3']}");
 		}
 		$(".header-loc").show();
 	}else{
@@ -466,6 +467,7 @@ function getOrderListInfo(){
 					if(data != null){
 						if(data.vhendimgurl != ""){
 							$(".cusheader").prop("src",data.vhendimgurl);
+							$(".header-info").text(data.vname);
 						}
 						$("#customerId").val(data.id);
 						//选客户后初始化交付地址
@@ -584,7 +586,8 @@ text-overflow:ellipsis;
 	height：高度
 	*/
 .stepInfo{position:relative;background:#f2f2f2;margin:20px auto 70 auto;}
-.stepInfo li{float:right;width:47%;height:0.15em;background:#bbb;}
+.stepInfo .lileft{float:right;width:47%;height:0.15em;background:#bbb;}
+.stepInfo .liright{float:right;width:47%;height:0.15em;background:#bbb;}
 .stepIco{border-radius:1em;padding:0.03em;background:#bbb;text-align:center;line-height:1.5em;color:#fff; position:absolute;width:1.4em;height:1.4em;}
 .stepIco1{top:-0.7em;left:-1%;}
 .stepIco2{top:-0.7em;left:19%;}
@@ -647,6 +650,7 @@ text-overflow:ellipsis;
           <a href="javascript:void(0);">
           <img class="cusheader" style="width:60px;height:60px;" src="${ctx}/resources/images/customer_01.png">
           </a></li>
+          <li class="header-info"></li>
 		  <!--<li class="file"><a href="javascript:;"><input type="file" name="file" id="file"></a></li>-->
 		  <li class="file"><a href="javascript:void(0);"><img src="${ctx}/resources/images/customer_02.png"></a></li>
           <div class="clear"></div>
@@ -654,8 +658,8 @@ text-overflow:ellipsis;
       </div>
       <div class="stepInfo">
 		<ul>
-			<li></li>
-			<li></li>
+			<li class="liright"></li>
+			<li class="lileft"></li>
 		</ul>
 		<div class="stepIco stepIco1" id="create">1
 			<div class="stepText" id="createText">提交</div>
