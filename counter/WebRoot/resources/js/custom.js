@@ -810,11 +810,11 @@ function showDefaultPic(){
 	var vtype = $("#vtype").val();
 	if(vtype == "customCankao"){
 		if($("#FILE_0").val() != null && $("#FILE_0").val() != ""){
-			$(".customCankaoShow img").attr("src","${ctx}/staticRes/"+$("#filemodel").val()+"/"+$("#FILE_0").val());
+			$(".customCankaoShow img").attr("src","/staticRes/"+$("#filemodel").val()+"/"+$("#FILE_0").val());
 		}
 	}else if(vtype == "customSheji"){
 		if($("#FILE_0").val() != null && $("#FILE_0").val() != ""){
-			$(".customShejiShow img").attr("src","${ctx}/staticRes/"+$("#filemodel").val()+"/"+$("#FILE_0").val());
+			$(".customShejiShow img").attr("src","/staticRes/"+$("#filemodel").val()+"/"+$("#FILE_0").val());
 		}
 	}
 }
