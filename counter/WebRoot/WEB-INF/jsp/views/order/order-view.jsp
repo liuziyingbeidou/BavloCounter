@@ -271,6 +271,7 @@ function loadOrderList(){
 <body>
 <input type="hidden" id='toUser' value='${openid}' /> 
 <input type="hidden" id="pageAttr" value="ORDER"/>
+<input type="hidden" id="pageCode" value="${ordervo['vorderCode']}"/>
 <input type="hidden" name="id" id="orderId" class="tableId" value="${ordervo['id']}">
 <input type="hidden" name="iorderState" id="orderState" value="${ordervo['iorderState']}">
 <input type="hidden" name="customerId" class="tocustomerId" id="customerId" value="${ordervo['customerId']}">

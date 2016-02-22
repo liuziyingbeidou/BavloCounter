@@ -181,7 +181,7 @@ $(function(){
 		//var text_company = '${shop}';
 		//var text_url = getRootPath()+"/custom/detail.do?id="+customId;
 		//var url = "${ctx}/sendMassage.do";
-		toRoleObj($("#pageAttr").val(),'<%=Constants.PMC_USERID%>',"款式"+ $("#customCode").val() +"已经完成，请来我厂Q货!",$(".tableId").val(),$(".tocustomerId").val());
+		toRoleObj($("#pageAttr").val(),'<%=Constants.PMC_USERID%>',"款式"+ $("#pageCode").val() +"已经完成，请来我厂Q货!",$(".tableId").val(),$(".tocustomerId").val());
 		
 	});
 	
@@ -208,9 +208,10 @@ $(function(){
 	var chainJson = '${chainJson}';
 	//链子
 	if(chainJson != ""){
-		$(".chain").append("<dd><h3>链子</h3></dd>");
+		/* $(".chain").append("<dd><h3>链子</h3></dd>");
 		add("chain",chainJson);
-		$(".chain").append("<dl></dl>");
+		$(".chain").append("<dl></dl>"); */
+		add("chain",chainJson);
 	}
 	var stockGemJson = '${stockGemJson}';
 	//库选石
@@ -232,9 +233,9 @@ $(function(){
 			var html = '';
 			html+= '<dd>'+
 				   '<h3>客主石</h3>'+
-				   '<img style="width:98%;" src='+pic+' ><br>'+
+				   '<img style="width:20%;" src='+pic+' ><br>'+
 				   '详情： '+data.vtype+' '+data.vshape+' '+data.vspec+' '+data.nweight+'ct<br>'+ 
-				   '保价：<b> ${customDetail.nmainGemCost }元</b>	'+
+				   '保价： ${customDetail.nmainGemCost }元	'+
 				   '</dd><dl></dl>';
 			$(".mianGem").append(html);
 			
@@ -253,9 +254,9 @@ $(function(){
 					var html = '';
 					html+= '<dd>'+
 						   '<h3>客配石</h3>'+
-						   '<img style="width:98%;" src='+pic+' ><br>'+
+						   '<img style="width:20%;" src='+pic+' ><br>'+
 						   '详情： '+data.vtype+' '+data.vshape+' '+data.vspec+' '+data.nweight+'ct<br>'+ 
-						   '数量： <b>${customDetail.ipartsGemNum }颗</b>'+
+						   '数量： ${customDetail.ipartsGemNum }颗'+
 						   '</dd><dl></dl>';
 					$(".partGem").append(html);
 				});
@@ -279,7 +280,7 @@ $(function(){
 //转发页面
 function toRoleObj(pageAttr,userid,memo,id,customerId){
 	var url = "${ctx}/sendMassage.do";
-	var pageCode = $("#customCode").val();
+	var pageCode = $("#pageCode").val();
 	$.post(url,{pageAttr:pageAttr,pageCode:pageCode,touser:userid,memo:memo,rootPath:getRootPath(),id:id,customerId:customerId},function(data){
 		if(data == 0){
 			alert("转发成功!");
@@ -310,11 +311,18 @@ function addChain(data){
 	}
 	var html="";
 	
-	html+= "<dd class='chainList chain"+i+"'>"+
+	/* html+= "<dd class='chainList chain"+i+"'>"+
 		   "<div class='cdetail'>"+
 		   "<div class='clear'></div>"+
 		   "<strong class='chain_name'>"+data.vchainName+"</strong>" +
 		   "<b>"+data.ichainItem+"条</b>"+
+		   "</div>" +
+		   "</dd>"; */
+	html+= "<dd class='chainList chain"+i+"'>"+
+		   "<div class='cdetail'>"+
+		   "<span>链子： </span>"+
+		   "<span class='chain_name'>"+data.vchainName+"</span>" +
+		   "<span style='float:right'>"+data.ichainItem+"条</span>"+
 		   "</div>" +
 		   "</dd>";
 	
@@ -335,7 +343,7 @@ function addStockGem(data){
 			"<div class='sgdetail'>"+
 			"<span>库选石： </span>"+
 			"<img class='stockGem_img' src='"+data.vstockGemImgPath+"' style='border:50px'/><span>"+data.vstockGemName+"</span>"+
-			""+"  "+data.istockGemNum+"颗"+
+			"<span style='float:right'>"+data.istockGemNum+"颗<span>"+
 			"<input type='button' value='配' onclick='useGem("+data.id+")' class='ugem CUST-RL CC-RL PM-RL CAD-RL PMC-RL PPS-RL' />"+
 			"</div>" +
 			"</dd>";
@@ -448,7 +456,7 @@ function save(){
 <body>
 	<form id="custom">
 		<input type="hidden" id='toUser' value='${openid}' /> 
-		<input type="hidden" id='customCode' value='${customDetail.vcustomCode }' /> 
+		<input type="hidden" id='pageCode' value='${customDetail.vcustomCode }' /> 
 		<input type="hidden" class="tableId" id='customId' value='${customDetail.id}' /> 
 		<input type="hidden" id='orderId' value="${customDetail['orderId'] }" /> 
 		<input type="hidden" id="pageAttr" value="STYLE" /> 
@@ -466,7 +474,7 @@ function save(){
 		<div class="all">
 			<div class="main">
 				<div class="mainleft GB-RL">
-					<div class="cankao">
+					<div class="cankao CUST-RL">
 						<h2>
 							<a href="javascript:;" style="color: #fff" class="cankaotu">+
 								参考图</a>
@@ -524,19 +532,46 @@ function save(){
 								订单号 : ${orderVO.vorderCode } 
 							</dd>
 							<dd class="lookOrder GB-RL">
-								<input type="button" value="查看订单"
+								<input type="button" value="返回订单"
 									id="orderCode"/>
 							</dd>
 							<dd class="quotedPrice CAD-RL PMC-RL GB-RL PPS-RL">
-								报价： <b>${orderVO.nquotedPrice } 元</b>
+								报价： <b>${customDetail.nprice } 元</b>
 							</dd>
 							<dd class="styleType GB-RL">类型：${customDetail.srcstyleType }</dd>
 							<dd class="ringSize GB-RL">手寸：${customDetail.srcringSize }</dd>
 							<dd class="metalType GB-RL">金属：${customDetail.srcmetal }</dd>
 							<dd class="StockGem"></dd>
+							<dd class="chain"></dd>
+							<dd class="mianGem"></dd>
+							<dd class="partGem"></dd> 
 							<dd class="GB-RL">
 								<div class="kzs"></div>
 							</dd>
+						</dl>
+					</div>
+				</div>
+				<div class="mainrig">
+					<div class="dzd_right">
+						<!-- <div class="chain">
+							<dd>
+								<h3>链子</h3>
+							</dd>
+						</div> -->
+
+						<%-- <div class="mianGem">
+							<dd>
+								<h3>客主石</h3>
+								保价： <b>${customDetail.nmainGemCost }元</b>
+							</dd>
+						</div>
+						<div class="partGem">
+							<dd>
+								<h3>客配石</h3>
+								数量： <b>${customDetail.ipartsGemNum }颗</b>
+							</dd>
+						</div> --%>
+						<dl>
 							<dd class="GB-RL">刻字：${customDetail.vengrave }</dd>
 							<dd class="GB-RL">工艺标签：${customDetail.vcraftTag }</dd>
 							<dd class="GB-RL">表面工艺：${customDetail.vrequirementB }</dd>
@@ -544,28 +579,6 @@ function save(){
 							<dd class="certificate-not GB-RL">鉴定证书：无</dd>
 							<dd class="GB-RL">定制说明：${customDetail.vrequirement }</dd>
 						</dl>
-					</div>
-				</div>
-				<div class="mainrig">
-					<div class="dzd_right">
-						<div class="chain">
-							<!-- <dd>
-								<h3>链子</h3>
-							</dd> -->
-						</div>
-
-						<div class="mianGem">
-							<%-- <dd>
-								<h3>客主石</h3>
-								保价： <b>${customDetail.nmainGemCost }元</b>
-							</dd> --%>
-						</div>
-						<div class="partGem">
-							<%-- <dd>
-								<h3>客配石</h3>
-								数量： <b>${customDetail.ipartsGemNum }颗</b>
-							</dd> --%>
-						</div>
 						<div class="clear"></div>
 						<div
 							class="dzd_right_btm d1 CUST-RL CC-RL PM-RL CAD-RL PMC-RL GB-RL">
