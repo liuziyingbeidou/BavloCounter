@@ -74,7 +74,14 @@
 			if($pageAttr.length > 0){
 				pageAttr = $pageAttr.val();
 			}else{
-				alert("该页面为设置页面属性");return ;
+				alert("该页面未设置页面属性");return ;
+			}
+			var $pageCode = $("#pageCode",window.parent.document);
+			var pageCode = null;
+			if($pageCode.length > 0){
+				pageCode = $pageCode.val();
+			}else{
+				alert("该页面没有页面编号");return ;
 			}
 			var $id = $(".tableId",window.parent.document);
 			var customerId = $(".tocustomerId",window.parent.document).val();
@@ -89,16 +96,16 @@
 				alert("该页面不允许转发...");return ;
 			}
 			//window.parent.BavloSendMessage(pageAttr,userid,id,customerId);
-			BavloSendMessage(pageAttr,userid,id,customerId);
+			BavloSendMessage(pageAttr,pageCode,userid,id,customerId);
 			//window.parent.setValueByFrame("role-menu",id,callbackMuilt());
 		}
 	}
 	
 	
 	//发送
-function BavloSendMessage(pageAttr,userid,id,customerId){
+function BavloSendMessage(pageAttr,pageCode,userid,id,customerId){
 	//closeMultiDlg();
-	toRoleObj(pageAttr,userid,"",id,customerId);
+	toRoleObj(pageAttr,pageCode,userid,"",id,customerId);
 	/*$('#my-prompt').modal({
       relatedTarget: this,
       onConfirm: function(e) {
@@ -111,9 +118,9 @@ function BavloSendMessage(pageAttr,userid,id,customerId){
 }
 
 //转发页面
-function toRoleObj(pageAttr,userid,memo,id,customerId){
+function toRoleObj(pageAttr,pageCode,userid,memo,id,customerId){
 	var url = "${ctx}/sendMassage.do";
-	$.post(url,{pageAttr:pageAttr,touser:userid,memo:memo,rootPath:getRootPath(),id:id,customerId:customerId},function(data){
+	$.post(url,{pageAttr:pageAttr,pageCode:pageCode,touser:userid,memo:memo,rootPath:getRootPath(),id:id,customerId:customerId},function(data){
 		if(data == 0){
 			alert("转发成功!");
 			window.parent.closeMultiDlg();

@@ -613,6 +613,7 @@ text-overflow:ellipsis;
 <body>
 <form id="orderFrmId">
 <input type="hidden" id='toUser' value='${openid}' /> 
+<input type="hidden" id="pageCode" value="${ordervo['vorderCode']}"/>
 <input type="hidden" id="pageAttr" value="ORDER"/>
 <input type="hidden" name="id" class="tableId" id="orderId" value="${ordervo['id']}">
 <input type="hidden" name="iorderState" id="orderState" value="<c:choose>
