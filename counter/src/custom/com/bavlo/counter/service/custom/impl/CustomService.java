@@ -96,8 +96,14 @@ public class CustomService extends CommonService implements ICustomService {
 		sql.append(" on a.customer_id=c.id");
 		sql.append(" where ifnull(a.dr,0)=0");
 		if(StringUtil.isNotEmpty(content)){
-			sql.append(content);
+			if("1=2".equals(content.trim())){
+				sql.append(" and 1=2 ");
+			}else{
+				sql.append(content);
+			}
 		}
+		
+		sql.append(" order by a.id desc");
 		
 		Integer count = getCountBySQL(sql.toString());
 		List<CustomVO> list = (List<CustomVO>)findListBySQL(sql.toString(), null, 0, count);
