@@ -101,6 +101,8 @@ public class EntitySignService extends CommonService implements IEntitySignServi
 			sql.append(" and" +wh);
 		}
 		
+		sql.append(" order by a.id desc");
+		
 		Integer count = getCountBySQL(sql.toString());
 		List<EntitySignVO> list = (List<EntitySignVO>)findListBySQL(sql.toString(), null, 0, count);
 		List<EntitySignVO> list_ = new ArrayList<EntitySignVO>();

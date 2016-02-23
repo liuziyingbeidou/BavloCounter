@@ -89,6 +89,8 @@ public class UseGemService extends CommonService implements IUseGemService {
 			sql.append(" and" +wh);
 		}
 		
+		sql.append(" order by a.id desc");
+		
 		Integer count = getCountBySQL(sql.toString());
 		List<UseGemVO> list = (List<UseGemVO>)findListBySQL(sql.toString(), null, 0, count);
 		List<UseGemVO> list_ = new ArrayList<UseGemVO>();

@@ -63,6 +63,8 @@ public class GemSignService extends CommonService implements IGemSignService {
 			sql.append(" and" +wh);
 		}
 		
+		sql.append(" order by a.id desc");
+		
 		Integer count = getCountBySQL(sql.toString());
 		List<GemSignVO> list = (List<GemSignVO>)findListBySQL(sql.toString(), null, 0, count);
 		List<GemSignVO> list_ = new ArrayList<GemSignVO>();
