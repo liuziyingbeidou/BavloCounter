@@ -199,7 +199,7 @@
             id: '#filePicker2',
             label: '继续添加'
         });
-
+        
         uploader.on('ready', function() {
             window.uploader = uploader;
         });
@@ -570,6 +570,7 @@
             	$("#FILE_8",window.parent.document).val(val._raw);
             	break;
             }
+            $(".completeBtn").show();
         });
         
         /*uploader.uploadSuccess = function( file, val ) {

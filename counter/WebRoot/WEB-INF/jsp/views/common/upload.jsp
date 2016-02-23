@@ -38,6 +38,11 @@
     		/*var url = "${ctx }/upload/uploadSGFile.do";//?filemodel="+filemodel+"&filetype="+filetype+"&filevalue="+filevalue*/
 	    	 upfile();
 	    });
+	    
+	    //完成事件
+	    $(".completeBtn").click(function(){
+	    	$(".ui-dialog-titlebar-close",window.parent.document).trigger("click");
+	    });
     });
     
     function upfile(){
@@ -65,8 +70,16 @@
     	var name = $("#sfile").val().substring(index+1,len);
 	    $(".sfile-name").text(name);
     }
+    
+    
+    
     </script>
     
+    <style type="text/css">
+    .completeBtn{
+    	display: none;
+    }
+    </style>
 </head>
 
 <body>
@@ -112,6 +125,7 @@
 	  </form>
     </div>
     <div class="upload_btn file-upload"><input type='button' class="signlefile" name='button' value='Upload'></div>
+    <div class="upload_btn completeBtn"><input type='button' name='button' value='完成'></div>
 </div>
 </body>
 </html>
