@@ -121,6 +121,14 @@ $(function(){
 		});
 	});
 	setTimeout("changeDivStyle();", 100); // 0.1秒后展示结果，因为HTML加载顺序，先加载脚本+样式，再加载body内容。所以加个延时
+	
+	//设置发票
+	var invoiceVl = $(".invoice").val();
+	if(invoiceVl == "Y"){
+		$(".invoiceType").show();
+	}else{
+		$(".invoiceType").hide();
+	}
 });
 
 
@@ -586,19 +594,22 @@ text-overflow:ellipsis;
 	height：高度
 	*/
 .stepInfo{position:relative;background:#f2f2f2;margin:20px auto 70 auto;}
+.stepInfo ul{padding-left:5px;}
 .stepInfo .lileft{float:right;width:47%;height:0.15em;background:#bbb;}
 .stepInfo .liright{float:right;width:47%;height:0.15em;background:#bbb;}
 .stepIco{border-radius:1em;padding:0.03em;background:#bbb;text-align:center;line-height:1.5em;color:#fff; position:absolute;width:1.4em;height:1.4em;}
-.stepIco1{top:-0.7em;left:-1%;}
-.stepIco2{top:-0.7em;left:19%;}
-.stepIco3{top:-0.7em;left:38%;}
-.stepIco4{top:-0.7em;left:58%;}
-.stepIco5{top:-0.7em;left:76%;}
-.stepIco6{top:-0.7em;left:95%;}
+.stepIco1{top:-0.7em;left:5%;}
+.stepIco2{top:-0.7em;left:21%;}
+.stepIco3{top:-0.7em;left:37%;}
+.stepIco4{top:-0.7em;left:53%;}
+.stepIco5{top:-0.7em;left:69%;}
+.stepIco6{top:-0.7em;left:85%;}
 .stepText{color:#DDDDDD;margin-top:0.2em;width:4em;text-align:center;margin-left:-1.4em;}
 }
+
 .stepInfo{position:relative;background:#f2f2f2;margin:20px auto 70 auto;}
-.stepInfo li{float:left;width:48%;height:0.15em;background:#bbb;}
+.stepInfo .lileft{float:left;width:48%;height:0.15em;background:#bbb;}
+.stepInfo .liright{float:left;width:48%;height:0.15em;background:#bbb;}
 .stepIco{border-radius:1em;padding:0.03em;background:#bbb;text-align:center;line-height:1.5em;color:#fff; position:absolute;width:1.4em;height:1.4em;}
 .stepIco1{top:-0.7em;left:-1%;}
 .stepIco2{top:-0.7em;left:19%;}
@@ -607,6 +618,7 @@ text-overflow:ellipsis;
 .stepIco5{top:-0.7em;left:76%;}
 .stepIco6{top:-0.7em;left:95%;}
 .stepText{color:#DDDDDD;margin-top:0.2em;width:4em;text-align:center;margin-left:-1.4em;}
+
 </style>
 </head>
 
@@ -816,12 +828,14 @@ text-overflow:ellipsis;
 	$(function(){
 		$(".invoice").change(function(){
 			if($(this).val() == "Y"){
+				$(".invoiceType").show();
 				if($(".invoiceTitle").val() == ""){
 					setBorderRed("invoiceTitle");
         		}else{
         			cancelBorderRed("invoiceTitle");
         		}
 			}else{
+				$(".invoiceType").hide();
 				$(".invoiceTitle").val("");
 				cancelBorderRed("invoiceTitle");
 			}
