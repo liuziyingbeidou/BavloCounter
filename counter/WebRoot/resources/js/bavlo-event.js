@@ -27,7 +27,7 @@
     	//价值
     	setSuffix("gem-worth","元");
     	//重量
-    	setSuffix("gem-weight","ct");
+    	setSuffix("gem-weight","克");
     	//数量
     	setSuffix("gem-count","颗");
     	/***************宝石签收单-结束******************/
@@ -36,7 +36,7 @@
     	//数量
     	setSuffix("entity-count","件");
     	//重量
-    	setSuffix("entity-weight","ct");
+    	setSuffix("entity-weight","克");
     	//价值
     	setSuffix("entity-worth","元");
     	//回收价格
@@ -57,7 +57,7 @@
     	//数量
     	setSuffix("useGem-count","颗");
     	//重量
-    	setSuffix("useGem-weight","ct");
+    	setSuffix("useGem-weight","克");
     	//价值
     	setSuffix("useGem-worth","元");
     	/***************配石单-结束*******************/

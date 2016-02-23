@@ -127,7 +127,7 @@
    		}
 	  	if($(".useGem-weight").val() != ""){
     		//重量
-    		initSuffix("useGem-weight","ct");
+    		initSuffix("useGem-weight","克");
    		}
     	if($(".useGem-worth").val() != ""){
     		//价值
@@ -190,7 +190,7 @@
 		//数量
     	clearSuffix("useGem-count","颗");
     	//重量
-    	clearSuffix("useGem-weight","ct");
+    	clearSuffix("useGem-weight","克");
     	//价值
     	clearSuffix("useGem-worth","元");
 		$.ajax({
@@ -417,7 +417,7 @@
 						<input type="hidden" name="vshapeName" id="shapeName" value="${useGemDetail['vshapeName'] }">
 						<dt>
 							<input type='text' id='nweight' name='nweight' class="qsdr r2 useGem-weight bl-ck-null lose-useGem"
-								value="${useGemDetail['nweight']}" placeholder="重量（ct）">
+								value="${useGemDetail['nweight']}" placeholder="重量（克）">
 						</dt>
 						<div class="clear"></div>
 					</div>
