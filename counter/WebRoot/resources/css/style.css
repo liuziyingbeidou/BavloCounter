@@ -403,7 +403,7 @@ background-color: #444;
 
 .list { width: 340px; margin-top: 20px;}
 .list h3 { font-size: 16px; font-weight: normal; line-height: 40px; padding-left: 10px;}
-.list dl dd { border-top: 1px solid #242424; line-height: 60px; height: 60px; padding-top: 20px; margin: 20px auto;}
+.list dl dd { border-top: 1px solid #bbb; line-height: 60px; height: 60px; padding-top: 20px; margin: 20px auto;}
 .list dl dd img { vertical-align: top;}
 .list dl dd input { width: 60px; text-align: center; font-size: 14px; margin: 0 26px; background: #ddd; color: #616161; height: 40px; line-height: 40px;}
 .list dl dd b { margin-left: 10px; margin-right: 20px; font-weight: normal;}
