@@ -59,27 +59,12 @@ public class TemplateMessagesUtil {
 		first.setValue("恭喜你购买成功！");
 		first.setColor("#173177");
 		
-		Keynote1 keynote1 = new Keynote1();
-		keynote1.setValue("戒指");
-		keynote1.setColor("#173177");
-		
-		Keynote2 keynote2 = new Keynote2();
-		keynote2.setValue("1600元");
-		keynote2.setColor("#173177");
-		
-		Keynote3 keynote3 = new Keynote3();
-		keynote3.setValue("2014年9月22日");
-		keynote3.setColor("#173177");
-		
 		Remark remark = new Remark();
 		remark.setValue("欢迎再次购买！");
 		remark.setColor("#173177");
 		
 		Data data = new Data();
 		data.setFirst(first);
-		data.setKeynote1(keynote1);
-		data.setKeynote2(keynote2);
-		data.setKeynote3(keynote3);
 		data.setRemark(remark);
 		
 		templateMessages.setData(data);
