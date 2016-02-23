@@ -77,17 +77,17 @@ public class SendController extends BaseController{
 		String uname = obj.getString("name");
 		//客户(cust)
 		if(IConstant.PAGE_ATTR_CUST.equals(pageAttr)){
-			text = vo.getVname()+" 的基本信息(转发人-" + actionPsn + ")";
+			text = "Hi, 我是 "+uname+loginVO.getRole()+", 已添加新客户："+pageCode+"。";
 			actionName = "customer/info.do?id="+id;
 		}else
 		//定制单(style)
 		if(IConstant.PAGE_ATTR_STYLE.equals(pageAttr)){
-			text = "Hi, 我是 "+uname+"("+loginVO.getRole()+")"+" 已上传款式单"+pageCode+"。";// + DateUtil.getCurDateTime()+")";
+			text = "Hi, 我是 "+uname+loginVO.getRole()+", 已上传款式单："+pageCode+"。";// + DateUtil.getCurDateTime()+")";
 			actionName = "custom/detail.do?id="+id;
 		}else
 		//订单(order)
 		if(IConstant.PAGE_ATTR_ORDER.equals(pageAttr)){
-			text = "Hi, 我是 "+uname+"("+loginVO.getRole()+")"+" 已上传订单"+pageCode+"。";// + DateUtil.getCurDateTime()+")";
+			text = "Hi, 我是 "+uname+loginVO.getRole()+", 已上传订单："+pageCode+"。";// + DateUtil.getCurDateTime()+")";
 			actionName = "order/view.do?id="+id;
 			
 			//PMC发给PPS订单进入制版态
@@ -113,17 +113,17 @@ public class SendController extends BaseController{
 		}else
 		//宝石签收单(gem)
 		if(IConstant.PAGE_ATTR_GEM.equals(pageAttr)){
-			text = "Hi, 我是 "+uname+"("+loginVO.getRole()+")"+" 已上传宝石签收单"+pageCode+"。";// + DateUtil.getCurDateTime()+")";
+			text = "Hi, 我是 "+uname+loginVO.getRole()+", 已上传宝石签收单："+pageCode+"。";// + DateUtil.getCurDateTime()+")";
 			actionName = "gem-sign/view.do?id="+id;
 		}else
 		//实物签收单(entity)
 		if(IConstant.PAGE_ATTR_ENTITY.equals(pageAttr)){
-			text = "Hi, 我是 "+uname+"("+loginVO.getRole()+")"+" 已上传实物签收单"+pageCode+"。";// + DateUtil.getCurDateTime()+")";
+			text = "Hi, 我是 "+uname+loginVO.getRole()+", 已上传实物签收单："+pageCode+"。";// + DateUtil.getCurDateTime()+")";
 			actionName = "entity-sign/view.do.id="+id;
 		}else
 		//配石单(deploy)
 		if(IConstant.PAGE_ATTR_DEPLOY.equals(pageAttr)){
-			text = "Hi, 我是 "+uname+"("+loginVO.getRole()+")"+" 已上传配石单"+pageCode+"。";// + DateUtil.getCurDateTime()+")";
+			text = "Hi, 我是 "+uname+loginVO.getRole()+", 已上传配石单："+pageCode+"。";// + DateUtil.getCurDateTime()+")";
 		}else{
 			isTurn = false;
 		}
