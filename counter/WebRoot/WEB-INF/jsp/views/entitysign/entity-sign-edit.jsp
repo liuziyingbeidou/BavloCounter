@@ -81,7 +81,7 @@
 			//数量
 	    	clearSuffix("entity-count","件");
 	    	//重量
-	    	clearSuffix("entity-weight","ct");
+	    	clearSuffix("entity-weight","克");
 	    	//价值
 	    	clearSuffix("entity-worth","元");
 	    	//回收价格
@@ -130,7 +130,7 @@
     		}
 		  	if($(".entity-weight").val() != ""){
 	    		//重量
-	    		initSuffix("entity-weight","ct");
+	    		initSuffix("entity-weight","克");
     		}
 	    	if($(".entity-worth").val() != ""){
 	    		//价值

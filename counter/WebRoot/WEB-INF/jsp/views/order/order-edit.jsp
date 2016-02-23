@@ -51,6 +51,11 @@ $(function(){
 	});
 	setValueByFrame("customer","${ordervo['id']}");
 	
+	//交付日期 当前日期15天之后
+	if(!$("#datetimepicker").val()){
+		$("#datetimepicker").val(GetDateStr(15));
+	}
+	
 	//日期选择器
 	$("#datetimepicker").datetimepicker({
 		format: 'yyyy-mm-dd',
@@ -61,6 +66,7 @@ $(function(){
 		forceParse:true,
 		language:"zh-CN"
 	});
+	
 	//城市联动
 	change(0);
 	$("#vprovince").change(function(){
@@ -126,11 +132,80 @@ $(function(){
 	var invoiceVl = $(".invoice").val();
 	if(invoiceVl == "Y"){
 		$(".invoiceType").show();
+		$(".invoiceTitle").show();
 	}else{
 		$(".invoiceType").hide();
+		$(".invoiceTitle").hide();
 	}
+	
+	
+	//计算未付
+	$(".order-quotedPrice").focusout(function(){
+		//报价
+		clearSuffix("order-quotedPrice","元");
+		//已付
+		clearSuffix("order-payment","元");
+		//报价
+		var quotedPrice = $(".order-quotedPrice").val();
+		//已付
+		var payment = $(".order-payment").val();
+		if(quotedPrice != "" && payment != ""){
+			$(".order-nonPayment").val(accSub(quotedPrice,payment));
+		}
+		//有值加后缀
+		initFieldSuffix();
+	});
+	$(".order-payment").focusout(function(){
+		//报价
+		clearSuffix("order-quotedPrice","元");
+		//已付
+		clearSuffix("order-payment","元");
+		//已付
+		var payment = $(".order-payment").val();
+		//报价
+		var quotedPrice = $(".order-quotedPrice").val();
+		if(quotedPrice != "" && payment != ""){
+			$(".order-nonPayment").val(accSub(quotedPrice,payment));
+		}
+		//有值加后缀
+		initFieldSuffix();
+	});
 });
 
+//获取n天后的日期 
+function GetDateStr(AddDayCount) { 
+	var dd = new Date(); 
+	dd.setDate(dd.getDate()+AddDayCount);//获取AddDayCount天后的日期 
+	var y = dd.getFullYear(); 
+	var m = dd.getMonth()+1;//获取当前月份的日期 
+	var d = dd.getDate(); 
+	return y+"-"+m+"-"+d; 
+} 
+
+/**
+ ** 减法函数，用来得到精确的减法结果
+ ** 说明：javascript的减法结果会有误差，在两个浮点数相减的时候会比较明显。这个函数返回较为精确的减法结果。
+ ** 调用：accSub(arg1,arg2)
+ ** 返回值：arg1加上arg2的精确结果
+ **/
+function accSub(arg1, arg2) {
+    var r1, r2, m, n;
+    try {
+        r1 = arg1.toString().split(".")[1].length;
+    }
+    catch (e) {
+        r1 = 0;
+    }
+    try {
+        r2 = arg2.toString().split(".")[1].length;
+    }
+    catch (e) {
+        r2 = 0;
+    }
+    m = Math.pow(10, Math.max(r1, r2)); //last modify by deeka //动态控制精度长度
+    n = (r1 >= r2) ? r1 : r2;
+    return ((arg1 * m - arg2 * m) / m).toFixed(n);
+}
 
 //加载清单列表
 function loadOrderList(){
@@ -806,8 +881,10 @@ text-overflow:ellipsis;
             <option value="3">30000-39999元</option>
             <option value="4">40000-50000元</option>
           </select>
-          <p><input type='text' name="nquotedPrice" class="zf bj order-quotedPrice" value="${ordervo['nquotedPrice'] }" placeholder="报价"><input type='text' name="npayment" class="zf yf order-payment bl-suf-null" value="${ordervo['npayment'] }" placeholder="已付"></p>
-          <p><input type='text' name="nnonPayment" class="zf bj order-nonPayment" value="${ordervo['nnonPayment'] }" placeholder="未付"><input type='text' name="ntailPaid" class="zf yf order-tailPaid" value="${ordervo['ntailPaid'] }" placeholder="尾款实收"></p>
+          <p><input type='text' name="nquotedPrice" class="zf bj order-quotedPrice" value="${ordervo['nquotedPrice'] }" placeholder="报价">
+          <input type='text' name="npayment" class="zf yf order-payment bl-suf-null" value="${ordervo['npayment'] }" placeholder="已付"></p>
+          <p><input type='text' name="nnonPayment" class="zf bj order-nonPayment" value="${ordervo['nnonPayment'] }" placeholder="未付">
+          <input type='text' name="ntailPaid" class="zf yf order-tailPaid" value="${ordervo['ntailPaid'] }" placeholder="尾款实收"></p>
           <input type="text" name="ddeliverdate" value="${ordervo['ddeliverdate'] }" id="datetimepicker" class="jianding" placeholder="交付时间" />
           
           <select name="vdeliveryWay" class="jianding deliveryWay">
@@ -829,6 +906,7 @@ text-overflow:ellipsis;
 		$(".invoice").change(function(){
 			if($(this).val() == "Y"){
 				$(".invoiceType").show();
+				$(".invoiceTitle").show();
 				if($(".invoiceTitle").val() == ""){
 					setBorderRed("invoiceTitle");
         		}else{
@@ -836,6 +914,7 @@ text-overflow:ellipsis;
         		}
 			}else{
 				$(".invoiceType").hide();
+				$(".invoiceTitle").hide();
 				$(".invoiceTitle").val("");
 				cancelBorderRed("invoiceTitle");
 			}

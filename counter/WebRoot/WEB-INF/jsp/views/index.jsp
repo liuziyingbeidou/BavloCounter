@@ -149,8 +149,9 @@ if(info != null){
     </style>
   </head>
   <body>
+  <jsp:include page="./header.jsp"></jsp:include>
     <div class="container">
-
+	
       <div class="container header text-align">
         <img src="${ctx }/resources/images/LOGO.png" alt="宝珑电子柜台系统" class="img img-logo">
       </div>
