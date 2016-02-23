@@ -111,6 +111,7 @@ function loadOrderList(){
 	$.get(url,{mid:mid},function(row){
 		var data = row;
 		if(data != null && data != ""){
+			var sumVl = "0";
 			for(var i = 0; i < data.length; i++){
 				var type = data[i].vsourceType;
 				if(type == "dz"){
@@ -120,19 +121,60 @@ function loadOrderList(){
 					}else{
 						pic = "<img class='bill-pic' src='${ctx}/resources/images/good_01.png'>";
 					}
-					$("#olist").append("<dd type='dz' onclick='toCustom(\""+data[i].vsourceId+"\")' sid='"+data[i].vsourceId+"' class='"+data[i].vsourceId+" bill'>"+pic+"<b class=''>进入款式单</b><a href='javascript:void(0);' style='color:#FFF' class='bill-num close_c order_list_close'>"+data[i].nnumber+"</a></dd>");
+					$("#olist").append("<dd type='dz' onclick='toCustom(\""+data[i].vsourceId+"\")' sid='"+data[i].vsourceId+"' class='"+data[i].vsourceId+" bill'>"+pic+"<b style='cursor:pointer;'>进入款式单</b><span class='list_name bill-name'>"+data[i].nprice+"元</span><a href='javascript:void(0);' style='color:#FFF' class='bill-num close_c order_list_close'>"+data[i].nnumber+"</a></dd>");
+					sumVl = accAdd(sumVl,data[i].nprice);
 				}/*else if(type == "ch"){
 					$("#olist").append("<dd type='ch' sid='"+data[i].vsourceId+"' class='"+data[i].vsourceId+" bill'><span class='list_name bill-name'>"+data[i].vname+"</span><b class='list_price bill-num'>"+data[i].nnumber+"条</b><a href='javascript:rlist("+data[i].vsourceId+")' class='close_c'><img src='${ctx}/resources/images/close.png'></a></dd>");
 				}*/
 			}
+			
+			$("#olist").append("<dd type='dz' class='bill'><span class='list_name bill-name'>总价："+sumVl+" 元</span><a href='javascript:void(0);' style='color:#FFF' class='bill-num close_c order_list_close'></a></dd>");
+			
 			$("#olist").append("<div class='clear'></div>");
 		}
 	});
 }
-		//删除清单
-		function rlist(className){
-			$("."+className).remove();
-		}
+
+/**
+ ** 加法函数，用来得到精确的加法结果
+ ** 说明：javascript的加法结果会有误差，在两个浮点数相加的时候会比较明显。这个函数返回较为精确的加法结果。
+ ** 调用：accAdd(arg1,arg2)
+ ** 返回值：arg1加上arg2的精确结果
+ **/
+function accAdd(arg1, arg2) {
+    var r1, r2, m, c;
+    try {
+        r1 = arg1.toString().split(".")[1].length;
+    }catch (e) {
+        r1 = 0;
+    }
+    try {
+        r2 = arg2.toString().split(".")[1].length;
+    }catch (e) {
+        r2 = 0;
+    }
+    c = Math.abs(r1 - r2);
+    m = Math.pow(10, Math.max(r1, r2));
+    if (c > 0) {
+        var cm = Math.pow(10, c);
+        if (r1 > r2) {
+            arg1 = Number(arg1.toString().replace(".", ""));
+            arg2 = Number(arg2.toString().replace(".", "")) * cm;
+        } else {
+            arg1 = Number(arg1.toString().replace(".", "")) * cm;
+            arg2 = Number(arg2.toString().replace(".", ""));
+        }
+    } else {
+        arg1 = Number(arg1.toString().replace(".", ""));
+        arg2 = Number(arg2.toString().replace(".", ""));
+    }
+    return (arg1 + arg2) / m;
+}
+
+//删除清单
+function rlist(className){
+	$("."+className).remove();
+}
 //子窗体调用
 		function setValueByFrame(type,id,callback,json){
 			var url;
