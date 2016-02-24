@@ -60,6 +60,8 @@
 		    	var obj = $("#filevalue").val();
 		    	$(".sfile-name").text(returndata);
 		        $("#"+obj,window.parent.document).val(returndata);
+		        //删除原文件名
+		        window.parent.delFileByName();
 		    }
 		  });
     }
@@ -70,8 +72,6 @@
     	var name = $("#sfile").val().substring(index+1,len);
 	    $(".sfile-name").text(name);
     }
-    
-    
     
     </script>
     

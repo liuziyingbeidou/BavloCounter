@@ -654,31 +654,8 @@ text-overflow:ellipsis;
 .st-jf{width:16px;height:15px;background:url('/counter/resources/images/Arrow4.png') no-repeat}
 .bill-pic{cursor: pointer;}
 .hidden_enent1 a:hover,.edit_hidden1 a:hover{text-decoration:none;}
-@media screen and (max-width: 1280px) and (min-width: 320px){
-	/* stepInfo 
-	border-radius：0为正方形，0~N，由正方形向圆形转化，N越大越圆。
-	padding：图形的内边距
-	background：图形背景色
-	text-align：文本对齐
-	line-height：行高
-	color：文字颜色
-	position：定位
-	width：宽度 width:500px;
-	height：高度
-	*/
-.stepInfo{position:relative;background:#f2f2f2;margin:20px auto 70 auto;}
-.stepInfo ul{padding-left:5px;}
-.stepInfo .lileft{float:right;width:47%;height:0.15em;background:#bbb;}
-.stepInfo .liright{float:right;width:47%;height:0.15em;background:#bbb;}
-.stepIco{border-radius:1em;padding:0.03em;background:#bbb;text-align:center;line-height:1.5em;color:#fff; position:absolute;width:1.4em;height:1.4em;}
-.stepIco1{top:-0.7em;left:5%;}
-.stepIco2{top:-0.7em;left:21%;}
-.stepIco3{top:-0.7em;left:37%;}
-.stepIco4{top:-0.7em;left:53%;}
-.stepIco5{top:-0.7em;left:69%;}
-.stepIco6{top:-0.7em;left:85%;}
-.stepText{color:#DDDDDD;margin-top:0.2em;width:4em;text-align:center;margin-left:-1.4em;}
-}
+
+@media screen and (min-width:320px) and (max-width:1280px) {
 
 .stepInfo{position:relative;background:#f2f2f2;margin:20px auto 70 auto;}
 .stepInfo .lileft{float:left;width:48%;height:0.15em;background:#bbb;}
@@ -690,6 +667,31 @@ text-overflow:ellipsis;
 .stepIco4{top:-0.7em;left:58%;}
 .stepIco5{top:-0.7em;left:76%;}
 .stepIco6{top:-0.7em;left:95%;}
+.stepText{color:#DDDDDD;margin-top:0.2em;width:4em;text-align:center;margin-left:-1.4em;}
+	/* stepInfo 
+	border-radius：0为正方形，0~N，由正方形向圆形转化，N越大越圆。
+	padding：图形的内边距
+	background：图形背景色
+	text-align：文本对齐
+	line-height：行高
+	color：文字颜色
+	position：定位
+	width：宽度 width:500px;
+	height：高度
+	*/
+
+}
+.stepInfo{position:relative;background:#f2f2f2;margin:20px auto 70 auto;}
+.stepInfo ul{padding-left:5px;}
+.stepInfo .lileft{float:right;width:47%;height:0.15em;background:#bbb;}
+.stepInfo .liright{float:right;width:47%;height:0.15em;background:#bbb;}
+.stepIco{border-radius:1em;padding:0.03em;background:#bbb;text-align:center;line-height:1.5em;color:#fff; position:absolute;width:1.4em;height:1.4em;}
+.stepIco1{top:-0.7em;left:5%;}
+.stepIco2{top:-0.7em;left:21%;}
+.stepIco3{top:-0.7em;left:37%;}
+.stepIco4{top:-0.7em;left:53%;}
+.stepIco5{top:-0.7em;left:69%;}
+.stepIco6{top:-0.7em;left:85%;}
 .stepText{color:#DDDDDD;margin-top:0.2em;width:4em;text-align:center;margin-left:-1.4em;}
 
 </style>
