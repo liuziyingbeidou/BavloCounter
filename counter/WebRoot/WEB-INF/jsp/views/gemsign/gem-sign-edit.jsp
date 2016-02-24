@@ -33,23 +33,31 @@
 		//本地webservice
 		var nativeUrl = "${pageScope.basePath}/counter/webservice/http.do";
 		$(function() {
-			/*//宝石类型下拉框值
+			//宝石类型下拉框值
 			var typeUrl = "http://www.bavlo.com/getAllGemType";
-			loadSelDataStr(nativeUrl, typeUrl, "gem-type-id", "data[i].id",
+			loadSelDataStr(nativeUrl, typeUrl, "gem-typec-id", "data[i].id",
 					"data[i].type_cn", function() {
-						$("#gem-type-id").val("${gemvo['vtype']}");
-					},"选宝石");
+						$("#gem-typec-id").val("${gemvo['vtypec']}");
+						//形状下拉框
+						initShapeByType();
+						$("#gem-shape-id").append("<option value='-2'>异形</option>");
+					},"推测类型");
 			
-			//形状下拉框
-			initShapeByType();
 			//规格下拉框
-			initSpecByTypeShape();
+			//initSpecByTypeShape();
 	
 			//类型和形状改变
-			$("#gem-type-id").change(function() {
+			$("#gem-typec-id").change(function() {
 				initShapeByType();
+				$(".vtypecId").val($("#gem-typec-id").find("option:selected").attr("sid"));
+				$(".vtypec").val($("#gem-typec-id").val());
 			});
+			
 			$("#gem-shape-id").change(function() {
+				$(".vshapeId").val($("#gem-shape-id").find("option:selected").attr("sid"));
+				$(".vshape").val($("#gem-shape-id").val());
+			});
+			/*$("#gem-shape-id").change(function() {
 				initSpecByTypeShape();
 			});*/
 			/**
@@ -110,21 +118,23 @@
 			});
 		}
 		
-/*		//初始化形状下拉框值
+		//初始化形状下拉框值
 		function initShapeByType() {
-			var gemTypeId = $("#gem-type-id").find("option:selected").attr("sid");
+			var gemTypeId = $("#gem-typec-id").find("option:selected").attr("sid");
 			if (gemTypeId == "-1") {
-				gemTypeId = "${gemvo['vtype']}";
+				gemTypeId = "${gemvo['vtypec']}";
 			}
 			var shapeUrl = "http://www.bavlo.com/getGemShape?typeId="+ gemTypeId;
 			loadSelDataStr(nativeUrl, shapeUrl, "gem-shape-id", "data[i].id",
 					"data[i].shape_cn", function() {
 						$("#gem-shape-id").val("${gemvo['vshape']}");
-					},"选形状");
+						$("#gem-shape-id").append("<option value='-2'>异形</option>");
+					},"形状");
+			
 		}
 		
 		//初始化规格下拉框值
-		function initSpecByTypeShape() {
+		/*function initSpecByTypeShape() {
 			var gemTypeId = $("#gem-type-id").find("option:selected").attr("sid");
 			var gemShapeId = $("#gem-shape-id").find("option:selected").attr("sid");
 			var specUrl = "http://www.bavlo.com/getGemCalibrated?typeId="
@@ -320,16 +330,26 @@
           <option value="-1">宝石</option>
         </select>
         -->
-        <input type='text' name='vtype' placeholder="宝石类型" class="qsdr r1 gem-type bl-ck-null lose-gem" value="${gemvo['vtype']}">
+        <input type='text' name='vtype' placeholder="声明类型" class="qsdr r1 gem-type bl-ck-null lose-gem" value="${gemvo['vtype']}">
         <dt><input type='text' name='nworth' placeholder="声明价值" class="qsdr r2 gem-worth bl-ck-null lose-gem" value="${gemvo['nworth']}"></dt>
         <div class="clear"></div>
       </div>
+      <div class="qsdtt qsd_right_1">
+      	<select name="vtypec0" class="qsdt r1" id="gem-typec-id">
+          <option value="-1">推测类型</option>
+        </select>
+        <input type="hidden" name="vtypecId" class="vtypecId" value="${gemvo['vtypecId']}">
+        <input type="hidden" name="vtypec" class="vtypec" value="${gemvo['vtypec']}">
+        <div class="clear"></div>
+      </div>
+      
       <div class="qsd_right_1">
-        <!--<select name="vshape" class="qsdr r1"  id="gem-shape-id">
+        <select name="vshape0" class="qsdr r1 lose-gem"  id="gem-shape-id">
           <option value="-1">形状</option>
         </select>
-        -->
-        <input type='text' name='vshape' placeholder="宝石形状" class="qsdr r1 gem-shape bl-ck-null lose-gem" value="${gemvo['vshape']}">
+        <input type="hidden" name="vshapeId" class="vshapeId" value="${gemvo['vshapeId']}">
+        <input type="hidden" name="vshape" class="vshape" value="${gemvo['vshape']}">
+        <!--<input type='text' name='vshape' placeholder="宝石形状" class="qsdr r1 gem-shape bl-ck-null lose-gem" value="${gemvo['vshape']}">-->
         <dt><input type='text' name='nweight' placeholder="重量" class="qsdr r2 gem-weight bl-ck-null lose-gem" value="${gemvo['nweight']}"></dt>
         <div class="clear"></div>
       </div>
