@@ -1,7 +1,9 @@
 package com.bavlo.counter.web;
 
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
+import java.io.IOException;
 import java.util.List;
 
 import javax.annotation.Resource;
@@ -19,6 +21,7 @@ import org.springframework.web.servlet.ModelAndView;
 import com.bavlo.counter.constant.IConstant;
 import com.bavlo.counter.service.ICommonService;
 import com.bavlo.counter.utils.ImageUtils;
+import com.bavlo.counter.utils.ReadFile;
 import com.bavlo.counter.utils.StringUtil;
 
 /**
@@ -130,6 +133,18 @@ public class UploadController extends BaseController {
 	public void uploadFile(@RequestParam("sfile") MultipartFile sfile,HttpServletRequest request, HttpServletResponse response) throws Exception {
 	    
 		uploadHeadPic(sfile,request,response);
+	}
+	
+	@RequestMapping("/delSGFile")
+	public void delFileByName(HttpServletRequest request,String fileName){
+		String filePath = "D:\\FTP\\apache-tomcat-6.0.32-counter\\webapps\\counter\\staticRes\\custom";
+		try {
+			ReadFile.deletefile(filePath+"\\"+fileName);
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 	}
 	
 	@RequestMapping("/uploadFile")

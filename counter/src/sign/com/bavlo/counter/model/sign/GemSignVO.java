@@ -34,6 +34,16 @@ public class GemSignVO extends IdEntity {
 	@Column(length=100)
 	private String vtype;
 	/**
+	 *  推测声明类型		varchar(100)	
+	 */
+	@Column(length=100)
+	private String vtypec;
+	/**
+	 *  推测声明类型Id		varchar(100)	
+	 */
+	@Column(length=100)
+	private String vtypecId;
+	/**
 	 * 声明价值		decimal(20,8)
 	 */
 	@Column(precision=20,scale=8)
@@ -51,6 +61,10 @@ public class GemSignVO extends IdEntity {
 	 * 形状		varchar(50)	
 	 */
 	private String vshape;
+	/**
+	 * 形状Id		varchar(50)	
+	 */
+	private String vshapeId;
 	/**
 	 * 规格		varchar(50)	
 	 */
@@ -124,6 +138,24 @@ public class GemSignVO extends IdEntity {
 	}
 	public void setVcreateTime(String vcreateTime) {
 		this.vcreateTime = vcreateTime;
+	}
+	public String getVtypec() {
+		return vtypec;
+	}
+	public void setVtypec(String vtypec) {
+		this.vtypec = vtypec;
+	}
+	public String getVtypecId() {
+		return vtypecId;
+	}
+	public void setVtypecId(String vtypecId) {
+		this.vtypecId = vtypecId;
+	}
+	public String getVshapeId() {
+		return vshapeId;
+	}
+	public void setVshapeId(String vshapeId) {
+		this.vshapeId = vshapeId;
 	}
 
 }
