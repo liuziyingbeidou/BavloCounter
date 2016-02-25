@@ -63,6 +63,7 @@ public class CustomController extends BaseController implements IConstant {
 	 * orderId=1&customerId=1
 	 */
 	@RequestMapping("edit")
+	@OAuthRequired
 	public ModelAndView edit(Integer id, Integer orderId, Integer customerId) {
 
 		CustomVO customEdit = customService.findCustomById(id);
