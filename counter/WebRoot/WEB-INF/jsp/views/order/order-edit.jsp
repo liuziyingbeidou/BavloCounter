@@ -140,7 +140,7 @@ $(function(){
 	
 	
 	//计算未付
-	$(".order-quotedPrice").focusout(function(){
+	$(".order-quotedPrice").keyup(function(){
 		//报价
 		clearSuffix("order-quotedPrice","元");
 		//已付
@@ -155,7 +155,7 @@ $(function(){
 		//有值加后缀
 		initFieldSuffix();
 	});
-	$(".order-payment").focusout(function(){
+	$(".order-payment").keyup(function(){
 		//报价
 		clearSuffix("order-quotedPrice","元");
 		//已付
@@ -657,17 +657,16 @@ text-overflow:ellipsis;
 
 @media screen and (min-width:320px) and (max-width:1280px) {
 
-.stepInfo{position:relative;background:#f2f2f2;margin:20px auto 70 auto;}
-.stepInfo .lileft{float:left;width:48%;height:0.15em;background:#bbb;}
-.stepInfo .liright{float:left;width:48%;height:0.15em;background:#bbb;}
+.stepInfo{position:relative;background:#f2f2f2;margin:20px 45px 70px -5px;}
+.stepInfo li{float:left;width:48%;height:0.15em;background:#bbb;}
 .stepIco{border-radius:1em;padding:0.03em;background:#bbb;text-align:center;line-height:1.5em;color:#fff; position:absolute;width:1.4em;height:1.4em;}
-.stepIco1{top:-0.7em;left:-1%;}
-.stepIco2{top:-0.7em;left:19%;}
-.stepIco3{top:-0.7em;left:38%;}
-.stepIco4{top:-0.7em;left:58%;}
-.stepIco5{top:-0.7em;left:76%;}
-.stepIco6{top:-0.7em;left:95%;}
-.stepText{color:#DDDDDD;margin-top:0.2em;width:4em;text-align:center;margin-left:-1.4em;}
+.stepIco1{top:-0.7em;left:5%;}
+.stepIco2{top:-0.7em;left:23%;}
+.stepIco3{top:-0.7em;left:42%;}
+.stepIco4{top:-0.7em;left:60%;}
+.stepIco5{top:-0.7em;left:78%;}
+.stepIco6{top:-0.7em;left:96%;}
+.stepText{color:#DDDDDD;margin-top:0.2em;width:4em;text-align:center;margin-left:-1.4em;font-size: 17px;}
 	/* stepInfo 
 	border-radius：0为正方形，0~N，由正方形向圆形转化，N越大越圆。
 	padding：图形的内边距
@@ -681,18 +680,16 @@ text-overflow:ellipsis;
 	*/
 
 }
-.stepInfo{position:relative;background:#f2f2f2;margin:20px auto 70 auto;}
-.stepInfo ul{padding-left:5px;}
-.stepInfo .lileft{float:right;width:47%;height:0.15em;background:#bbb;}
-.stepInfo .liright{float:right;width:47%;height:0.15em;background:#bbb;}
+.stepInfo{position:relative;background:#f2f2f2;margin:20px 45px 70px -5px;}
+.stepInfo li{float:right;width:47%;height:0.15em;background:#bbb;}
 .stepIco{border-radius:1em;padding:0.03em;background:#bbb;text-align:center;line-height:1.5em;color:#fff; position:absolute;width:1.4em;height:1.4em;}
 .stepIco1{top:-0.7em;left:5%;}
-.stepIco2{top:-0.7em;left:21%;}
-.stepIco3{top:-0.7em;left:37%;}
-.stepIco4{top:-0.7em;left:53%;}
-.stepIco5{top:-0.7em;left:69%;}
-.stepIco6{top:-0.7em;left:85%;}
-.stepText{color:#DDDDDD;margin-top:0.2em;width:4em;text-align:center;margin-left:-1.4em;}
+.stepIco2{top:-0.7em;left:23%;}
+.stepIco3{top:-0.7em;left:42%;}
+.stepIco4{top:-0.7em;left:60%;}
+.stepIco5{top:-0.7em;left:78%;}
+.stepIco6{top:-0.7em;left:96%;}
+.stepText{color:#DDDDDD;margin-top:0.2em;width:4em;text-align:center;margin-left:-1.4em;font-size: 17px;}
 
 </style>
 </head>
@@ -746,8 +743,8 @@ text-overflow:ellipsis;
       </div>
       <div class="stepInfo">
 		<ul>
-			<li class="liright"></li>
-			<li class="lileft"></li>
+			<li></li>
+			<li></li>
 		</ul>
 		<div class="stepIco stepIco1" id="create">1
 			<div class="stepText" id="createText">提交</div>
@@ -883,7 +880,7 @@ text-overflow:ellipsis;
           </select>
           <p><input type='text' name="nquotedPrice" class="zf bj order-quotedPrice" value="${ordervo['nquotedPrice'] }" placeholder="报价">
           <input type='text' name="npayment" class="zf yf order-payment bl-suf-null" value="${ordervo['npayment'] }" placeholder="已付"></p>
-          <p><input type='text' name="nnonPayment" class="zf bj order-nonPayment" value="${ordervo['nnonPayment'] }" placeholder="未付">
+          <p><input type='text' readonly="readonly" name="nnonPayment" class="zf bj order-nonPayment" value="${ordervo['nnonPayment'] }" placeholder="未付">
           <input type='text' name="ntailPaid" class="zf yf order-tailPaid" value="${ordervo['ntailPaid'] }" placeholder="尾款实收"></p>
           <input type="text" name="ddeliverdate" value="${ordervo['ddeliverdate'] }" id="datetimepicker" class="jianding" placeholder="交付时间" />
           
