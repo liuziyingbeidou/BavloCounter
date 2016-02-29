@@ -147,6 +147,34 @@ public class UploadController extends BaseController {
 		}
 	}
 	
+	/**
+	 * @Description: 删除已上传图片
+	 * @param @param request
+	 * @param @param fileModel 模块  eg： custom or custom
+	 * @param @param fileName 文件名称
+	 * @return void
+	 */
+	@RequestMapping("/delPic")
+	public void delPicByName(HttpServletRequest request,String fileModel,String fileName){
+		String filePath = "D:\\FTP\\apache-tomcat-6.0.32-counter\\webapps\\counter\\staticRes";
+		try {
+			ReadFile.deletefile(filePath+"\\"+fileModel+"\\"+fileName);//原图
+			
+			String minFileName = null;
+	        int index = fileName.lastIndexOf(".");
+	        if (index != -1) {
+	        	minFileName = fileName.substring(0, index) + "_min" + fileName.substring(index);
+	        } else {
+	        	minFileName = fileName+"_min.jpg";
+	        }
+			ReadFile.deletefile(filePath+"\\"+fileModel+"\\min\\"+minFileName);//小图
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+	
 	@RequestMapping("/uploadFile")
     public void uploadHeadPic(@RequestParam("file")MultipartFile file,HttpServletRequest request,HttpServletResponse response){
         try {
