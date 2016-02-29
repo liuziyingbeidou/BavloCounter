@@ -99,6 +99,7 @@
 			}else{
 				$(".header-loc").hide();
 			}
+			
 		});
 		
 		//加载子表数据
@@ -107,22 +108,54 @@
 			$.get(url,{cpath:"com.bavlo.counter.model.sign.GemSignBVO",fkey:"gemsignId",id:mid},function(row){
 				var data = row;
 				if(data != "" && data != null){
+					$(".qsd_pic_list ul").html("");
 					for(var i = 0; i < data.length; i++){
 						if(data[i].biscover == "Y"){
 							$("#FILE_0").val(data[i].vname);
 						}else{
 							$("#FILE_"+i).val(data[i].vname);
 						}
+						var minPicName = getMinPicByOrg(data[i].vname);
+						$(".qsd_pic_list ul").append("<li><img class='list_pic' style='width:60px;height:60px;' src='${ctx}/staticRes/gemsign/min/"+minPicName+"'><div class='dask' style='z-index:-1;cursor:pointer;width:60px;height:60px;padding:20px 0 0 20px;background:#000;opacity:0.8;position:relative;top:-60px;' picn='"+data[i].vname+"'><img src='${ctx}/resources/images/delete_shield_24px.ico'></div></li>");
+						
 					}
 				}
 			});
 		}
+		
+		//根据原图名称获取小图名称
+		function getMinPicByOrg(picName){//20160226_min.jsp
+			var newPicName = "";
+			if(picName != "" && picName != null){
+				var ix = picName.indexOf(".");
+				newPicName = picName.substring(0,ix)+"_min"+picName.substring(ix,picName.length);
+			}
+			
+			return newPicName;
+		}
+		
+		//根据原图名称获取小图名称
+		function getOrgPicByMin(picName){//20160226_min.jsp
+			var newPicName = "";
+			if(picName != "" && picName != null){
+				var ix = picName.indexOf("_min.");
+				newPicName = picName.substring(0,ix)+"."+picName.substring(ix+5,picName.length);
+			}
+			
+			return newPicName;
+		}
+		
 		
 		//初始化形状下拉框值
 		function initShapeByType() {
 			var gemTypeId = $("#gem-typec-id").find("option:selected").attr("sid");
 			if (gemTypeId == "-1") {
 				gemTypeId = "${gemvo['vtypec']}";
+			}
+			if(gemTypeId == undefined){
+				$("#gem-shape-id").empty();
+				$("#gem-shape-id").append("<option value='-1'>形状</option>");
+				return;
 			}
 			var shapeUrl = "http://www.bavlo.com/getGemShape?typeId="+ gemTypeId;
 			loadSelDataStr(nativeUrl, shapeUrl, "gem-shape-id", "data[i].id",
@@ -258,6 +291,14 @@
 			}
 		}
 		
+		//上传后显示小图
+		function showMinPic(em,value){
+			if($("#"+em).val() != null && $("#"+em).val() != ""){
+				var minPicName = getMinPicByOrg(value);
+				$(".qsd_pic_list ul").append("<li><img class='list_pic' style='width:60px;height:60px;' src='${ctx}/staticRes/gemsign/min/"+minPicName+"'><div class='dask' style='z-index:-1;cursor:pointer;width:60px;height:60px;padding:20px 0 0 20px;background:#000;opacity:0.8;position:relative;top:-60px;' picn='"+value+"'><img src='${ctx}/resources/images/delete_shield_24px.ico'></div></li>");
+			}
+		}
+		
 		</script>
 		<style type="text/css">
 		.gem-pic-show img{width:330px;height:330px;}
@@ -270,6 +311,12 @@
 		.edit_hidden { width:110px; position:relative; top:10px; left:-15;}
 		/*.qsdn,.qssm{width:328px}*/
 		#file{cursor:pointer;}
+		
+		/*.dask{z-index:-1;cursor:pointer;width:60px;height:60px;padding:20px 0 0 20px;background:#000;opacity:0;position:absolute;top:-200px;}*/
+		.dask{
+			z-index:-1;cursor:pointer;width:60px;height:60px;padding:20px 0 0 20px;background:#000;opacity:0.8;position:relative;top:-60px;
+		}
+		.qsd_pic_list ul li{height:60px;}
 		@media screen and (max-width: 1280px) and (min-width: 320px){
 		.qsd_left ul li {
 			height:auto;
@@ -322,6 +369,16 @@
 			</c:choose> 
 		</a>
 	</dt>
+	<div class="qsd_pic_list">
+	<ul>
+		<!--<li><img class="list_pic" style="width:60px;height:60px;" src="${ctx}/resources/images/customer_01.png">
+			<div class="dask">
+			<img src="${ctx}/resources/images/delete_shield_24px.ico">
+			</div>
+		</li>
+		-->
+	</ul>
+	</div>
     </div>
     <div class="qsd_right edit_btn">
       <div class="qsd_right_1">
@@ -389,4 +446,35 @@
 	<input type="hidden" name="filevalue" id="filevalue"></input>
 	</form>
 	</body>
+	<script type="text/javascript">
+	$(function(){
+		//小图列表遮罩
+		setMask();
+		//删除图片
+		delPic();
+	});
+	//遮罩
+	function setMask(){
+		$(".qsd_pic_list ul li").hover(
+			function () {
+				$(this).find(".dask").stop().delay(20).animate({"z-index":"1",opacity:0.8},200);
+			 },
+			function () {
+				$(this).find(".dask").stop().animate({"z-index":"-1",opacity:0},200);
+			}
+			
+		);
+	}
+	//删除图片
+	function delPic(){
+		$(".qsd_pic_list ul li .dask").click(function(){
+			if(confirm("是否删除?")){
+				var fileModel = $("#filemodel").val();
+				var fileName = $(this).attr("picn");
+			 	var url = "${ctx}/upload/delPic.do";
+				$.get(url,{fileModel:fileModel,fileName:fileName},function(){});
+			}
+		});
+	}
+	</script>
 </html>
