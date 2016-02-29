@@ -544,30 +544,39 @@
             case 'WU_FILE_0':
             	$("#FILE_0",window.parent.document).val(val._raw);
             	window.parent.showDefaultPic();
+            	window.parent.showMinPic('FILE_0',val._raw);
             	break;
             case 'WU_FILE_1':
             	$("#FILE_1",window.parent.document).val(val._raw);
+            	window.parent.showMinPic('FILE_1',val._raw);
             	break;
             case 'WU_FILE_2':
             	$("#FILE_2",window.parent.document).val(val._raw);
+            	window.parent.showMinPic('FILE_2',val._raw);
             	break;
             case 'WU_FILE_3':
             	$("#FILE_3",window.parent.document).val(val._raw);
+            	window.parent.showMinPic('FILE_3',val._raw);
             	break;
             case 'WU_FILE_4':
             	$("#FILE_4",window.parent.document).val(val._raw);
+            	window.parent.showMinPic('FILE_4',val._raw);
             	break;
             case 'WU_FILE_5':
             	$("#FILE_5",window.parent.document).val(val._raw);
+            	window.parent.showMinPic('FILE_5',val._raw);
             	break;
             case 'WU_FILE_6':
             	$("#FILE_6",window.parent.document).val(val._raw);
+            	window.parent.showMinPic('FILE_6',val._raw);
             	break;
             case 'WU_FILE_7':
             	$("#FILE_7",window.parent.document).val(val._raw);
+            	window.parent.showMinPic('FILE_7',val._raw);
             	break;
             case 'WU_FILE_8':
             	$("#FILE_8",window.parent.document).val(val._raw);
+            	window.parent.showMinPic('FILE_8',val._raw);
             	break;
             }
             $(".completeBtn").show();
