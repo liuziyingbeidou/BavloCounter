@@ -112,12 +112,21 @@
 			$.get(url,{cpath:"com.bavlo.counter.model.sign.EntitySignBVO",fkey:"entitysignId",id:mid},function(row){
 				var data = row;
 				if(data != "" && data != null){
+					$(".qsd_pic_list ul").html("");
 					for(var i = 0; i < data.length; i++){
 						if(data[i].biscover == "Y"){
 							$("#FILE_0").val(data[i].vname);
 						}else{
 							$("#FILE_"+i).val(data[i].vname);
 						}
+						var minPicName = getMinPicByOrg(data[i].vname);
+						//$(".qsd_pic_list ul").append("<li><img class='list_pic' style='width:60px;height:60px;' src='${ctx}/staticRes/gemsign/min/"+minPicName+"'><div class='dask' style='z-index:-1;cursor:pointer;width:60px;height:60px;padding:20px 0 0 20px;background:#000;opacity:0.8;position:relative;top:-60px;' picn='"+data[i].vname+"'><img src='${ctx}/resources/images/delete_shield_24px.ico'></div></li>");
+						//显示小图
+						var value = data[i].vname;
+						var ix = value.indexOf(".");
+						var val = value.substring(0,ix);
+						var fm = "FILE_"+i;
+						$(".qsd_pic_list ul").append("<li id='"+val+"' fem='"+fm+"' onmouseout='setMaskT(\""+val+"\")' onmouseover='setMaskO(\""+val+"\")'><img class='list_pic' style='width:60px;height:60px;' src='${ctx}/staticRes/"+fileModel+"/min/"+minPicName+"'><div onclick='rmMaskC(\""+value+"\")' class='dask' style='z-index:-1;cursor:pointer;width:60px;height:60px;padding:20px 0 0 20px;background:#000;opacity:0.8;position:relative;top:-60px;' picn='"+value+"'><img src='${ctx}/resources/images/delete_shield_24px.ico'></div></li>");
 					}
 				}
 			});
@@ -201,6 +210,27 @@
 				$("#entity-pic-show-id img").attr("src","${ctx}/staticRes/"+$("#filemodel").val()+"/"+$("#FILE_0").val());
 			}
 		}
+		/*//根据原图名称获取小图名称
+		function getMinPicByOrg(picName){//20160226_min.jsp
+			var newPicName = "";
+			if(picName != "" && picName != null){
+				var ix = picName.indexOf(".");
+				newPicName = picName.substring(0,ix)+"_min"+picName.substring(ix,picName.length);
+			}
+			
+			return newPicName;
+		}
+		
+		//根据原图名称获取小图名称
+		function getOrgPicByMin(picName){//20160226_min.jsp
+			var newPicName = "";
+			if(picName != "" && picName != null){
+				var ix = picName.indexOf("_min.");
+				newPicName = picName.substring(0,ix)+"."+picName.substring(ix+5,picName.length);
+			}
+			
+			return newPicName;
+		}*/
 		</script>
 		<style type="text/css">
 		.entity-pic-show img{width:330px;height:330px;}
@@ -211,6 +241,7 @@
 		.hidden_enent { width:110px; position:relative; top:10px; right:-690px;}
 		.edit_hidden { width:110px; position:relative; top:10px; left:-15;}
 		.e-customer-add{cursor:pointer;}
+		.qsd_pic_list ul li{height:60px;}
 		/*.swqsd,.swqsd1,.qssm,.qsdn1{width:328px;}*/
 		@media screen and (max-width: 1280px) and (min-width: 320px){
 		.qsd_left ul li {
@@ -263,6 +294,16 @@
 	  </c:choose> 
       </a>
       </dt>
+        <div class="qsd_pic_list">
+		<ul>
+			<!--<li><img class="list_pic" style="width:60px;height:60px;" src="${ctx}/resources/images/customer_01.png">
+				<div class="dask">
+				<img src="${ctx}/resources/images/delete_shield_24px.ico">
+				</div>
+			</li>
+			-->
+		</ul>
+		</div>
     </div>
     <div class="qsd_right edit_btn">
       <div class="qsd_right_1">
@@ -301,4 +342,103 @@
 	<input type="hidden" name="FILE_8" id="FILE_8"></input>
 </form>
 </body>
+<script type="text/javascript">
+	$(function(){
+		//小图列表遮罩
+		setMask();
+		//删除图片
+		delPic();
+	});
+	//遮罩
+	function setMask(){
+		$(".qsd_pic_list ul li").hover(
+			function () {
+				$(this).find(".dask").stop().delay(20).animate({"z-index":"1",opacity:0.8},200);
+			 },
+			function () {
+				$(this).find(".dask").stop().animate({"z-index":"-1",opacity:0},200);
+			}
+			
+		);
+	}
+	
+	//删除图片
+	function delPic(){
+		$(".qsd_pic_list ul li").bind("click",function(){
+			var em = this;
+			if(confirm("是否删除?")){
+				var fileModel = $("#filemodel").val();
+				var fileName = $(this).attr("picn");
+			 	var url = "${ctx}/upload/delPic.do";
+				$.get(url,{fileModel:fileModel,fileName:fileName},function(){
+					var fem = $(em).attr("fem");
+					if(fem == "FILE_0"){
+						$("#entity-pic-show-id img").prop("src","${ctx}/resources/images/pic_02.png");
+						$("#FILE_0").val("");
+					}
+					$(em).remove();
+				});
+			}
+		});
+	}
+	//上传后显示小图
+	function showMinPic(em,value){
+		if($("#"+em).val() != null && $("#"+em).val() != ""){
+			var minPicName = getMinPicByOrg(value);
+			var ix = value.indexOf(".");
+			var val = value.substring(0,ix);
+			var fileModel = $("#filemodel").val();
+			$(".qsd_pic_list ul").append("<li id='"+val+"' fem='"+em+"' onmouseout='setMaskT(\""+val+"\")' onmouseover='setMaskO(\""+val+"\")'><img class='list_pic' style='width:60px;height:60px;' src='${ctx}/staticRes/"+fileModel+"/min/"+minPicName+"'><div onclick='rmMaskC(\""+value+"\")' class='dask' style='z-index:-1;cursor:pointer;width:60px;height:60px;padding:20px 0 0 20px;background:#000;opacity:0.8;position:relative;top:-60px;' picn='"+value+"'><img src='${ctx}/resources/images/delete_shield_24px.ico'></div></li>");
+		}
+	}
+	
+	//移入
+	function setMaskO(value){
+		$("#"+value).find(".dask").stop().delay(20).animate({"z-index":"1",opacity:0.8},200);
+	}
+	//移出
+	function setMaskT(value){
+		$("#"+value).find(".dask").stop().animate({"z-index":"-1",opacity:0},200);
+	}
+	
+	//删除小图
+	function rmMaskC(value){
+		var ix = value.indexOf(".");
+		var val = value.substring(0,ix);
+		if(confirm("是否删除?")){
+			var fileModel = $("#filemodel").val();
+			var fileName = value;
+		 	var url = "${ctx}/upload/delPic.do";
+			$.get(url,{fileModel:fileModel,fileName:fileName},function(){
+				var fem = $("#"+val).attr("fem");
+				if(fem == "FILE_0"){
+					$("#gem-pic-show-id img").prop("src","${ctx}/resources/images/pic_02.png");
+					$("#FILE_0").val("");
+				}
+				$("#"+val).remove();
+			});
+		}
+	}
+	//根据原图名称获取小图名称
+	function getMinPicByOrg(picName){//20160226_min.jsp
+		var newPicName = "";
+		if(picName != "" && picName != null){
+			var ix = picName.indexOf(".");
+			newPicName = picName.substring(0,ix)+"_min"+picName.substring(ix,picName.length);
+		}
+		
+		return newPicName;
+	}
+	
+	//根据原图名称获取小图名称
+	function getOrgPicByMin(picName){//20160226_min.jsp
+		var newPicName = "";
+		if(picName != "" && picName != null){
+			var ix = picName.indexOf("_min.");
+			newPicName = picName.substring(0,ix)+"."+picName.substring(ix+5,picName.length);
+		}
+		
+		return newPicName;
+	}
+</script>
 </html>
