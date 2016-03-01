@@ -382,7 +382,7 @@
 		});
 	}
 	//上传后显示小图
-	function showMinPic(em,value){
+	function showMinPic(em,value,c){
 		if($("#"+em).val() != null && $("#"+em).val() != ""){
 			var minPicName = getMinPicByOrg(value);
 			var ix = value.indexOf(".");
