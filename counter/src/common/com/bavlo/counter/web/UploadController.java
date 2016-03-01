@@ -8,6 +8,7 @@ import java.util.List;
 
 import javax.annotation.Resource;
 import javax.imageio.ImageIO;
+import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -15,6 +16,7 @@ import org.apache.log4j.Logger;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.context.ServletContextAware;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -33,11 +35,13 @@ import com.bavlo.counter.utils.StringUtil;
  */
 @Controller("uploadController")
 @RequestMapping(value = "/upload")
-public class UploadController extends BaseController {
+public class UploadController extends BaseController implements ServletContextAware{
 	
 	@Resource
 	ICommonService commonService;
 
+	private ServletContext servletContext; 
+	
 	Logger log = Logger.getLogger(UploadController.class);
 	
 	@RequestMapping("/uppage")
@@ -137,7 +141,9 @@ public class UploadController extends BaseController {
 	
 	@RequestMapping("/delSGFile")
 	public void delFileByName(HttpServletRequest request,String fileName){
-		String filePath = "D:\\FTP\\apache-tomcat-6.0.32-counter\\webapps\\counter\\staticRes\\custom";
+		//String filePath = "D:\\FTP\\apache-tomcat-6.0.32-counter\\webapps\\counter\\staticRes\\custom";
+		String basePath = servletContext.getRealPath("/");  
+        String filePath = basePath +"/"+IConstant.FILE_DIR+"/custom";
 		try {
 			ReadFile.deletefile(filePath+"\\"+fileName);
 		} catch (FileNotFoundException e) {
@@ -156,18 +162,24 @@ public class UploadController extends BaseController {
 	 */
 	@RequestMapping("/delPic")
 	public void delPicByName(HttpServletRequest request,String fileModel,String fileName){
-		String filePath = "D:\\FTP\\apache-tomcat-6.0.32-counter\\webapps\\counter\\staticRes";
+		//String filePath = "D:\\FTP\\apache-tomcat-6.0.32-counter\\webapps\\counter\\staticRes";
+		String basePath = servletContext.getRealPath("/");  
+        String filePath = basePath +"/"+IConstant.FILE_DIR;
 		try {
-			ReadFile.deletefile(filePath+"\\"+fileModel+"\\"+fileName);//ԭͼ
+			ReadFile.deletefile(filePath+"/"+fileModel+"/"+fileName);//ԭͼ
 			
 			String minFileName = null;
-	        int index = fileName.lastIndexOf(".");
-	        if (index != -1) {
-	        	minFileName = fileName.substring(0, index) + "_min" + fileName.substring(index);
-	        } else {
-	        	minFileName = fileName+"_min.jpg";
-	        }
-			ReadFile.deletefile(filePath+"\\"+fileModel+"\\min\\"+minFileName);//Сͼ
+			if(fileName != null && fileName != ""){
+				
+				int index = fileName.lastIndexOf(".");
+		        if (index != -1) {
+		        	minFileName = fileName.substring(0, index) + "_min" + fileName.substring(index);
+		        } else {
+		        	minFileName = fileName+"_min.jpg";
+		        }
+				ReadFile.deletefile(filePath+"\\"+fileModel+"\\min\\"+minFileName);//Сͼ
+			}
+	        
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
 		} catch (IOException e) {
@@ -208,4 +220,9 @@ public class UploadController extends BaseController {
             e.printStackTrace();
         }
    }
+	
+	@Override  
+    public void setServletContext(ServletContext servletContext) {  
+        this.servletContext = servletContext;  
+    }  
 }
