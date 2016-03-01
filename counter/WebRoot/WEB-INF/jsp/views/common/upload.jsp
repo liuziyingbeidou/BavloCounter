@@ -42,6 +42,7 @@
 	    //完成事件
 	    $(".completeBtn").click(function(){
 	    	$(".ui-dialog-titlebar-close",window.parent.document).trigger("click");
+	    	window.parent.fnCompleteBtn();
 	    });
     });
     
@@ -63,6 +64,7 @@
 		        $("#"+obj,window.parent.document).val(returndata);
 		        //删除原文件名
 		        window.parent.delFileByName();
+		        
 		    }
 		  });
     }
