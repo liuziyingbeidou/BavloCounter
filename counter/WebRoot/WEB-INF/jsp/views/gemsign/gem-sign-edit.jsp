@@ -79,10 +79,10 @@
 			 		if($("#FILE_0").val() == "" || $("#FILE_0").val() == null){
 			 			alert("暂未上传图片");
 			 		}else{
-			 			openURL("${ctx}/upload/shownpic.do?frmId=gemfrmBId","图片展示");
+			 			openURL("${ctx}/upload/shownpic.do?frmId=gemfrmBId","图片展示",null,null,true);
 			 		}
 			 	}else{
-			 		openURL("${ctx}/upload/showpic.do?cpath=com.bavlo.counter.model.sign.GemSignBVO&fkey=gemsignId&id="+mid,"图片展示");
+			 		openURL("${ctx}/upload/showpic.do?cpath=com.bavlo.counter.model.sign.GemSignBVO&fkey=gemsignId&id="+mid,"图片展示",null,null,true);
 			 	}
 			 });
 			 //宝石签收单列表
@@ -109,6 +109,7 @@
 				var data = row;
 				if(data != "" && data != null){
 					$(".qsd_pic_list ul").html("");
+					var fileModel = $("#filemodel").val();
 					for(var i = 0; i < data.length; i++){
 						if(data[i].biscover == "Y"){
 							$("#FILE_0").val(data[i].vname);
@@ -116,35 +117,17 @@
 							$("#FILE_"+i).val(data[i].vname);
 						}
 						var minPicName = getMinPicByOrg(data[i].vname);
-						$(".qsd_pic_list ul").append("<li><img class='list_pic' style='width:60px;height:60px;' src='${ctx}/staticRes/gemsign/min/"+minPicName+"'><div class='dask' style='z-index:-1;cursor:pointer;width:60px;height:60px;padding:20px 0 0 20px;background:#000;opacity:0.8;position:relative;top:-60px;' picn='"+data[i].vname+"'><img src='${ctx}/resources/images/delete_shield_24px.ico'></div></li>");
+						//$(".qsd_pic_list ul").append("<li><img class='list_pic' style='width:60px;height:60px;' src='${ctx}/staticRes/gemsign/min/"+minPicName+"'><div class='dask' style='z-index:-1;cursor:pointer;width:60px;height:60px;padding:20px 0 0 20px;background:#000;opacity:0.8;position:relative;top:-60px;' picn='"+data[i].vname+"'><img src='${ctx}/resources/images/delete_shield_24px.ico'></div></li>");
+						var value = data[i].vname;
+						var ix = value.indexOf(".");
+						var val = value.substring(0,ix);
+						var fm = "FILE_"+i;
+						$(".qsd_pic_list ul").append("<li id='"+val+"' fem='"+fm+"' onmouseout='setMaskT(\""+val+"\")' onmouseover='setMaskO(\""+val+"\")'><img class='list_pic' style='width:60px;height:60px;' src='${ctx}/staticRes/"+fileModel+"/min/"+minPicName+"'><div onclick='rmMaskC(\""+value+"\")' class='dask' style='z-index:-1;cursor:pointer;width:60px;height:60px;padding:20px 0 0 20px;background:#000;opacity:0.8;position:relative;top:-60px;' picn='"+value+"'><img src='${ctx}/resources/images/delete_shield_24px.ico'></div></li>");
 						
 					}
 				}
 			});
 		}
-		
-		//根据原图名称获取小图名称
-		function getMinPicByOrg(picName){//20160226_min.jsp
-			var newPicName = "";
-			if(picName != "" && picName != null){
-				var ix = picName.indexOf(".");
-				newPicName = picName.substring(0,ix)+"_min"+picName.substring(ix,picName.length);
-			}
-			
-			return newPicName;
-		}
-		
-		//根据原图名称获取小图名称
-		function getOrgPicByMin(picName){//20160226_min.jsp
-			var newPicName = "";
-			if(picName != "" && picName != null){
-				var ix = picName.indexOf("_min.");
-				newPicName = picName.substring(0,ix)+"."+picName.substring(ix+5,picName.length);
-			}
-			
-			return newPicName;
-		}
-		
 		
 		//初始化形状下拉框值
 		function initShapeByType() {
@@ -291,14 +274,6 @@
 			}
 		}
 		
-		//上传后显示小图
-		function showMinPic(em,value){
-			if($("#"+em).val() != null && $("#"+em).val() != ""){
-				var minPicName = getMinPicByOrg(value);
-				$(".qsd_pic_list ul").append("<li><img class='list_pic' style='width:60px;height:60px;' src='${ctx}/staticRes/gemsign/min/"+minPicName+"'><div class='dask' style='z-index:-1;cursor:pointer;width:60px;height:60px;padding:20px 0 0 20px;background:#000;opacity:0.8;position:relative;top:-60px;' picn='"+value+"'><img src='${ctx}/resources/images/delete_shield_24px.ico'></div></li>");
-			}
-		}
-		
 		</script>
 		<style type="text/css">
 		.gem-pic-show img{width:330px;height:330px;}
@@ -334,16 +309,16 @@
 <header class="demo-bar">
 	<h1>
 		${pageOrderType}宝石签收单
-			<c:choose>
-				 <c:when test="${empty gemvo['vnumber']}">   
-				 ${number }
-				 <input type="hidden" name="vnumber" value="${number }">
-				 </c:when>
-				 <c:otherwise>
-				 ${gemvo['vnumber']}
-				 <input type="hidden" name="vnumber" value="${gemvo['vnumber']}">
-				 </c:otherwise>	
-			</c:choose>
+		<c:choose>
+			 <c:when test="${empty gemvo['vnumber']}">   
+			 ${number }
+			 <input type="hidden" name="vnumber" value="${number }">
+			 </c:when>
+			 <c:otherwise>
+			 ${gemvo['vnumber']}
+			 <input type="hidden" name="vnumber" value="${gemvo['vnumber']}">
+			 </c:otherwise>	
+		</c:choose>
 	</h1>
 </header>
 <jsp:include page="../header.jsp"></jsp:include>
@@ -375,8 +350,8 @@
 			<div class="dask">
 			<img src="${ctx}/resources/images/delete_shield_24px.ico">
 			</div>
-		</li>
-		-->
+		</li>-->
+		
 	</ul>
 	</div>
     </div>
@@ -465,16 +440,86 @@
 			
 		);
 	}
+	
 	//删除图片
 	function delPic(){
-		$(".qsd_pic_list ul li .dask").click(function(){
+		$(".qsd_pic_list ul li").bind("click",function(){
+			var em = this;
 			if(confirm("是否删除?")){
 				var fileModel = $("#filemodel").val();
 				var fileName = $(this).attr("picn");
 			 	var url = "${ctx}/upload/delPic.do";
-				$.get(url,{fileModel:fileModel,fileName:fileName},function(){});
+				$.get(url,{fileModel:fileModel,fileName:fileName},function(){
+					var fem = $(em).attr("fem");
+					if(fem == "FILE_0"){
+						$("#gem-pic-show-id img").prop("src","${ctx}/resources/images/pic_02.png");
+						$("#FILE_0").val("");
+					}
+					
+					$(em).remove();
+				});
 			}
 		});
+	}
+	//上传后显示小图{JS实现}
+	function showMinPic(em,value){
+		if($("#"+em).val() != null && $("#"+em).val() != ""){
+			var minPicName = getMinPicByOrg(value);
+			var ix = value.indexOf(".");
+			var val = value.substring(0,ix);
+			var fileModel = $("#filemodel").val();
+			$(".qsd_pic_list ul").append("<li id='"+val+"' fem='"+em+"' onmouseout='setMaskT(\""+val+"\")' onmouseover='setMaskO(\""+val+"\")'><img class='list_pic' style='width:60px;height:60px;' src='${ctx}/staticRes/"+fileModel+"/min/"+minPicName+"'><div onclick='rmMaskC(\""+value+"\")' class='dask' style='z-index:-1;cursor:pointer;width:60px;height:60px;padding:20px 0 0 20px;background:#000;opacity:0.8;position:relative;top:-60px;' picn='"+value+"'><img src='${ctx}/resources/images/delete_shield_24px.ico'></div></li>");
+		}
+	}
+	
+	//移入
+	function setMaskO(value){
+		$("#"+value).find(".dask").stop().delay(20).animate({"z-index":"1",opacity:0.8},200);
+	}
+	
+	//移出
+	function setMaskT(value){
+		$("#"+value).find(".dask").stop().animate({"z-index":"-1",opacity:0},200);
+	}
+	
+	//删除小图
+	function rmMaskC(value){
+		var ix = value.indexOf(".");
+		var val = value.substring(0,ix);
+		if(confirm("是否删除?")){
+			var fileModel = $("#filemodel").val();
+			var fileName = value;
+		 	var url = "${ctx}/upload/delPic.do";
+			$.get(url,{fileModel:fileModel,fileName:fileName},function(){
+				var fem = $("#"+val).attr("fem");
+				if(fem == "FILE_0"){
+					$("#gem-pic-show-id img").prop("src","${ctx}/resources/images/pic_02.png");
+					$("#FILE_0").val("");
+				}
+				$("#"+val).remove();
+			});
+		}
+	}
+	//根据原图名称获取小图名称
+	function getMinPicByOrg(picName){//20160226_min.jsp
+		var newPicName = "";
+		if(picName != "" && picName != null){
+			var ix = picName.indexOf(".");
+			newPicName = picName.substring(0,ix)+"_min"+picName.substring(ix,picName.length);
+		}
+		
+		return newPicName;
+	}
+	
+	//根据原图名称获取小图名称
+	function getOrgPicByMin(picName){//20160226_min.jsp
+		var newPicName = "";
+		if(picName != "" && picName != null){
+			var ix = picName.indexOf("_min.");
+			newPicName = picName.substring(0,ix)+"."+picName.substring(ix+5,picName.length);
+		}
+		
+		return newPicName;
 	}
 	</script>
 </html>
