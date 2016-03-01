@@ -462,7 +462,7 @@
 		});
 	}
 	//上传后显示小图{JS实现}
-	function showMinPic(em,value){
+	function showMinPic(em,value,c){
 		if($("#"+em).val() != null && $("#"+em).val() != ""){
 			var minPicName = getMinPicByOrg(value);
 			var ix = value.indexOf(".");
