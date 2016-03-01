@@ -57,6 +57,7 @@
 		    processData: false,
 		    success: function (returndata) {
 		    	alert("上传成功!");
+		    	$(".completeBtn").show();
 		    	var obj = $("#filevalue").val();
 		    	$(".sfile-name").text(returndata);
 		        $("#"+obj,window.parent.document).val(returndata);
@@ -125,7 +126,7 @@
 	  </form>
     </div>
     <div class="upload_btn file-upload"><input type='button' class="signlefile" name='button' value='Upload'></div>
-    <div class="upload_btn completeBtn"><input type='button' name='button' value='完成'></div>
+    <div class="upload_btn completeBtn"><input type='button' name='buttonc' value='完成'></div>
 </div>
 </body>
 </html>
