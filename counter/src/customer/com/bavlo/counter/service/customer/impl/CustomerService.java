@@ -53,7 +53,11 @@ public class CustomerService extends CommonService implements ICustomerService {
 
 	@Override
 	public void updateCustomer(CustomerVO customerVO) {
-		
+		try {
+			update(customerVO);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 	
 	@Override
