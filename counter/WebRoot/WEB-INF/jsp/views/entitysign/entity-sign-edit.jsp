@@ -46,7 +46,7 @@
 			 		if($("#FILE_0").val() == "" || $("#FILE_0").val() == null){
 			 			alert("暂未上传图片");
 			 		}else{
-			 			openURL("${ctx}/upload/shownpic.do?frmId=entityfrmBId","图片展示");
+			 			openURL("${ctx}/upload/shownpic.do?frmId=entityfrmBId","图片展示",null,null,true);
 			 		}
 			 	}else{
 			 		openURL("${ctx}/upload/showpic.do?cpath=com.bavlo.counter.model.sign.EntitySignBVO&fkey=entitysignId&id="+mid,"图片展示",null,null,true);
