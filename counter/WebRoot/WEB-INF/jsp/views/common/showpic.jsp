@@ -84,7 +84,7 @@ $(document).ready(function(){
 	<div class="main_image">
 		<ul>
 		  <c:forEach items="${listbvo}" var="bean">
-	      <li><span class="img_"><img  src="${ctx}/staticRes/${bean.vpath}/${bean.vname}" width="330" height="330" /></span></li>
+	      <li><span class="img_"><img  src="${ctx}/staticRes/${bean.vpath}/${bean.vname}" width="100%" /></span></li>
 	      </c:forEach>
 		</ul>
 		<a href="javascript:void(0);" id="btn_prev"></a>

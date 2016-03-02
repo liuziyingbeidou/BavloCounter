@@ -114,7 +114,8 @@ function loadRingSizeData(nativeUrl,remoteUrl,emName,selId,selName1,selName2,sel
 		var data = row;
 		if(data != null){
 			for(var i=0;i<data.length;i++){
-				$('#'+emName).append("<option value='"+eval(selName1)+"号 内径"+eval(selName2)+"mm 周长"+eval(selName3)+"mm'>"+eval(selName1)+"号 内径"+eval(selName2)+"mm 周长"+eval(selName3)+"mm</option>");
+				//$('#'+emName).append("<option value='"+eval(selName1)+"号 内径"+eval(selName2)+"mm 周长"+eval(selName3)+"mm'>"+eval(selName1)+"号 内径"+eval(selName2)+"mm 周长"+eval(selName3)+"mm</option>");
+				$('#'+emName).append("<option value='"+eval(selName1)+"号"+"'>"+eval(selName1)+"号"+"</option>");
 			}
 		}
 		

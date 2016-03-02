@@ -182,9 +182,21 @@ $(function() {
 	$(".calculator_btn2").click(function() { // 价格详情
 		calculator("detailPrice");
 	})
-
+	window.onbeforeunload = function() { 
+		if(customId == null){
+			saveOrUpdate();
+		}
+	} 
 	initFieldSuffix(); // 增加后缀
+	fnCompleteBtn(); // 显示CAD、矢量图名字
 })
+
+function fnCompleteBtn(){ // 显示CAD、矢量图名字
+	var vengraveVhName = $("#vengraveVh").val();
+	$(".vectorgraphName").text(vengraveVhName);
+	var vcadFileName = $("#vcadFile").val();
+	$(".cad_fileName").text(vcadFileName);
+}
 
 function loadBaseData() { // 加载基础数据
 	loadStyleType();
@@ -244,22 +256,26 @@ $(function() {
 	$(".cankaotu").bind("click", function() { // 上传参考图
 		$("#filetype").val("pic");
 		$("#vtype").val("customCankao");
-		openURL("/counter/upload/uppage.do", "上传参考图", null, 370);
+		openURL("/counter/upload/uppage.do", "上传参考图", null, 430);
 	});
 	$(".qibantu").bind("click", function() { // 上传起版图
 		$("#filetype").val("pic");
 		$("#vtype").val("customSheji");
-		openURL("/counter/upload/uppage.do", "上传起版图", null, 370);
+		openURL("/counter/upload/uppage.do", "上传起版图", null, 430);
 	});
 	$(".vectorgraph").bind("click", function() { // 上传刻字矢量图
 		$("#filetype").val("file");
-		openURL("/counter/upload/uppage.do", "上传刻字矢量图", null, 370);
+		openURL("/counter/upload/uppage.do", "上传刻字矢量图", null, 430);
 		$("#filevalue").val("vengraveVh");
+		var vengraveVhName = $("#vengraveVh").val();
+		$("#vectorgraphName").text(vengraveVhName);
 	});
 	$(".cad_file").bind("click", function() {
 		$("#filetype").val("file");
-		openURL("/counter/upload/uppage.do", "上传CAD文件");
+		openURL("/counter/upload/uppage.do", "上传CAD文件", null, 430);
 		$("#filevalue").val("vcadFile");
+		var vcadFileName = $("#vcadFile").val();
+		$("#cad_fileName").text(vcadFileName);
 	});
 
 	var customId = $("#customId").val(); // 款式单ID
@@ -274,12 +290,12 @@ $(function() {
 							} else {
 								openURL(
 										"/counter/upload/shownpic.do?frmId=customBId",
-										"图片展示");
+										"图片展示",null,null,true);
 							}
 						} else {
 							openURL(
 									"/counter/upload/showpic.do?cpath=com.bavlo.counter.model.custom.CustomBVO&fkey=customId&ptype=vtype&vtype=customCankao&id="
-											+ customId, "图片展示");
+											+ customId, "图片展示",null,null,true);
 						}
 					});
 
@@ -299,7 +315,7 @@ $(function() {
 						} else {
 							openURL(
 									"/counter/upload/showpic.do?cpath=com.bavlo.counter.model.custom.CustomBVO&fkey=customId&ptype=vtype&vtype=customSheji&id="
-											+ customId, "图片展示");
+											+ customId, "图片展示",null,null,true);
 						}
 					});
 
@@ -369,12 +385,6 @@ function calculator(str) { // 计算价格
 		params.reportPrice = $("#certificate").find("option:selected").val();
 	}
 
-	/*
-	 * var weChat = $("#weChat").val() var remoteUrl =
-	 * "http://www.bavlo.com/getAgentFromWeChat?weChat=" + weChat;
-	 * loadProfit(nativeUrl,remoteUrl,function(data){ params.agentProfit =
-	 * data.customizeRate; });
-	 */
 	if ($("#agentJson").val() != "") { // 利润率
 		var agentInfo = $("#agentJson").val();
 		var agentJson = JSON.parse(agentInfo);
@@ -462,7 +472,7 @@ function save() { // 款式单保存方法
 		cache : false,
 		success : function(data) {
 			$("#customid").val(data.id);
-			alert("保存成功!");
+			alert("款式单保存成功!");
 			initFieldSuffix();
 			var orderId = $("#orderId").val(); // 订单ID
 			if (orderId != "") { // 跳转到订单页面
@@ -471,7 +481,7 @@ function save() { // 款式单保存方法
 			}
 		},
 		error : function(e) {
-			alert("保存失败!");
+			alert("款式单保存失败!");
 			initFieldSuffix();
 		}
 	});
@@ -566,25 +576,28 @@ function setValueByFrame(type, id, callback, json) { // 子窗体调用
 				var pic = "";
 				if (data.FILE_0 != "" && data.FILE_0 != null) {
 					pic = "/counter/staticRes/" + data.FILE_0 + "";
+					url = "/counter/gem-sign/view.do?id="+data.id;
 				}
 			}
 			if (gemSignClass == "kzs_img") {
 				if (mainGem_img == undefined) {
 					$(".kzs_img").append(
-							"<img class='mainGem_img' src=" + pic + " >");
+							"<a href="+ url +"><img class='mainGem_img' src=" + pic + " ></a>");
 				} else {
 					$(".mainGem_img").attr("src", pic);
 				}
+				$("#mainGemPrice").val(data.nweight);
 				$("#mainGemPic").val(pic);
 				$("#mainGemId").val(data.id);
 			}
 			if (gemSignClass == "kps_img") {
 				if (partsGem_img == undefined) {
 					$(".kps_img").append(
-							"<img class='partsGem_img' src=" + pic + " >");
+							"<a href="+ url +"><img class='partsGem_img' src=" + pic + " ></a>");
 				} else {
 					$(".partsGem_img").attr("src", pic);
 				}
+				$("#inlayPrice").val(data.icount);
 				$("#partsGemPic").val(pic);
 				$("#partsGemId").val(data.id);
 			}
@@ -824,4 +837,111 @@ function showDefaultPic() { // 上传后显示封面
 							+ $("#FILE_0").val());
 		}
 	}
+}
+
+var classname = "cankao_pic_list";
+$(function(){
+	var vtype = $("#vtype").val();
+	if (vtype == "customCankao") {
+		classname = "cankao_pic_list";
+	} else if (vtype == "customSheji") {
+		classname = "qiban_pic_list";
+	}
+	//小图列表遮罩
+	setMask(classname);
+	//删除图片
+	delPic(classname);
+});
+//遮罩
+function setMask(classname){
+	$("."+classname+" ul li").hover(
+		function () {
+			$(this).find(".dask").stop().delay(20).animate({"z-index":"1",opacity:0.8},200);
+		 },
+		function () {
+			$(this).find(".dask").stop().animate({"z-index":"-1",opacity:0},200);
+		}
+		
+	);
+}
+
+//删除图片
+function delPic(classname){
+	$("."+classname+" ul li").bind("click",function(){
+		var em = this;
+		if(confirm("是否删除?")){
+			var fileModel = $("#filemodel").val();
+			var fileName = $(this).attr("picn");
+		 	var url = "/counter/upload/delPic.do";
+			$.get(url,{fileModel:fileModel,fileName:fileName},function(){
+				var fem = $(em).attr("fem");
+				if(fem == "FILE_0"){
+					$("#gem-pic-show-id img").prop("src","/counter/resources/images/pic_02.png");
+					$("#FILE_0").val("");
+				}
+				
+				$(em).remove();
+			});
+		}
+	});
+}
+//上传后显示小图{JS实现}
+function showMinPic(em,value,classname){
+	if($("#"+em).val() != null && $("#"+em).val() != ""){
+		var minPicName = getMinPicByOrg(value);
+		var ix = value.indexOf(".");
+		var val = value.substring(0,ix);
+		var fileModel = $("#filemodel").val();
+		$("."+classname+" ul").append("<li id='"+val+"' fem='"+em+"' onmouseout='setMaskT(\""+val+"\")' onmouseover='setMaskO(\""+val+"\")'><img class='list_pic' style='width:60px;height:60px;' src='/counter/staticRes/"+fileModel+"/min/"+minPicName+"'><div onclick='rmMaskC(\""+value+"\")' class='dask' style='z-index:-1;cursor:pointer;width:60px;height:60px;padding:20px 0 0 20px;background:#000;opacity:0.8;position:relative;top:-60px;' picn='"+value+"'><img src='/counter/resources/images/delete_shield_24px.ico'></div></li>");
+	}
+}
+
+//移入
+function setMaskO(value){
+	$("#"+value).find(".dask").stop().delay(20).animate({"z-index":"1",opacity:0.8},200);
+}
+
+//移出
+function setMaskT(value){
+	$("#"+value).find(".dask").stop().animate({"z-index":"-1",opacity:0},200);
+}
+
+//删除小图
+function rmMaskC(value){
+	var ix = value.indexOf(".");
+	var val = value.substring(0,ix);
+	if(confirm("是否删除?")){
+		var fileModel = $("#filemodel").val();
+		var fileName = value;
+	 	var url = "/counter/upload/delPic.do";
+		$.get(url,{fileModel:fileModel,fileName:fileName},function(){
+			var fem = $("#"+val).attr("fem");
+			if(fem == "FILE_0"){
+				$("#gem-pic-show-id img").prop("src","/counter/resources/images/pic_02.png");
+				$("#FILE_0").val("");
+			}
+			$("#"+val).remove();
+		});
+	}
+}
+//根据原图名称获取小图名称
+function getMinPicByOrg(picName){//20160226_min.jsp
+	var newPicName = "";
+	if(picName != "" && picName != null){
+		var ix = picName.indexOf(".");
+		newPicName = picName.substring(0,ix)+"_min"+picName.substring(ix,picName.length);
+	}
+	
+	return newPicName;
+}
+
+//根据原图名称获取小图名称
+function getOrgPicByMin(picName){//20160226_min.jsp
+	var newPicName = "";
+	if(picName != "" && picName != null){
+		var ix = picName.indexOf("_min.");
+		newPicName = picName.substring(0,ix)+"."+picName.substring(ix+5,picName.length);
+	}
+	
+	return newPicName;
 }
