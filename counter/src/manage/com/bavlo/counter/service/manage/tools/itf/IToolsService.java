@@ -3,6 +3,7 @@ package com.bavlo.counter.service.manage.tools.itf;
 import java.util.Map;
 
 import com.bavlo.counter.model.manage.tools.QrcodeVO;
+import com.bavlo.counter.model.manage.tools.SharePicVO;
 
 /**
  * @Title: ±¦ççCounter
@@ -45,5 +46,13 @@ public interface IToolsService {
 	 * @return QrcodeVO
 	 */
 	public QrcodeVO getQrcodeVOByWh(String condition);
+	
+	/**
+	 * @Description: ĞéÄâÊÔ´÷ ·ÖÏíÍ¼Æ¬±£´æURL
+	 * @param @param sharePicVO
+	 * @param @return
+	 * @return Integer
+	 */
+	public Integer saveSharePic(SharePicVO sharePicVO);
 	
 }

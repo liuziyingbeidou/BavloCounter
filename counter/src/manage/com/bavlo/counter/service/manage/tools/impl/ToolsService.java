@@ -7,6 +7,7 @@ import java.util.Map;
 import org.springframework.stereotype.Service;
 
 import com.bavlo.counter.model.manage.tools.QrcodeVO;
+import com.bavlo.counter.model.manage.tools.SharePicVO;
 import com.bavlo.counter.service.impl.CommonService;
 import com.bavlo.counter.service.manage.tools.itf.IToolsService;
 import com.bavlo.counter.utils.StringUtil;
@@ -89,6 +90,18 @@ public class ToolsService extends CommonService implements IToolsService {
 			conditions = condition;
 		}
 		return findFirst(QrcodeVO.class, conditions);
+	}
+
+	@Override
+	public Integer saveSharePic(SharePicVO sharePicVO) {
+		Integer id = null;
+		try {
+			id = saveReID(sharePicVO);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return id;
 	}
 	
 }
