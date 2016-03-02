@@ -63,7 +63,6 @@ public class CustomController extends BaseController implements IConstant {
 	 * orderId=1&customerId=1
 	 */
 	@RequestMapping("edit")
-	@OAuthRequired
 	public ModelAndView edit(Integer id, Integer orderId, Integer customerId) {
 
 		CustomVO customEdit = customService.findCustomById(id);
@@ -162,7 +161,6 @@ public class CustomController extends BaseController implements IConstant {
 	 * @return ModelAndView
 	 */
 	@RequestMapping("detail")
-	@OAuthRequired
 	public ModelAndView detail(HttpSession session,Integer id) {
 		
 		ModelAndView model = new ModelAndView(PATH_CUSTOM + "customDetail");
