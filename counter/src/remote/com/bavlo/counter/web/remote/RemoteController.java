@@ -57,17 +57,21 @@ public class RemoteController extends BaseController implements ServletContextAw
 		SharePicVO sharePicVO = new SharePicVO();
 		sharePicVO.setUrl(url);
 		
+		String str = "shar-1.jpg";
+		int ix = str.indexOf("share-");
+		System.out.println("ddd:"+str.substring(ix+6, str.length()));
+		
 		Integer id = toolsService.saveSharePic(sharePicVO);
 		
 		String accessToken = session.getAttribute("fw-accessToken")+"";
 		if(CommonUtils.isNull(accessToken)){
 			accessToken = CommonUtil.getToken(IContant.appId, IContant.appSecret).getAccessToken();
 		}
-		String sceneStr = id+"";
+		String sceneStr = "share-"+id;
 		String ticketStr = AdvancedUtil.createPermanentQRCode(accessToken, sceneStr);
 		String basePath = servletContext.getRealPath("/"); 
 		String qrPath = basePath+"/resources/qrcode";
-		String qrCodeUrl = AdvancedUtil.getQRCode(ticketStr,qrPath,id+"");
+		String qrCodeUrl = AdvancedUtil.getQRCode(ticketStr,qrPath,"S-"+id);
 		renderJson("{\"qrCodeUrl\":\""+"http://ct.bavlo.com/counter/resources/qrcode/"+qrCodeUrl+"}\"");
 	}
 	

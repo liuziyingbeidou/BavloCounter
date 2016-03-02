@@ -103,5 +103,11 @@ public class ToolsService extends CommonService implements IToolsService {
 		
 		return id;
 	}
+
+	@Override
+	public SharePicVO getSharePicVOById(Integer id) {
+		SharePicVO vo = findFirst(SharePicVO.class, " id="+id);
+		return vo;
+	}
 	
 }

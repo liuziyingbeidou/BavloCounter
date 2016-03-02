@@ -55,4 +55,12 @@ public interface IToolsService {
 	 */
 	public Integer saveSharePic(SharePicVO sharePicVO);
 	
+	/**
+	 * @Description: 根据id获取VO
+	 * @param @param id
+	 * @param @return
+	 * @return SharePicVO
+	 */
+	public SharePicVO getSharePicVOById(Integer id);
+	
 }
