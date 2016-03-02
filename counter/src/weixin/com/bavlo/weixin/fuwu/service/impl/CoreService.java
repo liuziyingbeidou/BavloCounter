@@ -15,6 +15,7 @@ import com.bavlo.counter.model.customer.CustomerVO;
 import com.bavlo.counter.service.customer.itf.ICustomerService;
 import com.bavlo.counter.service.impl.CommonService;
 import com.bavlo.counter.utils.StringUtil;
+import com.bavlo.counter.web.customer.CustomerController;
 import com.bavlo.weixin.fuwu.message.resp.ForwardMessage;
 import com.bavlo.weixin.fuwu.message.resp.KfAccountInfo;
 import com.bavlo.weixin.fuwu.service.itf.ICoreService;
@@ -71,8 +72,8 @@ public class CoreService extends CommonService implements ICoreService{
 					String vcode = customerService.addCustomerByScan(fromUserName, session, eventKey);
 					/**扫描二维码信息---结束**/
 					// 以下通过客服找绑定客服定制顾问名字
+					CustomerVO customerVO = customerService.findCustomerByWhere(" vcustomerCode='"+vcode+"'");
 					if(vcode != null){
-						CustomerVO customerVO = customerService.findCustomerByWhere(" vcustomerCode='"+vcode+"'");
 						if(customerVO != null){
 							eventKey = customerVO.getVserviceCode();
 						}
@@ -80,10 +81,12 @@ public class CoreService extends CommonService implements ICoreService{
 					String userId = customerService.getQYUserIdByKfCode(eventKey);
 					JSONObject  obj = WechatDepart.getUserInfo(request,userId);
 					String uname = obj.getString("name");
-					
+
+					customerVO.setToUserids(userId);
+					customerService.updateCustomer(customerVO);
 					/**扫描二维码信息---结束**/
 					//forwardMessage.setContent("这是您的编号:"+vcode);
-					forwardMessage.setContent("感谢关注！<br>我是宝珑珠宝定制顾问---"+uname+"，您有任何需求可在此与我沟通...随时.. :)");
+					forwardMessage.setContent("感谢关注！\n我是宝珑珠宝定制顾问---"+uname+"，您有任何需求可在此与我沟通。随时为您服务 :)");
 					// 将消息对象转换成xml
 					respXml = MessageUtil.messageToXml(forwardMessage);
 				}
@@ -109,8 +112,8 @@ public class CoreService extends CommonService implements ICoreService{
 					String eventKey = requestMap.get("EventKey");
 					String vcode = customerService.addCustomerByScan(fromUserName, session, eventKey);
 					// 以下通过客服找绑定客服定制顾问名字
+					CustomerVO customerVO = customerService.findCustomerByWhere(" vcustomerCode='"+vcode+"'");
 					if(vcode != null){
-						CustomerVO customerVO = customerService.findCustomerByWhere(" vcustomerCode='"+vcode+"'");
 						if(customerVO != null){
 							eventKey = customerVO.getVserviceCode();
 						}
@@ -119,9 +122,11 @@ public class CoreService extends CommonService implements ICoreService{
 					JSONObject  obj = WechatDepart.getUserInfo(request,userId);
 					String uname = obj.getString("name");
 					
+					customerVO.setToUserids(userId);
+					customerService.updateCustomer(customerVO);
 					/**扫描二维码信息---结束**/
 					//forwardMessage.setContent("这是您的编号:"+vcode);
-					forwardMessage.setContent("感谢关注！<br>我是宝珑珠宝定制顾问---"+uname+"，您有任何需求可在此与我沟通...随时.. :)");
+					forwardMessage.setContent("感谢关注！\n我是宝珑珠宝定制顾问---"+uname+"，您有任何需求可在此与我沟通。随时为您服务 :)");
 					// 将消息对象转换成xml
 					respXml = MessageUtil.messageToXml(forwardMessage);
 				}
