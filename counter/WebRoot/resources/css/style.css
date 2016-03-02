@@ -254,8 +254,11 @@ background-color: #444;
 	padding-left: 10px;
     margin-top:20px;
 }
-.tu {
-	height: 118px;
+ .tu {
+	padding-top: 20px;
+} 
+.tu2 {
+	padding-top: 20px;
 	border-bottom-width: 1px;
 	border-bottom-style: solid;
 	border-bottom-color: #777;
@@ -265,13 +268,21 @@ background-color: #444;
 	font-size: 16px;
 	color: #ddd;
 	background-color: #777;
-	line-height: 100px;
+	line-height: 40px;
 	text-align: center;
 	font-weight: normal;
 	padding-top: 9px;
 	padding-right: 46px;
 	padding-bottom: 9px;
 	padding-left: 25px;
+}
+.tu2 a{
+	font-family: "Microsoft yahei";
+	color: #c0c0c0;
+	text-align: center;
+	font-weight: normal;
+    width: 260px;
+    padding-bottom: 9px;
 }
 .tu u {
 	text-decoration: none;
@@ -294,7 +305,6 @@ background-color: #444;
 	color: #ddd;
 	margin-left: 50px;
 }
-
 .tu1 {
 	margin: 20px 0;
 }
@@ -334,7 +344,7 @@ background-color: #444;
 .sum a { text-decoration:none; color:#fff; width:192px;text-align:center; line-height:40px; height:40px; background:#777; float:right;}
 .baocun { margin-top: 100px;}
 .baocun input { width: 325px; text-align: center; font-size: 14px; background: #777; color: #fff; border: none; height: 40px; line-height: 40px;}
-.baocun1 { margin-top: 100px;}
+/* .baocun1 { margin-top: 100px;} */
 .baocun1 input { width: 325px; text-align: center; font-size: 14px; background: #777; color: #fff; border: none; height: 40px; line-height: 40px;}
 
 /*款式单*/
@@ -734,5 +744,11 @@ background-color: #444;
 	font-size: 14px;
 }
 
+/* 小图片样式  */
+.dask{
+			z-index:-1;cursor:pointer;width:60px;height:60px;padding:20px 0 0 20px;background:#000;opacity:0.8;position:relative;top:-60px;
+		}
+.qiban_pic_list ul li{height:60px;margin-top: 10px;margin-left: 5px;float: left;}
+.cankao_pic_list ul li{height:60px;margin-top: 10px;margin-left: 5px;float: left;}
 
 

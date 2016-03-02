@@ -145,6 +145,10 @@
 										</c:otherwise>
 									</c:choose> 
 								</a>
+							<div class="cankao_pic_list">
+							<ul>
+							</ul>
+							</div>
 							</div>
 						</div>
 					</div>
@@ -167,6 +171,10 @@
 										</c:otherwise>
 									</c:choose> 
 								</a>
+								<div class="qiban_pic_list">
+									<ul>
+									</ul>
+								</div>
 							</div>
 						</div>
 					</div>
@@ -335,6 +343,10 @@
 						<a href="javascript:;" class="vectorgraph">+ 刻字矢量图</a>
 						<a href="javascript:;" class="cad_file"> + CAD文件   </a>
 					</div>
+				</div>
+				<div class="tu2 CUST-RL CAD-RL CC-RL PMC-RL GB-RL PPS-RL">
+						<a href="javascript:;" class="vectorgraphName"></a>
+						<a href="javascript:;" class="cad_fileName"></a>
 				</div>
 				<div class="qita">
 					<div class="clear"></div>

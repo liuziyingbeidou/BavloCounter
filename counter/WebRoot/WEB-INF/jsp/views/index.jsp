@@ -149,7 +149,11 @@ if(info != null){
     </style>
   </head>
   <body>
-  <jsp:include page="./header.jsp"></jsp:include>
+  <header class="demo-bar">
+	<h1>
+	</h1>
+  </header>
+  <jsp:include page="header.jsp"></jsp:include>
     <div class="container">
 	
       <div class="container header text-align">

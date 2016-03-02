@@ -1,7 +1,16 @@
 <%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <c:set var="ctx" value="${pageContext.request.contextPath}" />
-
+<!-- 弹框 -->
+<!-- jQuery & jQuery UI files (needed)--> 
+<link rel="stylesheet" href="/counter/resources/jquery.multiDialog/css/jquery-ui-1.10.3.custom.css">
+<script src="/counter/resources/jquery.multiDialog/js/jquery/jquery-ui-1.10.3.custom.js"></script> 
+<!-- MultiDialog files (needed) --> 
+<link rel="stylesheet" href="/counter/resources/jquery.multiDialog/css/jquery.multiDialog.css"> 
+<script src="/counter/resources/jquery.multiDialog/js/jquery.ui.dialog.extended-1.0.2.js"></script> 
+<script src="/counter/resources/jquery.multiDialog/js/jquery.multiDialog.js"></script> 
+<script src="/counter/resources/js/bavlo-dialog.js"></script>
+<script src="/counter/resources/showLoading/showLoading.js"></script>
 <!-- amazeui -->
 <link rel="stylesheet" href="${ctx }/resources/amazeui/css/amazeui.min.css"/>
 <link rel="stylesheet" href="${ctx }/resources/amazeui/css/amaze.min.css">
@@ -42,5 +51,32 @@ $(function(){
 		$(".am-menu-dropdown3").show();
 	}
 });
-
+function setValueByFrame(type,id,callback,json){
+	var url;
+	if(type == "order"){
+		url = "${ctx}/order/edit.do?id="+id;//根据id查询订单信息
+		window.location = url;
+	}else if(type == "order-view"){
+		url = "${ctx}/order/view.do?id="+id;//根据id查询订单信息
+		window.location = url;
+	}else if(type == "signGem"){
+		url = "${ctx}/gem-sign/view.do?id="+id;//根据id查询宝石签收单信息
+		window.location = url;
+	}else if(type == "entity"){
+		url = "${ctx}/entity-sign/view.do?id="+id;//根据id查询实物签收单信息
+		window.location = url;
+	}else if(type == "customer-menu"){
+		url = "${ctx}/customer/info.do?id="+id;//根据id查询客户信息
+		window.location = url;
+	}else if(type == "custom"){
+		url = "${ctx}/custom/edit.do?id="+id;//根据id定制单信息
+		window.location = url;
+	}else if(type == "custom-view"){
+		url = "${ctx}/custom/detail.do?id="+id;//根据id显示定制单信息
+		window.location = url;
+	}else if(type == "useGem"){
+		url = "${ctx}/useGem/info.do?id="+id;//根据id显示配石单信息
+		window.location = url;
+	}
+}
 </script>
