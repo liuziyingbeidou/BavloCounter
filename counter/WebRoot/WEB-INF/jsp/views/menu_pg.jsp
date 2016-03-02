@@ -18,7 +18,7 @@ if(info != null){
 <script type="text/javascript">
 $(function(){
 	//角色控制标签
-	<%--  <%
+	<%
 	if(roleList != null){
 		if(roleList.size() > 0){
 			for(int i = 0; i < roleList.size(); i++){
@@ -39,7 +39,7 @@ $(function(){
 		$(".CUST-RL").hide();
 		<%
 	}
-	%>   --%>
+	%>
 	/* if("${isLogin}"){
 		alert("登录超时...随即推出");
 		window.close();
