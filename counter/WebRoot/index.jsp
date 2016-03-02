@@ -29,6 +29,12 @@ $(function(){
 		var info = httpRequest(nativeUrl,requestUrl,requestMethod,outputStr,test);
 	});
 	$('a[rel*=downloadr]').downloadr();
+	
+	$(".upcad").bind("click",function(){
+		$("#filetype").val("file");
+ 		openURL("/counter/upload/uppage.do","上传CAD文件",null,370); 
+ 		$("#filevalue").val("vcadFile");
+	});
 	});
 function test(data){
 	alert(data);
@@ -41,6 +47,7 @@ function mainPage(e){
 function manage(e){
 	window.location= "http://www.zbdzgt.com/agentWeb/manage?UserId=" + e; 
 }
+
 </script>
 </head>
 <body>
@@ -144,6 +151,9 @@ $('a[rel*=downloadr]').downloadr();
 		 */<br>
 		public void updateOrderCNumber(Integer orderId,String cnum);
     </fieldset>
-    
+    <fieldset>
+    	<legend>上传文件</legend>
+    	<button class="upcad">上传文件</button>
+    	</fieldset>
 </body>
 </html>
