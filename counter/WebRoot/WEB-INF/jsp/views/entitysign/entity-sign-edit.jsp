@@ -412,7 +412,7 @@
 			$.get(url,{fileModel:fileModel,fileName:fileName},function(){
 				var fem = $("#"+val).attr("fem");
 				if(fem == "FILE_0"){
-					$("#gem-pic-show-id img").prop("src","${ctx}/resources/images/pic_02.png");
+					$("#entity-pic-show-id img").prop("src","${ctx}/resources/images/pic_02.png");
 					$("#FILE_0").val("");
 				}
 				$("#"+val).remove();
