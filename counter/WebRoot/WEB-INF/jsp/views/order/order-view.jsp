@@ -524,7 +524,7 @@ function rlist(className){
 			var ix = value.indexOf(".");
 			var val = value.substring(0,ix);
 			var fileModel = $("#filemodel").val();
-			$(".qsd_pic_list ul").append("<li id='"+val+"' fem='"+em+"' onmouseout='setMaskT(\""+val+"\")' onmouseover='setMaskO(\""+val+"\")'><img class='list_pic' style='width:60px;height:60px;' src='${ctx}/staticRes/"+fileModel+"/min/"+minPicName+"'><div onclick='rmMaskC(\""+value+"\")' class='dask' style='z-index:-1;cursor:pointer;width:60px;height:60px;padding:20px 0 0 20px;background:#000;opacity:0.8;position:relative;top:-60px;' picn='"+value+"'><img src='${ctx}/resources/images/delete_shield_24px.ico'></div></li>");
+			$(".qsd_pic_list ul").append("<li id='"+val+"' fem='"+em+"' onmouseout='setMaskT(\""+val+"\")' onmouseover='setMaskO(\""+val+"\")'><img class='list_pic' style='width:60px;height:60px;margin-top:10px;' src='${ctx}/staticRes/"+fileModel+"/min/"+minPicName+"'><div onclick='rmMaskC(\""+value+"\")' class='dask' style='z-index:-1;cursor:pointer;width:60px;height:60px;padding:20px 0 0 20px;background:#000;opacity:0.8;position:relative;top:-60px;' picn='"+value+"'><img src='${ctx}/resources/images/delete_shield_24px.ico'></div></li>");
 		}
 	}
 	
@@ -576,6 +576,10 @@ function rlist(className){
 		}
 		
 		return newPicName;
+	}
+	//上传完成
+	function fnCompleteBtn(){
+		
 	}
 	</script>
 </html>
