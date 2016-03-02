@@ -227,6 +227,8 @@
 					if(data != null){
 						if(data.vhendimgurl != ""){
 							$(".cusheader").prop("src",data.vhendimgurl);
+						}else{
+							$(".cusheader").prop("src","${ctx}/resources/images/customer_01.png");
 						}
 						$("#customerId").val(data.id);
 					}

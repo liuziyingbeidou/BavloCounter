@@ -549,6 +549,9 @@ function getOrderListInfo(){
 						if(data.vhendimgurl != ""){
 							$(".cusheader").prop("src",data.vhendimgurl);
 							$(".header-info").text(data.vname);
+						}else{
+							$(".cusheader").prop("src","${ctx}/resources/images/customer_01.png");
+							$(".header-info").text(data.vname);
 						}
 						$("#customerId").val(data.id);
 						//选客户后初始化交付地址
