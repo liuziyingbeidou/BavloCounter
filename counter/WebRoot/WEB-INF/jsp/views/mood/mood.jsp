@@ -1,88 +1,48 @@
-<%@ page language="java" import="java.util.*,com.bavlo.counter.model.LoginVO" pageEncoding="utf-8"%>
+<%@ page language="java" import="java.util.*" pageEncoding="utf-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<c:set var="ctx" value="${pageContext.request.contextPath}"/>
+<c:set var="ctx" value="${pageContext.request.contextPath }"></c:set>
+
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html>
   <head>
-    <title>虚拟试戴分享效果图</title>
+    
+    <title>虚拟试戴效果图</title>
     
 	<meta http-equiv="pragma" content="no-cache">
 	<meta http-equiv="cache-control" content="no-cache">
 	<meta http-equiv="expires" content="0">    
 	<meta http-equiv="keywords" content="keyword1,keyword2,keyword3">
 	<meta http-equiv="description" content="This is my page">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	
-   	<script language="javascript" type="text/javascript" src="${ctx}/resources/js/jquery-1.9.1.min.js"></script>
-	<script type="text/javascript" src="${ctx }/resources/bootstrap/js/bootstrap.min.js"></script>
-	<link type="text/css" rel="stylesheet" href="${ctx }/resources/bootstrap/css/bootstrap.min.css">
-	
-	<!-- Loading -->
-	<script src="${ctx}/resources/showLoading/showLoading.js"></script>
-	<link type="text/css" rel="stylesheet" href="${ctx}/resources/showLoading/showLoading.css">
-    
-    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
-    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-    <!--[if lt IE 9]>
-        <script src="http://cdn.bootcss.com/html5shiv/3.7.0/html5shiv.min.js"></script>
-        <script src="http://cdn.bootcss.com/respond.js/1.3.0/respond.min.js"></script>
-    <![endif]-->
-    <style type="text/css">
-    body{background:#000000;}
-    @media (min-width: 650px){
-    .header{
-    	padding-top:80px;
-    }
-    .img-logo{
-    	height:100%;
-    	width:100%;
-    }
-    .text-align{
-    	text-align:center;
-    	color:#FFF;
-    }
-    .btn-default{
-    	color:#F0F0F0;
-    	background-color:#5B5B5B;
-    }
-    #ss{
-    	align-text:center;
-    }
-    }
-    @media (max-width: 650px){
-    .header{
-    	padding-top:30px;
-    }
-    .img-logo{
-    	height:100%;
-    	width:100%;
-    }
-    .text-align{
-    	text-align:center;
-    	color:#FFF;
-    }
-    .btn-default{
-    	color:#F0F0F0;
-    	background-color:#5B5B5B;
-    	width:170px;
-    	margin-top:7px;
-    }
-    #ss{
-    	align-text:center;
-    }
-    }
-    </style>
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <meta name="renderer" content="webkit">
+  	<link rel="stylesheet" href="${ctx }/page/counter/assets/css/amazeui.min.css"/>
+  	<link rel="stylesheet" href="${ctx }/page/counter/assets/css/admin.css">
+  	<script type="text/javascript" src="${ctx }/resources/js/jquery-1.8.3.min.js"></script>
+  	<script type="text/javascript" src="${ctx }/page/counter/assets/js/amazeui.min.js"></script>
+  	<style type="text/css">
+  	.tx-filed{
+  		font-size:18px;
+  		height:20px;
+  		line-height: 20px;
+  		padding-top:5px;
+  	}
+  	.tx-con{
+  		font-weight: bold;
+  	}
+  	</style>
   </head>
+  
   <body>
-    <div class="container">
-
-      <div class="container header text-align">
-        <img src="${sharePicVO['url'] }" class="img img-logo">
-      </div>
-      
-      <div class="container text-align" role="main">
-    	  
-      </div>
-    </div>
+    <figure data-am-widget="figure" class="am am-figure am-figure-default "   data-am-figure="{  pureview: 'true' }">
+      <img src="${sharePicVO['url'] }" data-rel="${sharePicVO['url'] }" alt="虚拟试戴效果图"/>
+          <figcaption class="am-figure-capition-btm">
+             	<a href="http://m.bavlo.com/mobile/detail.html?si=${sharePicVO['kId'] }"><span class="tx-filed">查看款式详情&nbsp; </span></a>
+          		<br><br><br>
+          		<img src="${ctx }/resources/images/LOGO_BM.png" class="am-img-responsive" alt=""/>
+          		<span class="tx-con">领先的珠宝定制品牌</span>
+          </figcaption>
+          
+    </figure>
+  
   </body>
 </html>
