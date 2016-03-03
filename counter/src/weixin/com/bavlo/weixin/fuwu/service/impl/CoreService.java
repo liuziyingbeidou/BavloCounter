@@ -19,6 +19,7 @@ import com.bavlo.counter.service.customer.itf.ICustomerService;
 import com.bavlo.counter.service.impl.CommonService;
 import com.bavlo.counter.service.manage.tools.itf.IToolsService;
 import com.bavlo.counter.utils.StringUtil;
+import com.bavlo.weixin.fuwu.message.req.ImageMessage;
 import com.bavlo.weixin.fuwu.message.resp.Article;
 import com.bavlo.weixin.fuwu.message.resp.ForwardMessage;
 import com.bavlo.weixin.fuwu.message.resp.KfAccountInfo;
@@ -61,7 +62,7 @@ public class CoreService extends CommonService implements ICoreService{
 			String msgType = requestMap.get("MsgType");
 			// 消息内容
 			String content = requestMap.get("Content");
-
+			
 			ForwardMessage forwardMessage = new ForwardMessage();
 			forwardMessage.setToUserName(fromUserName);
 			forwardMessage.setFromUserName(toUserName);
@@ -76,11 +77,14 @@ public class CoreService extends CommonService implements ICoreService{
 					String eventKey = requestMap.get("EventKey");
 					if(eventKey != null && eventKey != ""){
 						/**扫描二维码-分享图片-start**/
-						int ix = eventKey.indexOf("0000-");
+						String dStr = null;
+						if(eventKey.length() > 2){
+							dStr = eventKey.substring(eventKey.length()-2,eventKey.length());
+						}
 						//分享图片
-						if(ix >= 0){
+						if("00".equals(dStr)){
 							//获取图片URL对应ID
-							String id = eventKey.substring(ix+6, eventKey.length());
+							String id = eventKey.substring(0, eventKey.length()-2);
 							//根据id获取picUrl
 							if(id != null && id != ""){
 								SharePicVO sharePicVO = toolsService.getSharePicVOById(Integer.valueOf(id));
@@ -95,7 +99,9 @@ public class CoreService extends CommonService implements ICoreService{
 								article.setPicUrl(sharePicVO.getUrl());
 								article.setTitle("虚拟试戴效果图");
 								article.setDescription("虚拟试戴效果图");
+								article.setUrl("http://ct.bavlo.com/counter/remote/viewSharePic.do?id="+Integer.valueOf(id));
 								articlesList.add(article);
+								newsMessage.setArticles(articlesList);
 								
 								respXml = MessageUtil.messageToXml(newsMessage);
 							}
@@ -147,11 +153,15 @@ public class CoreService extends CommonService implements ICoreService{
 					String eventKey = requestMap.get("EventKey");
 					if(eventKey != null && eventKey != ""){
 						/**扫描二维码-分享图片-start**/
-						int ix = eventKey.indexOf("0000-");
+						System.out.println("eventKey:"+eventKey);
+						String dStr = null;
+						if(eventKey.length() > 2){
+							dStr = eventKey.substring(eventKey.length()-2,eventKey.length());
+						}
 						//分享图片
-						if(ix >= 0){
+						if("00".equals(dStr)){
 							//获取图片URL对应ID
-							String id = eventKey.substring(ix+6, eventKey.length());
+							String id = eventKey.substring(0, eventKey.length()-2);
 							//根据id获取picUrl
 							if(id != null && id != ""){
 								SharePicVO sharePicVO = toolsService.getSharePicVOById(Integer.valueOf(id));
@@ -166,7 +176,9 @@ public class CoreService extends CommonService implements ICoreService{
 								article.setPicUrl(sharePicVO.getUrl());
 								article.setTitle("虚拟试戴效果图");
 								article.setDescription("虚拟试戴效果图");
+								article.setUrl("http://ct.bavlo.com/counter/remote/viewSharePic.do?id="+Integer.valueOf(id));
 								articlesList.add(article);
+								newsMessage.setArticles(articlesList);
 								
 								respXml = MessageUtil.messageToXml(newsMessage);
 							}
@@ -178,7 +190,9 @@ public class CoreService extends CommonService implements ICoreService{
 							CustomerVO customerVO = customerService.findCustomerByWhere(" vcustomerCode='"+vcode+"'");
 							if(vcode != null){
 								if(customerVO != null){
-									eventKey = customerVO.getVserviceCode();
+									if(customerVO.getVserviceCode() != null && customerVO.getVserviceCode() != ""){
+										eventKey = customerVO.getVserviceCode();
+									}
 								}
 							}
 							String userId = customerService.getQYUserIdByKfCode(eventKey);

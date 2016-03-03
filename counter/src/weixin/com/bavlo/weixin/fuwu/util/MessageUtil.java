@@ -12,9 +12,9 @@ import org.dom4j.Document;
 import org.dom4j.Element;
 import org.dom4j.io.SAXReader;
 
+import com.bavlo.weixin.fuwu.message.req.ImageMessage;
 import com.bavlo.weixin.fuwu.message.resp.Article;
 import com.bavlo.weixin.fuwu.message.resp.ForwardMessage;
-import com.bavlo.weixin.fuwu.message.resp.ImageMessage;
 import com.bavlo.weixin.fuwu.message.resp.MusicMessage;
 import com.bavlo.weixin.fuwu.message.resp.NewsMessage;
 import com.bavlo.weixin.fuwu.message.resp.TextMessage;
