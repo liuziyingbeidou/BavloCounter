@@ -17,7 +17,7 @@ public interface IContant {
 	public static String serviceCode = "yuanyuan";
 	
 	//虚拟试戴
-	public static String mTitle = "我在宝珑体验了虚拟试戴!";
+	public static String mTitle = "我在宝珑珠宝体验了虚拟试戴!";
 	
 	public static String mContent = "看看我选的款式!也可分享给好友哦!";
 }
