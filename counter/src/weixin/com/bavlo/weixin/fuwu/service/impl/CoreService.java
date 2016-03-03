@@ -144,27 +144,56 @@ public class CoreService extends CommonService implements ICoreService{
 				}
 				//用户已关注时的事件推送
 				else if(eventType.equals(MessageUtil.EVENT_TYPE_SCAN)){
-					/**扫描二维码信息--本地库不存在该openId用户---开始**/
 					String eventKey = requestMap.get("EventKey");
-					String vcode = customerService.addCustomerByScan(fromUserName, session, eventKey);
-					// 以下通过客服找绑定客服定制顾问名字
-					CustomerVO customerVO = customerService.findCustomerByWhere(" vcustomerCode='"+vcode+"'");
-					if(vcode != null){
-						if(customerVO != null){
-							eventKey = customerVO.getVserviceCode();
+					if(eventKey != null && eventKey != ""){
+						/**扫描二维码-分享图片-start**/
+						int ix = eventKey.indexOf("share-");
+						//分享图片
+						if(ix >= 0){
+							//获取图片URL对应ID
+							String id = eventKey.substring(ix+6, eventKey.length());
+							//根据id获取picUrl
+							if(id != null && id != ""){
+								SharePicVO sharePicVO = toolsService.getSharePicVOById(Integer.valueOf(id));
+								NewsMessage newsMessage = new NewsMessage();
+								newsMessage.setToUserName(fromUserName);
+								newsMessage.setFromUserName(toUserName);
+								newsMessage.setCreateTime(new Date().getTime());
+								newsMessage.setMsgType(MessageUtil.RESP_MESSAGE_TYPE_NEWS);
+								newsMessage.setArticleCount(1);
+								List<Article> articlesList = new ArrayList<Article>();
+								Article article = new Article();
+								article.setPicUrl(sharePicVO.getUrl());
+								article.setTitle("虚拟试戴效果图");
+								article.setDescription("虚拟试戴效果图");
+								articlesList.add(article);
+								
+								respXml = MessageUtil.messageToXml(newsMessage);
+							}
+							/**扫描二维码-分享图片-end**/
+						}else{
+							/**扫描二维码信息--本地库不存在该openId用户---开始**/
+							String vcode = customerService.addCustomerByScan(fromUserName, session, eventKey);
+							// 以下通过客服找绑定客服定制顾问名字
+							CustomerVO customerVO = customerService.findCustomerByWhere(" vcustomerCode='"+vcode+"'");
+							if(vcode != null){
+								if(customerVO != null){
+									eventKey = customerVO.getVserviceCode();
+								}
+							}
+							String userId = customerService.getQYUserIdByKfCode(eventKey);
+							JSONObject  obj = WechatDepart.getUserInfo(request,userId);
+							String uname = obj.getString("name");
+							
+							customerVO.setToUserids(userId);
+							customerService.updateCustomer(customerVO);
+							/**扫描二维码信息---结束**/
+							//forwardMessage.setContent("这是您的编号:"+vcode);
+							forwardMessage.setContent("感谢关注！\n我是宝珑珠宝定制顾问---"+uname+"，您有任何需求可在此与我沟通。随时为您服务 :)");
+							// 将消息对象转换成xml
+							respXml = MessageUtil.messageToXml(forwardMessage);
 						}
 					}
-					String userId = customerService.getQYUserIdByKfCode(eventKey);
-					JSONObject  obj = WechatDepart.getUserInfo(request,userId);
-					String uname = obj.getString("name");
-					
-					customerVO.setToUserids(userId);
-					customerService.updateCustomer(customerVO);
-					/**扫描二维码信息---结束**/
-					//forwardMessage.setContent("这是您的编号:"+vcode);
-					forwardMessage.setContent("感谢关注！\n我是宝珑珠宝定制顾问---"+uname+"，您有任何需求可在此与我沟通。随时为您服务 :)");
-					// 将消息对象转换成xml
-					respXml = MessageUtil.messageToXml(forwardMessage);
 				}
 				// 取消订阅
 				else if (eventType.equals(MessageUtil.EVENT_TYPE_UNSUBSCRIBE)) {
