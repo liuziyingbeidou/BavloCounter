@@ -15,4 +15,9 @@ public interface IContant {
 	public static String appSecret = "e08d3c4e863555e7a99c8a510b433052";
 	//默认客服
 	public static String serviceCode = "yuanyuan";
+	
+	//虚拟试戴
+	public static String mTitle = "我在宝珑体验了虚拟试戴!";
+	
+	public static String mContent = "看看我选的款式!也可分享给好友哦!";
 }

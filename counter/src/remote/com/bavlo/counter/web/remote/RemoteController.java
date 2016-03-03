@@ -55,13 +55,11 @@ public class RemoteController extends BaseController implements ServletContextAw
 	 * LG：将URL存储存入数据库返回ID，然后根据
 	 */
 	@RequestMapping(value = "/getQrCodeURL")
-	public void getQrCodeURL(HttpServletRequest request,HttpServletResponse response,String url){
+	public void getQrCodeURL(HttpServletRequest request,HttpServletResponse response,String url,String kId){
 		
 		SharePicVO sharePicVO = new SharePicVO();
 		sharePicVO.setUrl(url);
-		
-		String str = "001.jpg";
-		System.out.println("ddd:"+str.substring(2, str.length()));
+		sharePicVO.setkId(kId);
 		
 		Integer id = toolsService.saveSharePic(sharePicVO);
 		
