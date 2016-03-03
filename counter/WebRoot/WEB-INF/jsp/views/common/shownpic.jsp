@@ -113,7 +113,7 @@ $(document).ready(function(){
 <style>
 .ui-dialog .ui-dialog-titlebar-close {
 	position: absolute;
-	right: 3em;/*.3em*/
+	right: 80px;/*.3em*/
 	
 }
 </style>
