@@ -101,6 +101,57 @@ if(info != null){
 			});
 		});
     });
+  //子窗体调用
+	function setValueByFrame(type,id,callback,json){
+		var url;debugger
+		if(type == "customer"){
+			url = "${ctx}/customer/infoJson.do";
+			$.get(url,{id:id},function(data){
+				if(data != null){
+					if(data.vhendimgurl != ""){
+						$(".cusheader").prop("src",data.vhendimgurl);
+					}else{
+						$(".cusheader").prop("src","${ctx}/resources/images/customer_01.png");
+					}
+					$("#customerId").val(data.id);
+				}
+				if($("#customerId").val()){
+					$(".header-loc").show();
+				}else{
+					$(".header-loc").hide();
+				}
+				closeMultiDlg();
+			});
+		}else if(type == "chain"){
+			var data = JSON.parse(json);
+			$("#order-list").append("<dd type='ch' sid='"+data.sid+"' class='"+data.sid+" bill'><span class='list_name bill-name'>"+data.sname+"</span><input class='list_num bill-num' style='width:40px;margin-left:10px;' type='text' value='1' placeholder='条'><b class='list_price bill-price'>"+data.sprice+"</b><a href='javascript:rlist("+data.sid+")' class='close_c'><img src='${ctx}/resources/images/close.png'></a></dd>");
+			closeMultiDlg();
+		}else if(type == "order"){
+			url = "${ctx}/order/edit.do?id="+id;//根据id查询客户信息
+			window.location = url;
+		}else if(type == "order-view"){
+			url = "${ctx}/order/view.do?id="+id;//根据id查询客户信息
+			window.location = url;
+		}else if(type == "signGem"){
+			url = "${ctx}/gem-sign/view.do?id="+id;//根据id查询客户信息
+			window.location = url;
+		}else if(type == "entity"){
+			url = "${ctx}/entity-sign/view.do?id="+id;//根据id查询客户信息
+			window.location = url;
+		}else if(type == "customer-menu"){
+			url = "${ctx}/customer/info.do?id="+id;//根据id查询客户信息
+			window.location = url;
+		}else if(type == "custom"){
+			url = "${ctx}/custom/edit.do?id="+id;//根据id定制单信息
+			window.location = url;
+		}else if(type == "custom-view"){
+			url = "${ctx}/custom/detail.do?id="+id;//根据id显示定制单信息
+			window.location = url;
+		}else if(type == "useGem"){
+			url = "${ctx}/useGem/info.do?id="+id;//根据id显示配石单信息
+			window.location = url;
+		}
+	}
 </script>
     <style type="text/css">
     body{background:#000000;}
