@@ -10,8 +10,11 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.context.ServletContextAware;
+import org.springframework.web.servlet.ModelAndView;
 
+import com.bavlo.counter.constant.IConstant;
 import com.bavlo.counter.model.manage.tools.SharePicVO;
+import com.bavlo.counter.model.sign.EntitySignVO;
 import com.bavlo.counter.service.manage.tools.itf.IToolsService;
 import com.bavlo.counter.utils.CommonUtils;
 import com.bavlo.counter.utils.JsonUtils;
@@ -57,9 +60,8 @@ public class RemoteController extends BaseController implements ServletContextAw
 		SharePicVO sharePicVO = new SharePicVO();
 		sharePicVO.setUrl(url);
 		
-/*		String str = "shar-1.jpg";
-		int ix = str.indexOf("share-");
-		System.out.println("ddd:"+str.substring(ix+6, str.length()));*/
+		String str = "001.jpg";
+		System.out.println("ddd:"+str.substring(2, str.length()));
 		
 		Integer id = toolsService.saveSharePic(sharePicVO);
 		
@@ -67,14 +69,23 @@ public class RemoteController extends BaseController implements ServletContextAw
 		if(CommonUtils.isNull(accessToken)){
 			accessToken = CommonUtil.getToken(IContant.appId, IContant.appSecret).getAccessToken();
 		}
-		String sceneStr = "0000-"+id;
+		String sceneStr = id+"00";
 		String ticketStr = AdvancedUtil.createPermanentQRCode(accessToken, sceneStr);
 		String basePath = servletContext.getRealPath("/"); 
 		String qrPath = basePath+"/resources/qrcode";
 		String qrCodeUrl = AdvancedUtil.getQRCode(ticketStr,qrPath,"S-"+id);
-		renderJson("{\"qrCodeUrl\":\""+"http://ct.bavlo.com/counter/resources/qrcode/"+qrCodeUrl+"}\"");
+		renderJson("{\"qrCodeUrl\":\""+"http://ct.bavlo.com/counter/resources/qrcode/"+qrCodeUrl+"\"}");
 	}
 	
+	@RequestMapping(value = "/viewSharePic")
+	public ModelAndView viewSharePic(HttpServletRequest request,HttpServletResponse response,Integer id){
+		
+		SharePicVO sharePicVO = toolsService.getSharePicVOById(id);
+		
+		ModelAndView model = new ModelAndView("mood/mood");
+		model.addObject("sharePicVO",sharePicVO);
+		return model;
+	}
 	
 	@Override  
     public void setServletContext(ServletContext servletContext) {  
