@@ -57,9 +57,9 @@ public class RemoteController extends BaseController implements ServletContextAw
 		SharePicVO sharePicVO = new SharePicVO();
 		sharePicVO.setUrl(url);
 		
-		String str = "shar-1.jpg";
+/*		String str = "shar-1.jpg";
 		int ix = str.indexOf("share-");
-		System.out.println("ddd:"+str.substring(ix+6, str.length()));
+		System.out.println("ddd:"+str.substring(ix+6, str.length()));*/
 		
 		Integer id = toolsService.saveSharePic(sharePicVO);
 		
@@ -67,7 +67,7 @@ public class RemoteController extends BaseController implements ServletContextAw
 		if(CommonUtils.isNull(accessToken)){
 			accessToken = CommonUtil.getToken(IContant.appId, IContant.appSecret).getAccessToken();
 		}
-		String sceneStr = "share-"+id;
+		String sceneStr = "0000-"+id;
 		String ticketStr = AdvancedUtil.createPermanentQRCode(accessToken, sceneStr);
 		String basePath = servletContext.getRealPath("/"); 
 		String qrPath = basePath+"/resources/qrcode";
