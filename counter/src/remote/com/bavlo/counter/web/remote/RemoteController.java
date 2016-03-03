@@ -74,7 +74,7 @@ public class RemoteController extends BaseController implements ServletContextAw
 		String basePath = servletContext.getRealPath("/"); 
 		String qrPath = basePath+"/resources/qrcode";
 		String qrCodeUrl = AdvancedUtil.getQRCode(ticketStr,qrPath,"S-"+id);
-		renderJson("{\"qrCodeUrl\":\""+"http://ct.bavlo.com/counter/resources/qrcode/"+qrCodeUrl+"\"}");
+		renderJson("{\"qrCodeUrl\":\""+ com.bavlo.weixin.qiye.util.Constants.REQURL +"/resources/qrcode/"+qrCodeUrl+"\"}");
 	}
 	
 	@RequestMapping(value = "/viewSharePic")
