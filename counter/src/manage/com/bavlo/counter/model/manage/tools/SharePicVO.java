@@ -18,7 +18,10 @@ public class SharePicVO extends IdEntity {
 
 	private static final long serialVersionUID = -5697652202872800039L;
 	
+	//∑÷œÌÕº∆¨URL
 	private String url;
+	//øÓ ΩID
+	private String kId;
 	
 	public String getUrl() {
 		return url;
@@ -28,4 +31,12 @@ public class SharePicVO extends IdEntity {
 		this.url = url;
 	}
 
+	public String getkId() {
+		return kId;
+	}
+
+	public void setkId(String kId) {
+		this.kId = kId;
+	}
+	
 }
