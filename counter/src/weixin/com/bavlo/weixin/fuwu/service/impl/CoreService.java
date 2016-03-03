@@ -76,7 +76,7 @@ public class CoreService extends CommonService implements ICoreService{
 					String eventKey = requestMap.get("EventKey");
 					if(eventKey != null && eventKey != ""){
 						/**扫描二维码-分享图片-start**/
-						int ix = eventKey.indexOf("share-");
+						int ix = eventKey.indexOf("0000-");
 						//分享图片
 						if(ix >= 0){
 							//获取图片URL对应ID
@@ -147,7 +147,7 @@ public class CoreService extends CommonService implements ICoreService{
 					String eventKey = requestMap.get("EventKey");
 					if(eventKey != null && eventKey != ""){
 						/**扫描二维码-分享图片-start**/
-						int ix = eventKey.indexOf("share-");
+						int ix = eventKey.indexOf("0000-");
 						//分享图片
 						if(ix >= 0){
 							//获取图片URL对应ID
