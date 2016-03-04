@@ -12,7 +12,7 @@
 <meta name="viewport"
 	content="width=device-width,target-densitydpi=high-dpi,initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no" />
 
-<title>款式单</title>
+<title>款式单${customDetail.vcustomCode }</title>
 <script language="javascript" type="text/javascript"
 	src="${ctx}/resources/js/jquery-1.8.3.min.js"></script>
 <link type='text/css' rel='stylesheet'
@@ -465,9 +465,9 @@ function save(){
 		<input type="hidden" id='vcadFile' value="" />
 		<input type="hidden" id='pCost' value="" />
 		<header class="demo-bar">
-			<h1>
+			<%-- <h1>
 				款式单${customDetail.vcustomCode }
-			</h1>
+			</h1> --%>
 		</header>
 		<jsp:include page="../header.jsp"></jsp:include>
 

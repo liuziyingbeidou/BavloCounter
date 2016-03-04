@@ -4,7 +4,18 @@
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html>
 <head>
-<title>${pageCustomType}款式单</title>
+<title>${pageCustomType}款式单
+	<c:choose>
+		 <c:when test="${empty customEdit['vcustomCode']}">   
+		 ${number }
+		 <input type="hidden" id="vcustomCode" name="vcustomCode" value="${number }">
+		 </c:when>
+		 <c:otherwise>
+		 ${customEdit['vcustomCode']}
+		 <input type="hidden" id="vcustomCode" name="vcustomCode" value="${customEdit['vcustomCode']}">
+		 </c:otherwise>	
+	</c:choose>
+</title>
 
 <meta http-equiv="pragma" content="no-cache" />
 <meta http-equiv="cache-control" content="no-cache" />
@@ -68,7 +79,7 @@
 	
 	<input type="hidden" id='agentJson' value='${agentJson}' />
 	<header class="demo-bar">
-		<h1>
+		<%-- <h1>
 			${pageOrderType}款式单
 				<c:choose>
 					 <c:when test="${empty customEdit['vcustomCode']}">   
@@ -80,7 +91,7 @@
 					 <input type="hidden" id="vcustomCode" name="vcustomCode" value="${customEdit['vcustomCode']}">
 					 </c:otherwise>	
 				</c:choose>
-		</h1>
+		</h1> --%>
 	</header>
 	<jsp:include page="../header.jsp"></jsp:include>
 	<%-- <div class="header" style="display:none;">
