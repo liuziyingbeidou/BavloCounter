@@ -9,11 +9,9 @@
 	<c:choose>
 		 <c:when test="${empty useGemDetail['vnumber']}">   
 		 ${number }
-		 <input type="hidden" id="vnumber" name="vnumber" value="${number }">
 		 </c:when>
 		 <c:otherwise>
 		 ${ordervo['vnumber']}
-		 <input type="hidden" id="vnumber" name="vnumber" value="${useGemDetail['vnumber']}">
 		 </c:otherwise>	
 	</c:choose> 
 </title>
@@ -320,14 +318,12 @@
 		<div class="top2">
 			<b><a href="javascript:;" onclick="EditShow_Hidden(ed1)"><img
 						src="${ctx}/resources/images/plus.png" />
-			</a>${pageOrderType}配石单
+			</a>
 			<c:choose>
 				 <c:when test="${empty useGemDetail['vnumber']}">   
-				 ${number }
 				 <input type="hidden" id="vnumber" name="vnumber" value="${number }">
 				 </c:when>
 				 <c:otherwise>
-				 ${ordervo['vnumber']}
 				 <input type="hidden" id="vnumber" name="vnumber" value="${useGemDetail['vnumber']}">
 				 </c:otherwise>	
 			</c:choose> 

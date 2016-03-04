@@ -9,7 +9,16 @@
 		<META HTTP-EQUIV="pragma" CONTENT="no-cache"> 
 		<META HTTP-EQUIV="Cache-Control" CONTENT="no-cache, must-revalidate"> 
 		<META HTTP-EQUIV="expires" CONTENT="0">
-		<title>编辑客户</title>
+		<title>${pageOrderType}客户
+			<c:choose>
+					 <c:when test="${empty customerDetail['vcustomerCode']}">   
+					 ${number }
+					 </c:when>
+					 <c:otherwise>
+					 ${customerDetail['vcustomerCode']}
+					 </c:otherwise>	
+			</c:choose>
+		</title>
 <!--必要样式-->
 <link rel='stylesheet' href='${ctx}/resources/css/style.css' media='all' />
 <link rel='stylesheet' href='${ctx}/resources/css/bootstrap.css' media='all' />
@@ -205,17 +214,14 @@
 		<input type="hidden" name='vserviceCode' value="${customerDetail.vserviceCode }" />
 <header class="demo-bar">
 	<h1>
-		${pageOrderType}客户
-			<c:choose>
-						 <c:when test="${empty customerDetail['vcustomerCode']}">   
-						 ${number }
-						 <input type="hidden" id="orderCode" name="vcustomerCode" value="${number }" />
-						 </c:when>
-						 <c:otherwise>
-						 ${customerDetail['vcustomerCode']}
-						 <input type="hidden" id="orderCode" name="vcustomerCode" value="${customerDetail['vcustomerCode']}" />
-						 </c:otherwise>	
-			</c:choose> 
+		<c:choose>
+			 <c:when test="${empty customerDetail['vcustomerCode']}">   
+			 <input type="hidden" id="orderCode" name="vcustomerCode" value="${number }" />
+			 </c:when>
+			 <c:otherwise>
+			 <input type="hidden" id="orderCode" name="vcustomerCode" value="${customerDetail['vcustomerCode']}" />
+			 </c:otherwise>	
+		</c:choose> 
 	</h1>
 </header>
 <jsp:include page="../header.jsp"></jsp:include>

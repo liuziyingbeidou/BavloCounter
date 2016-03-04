@@ -8,11 +8,9 @@
 	<c:choose>
 		 <c:when test="${empty customEdit['vcustomCode']}">   
 		 ${number }
-		 <input type="hidden" id="vcustomCode" name="vcustomCode" value="${number }">
 		 </c:when>
 		 <c:otherwise>
 		 ${customEdit['vcustomCode']}
-		 <input type="hidden" id="vcustomCode" name="vcustomCode" value="${customEdit['vcustomCode']}">
 		 </c:otherwise>	
 	</c:choose>
 </title>
@@ -79,19 +77,16 @@
 	
 	<input type="hidden" id='agentJson' value='${agentJson}' />
 	<header class="demo-bar">
-		<%-- <h1>
-			${pageOrderType}款式单
-				<c:choose>
-					 <c:when test="${empty customEdit['vcustomCode']}">   
-					 ${number }
-					 <input type="hidden" id="vcustomCode" name="vcustomCode" value="${number }">
-					 </c:when>
-					 <c:otherwise>
-					 ${customEdit['vcustomCode']}
-					 <input type="hidden" id="vcustomCode" name="vcustomCode" value="${customEdit['vcustomCode']}">
-					 </c:otherwise>	
-				</c:choose>
-		</h1> --%>
+		<h1>
+			<c:choose>
+				 <c:when test="${empty customEdit['vcustomCode']}">   
+				 <input type="hidden" id="vcustomCode" name="vcustomCode" value="${number }">
+				 </c:when>
+				 <c:otherwise>
+				 <input type="hidden" id="vcustomCode" name="vcustomCode" value="${customEdit['vcustomCode']}">
+				 </c:otherwise>	
+			</c:choose>
+		</h1> 
 	</header>
 	<jsp:include page="../header.jsp"></jsp:include>
 	<%-- <div class="header" style="display:none;">
