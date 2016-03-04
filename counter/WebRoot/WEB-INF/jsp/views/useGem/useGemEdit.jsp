@@ -5,7 +5,18 @@
 <html>
 <head>
 
-<title>${pageOrderType}配石单</title>
+<title>${pageOrderType}配石单
+	<c:choose>
+		 <c:when test="${empty useGemDetail['vnumber']}">   
+		 ${number }
+		 <input type="hidden" id="vnumber" name="vnumber" value="${number }">
+		 </c:when>
+		 <c:otherwise>
+		 ${ordervo['vnumber']}
+		 <input type="hidden" id="vnumber" name="vnumber" value="${useGemDetail['vnumber']}">
+		 </c:otherwise>	
+	</c:choose> 
+</title>
 
 <meta http-equiv="pragma" content="no-cache">
 <meta http-equiv="cache-control" content="no-cache">
@@ -267,27 +278,7 @@
 	}
 </script>
 <style type="text/css">
-@media screen and (max-width: 1280px) and (min-width: 320px){
-	.qsdr3 {
-	    height: 60px;
-	    line-height: 60px;
-	    width: 30%;
-	    padding-left: 10px;
-	    background: #ddd;
-	    color: #616161;
-	    font-size: 16px;
-	}
-}
 
-.qsdr3 {
-    height: 40px;
-    line-height: 40px;
-    width: 28%;
-    padding-left: 10px;
-    background: #ddd;
-    color: #616161;
-    font-size: 16px;
-}
 .muiltx{
 	color:#FFF;
 	padding:4px;
@@ -309,7 +300,7 @@
 	<form id="useGem">
 		<input type="hidden" id="pageAttr" value="DEPLOY"/>
 <header class="demo-bar">
-	<h1>
+	<%-- <h1>
 		${pageOrderType}配石单
 			<c:choose>
 				 <c:when test="${empty useGemDetail['vnumber']}">   
@@ -321,7 +312,7 @@
 				 <input type="hidden" id="vnumber" name="vnumber" value="${useGemDetail['vnumber']}">
 				 </c:otherwise>	
 			</c:choose> 
-	</h1>
+	</h1> --%>
 </header>
 <jsp:include page="../header.jsp"></jsp:include>
 <div class="header" style="display:none;">
@@ -422,8 +413,8 @@
 						<div class="clear"></div>
 					</div>
 					<div class="qsdtt">
-						<input type='text' id='vspec' name='vspec' value="${useGemDetail['vspec']}" placeholder="规格x" class="qsdr3 r1 useGem-spec bl-ck-null lose-useGem"><span class="muiltx">X</span>
-						<input type='text' id='vspec2' name='vspec2' value="${useGemDetail['vspec2']}" placeholder="规格y" class="qsdr3 r3 useGem-spec2 bl-ck-null lose-useGem"><span class="muiltx">X</span>
+						<input type='text' id='vspec' name='vspec' value="${useGemDetail['vspec']}" placeholder="规格x" class="qsdr3 r1 useGem-spec bl-ck-null lose-useGem"><span class="muiltx">  &nbsp;X</span>
+						<input type='text' id='vspec2' name='vspec2' value="${useGemDetail['vspec2']}" placeholder="规格y" class="qsdr3 r3 useGem-spec2 bl-ck-null lose-useGem"><span class="muiltx"> X</span>
 						<input type='text' id='vspec3' name='vspec3' value="${useGemDetail['vspec3']}" placeholder="规格z" class="qsdr3 useGem-spec3 bl-ck-null lose-useGem">
 					</div>
 					<div class="clear"></div>
