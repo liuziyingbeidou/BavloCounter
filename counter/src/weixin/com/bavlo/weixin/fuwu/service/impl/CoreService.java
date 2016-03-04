@@ -97,8 +97,8 @@ public class CoreService extends CommonService implements ICoreService{
 								List<Article> articlesList = new ArrayList<Article>();
 								Article article = new Article();
 								article.setPicUrl(sharePicVO.getUrl());
-								article.setTitle(IContant.mTitle);
-								article.setDescription(IContant.mContent);
+								article.setTitle("哈哈！我在宝珑珠宝体验了虚拟试戴...");//IContant.mTitle
+								article.setDescription("看看我选的款式！也可分享给好友哦！");//IContant.mContent
 								article.setUrl(com.bavlo.weixin.qiye.util.Constants.REQURL +"/remote/viewSharePic.do?id="+Integer.valueOf(id));
 								articlesList.add(article);
 								newsMessage.setArticles(articlesList);
@@ -174,8 +174,8 @@ public class CoreService extends CommonService implements ICoreService{
 								List<Article> articlesList = new ArrayList<Article>();
 								Article article = new Article();
 								article.setPicUrl(sharePicVO.getUrl());
-								article.setTitle(IContant.mTitle);
-								article.setDescription(IContant.mContent);
+								article.setTitle("哈哈！我在宝珑珠宝体验了虚拟试戴...");//IContant.mTitle
+								article.setDescription("看看我选的款式！也可分享给好友哦！");//IContant.mContent
 								article.setUrl(com.bavlo.weixin.qiye.util.Constants.REQURL +"/remote/viewSharePic.do?id="+Integer.valueOf(id));
 								articlesList.add(article);
 								newsMessage.setArticles(articlesList);
