@@ -7,7 +7,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <meta name="viewport"
 	content="width=device-width,target-densitydpi=high-dpi,initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no" />
-<title>我的列表</title>
+<title>我的历史列表</title>
 	<script type="text/javascript" src="${ctx}/resources/js/jquery.min.js"></script>
 	<link href="${ctx}/resources/css/orderlist-r.css" rel="stylesheet" type="text/css" />
 <script type="text/javascript">
