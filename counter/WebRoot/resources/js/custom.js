@@ -182,15 +182,13 @@ $(function() {
 	$(".calculator_btn2").click(function() { // 价格详情
 		calculator("detailPrice");
 	})
-	window.onbeforeunload = function() { 
-		if(customId == null){
-			saveOrUpdate();
-		}
-	} 
+	loadSubData(customId);
 	initFieldSuffix(); // 增加后缀
 	fnCompleteBtn(); // 显示CAD、矢量图名字
 })
-
+window.onbeforeunload = function() {
+		return '请确认已经保存';
+} 
 function fnCompleteBtn(){ // 显示CAD、矢量图名字
 	var vengraveVhName = $("#vengraveVh").val();
 	$(".vectorgraphName").text(vengraveVhName);
@@ -944,4 +942,37 @@ function getOrgPicByMin(picName){//20160226_min.jsp
 	}
 	
 	return newPicName;
+}
+
+//加载子表数据
+function loadSubData(mid){
+	var url = "/counter/upload/showpicJson.do";
+	$.get(url,{cpath:"com.bavlo.counter.model.custom.CustomBVO",fkey:"customId",id:mid},function(row){
+		var data = row;
+		if(data != "" && data != null){
+			$(".cankao_pic_list ul").html("");
+			$(".qiban_pic_list ul").html("");
+			var fileModel = $("#filemodel").val();
+			for(var i = 0; i < data.length; i++){
+				if(data[i].biscover == "Y"){
+					$("#FILE_0").val(data[i].vname);
+				}else{
+					$("#FILE_"+i).val(data[i].vname);
+				}
+				var minPicName = getMinPicByOrg(data[i].vname);
+				//$(".qsd_pic_list ul").append("<li><img class='list_pic' style='width:60px;height:60px;' src='${ctx}/staticRes/gemsign/min/"+minPicName+"'><div class='dask' style='z-index:-1;cursor:pointer;width:60px;height:60px;padding:20px 0 0 20px;background:#000;opacity:0.8;position:relative;top:-60px;' picn='"+data[i].vname+"'><img src='${ctx}/resources/images/delete_shield_24px.ico'></div></li>");
+				var value = data[i].vname;
+				var fileType = data[i].vtype;
+				var ix = value.indexOf(".");
+				var val = value.substring(0,ix);
+				var fm = "FILE_"+i;
+				if(fileType == "customCankao"){
+					$(".cankao_pic_list ul").append("<li id='"+val+"' fem='"+fm+"' onmouseout='setMaskT(\""+val+"\")' onmouseover='setMaskO(\""+val+"\")'><img class='list_pic' style='width:60px;height:60px;' src='/counter/staticRes/"+fileModel+"/min/"+minPicName+"'><div onclick='rmMaskC(\""+value+"\")' class='dask' style='z-index:-1;cursor:pointer;width:60px;height:60px;padding:20px 0 0 20px;background:#000;opacity:0.8;position:relative;top:-60px;' picn='"+value+"'><img src='/counter/resources/images/delete_shield_24px.ico'></div></li>");
+				} else if (fileType == "customSheji"){
+					$(".qiban_pic_list ul").append("<li id='"+val+"' fem='"+fm+"' onmouseout='setMaskT(\""+val+"\")' onmouseover='setMaskO(\""+val+"\")'><img class='list_pic' style='width:60px;height:60px;' src='/counter/staticRes/"+fileModel+"/min/"+minPicName+"'><div onclick='rmMaskC(\""+value+"\")' class='dask' style='z-index:-1;cursor:pointer;width:60px;height:60px;padding:20px 0 0 20px;background:#000;opacity:0.8;position:relative;top:-60px;' picn='"+value+"'><img src='/counter/resources/images/delete_shield_24px.ico'></div></li>");
+				}
+				
+			}
+		}
+	});
 }
