@@ -27,7 +27,7 @@ $(document).ready(function(){
 			var vfiled = jsonStr[i].value;
 			if(nfiled.indexOf("FILE") != -1){
 			 	if(vfiled != "" && vfiled != null){
-			 		$(".flicking_con").append("<a href='javascript:void(0);'>"+ num +"</a>");
+			 		$(".flicking_con").append("<a href='javascript:void(0);'></a>");
 					$(".main_image ul").append("<li><span class='img_'><img  src='${ctx}/staticRes/"+filemodel+"/"+vfiled+"' width='100%' /></span></li>");
 			 		num++;
 			 	}
