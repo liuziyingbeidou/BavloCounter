@@ -187,7 +187,9 @@ $(function() {
 	fnCompleteBtn(); // 显示CAD、矢量图名字
 })
 window.onbeforeunload = function() {
+	if(customId == ""){
 		return '请确认已经保存';
+	}
 } 
 function fnCompleteBtn(){ // 显示CAD、矢量图名字
 	var vengraveVhName = $("#vengraveVh").val();
