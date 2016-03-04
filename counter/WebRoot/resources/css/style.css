@@ -342,7 +342,7 @@ background-color: #444;
 .jisuan b { border:1px solid #bbb; border-radius:25px; padding:0 5px; background:#777;}
 .plus a { text-decoration:none; color:#fff;text-align:center; width:102px; height:40px; line-height:40px; background:#777777; float:left;}
 .sum a { text-decoration:none; color:#fff; width:192px;text-align:center; line-height:40px; height:40px; background:#777; float:right;}
-.baocun { margin-top: 100px;}
+.baocun { margin-top: 50px;}
 .baocun input { width: 325px; text-align: center; font-size: 14px; background: #777; color: #fff; border: none; height: 40px; line-height: 40px;}
 /* .baocun1 { margin-top: 100px;} */
 .baocun1 input { width: 325px; text-align: center; font-size: 14px; background: #777; color: #fff; border: none; height: 40px; line-height: 40px;}
@@ -450,7 +450,7 @@ background-color: #444;
 .fp2 { float: right;}
 .fapiao p { margin: 20px 0;}
 .fapiao input { height: 40px; line-height: 25px; width: 295px; font-size: 16px; margin-top: 28px; padding-left: 15px; background: #ddd; color: #616161;}
-.zf { height: 40px; line-height: 25px;margin-top: 15px; padding-left: 10px; width: 150px; font-family: "Microsoft yahei"; background: #ddd; color: #616161; font-size: 16px; }
+.zf { height: 40px; line-height: 25px;margin-bottom: 15px; padding-left: 10px; width: 150px; font-family: "Microsoft yahei"; background: #ddd; color: #616161; font-size: 16px; }
 .bj { float: left;}
 .yf { float: right;}
 
@@ -510,21 +510,21 @@ background-color: #444;
 .camera { float: right !important; padding-right:0 !important; width: auto;}
 .qsd_left dt { margin-top: 20px; border-top: 1px solid #242424; padding-top: 10px;}
 .qsd_right { width: 328px; float: right; margin-top: 20px;}
-.qsd_right_1 { width: 328px; margin-bottom: 30px; }
+.qsd_right_1 { width: 328px; margin-bottom: 20px; }
 .qsdr { height: 40px; line-height: 40px; width: 150px; padding-left: 10px; background: #ddd; color: #616161; font-size: 16px; }
 .swqs { float: left; height: 40px; text-align: center; line-height: 40px; width: 150px;  padding-left: 10px; background: #ddd; color: #616161; font-size: 16px; }
-.swqsd { height: 40px; line-height: 40px; width: 318px; padding-left: 10px; background: #ddd; color: #616161; font-size: 16px;}
-.swqsd1{ height: 40px; line-height: 40px; width: 318px; padding-left: 10px; background: #ddd; color: #616161; font-size: 16px;}
+.swqsd { height: 40px; line-height: 40px; width: 100%; padding-left: 10px; background: #ddd; color: #616161; font-size: 16px;}
+.swqsd1{ height: 40px; line-height: 40px; width: 100%; padding-left: 10px; background: #ddd; color: #616161; font-size: 16px;}
 .r1 {float: left; border: none;}
 .r2 {float: right;}
 .t1 b,.r2 b,.t2 b { float: right; margin-right: 10px; font-weight: normal;}
 .qsdt { height: 40px; line-height: 40px; width: 100%;  padding-left: 10px; background: #ddd; color: #616161; font-size: 16px; }
 .t1 { float: left; margin-right: 14px;}
 .t2 {float: right;}
-.qsdn { height: 40px; margin-top: 20px; text-align: center; line-height: 40px; width: 318px;  padding-left: 10px; background: #ddd; color: #616161; font-size: 16px; }
-.qsdn1 { height: 40px; margin-top: 20px; text-align: center; line-height: 40px; width: 318px;  padding-left: 10px; background: #ddd; color: #616161; font-size: 16px; }
+.qsdn { height: 40px; margin-top: 20px; text-align: center; line-height: 40px; width: 100%;  padding-left: 10px; background: #ddd; color: #616161; font-size: 16px; }
+.qsdn1 { height: 40px; margin-top: 20px; text-align: center; line-height: 40px; width: 100%;  padding-left: 10px; background: #ddd; color: #616161; font-size: 16px; }
 .t3 b { float: right; margin-right: 10px; font-weight: normal;}
-.qssm { width: 323px; margin-top: 20px; text-indent: 5px; font-family: "Microsoft yahei"; background: #eee url(../images/textarea_bg.png) no-repeat right bottom; border: none; height: 70px; line-height: 25px; color: #818181; font-size: 16px;}
+.qssm { width: 100%; margin-top: 20px; text-indent: 5px; font-family: "Microsoft yahei"; background: #eee url(../images/textarea_bg.png) no-repeat right bottom; border: none; height: 70px; line-height: 25px; color: #818181; font-size: 16px;}
 .qs_save { margin-top: 20px; border-top: 1px solid #242424; padding-top: 20px;}
 .qs_save1 { margin-top: 20px; border-top: 1px solid #787878; padding-top: 20px;}
 .qs_save1 input,.qs_save input { width: 328px; text-align: center; font-size: 16px; background: #777; color: #fff; border: none; height: 40px; line-height: 40px;}
@@ -567,8 +567,8 @@ background-color: #444;
 .edit_btn { border-top: 1px solid #242424; margin-top: 70px; padding-top: 20px;}
 .edit_1 { width: 328px; margin: 0 auto;}
 .edit_2 {color: #565656; height: 40px; line-height: 40px; background: #ddd; font-size: 16px; padding-left: 10px;}
-.edit_1_name { width: 150px; float: left; margin-bottom: 30px;}
-.edit_1_sex { width: 150px; float: right;}
+.edit_1_name { width: 160px; float: left; margin-bottom: 30px;}
+.edit_1_sex { width: 160px; float: right;}
 .edit_1_area { width: 160px; float: left; margin-bottom: 30px;}
 .edit_1_area_son { width: 160px; float: right;}
 .edit_save input { width: 328px; margin-top: 20px; text-align: center; font-size: 16px; background: #aaa; color: #333; border: none; height: 40px; line-height: 40px;}
@@ -751,4 +751,12 @@ background-color: #444;
 .qiban_pic_list ul li{height:60px;margin-top: 10px;margin-left: 5px;float: left;}
 .cankao_pic_list ul li{height:60px;margin-top: 10px;margin-left: 5px;float: left;}
 
-
+.qsdr3 {
+    height: 40px;
+    line-height: 40px;
+    width: 28%;
+    padding-left: 10px;
+    background: #ddd;
+    color: #616161;
+    font-size: 16px;
+}
