@@ -8,11 +8,9 @@
 			<c:choose>
 				 <c:when test="${empty entityvo['vnumber']}">
 				 ${number }
-				 <input type="hidden" name="vnumber" value="${number }">
 				 </c:when>
 				 <c:otherwise>
 				 ${entityvo['vnumber']}
-				 <input type="hidden" name="vnumber" value="${entityvo['vnumber']}">
 				 </c:otherwise>	
 			</c:choose>  
 		</title>
@@ -271,19 +269,16 @@
 <input id="entityid" class="mid tableId"  type="hidden" name="id" value="${entityvo['id']}">
 <input id="customerId" class="tocustomerId" type="hidden" name="customerId" value="${entityvo['customerId']}">
 <header class="demo-bar">
-	<%-- <h1>
-		${pageOrderType}实物签收单
-			<c:choose>
-				 <c:when test="${empty entityvo['vnumber']}">
-				 ${number }
-				 <input type="hidden" name="vnumber" value="${number }">
-				 </c:when>
-				 <c:otherwise>
-				 ${entityvo['vnumber']}
-				 <input type="hidden" name="vnumber" value="${entityvo['vnumber']}">
-				 </c:otherwise>	
-			</c:choose>  
-	</h1> --%>
+	<h1>
+		<c:choose>
+			 <c:when test="${empty entityvo['vnumber']}">
+			 <input type="hidden" name="vnumber" value="${number }">
+			 </c:when>
+			 <c:otherwise>
+			 <input type="hidden" name="vnumber" value="${entityvo['vnumber']}">
+			 </c:otherwise>	
+		</c:choose>  
+	</h1> 
 </header>
 <jsp:include page="../header.jsp"></jsp:include>
 

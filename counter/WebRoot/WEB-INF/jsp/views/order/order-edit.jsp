@@ -11,11 +11,9 @@
 <c:choose>
 	<c:when test="${empty ordervo['vorderCode']}">   
 	${number }
-	<input type="hidden" id="orderCode" name="vorderCode" value="${number }">
 	</c:when>
 	<c:otherwise>
 	${ordervo['vorderCode']}
-	<input type="hidden" id="orderCode" name="vorderCode" value="${ordervo['vorderCode']}">
 	</c:otherwise>	
 </c:choose> 
 </title>
@@ -724,19 +722,16 @@ text-overflow:ellipsis;
 					</c:choose> ">
 <input type="hidden" name="customerId" class="tocustomerId" id="customerId" value="${ordervo['customerId']}">
 <header class="demo-bar">
-<%-- 	<h1>
-		${pageOrderType}订单
-			<c:choose>
-				 <c:when test="${empty ordervo['vorderCode']}">   
-				 ${number }
-				 <input type="hidden" id="orderCode" name="vorderCode" value="${number }">
-				 </c:when>
-				 <c:otherwise>
-				 ${ordervo['vorderCode']}
-				 <input type="hidden" id="orderCode" name="vorderCode" value="${ordervo['vorderCode']}">
-				 </c:otherwise>	
-			</c:choose> 
-	</h1> --%>
+	<h1>
+		<c:choose>
+			 <c:when test="${empty ordervo['vorderCode']}">   
+			 <input type="hidden" id="orderCode" name="vorderCode" value="${number }">
+			 </c:when>
+			 <c:otherwise>
+			 <input type="hidden" id="orderCode" name="vorderCode" value="${ordervo['vorderCode']}">
+			 </c:otherwise>	
+		</c:choose> 
+	</h1>
 </header>
 <jsp:include page="../header.jsp"></jsp:include>
 <!-- 以下正文体 -->
