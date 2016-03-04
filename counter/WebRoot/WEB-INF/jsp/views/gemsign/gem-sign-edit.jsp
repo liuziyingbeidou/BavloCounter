@@ -4,7 +4,18 @@
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html>
 	<head>
-		<title>${pageGemType}宝石签收单</title>
+		<title>${pageGemType}宝石签收单
+			<c:choose>
+				 <c:when test="${empty gemvo['vnumber']}">   
+				 ${number }
+				 <input type="hidden" name="vnumber" value="${number }">
+				 </c:when>
+				 <c:otherwise>
+				 ${gemvo['vnumber']}
+				 <input type="hidden" name="vnumber" value="${gemvo['vnumber']}">
+				 </c:otherwise>	
+			</c:choose>
+		</title>
 
 		<meta http-equiv="pragma" content="no-cache">
 		<meta http-equiv="cache-control" content="no-cache">
@@ -309,7 +320,7 @@
 	<input id="gemid" class="mid tableId" type="hidden" name="id" value="${gemvo['id']}">
 	<input id="customerId" class="tocustomerId" type="hidden" name="customerId" value="${gemvo['customerId']}">
 <header class="demo-bar">
-	<h1>
+	<%-- <h1>
 		${pageOrderType}宝石签收单
 		<c:choose>
 			 <c:when test="${empty gemvo['vnumber']}">   
@@ -321,7 +332,7 @@
 			 <input type="hidden" name="vnumber" value="${gemvo['vnumber']}">
 			 </c:otherwise>	
 		</c:choose>
-	</h1>
+	</h1> --%>
 </header>
 <jsp:include page="../header.jsp"></jsp:include>
 
