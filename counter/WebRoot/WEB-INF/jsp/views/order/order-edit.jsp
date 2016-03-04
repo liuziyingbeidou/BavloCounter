@@ -885,7 +885,7 @@ text-overflow:ellipsis;
           <input type='text' name="npayment" class="zf yf order-payment bl-suf-null" value="${ordervo['npayment'] }" placeholder="已付"></p>
           <p><input type='text' readonly="readonly" name="nnonPayment" class="zf bj order-nonPayment" value="${ordervo['nnonPayment'] }" placeholder="未付">
           <input type='text' name="ntailPaid" class="zf yf order-tailPaid" value="${ordervo['ntailPaid'] }" placeholder="尾款实收"></p>
-          <input type="text" name="ddeliverdate" value="${ordervo['ddeliverdate'] }" id="datetimepicker" class="jianding" placeholder="交付时间" />
+          <input type="text" name="ddeliverdate" value="${ordervo['ddeliverdate'] }" id="datetimepicker" class="jianding" placeholder="交付时间" style="margin-top: 0"/>
           
           <select name="vdeliveryWay" class="jianding deliveryWay">
             <option value="来店自取">来店自取</option>
