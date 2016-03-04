@@ -84,7 +84,7 @@ public class CoreService extends CommonService implements ICoreService{
 						//分享图片
 						if("00".equals(dStr)){
 							//获取图片URL对应ID
-							String id = eventKey.substring(0, eventKey.length()-2);
+							String id = eventKey.substring(8, eventKey.length()-2);
 							//根据id获取picUrl
 							if(id != null && id != ""){
 								SharePicVO sharePicVO = toolsService.getSharePicVOById(Integer.valueOf(id));
