@@ -28,7 +28,7 @@ $(document).ready(function(){
 			if(nfiled.indexOf("FILE") != -1){
 			 	if(vfiled != "" && vfiled != null){
 			 		$(".flicking_con").append("<a href='javascript:void(0);'>"+ num +"</a>");
-					$(".main_image ul").append("<li><span class='img_'><img  src='${ctx}/staticRes/"+filemodel+"/"+vfiled+"' width='330' height='330' /></span></li>");
+					$(".main_image ul").append("<li><span class='img_'><img  src='${ctx}/staticRes/"+filemodel+"/"+vfiled+"' width='100%' /></span></li>");
 			 		num++;
 			 	}
 			}
