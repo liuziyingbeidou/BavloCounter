@@ -104,6 +104,9 @@ public class CoreService extends CommonService implements ICoreService{
 								newsMessage.setArticles(articlesList);
 								
 								respXml = MessageUtil.messageToXml(newsMessage);
+								
+								//更新状态
+								toolsService.updateQrCodeStateById(Integer.valueOf(id));
 							}
 							/**扫描二维码-分享图片-end**/
 						}else{
@@ -181,6 +184,8 @@ public class CoreService extends CommonService implements ICoreService{
 								newsMessage.setArticles(articlesList);
 								
 								respXml = MessageUtil.messageToXml(newsMessage);
+								//更新状态
+								toolsService.updateQrCodeStateById(Integer.valueOf(id));
 							}
 							/**扫描二维码-分享图片-end**/
 						}else{

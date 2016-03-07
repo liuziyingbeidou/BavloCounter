@@ -63,4 +63,11 @@ public interface IToolsService {
 	 */
 	public SharePicVO getSharePicVOById(Integer id);
 	
+	/**
+	 * @Description: 发出图文消息后，二维码清除
+	 * @param 
+	 * @return void
+	 */
+	public void updateQrCodeStateById(Integer id);
+	
 }
