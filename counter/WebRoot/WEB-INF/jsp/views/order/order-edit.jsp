@@ -7,16 +7,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <meta name="viewport" content="width=device-width,target-densitydpi=high-dpi,initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
-<title>${pageOrderType}订单
-<c:choose>
-	<c:when test="${empty ordervo['vorderCode']}">   
-	${number }
-	</c:when>
-	<c:otherwise>
-	${ordervo['vorderCode']}
-	</c:otherwise>	
-</c:choose> 
-</title>
+<title>${pageOrderType}订单</title>
 <script language="javascript" type="text/javascript" src="${ctx}/resources/js/jquery-1.9.1.min.js"></script>
 <link type='text/css' rel='stylesheet' href='${ctx}/resources/css/style.css' media='all' />
 <link type='text/css' rel='stylesheet' href='${ctx}/resources/css/bootstrap.css' media='all' />
@@ -297,6 +288,43 @@ function showAddrInfo(){
 			$(".email").val(data.vemail);
 		}
 	});
+	//设置可编辑性
+	//setAddrEdit("N");
+}
+
+//设置可编辑性
+function setAddrEdit(isEdit){
+	if("N" == isEdit){
+		//姓名
+		$(".receiverName").attr("readonly","readonly");
+		//省
+		$(".province").attr("disabled",true);
+		//市
+		$(".city").attr("disabled",true);
+		//县
+		$(".district").attr("disabled",true);
+		//街道
+		$(".street").attr("readonly","readonly");
+		//电话
+		$(".phoneCode").attr("readonly","readonly");
+		//邮箱
+		$(".email").attr("readonly","readonly");
+	}else if("Y" == isEdit){
+		//姓名
+		$(".receiverName").attr("readonly","");
+		//省
+		$(".province").attr("disabled",false);
+		//市
+		$(".city").attr("disabled",false);
+		//县
+		$(".district").attr("disabled",false);
+		//街道
+		$(".street").attr("readonly","");
+		//电话
+		$(".phoneCode").attr("readonly","");
+		//邮箱
+		$(".email").attr("readonly","");
+	}
 }
 
 //点击选择
@@ -723,14 +751,17 @@ text-overflow:ellipsis;
 <input type="hidden" name="customerId" class="tocustomerId" id="customerId" value="${ordervo['customerId']}">
 <header class="demo-bar">
 	<h1>
-		<c:choose>
-			 <c:when test="${empty ordervo['vorderCode']}">   
-			 <input type="hidden" id="orderCode" name="vorderCode" value="${number }">
-			 </c:when>
-			 <c:otherwise>
-			 <input type="hidden" id="orderCode" name="vorderCode" value="${ordervo['vorderCode']}">
-			 </c:otherwise>	
-		</c:choose> 
+		${pageOrderType}订单
+			<c:choose>
+						 <c:when test="${empty ordervo['vorderCode']}">   
+						 ${number }
+						 <input type="hidden" id="orderCode" name="vorderCode" value="${number }">
+						 </c:when>
+						 <c:otherwise>
+						 ${ordervo['vorderCode']}
+						 <input type="hidden" id="orderCode" name="vorderCode" value="${ordervo['vorderCode']}">
+						 </c:otherwise>	
+			</c:choose> 
 	</h1>
 </header>
 <jsp:include page="../header.jsp"></jsp:include>
@@ -839,7 +870,16 @@ text-overflow:ellipsis;
 			 	});
 			 	$("#addressId").val("");
 			 	$("#addrSave").val("Save");
-			 	$(".add_dizhi").show();
+			 	//var dpv = $("#add_dizhi").is(":visible");
+			 	//alert(dpv);
+			 	if($(".add_dizhi").is(":hidden")){
+			 		$(".btn-add-addr").val("↑ 收起");
+				    $(".add_dizhi").show();    //如果元素为隐藏,则将它显现
+				}else{
+					$(".btn-add-addr").val("+新建地址");
+				    $(".add_dizhi").hide();     //如果元素为显现,则将其隐藏
+				}
+			 	//$(".add_dizhi").show();
 			 }
 		  </script>
           <div class="address">
@@ -848,7 +888,7 @@ text-overflow:ellipsis;
             
             </table> 
             <!--<p class="new_adr">丁力 清华路17号院29号楼B座1103室...<a href="">X</a></p>-->
-            <input type="button" value="+新建地址" onclick="add_addr()" />
+            <input type="button" class="btn-add-addr" value="+新建地址" onclick="add_addr()" />
           </div>
           <div class="add_dizhi" style="display:none;">
             <div class="save1"><input type='text' name='vreceiverName' class="add name receiverName bl-ck-null lose-addr" value='' placeholder="姓名"></div>
@@ -891,7 +931,7 @@ text-overflow:ellipsis;
           <input type='text' name="npayment" class="zf yf order-payment bl-suf-null" value="${ordervo['npayment'] }" placeholder="已付"></p>
           <p><input type='text' readonly="readonly" name="nnonPayment" class="zf bj order-nonPayment" value="${ordervo['nnonPayment'] }" placeholder="未付">
           <input type='text' name="ntailPaid" class="zf yf order-tailPaid" value="${ordervo['ntailPaid'] }" placeholder="尾款实收"></p>
-          <input type="text" name="ddeliverdate" value="${ordervo['ddeliverdate'] }" id="datetimepicker" class="jianding" placeholder="交付时间" style="margin-top: 0"/>
+          <input type="text" name="ddeliverdate" value="${ordervo['ddeliverdate'] }" id="datetimepicker" class="jianding" placeholder="交付时间" />
           
           <select name="vdeliveryWay" class="jianding deliveryWay">
             <option value="来店自取">来店自取</option>
