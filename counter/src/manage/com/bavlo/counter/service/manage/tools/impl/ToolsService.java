@@ -109,5 +109,15 @@ public class ToolsService extends CommonService implements IToolsService {
 		SharePicVO vo = findFirst(SharePicVO.class, " id="+id);
 		return vo;
 	}
+
+	@Override
+	public void updateQrCodeStateById(Integer id) {
+		if(id != null){
+			String[] attrname = new String[]{"bisClose"};
+			String[] attrval = new String[]{"Y"};
+			String conditions = " id ="+id;
+			updateAttrs(SharePicVO.class, attrname, attrval, conditions);
+		}
+	}
 	
 }

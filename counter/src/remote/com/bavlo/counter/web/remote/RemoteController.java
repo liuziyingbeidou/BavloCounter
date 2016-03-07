@@ -1,5 +1,8 @@
 package com.bavlo.counter.web.remote;
 
+import java.io.FileNotFoundException;
+import java.io.IOException;
+
 import javax.annotation.Resource;
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
@@ -18,6 +21,7 @@ import com.bavlo.counter.model.sign.EntitySignVO;
 import com.bavlo.counter.service.manage.tools.itf.IToolsService;
 import com.bavlo.counter.utils.CommonUtils;
 import com.bavlo.counter.utils.JsonUtils;
+import com.bavlo.counter.utils.ReadFile;
 import com.bavlo.counter.web.BaseController;
 import com.bavlo.weixin.fuwu.util.AdvancedUtil;
 import com.bavlo.weixin.fuwu.util.CommonUtil;
@@ -60,6 +64,7 @@ public class RemoteController extends BaseController implements ServletContextAw
 		SharePicVO sharePicVO = new SharePicVO();
 		sharePicVO.setUrl(url);
 		sharePicVO.setkId(kId);
+		sharePicVO.setBisClose("N");
 		
 		Integer id = toolsService.saveSharePic(sharePicVO);
 		
@@ -72,9 +77,17 @@ public class RemoteController extends BaseController implements ServletContextAw
 		String basePath = servletContext.getRealPath("/"); 
 		String qrPath = basePath+"/resources/qrcode";
 		String qrCodeUrl = AdvancedUtil.getQRCode(ticketStr,qrPath,"S-"+id);
-		renderJson("{\"qrCodeUrl\":\""+ com.bavlo.weixin.qiye.util.Constants.REQURL +"/resources/qrcode/"+qrCodeUrl+"\"}");
+		renderJson("{\"qrCodeUrl\":\""+ com.bavlo.weixin.qiye.util.Constants.REQURL +"/resources/qrcode/"+qrCodeUrl+"\",\"id\":\""+id+"\"}");
 	}
 	
+	/**
+	 * @Description: 转发内容页
+	 * @param @param request
+	 * @param @param response
+	 * @param @param id
+	 * @param @return
+	 * @return ModelAndView
+	 */
 	@RequestMapping(value = "/viewSharePic")
 	public ModelAndView viewSharePic(HttpServletRequest request,HttpServletResponse response,Integer id){
 		
@@ -83,6 +96,28 @@ public class RemoteController extends BaseController implements ServletContextAw
 		ModelAndView model = new ModelAndView("mood/mood");
 		model.addObject("sharePicVO",sharePicVO);
 		return model;
+	}
+	
+	/**
+	 * @Description: 获取二维码是否关闭状态
+	 * @param @param request
+	 * @param @param response
+	 * @param @param id
+	 * @return void Y 关闭；N 不关闭
+	 */
+	@RequestMapping(value = "/getQrCodeState")
+	public void getQrCodeState(HttpServletRequest request,HttpServletResponse response,Integer id){
+		String basePath = servletContext.getRealPath("/");  
+        String filePath = basePath +"/resources";
+		SharePicVO sharePicVO = toolsService.getSharePicVOById(id);
+		try {
+			ReadFile.deletefile(filePath+"/S-"+id+".jpg");
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		renderJson("{\"state\":\""+sharePicVO.getBisClose()+"\",\"picUrl\":\"S-"+id+".jpg\"}");
 	}
 	
 	@Override  

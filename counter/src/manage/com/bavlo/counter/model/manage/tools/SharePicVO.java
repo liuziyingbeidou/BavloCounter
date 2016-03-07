@@ -22,6 +22,8 @@ public class SharePicVO extends IdEntity {
 	private String url;
 	//款式ID
 	private String kId;
+	//是否关闭/删除二维码
+	private String bisClose;
 	
 	public String getUrl() {
 		return url;
@@ -37,6 +39,14 @@ public class SharePicVO extends IdEntity {
 
 	public void setkId(String kId) {
 		this.kId = kId;
+	}
+
+	public String getBisClose() {
+		return bisClose;
+	}
+
+	public void setBisClose(String bisClose) {
+		this.bisClose = bisClose;
 	}
 	
 }
