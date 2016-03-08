@@ -51,17 +51,16 @@
 
 <script type="text/javascript">
 	//本地webservice
-	var nativeUrl = "${pageScope.basePath}/counter/webservice/http.do";
+	var nativeUrl = "/counter/webservice/http.do";
 	$(function() {
 		//宝石类型下拉框值
 		var typeUrl = "http://www.bavlo.com/getAllGemType";
 		loadSelData(nativeUrl, typeUrl, "gemTypeId", "data[i].id",
 				"data[i].type_cn", function() {
 					$("#gemTypeId").val("${useGemDetail['vtype']}");
+					//形状下拉框
+					initShapeByType();
 				}, "宝石类型");
-		
-		//形状下拉框
-		initShapeByType();
 		//规格下拉框
 	    //initSpecByTypeShape();
 
