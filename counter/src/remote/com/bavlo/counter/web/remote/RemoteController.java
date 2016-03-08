@@ -108,7 +108,7 @@ public class RemoteController extends BaseController implements ServletContextAw
 	@RequestMapping(value = "/getQrCodeState")
 	public void getQrCodeState(HttpServletRequest request,HttpServletResponse response,Integer id){
 		String basePath = servletContext.getRealPath("/");  
-        String filePath = basePath +"/resources";
+        String filePath = basePath +"/resources/qrcode";
 		SharePicVO sharePicVO = toolsService.getSharePicVOById(id);
 		try {
 			ReadFile.deletefile(filePath+"/S-"+id+".jpg");
