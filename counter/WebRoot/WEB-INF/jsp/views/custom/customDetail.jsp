@@ -14,32 +14,32 @@
 
 <title>款式单${customDetail.vcustomCode }</title>
 <script language="javascript" type="text/javascript"
-	src="${ctx}/resources/js/jquery-1.8.3.min.js"></script>
+	src="/counter/resources/js/jquery-1.8.3.min.js"></script>
 <link type='text/css' rel='stylesheet'
-	href='${ctx}/resources/css/style.css' media='all' />
+	href='/counter/resources/css/style.css' media='all' />
 <link type='text/css' rel='stylesheet'
-	href='${ctx}/resources/css/bootstrap.css' media='all' />
-<script src="${ctx}/resources/js/top.js"></script>
-<script src="${ctx}/resources/js/hide.js"></script>
+	href='/counter/resources/css/bootstrap.css' media='all' />
+<script src="/counter/resources/js/top.js"></script>
+<script src="/counter/resources/js/hide.js"></script>
 <!--必要样式-->
-<!--<link rel="stylesheet" href="${ctx}/resources/css/photoswipe.css">-->
-<link rel="stylesheet" href="${ctx}/resources/css/default-skin.css">
+<!--<link rel="stylesheet" href="/counter/resources/css/photoswipe.css">-->
+<link rel="stylesheet" href="/counter/resources/css/default-skin.css">
 <link rel="stylesheet"
 	href="/counter/resources/jquery.multiDialog/css/jquery-ui-1.10.3.custom.css">
 <script
 	src="/counter/resources/jquery.multiDialog/js/jquery/jquery-ui-1.10.3.custom.js"></script>
 <!--	
-<script src="${ctx}/resources/js/photoswipe.min.js"></script>
-<script src="${ctx}/resources/js/photoswipe-ui-default.min.js"></script>
-<script src="${ctx}/resources/js/photoswipefromdom.js"></script>
+<script src="/counter/resources/js/photoswipe.min.js"></script>
+<script src="/counter/resources/js/photoswipe-ui-default.min.js"></script>
+<script src="/counter/resources/js/photoswipefromdom.js"></script>
 -->
 <script src="/counter/resources/js/bavlo-dialog.js"></script>
-<script src="${ctx}/resources/js/bavlo-initdata.js"></script>
-<script src="${ctx}/resources/js/bavlo-event.js"></script>
+<script src="/counter/resources/js/bavlo-initdata.js"></script>
+<script src="/counter/resources/js/bavlo-event.js"></script>
 
 <!-- 定义JS -->
-<script src="${ctx}/resources/js/bavlo-initdata.js"></script>
-<script src="${ctx}/resources/js/bavlo-event.js"></script>
+<script src="/counter/resources/js/bavlo-initdata.js"></script>
+<script src="/counter/resources/js/bavlo-event.js"></script>
 
 <!-- 弹框 -->
 <!-- jQuery & jQuery UI files (needed)--> 
@@ -136,7 +136,7 @@ $(function(){
 	$(".dlcad").click(function(){
 		var cad = "${customDetail['vcadFile'] }";
 		if(cad != ""){
-			window.location="${ctx}/staticRes/custom/"+cad;
+			window.location="/counter/staticRes/custom/"+cad;
 			$.ajax({
 				url : "../order/updateState.do",
 				type : 'POST',
@@ -157,7 +157,7 @@ $(function(){
 	$(".dlvh").click(function(){
 		var vh = "${customDetail['vengraveVh'] }";
 		if(vh != ""){
-			window.location="${ctx}/staticRes/custom/"+vh;
+			window.location="/counter/staticRes/custom/"+vh;
 		} else {
 			alert("矢量图未上传！");
 		}
@@ -180,7 +180,7 @@ $(function(){
 	$(".sendPMC").click(function(){
 		//var text_company = '${shop}';
 		//var text_url = getRootPath()+"/custom/detail.do?id="+customId;
-		//var url = "${ctx}/sendMassage.do";
+		//var url = "/counter/sendMassage.do";
 		toRoleObj($("#pageAttr").val(),'<%=Constants.PMC_USERID%>',"款式"+ $("#pageCode").val() +"已经完成，请来我厂Q货!",$(".tableId").val(),$(".tocustomerId").val());
 		
 	});
@@ -279,7 +279,7 @@ $(function(){
 
 //转发页面
 function toRoleObj(pageAttr,userid,memo,id,customerId){
-	var url = "${ctx}/sendMassage.do";
+	var url = "/counter/sendMassage.do";
 	var pageCode = $("#pageCode").val();
 	$.post(url,{pageAttr:pageAttr,pageCode:pageCode,touser:userid,memo:memo,rootPath:getRootPath(),id:id,customerId:customerId},function(data){
 		if(data == 0){
@@ -344,7 +344,7 @@ function addStockGem(data){
 			"<span>库选石： </span>"+
 			"<img class='stockGem_img' src='"+data.vstockGemImgPath+"' style='border:50px'/><span>"+data.vstockGemName+"</span>"+
 			"<span style='float:right'>"+data.istockGemNum+"颗<span>"+
-			"<input type='button' value='配' onclick='useGem("+data.id+")' class='ugem CUST-RL CC-RL PM-RL CAD-RL PMC-RL PPS-RL' />"+
+			"<input type='button' value='配' onclick='useGem("+data.id+")' class='ugem CUST-RL CC-RL PM-RL CAD-RL PPS-RL' />"+
 			"</div>" +
 			"</dd>";
 		
@@ -363,7 +363,7 @@ function useGem(stockGemId){
 function setValueByFrame(type,id,callback,json){
 	var url;
 	if(type == "customer"){
-		url = "${ctx}/customer/infoJson.do";
+		url = "/counter/customer/infoJson.do";
 		$.get(url,{id:id},function(data){
 			if(data != null){
 				if(data.vhendimgurl != ""){
@@ -384,31 +384,31 @@ function setValueByFrame(type,id,callback,json){
 		});
 	}/*else if(type == "chain"){
 		var data = JSON.parse(json);
-		$("#order-list").append("<dd type='ch' sid='"+data.sid+"' class='"+data.sid+" bill'><span class='list_name bill-name'>"+data.sname+"</span><input class='list_num bill-num' style='width:40px;margin-left:10px;' type='text' value='1' placeholder='条'><b class='list_price bill-price'>"+data.sprice+"</b><a href='javascript:rlist("+data.sid+")' class='close_c'><img src='${ctx}/resources/images/close.png'></a></dd>");
+		$("#order-list").append("<dd type='ch' sid='"+data.sid+"' class='"+data.sid+" bill'><span class='list_name bill-name'>"+data.sname+"</span><input class='list_num bill-num' style='width:40px;margin-left:10px;' type='text' value='1' placeholder='条'><b class='list_price bill-price'>"+data.sprice+"</b><a href='javascript:rlist("+data.sid+")' class='close_c'><img src='/counter/resources/images/close.png'></a></dd>");
 		closeMultiDlg();
 	}*/else if(type == "order"){
-		url = "${ctx}/order/edit.do?id="+id;//根据id查询订单信息
+		url = "/counter/order/edit.do?id="+id;//根据id查询订单信息
 		window.location = url;
 	}else if(type == "order-view"){
-		url = "${ctx}/order/view.do?id="+id;//根据id查询订单信息
+		url = "/counter/order/view.do?id="+id;//根据id查询订单信息
 		window.location = url;
 	}else if(type == "signGem"){
-		url = "${ctx}/gem-sign/view.do?id="+id;//根据id查询宝石签收单信息
+		url = "/counter/gem-sign/view.do?id="+id;//根据id查询宝石签收单信息
 		window.location = url;
 	}else if(type == "entity"){
-		url = "${ctx}/entity-sign/view.do?id="+id;//根据id查询实物签收单信息
+		url = "/counter/entity-sign/view.do?id="+id;//根据id查询实物签收单信息
 		window.location = url;
 	}else if(type == "customer-menu"){
-		url = "${ctx}/customer/info.do?id="+id;//根据id查询客户信息
+		url = "/counter/customer/info.do?id="+id;//根据id查询客户信息
 		window.location = url;
 	}else if(type == "custom"){
-		url = "${ctx}/custom/edit.do?id="+id;//根据id定制单信息
+		url = "/counter/custom/edit.do?id="+id;//根据id定制单信息
 		window.location = url;
 	}else if(type == "custom-view"){
-		url = "${ctx}/custom/detail.do?id="+id;//根据id显示定制单信息
+		url = "/counter/custom/detail.do?id="+id;//根据id显示定制单信息
 		window.location = url;
 	}else if(type == "useGem"){
-		url = "${ctx}/useGem/info.do?id="+id;//根据id显示配石单信息
+		url = "/counter/useGem/info.do?id="+id;//根据id显示配石单信息
 		window.location = url;
 	}
 
@@ -489,7 +489,7 @@ function save(){
 											<c:when test="${empty customDetail['FILE_0']}">
 											</c:when>
 											<c:otherwise>
-												<img style="width: 98%;" src="${ctx}/staticRes/${customDetail['FILE_0']}">
+												<img style="width: 98%;" src="/counter/staticRes/${customDetail['FILE_0']}">
 											</c:otherwise>
 										</c:choose>
 									</a>
@@ -515,7 +515,7 @@ function save(){
 											<c:when test="${empty customDetail['FILE_1']}">
 											</c:when>
 											<c:otherwise>
-												<img style="width: 98%;" src="${ctx}/staticRes/${customDetail['FILE_1']}">
+												<img style="width: 98%;" src="/counter/staticRes/${customDetail['FILE_1']}">
 											</c:otherwise>
 										</c:choose>
 									</a>
@@ -581,7 +581,7 @@ function save(){
 						</dl>
 						<div class="clear"></div>
 						<div
-							class="dzd_right_btm d1 CUST-RL CC-RL PM-RL CAD-RL PMC-RL GB-RL">
+							class="dzd_right_btm d1 CUST-RL CC-RL PM-RL CAD-RL GB-RL">
 							<span class="gf"><a class="dlcad"
 								href="javascript:void(0)"
 								title="下载CAD文件">下载CAD</a> </span> <b><a
@@ -591,7 +591,7 @@ function save(){
 							<div class="clear"></div>
 						</div>
 						<div
-							class="dzd_right_btm d1 CUST-RL CC-RL PM-RL GB-RL PPS-RL">
+							class="dzd_right_btm d1 CUST-RL CC-RL PM-RL PMC-RL GB-RL PPS-RL">
 							<span class="gf"><a class="upcad" href="javascript:void(0)">上传CAD</a>
 							</span><!--  <b><a class="upvh" href="javascript:void(0);">上传矢量图</a></b> -->
 							<div class="clear"></div>
