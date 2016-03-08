@@ -341,7 +341,7 @@
 				<br />
 				<select id="certificate" name="icertificate" class="jianding1">
 					<option value="0" <c:if test="${customEdit['icertificate']=='0'}">selected</c:if>>鉴定证书 -无</option>
-					<option value="25" <c:if test="${customEdit['icertificate']=='25'}">selected</c:if>>鉴定证书 -有</option>
+					<option value="30" <c:if test="${customEdit['icertificate']=='30'}">selected</c:if>>鉴定证书 -有</option>
 				</select>
 				</div>
 				<div class="tu">

@@ -184,7 +184,7 @@
 			//价值
 	    	clearSuffix("gem-worth","元");
 	    	//重量
-	    	clearSuffix("gem-weight","克");
+	    	clearSuffix("gem-weight","ct");
 	    	//数量
 	    	clearSuffix("gem-count","颗");
 	    	
@@ -216,7 +216,7 @@
     		}
 		  	if($(".gem-weight").val() != ""){
 	    		//重量
-				initSuffix("gem-weight","克");
+				initSuffix("gem-weight","ct");
     		}
 	    	if($(".gem-count").val() != ""){
 	    		//数量

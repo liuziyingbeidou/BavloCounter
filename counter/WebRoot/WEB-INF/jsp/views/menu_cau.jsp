@@ -62,13 +62,13 @@ function getRootPath(){
 <li><a href="">Print</a></li>
 -->
 <c:forEach var="role" items="${roleList}">
-     <c:if test="${fn:contains('[CUST-RL][PM-RL][PMC-RL]',role)}">
+     <c:if test="${fn:contains('[CUST-RL][PM-RL]',role)}">
      <li class="bv-role-list" bv-role="CC" bv-title="定制顾问"><a href="javascript:void(0);">发定制顾问</a></li>
      </c:if>
      <c:if test="${fn:contains('[PM-RL]',role)}">
      <li class="bv-role-list" bv-role="CAD" bv-title="起版师"><a href="javascript:void(0);">发起版师</a></li>
      </c:if>
-     <c:if test="${fn:contains('[CC-RL][CAD-RL]',role)}">
+     <c:if test="${fn:contains('[CC-RL][CAD-RL][PMC-RL]',role)}">
      <li class="bv-role-list" bv-role="PM" bv-title="产品经理"><a href="javascript:void(0);">发产品经理</a></li>
      </c:if>
      <c:if test="${fn:contains('[PMC-RL]',role)}">

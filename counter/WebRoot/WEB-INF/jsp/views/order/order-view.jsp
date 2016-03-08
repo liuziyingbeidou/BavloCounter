@@ -121,16 +121,20 @@ function loadOrderList(){
 					}else{
 						pic = "<img class='bill-pic' src='${ctx}/resources/images/good_01.png'>";
 					}
-					$("#olist").append("<dd type='dz' onclick='toCustom(\""+data[i].vsourceId+"\")' sid='"+data[i].vsourceId+"' class='"+data[i].vsourceId+" bill'>"+pic+"<b style='cursor:pointer;'>进入款式单</b><span class='list_name bill-name'>"+data[i].nprice+"元</span><a href='javascript:void(0);' style='color:#FFF' class='bill-num close_c order_list_close'>"+data[i].nnumber+"</a></dd>");
+					$("#olist").append("<dd type='dz' onclick='toCustom(\""+data[i].vsourceId+"\")' sid='"+data[i].vsourceId+"' class='"+data[i].vsourceId+" bill'>"+pic+"<b style='cursor:pointer;'>进入款式单</b><span class='list_name bill-name PMC-RL'>"+data[i].nprice+"元</span><a href='javascript:void(0);' style='color:#FFF' class='bill-num close_c order_list_close'>"+data[i].nnumber+"</a></dd>");
 					sumVl = accAdd(sumVl,data[i].nprice);
 				}/*else if(type == "ch"){
 					$("#olist").append("<dd type='ch' sid='"+data[i].vsourceId+"' class='"+data[i].vsourceId+" bill'><span class='list_name bill-name'>"+data[i].vname+"</span><b class='list_price bill-num'>"+data[i].nnumber+"条</b><a href='javascript:rlist("+data[i].vsourceId+")' class='close_c'><img src='${ctx}/resources/images/close.png'></a></dd>");
 				}*/
 			}
 			
-			$("#olist").append("<dd type='dz' class='bill'><span class='list_name bill-name'>总价："+sumVl+" 元</span><a href='javascript:void(0);' style='color:#FFF' class='bill-num close_c order_list_close'></a></dd>");
+			$("#olist").append("<dd type='dz' class='bill'><span class='list_name bill-name PMC-RL'>总价："+sumVl+" 元</span><a href='javascript:void(0);' style='color:#FFF' class='bill-num close_c order_list_close'></a></dd>");
 			
 			$("#olist").append("<div class='clear'></div>");
+			var curRole = "${curRole}";
+			if(curRole.indexOf("PMC")>0){
+				$(".PMC-RL").hide();
+			}
 		}
 	});
 }
