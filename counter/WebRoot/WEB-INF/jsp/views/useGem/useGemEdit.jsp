@@ -353,14 +353,14 @@
 </div>
 		<input id="gemid" type="hidden" name="id" class="tableId"
 			value="${useGemDetail['id']}">
-		<input id="customId" type="hidden" name="customId" class="customId"
+		<input id="customdId" type="hidden" name="customdId" class="customdId"
 			value="
 			<c:choose>
-					 <c:when test="${empty useGemDetail['customId']}">   
+					 <c:when test="${empty useGemDetail['customdId']}">   
 					 ${customDVO['id'] }
 					 </c:when>
 					 <c:otherwise>
-					 ${useGemDetail['customId']}
+					 ${useGemDetail['customdId']}
 					 </c:otherwise>	
 			</c:choose> 
 			">
