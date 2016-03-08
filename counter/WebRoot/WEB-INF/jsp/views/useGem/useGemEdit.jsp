@@ -24,20 +24,20 @@
 <meta name="viewport"
 	content="width=device-width,target-densitydpi=high-dpi,initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no" />
 
-<script src="${ctx}/resources/js/jquery-1.8.3.min.js"></script>
-<script src="${ctx}/resources/js/top.js"></script>
-<script src="${ctx}/resources/js/hide.js"></script>
-<link href="${ctx}/resources/css/orderlist.css" rel="stylesheet" type="text/css" />
-<script src="${ctx}/resources/js/showList.js" type="text/javascript"></script>
+<script src="/counter/resources/js/jquery-1.8.3.min.js"></script>
+<script src="/counter/resources/js/top.js"></script>
+<script src="/counter/resources/js/hide.js"></script>
+<link href="/counter/resources/css/orderlist.css" rel="stylesheet" type="text/css" />
+<script src="/counter/resources/js/showList.js" type="text/javascript"></script>
 <!--必要样式-->
-<link rel='stylesheet' href='${ctx}/resources/css/style.css' media='all' />
-<link rel='stylesheet' href='${ctx}/resources/css/bootstrap.css' media='all' />
-<link rel="stylesheet" href="${ctx}/resources/css/photoswipe.css" />
-<link rel="stylesheet" href="${ctx}/resources/css/default-skin.css" />
+<link rel='stylesheet' href='/counter/resources/css/style.css' media='all' />
+<link rel='stylesheet' href='/counter/resources/css/bootstrap.css' media='all' />
+<link rel="stylesheet" href="/counter/resources/css/photoswipe.css" />
+<link rel="stylesheet" href="/counter/resources/css/default-skin.css" />
 
 <!-- 定义JS -->
-<script src="${ctx}/resources/js/bavlo-initdata.js"></script>
-<script src="${ctx}/resources/js/bavlo-event.js"></script>
+<script src="/counter/resources/js/bavlo-initdata.js"></script>
+<script src="/counter/resources/js/bavlo-event.js"></script>
 
 <!-- 弹框 -->
 <!-- jQuery & jQuery UI files (needed)--> 
@@ -82,7 +82,7 @@
 		 **/
 		/* //宝石签收单列表
 		 $(".custom_list").bind("click",function(){
-		 	openURL("${ctx}/custom/listJson.do","款式单列表");
+		 	openURL("/counter/custom/listJson.do","款式单列表");
 		 });*/
 		 
 		if("${useGemDetail['icount']}" != ""){
@@ -204,14 +204,14 @@
     	clearSuffix("useGem-worth","元");
 		$.ajax({
 			type : "POST",
-			url : "${ctx}/useGem/saveOrUpdate.do",
+			url : "/counter/useGem/saveOrUpdate.do",
 			data : $('#useGem').serialize(),// formid
 			async : false,
 			cache : false,
 			success : function(data) {
 				$("#gemid").val(data.id);
 				alert("保存成功!");
-				window.location = "${ctx}/useGem/info.do?id="+data.id;//根据id显示配石单信息
+				window.location = "/counter/useGem/info.do?id="+data.id;//根据id显示配石单信息
 			},
 			error : function(e) {
 				alert("保存失败!");
@@ -222,7 +222,7 @@
 	function setValueByFrame(type,id,callback,json){
 		var url;
 		if(type == "customer"){
-			url = "${ctx}/customer/infoJson.do";
+			url = "/counter/customer/infoJson.do";
 			$.get(url,{id:id},function(data){
 				if(data != null){
 					if(data.vhendimgurl != ""){
@@ -243,31 +243,31 @@
 			});
 		}/*else if(type == "chain"){
 			var data = JSON.parse(json);
-			$("#order-list").append("<dd type='ch' sid='"+data.sid+"' class='"+data.sid+" bill'><span class='list_name bill-name'>"+data.sname+"</span><input class='list_num bill-num' style='width:40px;margin-left:10px;' type='text' value='1' placeholder='条'><b class='list_price bill-price'>"+data.sprice+"</b><a href='javascript:rlist("+data.sid+")' class='close_c'><img src='${ctx}/resources/images/close.png'></a></dd>");
+			$("#order-list").append("<dd type='ch' sid='"+data.sid+"' class='"+data.sid+" bill'><span class='list_name bill-name'>"+data.sname+"</span><input class='list_num bill-num' style='width:40px;margin-left:10px;' type='text' value='1' placeholder='条'><b class='list_price bill-price'>"+data.sprice+"</b><a href='javascript:rlist("+data.sid+")' class='close_c'><img src='/counter/resources/images/close.png'></a></dd>");
 			closeMultiDlg();
 		}*/else if(type == "order"){
-			url = "${ctx}/order/edit.do?id="+id;//根据id查询订单信息
+			url = "/counter/order/edit.do?id="+id;//根据id查询订单信息
 			window.location = url;
 		}else if(type == "order-view"){
-			url = "${ctx}/order/view.do?id="+id;//根据id查询订单信息
+			url = "/counter/order/view.do?id="+id;//根据id查询订单信息
 			window.location = url;
 		}else if(type == "signGem"){
-			url = "${ctx}/gem-sign/view.do?id="+id;//根据id查询宝石签收单信息
+			url = "/counter/gem-sign/view.do?id="+id;//根据id查询宝石签收单信息
 			window.location = url;
 		}else if(type == "entity"){
-			url = "${ctx}/entity-sign/view.do?id="+id;//根据id查询实物签收单信息
+			url = "/counter/entity-sign/view.do?id="+id;//根据id查询实物签收单信息
 			window.location = url;
 		}else if(type == "customer-menu"){
-			url = "${ctx}/customer/info.do?id="+id;//根据id查询客户信息
+			url = "/counter/customer/info.do?id="+id;//根据id查询客户信息
 			window.location = url;
 		}else if(type == "custom"){
-			url = "${ctx}/custom/edit.do?id="+id;//根据id定制单信息
+			url = "/counter/custom/edit.do?id="+id;//根据id定制单信息
 			window.location = url;
 		}else if(type == "custom-view"){
-			url = "${ctx}/custom/detail.do?id="+id;//根据id显示定制单信息
+			url = "/counter/custom/detail.do?id="+id;//根据id显示定制单信息
 			window.location = url;
 		}else if(type == "useGem"){
-			url = "${ctx}/useGem/info.do?id="+id;//根据id显示配石单信息
+			url = "/counter/useGem/info.do?id="+id;//根据id显示配石单信息
 			window.location = url;
 		}
 		/*if(typeof(callback)!=='undefined'){
@@ -317,7 +317,7 @@
 	<div class="head2">
 		<div class="top2">
 			<b><a href="javascript:;" onclick="EditShow_Hidden(ed1)"><img
-						src="${ctx}/resources/images/plus.png" />
+						src="/counter/resources/images/plus.png" />
 			</a>
 			<c:choose>
 				 <c:when test="${empty useGemDetail['vnumber']}">   
@@ -329,7 +329,7 @@
 			</c:choose> 
 			</b>
 			<font><a href="javascript:;" onclick="Show_Hidden(tr1)"><img
-						src="${ctx}/resources/images/plus.png" />
+						src="/counter/resources/images/plus.png" />
 			</a> </font>
 		</div>
 		<div class="hidden_enent2" id="tr1" style="display: none;">
@@ -353,14 +353,14 @@
 </div>
 		<input id="gemid" type="hidden" name="id" class="tableId"
 			value="${useGemDetail['id']}">
-		<input id="customdId" type="hidden" name="customdId" class="customdId"
+		<input id="customId" type="hidden" name="customId" class="customId"
 			value="
 			<c:choose>
-					 <c:when test="${empty useGemDetail['customdId']}">   
+					 <c:when test="${empty useGemDetail['customId']}">   
 					 ${customDVO['id'] }
 					 </c:when>
 					 <c:otherwise>
-					 ${useGemDetail['customdId']}
+					 ${useGemDetail['customId']}
 					 </c:otherwise>	
 			</c:choose> 
 			">
