@@ -124,7 +124,7 @@ function closeMenu(){
      <c:if test="${fn:contains('[CC-RL]',role)}">
      <li class="menu-gem-list"><a href="javascript:void(0);">宝石签收单</a></li>
      </c:if>
-     <c:if test="${fn:contains('[GB]',role)}">
+     <c:if test="${fn:contains('[GB][PMC-RL]',role)}">
      <li class="menu-useGem-list"><a href="javascript:void(0);">配石单</a></li>
      </c:if>
      <c:if test="${fn:contains('[N]',role)}">

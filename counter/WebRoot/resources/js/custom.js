@@ -586,7 +586,7 @@ function setValueByFrame(type, id, callback, json) { // 子窗体调用
 				} else {
 					$(".mainGem_img").attr("src", pic);
 				}
-				$("#mainGemPrice").val(data.nweight);
+				$("#mainGemPrice").val(data.nworth);
 				$("#mainGemPic").val(pic);
 				$("#mainGemId").val(data.id);
 			}
