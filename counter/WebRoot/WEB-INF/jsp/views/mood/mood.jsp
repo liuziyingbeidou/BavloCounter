@@ -6,7 +6,7 @@
 <html>
   <head>
     
-    <title>太赞了！看我的试戴效果...</title>
+    <title>太赞了！看我的<c:if test="${sharePicVO['kId']!=-1}">试戴</c:if><c:if test="${sharePicVO['kId']==-1}">趣照</c:if>效果...</title>
     
 	<meta http-equiv="pragma" content="no-cache">
 	<meta http-equiv="cache-control" content="no-cache">
@@ -64,8 +64,10 @@
       <img src="${sharePicVO['url'] }" data-rel="${sharePicVO['url'] }" alt="虚拟试戴效果图"/>
           <figcaption class="am-figure-capition-btm">
           		<br>
+          		<c:if test="${sharePicVO['kId']!=-1}">
              	<a href="http://m.bavlo.com/mobile/detail.html?si=${sharePicVO['kId'] }"><span class="tx-filed">查看款式详情&nbsp; </span></a>
           		<br><br>
+          		</c:if>
           		<span class="tx-con cons">
 					<ul>
 						<li>. 珠宝DIY 定制（3D DIY）</li>
