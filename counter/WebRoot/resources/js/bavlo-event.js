@@ -27,7 +27,7 @@
     	//价值
     	setSuffix("gem-worth","元");
     	//重量
-    	setSuffix("gem-weight","克");
+    	setSuffix("gem-weight","ct");
     	//数量
     	setSuffix("gem-count","颗");
     	/***************宝石签收单-结束******************/

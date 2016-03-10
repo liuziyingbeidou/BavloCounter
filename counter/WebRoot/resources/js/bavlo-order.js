@@ -40,8 +40,11 @@ function freshOrderState(iorderState,roles){
 		$(".o-csave").hide();
 		//角色控制订单状态维护按钮
 		if(roles != null && roles != ""){
-			if(roles.indexOf("CC-RL")){
+			if(roles.indexOf("CC-RL")>=0){
 				$(".o-ssave").hide();
+			}
+			if(roles.indexOf("PMC-RL")>=0){
+				$(".o-ssave").show();
 			}
 		}
 		$(".ista option[value='5']").remove(); 
@@ -68,8 +71,11 @@ function freshOrderState(iorderState,roles){
 		$(".ista").val(5); 
 		//角色控制订单状态维护按钮
 		if(roles != null && roles != ""){
-			if(roles.indexOf("PMC-RL")){
+			if(roles.indexOf("PMC-RL")>=0){
 				$(".o-ssave").hide();
+			}
+			if(roles.indexOf("CC-RL")>=0){
+				$(".o-ssave").show();
 			}
 		}
 		$(".o-csave").show();

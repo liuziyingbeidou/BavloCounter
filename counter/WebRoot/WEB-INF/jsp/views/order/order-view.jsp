@@ -237,7 +237,7 @@ function rlist(className){
 	//状态条
 	function changeDivStyle(){
 		    var o_status = $("#orderState").val();	//获取隐藏框值
-			//var o_status = 4;
+			var o_status = 5;
 			if(o_status==0){
 				$('#create').css('background', '#7dae00');
 				$('#createText').css('color', '#DDDDDD');
