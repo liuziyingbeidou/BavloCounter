@@ -598,12 +598,12 @@ function save(){
 						</div>
 						<div
 							class="dzd_right_btm CUST-RL CC-RL PM-RL CAD-RL GB-RL">
-							<input type='text' class="gf" id="productionCost" value="${customDetail['nproductionCost'] }" placeholder="工费">
+							<input type='text' class="gf" id="productionCost" value="${customDetail['nproductionCost'] }" placeholder="实际工费 元">
 							<b><a href="javascript:void(0);" class="cost_save CUST-RL CC-RL PM-RL CAD-RL PMC-RL GB-RL">保存</a></b>
 							<div class="clear"></div>
 						</div>
 						<div
-							class="dzd_right_btm CUST-RL PM-RL CAD-RL PMC-RL GB-RL">
+							class="dzd_right_btm CUST-RL CC-RL PM-RL CAD-RL PMC-RL GB-RL">
 							<input type="button" value="通知PMC" class="dzd_close sendPMC" />
 							<div class="clear"></div>
 						</div>
