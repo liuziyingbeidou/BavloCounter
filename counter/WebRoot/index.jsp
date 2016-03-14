@@ -51,7 +51,8 @@ function manage(e){
 </script>
 </head>
 <body>
-    
+
+
     1、<a href="${ctx}/gem-sign/add.do">宝石签收单新增</a>
        <a href="${ctx}/gem-sign/list.do">宝石签收单列表</a>
     <br>   
