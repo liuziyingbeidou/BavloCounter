@@ -128,8 +128,10 @@ public class CoreService extends CommonService implements ICoreService{
 							}
 							String userId = customerService.getQYUserIdByKfCode(eventKey);
 							JSONObject  obj = WechatDepart.getUserInfo(request,userId);
-							String uname = obj.getString("name");
-
+							String uname = "";
+							if(obj != null){
+								uname = obj.getString("name");
+							}
 							customerVO.setToUserids(userId);
 							customerService.updateCustomer(customerVO);
 							/**扫描二维码信息---结束**/
