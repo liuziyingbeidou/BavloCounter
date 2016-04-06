@@ -23,7 +23,7 @@ import com.bavlo.counter.constant.IConstant;
  * @date 2015-10-31 下午04:14:37
  */
 public class UploadHelper {
-    private String allowSuffix = "jpg,png,gif,jpeg,txt";//允许文件格式
+    private String allowSuffix = "jpg,png,gif,jpeg,txt,cdr,jcd,3dm,plt";//允许文件格式
     private long allowSize = 2L;//允许文件大小
     private String fileName;//文件名(包含完整路径)
     private String[] fileNames;
