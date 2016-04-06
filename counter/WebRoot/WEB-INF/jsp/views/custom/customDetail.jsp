@@ -182,7 +182,11 @@ $(function(){
 		//var text_url = getRootPath()+"/custom/detail.do?id="+customId;
 		//var url = "/counter/sendMassage.do";
 		toRoleObj($("#pageAttr").val(),'<%=Constants.PMC_USERID%>',"款式"+ $("#pageCode").val() +"已经完成，请来我厂Q货!",$(".tableId").val(),$(".tocustomerId").val());
-		
+		//跳转到款式单页面 
+		if(customId != ""){
+			url = "/counter/custom/edit.do?id="+customId;
+			window.location = url;
+		}
 	});
 	
 	//图片展示
