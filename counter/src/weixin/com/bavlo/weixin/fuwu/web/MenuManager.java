@@ -26,7 +26,7 @@ public class MenuManager {
 	 * 
 	 * @return
 	 */
-	private static Menu getMenu() {
+	public static Menu getMenu() {
 		
 		ViewButton btn11 = new ViewButton();
 		btn11.setName("Home");
@@ -90,6 +90,8 @@ public class MenuManager {
 
 		return menu;
 	}
+	
+	
 
 	public static void main(String[] args) {
 		// 第三方用户唯一凭证

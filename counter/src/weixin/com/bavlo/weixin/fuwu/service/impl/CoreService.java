@@ -82,65 +82,77 @@ public class CoreService extends CommonService implements ICoreService{
 							dStr = eventKey.substring(eventKey.length()-2,eventKey.length());
 						}
 						//分享图片
-						if("00".equals(dStr)){
-							//获取图片URL对应ID
-							String id = eventKey.substring(8, eventKey.length()-2);
-							//根据id获取picUrl
-							if(id != null && id != ""){
-								SharePicVO sharePicVO = toolsService.getSharePicVOById(Integer.valueOf(id));
-								NewsMessage newsMessage = new NewsMessage();
-								newsMessage.setToUserName(fromUserName);
-								newsMessage.setFromUserName(toUserName);
-								newsMessage.setCreateTime(new Date().getTime());
-								newsMessage.setMsgType(MessageUtil.RESP_MESSAGE_TYPE_NEWS);
-								newsMessage.setArticleCount(1);
-								List<Article> articlesList = new ArrayList<Article>();
-								Article article = new Article();
-								article.setPicUrl(sharePicVO.getUrl());
-								if("-1".equals(sharePicVO.getkId())){
-									article.setTitle("我在宝珑珠宝体验了趣味拍照...");
-									article.setDescription("看看我拍的趣照！也可分享给好友哦！");//IContant.mContent
-								}else{
-									article.setTitle("哈哈！我在宝珑珠宝体验了虚拟试戴...");//IContant.mTitle
-									article.setDescription("看看我选的款式！也可分享给好友哦！");//IContant.mContent
-								}
-								article.setUrl(com.bavlo.weixin.qiye.util.Constants.REQURL +"/remote/viewSharePic.do?id="+Integer.valueOf(id));
-								articlesList.add(article);
-								newsMessage.setArticles(articlesList);
-								
-								respXml = MessageUtil.messageToXml(newsMessage);
-								
-								//更新状态
-								toolsService.updateQrCodeStateById(Integer.valueOf(id));
-							}
-							/**扫描二维码-分享图片-end**/
-						}else{
-							/**扫描二维码信息--本地库不存在该openId用户---开始**/
-							
-							String vcode = customerService.addCustomerByScan(fromUserName, session, eventKey);
-							/**扫描二维码信息---结束**/
-							// 以下通过客服找绑定客服定制顾问名字
-							CustomerVO customerVO = customerService.findCustomerByWhere(" vcustomerCode='"+vcode+"'");
-							if(vcode != null){
-								if(customerVO != null){
-									eventKey = customerVO.getVserviceCode();
-								}
-							}
-							String userId = customerService.getQYUserIdByKfCode(eventKey);
-							JSONObject  obj = WechatDepart.getUserInfo(request,userId);
-							String uname = "";
-							if(obj != null){
-								uname = obj.getString("name");
-							}
-							customerVO.setToUserids(userId);
-							customerService.updateCustomer(customerVO);
-							/**扫描二维码信息---结束**/
-							//forwardMessage.setContent("这是您的编号:"+vcode);
-							forwardMessage.setContent("感谢关注！\n我是宝珑珠宝定制顾问---"+uname+"，您有任何需求可在此与我沟通。随时为您服务 :)");
+						if(dStr == null){
+							forwardMessage.setContent("感谢关注！/:sun \n宝珑 | BAVLO\n珠宝定制第一品牌\n\nBAVLO，Jiu是与众不同！\n— — — — — — — —— —\nTEL:010-88866632\n移动版网站：m.bavlo.com");
 							// 将消息对象转换成xml
 							respXml = MessageUtil.messageToXml(forwardMessage);
+						}else{
+							if("00".equals(dStr)){
+								//获取图片URL对应ID
+								String id = eventKey.substring(8, eventKey.length()-2);
+								//根据id获取picUrl
+								if(id != null && id != ""){
+									SharePicVO sharePicVO = toolsService.getSharePicVOById(Integer.valueOf(id));
+									NewsMessage newsMessage = new NewsMessage();
+									newsMessage.setToUserName(fromUserName);
+									newsMessage.setFromUserName(toUserName);
+									newsMessage.setCreateTime(new Date().getTime());
+									newsMessage.setMsgType(MessageUtil.RESP_MESSAGE_TYPE_NEWS);
+									newsMessage.setArticleCount(1);
+									List<Article> articlesList = new ArrayList<Article>();
+									Article article = new Article();
+									article.setPicUrl(sharePicVO.getUrl());
+									if("-1".equals(sharePicVO.getkId())){
+										article.setTitle("我在宝珑珠宝体验了趣味拍照...");
+										article.setDescription("看看我拍的趣照！也可分享给好友哦！");//IContant.mContent
+									}else{
+										article.setTitle("哈哈！我在宝珑珠宝体验了虚拟试戴...");//IContant.mTitle
+										article.setDescription("看看我选的款式！也可分享给好友哦！");//IContant.mContent
+									}
+									article.setUrl(com.bavlo.weixin.qiye.util.Constants.REQURL +"/remote/viewSharePic.do?id="+Integer.valueOf(id));
+									articlesList.add(article);
+									newsMessage.setArticles(articlesList);
+									
+									respXml = MessageUtil.messageToXml(newsMessage);
+									
+									//更新状态
+									toolsService.updateQrCodeStateById(Integer.valueOf(id));
+								}
+								/**扫描二维码-分享图片-end**/
+							}else{
+								/**扫描二维码信息--本地库不存在该openId用户---开始**/
+								
+								String vcode = customerService.addCustomerByScan(fromUserName, session, eventKey);
+								/**扫描二维码信息---结束**/
+								// 以下通过客服找绑定客服定制顾问名字
+								CustomerVO customerVO = customerService.findCustomerByWhere(" vcustomerCode='"+vcode+"'");
+								if(vcode != null){
+									if(customerVO != null){
+										eventKey = customerVO.getVserviceCode();
+									}
+								}
+								String userId = customerService.getQYUserIdByKfCode(eventKey);
+								JSONObject  obj = WechatDepart.getUserInfo(request,userId);
+								String uname = "";
+								if(obj != null){
+									uname = obj.getString("name");
+								}
+								customerVO.setToUserids(userId);
+								customerService.updateCustomer(customerVO);
+								/**扫描二维码信息---结束**/
+								//forwardMessage.setContent("这是您的编号:"+vcode);
+								forwardMessage.setContent("感谢关注！\n我是宝珑珠宝定制顾问---"+uname+"，您有任何需求可在此与我沟通。随时为您服务 :)");
+								// 将消息对象转换成xml
+								respXml = MessageUtil.messageToXml(forwardMessage);
+							}
 						}
 					}
+				}
+				//wif连接
+				else if(eventType.equals(MessageUtil.EVENT_TYPE_WIFICONNECTED)){
+					forwardMessage.setContent("欢迎连接 - 宝珑 - wifi：）\n\n— — — — — — — —— —\n宝珑 | BAVLO\n您的私人珠宝定制顾问\n— — — — — — — —— —\n移动版网站：m.bavlo.com");
+					// 将消息对象转换成xml
+					respXml = MessageUtil.messageToXml(forwardMessage);
 				}
 				// 转接客服会话
 				else if (eventType.equals(MessageUtil.EVENT_TYPE_SWITCH_SESSION)) {
@@ -168,61 +180,67 @@ public class CoreService extends CommonService implements ICoreService{
 						if(eventKey.length() > 2){
 							dStr = eventKey.substring(eventKey.length()-2,eventKey.length());
 						}
-						//分享图片
-						if("00".equals(dStr)){
-							//获取图片URL对应ID
-							String id = eventKey.substring(0, eventKey.length()-2);
-							//根据id获取picUrl
-							if(id != null && id != ""){
-								SharePicVO sharePicVO = toolsService.getSharePicVOById(Integer.valueOf(id));
-								NewsMessage newsMessage = new NewsMessage();
-								newsMessage.setToUserName(fromUserName);
-								newsMessage.setFromUserName(toUserName);
-								newsMessage.setCreateTime(new Date().getTime());
-								newsMessage.setMsgType(MessageUtil.RESP_MESSAGE_TYPE_NEWS);
-								newsMessage.setArticleCount(1);
-								List<Article> articlesList = new ArrayList<Article>();
-								Article article = new Article();
-								article.setPicUrl(sharePicVO.getUrl());
-								if("-1".equals(sharePicVO.getkId())){
-									article.setTitle("我在宝珑珠宝体验了趣味拍照...");
-									article.setDescription("看看我拍的趣照！也可分享给好友哦！");//IContant.mContent
-								}else{
-									article.setTitle("哈哈！我在宝珑珠宝体验了虚拟试戴...");//IContant.mTitle
-									article.setDescription("看看我选的款式！也可分享给好友哦！");//IContant.mContent
-								}
-								article.setUrl(com.bavlo.weixin.qiye.util.Constants.REQURL +"/remote/viewSharePic.do?id="+Integer.valueOf(id));
-								articlesList.add(article);
-								newsMessage.setArticles(articlesList);
-								
-								respXml = MessageUtil.messageToXml(newsMessage);
-								//更新状态
-								toolsService.updateQrCodeStateById(Integer.valueOf(id));
-							}
-							/**扫描二维码-分享图片-end**/
-						}else{
-							/**扫描二维码信息--本地库不存在该openId用户---开始**/
-							String vcode = customerService.addCustomerByScan(fromUserName, session, eventKey);
-							// 以下通过客服找绑定客服定制顾问名字
-							CustomerVO customerVO = customerService.findCustomerByWhere(" vcustomerCode='"+vcode+"'");
-							if(vcode != null){
-								if(customerVO != null){
-									if(customerVO.getVserviceCode() != null && customerVO.getVserviceCode() != ""){
-										eventKey = customerVO.getVserviceCode();
-									}
-								}
-							}
-							String userId = customerService.getQYUserIdByKfCode(eventKey);
-							JSONObject  obj = WechatDepart.getUserInfo(request,userId);
-							String uname = obj.getString("name");
-							
-							customerVO.setToUserids(userId);
-							customerService.updateCustomer(customerVO);
-							/**扫描二维码信息---结束**/
-							//forwardMessage.setContent("这是您的编号:"+vcode);
-							forwardMessage.setContent("感谢关注！\n我是宝珑珠宝定制顾问---"+uname+"，您有任何需求可在此与我沟通。随时为您服务 :)");
+						if(dStr == null){
+							forwardMessage.setContent("感谢关注！/:sun \n宝珑 | BAVLO\n珠宝定制第一品牌\n\nBAVLO，Jiu是与众不同！\n— — — — — — — — ——\nTEL:010-88866632\n移动版网站：m.bavlo.com");
 							// 将消息对象转换成xml
 							respXml = MessageUtil.messageToXml(forwardMessage);
+						}else{
+							//分享图片
+							if("00".equals(dStr)){
+								//获取图片URL对应ID
+								String id = eventKey.substring(0, eventKey.length()-2);
+								//根据id获取picUrl
+								if(id != null && id != ""){
+									SharePicVO sharePicVO = toolsService.getSharePicVOById(Integer.valueOf(id));
+									NewsMessage newsMessage = new NewsMessage();
+									newsMessage.setToUserName(fromUserName);
+									newsMessage.setFromUserName(toUserName);
+									newsMessage.setCreateTime(new Date().getTime());
+									newsMessage.setMsgType(MessageUtil.RESP_MESSAGE_TYPE_NEWS);
+									newsMessage.setArticleCount(1);
+									List<Article> articlesList = new ArrayList<Article>();
+									Article article = new Article();
+									article.setPicUrl(sharePicVO.getUrl());
+									if("-1".equals(sharePicVO.getkId())){
+										article.setTitle("我在宝珑珠宝体验了趣味拍照...");
+										article.setDescription("看看我拍的趣照！也可分享给好友哦！");//IContant.mContent
+									}else{
+										article.setTitle("哈哈！我在宝珑珠宝体验了虚拟试戴...");//IContant.mTitle
+										article.setDescription("看看我选的款式！也可分享给好友哦！");//IContant.mContent
+									}
+									article.setUrl(com.bavlo.weixin.qiye.util.Constants.REQURL +"/remote/viewSharePic.do?id="+Integer.valueOf(id));
+									articlesList.add(article);
+									newsMessage.setArticles(articlesList);
+									
+									respXml = MessageUtil.messageToXml(newsMessage);
+									//更新状态
+									toolsService.updateQrCodeStateById(Integer.valueOf(id));
+								}
+								/**扫描二维码-分享图片-end**/
+							}else{
+								/**扫描二维码信息--本地库不存在该openId用户---开始**/
+								String vcode = customerService.addCustomerByScan(fromUserName, session, eventKey);
+								// 以下通过客服找绑定客服定制顾问名字
+								CustomerVO customerVO = customerService.findCustomerByWhere(" vcustomerCode='"+vcode+"'");
+								if(vcode != null){
+									if(customerVO != null){
+										if(customerVO.getVserviceCode() != null && customerVO.getVserviceCode() != ""){
+											eventKey = customerVO.getVserviceCode();
+										}
+									}
+								}
+								String userId = customerService.getQYUserIdByKfCode(eventKey);
+								JSONObject  obj = WechatDepart.getUserInfo(request,userId);
+								String uname = obj.getString("name");
+								
+								customerVO.setToUserids(userId);
+								customerService.updateCustomer(customerVO);
+								/**扫描二维码信息---结束**/
+								//forwardMessage.setContent("这是您的编号:"+vcode);
+								forwardMessage.setContent("感谢关注！\n我是宝珑珠宝定制顾问---"+uname+"，您有任何需求可在此与我沟通。随时为您服务 :)");
+								// 将消息对象转换成xml
+								respXml = MessageUtil.messageToXml(forwardMessage);
+							}
 						}
 					}
 				}
