@@ -64,14 +64,24 @@ public class MenuManager {
 		btn22.setUrl("http://www.bavlo.com/help/join_us.html");
 
 		ViewButton btn23 = new ViewButton();
-		btn23.setName("联系我们");
+		btn23.setName("Contact Us");
 		btn23.setType("view");
 		btn23.setUrl("http://mp.weixin.qq.com/s?__biz=MjM5OTMyODM4MQ==&mid=208833779&idx=1&sn=95af8523661d13f478a359ff5c0e83c2#rd");
 
+		ViewButton btn24 = new ViewButton();
+		btn24.setName("会员制度");
+		btn24.setType("view");
+		btn24.setUrl("http://mp.weixin.qq.com/s?__biz=MjM5OTMyODM4MQ==&mid=209465560&idx=1&sn=9cdc79df2020e9d6fafe2a5eead00d94#rd");
+
+		ViewButton btn25 = new ViewButton();
+		btn25.setName("ODM合作");
+		btn25.setType("view");
+		btn25.setUrl("http://mp.weixin.qq.com/s?__biz=MjM5OTMyODM4MQ==&mid=400506139&idx=1&sn=24f2b90fcb47f326095c03a20363e11e&scene=18#wechat_redirect");
+
 		ViewButton btn31 = new ViewButton();
-		btn31.setName("会员制度");
+		btn31.setName("历史消息");
 		btn31.setType("view");
-		btn31.setUrl("http://mp.weixin.qq.com/s?__biz=MjM5OTMyODM4MQ==&mid=209465560&idx=1&sn=9cdc79df2020e9d6fafe2a5eead00d94#rd");
+		btn31.setUrl("http://mp.weixin.qq.com/mp/getmasssendmsg?__biz=MjM5OTMyODM4MQ==#wechat_webview_type=1&wechat_redirect");
 
 		ComplexButton mainBtn1 = new ComplexButton();
 		mainBtn1.setName("精品款式");
@@ -79,14 +89,14 @@ public class MenuManager {
 
 		ComplexButton mainBtn2 = new ComplexButton();
 		mainBtn2.setName("About");
-		mainBtn2.setSub_button(new Button[] { btn21, btn22, btn23 });
+		mainBtn2.setSub_button(new Button[] { btn21, btn24,btn22,btn25, btn23 });
 
 		ComplexButton mainBtn3 = new ComplexButton();
-		mainBtn3.setName("会员制度");
+		mainBtn3.setName("历史消息");
 		mainBtn3.setSub_button(new Button[] { btn31 });
 
 		Menu menu = new Menu();
-		menu.setButton(new Button[] { mainBtn1, mainBtn2, mainBtn3 });
+		menu.setButton(new Button[] { mainBtn1, mainBtn2, btn31 });
 
 		return menu;
 	}
