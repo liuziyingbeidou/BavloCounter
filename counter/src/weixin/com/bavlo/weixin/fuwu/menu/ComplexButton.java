@@ -7,6 +7,15 @@ package com.bavlo.weixin.fuwu.menu;
  */
 public class ComplexButton extends Button {
 	private Button[] sub_button;
+	private Button button;
+
+	public Button getButton() {
+		return button;
+	}
+
+	public void setButton(Button button) {
+		this.button = button;
+	}
 
 	public Button[] getSub_button() {
 		return sub_button;
