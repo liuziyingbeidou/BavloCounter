@@ -25,6 +25,10 @@ public class CustomDVO extends IdEntity implements Serializable {
 	 */
 	private Integer customId;
 	/**
+	 * 配石外键
+	 */
+	private Integer useGemId;
+	/**
 	 * 库选石名称
 	 */
 	private String vstockGemName;
@@ -143,6 +147,14 @@ public class CustomDVO extends IdEntity implements Serializable {
 
 	public void setVstockGemShape(String vstockGemShape) {
 		this.vstockGemShape = vstockGemShape;
+	}
+
+	public Integer getUseGemId() {
+		return useGemId;
+	}
+
+	public void setUseGemId(Integer useGemId) {
+		this.useGemId = useGemId;
 	}
 
 }
