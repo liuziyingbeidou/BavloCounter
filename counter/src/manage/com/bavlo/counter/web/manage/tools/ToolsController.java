@@ -11,6 +11,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.context.ServletContextAware;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -82,26 +83,32 @@ public class ToolsController extends BaseController implements ServletContextAwa
 		renderJson(jsonmap);
 	}
 	
+	@ResponseBody
 	@RequestMapping(value="/createMenu")
-	public void createMenu(){
+	public String createMenu(){
+		String bkInfo = "Menu Create Fail!";
 		// 第三方用户唯一凭证
-				String appId = IContant.appId;
-				// 第三方用户唯一凭证密钥
-				String appSecret = IContant.appSecret;
+		String appId = IContant.appId;
+		// 第三方用户唯一凭证密钥
+		String appSecret = IContant.appSecret;
 
-				// 调用接口获取凭证
-				Token token = CommonUtil.getToken(appId, appSecret);
+		// 调用接口获取凭证
+		Token token = CommonUtil.getToken(appId, appSecret);
 
-				if (null != token) {
-					// 创建菜单
-					boolean result = MenuUtil.createMenu(com.bavlo.weixin.fuwu.web.MenuManager.getMenu(), token.getAccessToken());
+		if (null != token) {
+			// 创建菜单
+			boolean result = MenuUtil.createMenu(com.bavlo.weixin.fuwu.web.MenuManager.getMenu(), token.getAccessToken());
 
-					// 判断菜单创建结果
-					if (result)
-						log.info("菜单创建成功！");
-					else
-						log.info("菜单创建失败！");
-				}
+			// 判断菜单创建结果
+			if (result){
+				bkInfo = "Menu Create Success!";
+				log.info("菜单创建成功！");
+			}
+			else
+				log.info("菜单创建失败！");
+			
+		}
+		return bkInfo;
 	}
 	
     @Override  
