@@ -48,9 +48,9 @@ public class MenuManager {
 		btn14.setUrl("http://m.bavlo.com/mobile/style_list.html?st=3");
 		
 		ViewButton btn15 = new ViewButton();
-		btn15.setName("钻石");
+		btn15.setName("金塔宝石");
 		btn15.setType("view");
-		btn15.setUrl("http://m.bavlo.com/mobile/diamond_list.html");
+		btn15.setUrl("http://www.gemtak.com");
 
 		ViewButton btn21 = new ViewButton();
 		btn21.setName("宝珑品牌");
@@ -60,7 +60,7 @@ public class MenuManager {
 		ViewButton btn22 = new ViewButton();
 		btn22.setName("招商加盟");
 		btn22.setType("view");
-		btn22.setUrl("http://www.bavlo.com/help/join_us.html");
+		btn22.setUrl("http://mp.weixin.qq.com/s?__biz=MjM5OTMyODM4MQ==&mid=503438200&idx=1&sn=405267860efb379b72c0ed5dab621992&scene=1&srcid=0723UJOGJZntOM2xi9gI7aBl&from=singlemessage&isappinstalled=0#wechat_redirect");
 
 		ViewButton btn23 = new ViewButton();
 		btn23.setName("联系我们");
