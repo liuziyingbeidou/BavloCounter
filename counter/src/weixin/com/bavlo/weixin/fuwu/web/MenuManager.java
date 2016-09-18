@@ -61,7 +61,7 @@ public class MenuManager {
 		ViewButton btn22 = new ViewButton();
 		btn22.setName("’–…Ãº”√À");
 		btn22.setType("view");
-		btn22.setUrl("http://www.bavlo.com/help/join_us.html");
+		btn22.setUrl("http://mp.weixin.qq.com/s?__biz=MjM5OTMyODM4MQ==&mid=503438200&idx=1&sn=405267860efb379b72c0ed5dab621992&scene=1&srcid=0723UJOGJZntOM2xi9gI7aBl&from=singlemessage&isappinstalled=0#wechat_redirect");
 
 		ViewButton btn23 = new ViewButton();
 		btn23.setName("Contact Us");
