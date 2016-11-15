@@ -93,9 +93,6 @@ public class All_In_OnePCController extends BaseController implements ServletCon
 		SharePicVO sharePicVO = toolsService.getSharePicVOByVdef1(vdef1);
 		if(sharePicVO != null){
 			model.addObject("myShowPic", sharePicVO.getUrl());
-			sharePicVO.setBisClose("N");
-			sharePicVO.setUrl("NULL");
-			toolsService.updateSharePic(sharePicVO);
 		}
 		model.addObject("agentId", agentId);
 		model.addObject("companyName", companyName);
@@ -116,6 +113,11 @@ public class All_In_OnePCController extends BaseController implements ServletCon
 	public void getQrCodeState(HttpServletRequest request,HttpServletResponse response,String id){
 		SharePicVO sharePicVO = toolsService.getSharePicVOByVdef1(id);
 		renderJson("{\"state\":\""+sharePicVO.getBisClose()+"\",\"picUrl\":\""+sharePicVO.getUrl()+"\"}");
+		if("Y".equals(sharePicVO.getBisClose())){
+			sharePicVO.setBisClose("N");
+			sharePicVO.setUrl("NULL");
+			toolsService.updateSharePic(sharePicVO);
+		}
 	}
 	
 	
